@@ -5,29 +5,23 @@
 
 A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
-## Public API
-
-```lean
-import Yamaguchi26AbfaithfulGalois.All
-import Yamaguchi26SolvableCoverings.All
-```
-
-Individual numbered results can also be imported directly, for example:
-
-```lean
-import Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
-import Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
-```
-
-## Papers and main results
-
-### Ab-faithfulness of absolute Galois groups
+## Scope
 
 Naganori Yamaguchi, [*Ab-faithfulness of absolute Galois groups in number theory*](https://arxiv.org/abs/2610.05634).
 
 Ab-faithfulness concerns the faithful conjugation action of finite quotients on
 the abelianizations of open normal subgroups. The library develops its
 group-theoretic criteria and arithmetic applications.
+
+Naganori Yamaguchi, [*Extension of solvable coverings across horizontal divisors over the integers*](https://arxiv.org/abs/2610.02948).
+
+For a connected locally Noetherian scheme `X` and a horizontal effective
+Cartier divisor `D`, the library studies the actual map of étale fundamental
+groups induced by `X ∖ Supp(D) → X`.
+
+## Main results
+
+### Ab-faithfulness of absolute Galois groups
 
 | Result | Mathematical content |
 | --- | --- |
@@ -37,19 +31,7 @@ group-theoretic criteria and arithmetic applications.
 | [Corollary 6.6](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean) | Applications to absolute Galois groups, with the cyclotomic and positive-characteristic hypotheses stated in the paper. |
 | [Example 6.7(1)–(3)](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean) | Applications to torally Kummer-faithful ab-faithful fields of characteristic zero, sub-`p`-adic fields, and higher local fields. |
 
-The numbered development in Sections 1–6 is included except for Example 2.2
-and Lemma 6.8. Proposition 5.2 is proved under its split embedding-problem
-hypothesis; the general Hilbertian-field application still requires Ikeda's
-theorem. These applications and the PAC-field counterexample of Lemma 6.8
-are outside the current formalization.
-
 ### Extension of solvable coverings
-
-Naganori Yamaguchi, [*Extension of solvable coverings across horizontal divisors over the integers*](https://arxiv.org/abs/2610.02948).
-
-For a connected locally Noetherian scheme `X` and a horizontal effective
-Cartier divisor `D`, the library studies the actual map of étale fundamental
-groups induced by `X ∖ Supp(D) → X`.
 
 | Result | Mathematical content |
 | --- | --- |
@@ -60,13 +42,41 @@ groups induced by `X ∖ Supp(D) → X`.
 | [Corollary 2.6](Lean4/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean) | A continuous matrix representation over a complete Noetherian local ring with finite residue field extends across the divisor exactly when its residual representation does; the extension is unique. |
 
 The formalization includes numbered results 2.1–2.6 and the supporting boundary and
-finite-étale stability results. Example 1.4 is limited to `Spec ℤ`: the affine
-and projective spaces, moduli-space and plane-complement examples, and
-Corollary 2.7 on hyperplane arrangements are not yet included.
+finite-étale stability results.
 
 The shared group theory also contains the center-freeness criterion of
 Proposition 2.5 in [*Center-freeness of finite-step solvable groups arising from anabelian geometry*](https://arxiv.org/abs/2601.07112),
 in [SlimnessAndTorsion.lean](Lean4/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
+
+## Incomplete results
+
+**Ab-faithfulness of absolute Galois groups**
+
+The numbered development in Sections 1–6 is included except for Example 2.2
+and Lemma 6.8. Proposition 5.2 is proved under its split embedding-problem
+hypothesis; the general Hilbertian-field application still requires Ikeda's
+theorem. These applications and the PAC-field counterexample of Lemma 6.8
+are outside the current formalization.
+
+**Extension of solvable coverings**
+
+Example 1.4 is limited to `Spec ℤ`: the affine
+and projective spaces, moduli-space and plane-complement examples, and
+Corollary 2.7 on hyperplane arrangements are not yet included.
+
+## Public API
+
+```lean
+import Yamaguchi26AbfaithfulGalois.All
+import Yamaguchi26SolvableCoverings.All
+```
+
+Selected results:
+
+```lean
+import Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
+import Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
+```
 
 ## Build
 
