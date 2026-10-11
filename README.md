@@ -5,6 +5,8 @@
 
 A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
+All original code in this library is written by OpenAI Codex.
+
 This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
 Bundled dependencies use the same `Nyll` imports as the complete library.
 
@@ -94,9 +96,8 @@ lake --wfail build
 [CI](.github/workflows/lean.yml) checks imports and builds the libraries
 with warnings treated as errors.
 
-## Authorship and AI-written code
+## Authorship
 
-All original code in this library is written by OpenAI Codex.
 [Naganori Yamaguchi](https://github.com/n-yamaguchi-0729) sets the mathematical
 goals and scope, directs development, and maintains the library.
 Naganori Yamaguchi is also the author of the papers formalized here.
