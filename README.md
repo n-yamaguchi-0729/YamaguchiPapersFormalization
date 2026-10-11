@@ -94,11 +94,12 @@ lake --wfail build
 [CI](.github/workflows/lean.yml) checks imports and builds the libraries
 with warnings treated as errors.
 
-## Authorship and AI assistance
+## Authorship and AI-written code
 
-[Naganori Yamaguchi](https://github.com/n-yamaguchi-0729) is the author of the
-papers and the maintainer of this library. OpenAI Codex assisted with Lean
-development, statement review, and repository preparation.
+All original code in this library is written by AI (OpenAI Codex).
+[Naganori Yamaguchi](https://github.com/n-yamaguchi-0729) sets the mathematical
+goals and scope, directs development, and maintains the library.
+Naganori Yamaguchi is also the author of the papers formalized here.
 
 ## License and acknowledgements
 
