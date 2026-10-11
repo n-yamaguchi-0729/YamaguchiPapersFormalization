@@ -1,0 +1,23 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothConnected
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ComponentDimensionTwo
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.Connected
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ConnectedSource
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.FractionField
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothArithmeticConstants
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsTensor
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsFiniteDominance
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteCoverConstants
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticGenericFiber
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeConstants
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticFunctionField
+
+import EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothConnectedCovers
+
+/-! Canonical aggregate for EtaleFundamentalGroups.FiniteEtale.GenericFiber. -/

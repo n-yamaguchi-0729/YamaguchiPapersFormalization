@@ -1,0 +1,45 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import SchemeTheory.FiniteEtale.Algebra.Basic
+import SchemeTheory.FiniteEtale.Algebra.Descent
+import SchemeTheory.FiniteEtale.Algebra.Equalizer
+import SchemeTheory.FiniteEtale.Algebra.EtaleQuotientLift
+import SchemeTheory.FiniteEtale.Algebra.EtaleSection
+import SchemeTheory.FiniteEtale.Algebra.FaithfullyFlatDescent
+import SchemeTheory.FiniteEtale.Algebra.FiniteFieldModel
+import SchemeTheory.FiniteEtale.Algebra.FiniteCoefficientModel
+import SchemeTheory.FiniteEtale.Algebra.FinitelyGeneratedModel
+import SchemeTheory.FiniteEtale.Algebra.FilteredColimitModel
+import SchemeTheory.FiniteEtale.Algebra.FormallyEtaleNilpotent
+import SchemeTheory.FiniteEtale.Algebra.HenselianBaseChange
+import SchemeTheory.FiniteEtale.Algebra.HenselianEtaleSection
+import SchemeTheory.FiniteEtale.Algebra.HenselianEtaleMapLift
+import SchemeTheory.FiniteEtale.Algebra.HenselianFullness
+import SchemeTheory.FiniteEtale.Algebra.HenselianQuotientLift
+import SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
+import SchemeTheory.FiniteEtale.Algebra.IntegralFiniteModel
+import SchemeTheory.FiniteEtale.Algebra.JacobsonBaseChange
+import SchemeTheory.FiniteEtale.Algebra.JacobsonConservativity
+import SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
+import SchemeTheory.FiniteEtale.Algebra.JacobsonSection
+import SchemeTheory.FiniteEtale.Algebra.NilpotentBaseChange
+import SchemeTheory.FiniteEtale.Algebra.SectionFactor
+import SchemeTheory.FiniteEtale.Algebra.Splitting
+import SchemeTheory.FiniteEtale.Algebra.PrimeRigidity
+
+
+/- Canonical aggregate for SchemeTheory.FiniteEtale.Algebra. -/
+import SchemeTheory.FiniteEtale.Algebra.PointSpecialization
+import SchemeTheory.FiniteEtale.Algebra.FiniteGeometricallyReducedEtale
+import SchemeTheory.FiniteEtale.Algebra.FiniteSplitIdempotentSurjectivity
+import SchemeTheory.FiniteEtale.Algebra.LocalEtaleFromClosedFiber
+import SchemeTheory.FiniteEtale.Algebra.FiniteEtaleSplittingField
+import SchemeTheory.FiniteEtale.Algebra.EtaleFromLocalizations
+import SchemeTheory.FiniteEtale.Algebra.ProductBaseChangeComparison
+import SchemeTheory.FiniteEtale.Algebra.UniversalHomeomorphismAlgHom
+import SchemeTheory.FiniteEtale.Algebra.FiniteRadicialEssentialSurjectivity
+import SchemeTheory.FiniteEtale.Algebra.IntegralRadicialEssentialSurjectivity

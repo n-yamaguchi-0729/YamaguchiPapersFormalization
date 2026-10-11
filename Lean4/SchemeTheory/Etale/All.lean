@@ -1,0 +1,48 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import SchemeTheory.Etale.AffineClosedLift
+import SchemeTheory.Etale.AffineResidueField
+import SchemeTheory.Etale.AffineGeometricFiberBound
+import SchemeTheory.Etale.AffineFinitePresentationRefinement
+import SchemeTheory.Etale.AffineLocalFactorDescent
+import SchemeTheory.Etale.ChosenResidueExtension
+import SchemeTheory.Etale.ClosedNeighborhoodEqualizer
+import SchemeTheory.Etale.ClosedNeighborhoodLift
+import SchemeTheory.Etale.FiniteNeighborhoodSection
+import SchemeTheory.Etale.FiniteAffineCover
+import SchemeTheory.Etale.FiniteRadicialLocalSection
+import SchemeTheory.Etale.GeometricFiberNeighborhood
+import SchemeTheory.Etale.IsomorphismNeighborhood
+import SchemeTheory.Etale.NormalizationRemainder
+import SchemeTheory.Etale.NormalizationRemainderDegree
+import SchemeTheory.Etale.OverField.All
+import SchemeTheory.Etale.ProperLocalCover
+import SchemeTheory.Etale.ResidueBaseChange
+import SchemeTheory.Etale.ResidueFieldExtension
+import SchemeTheory.Etale.RingHom
+import SchemeTheory.Etale.UniversalHomeomorphismSections
+import SchemeTheory.Etale.AffineBaseChangeProperties
+import SchemeTheory.Etale.HenselianLocalSection
+import SchemeTheory.Etale.GeometricFiberBound
+import SchemeTheory.Etale.IntegralRefinement
+import SchemeTheory.Etale.LocalResidueFieldExtension
+import SchemeTheory.Etale.ResidueFieldPushout
+import SchemeTheory.Etale.ClosedFiberBaseChange
+import SchemeTheory.Etale.PurelyInseparableFiniteFactor
+import SchemeTheory.Etale.FiniteRadicialLocalSplitting
+import SchemeTheory.Etale.FiniteRadicialSplittingAlgebra
+import SchemeTheory.Etale.FiniteRadicialSplittingCover
+import SchemeTheory.Etale.MaximalSectionExtension
+import SchemeTheory.Etale.AffineFiniteSubalgebraRefinement
+import SchemeTheory.Etale.LocalFactorBaseChange
+import SchemeTheory.Etale.AffineChartFiniteSubalgebra
+import SchemeTheory.Etale.LocalFactorOpenCover
+import SchemeTheory.Etale.FiniteRefinement
+import SchemeTheory.Etale.FiniteGeometricPoints
+import SchemeTheory.Etale.HenselianLocalGeometricSection
+
+/- Canonical aggregate for SchemeTheory.Etale. -/

@@ -1,0 +1,184 @@
+/-
+Anthropic FLT upstream notice: Copyright 2026 Anthropic, PBC.
+Released under Apache 2.0 license as described in the file LICENSE.
+Adapted Anthropic FLT source (pinned comparison revision):
+https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/P2M/Sol/S_AlgebraicGeometry_bijective_appTop_pullback_snd_of_forall_bijective_algebraMap_sections.lean
+Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/NOTICE
+Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
+
+Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+AI assistance in local adaptation and maintenance: OpenAI Codex.
+-/
+
+import AlgebraicCurves.Geometry.Schemes.SchemeHomOver
+import SchemeTheory.Cohomology.Cech.TwoAffineOpenCover
+
+/-!
+Transfer bijectivity of algebra maps on affine base changes to sections of arbitrary base
+changes.
+-/
+
+section ProofImplementation
+
+namespace AlgebraicCurves.Geometry.Schemes.Proofs
+namespace bijective_appTop_pullback_snd_of_forall_bijective_algebraMap_sections
+
+universe u
+
+open _root_.CategoryTheory
+open _root_.CategoryTheory.Limits
+open _root_.AlgebraicGeometry
+open _root_.Opposite
+open _root_.TopologicalSpace
+
+namespace AlgebraicGeometry
+open _root_.AlgebraicGeometry
+namespace SectionsBaseChangeAux
+open _root_.AlgebraicGeometry
+
+lemma bijective_of_square {A B A' B' : CommRingCat.{u}} {f : A ⟶ B} {f' : A' ⟶ B'} (a : A ⟶ A')
+    (b : B ⟶ B')
+    [IsIso a] [IsIso b] (h : f ≫ b = a ≫ f') (hf : Function.Bijective f) : Function.Bijective f'
+      := by
+  have e : f' = inv a ≫ f ≫ b := by rw [h, IsIso.inv_hom_id_assoc]
+  rw [e]
+  change Function.Bijective ((f ≫ b).hom ∘ (inv a).hom)
+  rw [CommRingCat.hom_comp]
+  exact ((ConcreteCategory.bijective_of_isIso b).comp hf).comp
+    (ConcreteCategory.bijective_of_isIso (inv a))
+
+lemma isIso_appTop {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] : IsIso f.appTop :=
+  ⟨⟨(inv f).appTop, by rw [← Scheme.Hom.comp_appTop, IsIso.inv_hom_id, Scheme.Hom.id_appTop],
+    by rw [← Scheme.Hom.comp_appTop, IsIso.hom_inv_id, Scheme.Hom.id_appTop]⟩⟩
+
+lemma isIso_of_bijective {A B : CommRingCat.{u}} (f : A ⟶ B) (hf : Function.Bijective f) : IsIso
+    f := by
+  have : IsIso ((forget CommRingCat).map f) := (isIso_iff_bijective _).mpr hf
+  exact isIso_of_reflects_iso f (forget CommRingCat)
+
+lemma isIso_of_isIso_app_basis {X : TopCat.{u}} {ι : Type u} {B : ι → Opens X} (hB :
+    Opens.IsBasis (Set.range B))
+    (F G : TopCat.Sheaf CommRingCat.{u} X) (φ : F.1 ⟶ G.1) (h : ∀ i, IsIso (φ.app (op (B i)))) :
+      IsIso φ := by
+  let φB : (inducedFunctor B).op ⋙ F.1 ⟶ (inducedFunctor B).op ⋙ G.1 := Functor.whiskerLeft
+    (inducedFunctor B).op φ
+  have : ∀ i : ιᵒᵖ, IsIso (φB.app i) := fun i => h i.unop
+  have : IsIso φB := NatIso.isIso_of_isIso_app φB
+  let ψ : G.1 ⟶ F.1 := TopCat.Sheaf.restrictHomEquivHom G.1 F hB (inv φB)
+  refine ⟨ψ, ?_, ?_⟩
+  · apply TopCat.Sheaf.hom_ext F.1 F hB
+    intro i
+    rw [NatTrans.comp_app, NatTrans.id_app, TopCat.Sheaf.extend_hom_app]
+    change (φB ≫ inv φB).app (op i) = _
+    rw [IsIso.hom_inv_id]
+    rfl
+  · apply TopCat.Sheaf.hom_ext G.1 G hB
+    intro i
+    rw [NatTrans.comp_app, NatTrans.id_app, TopCat.Sheaf.extend_hom_app]
+    change (inv φB ≫ φB).app (op i) = _
+    rw [IsIso.inv_hom_id]
+    rfl
+
+variable {R : Type u} [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R))
+
+lemma bijective_appTop_snd_of_iso {T₁ T₂ : Scheme.{u}} (t₁ : T₁ ⟶ Spec (CommRingCat.of R)) (e :
+    T₂ ≅ T₁)
+    (h : Function.Bijective (pullback.snd c t₁).appTop) :
+    Function.Bijective (pullback.snd c (e.hom ≫ t₁)).appTop := by
+  let k : pullback c (e.hom ≫ t₁) ⟶ pullback c t₁ :=
+    pullback.map c (e.hom ≫ t₁) c t₁ (𝟙 C) e.hom (𝟙 _) (by simp) (by simp)
+  have hk : k ≫ pullback.snd c t₁ = pullback.snd c (e.hom ≫ t₁) ≫ e.hom := pullback.lift_snd _ _ _
+  have hsq : (pullback.snd c t₁).appTop ≫ k.appTop = e.hom.appTop ≫ (pullback.snd c (e.hom ≫
+    t₁)).appTop := by
+    rw [← Scheme.Hom.comp_appTop, ← Scheme.Hom.comp_appTop, hk]
+  have := isIso_appTop k
+  have := isIso_appTop e.hom
+  exact bijective_of_square _ _ hsq h
+
+lemma bijective_app_of_bijective_appTop_restrict {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of
+    R)) (U : T.Opens)
+    (h : Function.Bijective (pullback.snd c (U.ι ≫ t)).appTop) :
+    Function.Bijective ((pullback.snd c t).app U) := by
+  set p := pullback.snd c t
+  have h1 : Function.Bijective (pullback.snd p U.ι).appTop := by
+    have hsq : (pullback.snd c (U.ι ≫ t)).appTop ≫ (pullbackLeftPullbackSndIso c t U.ι).hom.appTop =
+        𝟙 _ ≫ (pullback.snd p U.ι).appTop := by
+      rw [← Scheme.Hom.comp_appTop, pullbackLeftPullbackSndIso_hom_snd, Category.id_comp]
+    have := isIso_appTop (pullbackLeftPullbackSndIso c t U.ι).hom
+    exact bijective_of_square _ _ hsq h
+  have h2 : Function.Bijective (p ∣_ U).appTop := by
+    have hsq : (pullback.snd p U.ι).appTop ≫ (pullbackRestrictIsoRestrict p U).inv.appTop =
+        𝟙 _ ≫ (p ∣_ U).appTop := by
+      rw [← Scheme.Hom.comp_appTop, Category.id_comp, ←
+        pullbackRestrictIsoRestrict_hom_morphismRestrict,
+        Iso.inv_hom_id_assoc]
+    have := isIso_appTop (pullbackRestrictIsoRestrict p U).inv
+    exact bijective_of_square _ _ hsq h1
+  have h3 : Function.Bijective (p.app (U.ι ''ᵁ ⊤)) := by
+    obtain ⟨N, hN, hNiso⟩ : ∃ N, (p ∣_ U).appTop = p.app (U.ι ''ᵁ ⊤) ≫ N ∧ IsIso N :=
+      ⟨((pullback c t).presheaf.mapIso (eqToIso (image_morphismRestrict_preimage p U ⊤)).op).hom,
+        morphismRestrict_appTop p U,
+        Iso.isIso_hom ((pullback c t).presheaf.mapIso
+          (eqToIso (image_morphismRestrict_preimage p U ⊤)).op)⟩
+    rw [hN] at h2
+    change Function.Bijective ((p.app (U.ι ''ᵁ ⊤) ≫ N).hom) at h2
+    rw [CommRingCat.hom_comp] at h2
+    exact (Function.Bijective.of_comp_iff' (ConcreteCategory.bijective_of_isIso N) _).mp h2
+  rwa [Scheme.Opens.ι_image_top] at h3
+
+lemma bijective_appTop_restrict_of_affine {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) (U
+    : T.Opens)
+    (hU : IsAffineOpen U)
+    (hH0 : ∀ (A : Type u) [CommRing A] [Algebra R A],
+      letI := Scheme.TwoAffineOpenCover.algebraOfHom
+        (Limits.pullback.snd c (Scheme.TwoAffineOpenCover.specMap R A)) ⊤
+      Function.Bijective (algebraMap A Γ(Limits.pullback c (Scheme.TwoAffineOpenCover.specMap R
+        A), ⊤))) :
+    Function.Bijective (pullback.snd c (U.ι ≫ t)).appTop := by
+  let := Scheme.TwoAffineOpenCover.algebraOfHom t U
+  have h0 := hH0 Γ(T, U)
+  set sA := Scheme.TwoAffineOpenCover.specMap R Γ(T, U) with hsA
+  have h1 : Function.Bijective (pullback.snd c sA).appTop := by
+    have h0' : Function.Bijective (((pullback.snd c sA).appLE ⊤ ⊤ le_top).hom ∘
+        (Scheme.ΓSpecIso (.of Γ(T, U))).inv.hom) := h0
+    have h0'' := (Function.Bijective.of_comp_iff _
+      (ConcreteCategory.bijective_of_isIso (Scheme.ΓSpecIso (.of Γ(T, U))).inv)).mp h0'
+    have : (pullback.snd c sA).appLE ⊤ ⊤ le_top = (pullback.snd c sA).appTop :=
+      (Scheme.Hom.app_eq_appLE _).symm
+    rwa [this] at h0''
+  have hE : hU.isoSpec.hom ≫ sA = U.ι ≫ t := by
+    rw [← Iso.eq_inv_comp, hsA, Scheme.TwoAffineOpenCover.specMap]
+    change Spec.map ((Scheme.ΓSpecIso (.of R)).inv ≫ t.appLE ⊤ U le_top) = _
+    rw [Spec.map_comp, ← Scheme.isoSpec_Spec_inv, ← IsAffineOpen.fromSpec_top,
+      IsAffineOpen.SpecMap_appLE_fromSpec t (isAffineOpen_top _) hU le_top, ← Category.assoc,
+      IsAffineOpen.isoSpec_inv_ι]
+  rw [← hE]
+  exact bijective_appTop_snd_of_iso c sA hU.isoSpec h1
+
+end AlgebraicGeometry.SectionsBaseChangeAux
+
+open AlgebraicGeometry.SectionsBaseChangeAux in
+theorem
+    _root_.AlgebraicGeometry.bijective_appTop_pullback_snd_of_forall_bijective_algebraMap_sections
+    (R : Type u) [CommRing R] {C : Scheme.{u}} (c : C ⟶ Spec (CommRingCat.of R))
+    (hH0 : ∀ (A : Type u) [CommRing A] [Algebra R A],
+      letI := Scheme.TwoAffineOpenCover.algebraOfHom
+        (Limits.pullback.snd c (Scheme.TwoAffineOpenCover.specMap R A)) ⊤
+      Function.Bijective (algebraMap A Γ(Limits.pullback c (Scheme.TwoAffineOpenCover.specMap R
+        A), ⊤)))
+    {T : Scheme.{u}} (t : T ⟶ Spec (CommRingCat.of R)) :
+    Function.Bijective (pullback.snd c t).appTop := by
+  set p := pullback.snd c t
+  have hB : Opens.IsBasis (Set.range (Subtype.val : T.affineOpens → T.Opens)) := by
+    rw [Subtype.range_coe]; exact T.isBasis_affineOpens
+  have hiso : IsIso p.c := by
+    refine isIso_of_isIso_app_basis hB T.sheaf ((TopCat.Sheaf.pushforward _ p.base).obj
+      (pullback c t).sheaf) p.c
+      (fun U => isIso_of_bijective _ ?_)
+    exact bijective_app_of_bijective_appTop_restrict c t U.1
+      (bijective_appTop_restrict_of_affine c t U.1 U.2 hH0)
+  have : IsIso (p.c.app (op ⊤)) := @NatIso.isIso_app_of_isIso _ _ _ _ _ _ p.c hiso (op ⊤)
+  exact ConcreteCategory.bijective_of_isIso (p.c.app (op ⊤))
+end bijective_appTop_pullback_snd_of_forall_bijective_algebraMap_sections
+end AlgebraicCurves.Geometry.Schemes.Proofs
+end ProofImplementation

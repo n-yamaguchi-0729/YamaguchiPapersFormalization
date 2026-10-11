@@ -1,0 +1,4613 @@
+/-
+Anthropic FLT upstream notice: Copyright 2026 Anthropic, PBC.
+Released under Apache 2.0 license as described in the file LICENSE.
+Adapted Anthropic FLT source (pinned comparison revision):
+https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/P2M/Sol/S_AlgebraicCurve_tateAgreement.lean
+Upstream NOTICE: https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/NOTICE
+Upstream per-file ATTRIBUTION (earlier FLT and Mathlib notices): https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
+
+Earlier source notices recorded for the cited upstream material:
+Copyright (c) 2025 Salvatore Mercuri. All rights reserved.
+Authors: Salvatore Mercuri, Kevin Buzzard
+https://github.com/ImperialCollegeLondon/FLT/blob/a7dbce8494c29858093974a612a72b6454fc5cba/FLT/Mathlib/RingTheory/LocalRing/MaximalIdeal/Basic.lean
+
+Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
+AI assistance in local adaptation and maintenance: OpenAI Codex.
+-/
+
+import AlgebraicCurves.Divisors.ClassGroup
+import AlgebraicCurves.Places.Rational.Basic
+import AlgebraicCurves.FunctionFields.CurveOver
+import AlgebraicCurves.Differentials.Order
+import AlgebraicCurves.Differentials.Uniformizer
+import AlgebraicCurves.Cohomology.Adelic.Repartitions
+import AlgebraicCurves.Cohomology.Adelic.Index
+import AlgebraicCurves.Divisors.Canonical
+import AlgebraicCurves.Differentials.Residues.Basic
+import AlgebraicCurves.Divisors.Maps
+import AlgebraicCurves.Valuations.AdicCompletion
+import AlgebraicCurves.Places.Completion
+import AlgebraicCurves.Differentials.Residues.TateTrace
+import AlgebraicCurves.Differentials.Residues.Canonical
+import Mathlib.RingTheory.AdicCompletion.RingHom
+
+/-!
+Agreement between the local Tate residue constructions.
+-/
+
+section ProofImplementation
+
+attribute [-ext] IsDedekindDomain.HeightOneSpectrum.adicCompletion.ext
+
+section
+namespace IsLocalRing
+open _root_.IsLocalRing
+end IsLocalRing
+open scoped IsLocalRing in
+theorem IsLocalRing.maximalIdeal_le {R : Type*} [CommSemiring R] [IsLocalRing R] {J : Ideal R}
+    (hJ : J ≠ ⊤) (h : IsLocalRing.maximalIdeal R ≤ J) :
+    J.IsMaximal :=
+  (IsLocalRing.maximalIdeal.isMaximal R).eq_of_le hJ h ▸ IsLocalRing.maximalIdeal.isMaximal R
+end
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve
+end AlgebraicCurve
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+namespace FiberKaehlerLocalDatum
+open _root_.AlgebraicCurve
+end AlgebraicCurve.FiberKaehlerLocalDatum
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve
+end AlgebraicCurve.Place
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+namespace RationalFunctionField
+open _root_.AlgebraicCurve.RationalFunctionField
+open _root_.AlgebraicCurve
+end AlgebraicCurve.RationalFunctionField
+namespace AlgebraicGeometry
+open _root_.AlgebraicGeometry
+open _root_.AlgebraicGeometry
+end AlgebraicGeometry
+namespace AlgebraicGeometry
+open _root_.AlgebraicGeometry
+namespace KwSmoothIrredRelDimConstantEngine
+open _root_.AlgebraicGeometry
+end AlgebraicGeometry.KwSmoothIrredRelDimConstantEngine
+namespace BigOperators
+open _root_.BigOperators
+end BigOperators
+namespace CategoryTheory
+open _root_.CategoryTheory
+open _root_.CategoryTheory
+end CategoryTheory
+namespace CategoryTheory
+open _root_.CategoryTheory
+namespace Limits
+open _root_.CategoryTheory.Limits
+open _root_.CategoryTheory.Limits
+open _root_.CategoryTheory
+end CategoryTheory.Limits
+namespace Classical
+open _root_.Classical
+open _root_.Classical
+end Classical
+namespace CongruenceSubgroup
+open _root_.CongruenceSubgroup
+end CongruenceSubgroup
+namespace Deformation
+namespace ModpDieudonne
+end Deformation.ModpDieudonne
+namespace Deformation
+namespace PDivisible
+end Deformation.PDivisible
+namespace FLT
+namespace HopfSpec
+end FLT.HopfSpec
+namespace Filter
+open _root_.Filter
+open _root_.Filter
+end Filter
+namespace FunctionField
+open _root_.FunctionField
+end FunctionField
+namespace GoodReductionJacobian
+end GoodReductionJacobian
+namespace IntermediateField
+open _root_.IntermediateField
+open _root_.IntermediateField
+end IntermediateField
+namespace IsDedekindDomain
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain
+end IsDedekindDomain
+namespace IsDedekindDomain
+open _root_.IsDedekindDomain
+namespace HeightOneSpectrum
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsDedekindDomain
+end IsDedekindDomain.HeightOneSpectrum
+namespace IsLocalRing
+open _root_.IsLocalRing
+open _root_.IsLocalRing
+end IsLocalRing
+namespace KaehlerDifferential
+open _root_.KaehlerDifferential
+open _root_.KaehlerDifferential
+end KaehlerDifferential
+namespace Ldgr23CohenDefectCorrectionSlice
+end Ldgr23CohenDefectCorrectionSlice
+namespace Ldgr24DefectKernelSlice
+end Ldgr24DefectKernelSlice
+namespace Ldgr25CorrectedChoiceSlice
+end Ldgr25CorrectedChoiceSlice
+namespace Ldgr30BankGate
+end Ldgr30BankGate
+namespace LinearMap
+open _root_.LinearMap
+open _root_.LinearMap
+end LinearMap
+namespace ModularCurve
+open _root_.ModularCurve
+open _root_.ModularCurve
+end ModularCurve
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V391a
+open _root_.ModularCurve.KwF4R1V391a
+open _root_.ModularCurve
+end ModularCurve.KwF4R1V391a
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V392a
+open _root_.ModularCurve
+end ModularCurve.KwF4R1V392a
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V394a
+open _root_.ModularCurve
+end ModularCurve.KwF4R1V394a
+
+open ModularCurve.KwF4R1V394a
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V410a
+open _root_.ModularCurve
+end ModularCurve.KwF4R1V410a
+
+open ModularCurve.KwF4R1V410a
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+end ModularCurve.KwF4gRRTate
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteR
+open _root_.ModularCurve
+end ModularCurve.KwNo6HrouteR
+
+open ModularCurve.KwNo6HrouteR
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteS
+open _root_.ModularCurve
+end ModularCurve.KwNo6HrouteS
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteV
+open _root_.ModularCurve
+end ModularCurve.KwNo6HrouteV
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteY
+open _root_.ModularCurve
+end ModularCurve.KwNo6HrouteY
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteZ
+open _root_.ModularCurve
+end ModularCurve.KwNo6HrouteZ
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6Pin
+open _root_.ModularCurve.KwNo6Pin
+open _root_.ModularCurve.KwNo6Pin
+open _root_.ModularCurve
+end ModularCurve.KwNo6Pin
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6Section
+open _root_.ModularCurve.KwNo6Section
+open _root_.ModularCurve
+end ModularCurve.KwNo6Section
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwOdaDHDR
+open _root_.ModularCurve
+end ModularCurve.KwOdaDHDR
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwTateRR3
+open _root_.ModularCurve
+end ModularCurve.KwTateRR3
+namespace ModularCurve
+open _root_.ModularCurve
+namespace GF24a11bRowACurrencyBridge
+open _root_.ModularCurve
+end ModularCurve.GF24a11bRowACurrencyBridge
+namespace ModularCurve
+open _root_.ModularCurve
+namespace GF24a12CohenSupply
+open _root_.ModularCurve
+end ModularCurve.GF24a12CohenSupply
+namespace ModularCurve
+open _root_.ModularCurve
+namespace GF24a9RRDx
+open _root_.ModularCurve
+end ModularCurve.GF24a9RRDx
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr25CotraceCompatSlice
+open _root_.ModularCurve
+end ModularCurve.Ldgr25CotraceCompatSlice
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr25PlaceExtensionSlice
+open _root_.ModularCurve
+end ModularCurve.Ldgr25PlaceExtensionSlice
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr29SimplePoleResidueSlice
+open _root_.ModularCurve
+end ModularCurve.Ldgr29SimplePoleResidueSlice
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr31PerPlaceRowJoinSlice
+open _root_.ModularCurve
+end ModularCurve.Ldgr31PerPlaceRowJoinSlice
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr32RegularLegSlice
+open _root_.ModularCurve
+end ModularCurve.Ldgr32RegularLegSlice
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr35Cs
+open _root_.ModularCurve.Ldgr35Cs
+open _root_.ModularCurve
+end ModularCurve.Ldgr35Cs
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr36Rc
+open _root_.ModularCurve.Ldgr36Rc
+open _root_.ModularCurve
+end ModularCurve.Ldgr36Rc
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Ldgr36Si
+open _root_.ModularCurve.Ldgr36Si
+open _root_.ModularCurve
+end ModularCurve.Ldgr36Si
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Lg37
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve
+end ModularCurve.Lg37
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Mp72a102T3
+open _root_.ModularCurve.Mp72a102T3
+open _root_.ModularCurve.Mp72a102T3
+open _root_.ModularCurve
+end ModularCurve.Mp72a102T3
+namespace Modularity
+namespace Ldgr26CorrectedRowsBandSlice
+end Modularity.Ldgr26CorrectedRowsBandSlice
+namespace Modularity
+namespace Ldgr27TraceSemilinearSlice
+end Modularity.Ldgr27TraceSemilinearSlice
+namespace Module
+open _root_.Module
+open _root_.Module
+end Module
+namespace MonoidWithZeroHom
+open _root_.MonoidWithZeroHom
+open _root_.MonoidWithZeroHom
+end MonoidWithZeroHom
+namespace Mp72a102T1
+open _root_.Mp72a102T1
+end Mp72a102T1
+namespace Mp72a102T2
+open _root_.Mp72a102T2
+end Mp72a102T2
+namespace Mp72a103T2
+open _root_.Mp72a103T2
+open _root_.Mp72a103T2
+end Mp72a103T2
+namespace Multiplicative
+open _root_.Multiplicative
+open _root_.Multiplicative
+end Multiplicative
+namespace NeronModelInfra
+end NeronModelInfra
+namespace NeronOggShafarevich
+end NeronOggShafarevich
+namespace NumberField
+open _root_.NumberField
+open _root_.NumberField
+end NumberField
+namespace Order
+open _root_.Order
+open _root_.Order
+end Order
+namespace PadicInt
+open _root_.PadicInt
+open _root_.PadicInt
+end PadicInt
+namespace Pointwise
+open _root_.Pointwise
+end Pointwise
+namespace Polynomial
+open _root_.Polynomial
+open _root_.Polynomial
+end Polynomial
+namespace RationalFunctionField
+end RationalFunctionField
+namespace Submodule
+open _root_.Submodule
+open _root_.Submodule
+end Submodule
+namespace TensorProduct
+open _root_.TensorProduct
+open _root_.TensorProduct
+end TensorProduct
+namespace Topology
+open _root_.Topology
+end Topology
+namespace WithZero
+open _root_.WithZero
+open _root_.WithZero
+end WithZero
+
+section
+section
+
+
+open _root_.LinearMap
+open _root_.Submodule
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section FinrankTrace
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+end FinrankTrace
+
+section TateComm
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+end TateComm
+
+section TateFactoring
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+end TateFactoring
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.WithZero
+open _root_.IsLocalRing
+
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+
+variable {K F}
+
+variable (v : Place K F)
+
+end Place
+
+namespace Divisor
+open _root_.AlgebraicCurve.Divisor
+open _root_.AlgebraicCurve.Divisor
+
+variable {K F}
+
+end Divisor
+
+namespace Pic0
+open _root_.AlgebraicCurve.Pic0
+open _root_.AlgebraicCurve.Pic0
+
+variable {K F}
+
+end Pic0
+
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+
+open scoped Pointwise
+
+variable {K F}
+variable (σ : F ≃ₐ[K] F)
+
+variable (v : Place K F)
+
+end Place
+
+namespace Divisor
+open _root_.AlgebraicCurve.Divisor
+open _root_.AlgebraicCurve.Divisor
+
+open scoped Pointwise
+
+variable {K F}
+
+end Divisor
+
+namespace Pic0
+open _root_.AlgebraicCurve.Pic0
+open _root_.AlgebraicCurve.Pic0
+
+open scoped Pointwise
+
+variable {K F}
+
+end Pic0
+
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+
+variable {K F}
+variable {R : Type*} [CommRing R] [IsDedekindDomain R] [Algebra R F] [IsFractionRing R F]
+
+end Place
+
+end AlgebraicCurve
+
+end
+end
+
+end
+
+section
+section
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.WithZero
+open _root_.IsLocalRing
+
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve
+
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+
+section SinglePlace
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] (v : Place K F)
+
+private theorem _root_.AlgebraicCurve.Place.ord_nonneg_of_mem {f : F} (hf : f ∈
+    v.toValuationSubring) : 0 ≤ v.ord f := by
+  rcases eq_or_ne f 0 with rfl | hf0
+  · simp
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
+  obtain ⟨n, u, hu⟩ :=
+    IsDiscreteValuationRing.eq_unit_mul_pow_irreducible
+      (x := (⟨f, hf⟩ : v.toValuationSubring)) (by simpa [Subtype.ext_iff] using hf0) hπ
+  have hcoe : f = ((u : v.toValuationSubring) : F) * ((π : F) ^ (n : ℤ)) := by
+    have h := congrArg (Subtype.val) hu
+    push_cast at h
+    rw [zpow_natCast]
+    exact h
+  rw [hcoe, v.ord_unit_smul_zpow u hπ (n : ℤ)]
+  exact Int.natCast_nonneg n
+
+open _root_.AlgebraicCurve.Place
+private theorem _root_.AlgebraicCurve.Place.mem_of_ord_nonneg {f : F} (hf : f ≠ 0) (h : 0 ≤
+    v.ord f) :
+    f ∈ v.toValuationSubring := by
+  obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible v.toValuationSubring
+  obtain ⟨u, hu⟩ := v.exists_unit_mul_zpow hf hπ
+  rw [hu, show v.ord f = (((v.ord f).toNat : ℕ) : ℤ) from (Int.toNat_of_nonneg h).symm,
+    zpow_natCast]
+  exact mul_mem (u : v.toValuationSubring).2 (pow_mem (π : v.toValuationSubring).2 _)
+
+open _root_.AlgebraicCurve.Place
+private theorem _root_.AlgebraicCurve.Place.mem_iff_ord_nonneg {f : F} (hf : f ≠ 0) :
+    f ∈ v.toValuationSubring ↔ 0 ≤ v.ord f :=
+  ⟨v.ord_nonneg_of_mem, v.mem_of_ord_nonneg hf⟩
+
+open _root_.AlgebraicCurve.Place
+end SinglePlace
+
+section Restrict
+
+variable {K F F' : Type*} [Field K] [Field F] [Field F']
+  [Algebra K F'] [Algebra F F']
+
+variable (w : Place K F')
+
+variable [Algebra.IsIntegral F F']
+
+section RestrictDef
+
+variable [Algebra K F] [IsScalarTower K F F']
+
+end RestrictDef
+
+end Restrict
+
+end Place
+
+end AlgebraicCurve
+
+end
+end
+
+end
+
+section
+section
+
+open scoped Multiplicative WithZero
+
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.MonoidWithZeroHom
+
+namespace MazurTorsion
+
+section Henselian
+
+variable {A : Type*} [CommRing A] [IsDedekindDomain A]
+  (K : Type*) [Field K] [Algebra A K] [IsFractionRing A K]
+  (v : IsDedekindDomain.HeightOneSpectrum A)
+
+theorem isClosed_setOf_valued_le (γ : ℤᵐ⁰) :
+    IsClosed {x : v.adicCompletion K | Valued.v x ≤ γ} := by
+  obtain ⟨z, hz⟩ := valuedAdicCompletion_surjective K v γ
+  have h := Valued.isClosed_closedBall (R := v.adicCompletion K) (Γ₀ := ℤᵐ⁰)
+    ((Valued.v : Valuation (v.adicCompletion K) ℤᵐ⁰).restrict z)
+  convert h using 1
+  ext x
+  simp only [Set.mem_ofPred_eq]
+  rw [Valuation.restrict_le_iff, hz]
+
+
+scoped instance instIsAdicCompleteCompletionIdealAdicCompletionIntegers :
+    IsAdicComplete (v.completionIdeal K) (v.adicCompletionIntegers K) where
+  haus' x hx := by
+    have hx' : ∀ n : ℕ, Valued.v x.val ≤ WithZero.exp (-(n : ℤ)) := by
+      intro n
+      have h := hx n
+      simp only [Ideal.smul_eq_mul, Ideal.mul_top, SModEq.zero,
+        adicCompletion.mem_completionIdeal_pow K v] at h
+      exact h
+    by_contra hx0
+    have hxne : x.val ≠ (0 : v.adicCompletion K) := fun h => hx0 (Subtype.ext h)
+    have hvne : Valued.v x.val ≠ 0 :=
+      (Valuation.ne_zero_iff (Valued.v : Valuation (v.adicCompletion K) ℤᵐ⁰)).mpr hxne
+    obtain ⟨k, hk⟩ := exists_ofAdd_natCast_lt hvne
+    exact absurd (hx' k) (not_le.mpr hk)
+  prec' f hf := by
+    classical
+    have hf' : ∀ m n : ℕ, m ≤ n →
+        Valued.v ((f m - f n : v.adicCompletionIntegers K)).val ≤ WithZero.exp (-(m : ℤ)) := by
+      intro m n hmn
+      have h := hf hmn
+      simp only [Ideal.smul_eq_mul, Ideal.mul_top, SModEq.sub_mem,
+        adicCompletion.mem_completionIdeal_pow K v] at h
+      exact h
+    have hcoe : ∀ a b : ℕ, ((f a - f b : v.adicCompletionIntegers K)).val
+        = (f a).val - (f b).val := fun a b => rfl
+    have hcauchy : CauchySeq (fun n => (f n).val : ℕ → v.adicCompletion K) := by
+      rw [(Valued.hasBasis_uniformity (v.adicCompletion K) ℤᵐ⁰).cauchySeq_iff]
+      rintro γ -
+      have hγ0 : (ValueGroup₀.embedding γ.val : ℤᵐ⁰) ≠ 0 := by
+        intro h0
+        exact γ.ne_zero (ValueGroup₀.embedding_strictMono.injective
+          (h0.trans (_root_.map_zero _).symm))
+      obtain ⟨k, hk⟩ := exists_ofAdd_natCast_lt hγ0
+      refine ⟨k, fun m hm n hn => ?_⟩
+      have key : ∀ a b : ℕ, k ≤ a → a ≤ b →
+          Valued.v ((f b).val - (f a).val) < ValueGroup₀.embedding γ.val := by
+        intro a b hka hab
+        have h1 : Valued.v ((f b).val - (f a).val) ≤ WithZero.exp (-(a : ℤ)) := by
+          rw [Valuation.map_sub_swap, ← hcoe a b]
+          exact hf' a b hab
+        have h2 : WithZero.exp (-(a : ℤ)) ≤ WithZero.exp (-(k : ℤ)) := by
+          rw [WithZero.exp_le_exp]
+          omega
+        exact lt_of_le_of_lt (h1.trans h2) hk
+      change ((Valued.v : Valuation (v.adicCompletion K) ℤᵐ⁰).restrict
+        ((f n).val - (f m).val)) < γ.val
+      rw [Valuation.restrict_lt_iff_lt_embedding]
+      rcases le_total m n with hmn | hnm
+      · exact key m n hm hmn
+      · rw [Valuation.map_sub_swap]
+        exact key n m hn hnm
+    obtain ⟨L₀, hL₀⟩ := cauchySeq_tendsto_of_complete hcauchy
+    have hbound : ∀ n : ℕ, Valued.v (L₀ - (f n).val) ≤ WithZero.exp (-(n : ℤ)) := by
+      intro n
+      have hclosed : IsClosed {y : v.adicCompletion K |
+          Valued.v (y - (f n).val) ≤ WithZero.exp (-(n : ℤ))} := by
+        have hpre : {y : v.adicCompletion K |
+            Valued.v (y - (f n).val) ≤ WithZero.exp (-(n : ℤ))}
+              = (fun y => y - (f n).val) ⁻¹'
+                {z : v.adicCompletion K | Valued.v z ≤ WithZero.exp (-(n : ℤ))} := rfl
+        rw [hpre]
+        exact (isClosed_setOf_valued_le K v _).preimage (continuous_sub_right ((f n).val))
+      have hev : ∀ᶠ m in Filter.atTop, (f m).val ∈ {y : v.adicCompletion K |
+          Valued.v (y - (f n).val) ≤ WithZero.exp (-(n : ℤ))} := by
+        refine Filter.eventually_atTop.mpr ⟨n, fun m hm => ?_⟩
+        have h := hf' n m hm
+        rw [hcoe n m] at h
+        rw [Set.mem_ofPred_eq, Valuation.map_sub_swap]
+        exact h
+      exact hclosed.mem_of_tendsto hL₀ hev
+    have hL₀mem : L₀ ∈ v.adicCompletionIntegers K := by
+      rw [mem_adicCompletionIntegers]
+      have h0 : Valued.v (L₀ - (f 0).val) ≤ (1 : ℤᵐ⁰) := by
+        have h := hbound 0
+        simpa using h
+      have h1 : Valued.v ((f 0).val) ≤ (1 : ℤᵐ⁰) := (f 0).2
+      have hmax : Valued.v ((L₀ - (f 0).val) + (f 0).val) ≤ (1 : ℤᵐ⁰) :=
+        Valuation.map_add_le _ h0 h1
+      have hL : (L₀ - (f 0).val) + (f 0).val = L₀ := by ring
+      rwa [hL] at hmax
+    refine ⟨⟨L₀, hL₀mem⟩, fun n => ?_⟩
+    have h : Valued.v ((f n).val - L₀) ≤ WithZero.exp (-(n : ℤ)) := by
+      rw [Valuation.map_sub_swap]
+      exact hbound n
+    simp only [Ideal.smul_eq_mul, Ideal.mul_top, SModEq.sub_mem,
+      adicCompletion.mem_completionIdeal_pow K v]
+    have hsub : ((f n - (⟨L₀, hL₀mem⟩ : v.adicCompletionIntegers K) :
+        v.adicCompletionIntegers K)).val = (f n).val - L₀ := rfl
+    rw [hsub]
+    exact h
+
+end Henselian
+
+section Uniformizer
+
+variable {A : Type*} [CommRing A] [IsDedekindDomain A]
+  (K : Type*) [Field K] [Algebra A K] [IsFractionRing A K]
+  (v : IsDedekindDomain.HeightOneSpectrum A)
+
+end Uniformizer
+
+section DVR
+
+variable (R : Type*) [CommRing R] [IsDomain R] [IsDiscreteValuationRing R]
+
+variable (K : Type*) [Field K] [Algebra R K] [IsFractionRing R K]
+
+end DVR
+
+section Cover
+
+end Cover
+
+section Consequences
+
+end Consequences
+
+section PadicGate
+
+end PadicGate
+
+end MazurTorsion
+
+end
+
+end
+
+section
+section
+
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+open _root_.WithZero
+open _root_.MonoidWithZeroHom
+
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+namespace Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve.Place
+open _root_.AlgebraicCurve
+
+section AdicCompletion
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] (V : Place K F)
+
+end AdicCompletion
+
+section Henselian
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] (V : Place K F)
+
+open scoped MazurTorsion in
+scoped instance kw_ffgc_isAdicComplete_placeAdicCompletionIntegers :
+    IsAdicComplete (maximalIdeal V.adicCompletionIntegers) V.adicCompletionIntegers :=
+  inferInstance
+
+end Henselian
+
+section WithValLevel
+
+variable {K F F' : Type*} [Field K] [Field F] [Field F'] [Algebra K F] [Algebra K F']
+variable (F)
+variable [Algebra F F'] [IsScalarTower K F F'] [Algebra.IsIntegral F F'] (W : Place K F')
+
+end WithValLevel
+
+section CompletionComap
+
+variable {K F F' : Type*} [Field K] [Field F] [Field F'] [Algebra K F] [Algebra K F']
+variable (F)
+variable [Algebra F F'] [IsScalarTower K F F'] [Algebra.IsIntegral F F'] (W : Place K F')
+
+end CompletionComap
+
+section Bridge
+
+variable {K F F' : Type*} [Field K] [Field F] [Field F'] [Algebra K F] [Algebra K F']
+variable (F)
+variable [Algebra F F'] [IsScalarTower K F F'] [Algebra.IsIntegral F F'] (W : Place K F')
+
+end Bridge
+
+end AlgebraicCurve.Place
+
+end
+end
+
+end
+
+section
+section
+
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.WithZero
+open _root_.Module
+open _root_.IsLocalRing
+open _root_.Module.IsLocalRing
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace Lg37
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve
+
+open _root_.AlgebraicCurve
+open _root_.ModularCurve.Ldgr36Si
+open _root_.ModularCurve.Ldgr36Rc
+open _root_.ModularCurve.Ldgr35Cs
+
+section CompletionCarrier
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+
+end CompletionCarrier
+
+section Inhabitant
+
+end Inhabitant
+
+section Stratum
+
+variable {K E : Type*} [Field K] [Field E] [Algebra K E] [HasCanonicalLocalResidueKStar K E]
+
+end Stratum
+
+section MovedCarrier
+
+variable {K K' F' : Type*} [Field K] [Field K'] [Field F']
+  [Algebra K K'] [Algebra K' F'] [Algebra K F'] [IsScalarTower K K' F']
+variable [HasCanonicalLocalResidueKStar K F']
+
+end MovedCarrier
+
+section CommittedPlace
+
+end CommittedPlace
+
+end ModularCurve.Lg37
+
+section AxiomAudit
+
+end AxiomAudit
+
+end
+
+end
+
+end
+
+section
+section
+
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.IsLocalRing
+open _root_.Polynomial
+
+open scoped Polynomial
+
+namespace Mp72a103T2
+open _root_.Mp72a103T2
+open _root_.Mp72a103T2
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.RationalFunctionField
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.Mp72a102T3
+open _root_.Mp72a102T2
+
+section Calculus
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+
+theorem mp72a103_t2_evalDepth_pow_uniformizer_mul_eq_zero (v : Place K F) :
+    ∀ (m : ℕ) (z : lg37_completion v),
+      AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) m
+        (algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ m * z) = 0 := by
+  intro m
+  induction m with
+  | zero => intro z; exact mp72a102_t3_evalₐ_zero_depth _ _
+  | succ m ih =>
+    intro z
+    have hkill := mp72a102_t3_evalₐ_succ_mul_eq_zero
+      (maximalIdeal v.toValuationSubring) v.uniformizerSubring_mem_maximalIdeal (ih z)
+    have hgoal : algebraMap v.toValuationSubring (lg37_completion v)
+          v.uniformizerSubring ^ (m + 1) * z
+        = algebraMap v.toValuationSubring (lg37_completion v) v.uniformizerSubring
+          * (algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ m * z) := by
+      rw [pow_succ', mul_assoc]
+    rw [hgoal]
+    exact hkill
+
+end Calculus
+
+section NumeratorBand
+
+variable {K : Type*} [Field K] [CharZero K]
+
+end NumeratorBand
+
+section RatProduction
+
+attribute [local instance 2000] RatFunc.instAlgebraOfPolynomial
+
+variable [HasCanonicalLocalResidueKStar ℚ (RatFunc ℚ)]
+variable [HasCanonicalLocalResidueKStar (AlgebraicClosure ℚ) (RatFunc (AlgebraicClosure ℚ))]
+
+end RatProduction
+
+end Mp72a103T2
+
+section AxiomAudit
+
+end AxiomAudit
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.IsDedekindDomain
+
+noncomputable section
+
+namespace AlgebraicCurve
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve
+
+section LocalResidueCompletion
+
+variable {K E : Type*} [Field K] [Field E] [Algebra K E]
+
+variable [HasCanonicalLocalResidueKStar K E]
+
+theorem kwHgfV352_localResidueCompletion_spec (v : Place K E) (xh : v.adicCompletion)
+    {x : E} (hx : algebraMap E v.adicCompletion x - xh ∈ v.adicCompletionIntegers) :
+    kwHgfV352_localResidueCompletion v xh = v.localResidue x := by
+  unfold kwHgfV352_localResidueCompletion
+  set x₀ := (kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh).choose
+  have hx₀ := (kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh).choose_spec
+  have heq : algebraMap E v.adicCompletion (x₀ - x)
+      = (algebraMap E v.adicCompletion x₀ - xh) - (algebraMap E v.adicCompletion x - xh) := by
+    rw [map_sub]; ring
+  have hdiff : algebraMap E v.adicCompletion (x₀ - x) ∈ v.adicCompletionIntegers :=
+    heq ▸ sub_mem hx₀ hx
+  have hov : x₀ - x ∈ v.toValuationSubring :=
+    (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff v _).mp hdiff
+  have hzero : v.localResidue (x₀ - x) = 0 :=
+    v.localResidue_eq_zero_of_ord_nonneg (Or.inr (v.ord_nonneg_of_mem hov))
+  rw [map_sub, sub_eq_zero] at hzero
+  exact hzero
+
+theorem kwHgfV352_localResidueCompletion_algebraMap (v : Place K E) (x : E) :
+    kwHgfV352_localResidueCompletion v (algebraMap E v.adicCompletion x)
+      = v.localResidue x :=
+  kwHgfV352_localResidueCompletion_spec v _
+    (by rw [sub_self]; exact zero_mem _)
+
+theorem kwHgfV352_localResidueCompletion_eq_zero_of_mem_integers (v : Place K E)
+    {xh : v.adicCompletion} (hxh : xh ∈ v.adicCompletionIntegers) :
+    kwHgfV352_localResidueCompletion v xh = 0 := by
+  rw [kwHgfV352_localResidueCompletion_spec v xh (x := 0)
+    (by rw [_root_.map_zero, zero_sub]; exact neg_mem hxh)]
+  exact _root_.map_zero _
+
+theorem kwHgfV352_localResidueCompletion_add (v : Place K E)
+    (xh yh : v.adicCompletion) :
+    kwHgfV352_localResidueCompletion v (xh + yh)
+      = kwHgfV352_localResidueCompletion v xh
+        + kwHgfV352_localResidueCompletion v yh := by
+  obtain ⟨x, hx⟩ := kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh
+  obtain ⟨y, hy⟩ := kwHgfV352_exists_sub_mem_adicCompletionIntegers v yh
+  have heq : algebraMap E v.adicCompletion (x + y) - (xh + yh)
+      = (algebraMap E v.adicCompletion x - xh) + (algebraMap E v.adicCompletion y - yh) := by
+    rw [map_add]; ring
+  rw [kwHgfV352_localResidueCompletion_spec v xh hx,
+    kwHgfV352_localResidueCompletion_spec v yh hy,
+    kwHgfV352_localResidueCompletion_spec v (xh + yh) (x := x + y)
+      (heq ▸ add_mem hx hy),
+    map_add]
+
+end LocalResidueCompletion
+
+section CompletionTraceAt
+
+variable {K : Type*} [Field K] {F : Type*} [Field F] [Algebra K F]
+variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F] [HasPrincipalDivisors K E] [HasPrincipalDivisors K F]
+
+end CompletionTraceAt
+
+section MPGKPowBasisLocalMint
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+variable (E : Type*) [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+variable [Algebra.IsIntegral E F]
+
+end MPGKPowBasisLocalMint
+
+section CompletionTraceSumMint
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+variable (E : Type*) [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+
+end CompletionTraceSumMint
+
+section EffBaseDescentMint
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+variable (E : Type*) [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+
+end EffBaseDescentMint
+
+section MainReduction
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+variable [Algebra.IsIntegral E F] [FiniteDimensional E F]
+
+end MainReduction
+
+end AlgebraicCurve
+
+end
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section TateProj
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem mem_adicIntegersKSubmod_iff (x : u.adicCompletion) :
+    x ∈ adicIntegersKSubmod u ↔ x ∈ u.adicCompletionIntegers := Iff.rfl
+
+theorem tateProj_mem_integers (x : u.adicCompletion) :
+    tateProj u x ∈ u.adicCompletionIntegers :=
+  (mem_adicIntegersKSubmod_iff u _).mp
+    (Submodule.coe_mem
+      (Submodule.projectionOnto (adicIntegersKSubmod u) _
+        (Classical.choose_spec (Submodule.exists_isCompl (adicIntegersKSubmod u))) x))
+
+theorem tateProj_of_mem {x : u.adicCompletion} (hx : x ∈ u.adicCompletionIntegers) :
+    tateProj u x = x := by
+  have h := Submodule.projectionOnto_apply_left
+    (Classical.choose_spec (Submodule.exists_isCompl (adicIntegersKSubmod u)))
+    (⟨x, (mem_adicIntegersKSubmod_iff u x).mpr hx⟩ : adicIntegersKSubmod u)
+  have hcoe := congrArg (Subtype.val (p := fun y => y ∈ adicIntegersKSubmod u)) h
+  exact hcoe
+
+theorem tateProj_idem : tateProj u ∘ₗ tateProj u = tateProj u := by
+  refine LinearMap.ext fun x => ?_
+  rw [LinearMap.comp_apply]
+  exact tateProj_of_mem u (tateProj_mem_integers u x)
+
+theorem range_tateProj : LinearMap.range (tateProj u) = adicIntegersKSubmod u := by
+  apply le_antisymm
+  · rintro x ⟨y, rfl⟩
+    exact tateProj_mem_integers u y
+  · intro x hx
+    exact ⟨x, tateProj_of_mem u hx⟩
+
+end TateProj
+
+section TateResDef
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+end TateResDef
+
+section TateAtoms
+
+variable (K L : Type*) [Field K] [Field L] [Algebra K L]
+
+variable [HasCanonicalLocalResidueKStar K L]
+
+variable (F E : Type*) [Field F] [Algebra K F] [Field E] [Algebra K E]
+variable [Algebra E F] [IsScalarTower K E F] [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K F] [HasCanonicalLocalResidueKStar K E]
+
+end TateAtoms
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section PoleWindow
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+/-- The space of completion elements with poles bounded by the given uniformizer power. -/
+def poleWindowKSubmod (πh : u.adicCompletionIntegers) (M : ℕ) :
+    Submodule K u.adicCompletion where
+  carrier := {x | (πh : u.adicCompletion)^M * x ∈ u.adicCompletionIntegers}
+  add_mem' {a b} ha hb := by
+    simp only [Set.mem_ofPred_eq, mul_add] at ha hb ⊢; exact add_mem ha hb
+  zero_mem' := by simp only [Set.mem_ofPred_eq, mul_zero]; exact zero_mem _
+  smul_mem' c x hx := by
+    simp only [Set.mem_ofPred_eq] at hx ⊢
+    rw [Algebra.smul_def, IsScalarTower.algebraMap_apply K L u.adicCompletion, mul_left_comm]
+    exact mul_mem ((kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr
+      (u.algebraMap_mem' c)) hx
+
+theorem mem_poleWindowKSubmod_iff (πh : u.adicCompletionIntegers) (M : ℕ)
+    (x : u.adicCompletion) :
+    x ∈ poleWindowKSubmod u πh M ↔ (πh : u.adicCompletion)^M * x ∈ u.adicCompletionIntegers :=
+  Iff.rfl
+
+theorem adicIntegersKSubmod_le_poleWindowKSubmod (πh : u.adicCompletionIntegers) (M : ℕ) :
+    adicIntegersKSubmod u ≤ poleWindowKSubmod u πh M :=
+  fun _ hx => mul_mem (pow_mem πh.2 M) hx
+
+theorem kwF4gRRTate_clearPole (πh : u.adicCompletionIntegers) (hπh : Irreducible πh)
+    (fh : u.adicCompletion) :
+    ∃ M : ℕ, (πh : u.adicCompletion)^M * fh ∈ u.adicCompletionIntegers := by
+  obtain ⟨a, b, hb, hfh⟩ := IsFractionRing.div_surjective
+    (A := u.adicCompletionIntegers) (K := u.adicCompletion) fh
+  have hb0 : b ≠ 0 := nonZeroDivisors.ne_zero hb
+  obtain ⟨M, ub, hbeq⟩ := IsDiscreteValuationRing.eq_unit_mul_pow_irreducible hb0 hπh
+  refine ⟨M, ?_⟩
+  have hcoe : ∀ x : u.adicCompletionIntegers,
+      (x : u.adicCompletion) = algebraMap _ u.adicCompletion x := fun _ => rfl
+  have hbK0 : (b : u.adicCompletion) ≠ 0 := by
+    rw [hcoe]; exact (map_ne_zero_iff _ (IsFractionRing.injective _ _)).mpr hb0
+  have hbfh : (b : u.adicCompletion) * fh = (a : u.adicCompletion) := by
+    rw [← hfh, hcoe b, hcoe a, mul_div_cancel₀ _ (hcoe b ▸ hbK0)]
+  have hπheq : ((ub⁻¹ : u.adicCompletionIntegersˣ) : u.adicCompletionIntegers) * b = πh ^ M := by
+    rw [hbeq, ← mul_assoc, ← Units.val_mul, inv_mul_cancel, Units.val_one, one_mul]
+  have hπheqK : ((((ub⁻¹ : u.adicCompletionIntegersˣ) : u.adicCompletionIntegers)
+        : u.adicCompletion)) * (b : u.adicCompletion)
+      = (πh : u.adicCompletion)^M := by
+    have := congrArg (algebraMap u.adicCompletionIntegers u.adicCompletion) hπheq
+    simp only [map_mul, map_pow] at this
+    exact this
+  rw [← hπheqK, mul_assoc, hbfh]
+  exact mul_mem (Subtype.coe_prop _) a.2
+
+variable (K L) in
+/-- Finite dimensionality of each bounded pole space modulo integral completion elements. -/
+def KwF4gRRTatePoleWindowFinite : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue] (πh : u.adicCompletionIntegers) (_ : Irreducible πh)
+    (M : ℕ),
+    FiniteDimensional K
+      (poleWindowKSubmod u πh M ⧸
+        (adicIntegersKSubmod u).comap (poleWindowKSubmod u πh M).subtype)
+
+end PoleWindow
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open scoped WithZero Multiplicative Topology
+open _root_.Filter
+
+namespace IsDedekindDomain
+open _root_.IsDedekindDomain
+namespace HeightOneSpectrum
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsDedekindDomain
+
+variable {A : Type*} (K : Type*) [CommRing A] [Field K] [Algebra A K] [IsFractionRing A K]
+    [IsDedekindDomain A] (v : HeightOneSpectrum A)
+
+namespace adicCompletion
+open _root_.IsDedekindDomain.HeightOneSpectrum.adicCompletion
+open _root_.IsDedekindDomain.HeightOneSpectrum.adicCompletion
+
+local notation "vK" => (Valued.v : Valuation (v.adicCompletion K) ℤᵐ⁰)
+
+theorem isOpen_setOf_valued_le {γ : ℤᵐ⁰} (hγ : γ ≠ 0) :
+    IsOpen {y : v.adicCompletion K | Valued.v y ≤ γ} := by
+  obtain ⟨z, hz⟩ := valuedAdicCompletion_surjective K v γ
+  have hz0 : vK z ≠ 0 := by rw [hz]; exact hγ
+  have hr0 : (vK).restrict z ≠ 0 := fun h =>
+    hz0 ((Valuation.restrict_eq_zero_iff vK).mp h)
+  have hset : {y : v.adicCompletion K | Valued.v y ≤ γ}
+      = {y : v.adicCompletion K | (vK).restrict y ≤ (vK).restrict z} := by
+    ext y
+    simp only [Set.mem_ofPred_eq, Valuation.restrict_le_iff, hz]
+  rw [hset]
+  exact Valued.isOpen_closedBall _ hr0
+
+end adicCompletion
+
+section NumberField
+
+open _root_.NumberField
+
+variable (F : Type*) [Field F] [NumberField F] (w : HeightOneSpectrum (𝓞 F))
+
+end NumberField
+
+end IsDedekindDomain.HeightOneSpectrum
+
+section AxiomAudit
+
+open _root_.IsDedekindDomain.HeightOneSpectrum
+
+end AxiomAudit
+
+end
+
+end
+
+section
+section
+
+
+noncomputable section
+
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+open _root_.WithZero
+open _root_.ModularCurve.Lg37
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V410a
+open _root_.ModularCurve
+
+theorem kwF4R1V410a_factorPow_evalₐ {R : Type*} [CommRing R] {I : Ideal R}
+    {m n : ℕ} (hle : m ≤ n) (z : AdicCompletion I R) :
+    Ideal.Quotient.factorPow I hle (AdicCompletion.evalₐ I n z)
+      = AdicCompletion.evalₐ I m z := by
+  rw [← AdicCompletion.factor_eval_eq_evalₐ I z (n := n) (le_of_eq (Ideal.mul_top _)),
+    ← AdicCompletion.factor_eval_eq_evalₐ I z (n := m) (le_of_eq (Ideal.mul_top _)),
+    AdicCompletion.eval_apply, AdicCompletion.eval_apply, ← z.prop hle]
+  obtain ⟨x, hx⟩ := Submodule.Quotient.mk_surjective _ (z.val n)
+  rw [← hx]; rfl
+
+scoped instance kwF4R1V410a_subsingletonHeightOneSpectrumDVR
+    {O : Type*} [CommRing O] [IsDomain O] [IsDiscreteValuationRing O] :
+    Subsingleton (HeightOneSpectrum O) :=
+  ⟨fun a b => IsDedekindDomain.HeightOneSpectrum.ext
+    (((IsDiscreteValuationRing.iff_pid_with_one_nonzero_prime O).mp
+      inferInstance).2.unique ⟨a.3, a.2⟩ ⟨b.3, b.2⟩)⟩
+
+section Bridge
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] (w : Place K F)
+
+local notation "O_w" => w.toValuationSubring
+local notation "𝔪_w" => IsLocalRing.maximalIdeal w.toValuationSubring
+local notation "O_W" => w.adicCompletionIntegers
+local notation "𝔪_W" => w.heightOneSpectrum.completionIdeal F
+
+theorem kwF4R1V410a_algebraMap_mem_completionIdeal_pow_iff (n : ℕ) (x : O_w) :
+    algebraMap (O_w) (O_W) x ∈ (𝔪_W) ^ n ↔ x ∈ (𝔪_w) ^ n := by
+  have hval : Valued.v (algebraMap (O_w) (O_W) x).val
+      = w.heightOneSpectrum.intValuation x := by
+    have h1 : (algebraMap (O_w) (O_W) x).val
+        = ((algebraMap (O_w) F x : F) : w.adicCompletion) := rfl
+    rw [h1, valuedAdicCompletion_eq_valuation' (K := F) w.heightOneSpectrum,
+      valuation_of_algebraMap]
+  rw [adicCompletion.mem_completionIdeal_pow, hval, ← WithZero.exp_eq_coe_ofAdd,
+    intValuation_le_pow_iff_mem, w.heightOneSpectrum_asIdeal]
+
+theorem kwF4R1V410a_exists_sub_mem_completionIdeal_pow (n : ℕ) (y : O_W) :
+    ∃ x : O_w, y - algebraMap (O_w) (O_W) x ∈ (𝔪_W) ^ n := by
+  have hball_open : IsOpen {z : w.adicCompletion |
+      Valued.v (z - y.val) ≤ WithZero.exp (-(n : ℤ))} :=
+    (adicCompletion.isOpen_setOf_valued_le F w.heightOneSpectrum
+      WithZero.exp_ne_zero).preimage (continuous_sub_right y.val)
+  have hy_mem : y.val ∈ {z : w.adicCompletion |
+      Valued.v (z - y.val) ≤ WithZero.exp (-(n : ℤ))} := by
+    simp only [Set.mem_ofPred_eq, sub_self, _root_.map_zero]; exact zero_le
+  have hmeet := mem_closure_iff.mp
+    ((denseRange_algebraMap F w.heightOneSpectrum) y.val) _ hball_open hy_mem
+  have hexists : ∃ z : F, Valued.v (algebraMap F w.adicCompletion z - y.val)
+      ≤ WithZero.exp (-(n : ℤ)) := by
+    rcases hmeet with ⟨z₀, hz₀_ball, z, hz_eq⟩
+    exact ⟨z, hz_eq ▸ hz₀_ball⟩
+  obtain ⟨z, hz⟩ := hexists
+  rw [show algebraMap F w.adicCompletion z = ((z : F) : w.adicCompletion) from rfl] at hz
+  have hz_val_le : w.heightOneSpectrum.valuation F z ≤ 1 := by
+    have hzhat : Valued.v ((z : w.adicCompletion)) ≤ (1 : ℤᵐ⁰) := by
+      calc Valued.v ((z : w.adicCompletion))
+          = Valued.v (((z : w.adicCompletion) - y.val) + y.val) := by ring_nf
+        _ ≤ max (Valued.v ((z : w.adicCompletion) - y.val)) (Valued.v y.val) :=
+            Valuation.map_add _ _ _
+        _ ≤ (1 : ℤᵐ⁰) := max_le
+            (hz.trans (by rw [← WithZero.exp_zero]; exact WithZero.exp_le_exp.mpr (by omega)))
+            y.2
+    rwa [valuedAdicCompletion_eq_valuation'] at hzhat
+  have hz_mem : z ∈ (O_w : ValuationSubring F) := by
+    obtain ⟨r, hr⟩ := mem_integers_of_valuation_le_one F z
+      (fun v' => by
+        obtain rfl : v' = w.heightOneSpectrum := Subsingleton.elim _ _
+        exact hz_val_le)
+    exact hr ▸ r.2
+  refine ⟨⟨z, hz_mem⟩, ?_⟩
+  rw [adicCompletion.mem_completionIdeal_pow, ← WithZero.exp_eq_coe_ofAdd]
+  have hsub : (y - algebraMap (O_w) (O_W) ⟨z, hz_mem⟩ : O_W).val
+      = y.val - ((z : F) : w.adicCompletion) := rfl
+  rw [hsub, Valuation.map_sub_swap]
+  exact hz
+
+/-- The equivalence of valuation-ring and completed valuation-ring quotients at the specified
+depth. -/
+def kwF4R1V410a_quotientEquiv (n : ℕ) :
+    (O_w) ⧸ (𝔪_w) ^ n ≃+* (O_W) ⧸ (𝔪_W) ^ n :=
+  RingEquiv.ofBijective
+    (Ideal.quotientMap _ (algebraMap (O_w) (O_W))
+      (fun x hx => (kwF4R1V410a_algebraMap_mem_completionIdeal_pow_iff w n x).mpr hx))
+    ⟨Ideal.quotientMap_injective'
+      (fun x hx => (kwF4R1V410a_algebraMap_mem_completionIdeal_pow_iff w n x).mp
+        (Ideal.mem_comap.mp hx)),
+    fun y => by
+      obtain ⟨y', rfl⟩ := Ideal.Quotient.mk_surjective y
+      obtain ⟨x, hx⟩ := kwF4R1V410a_exists_sub_mem_completionIdeal_pow w n y'
+      refine ⟨Ideal.Quotient.mk _ x, ?_⟩
+      change Ideal.Quotient.mk ((𝔪_W)^n) (algebraMap (O_w) (O_W) x) =
+        Ideal.Quotient.mk ((𝔪_W)^n) y'
+      exact (Ideal.Quotient.mk_eq_mk_iff_sub_mem _ _).mpr (by
+        rw [← neg_sub, neg_mem_iff]; exact hx)⟩
+
+theorem kwF4R1V410a_quotientEquiv_mk (n : ℕ) (x : O_w) :
+    kwF4R1V410a_quotientEquiv w n (Ideal.Quotient.mk _ x)
+      = Ideal.Quotient.mk _ (algebraMap (O_w) (O_W) x) := rfl
+
+theorem kwF4R1V410a_quotientEquiv_factorPow {m n : ℕ} (hle : m ≤ n)
+    (z : (O_w) ⧸ (𝔪_w) ^ n) :
+    Ideal.Quotient.factorPow (𝔪_W) hle (kwF4R1V410a_quotientEquiv w n z)
+      = kwF4R1V410a_quotientEquiv w m (Ideal.Quotient.factorPow (𝔪_w) hle z) := by
+  obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective z
+  rw [kwF4R1V410a_quotientEquiv_mk, Ideal.Quotient.factor_mk, Ideal.Quotient.factor_mk,
+    kwF4R1V410a_quotientEquiv_mk]
+
+/-- The compatible quotient-level map from the adic completion to completed valuation-ring
+quotients. -/
+def kwF4R1V410a_forwardFamily (n : ℕ) :
+    lg37_completion w →+* (O_W) ⧸ (𝔪_W)^n :=
+  RingHom.comp ((kwF4R1V410a_quotientEquiv w n).toRingHom)
+    ((AdicCompletion.evalₐ (𝔪_w) n).toRingHom)
+
+theorem kwF4R1V410a_forwardFamily_compat {m n : ℕ} (hle : m ≤ n) :
+    (Ideal.Quotient.factorPow (𝔪_W) hle).comp (kwF4R1V410a_forwardFamily w n)
+      = kwF4R1V410a_forwardFamily w m := by
+  refine RingHom.ext fun z => ?_
+  change Ideal.Quotient.factorPow (𝔪_W) hle
+      (kwF4R1V410a_quotientEquiv w n (AdicCompletion.evalₐ (𝔪_w) n z))
+    = kwF4R1V410a_quotientEquiv w m (AdicCompletion.evalₐ (𝔪_w) m z)
+  rw [kwF4R1V410a_quotientEquiv_factorPow w hle, kwF4R1V410a_factorPow_evalₐ hle z]
+
+/-- The map from the adic completion to the completed valuation ring induced by its quotient
+maps. -/
+def kwF4R1V410a_forward : lg37_completion w →+* (O_W) :=
+  have := kw_ffgc_isAdicComplete_placeAdicCompletionIntegers w
+  IsAdicComplete.liftRingHom (𝔪_W) (kwF4R1V410a_forwardFamily w)
+    (kwF4R1V410a_forwardFamily_compat w)
+
+theorem kwF4R1V410a_mk_forward (n : ℕ) (z : lg37_completion w) :
+    Ideal.Quotient.mk ((𝔪_W)^n) (kwF4R1V410a_forward w z)
+      = kwF4R1V410a_quotientEquiv w n (AdicCompletion.evalₐ (𝔪_w) n z) := by
+  have := kw_ffgc_isAdicComplete_placeAdicCompletionIntegers w
+  exact IsAdicComplete.mk_liftRingHom (𝔪_W) (kwF4R1V410a_forwardFamily w)
+    (kwF4R1V410a_forwardFamily_compat w) n z
+
+/-- The quotient-level inverse maps from the completed valuation ring to valuation-ring
+quotients. -/
+def kwF4R1V410a_backwardFamily (n : ℕ) : (O_W) →+* (O_w) ⧸ (𝔪_w)^n :=
+  RingHom.comp ((kwF4R1V410a_quotientEquiv w n).symm.toRingHom)
+    (Ideal.Quotient.mk ((𝔪_W)^n))
+
+theorem kwF4R1V410a_backwardFamily_compat {m n : ℕ} (hle : m ≤ n) :
+    (Ideal.Quotient.factorPow (𝔪_w) hle).comp (kwF4R1V410a_backwardFamily w n)
+      = kwF4R1V410a_backwardFamily w m := by
+  refine RingHom.ext fun y => ?_
+  change Ideal.Quotient.factorPow (𝔪_w) hle
+      ((kwF4R1V410a_quotientEquiv w n).symm (Ideal.Quotient.mk ((𝔪_W)^n) y))
+    = (kwF4R1V410a_quotientEquiv w m).symm (Ideal.Quotient.mk ((𝔪_W)^m) y)
+  apply (kwF4R1V410a_quotientEquiv w m).injective
+  rw [RingEquiv.apply_symm_apply, ← kwF4R1V410a_quotientEquiv_factorPow w hle,
+    RingEquiv.apply_symm_apply, Ideal.Quotient.factor_mk]
+
+/-- The inverse completion map induced by the compatible valuation-ring quotient maps. -/
+def kwF4R1V410a_backward : (O_W) →+* lg37_completion w :=
+  AdicCompletion.liftRingHom (𝔪_w) (kwF4R1V410a_backwardFamily w)
+    (kwF4R1V410a_backwardFamily_compat w)
+
+theorem kwF4R1V410a_evalₐ_backward (n : ℕ) (y : O_W) :
+    AdicCompletion.evalₐ (𝔪_w) n (kwF4R1V410a_backward w y)
+      = (kwF4R1V410a_quotientEquiv w n).symm (Ideal.Quotient.mk ((𝔪_W)^n) y) :=
+  AdicCompletion.evalₐ_liftRingHom (𝔪_w) (kwF4R1V410a_backwardFamily w)
+    (kwF4R1V410a_backwardFamily_compat w) n y
+
+theorem kwF4R1V410a_forward_backward :
+    (kwF4R1V410a_forward w).comp (kwF4R1V410a_backward w) = RingHom.id _ := by
+  have := kw_ffgc_isAdicComplete_placeAdicCompletionIntegers w
+  have hfun : (fun y => kwF4R1V410a_forward w (kwF4R1V410a_backward w y))
+      = _root_.id := IsHausdorff.funext' (𝔪_W) (fun n y => by
+    rw [kwF4R1V410a_mk_forward, kwF4R1V410a_evalₐ_backward,
+      RingEquiv.apply_symm_apply, _root_.id])
+  exact RingHom.ext (fun y => congrFun hfun y)
+
+theorem kwF4R1V410a_backward_forward :
+    (kwF4R1V410a_backward w).comp (kwF4R1V410a_forward w) = RingHom.id _ := by
+  refine RingHom.ext (fun z => AdicCompletion.ext_evalₐ (fun n => ?_))
+  rw [RingHom.comp_apply, kwF4R1V410a_evalₐ_backward, kwF4R1V410a_mk_forward,
+    RingEquiv.symm_apply_apply, RingHom.id_apply]
+
+/-- The ring equivalence between the adic completion and the completed valuation ring. -/
+def kwF4R1V410a_ringEquiv : lg37_completion w ≃+* (O_W) :=
+  RingEquiv.ofRingHom (kwF4R1V410a_forward w) (kwF4R1V410a_backward w)
+    (kwF4R1V410a_forward_backward w) (kwF4R1V410a_backward_forward w)
+
+theorem kwF4R1V410a_ringEquiv_apply (z : lg37_completion w) :
+    kwF4R1V410a_ringEquiv w z = kwF4R1V410a_forward w z := rfl
+
+theorem kwF4R1V410a_ringEquiv_of (x : O_w) :
+    kwF4R1V410a_ringEquiv w (algebraMap (O_w) (lg37_completion w) x)
+      = algebraMap (O_w) (O_W) x := by
+  have := kw_ffgc_isAdicComplete_placeAdicCompletionIntegers w
+  have hfun : (fun x => kwF4R1V410a_ringEquiv w
+        (algebraMap (O_w) (lg37_completion w) x))
+      = algebraMap (O_w) (O_W) := IsHausdorff.funext' (𝔪_W) (fun n x => by
+    rw [kwF4R1V410a_ringEquiv_apply, kwF4R1V410a_mk_forward,
+      show algebraMap (O_w) (lg37_completion w) x
+        = AdicCompletion.of (𝔪_w) (O_w) x from rfl,
+      AdicCompletion.evalₐ_of, kwF4R1V410a_quotientEquiv_mk])
+  exact congrFun hfun x
+
+end Bridge
+
+end ModularCurve.KwF4R1V410a
+
+end
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section PoleWindowShift
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem coe_smul_K (c : K) (x : u.adicCompletionIntegers) :
+    ((c • x : u.adicCompletionIntegers) : u.adicCompletion) = c • (x : u.adicCompletion) := by
+  rw [Algebra.smul_def, Algebra.smul_def]
+  rfl
+
+/-- The linear map clearing a bounded pole by the specified uniformizer power. -/
+def poleWindowShift (πh : u.adicCompletionIntegers) (M : ℕ) :
+    poleWindowKSubmod u πh M →ₗ[K] u.adicCompletionIntegers where
+  toFun x := ⟨(πh : u.adicCompletion)^M * (x : u.adicCompletion), x.2⟩
+  map_add' x y := by apply Subtype.ext; push_cast; ring
+  map_smul' c x := by
+    apply Subtype.ext
+    rw [coe_smul_K]
+    change (πh : u.adicCompletion)^M * (c • (x : u.adicCompletion))
+        = c • ((πh : u.adicCompletion)^M * (x : u.adicCompletion))
+    rw [mul_smul_comm]
+
+theorem poleWindowShift_injective (πh : u.adicCompletionIntegers) (hπh : Irreducible πh)
+    (M : ℕ) : Function.Injective (poleWindowShift u πh M) := by
+  rw [← LinearMap.ker_eq_bot, eq_bot_iff]
+  intro x hx
+  rw [LinearMap.mem_ker] at hx
+  have hπhM0 : (πh : u.adicCompletion)^M ≠ 0 := by
+    refine pow_ne_zero M ?_
+    intro hz
+    exact hπh.ne_zero (Subtype.ext hz)
+  have hx0 : (x : u.adicCompletion) = 0 := by
+    have := congrArg Subtype.val hx
+    push_cast at this
+    exact (mul_eq_zero.mp this).resolve_left hπhM0
+  exact Subtype.ext hx0
+
+theorem poleWindowShift_surjective (πh : u.adicCompletionIntegers) (hπh : Irreducible πh)
+    (M : ℕ) : Function.Surjective (poleWindowShift u πh M) := by
+  intro y
+  have hπhM0 : (πh : u.adicCompletion)^M ≠ 0 := by
+    refine pow_ne_zero M ?_
+    intro hz; exact hπh.ne_zero (Subtype.ext hz)
+  refine ⟨⟨(y : u.adicCompletion) / (πh : u.adicCompletion)^M, ?_⟩, ?_⟩
+  · rw [mem_poleWindowKSubmod_iff, mul_div_cancel₀ _ hπhM0]; exact y.2
+  · apply Subtype.ext
+    change (πh : u.adicCompletion)^M * ((y : u.adicCompletion) / (πh : u.adicCompletion)^M)
+        = (y : u.adicCompletion)
+    rw [mul_div_cancel₀ _ hπhM0]
+
+/-- The linear equivalence obtained by clearing a bounded pole. -/
+def poleWindowShiftEquiv (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) (M : ℕ) :
+    poleWindowKSubmod u πh M ≃ₗ[K] u.adicCompletionIntegers :=
+  LinearEquiv.ofBijective (poleWindowShift u πh M)
+    ⟨poleWindowShift_injective u πh hπh M, poleWindowShift_surjective u πh hπh M⟩
+
+/-- The subspace of integral completion elements divisible by the uniformizer power. -/
+def piPowKSubmod (πh : u.adicCompletionIntegers) (M : ℕ) :
+    Submodule K u.adicCompletionIntegers where
+  carrier := {y | ∃ x : u.adicCompletionIntegers, y = πh^M * x}
+  add_mem' := by rintro a b ⟨xa, rfl⟩ ⟨xb, rfl⟩; exact ⟨xa + xb, by ring⟩
+  zero_mem' := ⟨0, by ring⟩
+  smul_mem' c y := by
+    rintro ⟨x, rfl⟩
+    exact ⟨c • x, by rw [Algebra.smul_def, Algebra.smul_def, mul_left_comm]⟩
+
+theorem poleWindowShift_image_integers (πh : u.adicCompletionIntegers) (M : ℕ) :
+    Submodule.map (poleWindowShift u πh M)
+        ((adicIntegersKSubmod u).comap (poleWindowKSubmod u πh M).subtype)
+      = piPowKSubmod u πh M := by
+  ext y
+  constructor
+  · rintro ⟨⟨x, hxP⟩, hxA, rfl⟩
+    refine ⟨⟨(x : u.adicCompletion), hxA⟩, ?_⟩
+    apply Subtype.ext; push_cast; rfl
+  · rintro ⟨x, rfl⟩
+    refine ⟨⟨(x : u.adicCompletion),
+      adicIntegersKSubmod_le_poleWindowKSubmod u πh M x.2⟩, x.2, ?_⟩
+    apply Subtype.ext; push_cast; rfl
+
+variable (K L) in
+/-- Finite dimensionality of integral completion quotients by uniformizer powers. -/
+def KwF4gRRTateDVRQuotPowKFinite : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue] (πh : u.adicCompletionIntegers) (_ : Irreducible πh)
+    (M : ℕ),
+    FiniteDimensional K (u.adicCompletionIntegers ⧸ piPowKSubmod u πh M)
+
+theorem kwF4gRRTate_poleWindowFinite_of_DVRQuotPowKFinite
+    (hDVR : KwF4gRRTateDVRQuotPowKFinite K L) :
+    KwF4gRRTatePoleWindowFinite K L := by
+  intro u _ πh hπh M
+  have := hDVR u πh hπh M
+  have e := (poleWindowShiftEquiv u πh hπh M).toLinearMap
+  let e' := Submodule.Quotient.equiv
+    ((adicIntegersKSubmod u).comap (poleWindowKSubmod u πh M).subtype)
+    (piPowKSubmod u πh M)
+    (poleWindowShiftEquiv u πh hπh M)
+    (poleWindowShift_image_integers u πh M)
+  exact FiniteDimensional.of_injective e'.toLinearMap e'.injective
+
+end PoleWindowShift
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section AgreementReduce
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem principalPart_mul_zero_of_mem_integers
+    {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers)
+    {a : u.adicCompletion} (ha : a ∈ u.adicCompletionIntegers) :
+    gh * a - tateProj u (gh * a) = 0 := by
+  rw [tateProj_of_mem u (mul_mem hgh ha), sub_self]
+
+theorem tateCommRestrict_single_term
+    {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers)
+    (fh : u.adicCompletion) (a : LinearMap.range (tateProj u)) :
+    (tateCommRestrict (tateProj u) (lmulK u fh) (lmulK u gh) a : u.adicCompletion)
+      = tateProj u (gh * (fh * (a : u.adicCompletion)
+          - tateProj u (fh * (a : u.adicCompletion)))) := by
+  have haInt : (a : u.adicCompletion) ∈ u.adicCompletionIntegers :=
+    (range_tateProj u ▸ a.2 : (a : u.adicCompletion) ∈ adicIntegersKSubmod u)
+  have hcomm : lmulK u fh ∘ₗ lmulK u gh = lmulK u gh ∘ₗ lmulK u fh := by
+    refine LinearMap.ext fun x => ?_; change fh * (gh * x) = gh * (fh * x); ring
+  rw [tateCommRestrict_apply, tateComm_eq_of_commute hcomm]
+  change tateProj u (gh * (fh * ↑a - tateProj u (fh * ↑a)))
+      - tateProj u (fh * (gh * ↑a - tateProj u (gh * ↑a)))
+    = tateProj u (gh * (fh * ↑a - tateProj u (fh * ↑a)))
+  rw [principalPart_mul_zero_of_mem_integers u hgh haInt, mul_zero, _root_.map_zero, sub_zero]
+
+end AgreementReduce
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section FinrankTraceCyclicity
+
+variable {K M N : Type*} [Field K] [AddCommGroup M] [Module K M] [AddCommGroup N] [Module K N]
+
+theorem range_comp_map_left (f : M →ₗ[K] N) (g : N →ₗ[K] M) :
+    ∀ x ∈ LinearMap.range (g ∘ₗ f), f x ∈ LinearMap.range (f ∘ₗ g) := by
+  rintro x ⟨y, rfl⟩
+  exact ⟨f y, rfl⟩
+
+theorem finrankTrace_comp_comm (f : M →ₗ[K] N) (g : N →ₗ[K] M)
+    [FiniteDimensional K (LinearMap.range (g ∘ₗ f))]
+    [FiniteDimensional K (LinearMap.range (f ∘ₗ g))] :
+    finrankTrace (g ∘ₗ f) = finrankTrace (f ∘ₗ g) := by
+  set W := LinearMap.range (g ∘ₗ f)
+  set W' := LinearMap.range (f ∘ₗ g)
+  let fR : W →ₗ[K] W' := f.restrict (range_comp_map_left f g)
+  let gR : W' →ₗ[K] W := g.restrict (range_comp_map_left g f)
+  have hgf : (g ∘ₗ f).restrict (fun x _ => LinearMap.mem_range_self _ x) = gR ∘ₗ fR := by
+    apply LinearMap.ext; intro x; apply Subtype.ext; rfl
+  have hfg : (f ∘ₗ g).restrict (fun x _ => LinearMap.mem_range_self _ x) = fR ∘ₗ gR := by
+    apply LinearMap.ext; intro x; apply Subtype.ext; rfl
+  unfold finrankTrace
+  rw [hgf, hfg, LinearMap.trace_comp_comm']
+
+end FinrankTraceCyclicity
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section DeltaLemmas
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+variable (pA pA' : V →ₗ[K] V)
+
+/-- Two idempotent linear projectors with the same range. -/
+structure SameRangeIdemProjectors : Prop where
+  /-- Idempotence of the first projector. -/
+  idem_pA : ∀ x, pA (pA x) = pA x
+  /-- Idempotence of the second projector. -/
+  idem_pA' : ∀ x, pA' (pA' x) = pA' x
+  /-- Equality of the two projector ranges. -/
+  range_eq : LinearMap.range pA = LinearMap.range pA'
+
+variable {pA pA'}
+
+theorem pA_fixes_range (h : SameRangeIdemProjectors pA pA') :
+    ∀ x ∈ LinearMap.range pA, pA x = x := by
+  rintro x ⟨y, rfl⟩; exact h.idem_pA y
+
+theorem pA'_fixes_range (h : SameRangeIdemProjectors pA pA') :
+    ∀ x ∈ LinearMap.range pA, pA' x = x := by
+  rintro x hx
+  rw [h.range_eq] at hx
+  obtain ⟨y, rfl⟩ := hx
+  exact h.idem_pA' y
+
+theorem delta_zero_on_range (h : SameRangeIdemProjectors pA pA')
+    {x : V} (hx : x ∈ LinearMap.range pA) :
+    (pA - pA') x = 0 := by
+  simp only [LinearMap.sub_apply, pA_fixes_range h x hx, pA'_fixes_range h x hx, sub_self]
+
+theorem delta_range_subset (h : SameRangeIdemProjectors pA pA')
+    (x : V) : (pA - pA') x ∈ LinearMap.range pA := by
+  simp only [LinearMap.sub_apply]
+  refine sub_mem (LinearMap.mem_range_self pA x) ?_
+  rw [h.range_eq]; exact LinearMap.mem_range_self pA' x
+
+end DeltaLemmas
+
+section Mint
+
+variable (K L : Type*) [Field K] [Field L] [Algebra K L]
+
+/-- Independence of the Tate commutator trace from a projector with the same range. -/
+def KwF4gRRTateProjectorIndep : Prop :=
+  ∀ (u : Place K L) (pA' : u.adicCompletion →ₗ[K] u.adicCompletion),
+    SameRangeIdemProjectors (tateProj u) pA' →
+    ∀ (fh gh : u.adicCompletion), gh ∈ u.adicCompletionIntegers →
+    ∀ [FiniteDimensional K (LinearMap.range
+        (tateCommRestrict (tateProj u) (lmulK u fh) (lmulK u gh)))]
+      [FiniteDimensional K (LinearMap.range
+        (tateCommRestrict pA' (lmulK u fh) (lmulK u gh)))],
+    tateCommTrace (tateProj u) (lmulK u fh) (lmulK u gh)
+      = tateCommTrace pA' (lmulK u fh) (lmulK u gh)
+
+end Mint
+
+section DiffComputation
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (pA' : u.adicCompletion →ₗ[K] u.adicCompletion)
+
+theorem tateCommRestrict_diff
+    (h : SameRangeIdemProjectors (tateProj u) pA')
+    {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers)
+    (fh : u.adicCompletion) (a : LinearMap.range (tateProj u)) :
+    (tateCommRestrict (tateProj u) (lmulK u fh) (lmulK u gh) a : u.adicCompletion)
+      - tateComm pA' (lmulK u fh) (lmulK u gh) (a : u.adicCompletion)
+      = (tateProj u - pA') (gh * fh * (a : u.adicCompletion))
+        - gh * (tateProj u - pA') (fh * (a : u.adicCompletion)) := by
+  have haO : (a : u.adicCompletion) ∈ u.adicCompletionIntegers :=
+    (range_tateProj u ▸ a.2 : (a : u.adicCompletion) ∈ adicIntegersKSubmod u)
+  have hmemO_of_rangeP : ∀ {x : u.adicCompletion},
+      x ∈ LinearMap.range (tateProj u) → x ∈ u.adicCompletionIntegers := fun {x} hx =>
+    (range_tateProj u ▸ hx : x ∈ adicIntegersKSubmod u)
+  have hmemP_of_O : ∀ {x : u.adicCompletion},
+      x ∈ u.adicCompletionIntegers → x ∈ LinearMap.range (tateProj u) := fun {x} hx => by
+    rw [range_tateProj u]; exact hx
+  rw [tateCommRestrict_single_term u hgh fh a]
+  have hcomm : lmulK u fh ∘ₗ lmulK u gh = lmulK u gh ∘ₗ lmulK u fh := by
+    refine LinearMap.ext fun x => ?_; change fh * (gh * x) = gh * (fh * x); ring
+  have hghaP : gh * (a : u.adicCompletion) ∈ LinearMap.range (tateProj u) :=
+    hmemP_of_O (mul_mem hgh haO)
+  have hpA'_gha : pA' (gh * (a : u.adicCompletion)) = gh * (a : u.adicCompletion) :=
+    pA'_fixes_range h _ hghaP
+  have hpA'_single :
+      tateComm pA' (lmulK u fh) (lmulK u gh) (a : u.adicCompletion)
+      = pA' (gh * (fh * (a : u.adicCompletion)
+          - pA' (fh * (a : u.adicCompletion)))) := by
+    rw [tateComm_eq_of_commute hcomm]
+    change pA' (gh * (fh * ↑a - pA' (fh * ↑a)))
+        - pA' (fh * (gh * ↑a - pA' (gh * ↑a)))
+      = pA' (gh * (fh * ↑a - pA' (fh * ↑a)))
+    rw [hpA'_gha, sub_self, mul_zero, _root_.map_zero, sub_zero]
+  rw [hpA'_single]
+  set fa := fh * (a : u.adicCompletion)
+  have hPfaO : tateProj u fa ∈ u.adicCompletionIntegers :=
+    hmemO_of_rangeP (LinearMap.mem_range_self (tateProj u) fa)
+  have hPfaO' : pA' fa ∈ u.adicCompletionIntegers :=
+    hmemO_of_rangeP (h.range_eq ▸ LinearMap.mem_range_self pA' fa)
+  have hghPfa : tateProj u (gh * tateProj u fa) = gh * tateProj u fa :=
+    tateProj_of_mem u (mul_mem hgh hPfaO)
+  have hghPfa' : pA' (gh * pA' fa) = gh * pA' fa :=
+    pA'_fixes_range h _ (hmemP_of_O (mul_mem hgh hPfaO'))
+  rw [mul_sub, map_sub, mul_sub, map_sub, hghPfa, hghPfa']
+  simp only [LinearMap.sub_apply]
+  rw [show gh * fh * (a : u.adicCompletion) = gh * fa from (mul_assoc gh fh _).symm ▸ rfl]
+  ring
+
+end DiffComputation
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section TraceOnSuperspace
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+theorem finrankTrace_eq_trace_on_superspace
+    (φ : V →ₗ[K] V) (W : Submodule K V) [FiniteDimensional K W]
+    (hrange : LinearMap.range φ ≤ W) (hW : ∀ x ∈ W, φ x ∈ W) :
+    haveI : FiniteDimensional K (LinearMap.range φ) :=
+      Submodule.finiteDimensional_of_le hrange
+    finrankTrace φ = LinearMap.trace K W (φ.restrict hW) := by
+  have : FiniteDimensional K (LinearMap.range φ) := Submodule.finiteDimensional_of_le hrange
+  let i : LinearMap.range φ →ₗ[K] W := Submodule.inclusion hrange
+  let π : W →ₗ[K] LinearMap.range φ :=
+    { toFun := fun w => ⟨φ (w : V), LinearMap.mem_range_self φ (w : V)⟩
+      map_add' := fun w₁ w₂ => by simp
+      map_smul' := fun c w => by simp }
+  have hip : i ∘ₗ π = φ.restrict hW := by
+    apply LinearMap.ext; intro w; apply Subtype.ext; rfl
+  have hpi : π ∘ₗ i = φ.restrict (fun x _ => LinearMap.mem_range_self φ x) := by
+    apply LinearMap.ext; intro x; apply Subtype.ext; rfl
+  unfold finrankTrace
+  rw [← hpi, ← hip, LinearMap.trace_comp_comm']
+
+end TraceOnSuperspace
+
+section Additivity
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+theorem finrankTrace_sub_eq
+    (φ ψ : V →ₗ[K] V)
+    [FiniteDimensional K (LinearMap.range φ)]
+    [FiniteDimensional K (LinearMap.range ψ)] :
+    haveI : FiniteDimensional K
+        ((LinearMap.range φ ⊔ LinearMap.range ψ : Submodule K V) : Type _) :=
+      Submodule.finiteDimensional_sup _ _
+    finrankTrace φ - finrankTrace ψ
+      = LinearMap.trace K (LinearMap.range φ ⊔ LinearMap.range ψ : Submodule K V)
+          ((φ - ψ).restrict
+            (p := (LinearMap.range φ ⊔ LinearMap.range ψ : Submodule K V))
+            (fun x _ => sub_mem
+              (Submodule.mem_sup_left (LinearMap.mem_range_self φ x))
+              (Submodule.mem_sup_right (LinearMap.mem_range_self ψ x)))) := by
+  set W' : Submodule K V := LinearMap.range φ ⊔ LinearMap.range ψ with hW'
+  have : FiniteDimensional K W' := Submodule.finiteDimensional_sup _ _
+  have hφW : ∀ x ∈ W', φ x ∈ W' := fun x _ =>
+    Submodule.mem_sup_left (LinearMap.mem_range_self φ x)
+  have hψW : ∀ x ∈ W', ψ x ∈ W' := fun x _ =>
+    Submodule.mem_sup_right (LinearMap.mem_range_self ψ x)
+  rw [finrankTrace_eq_trace_on_superspace φ W' le_sup_left hφW,
+    finrankTrace_eq_trace_on_superspace ψ W' le_sup_right hψW,
+    ← map_sub]
+  refine congrArg (LinearMap.trace K W') (LinearMap.ext fun x => Subtype.ext ?_)
+  rfl
+
+end Additivity
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section DVRQuotDischarge
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem piPowKSubmod_eq_restrictScalars (πh : u.adicCompletionIntegers) (M : ℕ) :
+    piPowKSubmod u πh M
+      = (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers).restrictScalars K := by
+  ext y
+  rw [Submodule.restrictScalars_mem, Ideal.mem_span_singleton]
+  exact ⟨fun ⟨x, h⟩ => ⟨x, h⟩, fun ⟨x, h⟩ => ⟨x, h⟩⟩
+
+/-- The linear equivalence identifying divisibility by a uniformizer power with its principal
+ideal. -/
+def quotPiPowEquivIdealQuot (πh : u.adicCompletionIntegers) (M : ℕ) :
+    (u.adicCompletionIntegers ⧸ piPowKSubmod u πh M)
+      ≃ₗ[K] (u.adicCompletionIntegers ⧸ (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers)) :=
+  (Submodule.quotEquivOfEq _ _ (piPowKSubmod_eq_restrictScalars u πh M)).trans
+    (Submodule.Quotient.restrictScalarsEquiv K _)
+
+variable (K L) in
+/-- Finite dimensionality of the integral completion quotient by an irreducible element. -/
+def KwF4gRRTateDVRCotangentKFinite : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue] (πh : u.adicCompletionIntegers) (_ : Irreducible πh),
+    FiniteDimensional K
+      (u.adicCompletionIntegers ⧸ (Ideal.span {πh} : Ideal u.adicCompletionIntegers))
+
+theorem range_mulLeft_eq_restrictScalars_span (a : u.adicCompletionIntegers) :
+    LinearMap.range (LinearMap.mulLeft K a)
+      = (Ideal.span {a} : Ideal u.adicCompletionIntegers).restrictScalars K := by
+  ext y
+  simp only [LinearMap.mem_range, LinearMap.mulLeft_apply, Submodule.restrictScalars_mem,
+    Ideal.mem_span_singleton]
+  exact ⟨fun ⟨x, hx⟩ => ⟨x, hx.symm⟩, fun ⟨x, hx⟩ => ⟨x, hx.symm⟩⟩
+
+
+theorem finiteDimensional_restrictScalarsQuot_pow [u.FiniteResidue]
+    (hCot : KwF4gRRTateDVRCotangentKFinite K L)
+    (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) (M : ℕ) :
+    FiniteDimensional K (u.adicCompletionIntegers ⧸
+      (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers).restrictScalars K) := by
+  induction M with
+  | zero =>
+    rw [pow_zero, Ideal.span_singleton_one, Submodule.restrictScalars_top]
+    infer_instance
+  | succ M ih =>
+    have hle : (Ideal.span {πh^(M+1)} : Ideal u.adicCompletionIntegers)
+        ≤ Ideal.span {πh^M} := by
+      rw [Ideal.span_singleton_le_span_singleton, pow_succ]; exact ⟨πh, rfl⟩
+    have hle' : (Ideal.span {πh^(M+1)} : Ideal u.adicCompletionIntegers).restrictScalars K
+        ≤ (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers).restrictScalars K :=
+      Submodule.restrictScalars_mono K hle
+    set N : Submodule K (u.adicCompletionIntegers ⧸
+        (Ideal.span {πh^(M+1)} : Ideal u.adicCompletionIntegers).restrictScalars K) :=
+      (Submodule.restrictScalars K (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers)).map
+        (Submodule.restrictScalars K (Ideal.span {πh^(M+1)} : Ideal _)).mkQ with hN_def
+    have hquot : FiniteDimensional K
+        ((u.adicCompletionIntegers ⧸
+          (Ideal.span {πh^(M+1)} : Ideal _).restrictScalars K) ⧸ N) := by
+      have := ih
+      exact Module.Finite.equiv
+        (Submodule.quotientQuotientEquivQuotient _ _ hle').symm
+    have hN : FiniteDimensional K N := by
+      set φ : u.adicCompletionIntegers →ₗ[K] (u.adicCompletionIntegers ⧸
+          (Ideal.span {πh^(M+1)} : Ideal u.adicCompletionIntegers).restrictScalars K) :=
+        (Submodule.restrictScalars K
+            (Ideal.span {πh^(M+1)} : Ideal u.adicCompletionIntegers)).mkQ ∘ₗ
+          LinearMap.mulLeft K (πh^M) with hφ_def
+      have hrange : LinearMap.range φ = N := by
+        rw [hφ_def, LinearMap.range_comp, range_mulLeft_eq_restrictScalars_span, hN_def]
+      have hker : LinearMap.ker φ
+          = (Ideal.span {πh} : Ideal u.adicCompletionIntegers).restrictScalars K := by
+        simp only [hφ_def, LinearMap.ker_comp, Submodule.ker_mkQ]
+        ext x
+        simp only [Submodule.mem_comap, LinearMap.mulLeft_apply, Submodule.restrictScalars_mem,
+          Ideal.mem_span_singleton]
+        have hπM : (πh : u.adicCompletionIntegers)^M ≠ 0 := pow_ne_zero M hπh.ne_zero
+        constructor
+        · rintro ⟨c, hc⟩
+          exact ⟨c, mul_left_cancel₀ hπM (by rw [hc, pow_succ, mul_assoc])⟩
+        · rintro ⟨c, hc⟩
+          exact ⟨c, by rw [hc, pow_succ, mul_assoc]⟩
+      let e₁ : (u.adicCompletionIntegers ⧸
+            (Ideal.span {πh} : Ideal u.adicCompletionIntegers).restrictScalars K)
+          ≃ₗ[K] (u.adicCompletionIntegers ⧸ LinearMap.ker φ) :=
+        Submodule.quotEquivOfEq _ _ hker.symm
+      let e₂ : (u.adicCompletionIntegers ⧸ LinearMap.ker φ) ≃ₗ[K] LinearMap.range φ :=
+        φ.quotKerEquivRange
+      let e₃ : (LinearMap.range φ : Submodule K _) ≃ₗ[K] N := LinearEquiv.ofEq _ _ hrange
+      have hCK : FiniteDimensional K (u.adicCompletionIntegers ⧸
+          (Ideal.span {πh} : Ideal u.adicCompletionIntegers).restrictScalars K) := by
+        have := hCot u πh hπh
+        exact Module.Finite.equiv
+          (Submodule.Quotient.restrictScalarsEquiv K
+            (Ideal.span {πh} : Ideal u.adicCompletionIntegers)).symm
+      exact Module.Finite.equiv ((e₁.trans e₂).trans e₃)
+    exact Module.Finite.of_submodule_quotient N
+
+theorem finiteDimensional_idealQuot_pow [u.FiniteResidue]
+    (hCot : KwF4gRRTateDVRCotangentKFinite K L)
+    (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) (M : ℕ) :
+    FiniteDimensional K
+      (u.adicCompletionIntegers ⧸ (Ideal.span {πh^M} : Ideal u.adicCompletionIntegers)) := by
+  have := finiteDimensional_restrictScalarsQuot_pow u hCot πh hπh M
+  exact Module.Finite.equiv (Submodule.Quotient.restrictScalarsEquiv K _)
+
+theorem kwF4gRRTate_DVRQuotPowKFinite_of_cotangent
+    (hCot : KwF4gRRTateDVRCotangentKFinite K L) :
+    KwF4gRRTateDVRQuotPowKFinite K L := by
+  intro u _ πh hπh M
+  have := finiteDimensional_idealQuot_pow u hCot πh hπh M
+  exact Module.Finite.equiv (quotPiPowEquivIdealQuot u πh M).symm
+
+end DVRQuotDischarge
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.IsLocalRing
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section DVRCotangentDischarge
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+scoped instance instIsScalarTower_K_toValuationSubring_adicCompletionIntegers :
+    IsScalarTower K u.toValuationSubring u.adicCompletionIntegers := by
+  refine IsScalarTower.of_algebraMap_eq fun k => ?_
+  apply Subtype.ext
+  change algebraMap K u.adicCompletion k
+    = (algebraMap u.toValuationSubring u.adicCompletionIntegers (algebraMap K _ k)).val
+  rw [IsScalarTower.algebraMap_apply K L u.adicCompletion]
+  rfl
+
+theorem span_irreducible_eq_completionIdeal_pow_one
+    (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) :
+    (Ideal.span {πh} : Ideal u.adicCompletionIntegers)
+      = (u.heightOneSpectrum.completionIdeal L) ^ 1 := by
+  rw [pow_one, ← hπh.maximalIdeal_eq]
+
+/-- The base-field algebra equivalence between valuation-ring and completed valuation-ring
+quotients. -/
+def quotientEquivKAlg (n : ℕ) :
+    (u.toValuationSubring ⧸ (IsLocalRing.maximalIdeal u.toValuationSubring) ^ n)
+      ≃ₐ[K] (u.adicCompletionIntegers ⧸ (u.heightOneSpectrum.completionIdeal L) ^ n) :=
+  { kwF4R1V410a_quotientEquiv u n with
+    commutes' := fun k => by
+      change kwF4R1V410a_quotientEquiv u n (algebraMap K _ k) = algebraMap K _ k
+      rw [IsScalarTower.algebraMap_apply K u.toValuationSubring
+          (u.toValuationSubring ⧸ (IsLocalRing.maximalIdeal u.toValuationSubring) ^ n),
+        Ideal.Quotient.algebraMap_eq, kwF4R1V410a_quotientEquiv_mk,
+        IsScalarTower.algebraMap_apply K u.adicCompletionIntegers
+          (u.adicCompletionIntegers ⧸ (u.heightOneSpectrum.completionIdeal L) ^ n),
+        Ideal.Quotient.algebraMap_eq,
+        IsScalarTower.algebraMap_apply K u.toValuationSubring u.adicCompletionIntegers] }
+
+/-- The residue-field identification of the integral completion quotient by an irreducible
+element. -/
+def quotSpanIrreducibleEquivResidueField (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) :
+    (u.adicCompletionIntegers ⧸ (Ideal.span {πh} : Ideal u.adicCompletionIntegers))
+      ≃ₗ[K] u.ResidueField :=
+  (Ideal.quotientEquivAlgOfEq K
+      (span_irreducible_eq_completionIdeal_pow_one u πh hπh)).toLinearEquiv.trans
+    ((quotientEquivKAlg u 1).symm.toLinearEquiv.trans
+      (Ideal.quotientEquivAlgOfEq K
+        (pow_one (IsLocalRing.maximalIdeal u.toValuationSubring))).toLinearEquiv)
+
+theorem kwF4gRRTate_DVRCotangentKFinite : KwF4gRRTateDVRCotangentKFinite K L := by
+  intro u _ πh hπh
+  have : Module.Finite K u.ResidueField := FiniteResidue.finite
+  exact Module.Finite.equiv (quotSpanIrreducibleEquivResidueField u πh hπh).symm
+
+end DVRCotangentDischarge
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section DeltaQuotFactor
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+variable {pA pA' : V →ₗ[K] V}
+
+/-- The difference of the two projectors factored through their common-range quotient. -/
+def deltaQuotFactor (h : SameRangeIdemProjectors pA pA') :
+    (V ⧸ LinearMap.range pA) →ₗ[K] LinearMap.range pA :=
+  (LinearMap.range pA).liftQ
+    (LinearMap.codRestrict (LinearMap.range pA) (pA - pA') (delta_range_subset h))
+    (fun x hx => by
+      apply Subtype.ext
+      exact delta_zero_on_range h hx)
+
+theorem deltaQuotFactor_apply (h : SameRangeIdemProjectors pA pA') (x : V) :
+    (deltaQuotFactor h (Submodule.Quotient.mk x) : V) = (pA - pA') x := rfl
+
+end DeltaQuotFactor
+
+section TermRangeFinite
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable [u.FiniteResidue]
+
+/-- Finite dimensionality of the principal-part image of integral completion elements after
+multiplication. -/
+def KwF4gRRTatePoleWindowImageFinite : Prop :=
+  ∀ (fh : u.adicCompletion),
+    FiniteDimensional K (Submodule.map (adicIntegersKSubmod u).mkQ
+      (Submodule.map (lmulK u fh) (adicIntegersKSubmod u)))
+
+end TermRangeFinite
+
+section DiffTraceZero
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (pA' : u.adicCompletion →ₗ[K] u.adicCompletion)
+
+/-- Finite dimensionality of all commutator ranges for a projector sharing the integral range. -/
+def KwF4gRRTateCommFiniteGen : Prop :=
+  ∀ (_h : SameRangeIdemProjectors (tateProj u) pA') (fh gh : u.adicCompletion),
+    FiniteDimensional K
+      (LinearMap.range (tateCommRestrict pA' (lmulK u fh) (lmulK u gh)))
+
+end DiffTraceZero
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section Composite
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+
+theorem kwF4gRRTate_poleWindowFinite : KwF4gRRTatePoleWindowFinite K L :=
+  kwF4gRRTate_poleWindowFinite_of_DVRQuotPowKFinite
+    (kwF4gRRTate_DVRQuotPowKFinite_of_cotangent
+      kwF4gRRTate_DVRCotangentKFinite)
+
+end Composite
+
+section Subset
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem lmul_adicIntegers_subset_poleWindow (fh : u.adicCompletion)
+    (πh : u.adicCompletionIntegers) (M : ℕ)
+    (hfhM : (πh : u.adicCompletion) ^ M * fh ∈ u.adicCompletionIntegers) :
+    Submodule.map (lmulK u fh) (adicIntegersKSubmod u) ≤ poleWindowKSubmod u πh M := by
+  rintro x ⟨a, ha, rfl⟩
+  rw [mem_poleWindowKSubmod_iff]
+  show (πh : u.adicCompletion)^M * (lmulK u fh) a ∈ u.adicCompletionIntegers
+  have : (lmulK u fh) a = fh * a := rfl
+  rw [this, ← mul_assoc]
+  exact mul_mem hfhM (show a ∈ u.adicCompletionIntegers from ha)
+
+end Subset
+
+section Discharge
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable [u.FiniteResidue]
+
+theorem kwF4gRRTate_poleWindowImageFinite :
+    KwF4gRRTatePoleWindowImageFinite u := by
+  intro fh
+  obtain ⟨πh, hπh⟩ := IsDiscreteValuationRing.exists_irreducible u.adicCompletionIntegers
+  obtain ⟨M, hfhM⟩ := kwF4gRRTate_clearPole u πh hπh fh
+  set A := adicIntegersKSubmod u
+  set P := poleWindowKSubmod u πh M
+  have hsub : Submodule.map A.mkQ (Submodule.map (lmulK u fh) A)
+      ≤ Submodule.map A.mkQ P :=
+    Submodule.map_mono (lmul_adicIntegers_subset_poleWindow u fh πh M hfhM)
+  suffices hPim : FiniteDimensional K (Submodule.map A.mkQ P : Submodule K _) by
+    exact Submodule.finiteDimensional_of_le hsub
+  have : FiniteDimensional K (P ⧸ (A.comap P.subtype)) :=
+    kwF4gRRTate_poleWindowFinite (K := K) (L := L) u πh hπh M
+  let r : P →ₗ[K] (u.adicCompletion ⧸ A) := A.mkQ ∘ₗ P.subtype
+  have hrange : LinearMap.range r = Submodule.map A.mkQ P := by
+    rw [LinearMap.range_comp, Submodule.range_subtype]
+  have hker : LinearMap.ker r = A.comap P.subtype := by
+    rw [LinearMap.ker_comp, Submodule.ker_mkQ]
+  have e : (P ⧸ (A.comap P.subtype)) ≃ₗ[K] LinearMap.range r := hker ▸ r.quotKerEquivRange
+  rw [← hrange]
+  exact e.finiteDimensional
+
+end Discharge
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section KerInf
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (pA' : u.adicCompletion →ₗ[K] u.adicCompletion)
+
+theorem ker_pA'_inf_integers (h : SameRangeIdemProjectors (tateProj u) pA') :
+    LinearMap.ker pA' ⊓ adicIntegersKSubmod u = ⊥ := by
+  rw [eq_bot_iff]
+  intro x hx
+  obtain ⟨hker, hint⟩ := Submodule.mem_inf.mp hx
+  have h0 : pA' x = 0 := LinearMap.mem_ker.mp hker
+  have hxR : x ∈ LinearMap.range (tateProj u) := by rw [range_tateProj u]; exact hint
+  have hpAx : pA' x = x := pA'_fixes_range h x hxR
+  rw [Submodule.mem_bot, ← hpAx, h0]
+
+theorem finiteDimensional_ker_pA'_inf_poleWindow
+    (h : SameRangeIdemProjectors (tateProj u) pA')
+    [u.FiniteResidue] (πh : u.adicCompletionIntegers) (hπh : Irreducible πh) (M : ℕ) :
+    FiniteDimensional K
+      ((LinearMap.ker pA' ⊓ poleWindowKSubmod u πh M : Submodule K _)) := by
+  have := kwF4gRRTate_poleWindowFinite (K := K) (L := L) u πh hπh M
+  set A := adicIntegersKSubmod u
+  set P := poleWindowKSubmod u πh M
+  let A' : Submodule K P := A.comap P.subtype
+  let ι : (LinearMap.ker pA' ⊓ P : Submodule K _) →ₗ[K] P ⧸ A' :=
+    (A'.mkQ).comp (Submodule.inclusion inf_le_right)
+  refine FiniteDimensional.of_injective ι ?_
+  rw [← LinearMap.ker_eq_bot, eq_bot_iff]
+  intro xh hxker
+  obtain ⟨x, hxkp⟩ := xh
+  obtain ⟨hxk, hxp⟩ := Submodule.mem_inf.mp hxkp
+  simp only [ι, LinearMap.mem_ker, LinearMap.comp_apply, Submodule.mkQ_apply,
+    Submodule.Quotient.mk_eq_zero, Submodule.inclusion_apply] at hxker
+  have hxA : x ∈ A := hxker
+  have hx0 : x = 0 := by
+    have hbot : x ∈ (⊥ : Submodule K u.adicCompletion) := by
+      rw [← ker_pA'_inf_integers u pA' h]; exact Submodule.mem_inf.mpr ⟨hxk, hxA⟩
+    exact (Submodule.mem_bot K).mp hbot
+  exact Subtype.ext hx0
+
+end KerInf
+
+section Discharge
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (pA' : u.adicCompletion →ₗ[K] u.adicCompletion)
+variable [∀ u : Place K L, u.FiniteResidue]
+
+theorem finiteDimensional_principalPart_pA'_range
+    (h : SameRangeIdemProjectors (tateProj u) pA') (fh : u.adicCompletion) :
+    FiniteDimensional K
+      (LinearMap.range
+        ((LinearMap.id - pA') ∘ₗ lmulK u fh ∘ₗ (adicIntegersKSubmod u).subtype)) := by
+  obtain ⟨πh, hπh⟩ := IsDiscreteValuationRing.exists_irreducible u.adicCompletionIntegers
+  obtain ⟨M, hfhM⟩ := kwF4gRRTate_clearPole u πh hπh fh
+  have := finiteDimensional_ker_pA'_inf_poleWindow u pA' h πh hπh M
+  apply Submodule.finiteDimensional_of_le
+    (S₂ := LinearMap.ker pA' ⊓ poleWindowKSubmod u πh M)
+  rintro x ⟨a, rfl⟩
+  refine Submodule.mem_inf.mpr ⟨?_, ?_⟩
+  · rw [LinearMap.mem_ker]
+    simp only [LinearMap.comp_apply, LinearMap.sub_apply, LinearMap.id_apply,
+      Submodule.subtype_apply, map_sub]
+    exact sub_eq_zero.mpr (h.idem_pA' _).symm
+  · simp only [LinearMap.comp_apply, LinearMap.sub_apply, LinearMap.id_apply,
+      Submodule.subtype_apply]
+    refine sub_mem ?_ ?_
+    · exact lmul_adicIntegers_subset_poleWindow u fh πh M hfhM ⟨a, a.2, rfl⟩
+    · refine adicIntegersKSubmod_le_poleWindowKSubmod u πh M ?_
+      have heq : LinearMap.range pA' = adicIntegersKSubmod u := by
+        rw [← h.range_eq, range_tateProj u]
+      exact heq.le (LinearMap.mem_range_self pA' _)
+
+theorem kwF4gRRTate_commFiniteGen :
+    KwF4gRRTateCommFiniteGen u pA' := by
+  intro h fh gh
+  have h3f := finiteDimensional_principalPart_pA'_range u pA' h fh
+  have h3g := finiteDimensional_principalPart_pA'_range u pA' h gh
+  set qf := (LinearMap.id - pA') ∘ₗ lmulK u fh ∘ₗ (adicIntegersKSubmod u).subtype
+  set qg := (LinearMap.id - pA') ∘ₗ lmulK u gh ∘ₗ (adicIntegersKSubmod u).subtype
+  set Wf := LinearMap.range qf
+  set Wg := LinearMap.range qg
+  set S₂ : Submodule K u.adicCompletion :=
+    Submodule.map (pA' ∘ₗ lmulK u gh) Wf ⊔ Submodule.map (pA' ∘ₗ lmulK u fh) Wg with hS₂
+  have : FiniteDimensional K S₂ := by
+    have : FiniteDimensional K (Submodule.map (pA' ∘ₗ lmulK u gh) Wf : Submodule K _) :=
+      inferInstance
+    have : FiniteDimensional K (Submodule.map (pA' ∘ₗ lmulK u fh) Wg : Submodule K _) :=
+      inferInstance
+    exact Submodule.finiteDimensional_sup _ _
+  set R := LinearMap.range (tateCommRestrict pA' (lmulK u fh) (lmulK u gh))
+  suffices himg : Submodule.map (LinearMap.range pA').subtype R ≤ S₂ by
+    have : FiniteDimensional K (Submodule.map (LinearMap.range pA').subtype R) :=
+      Submodule.finiteDimensional_of_le himg
+    exact (Submodule.equivMapOfInjective (LinearMap.range pA').subtype
+        (LinearMap.range pA').injective_subtype R).symm.finiteDimensional
+  rintro x ⟨y, hyR, rfl⟩
+  obtain ⟨a, rfl⟩ := hyR
+  have heq : LinearMap.range pA' = adicIntegersKSubmod u := by
+    rw [← h.range_eq, range_tateProj u]
+  have haO : (a : u.adicCompletion) ∈ adicIntegersKSubmod u := heq.le a.2
+  set aO : adicIntegersKSubmod u := ⟨(a : u.adicCompletion), haO⟩
+  have hcomm : lmulK u fh ∘ₗ lmulK u gh = lmulK u gh ∘ₗ lmulK u fh := by
+    refine LinearMap.ext fun y' => ?_; change fh * (gh * y') = gh * (fh * y'); ring
+  change (tateCommRestrict pA' (lmulK u fh) (lmulK u gh) a : u.adicCompletion) ∈ S₂
+  rw [show (tateCommRestrict pA' (lmulK u fh) (lmulK u gh) a : u.adicCompletion)
+      = tateComm pA' (lmulK u fh) (lmulK u gh) (a : u.adicCompletion) from rfl,
+    tateComm_eq_of_commute hcomm]
+  refine sub_mem (Submodule.mem_sup_left ?_) (Submodule.mem_sup_right ?_)
+  · exact ⟨qf aO, ⟨aO, rfl⟩, rfl⟩
+  · exact ⟨qg aO, ⟨aO, rfl⟩, rfl⟩
+
+end Discharge
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section Additivity
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+theorem finrankTrace_congr {φ ψ : V →ₗ[K] V}
+    [hφ : FiniteDimensional K (LinearMap.range φ)]
+    [hψ : FiniteDimensional K (LinearMap.range ψ)]
+    (h : φ = ψ) : finrankTrace φ = finrankTrace ψ := by
+  subst h; rfl
+
+theorem range_sub_le (φ ψ : V →ₗ[K] V) :
+    LinearMap.range (φ - ψ) ≤ LinearMap.range φ ⊔ LinearMap.range ψ := by
+  rintro x ⟨y, rfl⟩
+  exact sub_mem (Submodule.mem_sup_left (mem_range_self φ y))
+    (Submodule.mem_sup_right (mem_range_self ψ y))
+
+scoped instance instFinDimRangeSub (φ ψ : V →ₗ[K] V)
+    [FiniteDimensional K (LinearMap.range φ)]
+    [FiniteDimensional K (LinearMap.range ψ)] :
+    FiniteDimensional K (LinearMap.range (φ - ψ)) :=
+  have : FiniteDimensional K
+      ((LinearMap.range φ ⊔ LinearMap.range ψ : Submodule K V) : Type _) :=
+    Submodule.finiteDimensional_sup _ _
+  Submodule.finiteDimensional_of_le (range_sub_le φ ψ)
+
+theorem finrankTrace_sub (φ ψ : V →ₗ[K] V)
+    [FiniteDimensional K (LinearMap.range φ)]
+    [FiniteDimensional K (LinearMap.range ψ)] :
+    finrankTrace φ - finrankTrace ψ = finrankTrace (φ - ψ) := by
+  set W' : Submodule K V := LinearMap.range φ ⊔ LinearMap.range ψ
+  have : FiniteDimensional K W' := Submodule.finiteDimensional_sup _ _
+  have hφψW : ∀ x ∈ W', (φ - ψ) x ∈ W' := fun x _ =>
+    sub_mem (Submodule.mem_sup_left (mem_range_self φ x))
+      (Submodule.mem_sup_right (mem_range_self ψ x))
+  rw [finrankTrace_sub_eq φ ψ,
+    finrankTrace_eq_trace_on_superspace (φ - ψ) W' (range_sub_le φ ψ) hφψW]
+
+end Additivity
+
+section ConjInvariance
+
+variable {K M N : Type*} [Field K] [AddCommGroup M] [Module K M]
+variable [AddCommGroup N] [Module K N]
+
+theorem range_conj_eq_map (e : M ≃ₗ[K] N) (φ : M →ₗ[K] M) :
+    LinearMap.range (e.conj φ) = (LinearMap.range φ).map (e : M →ₗ[K] N) := by
+  rw [LinearEquiv.conj_apply, LinearMap.range_comp, LinearEquiv.range,
+    Submodule.map_top, LinearMap.range_comp]
+
+theorem finrankTrace_conj (e : M ≃ₗ[K] N) (φ : M →ₗ[K] M)
+    [hφ : FiniteDimensional K (LinearMap.range φ)] :
+    haveI : FiniteDimensional K (LinearMap.range (e.conj φ)) := by
+      rw [range_conj_eq_map]
+      exact (Submodule.equivMapOfInjective _ e.injective _).finiteDimensional
+    finrankTrace (e.conj φ) = finrankTrace φ := by
+  have hgf : ((e : M →ₗ[K] N) ∘ₗ φ) ∘ₗ (e.symm : N →ₗ[K] M) = e.conj φ := by
+    apply LinearMap.ext; intro x
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.conj_apply]
+  have hfg : (e.symm : N →ₗ[K] M) ∘ₗ ((e : M →ₗ[K] N) ∘ₗ φ) = φ := by
+    apply LinearMap.ext; intro x
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.symm_apply_apply]
+  have : FiniteDimensional K
+      (LinearMap.range (((e : M →ₗ[K] N) ∘ₗ φ) ∘ₗ (e.symm : N →ₗ[K] M))) := by
+    rw [hgf, range_conj_eq_map]
+    exact (Submodule.equivMapOfInjective _ e.injective _).finiteDimensional
+  have : FiniteDimensional K
+      (LinearMap.range ((e.symm : N →ₗ[K] M) ∘ₗ ((e : M →ₗ[K] N) ∘ₗ φ))) := by
+    rw [hfg]; exact hφ
+  have hcyc := finrankTrace_comp_comm (e.symm : N →ₗ[K] M) ((e : M →ₗ[K] N) ∘ₗ φ)
+  have hconj : FiniteDimensional K (LinearMap.range (e.conj φ)) := by
+    rw [range_conj_eq_map]
+    exact (Submodule.equivMapOfInjective _ e.injective _).finiteDimensional
+  exact (finrankTrace_congr hgf.symm).trans (hcyc.trans (finrankTrace_congr hfg))
+
+end ConjInvariance
+
+section TermMaps
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+/-- Multiplication followed by projection to the quotient of the Tate projector range. -/
+def alphaMap (c : u.adicCompletion) :
+    LinearMap.range (tateProj u) →ₗ[K] (u.adicCompletion ⧸ LinearMap.range (tateProj u)) :=
+  (LinearMap.range (tateProj u)).mkQ ∘ₗ lmulK u c ∘ₗ (LinearMap.range (tateProj u)).subtype
+
+theorem alphaMap_apply (c : u.adicCompletion) (a : LinearMap.range (tateProj u)) :
+    alphaMap u c a = Submodule.Quotient.mk (c * (a : u.adicCompletion)) := rfl
+
+/-- Multiplication by an integral completion element restricted to the Tate projector range. -/
+def mulOnRange {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers) :
+    LinearMap.range (tateProj u) →ₗ[K] LinearMap.range (tateProj u) :=
+  (lmulK u gh).restrict (fun x hx => by
+    have hxO : x ∈ u.adicCompletionIntegers :=
+      (range_tateProj u ▸ hx : x ∈ adicIntegersKSubmod u)
+    have hghx : gh * x ∈ u.adicCompletionIntegers := mul_mem hgh hxO
+    rw [range_tateProj u]
+    exact (show gh * x ∈ adicIntegersKSubmod u from hghx))
+
+theorem mulOnRange_apply {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers)
+    (a : LinearMap.range (tateProj u)) :
+    (mulOnRange u hgh a : u.adicCompletion) = gh * (a : u.adicCompletion) := rfl
+
+variable [u.FiniteResidue]
+
+theorem finiteDimensional_range_alphaMap (c : u.adicCompletion) :
+    FiniteDimensional K (LinearMap.range (alphaMap u c)) := by
+  have hF21 := kwF4gRRTate_poleWindowImageFinite u c
+  set Q1 := u.adicCompletion ⧸ LinearMap.range (tateProj u)
+  set Q2 := u.adicCompletion ⧸ adicIntegersKSubmod u
+  let eQ : Q1 ≃ₗ[K] Q2 := Submodule.quotEquivOfEq _ _ (range_tateProj u)
+  have hmap : (LinearMap.range (alphaMap u c)).map (eQ : Q1 →ₗ[K] Q2)
+      = Submodule.map (adicIntegersKSubmod u).mkQ
+          (Submodule.map (lmulK u c) (adicIntegersKSubmod u)) := by
+    apply le_antisymm
+    · rintro x ⟨y, hy, rfl⟩
+      obtain ⟨a, rfl⟩ := hy
+      refine ⟨c * (a : u.adicCompletion), ⟨(a : u.adicCompletion), ?_, rfl⟩, ?_⟩
+      · exact (range_tateProj u) ▸ a.2
+      · rfl
+    · rintro x ⟨y, ⟨av, hav, rfl⟩, rfl⟩
+      refine ⟨alphaMap u c ⟨av, (range_tateProj u).symm ▸ hav⟩, ⟨_, rfl⟩, ?_⟩
+      rfl
+  have : FiniteDimensional K
+      ((LinearMap.range (alphaMap u c)).map (eQ : Q1 →ₗ[K] Q2)) := by
+    rw [hmap]; exact hF21
+  exact (Submodule.equivMapOfInjective (eQ : Q1 →ₗ[K] Q2) eQ.injective
+    (LinearMap.range (alphaMap u c))).symm.finiteDimensional
+
+end TermMaps
+
+section Cyclicity
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable [u.FiniteResidue]
+variable {pA' : u.adicCompletion →ₗ[K] u.adicCompletion}
+
+scoped instance instFinDimRangeDeltaAlpha (h : SameRangeIdemProjectors (tateProj u) pA')
+    (c : u.adicCompletion) :
+    FiniteDimensional K (LinearMap.range (deltaQuotFactor h ∘ₗ alphaMap u c)) := by
+  have := finiteDimensional_range_alphaMap u c
+  rw [LinearMap.range_comp]
+  infer_instance
+
+scoped instance instFinDimRangeMulDeltaAlpha (h : SameRangeIdemProjectors (tateProj u) pA')
+    (c : u.adicCompletion) {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers) :
+    FiniteDimensional K
+      (LinearMap.range (mulOnRange u hgh ∘ₗ deltaQuotFactor h ∘ₗ alphaMap u c)) := by
+  have := finiteDimensional_range_alphaMap u c
+  rw [LinearMap.range_comp, LinearMap.range_comp]
+  infer_instance
+
+theorem finrankTrace_term_eq (h : SameRangeIdemProjectors (tateProj u) pA')
+    (fh : u.adicCompletion) {gh : u.adicCompletion} (hgh : gh ∈ u.adicCompletionIntegers) :
+    finrankTrace (deltaQuotFactor h ∘ₗ alphaMap u (gh * fh))
+      = finrankTrace (mulOnRange u hgh ∘ₗ deltaQuotFactor h ∘ₗ alphaMap u fh) := by
+  set dQ := deltaQuotFactor h
+  set α₁ := alphaMap u (gh * fh)
+  set α₂ := alphaMap u fh
+  set β := mulOnRange u hgh
+  have hFα₁ : FiniteDimensional K (LinearMap.range α₁) :=
+    finiteDimensional_range_alphaMap u (gh * fh)
+  have hFα₂ : FiniteDimensional K (LinearMap.range α₂) :=
+    finiteDimensional_range_alphaMap u fh
+  have hFS₁ : FiniteDimensional K (LinearMap.range (α₁ ∘ₗ dQ)) := by
+    apply Submodule.finiteDimensional_of_le (S₂ := LinearMap.range α₁)
+    exact LinearMap.range_comp_le_range _ _
+  have hFS₂ : FiniteDimensional K (LinearMap.range (α₂ ∘ₗ (β ∘ₗ dQ))) := by
+    apply Submodule.finiteDimensional_of_le (S₂ := LinearMap.range α₂)
+    exact LinearMap.range_comp_le_range _ _
+  have hFT₂' : FiniteDimensional K (LinearMap.range ((β ∘ₗ dQ) ∘ₗ α₂)) :=
+    instFinDimRangeMulDeltaAlpha u h fh hgh
+  have hcyc₁ : finrankTrace (dQ ∘ₗ α₁) = finrankTrace (α₁ ∘ₗ dQ) :=
+    finrankTrace_comp_comm α₁ dQ
+  have hcyc₂ : finrankTrace ((β ∘ₗ dQ) ∘ₗ α₂) = finrankTrace (α₂ ∘ₗ (β ∘ₗ dQ)) :=
+    finrankTrace_comp_comm α₂ (β ∘ₗ dQ)
+  have hSeq : α₁ ∘ₗ dQ = α₂ ∘ₗ (β ∘ₗ dQ) := by
+    apply LinearMap.ext; intro y
+    simp only [LinearMap.comp_apply]
+    rw [alphaMap_apply, alphaMap_apply, mulOnRange_apply]
+    congr 1
+    ring
+  change finrankTrace (dQ ∘ₗ α₁) = finrankTrace ((β ∘ₗ dQ) ∘ₗ α₂)
+  rw [hcyc₁, hcyc₂]
+  exact finrankTrace_congr hSeq
+
+end Cyclicity
+
+section Headline
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [∀ u : Place K L, u.FiniteResidue]
+
+theorem kwF4gRRTate_projectorIndep : KwF4gRRTateProjectorIndep K L := by
+  intro u pA' h fh gh hgh _ _
+  set Φ := tateCommRestrict (tateProj u) (lmulK u fh) (lmulK u gh)
+  set Ψ' := tateCommRestrict pA' (lmulK u fh) (lmulK u gh)
+  let e : LinearMap.range pA' ≃ₗ[K] LinearMap.range (tateProj u) :=
+    LinearEquiv.ofEq _ _ h.range_eq.symm
+  set Ψ := e.conj Ψ' with hΨdef
+  have hFΨ : FiniteDimensional K (LinearMap.range Ψ) := by
+    rw [hΨdef, range_conj_eq_map]
+    infer_instance
+  have hΨeq : finrankTrace Ψ = finrankTrace Ψ' := finrankTrace_conj e Ψ'
+  change finrankTrace Φ = finrankTrace Ψ'
+  rw [← hΨeq]
+  set dQ := deltaQuotFactor h
+  set T₁ := dQ ∘ₗ alphaMap u (gh * fh) with hT₁def
+  set T₂ := mulOnRange u hgh ∘ₗ dQ ∘ₗ alphaMap u fh with hT₂def
+  have hΦΨ : Φ - Ψ = T₁ - T₂ := by
+    apply LinearMap.ext; intro a
+    apply Subtype.ext
+    simp only [LinearMap.sub_apply, AddSubgroupClass.coe_sub]
+    have hΦv : (Φ a : u.adicCompletion)
+        = (tateCommRestrict (tateProj u) (lmulK u fh) (lmulK u gh) a : u.adicCompletion) :=
+      rfl
+    have hΨv : (Ψ a : u.adicCompletion) = tateComm pA' (lmulK u fh) (lmulK u gh)
+        (a : u.adicCompletion) := by
+      change ((e.conj Ψ') a : u.adicCompletion) = _
+      simp only [LinearEquiv.conj_apply, LinearMap.comp_apply, LinearEquiv.coe_coe]
+      have he_coe : ∀ (x : LinearMap.range pA'), ((e x : LinearMap.range (tateProj u)) :
+          u.adicCompletion) = (x : u.adicCompletion) := fun x => rfl
+      have hesymm_coe : ∀ (x : LinearMap.range (tateProj u)),
+          ((e.symm x : LinearMap.range pA') : u.adicCompletion)
+          = (x : u.adicCompletion) := fun x => rfl
+      rw [he_coe, tateCommRestrict_apply, hesymm_coe]
+    rw [hΦv, hΨv]
+    rw [tateCommRestrict_diff u pA' h hgh fh a]
+    have hT₁v : (T₁ a : u.adicCompletion)
+        = (tateProj u - pA') (gh * fh * (a : u.adicCompletion)) := by
+      simp only [T₁, LinearMap.comp_apply, dQ]
+      rw [alphaMap_apply, deltaQuotFactor_apply]
+    have hT₂v : (T₂ a : u.adicCompletion)
+        = gh * (tateProj u - pA') (fh * (a : u.adicCompletion)) := by
+      simp only [T₂, LinearMap.comp_apply, dQ]
+      rw [alphaMap_apply, mulOnRange_apply, deltaQuotFactor_apply]
+    rw [hT₁v, hT₂v]
+  have hFT₁ : FiniteDimensional K (LinearMap.range T₁) :=
+    instFinDimRangeDeltaAlpha u h (gh * fh)
+  have hFT₂ : FiniteDimensional K (LinearMap.range T₂) :=
+    instFinDimRangeMulDeltaAlpha u h fh hgh
+  have hchain : finrankTrace Φ - finrankTrace Ψ = finrankTrace T₁ - finrankTrace T₂ := by
+    rw [finrankTrace_sub Φ Ψ, finrankTrace_sub T₁ T₂]
+    exact finrankTrace_congr hΦΨ
+  rw [← sub_eq_zero, hchain, finrankTrace_term_eq u h fh hgh, sub_self]
+
+end Headline
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section Additivity
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+end Additivity
+
+section TateCommAddFst
+
+variable {K V : Type*} [Field K] [AddCommGroup V] [Module K V]
+
+end TateCommAddFst
+
+section TateResAddFst
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+end TateResAddFst
+
+section CohenMint
+
+variable (K L : Type*) [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- Agreement between the Cohen projector commutator trace and the completed local residue trace. -/
+def KwF4gRRTateCohenTateAgreement : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue],
+    ∃ (pC : u.adicCompletion →ₗ[K] u.adicCompletion)
+      (_hpC : SameRangeIdemProjectors (tateProj u) pC),
+    ∀ (fh : u.adicCompletion)
+      [FiniteDimensional K (LinearMap.range
+        (tateCommRestrict pC (lmulK u fh)
+          (lmulK u (algebraMap L u.adicCompletion u.uniformizer))))],
+    tateCommTrace pC (lmulK u fh) (lmulK u (algebraMap L u.adicCompletion u.uniformizer))
+      = Algebra.trace K u.ResidueField (kwHgfV352_localResidueCompletion u fh)
+
+end CohenMint
+
+section Reprice
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+variable [∀ u : Place K L, u.FiniteResidue]
+
+theorem kwF4gRRTate_agreement_of_cohenTateAgreement
+    (hfin : KwF4gRRTateCommFinite K L)
+    (hCTA : KwF4gRRTateCohenTateAgreement K L) :
+    KwF4gRRTateAgreement K L hfin := by
+  intro u _ fh
+  obtain ⟨pC, hpC, hCTA_u⟩ := hCTA u
+  set ghπ := algebraMap L u.adicCompletion u.uniformizer
+  have hgh : ghπ ∈ u.adicCompletionIntegers :=
+    (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr u.uniformizer_mem
+  have hF1 := hfin u fh ghπ
+  have hF2 : FiniteDimensional K (LinearMap.range
+      (tateCommRestrict pC (lmulK u fh) (lmulK u ghπ))) :=
+    kwF4gRRTate_commFiniteGen u pC hpC fh ghπ
+  change tateRes u fh ghπ = Algebra.trace K u.ResidueField
+    (kwHgfV352_localResidueCompletion u fh)
+  unfold tateRes
+  rw [kwF4gRRTate_projectorIndep u pC hpC fh ghπ hgh]
+  exact hCTA_u fh
+
+end Reprice
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.ModularCurve.KwF4gRRTate
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve
+
+section CohenKernelData
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- A Cohen projector and residue-field lift realizing the completed residue commutator. -/
+structure TateCohenKernelData (u : Place K L) [u.FiniteResidue] where
+  /-- The Cohen projector onto integral completion elements. -/
+  pC : u.adicCompletion →ₗ[K] u.adicCompletion
+  /-- Idempotence of the Cohen projector. -/
+  pC_idem : ∀ x, pC (pC x) = pC x
+  /-- Its range agrees with the Tate projector range. -/
+  range_pC : LinearMap.range (tateProj u) = LinearMap.range pC
+  /-- The residue-field lift into the Cohen projector range. -/
+  liftκ : u.ResidueField →ₗ[K] LinearMap.range pC
+  /-- Injectivity of the residue-field lift. -/
+  liftκ_inj : Function.Injective liftκ
+  /-- The uniformizer commutator takes values in the residue-field lift range. -/
+  tateComm_mem_range_liftκ : ∀ (fh : u.adicCompletion) (a : LinearMap.range pC),
+    tateCommRestrict pC (lmulK u fh)
+      (lmulK u (algebraMap L u.adicCompletion u.uniformizer)) a ∈ LinearMap.range liftκ
+  /-- The uniformizer commutator on lifted residues is multiplication by the completed local
+  residue. -/
+  tateComm_liftκ : ∀ (fh : u.adicCompletion) (c : u.ResidueField),
+    tateCommRestrict pC (lmulK u fh)
+      (lmulK u (algebraMap L u.adicCompletion u.uniformizer)) (liftκ c)
+      = liftκ (kwHgfV352_localResidueCompletion u fh * c)
+
+variable {u : Place K L} [u.FiniteResidue]
+
+theorem sameRangeIdemProjectors_of_kernelData (D : TateCohenKernelData u) :
+    SameRangeIdemProjectors (tateProj u) D.pC where
+  idem_pA x := congrFun (congrArg DFunLike.coe (tateProj_idem u)) x
+  idem_pA' := D.pC_idem
+  range_eq := D.range_pC
+
+end CohenKernelData
+
+section TraceComputation
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+variable {u : Place K L} [u.FiniteResidue]
+
+theorem tateCommTrace_of_kernelData (D : TateCohenKernelData u) (fh : u.adicCompletion)
+    [FiniteDimensional K (LinearMap.range
+      (tateCommRestrict D.pC (lmulK u fh)
+        (lmulK u (algebraMap L u.adicCompletion u.uniformizer))))] :
+    tateCommTrace D.pC (lmulK u fh)
+        (lmulK u (algebraMap L u.adicCompletion u.uniformizer))
+      = Algebra.trace K u.ResidueField (kwHgfV352_localResidueCompletion u fh) := by
+  have : FiniteDimensional K u.ResidueField := Place.FiniteResidue.finite
+  set T : LinearMap.range D.pC →ₗ[K] LinearMap.range D.pC :=
+    tateCommRestrict D.pC (lmulK u fh)
+    (lmulK u (algebraMap L u.adicCompletion u.uniformizer)) with hT
+  set W : Submodule K (LinearMap.range D.pC) := LinearMap.range D.liftκ with hW
+  have hWfin : FiniteDimensional K W := LinearMap.finiteDimensional_range D.liftκ
+  have hrange : LinearMap.range T ≤ W := by
+    rintro x ⟨a, rfl⟩; exact D.tateComm_mem_range_liftκ fh a
+  have hstab : ∀ x ∈ W, T x ∈ W := by
+    rintro x ⟨c, rfl⟩
+    exact ⟨kwHgfV352_localResidueCompletion u fh * c, (D.tateComm_liftκ fh c).symm⟩
+  let e : u.ResidueField ≃ₗ[K] W := LinearEquiv.ofInjective D.liftκ D.liftκ_inj
+  let gκ : u.ResidueField →ₗ[K] u.ResidueField :=
+    Algebra.lmul K u.ResidueField (kwHgfV352_localResidueCompletion u fh)
+  have hconj : T.restrict hstab
+      = e.conj gκ := by
+    refine LinearMap.ext fun w => ?_
+    obtain ⟨c, rfl⟩ := e.surjective w
+    rw [LinearEquiv.conj_apply_apply, LinearEquiv.symm_apply_apply]
+    apply Subtype.ext
+    exact D.tateComm_liftκ fh c
+  calc tateCommTrace D.pC (lmulK u fh)
+        (lmulK u (algebraMap L u.adicCompletion u.uniformizer))
+      = finrankTrace T := rfl
+    _ = LinearMap.trace K W (T.restrict hstab) :=
+          finrankTrace_eq_trace_on_superspace T W hrange hstab
+    _ = LinearMap.trace K W (e.conj gκ) := congrArg (LinearMap.trace K W) hconj
+    _ = LinearMap.trace K W
+          ((e.toLinearMap.comp gκ).comp e.symm.toLinearMap) :=
+          congrArg (LinearMap.trace K W) (LinearEquiv.conj_apply e gκ)
+    _ = LinearMap.trace K u.ResidueField
+          (e.symm.toLinearMap.comp (e.toLinearMap.comp gκ)) := by
+          have hWfree : Module.Free K W := Module.Free.of_divisionRing K W
+          exact LinearMap.trace_comp_comm' (R := K) (M := ↥W) (N := u.ResidueField)
+            e.symm.toLinearMap (e.toLinearMap.comp gκ)
+    _ = LinearMap.trace K u.ResidueField gκ := by
+          rw [← LinearMap.comp_assoc, LinearEquiv.symm_comp, LinearMap.id_comp]
+    _ = Algebra.trace K u.ResidueField (kwHgfV352_localResidueCompletion u fh) := rfl
+
+end TraceComputation
+
+section Mint
+
+variable (K L : Type*) [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- Existence of Cohen kernel data at every place with finite residue field. -/
+def KwF4gRRTateCohenKernelDataExists : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue], Nonempty (TateCohenKernelData u)
+
+end Mint
+
+section Headline
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+theorem kwF4gRRTate_cohenTateAgreement_of_kernelData
+    (hD : KwF4gRRTateCohenKernelDataExists K L) :
+    KwF4gRRTateCohenTateAgreement K L := by
+  intro u _
+  obtain ⟨D⟩ := hD u
+  exact ⟨D.pC, sameRangeIdemProjectors_of_kernelData D,
+    fun fh _ => tateCommTrace_of_kernelData D fh⟩
+
+theorem kwF4gRRTate_agreement_of_kernelData
+    [∀ u : Place K L, u.FiniteResidue]
+    (hfin : KwF4gRRTateCommFinite K L)
+    (hD : KwF4gRRTateCohenKernelDataExists K L) :
+    KwF4gRRTateAgreement K L hfin :=
+  kwF4gRRTate_agreement_of_cohenTateAgreement hfin
+    (kwF4gRRTate_cohenTateAgreement_of_kernelData hD)
+
+end Headline
+
+end ModularCurve.KwF4gRRTate
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.FunctionField
+open _root_.KaehlerDifferential
+open ModularCurve.GF24a9RRDx
+open _root_.ModularCurve.KwF4R1V391a
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwF4R1V394a
+open _root_.ModularCurve
+
+section LinearWrappers
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+variable [HasPrincipalDivisors K E] [HasPrincipalDivisors K F] [FiniteDimensional E F]
+variable [Nontrivial Ω[E⁄K]]
+
+omit [HasPrincipalDivisors K E] [Nontrivial Ω[E⁄K]] in
+theorem kwF4R1V394a_localResidueCompletion_smul
+    (v : Place K E) (c : K) (xh : v.adicCompletion) :
+    kwHgfV352_localResidueCompletion v (c • xh)
+      = c • kwHgfV352_localResidueCompletion v xh := by
+  obtain ⟨x, hx⟩ := kwHgfV352_exists_sub_mem_adicCompletionIntegers v xh
+  have halg : algebraMap E v.adicCompletion (c • x)
+      = c • algebraMap E v.adicCompletion x := by
+    rw [Algebra.smul_def, map_mul, ← IsScalarTower.algebraMap_apply K E v.adicCompletion,
+      ← Algebra.smul_def]
+  have hcx : algebraMap E v.adicCompletion (c • x) - c • xh
+      ∈ v.adicCompletionIntegers := by
+    rw [halg, ← smul_sub, Algebra.smul_def,
+      IsScalarTower.algebraMap_apply K E v.adicCompletion c]
+    refine mul_mem ?_ hx
+    exact (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff v _).mpr
+      (v.algebraMap_mem' c)
+  rw [kwHgfV352_localResidueCompletion_spec v _ hcx,
+    kwHgfV352_localResidueCompletion_spec v _ hx, map_smul]
+
+end LinearWrappers
+
+section OrdCompat
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+variable (E : Type*) [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+
+variable {K F E}
+variable [HasPrincipalDivisors K E] [HasPrincipalDivisors K F] [FiniteDimensional E F]
+variable [Nontrivial Ω[E⁄K]]
+
+end OrdCompat
+
+section Recursion
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+variable [HasPrincipalDivisors K E] [HasPrincipalDivisors K F] [FiniteDimensional E F]
+variable [Nontrivial Ω[E⁄K]]
+
+variable [Nontrivial Ω[F⁄K]]
+
+end Recursion
+
+section MonomialMint
+
+variable (K F : Type*) [Field K] [Field F] [Algebra K F]
+variable (E : Type*) [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+
+end MonomialMint
+
+section Engine
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+variable {E : Type*} [Field E] [Algebra K E] [Algebra E F] [IsScalarTower K E F]
+variable [Algebra.IsIntegral E F]
+variable [HasCanonicalLocalResidueKStar K E] [HasCanonicalLocalResidueKStar K F]
+
+end Engine
+
+end ModularCurve.KwF4R1V394a
+
+end
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.IsLocalRing
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.Lg37
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwTateRR3
+open _root_.ModularCurve
+
+section CohenSectionHat
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+
+/-- The residue-field section transported into the valuation completion. -/
+def cohenSectionHat (u : Place K L) (S : Lg37CompletionSection u) :
+    u.ResidueField →ₐ[K] u.adicCompletion where
+  toRingHom :=
+    (u.adicCompletionIntegers.subtype).comp
+      ((kwF4R1V410a_ringEquiv u).toRingHom.comp S.lift.toRingHom)
+  commutes' c := by
+    change ((kwF4R1V410a_ringEquiv u (S.lift (algebraMap K u.ResidueField c))
+        : u.adicCompletionIntegers) : u.adicCompletion)
+      = algebraMap K u.adicCompletion c
+    rw [S.lift.commutes c,
+      IsScalarTower.algebraMap_apply K u.toValuationSubring (lg37_completion u) c,
+      kwF4R1V410a_ringEquiv_of u,
+      IsScalarTower.algebraMap_apply K L u.adicCompletion c]
+    rfl
+
+theorem cohenSectionHat_apply (u : Place K L) (S : Lg37CompletionSection u)
+    (a : u.ResidueField) :
+    cohenSectionHat u S a
+      = ((kwF4R1V410a_ringEquiv u (S.lift a) : u.adicCompletionIntegers)
+          : u.adicCompletion) := rfl
+
+theorem cohenSectionHat_mem_integers (u : Place K L) (S : Lg37CompletionSection u)
+    (a : u.ResidueField) :
+    cohenSectionHat u S a ∈ u.adicCompletionIntegers :=
+  (kwF4R1V410a_ringEquiv u (S.lift a)).2
+
+theorem cohenSectionHat_mem_adicIntegersKSubmod (u : Place K L)
+    (S : Lg37CompletionSection u) (a : u.ResidueField) :
+    cohenSectionHat u S a ∈ adicIntegersKSubmod u :=
+  cohenSectionHat_mem_integers u S a
+
+theorem cohenSectionHat_injective (u : Place K L) (S : Lg37CompletionSection u) :
+    Function.Injective (cohenSectionHat u S) :=
+  (cohenSectionHat u S).toRingHom.injective
+
+end CohenSectionHat
+
+section CohenProjC
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+/-- Projection onto integral completion elements along the chosen complementary subspace. -/
+def cohenProjC (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) :
+    u.adicCompletion →ₗ[K] u.adicCompletion :=
+  (adicIntegersKSubmod u).subtype ∘ₗ Submodule.projectionOnto (adicIntegersKSubmod u) B hcompl
+
+theorem cohenProjC_mem_integers (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) (x : u.adicCompletion) :
+    cohenProjC u B hcompl x ∈ u.adicCompletionIntegers :=
+  (Submodule.projectionOnto (adicIntegersKSubmod u) B hcompl x).2
+
+theorem cohenProjC_of_mem (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) {x : u.adicCompletion}
+    (hx : x ∈ u.adicCompletionIntegers) :
+    cohenProjC u B hcompl x = x :=
+  congrArg Subtype.val (Submodule.projectionOnto_apply_left hcompl ⟨x, hx⟩)
+
+theorem cohenProjC_of_mem_B (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) {x : u.adicCompletion}
+    (hx : x ∈ B) :
+    cohenProjC u B hcompl x = 0 :=
+  congrArg Subtype.val (Submodule.projectionOnto_apply_right hcompl ⟨x, hx⟩)
+
+theorem cohenProjC_idem (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) (x : u.adicCompletion) :
+    cohenProjC u B hcompl (cohenProjC u B hcompl x) = cohenProjC u B hcompl x :=
+  cohenProjC_of_mem u B hcompl (cohenProjC_mem_integers u B hcompl x)
+
+theorem range_cohenProjC (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) :
+    LinearMap.range (cohenProjC u B hcompl) = adicIntegersKSubmod u :=
+  le_antisymm (fun _x ⟨y, hy⟩ => hy ▸ cohenProjC_mem_integers u B hcompl y)
+    (fun _x hx => ⟨_x, cohenProjC_of_mem u B hcompl hx⟩)
+
+theorem sub_cohenProjC_mem_B (B : Submodule K u.adicCompletion)
+    (hcompl : IsCompl (adicIntegersKSubmod u) B) (x : u.adicCompletion) :
+    x - cohenProjC u B hcompl x ∈ B := by
+  have htop : x ∈ adicIntegersKSubmod u ⊔ B := by
+    rw [hcompl.sup_eq_top]; exact Submodule.mem_top
+  obtain ⟨a, ha, b, hb, hab⟩ := Submodule.mem_sup.mp htop
+  subst hab
+  rw [map_add, cohenProjC_of_mem u B hcompl ha,
+    cohenProjC_of_mem_B u B hcompl hb, add_zero, add_sub_cancel_left]
+  exact hb
+
+end CohenProjC
+
+section SingleTerm
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (B : Submodule K u.adicCompletion) (hcompl : IsCompl (adicIntegersKSubmod u) B)
+
+theorem cohenTateCommRestrict_single_term (fh : u.adicCompletion)
+    (a : LinearMap.range (cohenProjC u B hcompl)) :
+    (tateCommRestrict (cohenProjC u B hcompl) (lmulK u fh)
+        (lmulK u (algebraMap L u.adicCompletion u.uniformizer)) a
+      : u.adicCompletion)
+    = cohenProjC u B hcompl
+        (algebraMap L u.adicCompletion u.uniformizer
+          * (fh * (a : u.adicCompletion)
+              - cohenProjC u B hcompl (fh * (a : u.adicCompletion)))) := by
+  have haInt : (a : u.adicCompletion) ∈ u.adicCompletionIntegers :=
+    (range_cohenProjC u B hcompl ▸ a.2 :
+      (a : u.adicCompletion) ∈ adicIntegersKSubmod u)
+  have hπ : algebraMap L u.adicCompletion u.uniformizer ∈ u.adicCompletionIntegers :=
+    (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr u.uniformizer_mem
+  have hcomm : lmulK u fh ∘ₗ lmulK u (algebraMap L u.adicCompletion u.uniformizer)
+      = lmulK u (algebraMap L u.adicCompletion u.uniformizer) ∘ₗ lmulK u fh := by
+    refine LinearMap.ext fun x => ?_
+    change fh * (algebraMap L u.adicCompletion u.uniformizer * x) =
+      algebraMap L u.adicCompletion u.uniformizer * (fh * x)
+    ring
+  rw [tateCommRestrict_apply, tateComm_eq_of_commute hcomm]
+  change cohenProjC u B hcompl (_ * (fh * ↑a - cohenProjC u B hcompl (fh * ↑a)))
+      - cohenProjC u B hcompl (fh * (_ * ↑a - cohenProjC u B hcompl (_ * ↑a)))
+    = cohenProjC u B hcompl (_ * (fh * ↑a - cohenProjC u B hcompl (fh * ↑a)))
+  rw [cohenProjC_of_mem u B hcompl (mul_mem hπ haInt), sub_self, mul_zero, _root_.map_zero,
+    sub_zero]
+
+end SingleTerm
+
+section CohenLaurentSpec
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- A Cohen section and Laurent complement with a compatible principal-part residue map. -/
+structure KwTateRR3CohenLaurentSpec (u : Place K L) [u.FiniteResidue] where
+  /-- The chosen section from the residue field into the adic completion. -/
+  S : Lg37CompletionSection u
+  /-- The complementary subspace of Laurent principal parts. -/
+  B : Submodule K u.adicCompletion
+  /-- The Laurent subspace complements integral completion elements. -/
+  hcompl : IsCompl (adicIntegersKSubmod u) B
+  /-- The leading residue coefficient on the complementary subspace. -/
+  ε : B →ₗ[K] u.ResidueField
+  /-- Uniformizer multiplication preserves the complement after removing the lifted residue. -/
+  shift_sub_mem : ∀ z : B,
+    algebraMap L u.adicCompletion u.uniformizer * (z : u.adicCompletion)
+      - cohenSectionHat u S (ε z) ∈ B
+  /-- The residue coefficient of a multiplied lifted residue agrees with the completed local
+  residue. -/
+  ε_principalPart_mul_sectionHat : ∀ (fh : u.adicCompletion) (c : u.ResidueField),
+    ε ⟨fh * cohenSectionHat u S c
+          - cohenProjC u B hcompl (fh * cohenSectionHat u S c),
+        sub_cohenProjC_mem_B u B hcompl _⟩
+      = kwHgfV352_localResidueCompletion u fh * c
+
+variable {u : Place K L} [u.FiniteResidue] (D : KwTateRR3CohenLaurentSpec u)
+
+theorem cohenProjC_uniformizer_mul_of_mem_B {x : u.adicCompletion} (hx : x ∈ D.B) :
+    cohenProjC u D.B D.hcompl
+        (algebraMap L u.adicCompletion u.uniformizer * x)
+      = cohenSectionHat u D.S (D.ε ⟨x, hx⟩) := by
+  have hsplit : algebraMap L u.adicCompletion u.uniformizer * x
+      = cohenSectionHat u D.S (D.ε ⟨x, hx⟩)
+        + (algebraMap L u.adicCompletion u.uniformizer * x
+            - cohenSectionHat u D.S (D.ε ⟨x, hx⟩)) := (add_sub_cancel _ _).symm
+  rw [hsplit, map_add, cohenProjC_of_mem u D.B D.hcompl
+      (cohenSectionHat_mem_integers u D.S _),
+    cohenProjC_of_mem_B u D.B D.hcompl (D.shift_sub_mem ⟨x, hx⟩), add_zero]
+
+end CohenLaurentSpec
+
+section Construct
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+variable {u : Place K L} [u.FiniteResidue]
+
+/-- The residue-field lift into the integral range of the Cohen projector. -/
+def cohenLiftκ (D : KwTateRR3CohenLaurentSpec u) :
+    u.ResidueField →ₗ[K] LinearMap.range (cohenProjC u D.B D.hcompl) where
+  toFun c := ⟨cohenSectionHat u D.S c,
+    (range_cohenProjC u D.B D.hcompl).symm ▸
+      cohenSectionHat_mem_adicIntegersKSubmod u D.S c⟩
+  map_add' a b := Subtype.ext (map_add _ a b)
+  map_smul' r a := Subtype.ext ((cohenSectionHat u D.S).toLinearMap.map_smul r a)
+
+theorem cohenLiftκ_coe (D : KwTateRR3CohenLaurentSpec u) (c : u.ResidueField) :
+    ((cohenLiftκ D c : LinearMap.range (cohenProjC u D.B D.hcompl)) : u.adicCompletion)
+      = cohenSectionHat u D.S c := rfl
+
+theorem cohenLiftκ_injective (D : KwTateRR3CohenLaurentSpec u) :
+    Function.Injective (cohenLiftκ D) := by
+  intro a b hab
+  have hval : cohenSectionHat u D.S a = cohenSectionHat u D.S b :=
+    (cohenLiftκ_coe D a).symm.trans
+      ((congrArg Subtype.val hab).trans (cohenLiftκ_coe D b))
+  exact cohenSectionHat_injective u D.S hval
+
+/-- The Cohen kernel data supplied by a compatible Laurent specification. -/
+def tateCohenKernelData_of_cohenLaurentSpec (D : KwTateRR3CohenLaurentSpec u) :
+    TateCohenKernelData u where
+  pC := cohenProjC u D.B D.hcompl
+  pC_idem := cohenProjC_idem u D.B D.hcompl
+  range_pC := (range_tateProj u).trans (range_cohenProjC u D.B D.hcompl).symm
+  liftκ := cohenLiftκ D
+  liftκ_inj := cohenLiftκ_injective D
+  tateComm_mem_range_liftκ fh a := by
+    have hmem := sub_cohenProjC_mem_B u D.B D.hcompl (fh * (a : u.adicCompletion))
+    refine ⟨D.ε ⟨_, hmem⟩, ?_⟩
+    apply Subtype.ext
+    rw [cohenLiftκ_coe, cohenTateCommRestrict_single_term u D.B D.hcompl fh a,
+      cohenProjC_uniformizer_mul_of_mem_B D hmem]
+  tateComm_liftκ fh c := by
+    apply Subtype.ext
+    have hmem := sub_cohenProjC_mem_B u D.B D.hcompl (fh * cohenSectionHat u D.S c)
+    rw [cohenLiftκ_coe, cohenTateCommRestrict_single_term u D.B D.hcompl fh (cohenLiftκ D c),
+      cohenLiftκ_coe, cohenProjC_uniformizer_mul_of_mem_B D hmem]
+    congr 1
+    exact D.ε_principalPart_mul_sectionHat fh c
+
+end Construct
+
+section Mint
+
+variable (K L : Type*) [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- Existence of a compatible Cohen Laurent specification at every place. -/
+def KwTateRR3CohenLaurentSpecExists : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue], Nonempty (KwTateRR3CohenLaurentSpec u)
+
+end Mint
+
+section Headline
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+theorem kwTateRR3_cohenKernelDataExists_of_cohenLaurentSpec
+    (hD : KwTateRR3CohenLaurentSpecExists K L) :
+    KwF4gRRTateCohenKernelDataExists K L := fun u _ =>
+  (hD u).map tateCohenKernelData_of_cohenLaurentSpec
+
+end Headline
+
+end ModularCurve.KwTateRR3
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.Polynomial
+open _root_.IsLocalRing
+open _root_.AlgebraicCurve
+open _root_.KaehlerDifferential
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.KwNo6Pin
+open _root_.ModularCurve.KwNo6Section
+open _root_.ModularCurve.Mp72a102T3
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwNo6HrouteR
+open _root_.ModularCurve
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+
+theorem aCoeff_sub (v : Place K F) (S : Lg37CompletionSection v) (m : ℕ)
+    (x y : lg37_completion v) :
+    aCoeff v S m (x - y) = aCoeff v S m x - aCoeff v S m y := by
+  rw [eq_sub_iff_add_eq, ← aCoeff_add, sub_add_cancel]
+
+theorem aCoeff_uniformizerHat_pow_mul_eq_zero_of_lt (v : Place K F)
+    (S : Lg37CompletionSection v) {k m : ℕ} (hk : k < m)
+    (x : lg37_completion v) :
+    aCoeff v S k ((algebraMap v.toValuationSubring (lg37_completion v)
+      v.uniformizerSubring) ^ m * x) = 0 := by
+  obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_lt hk
+  rw [show k + j + 1 = k + (j + 1) from by omega, pow_add, mul_assoc]
+  have hsh := aCoeff_shift_pow v S 0 k
+    ((algebraMap v.toValuationSubring (lg37_completion v)
+      v.uniformizerSubring) ^ (j + 1) * x)
+  rw [Nat.zero_add] at hsh
+  rw [hsh, aCoeff_zero]
+  change lg37_residueHat v _ = 0
+  rw [pow_succ', mul_assoc, map_mul, lg37_residueHat_algebraMap,
+    (IsLocalRing.residue_eq_zero_iff _).mpr v.uniformizerSubring_mem_maximalIdeal, zero_mul]
+
+theorem taylor_choose_eq_aCoeff (v : Place K F) (S : Lg37CompletionSection v)
+    (n : ℕ) (x : lg37_completion v) {k : ℕ} (hk : k < n) :
+    Classical.choose (mp72a102_t3_sigma_taylor_expansion v S n x) k = aCoeff v S k x := by
+  set cc := Classical.choose (mp72a102_t3_sigma_taylor_expansion v S n x)
+  have hcc := Classical.choose_spec (mp72a102_t3_sigma_taylor_expansion v S n x)
+  set cc' := Classical.choose (mp72a102_t3_sigma_taylor_expansion v S (k + 1) x) with hcc'_def
+  have hcc' := Classical.choose_spec (mp72a102_t3_sigma_taylor_expansion v S (k + 1) x)
+  have hfac := mp72a102_t3_evalₐ_factor (maximalIdeal v.toValuationSubring) hk
+    (x - ∑ i ∈ Finset.range n, S.lift (cc i)
+      * algebraMap v.toValuationSubring (lg37_completion v) v.uniformizerSubring ^ i)
+  rw [hcc, _root_.map_zero] at hfac
+  have htail : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (k + 1)
+      (∑ i ∈ Finset.Ico (k + 1) n, S.lift (cc i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = 0 := by
+    rw [map_sum]
+    refine Finset.sum_eq_zero fun i hi => ?_
+    obtain ⟨j, rfl⟩ := Nat.exists_eq_add_of_le (Finset.mem_Ico.mp hi).1
+    have heq : S.lift (cc (k + 1 + j))
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ (k + 1 + j)
+        = algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ (k + 1)
+          * (algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ j * S.lift (cc (k + 1 + j))) := by
+      rw [pow_add]; ring
+    rw [heq]
+    exact Mp72a103T2.mp72a103_t2_evalDepth_pow_uniformizer_mul_eq_zero v (k + 1) _
+  have hhead : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (k + 1)
+      (x - ∑ i ∈ Finset.range (k + 1), S.lift (cc i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = 0 := by
+    have hsplit : x - ∑ i ∈ Finset.range (k + 1), S.lift (cc i)
+          * algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ i
+        = (x - ∑ i ∈ Finset.range n, S.lift (cc i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i)
+          + ∑ i ∈ Finset.Ico (k + 1) n, S.lift (cc i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i := by
+      rw [show Finset.range n = Finset.range (k + 1) ∪ Finset.Ico (k + 1) n from by
+          simp only [Finset.range_eq_Ico]
+          exact (Finset.Ico_union_Ico_eq_Ico (Nat.zero_le _) hk).symm,
+        Finset.sum_union (by
+          rw [Finset.range_eq_Ico]; exact Finset.Ico_disjoint_Ico_consecutive 0 (k + 1) n)]
+      ring
+    rw [hsplit, map_add, ← hfac, htail, add_zero]
+  have key : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (k + 1)
+      (∑ i ∈ Finset.range (k + 1), S.lift ((fun i => cc' i - cc i) i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = 0 := by
+    have e1 : (∑ i ∈ Finset.range (k + 1), S.lift (cc' i - cc i)
+          * algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ i)
+        = (x - ∑ i ∈ Finset.range (k + 1), S.lift (cc i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i)
+          - (x - ∑ i ∈ Finset.range (k + 1), S.lift (cc' i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i) := by
+      rw [Finset.sum_congr rfl (fun i _ => by rw [map_sub, sub_mul]),
+        Finset.sum_sub_distrib]
+      ring
+    rw [e1, map_sub, hhead, hcc', sub_zero]
+  have hzero := Mp72a103T2.mp72a103_t2_taylor_coeff_eq_zero_of_depth v S (k + 1)
+    (fun i => cc' i - cc i) key k (Nat.lt_succ_self k)
+  have h := (sub_eq_zero.mp hzero).symm
+  simp only [aCoeff, ← hcc'_def]
+  exact h
+
+theorem exists_approximant (v : Place K F) (S : Lg37CompletionSection v)
+    (a : v.ResidueField) (M : ℕ) :
+    ∃ ℓ : v.toValuationSubring, IsLocalRing.residue _ ℓ = a
+      ∧ ∀ k, 1 ≤ k → k ≤ M →
+        aCoeff v S k (algebraMap v.toValuationSubring (lg37_completion v) ℓ) = 0 := by
+  induction M with
+  | zero =>
+    obtain ⟨ℓ, hℓ⟩ := IsLocalRing.residue_surjective a
+    exact ⟨ℓ, hℓ, fun k hk1 hk0 => absurd (hk1.trans hk0) (by omega)⟩
+  | succ M ih =>
+    obtain ⟨ℓ, hres, hvan⟩ := ih
+    set b := aCoeff v S (M + 1)
+      (algebraMap v.toValuationSubring (lg37_completion v) ℓ) with hb
+    obtain ⟨n, hn⟩ := IsLocalRing.residue_surjective b
+    refine ⟨ℓ - n * v.uniformizerSubring ^ (M + 1), ?_, ?_⟩
+    · rw [map_sub, map_mul, map_pow, hres, sub_eq_self, mul_eq_zero]
+      right
+      exact pow_eq_zero_iff (by omega) |>.mpr
+        ((IsLocalRing.residue_eq_zero_iff _).mpr v.uniformizerSubring_mem_maximalIdeal)
+    · intro k hk1 hkM
+      rw [map_sub, map_mul, map_pow, aCoeff_sub,
+        mul_comm (algebraMap _ _ n) _]
+      rcases Nat.lt_or_ge k (M + 1) with hk | hk
+      · rw [hvan k hk1 (Nat.lt_succ_iff.mp hk),
+          aCoeff_uniformizerHat_pow_mul_eq_zero_of_lt v S hk, sub_zero]
+      · have hkeq : k = M + 1 := le_antisymm hkM hk
+        subst hkeq
+        rw [← hb]
+        have hsh := aCoeff_shift_pow v S 0 (M + 1)
+          (algebraMap v.toValuationSubring (lg37_completion v) n)
+        rw [Nat.zero_add] at hsh
+        rw [hsh, aCoeff_zero, lg37_residueHat_algebraMap, hn, sub_self]
+
+section Separability
+
+variable [HasCanonicalLocalResidueKStar K F]
+variable (v : Place K F) [v.DCoordGenerates] [Nontrivial Ω[F⁄K]]
+
+end Separability
+
+attribute [local instance 2000] RatFunc.instAlgebraOfPolynomial
+
+end ModularCurve.KwNo6HrouteR
+
+end
+
+end
+
+end
+
+section
+section
+
+open scoped PadicInt AlgebraicGeometry
+open _root_.BigOperators
+open _root_.CategoryTheory
+open _root_.AlgebraicCurve
+open _root_.CategoryTheory
+open _root_.CategoryTheory.Limits
+open _root_.AlgebraicGeometry
+open _root_.ModularCurve
+open _root_.Order
+open _root_.Topology
+open FLT.HopfSpec GoodReductionJacobian
+open Deformation.PDivisible Deformation.ModpDieudonne
+open _root_.AlgebraicCurve
+open _root_.Module
+open _root_.CongruenceSubgroup
+open NeronOggShafarevich
+open AlgebraicGeometry.KwSmoothIrredRelDimConstantEngine
+open _root_.AlgebraicCurve.RationalFunctionField
+open scoped TensorProduct
+open _root_.IntermediateField
+open _root_.AlgebraicCurve.RationalFunctionField
+open ModularCurve.KwNo6HrouteV
+open ModularCurve.KwNo6HrouteY
+open ModularCurve.KwNo6HrouteZ
+open ModularCurve.GF24a9RRDx
+open ModularCurve.GF24a12CohenSupply
+open Ldgr30BankGate
+open Modularity.Ldgr27TraceSemilinearSlice
+open Ldgr24DefectKernelSlice
+open Ldgr23CohenDefectCorrectionSlice
+open ModularCurve.Ldgr25PlaceExtensionSlice
+open Ldgr25CorrectedChoiceSlice
+open Modularity.Ldgr26CorrectedRowsBandSlice
+open ModularCurve.GF24a11bRowACurrencyBridge
+open ModularCurve.GF24a12CohenSupply
+open ModularCurve.Ldgr32RegularLegSlice
+open ModularCurve.Ldgr31PerPlaceRowJoinSlice
+open ModularCurve.Ldgr29SimplePoleResidueSlice
+open ModularCurve.Ldgr25CotraceCompatSlice
+open AlgebraicCurve.FiberKaehlerLocalDatum
+open ModularCurve.KwNo6HrouteS
+open _root_.AlgebraicCurve.Place
+open _root_.ModularCurve.KwNo6Pin
+open ModularCurve.KwNo6HrouteR
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.Mp72a102T3
+open _root_.Mp72a103T2
+open _root_.Mp72a102T1
+open _root_.ModularCurve.KwNo6Section
+open _root_.IsLocalRing
+open _root_.Module.IsLocalRing
+open scoped Polynomial
+
+noncomputable section
+
+section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwOdaDHDR
+open _root_.ModularCurve
+
+attribute [local instance 2000] RatFunc.instAlgebraOfPolynomial
+
+section Generic
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+
+theorem kwHgf_v277_aCoeff_section_lift_mul (v : Place K F)
+    (S : Lg37CompletionSection v) (m : ℕ) (a : v.ResidueField)
+    (x : lg37_completion v) :
+    aCoeff v S m (S.lift a * x) = a * aCoeff v S m x := by
+  have hx := Classical.choose_spec (mp72a102_t3_sigma_taylor_expansion v S (m + 1) x)
+  have hax' := Classical.choose_spec
+    (mp72a102_t3_sigma_taylor_expansion v S (m + 1) (S.lift a * x))
+  set ax := Classical.choose (mp72a102_t3_sigma_taylor_expansion v S (m + 1) x)
+    with hax_def
+  set aax := Classical.choose
+    (mp72a102_t3_sigma_taylor_expansion v S (m + 1) (S.lift a * x)) with haax_def
+  have hsmul : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (m + 1)
+      ((S.lift a * x)
+        - ∑ i ∈ Finset.range (m + 1),
+            S.lift ((fun i => a * ax i) i)
+          * algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ i) = 0 := by
+    have e : (S.lift a * x)
+          - ∑ i ∈ Finset.range (m + 1), S.lift (a * ax i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i
+        = S.lift a
+          * (x - ∑ i ∈ Finset.range (m + 1), S.lift (ax i)
+              * algebraMap v.toValuationSubring (lg37_completion v)
+                  v.uniformizerSubring ^ i) := by
+      rw [mul_sub, Finset.mul_sum]
+      congr 1
+      refine Finset.sum_congr rfl (fun i _ => ?_)
+      rw [map_mul, mul_assoc]
+    rw [e, mp72a102_t3_evalDepth_mul, hx, mul_zero]
+  have key : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (m + 1)
+      (∑ i ∈ Finset.range (m + 1),
+          S.lift ((fun i => a * ax i - aax i) i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = 0 := by
+    have e1 : (∑ i ∈ Finset.range (m + 1),
+            S.lift (a * ax i - aax i)
+          * algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ i)
+        = ((S.lift a * x)
+            - ∑ i ∈ Finset.range (m + 1), S.lift (aax i)
+              * algebraMap v.toValuationSubring (lg37_completion v)
+                  v.uniformizerSubring ^ i)
+          - ((S.lift a * x)
+            - ∑ i ∈ Finset.range (m + 1), S.lift (a * ax i)
+              * algebraMap v.toValuationSubring (lg37_completion v)
+                  v.uniformizerSubring ^ i) := by
+      rw [Finset.sum_congr rfl (fun i _ => by rw [map_sub, sub_mul]),
+        Finset.sum_sub_distrib]
+      ring
+    rw [e1, map_sub, hax', hsmul, sub_zero]
+  have hzero := mp72a103_t2_taylor_coeff_eq_zero_of_depth v S (m + 1)
+    (fun i => a * ax i - aax i) key m (Nat.lt_succ_self m)
+  have han : aax m = a * ax m := (sub_eq_zero.mp hzero).symm
+  simp only [aCoeff, ← hax_def, ← haax_def]
+  exact han
+
+end Generic
+
+end ModularCurve.KwOdaDHDR
+
+end
+
+end
+
+end
+
+end
+
+section
+section
+
+open scoped PadicInt AlgebraicGeometry
+open _root_.BigOperators
+open _root_.CategoryTheory
+open _root_.AlgebraicCurve
+open _root_.CategoryTheory
+open _root_.CategoryTheory.Limits
+open _root_.AlgebraicGeometry
+open _root_.ModularCurve
+open _root_.Order
+open _root_.Topology
+open FLT.HopfSpec GoodReductionJacobian
+open Deformation.PDivisible Deformation.ModpDieudonne
+open _root_.AlgebraicCurve
+open _root_.Module
+open _root_.CongruenceSubgroup
+open NeronOggShafarevich
+open AlgebraicGeometry.KwSmoothIrredRelDimConstantEngine
+open _root_.AlgebraicCurve.RationalFunctionField
+open scoped TensorProduct
+open _root_.IntermediateField
+open _root_.AlgebraicCurve.RationalFunctionField
+open ModularCurve.KwNo6HrouteV
+open ModularCurve.KwNo6HrouteY
+open ModularCurve.KwNo6HrouteZ
+open ModularCurve.GF24a9RRDx
+open ModularCurve.GF24a12CohenSupply
+open Ldgr30BankGate
+open Modularity.Ldgr27TraceSemilinearSlice
+open Ldgr24DefectKernelSlice
+open Ldgr23CohenDefectCorrectionSlice
+open ModularCurve.Ldgr25PlaceExtensionSlice
+open Ldgr25CorrectedChoiceSlice
+open Modularity.Ldgr26CorrectedRowsBandSlice
+open ModularCurve.GF24a11bRowACurrencyBridge
+open ModularCurve.GF24a12CohenSupply
+open ModularCurve.Ldgr32RegularLegSlice
+open ModularCurve.Ldgr31PerPlaceRowJoinSlice
+open ModularCurve.Ldgr29SimplePoleResidueSlice
+open ModularCurve.Ldgr25CotraceCompatSlice
+open AlgebraicCurve.FiberKaehlerLocalDatum
+open ModularCurve.KwNo6HrouteS
+open _root_.AlgebraicCurve.Place
+open _root_.ModularCurve.KwNo6Pin
+open ModularCurve.KwNo6HrouteR
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.Mp72a102T3
+open _root_.Mp72a103T2
+open _root_.Mp72a102T1
+open _root_.ModularCurve.KwNo6Section
+open _root_.IsLocalRing
+open _root_.Module.IsLocalRing
+open scoped Polynomial
+
+noncomputable section
+
+section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwOdaDHDR
+open _root_.ModularCurve
+
+attribute [local instance 2000] RatFunc.instAlgebraOfPolynomial
+
+section Generic
+
+variable {K F : Type*} [Field K] [Field F] [Algebra K F]
+
+theorem kwHgf_v278_aCoeff_eq_zero_of_evalDepth_zero (v : Place K F)
+    (S : Lg37CompletionSection v) {n : ℕ} (w : lg37_completion v)
+    (hw : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) n w = 0)
+    {k : ℕ} (hk : k < n) :
+    aCoeff v S k w = 0 := by
+  have hspec := Classical.choose_spec (mp72a102_t3_sigma_taylor_expansion v S n w)
+  set cc := Classical.choose (mp72a102_t3_sigma_taylor_expansion v S n w) with hcc_def
+  have hsum : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) n
+      (∑ i ∈ Finset.range n, S.lift ((fun i => cc i) i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = 0 := by
+    have e : (∑ i ∈ Finset.range n, S.lift (cc i)
+          * algebraMap v.toValuationSubring (lg37_completion v)
+              v.uniformizerSubring ^ i)
+        = w - (w - ∑ i ∈ Finset.range n, S.lift (cc i)
+            * algebraMap v.toValuationSubring (lg37_completion v)
+                v.uniformizerSubring ^ i) := by ring
+    simp only at e ⊢
+    rw [e, map_sub, hw, hspec, sub_zero]
+  have hzero := mp72a103_t2_taylor_coeff_eq_zero_of_depth v S n
+    (fun i => cc i) hsum k hk
+  rw [← taylor_choose_eq_aCoeff v S n w hk, ← hcc_def]
+  exact hzero
+
+theorem kwHgf_v278_resStar_approximant_mul (v : Place K F)
+    (S : Lg37CompletionSection v) (ℓ : v.toValuationSubring) (M : ℕ)
+    (hvan : ∀ k, 1 ≤ k → k ≤ M →
+      aCoeff v S k (algebraMap v.toValuationSubring (lg37_completion v) ℓ) = 0)
+    (g : F) (hg : g ∈ v.poleSubmodule (M + 1)) :
+    resStar v S ((ℓ : F) * g) = IsLocalRing.residue _ ℓ * resStar v S g := by
+  set a := IsLocalRing.residue _ ℓ with ha
+  have hgN : (-v.ord g).toNat ≤ M + 1 := by
+    rcases eq_or_ne g 0 with rfl | hg0
+    · rw [v.ord_zero]; simp
+    · have := (v.mem_poleSubmodule_iff_ord hg0).mp hg
+      omega
+  have hlgN : (-v.ord ((ℓ : F) * g)).toNat ≤ M + 1 := by
+    rcases eq_or_ne ((ℓ : F) * g) 0 with h0 | hlg0
+    · rw [h0, v.ord_zero]; simp
+    · have hg0 : g ≠ 0 := right_ne_zero_of_mul hlg0
+      have hl0 : (ℓ : F) ≠ 0 := left_ne_zero_of_mul hlg0
+      have hge := (v.mem_poleSubmodule_iff_ord hg0).mp hg
+      have hlge : (0 : ℤ) ≤ v.ord (ℓ : F) := (v.mem_iff_ord_nonneg hl0).mp ℓ.2
+      rw [v.ord_mul hl0 hg0]
+      omega
+  rw [← aCoeff_clearedHat_of_le v S ((ℓ : F) * g) hlgN,
+    ← aCoeff_clearedHat_of_le v S g hgN]
+  set x := clearedHat v g hgN with hx_def
+  have hιℓx : clearedHat v ((ℓ : F) * g) hlgN
+      = algebraMap v.toValuationSubring (lg37_completion v) ℓ * x := by
+    rw [hx_def]
+    unfold clearedHat
+    rw [← map_mul]
+    congr 1
+    apply Subtype.ext
+    push_cast
+    ring
+  rw [hιℓx]
+  have hsplit : algebraMap v.toValuationSubring (lg37_completion v) ℓ * x
+      = S.lift a * x
+        + (algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a) * x := by
+    ring
+  rw [hsplit, aCoeff_add]
+  rw [kwHgf_v277_aCoeff_section_lift_mul v S (M + 1) a x]
+  suffices hsnd : aCoeff v S (M + 1)
+      ((algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a) * x)
+      = 0 by rw [hsnd, add_zero]
+  set x' := algebraMap v.toValuationSubring (lg37_completion v)
+    ⟨v.uniformizer ^ (M + 1) * g, (v.mem_poleSubmodule).mp hg⟩ with hx'_def
+  have hxfac : x = algebraMap v.toValuationSubring (lg37_completion v)
+      v.uniformizerSubring * x' := by
+    rw [hx_def, hx'_def]
+    unfold clearedHat
+    rw [← map_mul]
+    congr 1
+    apply Subtype.ext
+    push_cast [v.coe_uniformizerSubring]
+    ring
+  rw [hxfac, show
+    (algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a)
+        * (algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring * x')
+      = algebraMap v.toValuationSubring (lg37_completion v) v.uniformizerSubring
+        * ((algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a)
+          * x') from by ring,
+    aCoeff_shift]
+  have hev : AdicCompletion.evalₐ (maximalIdeal v.toValuationSubring) (M + 1)
+      (algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a) = 0 := by
+    have hspec := Classical.choose_spec
+      (mp72a102_t3_sigma_taylor_expansion v S (M + 1)
+        (algebraMap v.toValuationSubring (lg37_completion v) ℓ))
+    set cc := Classical.choose (mp72a102_t3_sigma_taylor_expansion v S (M + 1)
+        (algebraMap v.toValuationSubring (lg37_completion v) ℓ)) with hcc_def
+    have hcc : ∀ k, k < M + 1 → cc k
+        = aCoeff v S k (algebraMap v.toValuationSubring (lg37_completion v) ℓ) :=
+      fun k hk => hcc_def ▸ taylor_choose_eq_aCoeff v S (M + 1) _ hk
+    suffices hsum : (∑ i ∈ Finset.range (M + 1), S.lift (cc i)
+        * algebraMap v.toValuationSubring (lg37_completion v)
+            v.uniformizerSubring ^ i) = S.lift a by
+      rw [← hsum]; exact hspec
+    rw [Finset.sum_eq_single 0
+      (fun i hi hi0 => by
+        rw [hcc i (Finset.mem_range.mp hi),
+          hvan i (Nat.one_le_iff_ne_zero.mpr hi0)
+            (Nat.lt_succ_iff.mp (Finset.mem_range.mp hi)),
+          _root_.map_zero, zero_mul])
+      (fun h => absurd (Finset.mem_range.mpr (by omega)) h),
+      pow_zero, mul_one, hcc 0 (by omega), aCoeff_zero,
+      lg37_residueHat_algebraMap, ← ha]
+  exact kwHgf_v278_aCoeff_eq_zero_of_evalDepth_zero v S
+    ((algebraMap v.toValuationSubring (lg37_completion v) ℓ - S.lift a) * x')
+    (by rw [map_mul, hev, zero_mul]) (Nat.lt_succ_self M)
+
+end Generic
+
+end ModularCurve.KwOdaDHDR
+
+end
+
+end
+
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.IsLocalRing
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.KwNo6Pin
+open _root_.ModularCurve.Mp72a102T3
+open _root_.Mp72a103T2
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.WithZero
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwTateRR3
+open _root_.ModularCurve
+
+section ApproximantHev
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+
+theorem approximant_evalₐ_sub_lift_eq_zero (u : Place K L) (S : Lg37CompletionSection u)
+    {ℓ : u.toValuationSubring} {M : ℕ}
+    (hvan : ∀ k, 1 ≤ k → k ≤ M →
+      aCoeff u S k (algebraMap u.toValuationSubring (lg37_completion u) ℓ) = 0) :
+    AdicCompletion.evalₐ (maximalIdeal u.toValuationSubring) (M + 1)
+      (algebraMap u.toValuationSubring (lg37_completion u) ℓ
+        - S.lift (IsLocalRing.residue _ ℓ)) = 0 := by
+  set a := IsLocalRing.residue _ ℓ with ha
+  have hspec := Classical.choose_spec
+    (mp72a102_t3_sigma_taylor_expansion u S (M + 1)
+      (algebraMap u.toValuationSubring (lg37_completion u) ℓ))
+  set cc := Classical.choose (mp72a102_t3_sigma_taylor_expansion u S (M + 1)
+      (algebraMap u.toValuationSubring (lg37_completion u) ℓ)) with hcc_def
+  have hcc : ∀ k, k < M + 1 → cc k
+      = aCoeff u S k (algebraMap u.toValuationSubring (lg37_completion u) ℓ) :=
+    fun k hk => hcc_def ▸ taylor_choose_eq_aCoeff u S (M + 1) _ hk
+  suffices hsum : (∑ i ∈ Finset.range (M + 1), S.lift (cc i)
+      * algebraMap u.toValuationSubring (lg37_completion u)
+          u.uniformizerSubring ^ i) = S.lift a by
+    rw [← hsum]; exact hspec
+  rw [Finset.sum_eq_single 0
+    (fun i hi hi0 => by
+      rw [hcc i (Finset.mem_range.mp hi),
+        hvan i (Nat.one_le_iff_ne_zero.mpr hi0)
+          (Nat.lt_succ_iff.mp (Finset.mem_range.mp hi)),
+        _root_.map_zero, zero_mul])
+    (fun h => absurd (Finset.mem_range.mpr (by omega)) h),
+    pow_zero, mul_one, hcc 0 (by omega), aCoeff_zero,
+    lg37_residueHat_algebraMap, ← ha]
+
+end ApproximantHev
+
+section V410aBridge
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+theorem v410a_mem_completionIdeal_pow_of_evalₐ_eq_zero (n : ℕ)
+    (z : lg37_completion u)
+    (hz : AdicCompletion.evalₐ (maximalIdeal u.toValuationSubring) n z = 0) :
+    kwF4R1V410a_ringEquiv u z ∈ (u.heightOneSpectrum.completionIdeal L) ^ n := by
+  rw [← Ideal.Quotient.eq_zero_iff_mem, kwF4R1V410a_ringEquiv_apply,
+    kwF4R1V410a_mk_forward u n z, hz, _root_.map_zero]
+
+theorem valued_algebraMap_uniformizer :
+    Valued.v (algebraMap L u.adicCompletion u.uniformizer) = WithZero.exp (-1 : ℤ) := by
+  rw [show algebraMap L u.adicCompletion u.uniformizer
+      = ((u.uniformizer : L) : u.adicCompletion) from rfl,
+    valuedAdicCompletion_eq_valuation' (K := L) u.heightOneSpectrum,
+    show u.heightOneSpectrum.valuation L u.uniformizer = u.adicValuation u.uniformizer
+      from rfl,
+    show u.adicValuation u.uniformizer = WithZero.exp (-(u.ord u.uniformizer)) from by
+      rw [Place.ord, neg_neg,
+        WithZero.exp_log (u.adicValuation_ne_zero u.uniformizer_ne_zero)],
+    u.ord_uniformizer]
+
+theorem v410a_evalDepth_mul_mem_integers (n : ℕ) (z : lg37_completion u)
+    (hz : AdicCompletion.evalₐ (maximalIdeal u.toValuationSubring) n z = 0)
+    (fh : u.adicCompletion)
+    (hfh : (algebraMap L u.adicCompletion u.uniformizer) ^ n * fh ∈ u.adicCompletionIntegers) :
+    ((kwF4R1V410a_ringEquiv u z : u.adicCompletionIntegers) : u.adicCompletion) * fh
+      ∈ u.adicCompletionIntegers := by
+  rw [mem_adicCompletionIntegers, map_mul]
+  have hzmem := v410a_mem_completionIdeal_pow_of_evalₐ_eq_zero u n z hz
+  have hzval : Valued.v
+      ((kwF4R1V410a_ringEquiv u z : u.adicCompletionIntegers) : u.adicCompletion)
+      ≤ WithZero.exp (-(n : ℤ)) := by
+    rw [WithZero.exp_eq_coe_ofAdd]
+    exact (adicCompletion.mem_completionIdeal_pow L u.heightOneSpectrum
+      (kwF4R1V410a_ringEquiv u z)).mp hzmem
+  have hπval : Valued.v ((algebraMap L u.adicCompletion u.uniformizer)^n)
+      = WithZero.exp (-(n : ℤ)) := by
+    rw [map_pow, valued_algebraMap_uniformizer u, ← WithZero.exp_nsmul]
+    congr 1; ring
+  have hfhval : Valued.v fh ≤ WithZero.exp (n : ℤ) := by
+    have h1 : Valued.v ((algebraMap L u.adicCompletion u.uniformizer)^n * fh) ≤ 1 := hfh
+    rw [map_mul, hπval] at h1
+    calc Valued.v fh
+        = WithZero.exp (n : ℤ) * (WithZero.exp (-(n : ℤ)) * Valued.v fh) := by
+          rw [← mul_assoc, ← WithZero.exp_add, add_neg_cancel, WithZero.exp_zero, one_mul]
+      _ ≤ WithZero.exp (n : ℤ) * 1 := mul_le_mul_of_nonneg_left h1 zero_le
+      _ = WithZero.exp (n : ℤ) := mul_one _
+  calc Valued.v ((kwF4R1V410a_ringEquiv u z : u.adicCompletionIntegers)
+          : u.adicCompletion) * Valued.v fh
+      ≤ WithZero.exp (-(n : ℤ)) * WithZero.exp (n : ℤ) := mul_le_mul' hzval hfhval
+    _ = WithZero.exp ((-(n : ℤ)) + (n : ℤ)) := (WithZero.exp_add _ _).symm
+    _ = 1 := by rw [_root_.neg_add_cancel, WithZero.exp_zero]
+
+end V410aBridge
+
+section EpsSpec
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K]
+
+theorem kwTateRR3_localResidueCompletion_sub (u : Place K L) (xh yh : u.adicCompletion) :
+    kwHgfV352_localResidueCompletion u (xh - yh)
+      = kwHgfV352_localResidueCompletion u xh
+        - kwHgfV352_localResidueCompletion u yh := by
+  rw [eq_sub_iff_add_eq, ← kwHgfV352_localResidueCompletion_add, sub_add_cancel]
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem algebraMap_sub_cohenSectionHat_eq_v410a (u : Place K L)
+    (S : Lg37CompletionSection u) (ℓ : u.toValuationSubring) :
+    algebraMap L u.adicCompletion (ℓ : L)
+        - cohenSectionHat u S (IsLocalRing.residue _ ℓ)
+      = ((kwF4R1V410a_ringEquiv u
+            (algebraMap u.toValuationSubring (lg37_completion u) ℓ
+              - S.lift (IsLocalRing.residue _ ℓ))
+          : u.adicCompletionIntegers) : u.adicCompletion) := by
+  have hℓ : algebraMap L u.adicCompletion (ℓ : L)
+      = ((kwF4R1V410a_ringEquiv u
+            (algebraMap u.toValuationSubring (lg37_completion u) ℓ)
+          : u.adicCompletionIntegers) : u.adicCompletion) := by
+    rw [kwF4R1V410a_ringEquiv_of u ℓ]; rfl
+  rw [hℓ, cohenSectionHat_apply]
+  exact (AddSubgroupClass.coe_sub _ _).symm.trans
+    (congrArg (fun x : u.adicCompletionIntegers => (x : u.adicCompletion))
+      ((kwF4R1V410a_ringEquiv u).toRingHom.map_sub
+        (algebraMap u.toValuationSubring (lg37_completion u) ℓ)
+        (S.lift (IsLocalRing.residue _ ℓ)))).symm
+
+theorem localResidueCompletion_mul_cohenSectionHat
+    (u : Place K L) (S : Lg37CompletionSection u)
+    (fh : u.adicCompletion) (c : u.ResidueField) :
+    kwHgfV352_localResidueCompletion u (fh * cohenSectionHat u S c)
+      = kwHgfV352_localResidueCompletion u fh * c := by
+  obtain ⟨f, hf⟩ := kwHgfV352_exists_sub_mem_adicCompletionIntegers u fh
+  rcases (em (f ∈ u.toValuationSubring)) with hfmem | hfnmem
+  · have hfh_mem : fh ∈ u.adicCompletionIntegers := by
+      have hfhat : algebraMap L u.adicCompletion f ∈ u.adicCompletionIntegers :=
+        (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u f).mpr hfmem
+      have hsub : algebraMap L u.adicCompletion f
+          - (algebraMap L u.adicCompletion f - fh) = fh := by ring
+      exact hsub ▸ sub_mem hfhat hf
+    rw [kwHgfV352_localResidueCompletion_eq_zero_of_mem_integers u hfh_mem, zero_mul,
+      kwHgfV352_localResidueCompletion_eq_zero_of_mem_integers u
+        (mul_mem hfh_mem (cohenSectionHat_mem_integers u S c))]
+  have hf0 : f ≠ 0 := fun h => hfnmem (h ▸ zero_mem _)
+  have hord_neg : u.ord f < 0 :=
+    not_le.mp (fun h => hfnmem ((u.mem_iff_ord_nonneg hf0).mpr h))
+  set M := (-u.ord f).toNat with hM_def
+  have hM_eq : (M : ℤ) = -u.ord f := Int.toNat_of_nonneg (by omega)
+  have hfpole : f ∈ u.poleSubmodule (M + 1) := by
+    rw [u.mem_poleSubmodule_iff_ord hf0]; omega
+  obtain ⟨ℓ, hℓres, hℓvan⟩ := exists_approximant u S c M
+  have hV278 : resStar u S ((ℓ : L) * f) = c * resStar u S f := by
+    rw [← hℓres]
+    exact ModularCurve.KwOdaDHDR.kwHgf_v278_resStar_approximant_mul u S ℓ M hℓvan f hfpole
+  have hfhLR : kwHgfV352_localResidueCompletion u fh = resStar u S f := by
+    rw [kwHgfV352_localResidueCompletion_spec u fh hf, localResidue_eq_resStar u S f]
+  have hgap : algebraMap L u.adicCompletion ((ℓ : L) * f) - fh * cohenSectionHat u S c
+      ∈ u.adicCompletionIntegers := by
+    have hℓhat_mem : algebraMap L u.adicCompletion (ℓ : L) ∈ u.adicCompletionIntegers :=
+      (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr ℓ.2
+    have hfirst : algebraMap L u.adicCompletion (ℓ : L)
+        * (algebraMap L u.adicCompletion f - fh) ∈ u.adicCompletionIntegers :=
+      mul_mem hℓhat_mem hf
+    have hsecond : (algebraMap L u.adicCompletion (ℓ : L)
+        - cohenSectionHat u S c) * fh ∈ u.adicCompletionIntegers := by
+      rw [← hℓres, algebraMap_sub_cohenSectionHat_eq_v410a u S ℓ]
+      refine v410a_evalDepth_mul_mem_integers u (M + 1) _
+        (approximant_evalₐ_sub_lift_eq_zero u S hℓvan) fh ?_
+      have hπmem : algebraMap L u.adicCompletion u.uniformizer ^ (M + 1)
+          ∈ u.adicCompletionIntegers := pow_mem
+        ((kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr
+          u.uniformizer_mem) _
+      have hπf : algebraMap L u.adicCompletion u.uniformizer ^ (M + 1)
+          * algebraMap L u.adicCompletion f ∈ u.adicCompletionIntegers := by
+        rw [← map_pow, ← map_mul]
+        exact (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr
+          ((u.mem_poleSubmodule).mp hfpole)
+      have hdecomp : algebraMap L u.adicCompletion u.uniformizer ^ (M + 1) * fh
+          = algebraMap L u.adicCompletion u.uniformizer ^ (M + 1)
+              * algebraMap L u.adicCompletion f
+            - algebraMap L u.adicCompletion u.uniformizer ^ (M + 1)
+              * (algebraMap L u.adicCompletion f - fh) := by ring
+      rw [hdecomp]; exact sub_mem hπf (mul_mem hπmem hf)
+    have hdecomp : algebraMap L u.adicCompletion ((ℓ : L) * f)
+          - fh * cohenSectionHat u S c
+        = algebraMap L u.adicCompletion (ℓ : L)
+            * (algebraMap L u.adicCompletion f - fh)
+          + (algebraMap L u.adicCompletion (ℓ : L)
+              - cohenSectionHat u S c) * fh := by
+      rw [map_mul]; ring
+    rw [hdecomp]; exact add_mem hfirst hsecond
+  rw [kwHgfV352_localResidueCompletion_spec u _ hgap,
+    localResidue_eq_resStar u S ((ℓ : L) * f), hV278, hfhLR, mul_comm]
+
+end EpsSpec
+
+section ComplMint
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [HasCanonicalLocalResidueKStar K L]
+
+/-- A Cohen section and a Laurent complement compatible with the completed local residue. -/
+structure KwTateRR3CohenLaurentCompl (u : Place K L) [u.FiniteResidue] where
+  /-- The chosen section from the residue field into the adic completion. -/
+  S : Lg37CompletionSection u
+  /-- The complementary subspace of Laurent principal parts. -/
+  B : Submodule K u.adicCompletion
+  /-- The Laurent subspace complements integral completion elements. -/
+  hcompl : IsCompl (adicIntegersKSubmod u) B
+  /-- Uniformizer multiplication preserves the complement after removing the lifted completed
+  residue. -/
+  shift_sub_mem : ∀ z : B,
+    algebraMap L u.adicCompletion u.uniformizer * (z : u.adicCompletion)
+      - cohenSectionHat u S (kwHgfV352_localResidueCompletion u (z : u.adicCompletion)) ∈ B
+
+variable (K L) in
+/-- Existence of a Cohen section with a compatible Laurent complement at every place. -/
+def KwTateRR3CohenLaurentComplExists : Prop :=
+  ∀ (u : Place K L) [u.FiniteResidue], Nonempty (KwTateRR3CohenLaurentCompl u)
+
+end ComplMint
+
+section Construct
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K]
+variable {u : Place K L} [u.FiniteResidue]
+
+/-- The completed local residue regarded as a linear map over the base field. -/
+def localResidueCompletionₗ (u : Place K L) : u.adicCompletion →ₗ[K] u.ResidueField where
+  toFun := kwHgfV352_localResidueCompletion u
+  map_add' := kwHgfV352_localResidueCompletion_add u
+  map_smul' c x := by
+    rw [RingHom.id_apply]; exact kwF4R1V394a_localResidueCompletion_smul u c x
+
+/-- The Laurent specification induced by the completed local residue on a compatible complement. -/
+def cohenLaurentSpec_of_compl (C : KwTateRR3CohenLaurentCompl u) :
+    KwTateRR3CohenLaurentSpec u where
+  S := C.S
+  B := C.B
+  hcompl := C.hcompl
+  ε := (localResidueCompletionₗ u).comp C.B.subtype
+  shift_sub_mem z := C.shift_sub_mem z
+  ε_principalPart_mul_sectionHat fh c := by
+    change kwHgfV352_localResidueCompletion u
+        (fh * cohenSectionHat u C.S c
+          - cohenProjC u C.B C.hcompl (fh * cohenSectionHat u C.S c))
+      = kwHgfV352_localResidueCompletion u fh * c
+    rw [kwTateRR3_localResidueCompletion_sub u,
+      kwHgfV352_localResidueCompletion_eq_zero_of_mem_integers u
+        (cohenProjC_mem_integers u C.B C.hcompl _),
+      sub_zero, localResidueCompletion_mul_cohenSectionHat u C.S fh c]
+
+end Construct
+
+section Headline
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K]
+
+theorem kwTateRR3_cohenLaurentSpecExists_of_complExists
+    (hC : KwTateRR3CohenLaurentComplExists K L) :
+    KwTateRR3CohenLaurentSpecExists K L := fun u _ =>
+  (hC u).map cohenLaurentSpec_of_compl
+
+theorem kwTateRR3_cohenKernelDataExists_of_complExists
+    (hC : KwTateRR3CohenLaurentComplExists K L) :
+    KwF4gRRTateCohenKernelDataExists K L :=
+  kwTateRR3_cohenKernelDataExists_of_cohenLaurentSpec
+    (kwTateRR3_cohenLaurentSpecExists_of_complExists hC)
+
+end Headline
+
+end ModularCurve.KwTateRR3
+
+end
+end
+
+end
+
+section
+section
+
+
+open _root_.AlgebraicCurve
+open _root_.AlgebraicCurve.Place
+open _root_.LinearMap
+open _root_.Submodule
+open _root_.IsLocalRing
+open _root_.ModularCurve.KwF4gRRTate
+open _root_.ModularCurve.Lg37
+open _root_.ModularCurve.KwNo6Pin
+open _root_.IsDedekindDomain
+open _root_.IsDedekindDomain.HeightOneSpectrum
+open _root_.WithZero
+
+noncomputable section
+
+namespace ModularCurve
+open _root_.ModularCurve
+namespace KwTateRR3
+open _root_.ModularCurve
+
+section UniformizerHat
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+
+/-- The image of the chosen uniformizer in the valuation completion. -/
+abbrev uniformizerHat : u.adicCompletion := algebraMap L u.adicCompletion u.uniformizer
+
+theorem uniformizerHat_ne_zero : uniformizerHat u ≠ 0 :=
+  fun h => u.uniformizer_ne_zero
+    ((map_eq_zero_iff _ (algebraMap L u.adicCompletion).injective).mp h)
+
+theorem uniformizerHat_mem_integers : uniformizerHat u ∈ u.adicCompletionIntegers :=
+  (kwHgfV352_algebraMap_mem_adicCompletionIntegers_iff u _).mpr u.uniformizer_mem
+
+theorem irreducible_uniformizerHat :
+    Irreducible (⟨uniformizerHat u, uniformizerHat_mem_integers u⟩
+      : u.adicCompletionIntegers) := by
+  refine (IsDiscreteValuationRing.irreducible_iff_uniformizer _).mpr
+    (adicCompletion.maximalIdeal_eq_span_uniformizer L u.heightOneSpectrum ?_)
+  rw [valued_algebraMap_uniformizer u, WithZero.exp_eq_coe_ofAdd]
+
+end UniformizerHat
+
+section CohenPhi
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (S : Lg37CompletionSection u)
+
+/-- The finite Laurent principal part associated to finitely supported residue-field
+coefficients. -/
+def cohenΦ : (ℕ →₀ u.ResidueField) →ₗ[K] u.adicCompletion :=
+  Finsupp.lsum K fun j =>
+    lmulK u ((uniformizerHat u)⁻¹ ^ (j + 1)) ∘ₗ (cohenSectionHat u S).toLinearMap
+
+theorem cohenΦ_apply (δ : ℕ →₀ u.ResidueField) :
+    cohenΦ u S δ = δ.sum fun j c => (uniformizerHat u)⁻¹ ^ (j + 1) * cohenSectionHat u S c := by
+  rw [cohenΦ, Finsupp.coe_lsum]; rfl
+
+theorem cohenΦ_single (j : ℕ) (c : u.ResidueField) :
+    cohenΦ u S (Finsupp.single j c)
+      = (uniformizerHat u)⁻¹ ^ (j + 1) * cohenSectionHat u S c := by
+  rw [cohenΦ_apply, Finsupp.sum_single_index]
+  rw [_root_.map_zero, mul_zero]
+
+/-- The subspace of finite Laurent principal parts supplied by the Cohen section. -/
+def cohenB : Submodule K u.adicCompletion := LinearMap.range (cohenΦ u S)
+
+theorem monomial_mem_cohenB (j : ℕ) (c : u.ResidueField) :
+    (uniformizerHat u)⁻¹ ^ (j + 1) * cohenSectionHat u S c ∈ cohenB u S :=
+  ⟨Finsupp.single j c, cohenΦ_single u S j c⟩
+
+end CohenPhi
+
+section LocResComplMonomial
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K] (u : Place K L)
+
+theorem locResCompl_uniformizerHat_inv (S : Lg37CompletionSection u) :
+    kwHgfV352_localResidueCompletion u ((uniformizerHat u)⁻¹) = 1 := by
+  rw [show (uniformizerHat u)⁻¹ = algebraMap L u.adicCompletion (u.uniformizer)⁻¹ from
+      (map_inv₀ (algebraMap L u.adicCompletion) _).symm,
+    kwHgfV352_localResidueCompletion_algebraMap u, localResidue_eq_resStar u S,
+    resStar_simplePole u S _
+      (by rw [mul_inv_cancel₀ u.uniformizer_ne_zero]; exact one_mem _)]
+  exact congrArg (IsLocalRing.residue _)
+    (Subtype.ext (mul_inv_cancel₀ u.uniformizer_ne_zero)) |>.trans (map_one _)
+
+theorem locResCompl_uniformizerHat_inv_pow_succ (S : Lg37CompletionSection u)
+    {j : ℕ} (hj : 1 ≤ j) :
+    kwHgfV352_localResidueCompletion u ((uniformizerHat u)⁻¹ ^ (j + 1)) = 0 := by
+  rw [show (uniformizerHat u)⁻¹ ^ (j + 1)
+        = algebraMap L u.adicCompletion (u.uniformizer ^ (j + 1))⁻¹ by
+      rw [map_inv₀ (algebraMap L u.adicCompletion), map_pow, inv_pow],
+    kwHgfV352_localResidueCompletion_algebraMap u, localResidue_eq_resStar u S,
+    resStar_higherPoleMonomial u S hj]
+
+end LocResComplMonomial
+
+section LocResComplPhi
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K] (u : Place K L)
+variable (S : Lg37CompletionSection u)
+
+theorem locResCompl_cohenΦ (δ : ℕ →₀ u.ResidueField) :
+    kwHgfV352_localResidueCompletion u (cohenΦ u S δ) = δ 0 := by
+  rw [show kwHgfV352_localResidueCompletion u (cohenΦ u S δ)
+      = localResidueCompletionₗ u (cohenΦ u S δ) from rfl,
+    cohenΦ_apply, map_finsuppSum]
+  refine (Finsupp.sum_eq_single 0 (fun j _ hj0 => ?_) (fun _ => ?_)).trans ?_
+  · change kwHgfV352_localResidueCompletion u _ = 0
+    rw [localResidueCompletion_mul_cohenSectionHat u S,
+      locResCompl_uniformizerHat_inv_pow_succ u S (Nat.one_le_iff_ne_zero.mpr hj0), zero_mul]
+  · change kwHgfV352_localResidueCompletion u _ = 0
+    rw [_root_.map_zero, mul_zero]
+    exact _root_.map_zero (localResidueCompletionₗ u)
+  · change kwHgfV352_localResidueCompletion u _ = _
+    rw [zero_add, pow_one, localResidueCompletion_mul_cohenSectionHat u S,
+      locResCompl_uniformizerHat_inv u S, one_mul]
+
+end LocResComplPhi
+
+section ShiftCore
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (S : Lg37CompletionSection u)
+
+theorem uniformizerHat_mul_cohenΦ (δ : ℕ →₀ u.ResidueField) :
+    uniformizerHat u * cohenΦ u S δ
+      = δ.sum fun j c => (uniformizerHat u)⁻¹ ^ j * cohenSectionHat u S c := by
+  rw [cohenΦ_apply, Finsupp.mul_sum]
+  refine Finsupp.sum_congr fun j _ => ?_
+  rw [pow_succ', ← mul_assoc, ← mul_assoc,
+    mul_inv_cancel₀ (uniformizerHat_ne_zero u), one_mul]
+
+theorem uniformizerHat_mul_cohenΦ_sub_mem (δ : ℕ →₀ u.ResidueField) :
+    uniformizerHat u * cohenΦ u S δ - cohenSectionHat u S (δ 0) ∈ cohenB u S := by
+  rw [uniformizerHat_mul_cohenΦ u S δ, Finsupp.sum,
+    show cohenSectionHat u S (δ 0)
+        = (uniformizerHat u)⁻¹ ^ 0 * cohenSectionHat u S (δ 0) by rw [pow_zero, one_mul]]
+  have hterm : ∀ j ∈ δ.support, j ≠ 0 →
+      (uniformizerHat u)⁻¹ ^ j * cohenSectionHat u S (δ j) ∈ cohenB u S := fun j _ hj0 => by
+    obtain ⟨j', rfl⟩ := Nat.exists_eq_succ_of_ne_zero hj0
+    exact monomial_mem_cohenB u S j' (δ (j' + 1))
+  rcases em ((0 : ℕ) ∈ δ.support) with h0 | h0
+  · rw [← Finset.sum_erase_add _ _ h0, add_sub_cancel_right]
+    exact sum_mem fun j hj => hterm j (Finset.mem_of_mem_erase hj) (Finset.ne_of_mem_erase hj)
+  · rw [Finsupp.notMem_support_iff.mp h0, _root_.map_zero, mul_zero, sub_zero]
+    exact sum_mem fun j hj => hterm j hj fun hj0 => h0 (hj0 ▸ hj)
+
+end ShiftCore
+
+section Disjoint
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L] (u : Place K L)
+variable (S : Lg37CompletionSection u)
+
+theorem valued_cohenSectionHat_of_ne_zero {c : u.ResidueField} (hc : c ≠ 0) :
+    Valued.v (cohenSectionHat u S c) = 1 := by
+  refine le_antisymm (cohenSectionHat_mem_integers u S c) ?_
+  have hprod : Valued.v (cohenSectionHat u S c) * Valued.v (cohenSectionHat u S c⁻¹) = 1 := by
+    rw [← map_mul, ← map_mul, mul_inv_cancel₀ hc, map_one, map_one]
+  calc (1 : ℤᵐ⁰)
+      = Valued.v (cohenSectionHat u S c) * Valued.v (cohenSectionHat u S c⁻¹) := hprod.symm
+    _ ≤ Valued.v (cohenSectionHat u S c) * 1 :=
+        mul_le_mul_right (cohenSectionHat_mem_integers u S c⁻¹) _
+    _ = Valued.v (cohenSectionHat u S c) := mul_one _
+
+theorem uniformizerHat_pow_mul_cohenΦ_sub_top (δ : ℕ →₀ u.ResidueField)
+    (hδ : δ.support.Nonempty) :
+    let J := δ.support.max' hδ
+    (uniformizerHat u) ^ (J + 1) * cohenΦ u S δ - cohenSectionHat u S (δ J)
+      = ∑ j ∈ δ.support.erase J,
+          (uniformizerHat u) ^ (J - j) * cohenSectionHat u S (δ j) := by
+  intro J
+  have hJmem : J ∈ δ.support := δ.support.max'_mem hδ
+  rw [cohenΦ_apply, Finsupp.mul_sum, Finsupp.sum,
+    ← Finset.sum_erase_add _ _ hJmem,
+    show (uniformizerHat u) ^ (J + 1) * ((uniformizerHat u)⁻¹ ^ (J + 1)
+            * cohenSectionHat u S (δ J))
+        = cohenSectionHat u S (δ J) by
+      rw [← mul_assoc, ← mul_pow, mul_inv_cancel₀ (uniformizerHat_ne_zero u), one_pow, one_mul],
+    add_sub_cancel_right]
+  refine Finset.sum_congr rfl fun j hj => ?_
+  have hjJ : j < J := lt_of_le_of_ne
+    (δ.support.le_max' j (Finset.mem_of_mem_erase hj)) (Finset.ne_of_mem_erase hj)
+  rw [← mul_assoc]
+  congr 1
+  rw [show J + 1 = (J - j) + (j + 1) by omega, pow_add, mul_assoc,
+    ← mul_pow, mul_inv_cancel₀ (uniformizerHat_ne_zero u), one_pow, mul_one]
+
+theorem cohenΦ_mem_integers_iff_zero (δ : ℕ →₀ u.ResidueField) :
+    cohenΦ u S δ ∈ u.adicCompletionIntegers → δ = 0 := by
+  intro hmem
+  by_contra hδ0
+  have hδne : δ.support.Nonempty := Finsupp.support_nonempty_iff.mpr hδ0
+  set J := δ.support.max' hδne with hJ
+  have hδJ : δ J ≠ 0 := Finsupp.mem_support_iff.mp (δ.support.max'_mem hδne)
+  have hi : Valued.v ((uniformizerHat u) ^ (J + 1) * cohenΦ u S δ)
+      ≤ WithZero.exp (-1 : ℤ) := by
+    rw [map_mul, map_pow, valued_algebraMap_uniformizer u, ← WithZero.exp_nsmul]
+    calc WithZero.exp ((J + 1) • (-1 : ℤ)) * Valued.v (cohenΦ u S δ)
+        ≤ WithZero.exp ((J + 1) • (-1 : ℤ)) * 1 := mul_le_mul_right hmem _
+      _ = WithZero.exp (-((J : ℤ) + 1)) := by rw [mul_one]; congr 1; ring
+      _ ≤ WithZero.exp (-1 : ℤ) := WithZero.exp_le_exp.mpr (by omega)
+  have hii : Valued.v
+      ((uniformizerHat u) ^ (J + 1) * cohenΦ u S δ - cohenSectionHat u S (δ J))
+      ≤ WithZero.exp (-1 : ℤ) := by
+    rw [uniformizerHat_pow_mul_cohenΦ_sub_top u S δ hδne]
+    refine Finset.sum_induction _ (fun x => Valued.v x ≤ WithZero.exp (-1 : ℤ))
+      (fun a b ha hb => (Valued.v.map_add a b).trans (max_le ha hb))
+      ?_ fun j hj => ?_
+    · change Valued.v (0 : u.adicCompletion) ≤ _
+      rw [_root_.map_zero]; exact zero_le
+    · have hjJ : j < J := lt_of_le_of_ne
+        (δ.support.le_max' j (Finset.mem_of_mem_erase hj)) (Finset.ne_of_mem_erase hj)
+      change Valued.v (_ * _) ≤ _
+      rw [map_mul, map_pow, valued_algebraMap_uniformizer u, ← WithZero.exp_nsmul]
+      calc WithZero.exp ((J - j) • (-1 : ℤ)) * Valued.v (cohenSectionHat u S (δ j))
+          ≤ WithZero.exp ((J - j) • (-1 : ℤ)) * 1 :=
+            mul_le_mul_right (cohenSectionHat_mem_integers u S _) _
+        _ = WithZero.exp (-((J - j : ℕ) : ℤ)) := by rw [mul_one]; congr 1; ring
+        _ ≤ WithZero.exp (-1 : ℤ) := WithZero.exp_le_exp.mpr (by omega)
+  have hiii : Valued.v (cohenSectionHat u S (δ J)) ≤ WithZero.exp (-1 : ℤ) := by
+    have hdecomp : cohenSectionHat u S (δ J)
+        = (uniformizerHat u) ^ (J + 1) * cohenΦ u S δ
+          - ((uniformizerHat u) ^ (J + 1) * cohenΦ u S δ - cohenSectionHat u S (δ J)) := by ring
+    rw [hdecomp, sub_eq_add_neg]
+    exact (Valued.v.map_add _ _).trans (max_le hi (by rwa [Valuation.map_neg]))
+  rw [valued_cohenSectionHat_of_ne_zero u S hδJ] at hiii
+  exact absurd hiii (not_le.mpr (by
+    rw [← WithZero.exp_zero]; exact WithZero.exp_lt_exp.mpr (by norm_num)))
+
+theorem disjoint_adicIntegersKSubmod_cohenB :
+    _root_.Disjoint (adicIntegersKSubmod u) (cohenB u S) := by
+  rw [Submodule.disjoint_def]
+  rintro x hxO ⟨δ, rfl⟩
+  rw [cohenΦ_mem_integers_iff_zero u S δ hxO, _root_.map_zero]
+
+end Disjoint
+
+section Codisjoint
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K] (u : Place K L)
+variable (S : Lg37CompletionSection u)
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem uniformizerHat_inv_mul_mem_integers_of_valued_le
+    {y : u.adicCompletion} (hy : Valued.v y ≤ WithZero.exp (-1 : ℤ)) :
+    (uniformizerHat u)⁻¹ * y ∈ u.adicCompletionIntegers := by
+  change Valued.v ((uniformizerHat u)⁻¹ * y) ≤ 1
+  rw [map_mul, map_inv₀, valued_algebraMap_uniformizer u, ← WithZero.exp_neg, neg_neg]
+  calc WithZero.exp (1 : ℤ) * Valued.v y
+      ≤ WithZero.exp (1 : ℤ) * WithZero.exp (-1 : ℤ) := mul_le_mul_right hy _
+    _ = 1 := by rw [← WithZero.exp_add, add_neg_cancel, WithZero.exp_zero]
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem valued_le_of_mem_completionIdeal {y : u.adicCompletionIntegers}
+    (hy : y ∈ u.heightOneSpectrum.completionIdeal L) :
+    Valued.v (y : u.adicCompletion) ≤ WithZero.exp (-1 : ℤ) := by
+  have := (adicCompletion.mem_completionIdeal_pow L u.heightOneSpectrum y).mp
+    (by rw [pow_one]; exact hy)
+  rwa [← WithZero.exp_eq_coe_ofAdd, show (-((1 : ℕ) : ℤ)) = (-1 : ℤ) by norm_num] at this
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem exists_residue_peel (ŷ : u.adicCompletionIntegers) :
+    ∃ c : u.ResidueField,
+      (uniformizerHat u)⁻¹ * ((ŷ : u.adicCompletion) - cohenSectionHat u S c)
+        ∈ u.adicCompletionIntegers := by
+  obtain ⟨ℓ, hℓ⟩ := kwF4R1V410a_exists_sub_mem_completionIdeal_pow u 1 ŷ
+  refine ⟨IsLocalRing.residue _ ℓ, uniformizerHat_inv_mul_mem_integers_of_valued_le u ?_⟩
+  have hcoe : ((algebraMap u.toValuationSubring u.adicCompletionIntegers ℓ
+        : u.adicCompletionIntegers) : u.adicCompletion)
+      = algebraMap L u.adicCompletion (ℓ : L) := rfl
+  have hdecomp : (ŷ : u.adicCompletion) - cohenSectionHat u S (IsLocalRing.residue _ ℓ)
+      = ((ŷ - algebraMap u.toValuationSubring u.adicCompletionIntegers ℓ
+            : u.adicCompletionIntegers) : u.adicCompletion)
+        + (algebraMap L u.adicCompletion (ℓ : L)
+            - cohenSectionHat u S (IsLocalRing.residue _ ℓ)) := by
+    push_cast [hcoe]; ring
+  rw [hdecomp]
+  refine (Valued.v.map_add _ _).trans (max_le ?_ ?_)
+  · refine valued_le_of_mem_completionIdeal u ?_
+    rw [← pow_one (u.heightOneSpectrum.completionIdeal L)]; exact hℓ
+  · rw [algebraMap_sub_cohenSectionHat_eq_v410a u S ℓ]
+    refine valued_le_of_mem_completionIdeal u ?_
+    rw [← pow_one (u.heightOneSpectrum.completionIdeal L)]
+    exact v410a_mem_completionIdeal_pow_of_evalₐ_eq_zero u 1 _
+      (approximant_evalₐ_sub_lift_eq_zero u S (M := 0) (ℓ := ℓ)
+        (fun k hk1 hk0 => absurd hk0 (by omega)))
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem mem_sup_of_uniformizerHat_pow_mul_mem_integers (M : ℕ) :
+    ∀ x : u.adicCompletion, (uniformizerHat u) ^ M * x ∈ u.adicCompletionIntegers →
+      x ∈ adicIntegersKSubmod u ⊔ cohenB u S := by
+  induction M with
+  | zero => intro x hx; rw [pow_zero, one_mul] at hx; exact Submodule.mem_sup_left hx
+  | succ M IH =>
+    intro x hx
+    obtain ⟨c, hc⟩ := exists_residue_peel u S ⟨_, hx⟩
+    have hne := uniformizerHat_ne_zero u
+    have hstep : (uniformizerHat u) ^ M * (x
+        - (uniformizerHat u)⁻¹ ^ (M + 1) * cohenSectionHat u S c)
+        ∈ u.adicCompletionIntegers := by
+      have heq : (uniformizerHat u) ^ M * (x
+            - (uniformizerHat u)⁻¹ ^ (M + 1) * cohenSectionHat u S c)
+          = (uniformizerHat u)⁻¹ * ((uniformizerHat u)^(M+1)*x - cohenSectionHat u S c) := by
+        rw [mul_sub, mul_sub,
+          show (uniformizerHat u)⁻¹ * ((uniformizerHat u)^(M+1) * x)
+              = (uniformizerHat u)^M * x by
+            rw [← mul_assoc, pow_succ', ← mul_assoc, inv_mul_cancel₀ hne, one_mul],
+          show (uniformizerHat u)^M * ((uniformizerHat u)⁻¹^(M+1) * cohenSectionHat u S c)
+              = (uniformizerHat u)⁻¹ * cohenSectionHat u S c by
+            rw [← mul_assoc, pow_succ, ← mul_assoc, ← mul_pow,
+              mul_inv_cancel₀ hne, one_pow, one_mul]]
+      rw [heq]; exact hc
+    have hx' := IH _ hstep
+    have hb : (uniformizerHat u)⁻¹ ^ (M + 1) * cohenSectionHat u S c ∈ cohenB u S :=
+      monomial_mem_cohenB u S M c
+    have hx_eq : x = (x - (uniformizerHat u)⁻¹ ^ (M + 1) * cohenSectionHat u S c)
+        + (uniformizerHat u)⁻¹ ^ (M + 1) * cohenSectionHat u S c := by ring
+    rw [hx_eq]
+    exact add_mem hx' (Submodule.mem_sup_right hb)
+
+omit [IsCurveOver K L] [PerfectField K] in
+theorem codisjoint_adicIntegersKSubmod_cohenB :
+    Codisjoint (adicIntegersKSubmod u) (cohenB u S) := by
+  rw [codisjoint_iff, eq_top_iff]
+  intro x _
+  obtain ⟨M, hM⟩ := kwF4gRRTate_clearPole u
+    ⟨uniformizerHat u, uniformizerHat_mem_integers u⟩ (irreducible_uniformizerHat u) x
+  exact mem_sup_of_uniformizerHat_pow_mul_mem_integers u S M x hM
+
+end Codisjoint
+
+section Assembly
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K]
+
+/-- The compatible Laurent complement constructed from the chosen Cohen section. -/
+def cohenLaurentCompl_of_section (u : Place K L) [u.FiniteResidue]
+    (S : Lg37CompletionSection u) : KwTateRR3CohenLaurentCompl u where
+  S := S
+  B := cohenB u S
+  hcompl := ⟨disjoint_adicIntegersKSubmod_cohenB u S,
+    codisjoint_adicIntegersKSubmod_cohenB u S⟩
+  shift_sub_mem z := by
+    obtain ⟨δ, hδ⟩ := z.2
+    rw [← hδ, locResCompl_cohenΦ u S δ]
+    exact uniformizerHat_mul_cohenΦ_sub_mem u S δ
+
+end Assembly
+
+section Headline
+
+variable {K L : Type*} [Field K] [Field L] [Algebra K L]
+variable [IsCurveOver K L] [PerfectField K]
+
+theorem kwTateRR3_cohenLaurentComplExists :
+    KwTateRR3CohenLaurentComplExists K L := fun u _ => by
+  have : FiniteDimensional K u.ResidueField := Place.FiniteResidue.finite
+  have : Algebra.IsSeparable K u.ResidueField :=
+    Algebra.IsAlgebraic.isSeparable_of_perfectField
+  exact (completionSection_nonempty_generic u).map (cohenLaurentCompl_of_section u)
+
+theorem kwTateRR3_cohenKernelDataExists :
+    KwF4gRRTateCohenKernelDataExists K L :=
+  kwTateRR3_cohenKernelDataExists_of_complExists kwTateRR3_cohenLaurentComplExists
+
+end Headline
+
+end ModularCurve.KwTateRR3
+
+end
+end
+
+namespace AlgebraicCurves.Differentials.Residues.Proofs.TateAgreement
+
+theorem _root_.AlgebraicCurve.tateAgreement
+    {K L : Type*} [Field K] [Field L] [Algebra K L]
+    [AlgebraicCurve.IsCurveOver K L] [PerfectField K]
+    [∀ u : AlgebraicCurve.Place K L, u.FiniteResidue]
+    (hfin : ModularCurve.KwF4gRRTate.KwF4gRRTateCommFinite K L) :
+    ModularCurve.KwF4gRRTate.KwF4gRRTateAgreement K L hfin :=
+  ModularCurve.KwF4gRRTate.kwF4gRRTate_agreement_of_kernelData hfin
+    ModularCurve.KwTateRR3.kwTateRR3_cohenKernelDataExists
+end AlgebraicCurves.Differentials.Residues.Proofs.TateAgreement
+end
+end ProofImplementation

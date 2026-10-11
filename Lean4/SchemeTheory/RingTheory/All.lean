@@ -1,0 +1,116 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import SchemeTheory.RingTheory.AdicCompletion.All
+import SchemeTheory.RingTheory.CyclicIdempotentAnnihilator
+import SchemeTheory.RingTheory.CyclicIdempotentFactor
+import SchemeTheory.RingTheory.Descent.All
+import SchemeTheory.RingTheory.DeterminantTrickCongruence
+import SchemeTheory.RingTheory.Finite
+import SchemeTheory.RingTheory.FiniteOpenFactor
+import SchemeTheory.RingTheory.GenericFiber.All
+import SchemeTheory.RingTheory.HenselianCyclicIdempotent
+import SchemeTheory.RingTheory.HenselianFactorization
+import SchemeTheory.RingTheory.HenselianFiniteIdempotent
+import SchemeTheory.RingTheory.HenselianIdempotents
+import SchemeTheory.RingTheory.HenselianIntegral
+import SchemeTheory.RingTheory.HenselianIntegralCyclicIdempotent
+import SchemeTheory.RingTheory.HenselianNilIdeal
+import SchemeTheory.RingTheory.IdempotentAnnihilator
+import SchemeTheory.RingTheory.IdempotentFactorReduction
+import SchemeTheory.RingTheory.IdempotentFromCoprimeFactors
+import SchemeTheory.RingTheory.IdempotentLiftSupport
+import SchemeTheory.RingTheory.IdempotentLocalizationCyclicity
+import SchemeTheory.RingTheory.IdempotentQuotientFactor
+import SchemeTheory.RingTheory.IntegralLocalizationFiniteModel
+import SchemeTheory.RingTheory.IntegralLocalizationIdempotentModel
+import SchemeTheory.RingTheory.JacobianLocalization
+import SchemeTheory.RingTheory.JacobsonIdempotentFactor
+import SchemeTheory.RingTheory.JacobsonIdempotentRigidity
+import SchemeTheory.RingTheory.JacobsonIntegral
+import SchemeTheory.RingTheory.Localization.All
+import SchemeTheory.RingTheory.LocalizationIdempotentFactor
+import SchemeTheory.RingTheory.OpenImmersionFiniteFactor
+import SchemeTheory.RingTheory.QuotientBaseChange
+import SchemeTheory.RingTheory.QuotientProducts
+import SchemeTheory.RingTheory.Ramification.All
+import SchemeTheory.RingTheory.SmoothReduced
+import SchemeTheory.RingTheory.TensorProductPrime
+import SchemeTheory.RingTheory.FiniteProductFaithfullyFlat
+import SchemeTheory.RingTheory.SeparableConstantsTensor
+import SchemeTheory.RingTheory.FractionFieldSubalgebraTrace
+import SchemeTheory.RingTheory.RegularLocalFiniteFreeResolution
+import SchemeTheory.RingTheory.RegularLocalTrace
+import SchemeTheory.RingTheory.FractionFieldTensorDomain
+import SchemeTheory.RingTheory.FiniteResidueGeometricPoint
+import SchemeTheory.RingTheory.DVRFractionFieldAway
+import SchemeTheory.RingTheory.HenselianFiniteDomainLocal
+import SchemeTheory.RingTheory.StrictHenselianFiniteDomainPoint
+
+import SchemeTheory.RingTheory.IntegralClosureSplitProduct
+import SchemeTheory.RingTheory.IntegralClosureEtaleOfSplit
+import SchemeTheory.RingTheory.LocalizationTensorTower
+
+import SchemeTheory.RingTheory.StrictHenselianFiniteDomainPointLift
+
+import SchemeTheory.RingTheory.Flat.All
+import SchemeTheory.RingTheory.LocalAlgebra
+import SchemeTheory.RingTheory.CohenMacaulay
+import SchemeTheory.RingTheory.FreeModuleRegularScalar
+import SchemeTheory.RingTheory.FreeModuleRegularSequenceAux
+import SchemeTheory.RingTheory.FreeModuleRegularSequence
+import SchemeTheory.RingTheory.ModuleDepthBound
+import SchemeTheory.RingTheory.ModuleDepthRegularQuotient
+import SchemeTheory.RingTheory.CommonRegularElement
+import SchemeTheory.RingTheory.RegularLocalDepth
+import SchemeTheory.RingTheory.RegularLocalDepthFreeness
+import SchemeTheory.RingTheory.RegularLocalDomain
+
+
+
+/- Canonical aggregate for SchemeTheory.RingTheory. -/
+import SchemeTheory.RingTheory.HomogeneousIdealMap
+import SchemeTheory.RingTheory.EtaleFieldPointBound
+import SchemeTheory.RingTheory.EtaleFieldPointGlobalBound
+import SchemeTheory.RingTheory.FinitePresentationAwayRelations
+import SchemeTheory.RingTheory.FinitePresentationCoequalizer
+import SchemeTheory.RingTheory.IntegralFinitePresentationColimit
+import SchemeTheory.RingTheory.IntegralFinitePresentationDiagram
+import SchemeTheory.RingTheory.IntegralFinitePresentationModel
+import SchemeTheory.RingTheory.ModuleFiniteLocalizationModel
+import SchemeTheory.RingTheory.ModuleKernelLocalization
+import SchemeTheory.RingTheory.GenericTensorSplit
+import SchemeTheory.RingTheory.SignPolynomialAction
+import SchemeTheory.RingTheory.SignPolynomialMonomials
+import SchemeTheory.RingTheory.SignPolynomialInvariants
+import SchemeTheory.RingTheory.SignPolynomialFinite
+import SchemeTheory.RingTheory.SignPolynomialNormal
+import SchemeTheory.RingTheory.SignPolynomialDegree
+import SchemeTheory.RingTheory.HenselianIntegralDomainLocal
+import SchemeTheory.RingTheory.HenselianIntegralClosureUnits
+import SchemeTheory.RingTheory.HenselianOrthogonalIdempotents
+import SchemeTheory.RingTheory.OrthogonalIdempotentsDegree
+import SchemeTheory.RingTheory.StrictHenselianFiberDegree
+import SchemeTheory.RingTheory.IntegralPurelyInseparableLocalTensor
+import SchemeTheory.RingTheory.FlatTensorNilpotentKernel
+import SchemeTheory.RingTheory.GeometricallyUnibranch
+import SchemeTheory.RingTheory.SubmoduleAdjoinLocalization
+import SchemeTheory.RingTheory.SubmoduleAdjoinRestriction
+import SchemeTheory.RingTheory.LocalizedSubmoduleComparison
+import SchemeTheory.RingTheory.SubalgebraResidueFieldColimit
+import SchemeTheory.RingTheory.HenselianLocalRing_existsUnique_isIdempotentElem_mk_eq_of_moduleFinite
+import SchemeTheory.RingTheory.HenselianLocalRing_exists_algHom_lift_of_etale
+import SchemeTheory.RingTheory.HenselianLocalRing_exists_completeOrthogonalIdempotents_forall_isLocalRing_quotient_of_moduleFinite
+import SchemeTheory.RingTheory.HenselianLocalRing_of_isIntegral_of_isLocalRing
+import SchemeTheory.RingTheory.HenselianLocalRing_of_moduleFinite_of_isLocalRing
+import SchemeTheory.RingTheory.Module_Finite_of_ker_le_range_of_isNoetherianRing
+
+/-!
+# Ring-theoretic foundations for scheme constructions
+
+This aggregate exposes adic completions, generic fibres, henselian factorizations,
+flatness and descent, normalization, and ramification modules.
+-/

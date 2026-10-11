@@ -1,0 +1,6 @@
+This distribution contains code by Naganori Yamaguchi and third-party code.
+Original source headers and notices are retained. See THIRD_PARTY.md,
+PI1_ATTRIBUTION.md, and the ANTHROPIC_FLT_NOTICE / ATTRIBUTION files under Lean4.
+Original contributions: Copyright 2026 Naganori Yamaguchi.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex).
+https://github.com/n-yamaguchi-0729

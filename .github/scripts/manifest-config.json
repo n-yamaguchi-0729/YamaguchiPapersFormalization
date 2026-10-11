@@ -1,0 +1,87 @@
+{
+  "owners": {
+    "ProCGroups": [
+      "ProCGroups"
+    ],
+    "ValuedFieldTheory": [
+      "ValuedFieldTheory"
+    ],
+    "GaloisCohomology": [
+      "GaloisCohomology"
+    ],
+    "SchemeTheory": [
+      "SchemeTheory"
+    ],
+    "ClassFieldTheory": [
+      "ClassFieldTheory"
+    ],
+    "AlgebraicCurves": [
+      "AlgebraicCurves"
+    ],
+    "EtaleFundamentalGroups": [
+      "EtaleFundamentalGroups"
+    ],
+    "EtaleCohomology": [
+      "EtaleCohomology"
+    ],
+    "Yamaguchi26AbfaithfulGalois": [
+      "Yamaguchi26AbfaithfulGalois"
+    ],
+    "Yamaguchi26SolvableCoverings": [
+      "Yamaguchi26SolvableCoverings"
+    ],
+    "EntryPoint": [
+      "All"
+    ]
+  },
+  "roots": [
+    "All"
+  ],
+  "leanToolchain": "leanprover/lean4:v4.35.0-rc2",
+  "mathlibRevision": "065356127b1dc0016f66b7283ce0ce2c4055aa55",
+  "mathlibRepository": "https://github.com/leanprover-community/mathlib4",
+  "externalModuleRoots": [
+    "Mathlib",
+    "Lean",
+    "Init",
+    "Std",
+    "Batteries",
+    "Qq",
+    "Aesop",
+    "Plausible"
+  ],
+  "excludedDirectories": [
+    ".git",
+    ".lake",
+    "tmp",
+    "__pycache__"
+  ],
+  "excludedPaths": [
+    ".github/scripts"
+  ],
+  "enforceSourcePolicy": true,
+  "depths": {
+    "ProCGroups": 1,
+    "ValuedFieldTheory": 1,
+    "GaloisCohomology": 1,
+    "SchemeTheory": 1,
+    "ClassFieldTheory": 2,
+    "AlgebraicCurves": 2,
+    "EtaleFundamentalGroups": 2,
+    "EtaleCohomology": 2,
+    "Yamaguchi26AbfaithfulGalois": 3,
+    "Yamaguchi26SolvableCoverings": 3
+  },
+  "orderedLibraries": [
+    "ProCGroups",
+    "ValuedFieldTheory",
+    "GaloisCohomology",
+    "SchemeTheory",
+    "ClassFieldTheory",
+    "AlgebraicCurves",
+    "EtaleFundamentalGroups",
+    "EtaleCohomology",
+    "Yamaguchi26AbfaithfulGalois",
+    "Yamaguchi26SolvableCoverings"
+  ]
+}

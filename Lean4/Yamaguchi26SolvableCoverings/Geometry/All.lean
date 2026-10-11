@@ -1,0 +1,30 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Yamaguchi26SolvableCoverings.Geometry.Boundary
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryAbelianizationPullback
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryBranchGeometricPoint
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryExtension
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalFixedPoint
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalEtale
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalNormalizationEtale
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryCyclotomic
+
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryHeightOneEtale
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkComponentHeightOne
+
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkNormalizationEtale
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryUnramifiedExtension
+
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictLocalModel
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictImage
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictInertia
+import Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictExtension
+
+/-!
+# Geometry of solvable coverings across horizontal divisors
+-/

@@ -1,0 +1,72 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import EtaleCohomology.Sites.Stalks
+import EtaleCohomology.Sites.BaseChange
+import EtaleCohomology.Sites.Subcanonical
+import EtaleCohomology.Sites.ClosedNeighborhoods
+import EtaleCohomology.Sites.RestrictionStalks
+import EtaleCohomology.Sites.RestrictionAdjunction
+import EtaleCohomology.Sites.ClosedImmersionStalks
+import EtaleCohomology.Sites.ClosedImmersionExact
+import EtaleCohomology.Sites.ClosedAdjunction
+import EtaleCohomology.Sites.Localization
+import EtaleCohomology.Sites.EmptySections
+import EtaleCohomology.Sites.SheafFunctors
+import EtaleCohomology.Sites.SetSheafFunctors
+import EtaleCohomology.Sites.SetPullbackComposition
+import EtaleCohomology.Sites.EtaleRestriction
+import EtaleCohomology.Sites.EtaleSlice
+import EtaleCohomology.Sites.LocallyDirectedCover
+import EtaleCohomology.Sites.RepresentablePullback
+import EtaleCohomology.Sites.ConstantRepresentable
+import EtaleCohomology.Sites.ConnectedConstants
+import EtaleCohomology.Sites.MateComparison
+import EtaleCohomology.Sites.ModuleSetComparison
+import EtaleCohomology.Sites.ModuleConstant
+import EtaleCohomology.Sites.ConstantPullback
+import EtaleCohomology.Sites.PullbackComposition
+import EtaleCohomology.Sites.PullbackStalks
+import EtaleCohomology.Sites.ExtensionByZero
+import EtaleCohomology.Sites.StalkAdjunction
+import EtaleCohomology.Sites.ExtensionByZeroStalks
+import EtaleCohomology.Sites.SheafAdjunction
+import EtaleCohomology.Sites.OpenAdjunction
+import EtaleCohomology.Sites.ConstantPresentation
+import EtaleCohomology.Sites.FiniteFreeLift
+import EtaleCohomology.Sites.ModuleRestriction
+import EtaleCohomology.Sites.HenselianLocal
+import EtaleCohomology.Sites.ProperLocalSections
+import EtaleCohomology.Sites.ClosedFiberFiniteLiftCover
+import EtaleCohomology.Sites.SetPullbackExact
+import EtaleCohomology.Sites.ZariskiRestriction
+import EtaleCohomology.Sites.ZariskiBaseChange
+import EtaleCohomology.Sites.ZariskiSectionEquality
+import EtaleCohomology.Sites.ZariskiModuleBaseChange
+import EtaleCohomology.Sites.ZariskiGeometricStalks
+import EtaleCohomology.Sites.PullbackSections
+import EtaleCohomology.Sites.ClosedFiberFinitePullbackLifts
+import EtaleCohomology.Sites.ClosedZariskiComparison
+import EtaleCohomology.Sites.PullbackClosedFiberStalks
+import EtaleCohomology.Sites.ZariskiGlobalSections
+import EtaleCohomology.Sites.PullbackGlobalSectionsComposition
+import EtaleCohomology.Sites.ProperPullbackClosedUnitInjective
+import EtaleCohomology.Sites.ClosedFiberPullbackGluing
+import EtaleCohomology.Sites.CechSections
+import EtaleCohomology.Sites.FiniteRefinementCompatibleLift
+import EtaleCohomology.Sites.PushforwardStalkComparison
+import EtaleCohomology.Sites.FinitePushforwardStalks
+import EtaleCohomology.Sites.PullbackUnitStalks
+import EtaleCohomology.Sites.PullbackUnitGeometricStalks
+import EtaleCohomology.Sites.FiniteSurjectiveUnit
+import EtaleCohomology.Sites.PushforwardStalkComposition
+import EtaleCohomology.Sites.PullbackStalkComposition
+import EtaleCohomology.Sites.PushforwardGlobalSections
+import EtaleCohomology.Sites.FiniteCechStalkLift
+import EtaleCohomology.Sites.SectionImageGluing
+import EtaleCohomology.Sites.FiniteSurjectiveDescent
+import EtaleCohomology.Sites.ProperHenselianH0
+

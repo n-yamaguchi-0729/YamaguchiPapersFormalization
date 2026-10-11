@@ -1,0 +1,115 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import GaloisCohomology.Kummer.Concrete.QuadraticSquareClasses
+import GaloisCohomology.Kummer.Concrete.NormalRestrictionKernel
+import GaloisCohomology.Kummer.Concrete.NormalRestrictionResidualAction
+import GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
+import GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
+import GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+import GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAction
+import GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+import GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+import GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+import GaloisCohomology.Kummer.Concrete.AbsoluteKummerEvaluation
+import GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
+import GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+import GaloisCohomology.Kummer.Concrete.ContinuousCharacters
+import GaloisCohomology.Kummer.Concrete.Correspondence
+import GaloisCohomology.Kummer.Concrete.CyclicExtension
+import GaloisCohomology.Kummer.Concrete.Cyclotomic.All
+import GaloisCohomology.Kummer.Concrete.CyclotomicField
+import GaloisCohomology.Kummer.Concrete.ExtensionRoundTrip
+import GaloisCohomology.Kummer.Concrete.FiniteCharacterEquiv
+import GaloisCohomology.Kummer.Concrete.FiniteDualSeparation
+import GaloisCohomology.Kummer.Concrete.FiniteGaloisDual
+import GaloisCohomology.Kummer.Concrete.FiniteGeneration
+import GaloisCohomology.Kummer.Concrete.FiniteKummerNormalizedGenerator
+import GaloisCohomology.Kummer.Concrete.FiniteSupport
+import GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+import GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+import GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+import GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+import GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+import GaloisCohomology.Kummer.Concrete.GaloisCohomology
+import GaloisCohomology.Kummer.Concrete.InfiniteCharacterEquiv
+import GaloisCohomology.Kummer.Concrete.InfiniteContinuity
+import GaloisCohomology.Kummer.Concrete.InfiniteGeneration
+import GaloisCohomology.Kummer.Concrete.InfiniteInverse
+import GaloisCohomology.Kummer.Concrete.KummerCorrespondenceFormula
+import GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
+import GaloisCohomology.Kummer.Concrete.LocalMaximalKummerExtension
+import GaloisCohomology.Kummer.Concrete.LocalUnitKummerUnramified
+import GaloisCohomology.Kummer.Concrete.MaximalKummerSubgroup
+import GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
+import GaloisCohomology.Kummer.Concrete.PrimePowerRootObstruction
+import GaloisCohomology.Kummer.Concrete.RadicalExtension
+import GaloisCohomology.Kummer.Concrete.RadicalQuotient
+import GaloisCohomology.Kummer.Concrete.RestrictedFinite
+import GaloisCohomology.Kummer.Concrete.RootCharacters
+import GaloisCohomology.Kummer.Concrete.SUnitPreparation.All
+import GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
+import GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+import GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+import GaloisCohomology.Kummer.Concrete.SimpleExtension
+import GaloisCohomology.Kummer.Concrete.SimpleExtensionNorm
+
+import GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
+import GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
+
+import GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
+import GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
+import GaloisCohomology.Kummer.Concrete.AbsoluteH1TrivialCharacter
+import GaloisCohomology.Kummer.Concrete.SemilinearRestriction
+import GaloisCohomology.Kummer.Concrete.InvariantKummerPowerWitness
+import GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
+
+
+import GaloisCohomology.Kummer.Concrete.MovingRootOfUnity
+
+import GaloisCohomology.Kummer.Concrete.AbsoluteKummerCharacterAction
+import GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
+import GaloisCohomology.Kummer.Concrete.RootKummerInvariantCharacter
+import GaloisCohomology.Kummer.Concrete.CyclotomicInvariantKummerTrace
+
+
+import GaloisCohomology.Kummer.Concrete.SeparableKummerH1
+import GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
+import GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+import GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
+import GaloisCohomology.Kummer.Concrete.FieldMapNaturality
+import GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
+import GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
+import GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
+import GaloisCohomology.Kummer.Concrete.ContinuousHilbert90
+import GaloisCohomology.Kummer.Concrete.ContinuousRootCocycleLifting
+
+import GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+
+import GaloisCohomology.Kummer.Concrete.NormalRestrictionCharacterExtension
+import GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAverage
+import GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
+import GaloisCohomology.Kummer.Concrete.CyclotomicCocycleLifting
+import GaloisCohomology.Kummer.Concrete.CyclotomicOpenCocycleLifting
+
+import GaloisCohomology.Kummer.Concrete.ProlongationCharacterApproximation
+import GaloisCohomology.Kummer.Concrete.InvariantCompletionCharacter
+import GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
+import GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+import GaloisCohomology.Kummer.Concrete.MixedCharacteristicCharacters
+import GaloisCohomology.Kummer.Concrete.CompletionAbelianModPower
+
+import GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
+
+import GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
+import GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
+
+/-!
+# Concrete Kummer extensions and characters
+
+Collects concrete Kummer extensions, character correspondences, root actions,
+restriction kernels, finite approximations, and S-unit preparations.
+-/

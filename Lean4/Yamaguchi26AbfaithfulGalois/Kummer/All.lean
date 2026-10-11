@@ -1,0 +1,49 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicReduction
+import Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeReduction
+import GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+import GaloisCohomology.Kummer.Concrete.SeparableKummerH1
+import GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+import Yamaguchi26AbfaithfulGalois.Kummer.TrivialAction
+import Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+import Yamaguchi26AbfaithfulGalois.Kummer.CompletionComparison
+import Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicFaithfulness
+import Yamaguchi26AbfaithfulGalois.Kummer.Concrete.All
+
+import Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFaithfulness
+
+import Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFiniteRoots
+
+import Yamaguchi26AbfaithfulGalois.Kummer.FiniteGaloisPrimeDegreeReduction
+import Yamaguchi26AbfaithfulGalois.Kummer.RelativeModPowerNaturality
+import Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicCompletionDetection
+import Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicMovedValuation
+import Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicPrimeDetection
+import Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection
+
+import Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicPrimeDegreeReduction
+import Yamaguchi26AbfaithfulGalois.Kummer.FinitelyGeneratedPositiveCharacteristicDetection
+
+import Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicCompleteDetection
+
+import Yamaguchi26AbfaithfulGalois.Kummer.DyadicModTwo
+
+import Yamaguchi26AbfaithfulGalois.Kummer.CompletePrimeOrderDetection
+
+import Yamaguchi26AbfaithfulGalois.Kummer.WeakApproximationForCharacters
+
+import Yamaguchi26AbfaithfulGalois.Kummer.ModPrimeCohomologyDetection
+import Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeCohomology
+
+/-!
+# Kummer methods for abelian faithfulness
+
+This aggregate collects Kummer comparisons, valuation and cohomology
+detection, prime-degree reductions, and local methods for abelian
+faithfulness.
+-/

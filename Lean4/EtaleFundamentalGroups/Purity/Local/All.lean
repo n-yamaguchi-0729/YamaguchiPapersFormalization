@@ -1,0 +1,34 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
+import EtaleFundamentalGroups.Purity.Local.AdicCompletionQuotient
+import EtaleFundamentalGroups.Purity.Local.AdicCompletionTorsionReflection
+import EtaleFundamentalGroups.Purity.Local.CompleteQuotient
+import EtaleFundamentalGroups.Purity.Local.DimensionOne
+import EtaleFundamentalGroups.Purity.Local.FiniteEtaleQuotientLift
+import EtaleFundamentalGroups.Purity.Local.FinitePresentationExtOneBaseChange
+import EtaleFundamentalGroups.Purity.Local.FinitePresentationHomBaseChange
+import EtaleFundamentalGroups.Purity.Local.GeneratorRelationHOne
+import EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtOneBaseChange
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtTorsion
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedBilinearDescent
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedEqualizer
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedHomDescent
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleCoverDescent
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleGluingData
+import EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleHomDescent
+import EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
+import EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
+import EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
+
+import EtaleFundamentalGroups.Purity.Local.CompleteRegularLocalPurity
+import EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
+import EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
+
+/-! Canonical aggregate for EtaleFundamentalGroups.Purity.Local. -/

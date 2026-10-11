@@ -1,0 +1,46 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitCriterion
+import Yamaguchi26AbfaithfulGalois.GroupTheory.RegularWreathKernel
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ElementaryFaithfulEmbeddingSolution
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualFiniteInvariantQuotient
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingImage
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingQuotient
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingSolutions
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingFormulation
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaMaximalQuotient
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOpenSubgroup
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaProGroup
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaAllPrimes
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+import Yamaguchi26AbfaithfulGalois.GroupTheory.EmbeddingFormulation
+import Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+import Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+import Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaProPNormal
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaAbelianNormalObstruction
+import Yamaguchi26AbfaithfulGalois.GroupTheory.AbelianModPower
+
+import Yamaguchi26AbfaithfulGalois.GroupTheory.FiniteFieldExtensions
+
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEquivalence
+
+import Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitRegularQuotient
+import Yamaguchi26AbfaithfulGalois.GroupTheory.EquivariantActions
+import Yamaguchi26AbfaithfulGalois.GroupTheory.PrimePowerCharacterDetection
+import Yamaguchi26AbfaithfulGalois.GroupTheory.SlimFieldExtensions
+
+/-!
+# Abelianization actions
+
+This aggregate module exposes faithfulness properties of conjugation actions on topological
+abelianizations and their consequences for slimness and torsion.
+-/
+

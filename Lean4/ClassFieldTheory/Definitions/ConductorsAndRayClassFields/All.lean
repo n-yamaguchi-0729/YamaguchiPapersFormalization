@@ -1,0 +1,34 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.EmbedsInRayClassField
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.FractionalIdealNormExponentMap
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.FractionalIdealNorm
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.IsAbelianConductor
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.IsRayCongruent
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.IsUnramifiedOutsideModulus
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.NarrowClassGroup
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.NarrowRayClassModulus
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.OrdinaryRayClassModulus
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayArtin
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassFieldRealization
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassGroup
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassIdealModulusProjection
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassIdealNorm
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassModulus
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassOfFinitePrime
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassPrimeToIdeals
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassSubgroupRealization
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayClassSubgroupQuotientEquiv
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayLocalHigherUnitGroup
+import ClassFieldTheory.Definitions.ConductorsAndRayClassFields.RayPrincipalIdealSubgroup
+
+/-!
+# Conductors and ray class-field definitions
+
+This aggregate collects conductor and modulus conditions, ray class
+groups and realizations, ideal norms, and ray Artin maps.
+-/

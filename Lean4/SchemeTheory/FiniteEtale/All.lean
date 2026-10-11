@@ -1,0 +1,67 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import SchemeTheory.FiniteEtale.AffineEquivalence
+import SchemeTheory.FiniteEtale.AffineThickening
+import SchemeTheory.FiniteEtale.AffineUniversalHomeomorphismModel
+import SchemeTheory.FiniteEtale.Algebra.All
+import SchemeTheory.FiniteEtale.Away.All
+import SchemeTheory.FiniteEtale.BaseChange.All
+import SchemeTheory.FiniteEtale.Basic
+import SchemeTheory.FiniteEtale.ClopenPullback
+import SchemeTheory.FiniteEtale.DensePullback
+import SchemeTheory.FiniteEtale.Forget.All
+import SchemeTheory.FiniteEtale.Geometry
+import SchemeTheory.FiniteEtale.Henselian.All
+import SchemeTheory.FiniteEtale.Local.All
+import SchemeTheory.FiniteEtale.LocalSplitting
+import SchemeTheory.FiniteEtale.PullbackFaithful
+import SchemeTheory.FiniteEtale.PullbackRepresentable
+import SchemeTheory.FiniteEtale.RadicialDescentCocycle
+import SchemeTheory.FiniteEtale.RadicialDescentIso
+import SchemeTheory.FiniteEtale.RingCover
+import SchemeTheory.FiniteEtale.ThickeningFullyFaithful
+import SchemeTheory.FiniteEtale.ThickeningGluing
+import SchemeTheory.FiniteEtale.UniversalHomeomorphismFullyFaithful
+import SchemeTheory.FiniteEtale.SectionsDescent
+import SchemeTheory.FiniteEtale.AffinizationExtension
+import SchemeTheory.FiniteEtale.PointSections
+import SchemeTheory.FiniteEtale.InverseLimitHom
+import SchemeTheory.FiniteEtale.InverseLimitEquality
+import SchemeTheory.FiniteEtale.FilteredColimitSpec
+import SchemeTheory.FiniteEtale.AffineTransitionModel
+import SchemeTheory.FiniteEtale.AffineTransitionCharts
+import SchemeTheory.FiniteEtale.RelativeGluing
+import SchemeTheory.FiniteEtale.InverseLimitIsomorphism
+import SchemeTheory.FiniteEtale.AffineTransitionLocalModel
+import SchemeTheory.FiniteEtale.InverseLimitOpenEquations
+import SchemeTheory.FiniteEtale.InverseLimitFiniteCover
+import SchemeTheory.FiniteEtale.InverseLimitIsoDescent
+import SchemeTheory.FiniteEtale.InverseLimitIsoModels
+import SchemeTheory.FiniteEtale.InverseLimitOpenIsomorphisms
+import SchemeTheory.FiniteEtale.AffineTransitionOverlapRecovery
+import SchemeTheory.FiniteEtale.InverseLimitGluingRelations
+import SchemeTheory.FiniteEtale.RelativePullbackGluing
+import SchemeTheory.FiniteEtale.RelativeOverlapFiniteness
+import SchemeTheory.FiniteEtale.InverseLimitRecoveredModel
+import SchemeTheory.FiniteEtale.RawOverlapFiniteness
+import SchemeTheory.FiniteEtale.InverseLimitRawCharts
+import SchemeTheory.FiniteEtale.InverseLimitRawModel
+import SchemeTheory.FiniteEtale.InverseLimitModel
+import SchemeTheory.FiniteEtale.StrictLocalSections
+import SchemeTheory.FiniteEtale.ProperClosedFiberFaithful
+import SchemeTheory.FiniteEtale.AffineUniversalHomeomorphismEquivalence
+import SchemeTheory.FiniteEtale.isIso_of_isIso_pullback_closedFibre_of_isFinite_of_etale_of_isProper
+
+
+/-!
+# Finite étale scheme theory
+
+This facade collects affine Weil restriction, fpqc descent for finite étale
+algebras, exactness of the forgetful functor, and étale schemes over a field.
+-/
+
+/- Canonical aggregate for SchemeTheory.FiniteEtale. -/

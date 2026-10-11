@@ -1,0 +1,115 @@
+name: Lean
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lean-${{ github.ref }}
+  cancel-in-progress: true
+
+# Private pushes install the workflow but do not consume hosted build minutes.
+# Run manually while private; ordinary push/PR builds begin after publication.
+jobs:
+  depth1-procgroups:
+    name: ProCGroups.All
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-procgroups
+      target: +ProCGroups.All
+
+  depth1-valuedfield:
+    name: ValuedFieldTheory.All
+    needs: depth1-procgroups
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-valuedfield
+      target: +ValuedFieldTheory.All
+
+  depth1-galoiscohomology:
+    name: GaloisCohomology.All
+    needs: depth1-valuedfield
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-galoiscohomology
+      target: +GaloisCohomology.All
+
+  depth1-schemetheory:
+    name: SchemeTheory.All
+    needs: depth1-galoiscohomology
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth1-schemetheory
+      target: +SchemeTheory.All
+
+  depth2-classfield:
+    name: ClassFieldTheory.All
+    needs: depth1-schemetheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-classfield
+      target: +ClassFieldTheory.All
+
+  depth2-curves:
+    name: AlgebraicCurves.All
+    needs: depth2-classfield
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-curves
+      target: +AlgebraicCurves.All
+
+  depth2-fundamental:
+    name: EtaleFundamentalGroups.All
+    needs: depth2-curves
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-fundamental
+      target: +EtaleFundamentalGroups.All
+
+  depth2-cohomology:
+    name: EtaleCohomology.All
+    needs: depth2-fundamental
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth2-cohomology
+      target: +EtaleCohomology.All
+
+  depth3-abfaithful:
+    name: Yamaguchi26AbfaithfulGalois.All
+    needs: depth2-cohomology
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-abfaithful
+      target: +Yamaguchi26AbfaithfulGalois.All
+
+  depth3-solvable:
+    name: Yamaguchi26SolvableCoverings.All
+    needs: depth3-abfaithful
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-solvable
+      target: +Yamaguchi26SolvableCoverings.All
+
+  all:
+    name: All
+    needs: depth3-solvable
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: all
+      target: +All
