@@ -1,0 +1,93 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.BoundaryAndLocalFactors
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponents
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedComponentFaithful
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedReduction
+import Nyll.EtaleFundamentalGroups.FiniteEtale.DensePullback
+import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbelian
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisDomination
+import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianPair
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integers
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InternalHom
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Local.All
+import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
+import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Thickening
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Towers.All
+
+import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialCoverAlgebra
+
+import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFractions
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFullness
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFaithfulness
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFundamentalGroup
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFundamentalGroupSystem
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualHom
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStageCoherence
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEquivalence
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitComparison
+import Nyll.EtaleFundamentalGroups.FiniteEtale.LocalKernelBaseChange
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProjectiveCokernelBaseChange
+import Nyll.EtaleFundamentalGroups.FiniteEtale.StructureSheafSectionsEquiv
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperGeometricallyReducedSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSectionsEtaleFieldDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ClosedFiberEtaleDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.NoetherianLocalProperModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.CechKernelBaseChangeSurjectivity
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperEtaleClosedFiberSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalH0BaseChange
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalSectionsBaseChange
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalSectionAlgebra
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalFiniteEtaleSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperIdempotentSectionLift
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSplitClosedFiberSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperHenselianFullyFaithful
+import Nyll.EtaleFundamentalGroups.FiniteEtale.AdicCoverTower
+import Nyll.EtaleFundamentalGroups.FiniteEtale.UniversalHomeomorphism
+import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkObjectSpreading
+import Nyll.EtaleFundamentalGroups.FiniteEtale.CompatibleStalkCoverSpreading
+
+
+
+
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianSectionAlgebra
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianNormalization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperLocalScalarSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianConnectedFibers
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianModelSections
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSectionAlgebra
+import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNormalization
+/-!
+# Finite étale covers and geometric fibers
+
+This facade collects the geometric-fiber equivalence, covering-family
+criterion, and Galois-cover characterizations over the scheme-theoretic finite
+étale foundation.
+-/
+
+
+/-! Canonical aggregate for EtaleFundamentalGroups.FiniteEtale. -/

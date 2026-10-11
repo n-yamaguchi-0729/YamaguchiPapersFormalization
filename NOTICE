@@ -27,127 +27,127 @@ Local changes include module splitting and relocation, import updates, adaptatio
 to Lean and Mathlib APIs, and proofs comparing geometric fibers and absolute
 Galois groups. These are local changes and are not asserted to be upstream work.
 
-Lean4/EtaleFundamentalGroups/FiniteEtale/GaloisCategory.lean
+Nyll/EtaleFundamentalGroups/FiniteEtale/GaloisCategory.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/Galois.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/EtaleFundamentalGroups/GaloisCategories/FundamentalGroup.lean
+Nyll/EtaleFundamentalGroups/GaloisCategories/FundamentalGroup.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/CategoryTheory/Galois/IsFundamentalGroup.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/EtaleFundamentalGroups/GeometricFiber/FundamentalGroup.lean
+Nyll/EtaleFundamentalGroups/GeometricFiber/FundamentalGroup.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/Point.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Affine/GeometricIrreducibility.lean
+Nyll/SchemeTheory/Affine/GeometricIrreducibility.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Geometric.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/Affine/Over.lean
+Nyll/SchemeTheory/Affine/Over.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/AffineColimits.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Affine/Property.lean
+Nyll/SchemeTheory/Affine/Property.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/AffineAnd.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/CategoryTheory/Over.lean
+Nyll/SchemeTheory/CategoryTheory/Over.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/CategoryTheory/Limits/MorphismProperty.lean
   Authors: Christian Merten
   Copyright (c) 2024 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Descent/FlatEqualizer.lean
+Nyll/SchemeTheory/Descent/FlatEqualizer.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Flat/Equalizer.lean
   Authors: Christian Merten
   Copyright (c) 2024 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Etale/RingHom.lean
+Nyll/SchemeTheory/Etale/RingHom.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/RingHom/Etale.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/FiniteEtale/Algebra/Basic.lean
+Nyll/SchemeTheory/FiniteEtale/Algebra/Basic.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Basic.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/FiniteEtale/Algebra/Descent.lean
+Nyll/SchemeTheory/FiniteEtale/Algebra/Descent.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Descent.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/FiniteEtale/Algebra/Equalizer.lean
+Nyll/SchemeTheory/FiniteEtale/Algebra/Equalizer.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Equalizer.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/FiniteEtale/Algebra/Splitting.lean
+Nyll/SchemeTheory/FiniteEtale/Algebra/Splitting.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/KerTensor.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/FiniteEtale/Basic.lean
+Nyll/SchemeTheory/FiniteEtale/Basic.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/FiniteEtale.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/FiniteEtale/Forget/FiniteCoequalizers.lean
+Nyll/SchemeTheory/FiniteEtale/Forget/FiniteCoequalizers.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/KerTensor.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/FiniteEtale/Geometry.lean
+Nyll/SchemeTheory/FiniteEtale/Geometry.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/Galois.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/FunctionFields/Transcendence.lean
+Nyll/SchemeTheory/FunctionFields/Transcendence.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/Transcendence.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/Morphisms/ClosedImmersion.lean
+Nyll/SchemeTheory/Morphisms/ClosedImmersion.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/AlgebraicGeometry/Limits.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/Morphisms/Finite.lean
+Nyll/SchemeTheory/Morphisms/Finite.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/AlgebraicGeometry/Morphisms/Finite.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Morphisms/Flat.lean
+Nyll/SchemeTheory/Morphisms/Flat.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/AlgebraicGeometry/Morphisms/Flat.lean
   Authors: Christian Merten, Andrew Yang
   Copyright (c) 2024 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Morphisms/FlatRank.lean
+Nyll/SchemeTheory/Morphisms/FlatRank.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/FundamentalGroup/Rank.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/Morphisms/Smooth.lean
+Nyll/SchemeTheory/Morphisms/Smooth.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/RingHom/Smooth.lean
   Authors: Christian Merten
   Copyright (c) 2025 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/Morphisms/SmoothLocus.lean
+Nyll/SchemeTheory/Morphisms/SmoothLocus.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/Smooth/StandardSmoothSmooth.lean
   Authors: Christian Merten
   Copyright (c) 2024 Christian Merten. All rights reserved.
 
-Lean4/SchemeTheory/RingTheory/Finite.lean
+Nyll/SchemeTheory/RingTheory/Finite.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/RingHom/Finite.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.
 
-Lean4/SchemeTheory/RingTheory/QuotientProducts.lean
+Nyll/SchemeTheory/RingTheory/QuotientProducts.lean
   Upstream: https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Ideal/Quotient/Operations.lean
   Authors: Christian Merten
   The cited upstream file has no copyright notice; the copyright holder is unverified.

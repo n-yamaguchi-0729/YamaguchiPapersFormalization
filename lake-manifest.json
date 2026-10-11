@@ -111,7 +111,7 @@
       "configFile": "lakefile.toml"
     }
   ],
-  "name": "YamaguchiPapersFormalization",
+  "name": "Nyll",
   "lakeDir": ".lake",
   "fixedToolchain": false
 }

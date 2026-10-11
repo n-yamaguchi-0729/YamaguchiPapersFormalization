@@ -1,0 +1,26 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.AlgEquivDescent
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldDescent
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.FiniteFieldTensorDiagram
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IntermediateFieldDiagram
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.RelativeFiniteFieldDescent
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.RelativeFiniteFieldTensorDiagram
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.ScalarExtension
+
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.IdempotentDescent
+
+
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalPushout
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalDescent
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CategoricalTensor
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorCorrespondence
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorPushout
+import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.NativeTensorDescent
+
+/-! Canonical aggregate for EtaleFundamentalGroups.GenericTensor.FilteredColimit. -/

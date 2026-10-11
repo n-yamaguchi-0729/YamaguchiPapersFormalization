@@ -17,99 +17,99 @@ concurrency:
 # Run manually while private; ordinary push/PR builds begin after publication.
 jobs:
   depth1-procgroups:
-    name: ProCGroups.All
+    name: Nyll.ProCGroups.All
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-procgroups
-      target: +ProCGroups.All
+      target: +Nyll.ProCGroups.All
 
-  depth1-valuedfield:
-    name: ValuedFieldTheory.All
+  depth1-valuedfieldtheory:
+    name: Nyll.ValuedFieldTheory.All
     needs: depth1-procgroups
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth1-valuedfield
-      target: +ValuedFieldTheory.All
+      stage: depth1-valuedfieldtheory
+      target: +Nyll.ValuedFieldTheory.All
 
   depth1-galoiscohomology:
-    name: GaloisCohomology.All
-    needs: depth1-valuedfield
+    name: Nyll.GaloisCohomology.All
+    needs: depth1-valuedfieldtheory
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-galoiscohomology
-      target: +GaloisCohomology.All
+      target: +Nyll.GaloisCohomology.All
 
   depth1-schemetheory:
-    name: SchemeTheory.All
+    name: Nyll.SchemeTheory.All
     needs: depth1-galoiscohomology
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: depth1-schemetheory
-      target: +SchemeTheory.All
+      target: +Nyll.SchemeTheory.All
 
-  depth2-classfield:
-    name: ClassFieldTheory.All
+  depth2-classfieldtheory:
+    name: Nyll.ClassFieldTheory.All
     needs: depth1-schemetheory
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth2-classfield
-      target: +ClassFieldTheory.All
+      stage: depth2-classfieldtheory
+      target: +Nyll.ClassFieldTheory.All
 
-  depth2-curves:
-    name: AlgebraicCurves.All
-    needs: depth2-classfield
+  depth2-algebraiccurves:
+    name: Nyll.AlgebraicCurves.All
+    needs: depth2-classfieldtheory
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth2-curves
-      target: +AlgebraicCurves.All
+      stage: depth2-algebraiccurves
+      target: +Nyll.AlgebraicCurves.All
 
-  depth2-fundamental:
-    name: EtaleFundamentalGroups.All
-    needs: depth2-curves
+  depth2-etalefundamentalgroups:
+    name: Nyll.EtaleFundamentalGroups.All
+    needs: depth2-algebraiccurves
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth2-fundamental
-      target: +EtaleFundamentalGroups.All
+      stage: depth2-etalefundamentalgroups
+      target: +Nyll.EtaleFundamentalGroups.All
 
-  depth2-cohomology:
-    name: EtaleCohomology.All
-    needs: depth2-fundamental
+  depth2-etalecohomology:
+    name: Nyll.EtaleCohomology.All
+    needs: depth2-etalefundamentalgroups
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth2-cohomology
-      target: +EtaleCohomology.All
+      stage: depth2-etalecohomology
+      target: +Nyll.EtaleCohomology.All
 
-  depth3-abfaithful:
-    name: Yamaguchi26AbfaithfulGalois.All
-    needs: depth2-cohomology
+  depth3-yamaguchi26abfaithfulgalois:
+    name: Nyll.Yamaguchi26AbfaithfulGalois.All
+    needs: depth2-etalecohomology
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth3-abfaithful
-      target: +Yamaguchi26AbfaithfulGalois.All
+      stage: depth3-yamaguchi26abfaithfulgalois
+      target: +Nyll.Yamaguchi26AbfaithfulGalois.All
 
-  depth3-solvable:
-    name: Yamaguchi26SolvableCoverings.All
-    needs: depth3-abfaithful
+  depth3-yamaguchi26solvablecoverings:
+    name: Nyll.Yamaguchi26SolvableCoverings.All
+    needs: depth3-yamaguchi26abfaithfulgalois
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth3-solvable
-      target: +Yamaguchi26SolvableCoverings.All
+      stage: depth3-yamaguchi26solvablecoverings
+      target: +Nyll.Yamaguchi26SolvableCoverings.All
 
   all:
-    name: All
-    needs: depth3-solvable
+    name: Nyll.All
+    needs: depth3-yamaguchi26solvablecoverings
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
       stage: all
-      target: +All
+      target: +Nyll.All

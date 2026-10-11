@@ -1,0 +1,30 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.ChosenPrime.All
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EssentiallyEtaleBaseChangeInertiaContraction
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaCardinality
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaComparison
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeInertiaContraction
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.EtaleBaseChangeProductSurjectivity
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalCyclotomicInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCanonicalFundamentalGroup
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverCyclotomicInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverHeightOneConjugacy
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealCoprimality
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealGroups
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealQuotient
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealResidue
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverQuotientCyclotomicInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteQuotientNormalizationInertiaCoprimality
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteSeparableInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.HeightOneCyclotomicInertia
+import Nyll.EtaleFundamentalGroups.Kummer.Normalization.LargerPrimeInertia
+
+/-! Canonical aggregate for EtaleFundamentalGroups.Kummer.Normalization. -/

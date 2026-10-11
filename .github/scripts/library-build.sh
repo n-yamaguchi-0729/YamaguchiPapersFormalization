@@ -15,6 +15,9 @@ if (( $# < 2 )) || [[ ! "$1" =~ ^(depth[123](-[a-z0-9-]+)?|all)$ ]]; then
 fi
 stage="$1"
 shift
+if [[ "$stage" == all ]]; then
+  set -- "$@" +Nyll
+fi
 for target in "$@"; do
   if [[ ! "$target" =~ ^\+[A-Za-z0-9_.]+$ ]]; then
     echo 'Invalid Lake target.' >&2
@@ -48,14 +51,8 @@ if (( free_kib < minimum_free_kib )); then
 fi
 
 # Give Lake and tee one process group, so a capacity failure stops this stage only.
-lake_flags=(--wfail)
-# The one declared presentation theorem remains visibly unproved.
-if [[ -f Lean4/AnabelianGeometry/GeometricFundamentalGroup/CharZeroPresentation.lean ]] &&
-   [[ "$stage" == depth3-anabelian || "$stage" == all ]]; then
-  lake_flags=()
-fi
-setsid bash -c 'set -o pipefail; log="$1"; shift; lake --no-ansi "$@" 2>&1 | tee "$log"' \
-  bash "$log" "${lake_flags[@]}" build "$@" &
+setsid bash -c 'set -o pipefail; log="$1"; shift; lake --wfail --no-ansi build "$@" 2>&1 | tee "$log"' \
+  bash "$log" "$@" &
 build_pid=$!
 capacity_failed=false
 polls=0
@@ -82,6 +79,3 @@ fi
 if (( status != 0 )); then
   exit "$status"
 fi
-# The log is unchanged. Exactly the user-authorized theorem's sorry is classified
-# separately; all other Lean diagnostics still fail this stage.
-python3 .github/scripts/check-library-diagnostics.py "$log"

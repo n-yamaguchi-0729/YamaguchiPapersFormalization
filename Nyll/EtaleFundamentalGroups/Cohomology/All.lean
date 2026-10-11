@@ -1,0 +1,89 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.Cohomology.ConstantStalk
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionComparison
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionFibers
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionMonodromy
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionSplitting
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionVanishing
+import Nyll.EtaleFundamentalGroups.Cohomology.FiberCoefficientMap
+import Nyll.EtaleFundamentalGroups.Cohomology.FiberMap
+import Nyll.EtaleFundamentalGroups.Cohomology.FiberStalkComparison
+import Nyll.EtaleFundamentalGroups.Cohomology.FiberTranslation
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteAbelianRepresenter
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteAbelianSheaf
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteAbelianStalk
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteCharacterExtension
+import Nyll.EtaleFundamentalGroups.Cohomology.H1Additivity
+import Nyll.EtaleFundamentalGroups.Cohomology.H1Character
+import Nyll.EtaleFundamentalGroups.Cohomology.H1Extensions
+import Nyll.EtaleFundamentalGroups.Cohomology.H1FiniteEtaleEffacement
+import Nyll.EtaleFundamentalGroups.Cohomology.H1FiniteCover
+import Nyll.EtaleFundamentalGroups.Cohomology.H1Naturality
+import Nyll.EtaleFundamentalGroups.Cohomology.IntegerFiberSections
+import Nyll.EtaleFundamentalGroups.Cohomology.LocalTrivialization
+import Nyll.EtaleFundamentalGroups.Cohomology.MonodromySections
+import Nyll.EtaleFundamentalGroups.Cohomology.StalkFiber
+import Nyll.EtaleFundamentalGroups.Cohomology.TorsorCharacter
+import Nyll.EtaleFundamentalGroups.Cohomology.TorsorCharacterNaturality
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteLocallyConstantDetection
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteAbelianConstants
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteLocallyConstantEpis
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteLocallyConstantPullbacks
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteLocallyConstantExact
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteLocallyConstantHom
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteAbelianExact
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteCharacterSheaf
+import Nyll.EtaleFundamentalGroups.Cohomology.RepresentedMonodromy
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionMonodromyEvaluation
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.H1Surjectivity
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.AdicH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.PadicH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.LinearAdicH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.RationalH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.TorsionH1Comparison
+import Nyll.EtaleFundamentalGroups.Cohomology.AbelianH1Duality
+import Nyll.EtaleFundamentalGroups.Cohomology.MonodromyPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.SchemePullback
+import Nyll.EtaleFundamentalGroups.Cohomology.RepresenterPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.AbelianPullbackUnderlying
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionFiberSquare
+import Nyll.EtaleFundamentalGroups.Cohomology.ExtensionFiberPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.AbelianPullbackMate
+import Nyll.EtaleFundamentalGroups.Cohomology.ConstantPullbackSections
+import Nyll.EtaleFundamentalGroups.Cohomology.H1FiberPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.IntegerExtensionShear
+import Nyll.EtaleFundamentalGroups.Cohomology.FiberPullbackTranslation
+import Nyll.EtaleFundamentalGroups.Cohomology.H1CharacterPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteTorsionPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.PointedH1Pullback
+import Nyll.EtaleFundamentalGroups.Cohomology.DeckH1Centralizer
+import Nyll.EtaleFundamentalGroups.Cohomology.DeckAbelianH1Duality
+import Nyll.EtaleFundamentalGroups.Cohomology.GaloisH1Descent
+import Nyll.EtaleFundamentalGroups.Cohomology.GenericH1Characters
+import Nyll.EtaleFundamentalGroups.Cohomology.GenericPointCharacterDetection
+import Nyll.EtaleFundamentalGroups.Cohomology.H1CharacterComposition
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1PullbackComposition
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1IsomorphismPullback
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1PullbackIdentity
+import Nyll.EtaleFundamentalGroups.Cohomology.CyclicDeckH1Reduction
+import Nyll.EtaleFundamentalGroups.Cohomology.FiniteH1DeckKernel
+import Nyll.EtaleFundamentalGroups.Cohomology.ProperH1CoprimeCoefficient
+
+/-!
+# Étale cohomology and finite étale covers
+
+Actual degree-one cohomology is identified with continuous finite-coefficient
+characters of the fundamental group and its topological abelianization.
+The coefficient-natural comparison identifies classical integral ℓ-adic H¹
+with actual continuous p-adic characters, including their p-adic scalar action.
+Compactness identifies the scalar extension with actual continuous Qℓ-valued characters.
+The finite-coefficient direct limit retains torsion and reconstructs the full
+topological abelianization by Pontryagin duality.
+-/

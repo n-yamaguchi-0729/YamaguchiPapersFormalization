@@ -5,6 +5,9 @@
 
 A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
+This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
+Bundled dependencies use the same `Nyll` imports as the complete library.
+
 ## Scope
 
 Naganori Yamaguchi, [*Ab-faithfulness of absolute Galois groups in number theory*](https://arxiv.org/abs/2610.05634).
@@ -25,28 +28,28 @@ groups induced by `X ∖ Supp(D) → X`.
 
 | Result | Mathematical content |
 | --- | --- |
-| [Theorem 3.6](Lean4/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean) | The absolute Galois group of a mixed-characteristic discretely valued field is `p`-ab-faithful, where `p` is the residue characteristic. Completeness is not required. |
-| [Theorem 4.2](Lean4/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean) | Ab-faithfulness of the absolute Galois group of a higher local field of positive dimension. |
-| [Theorem 6.4](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot4RelativeCriterion.lean) and [Corollary 6.5](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot5GroupCriterion.lean) | Center-freeness and slimness criteria for finite-step solvable quotients, using ab-faithfulness and orientations satisfying formal Hilbert 90. |
-| [Corollary 6.6](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean) | Applications to absolute Galois groups, with the cyclotomic and positive-characteristic hypotheses stated in the paper. |
-| [Example 6.7(1)–(3)](Lean4/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean) | Applications to torally Kummer-faithful ab-faithful fields of characteristic zero, sub-`p`-adic fields, and higher local fields. |
+| [Theorem 3.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean) | The absolute Galois group of a mixed-characteristic discretely valued field is `p`-ab-faithful, where `p` is the residue characteristic. Completeness is not required. |
+| [Theorem 4.2](Nyll/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean) | Ab-faithfulness of the absolute Galois group of a higher local field of positive dimension. |
+| [Theorem 6.4](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot4RelativeCriterion.lean) and [Corollary 6.5](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot5GroupCriterion.lean) | Center-freeness and slimness criteria for finite-step solvable quotients, using ab-faithfulness and orientations satisfying formal Hilbert 90. |
+| [Corollary 6.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean) | Applications to absolute Galois groups, with the cyclotomic and positive-characteristic hypotheses stated in the paper. |
+| [Example 6.7(1)–(3)](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean) | Applications to torally Kummer-faithful ab-faithful fields of characteristic zero, sub-`p`-adic fields, and higher local fields. |
 
 ### Extension of solvable coverings
 
 | Result | Mathematical content |
 | --- | --- |
-| [Lemma 1.1](Lean4/Yamaguchi26SolvableCoverings/Theorem1Dot1BoundaryQuotient.lean) and [Lemma 1.2](Lean4/Yamaguchi26SolvableCoverings/Theorem1Dot2InertiaControl.lean) | Surjectivity and normal generation of the kernel by boundary inertia, together with prime-to-residue-characteristic restrictions on finite inertia images. |
-| [Proposition 1.3](Lean4/Yamaguchi26SolvableCoverings/Theorem1Dot3BoundaryInvariance.lean) | Invariance of the full étale fundamental group under the paper's boundary hypotheses for every prime. |
-| [Example 1.4: Spec ℤ](Lean4/Yamaguchi26SolvableCoverings/Theorem1Dot4FundamentalGroupIntegers.lean) | Triviality of the étale fundamental group of `Spec ℤ`, using Minkowski's discriminant bound. |
-| [Theorem 2.5 / Theorem A](Lean4/Yamaguchi26SolvableCoverings/Theorem2Dot5PerfectKernel.lean) | Under boundary condition `(†)`, the kernel is topologically perfect and the inclusion induces an isomorphism on maximal prosolvable quotients. |
-| [Corollary 2.6](Lean4/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean) | A continuous matrix representation over a complete Noetherian local ring with finite residue field extends across the divisor exactly when its residual representation does; the extension is unique. |
+| [Lemma 1.1](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot1BoundaryQuotient.lean) and [Lemma 1.2](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot2InertiaControl.lean) | Surjectivity and normal generation of the kernel by boundary inertia, together with prime-to-residue-characteristic restrictions on finite inertia images. |
+| [Proposition 1.3](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot3BoundaryInvariance.lean) | Invariance of the full étale fundamental group under the paper's boundary hypotheses for every prime. |
+| [Example 1.4: Spec ℤ](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot4FundamentalGroupIntegers.lean) | Triviality of the étale fundamental group of `Spec ℤ`, using Minkowski's discriminant bound. |
+| [Theorem 2.5 / Theorem A](Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot5PerfectKernel.lean) | Under boundary condition `(†)`, the kernel is topologically perfect and the inclusion induces an isomorphism on maximal prosolvable quotients. |
+| [Corollary 2.6](Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean) | A continuous matrix representation over a complete Noetherian local ring with finite residue field extends across the divisor exactly when its residual representation does; the extension is unique. |
 
 The formalization includes numbered results 2.1–2.6 and the supporting boundary and
 finite-étale stability results.
 
 The shared group theory also contains the center-freeness criterion of
 Proposition 2.5 in [*Center-freeness of finite-step solvable groups arising from anabelian geometry*](https://arxiv.org/abs/2601.07112),
-in [SlimnessAndTorsion.lean](Lean4/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
+in [SlimnessAndTorsion.lean](Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
 
 ## Incomplete results
 
@@ -67,15 +70,15 @@ Corollary 2.7 on hyperplane arrangements are not yet included.
 ## Public API
 
 ```lean
-import Yamaguchi26AbfaithfulGalois.All
-import Yamaguchi26SolvableCoverings.All
+import Nyll.Yamaguchi26AbfaithfulGalois.All
+import Nyll.Yamaguchi26SolvableCoverings.All
 ```
 
 Selected results:
 
 ```lean
-import Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
-import Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
+import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
+import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
 ```
 
 ## Build

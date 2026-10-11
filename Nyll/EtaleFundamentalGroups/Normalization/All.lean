@@ -1,0 +1,53 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.Normalization.Branch.All
+import Nyll.EtaleFundamentalGroups.Normalization.EtaleDominantQuotient
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteEtaleGenericFiber
+import Nyll.EtaleFundamentalGroups.Normalization.GenericExtensionFiber
+import Nyll.EtaleFundamentalGroups.Normalization.GenericFiber
+import Nyll.EtaleFundamentalGroups.Normalization.GenericFieldSource
+import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.All
+import Nyll.EtaleFundamentalGroups.Normalization.Localization.All
+import Nyll.EtaleFundamentalGroups.Normalization.Primes.All
+import Nyll.EtaleFundamentalGroups.Normalization.Products.All
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalBase
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedNormalization
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedFiberDegree
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedSubfield
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedGeometricInertia
+
+
+
+
+import Nyll.EtaleFundamentalGroups.Normalization.GenericNormalizationChartAction
+
+import Nyll.EtaleFundamentalGroups.Normalization.AffineInertiaCriterion
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteFractionFieldModel
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalModelNeighborhood
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalizationLocalCriterion
+import Nyll.EtaleFundamentalGroups.Normalization.LocalUnramifiedCriterion
+
+import Nyll.EtaleFundamentalGroups.Normalization.GlobalLocalUnramifiedCriterion
+
+import Nyll.EtaleFundamentalGroups.Normalization.FieldSourceNormalization
+import Nyll.EtaleFundamentalGroups.Normalization.AffineUnramifiedSubfield
+
+import Nyll.EtaleFundamentalGroups.Normalization.NormalLocalFiberDegree
+import Nyll.EtaleFundamentalGroups.Normalization.FiberDegreeCriterion
+import Nyll.EtaleFundamentalGroups.Normalization.GlobalFiberDegreeCriterion
+import Nyll.EtaleFundamentalGroups.Normalization.UnramifiedCriteria
+import Nyll.EtaleFundamentalGroups.Normalization.GenericFieldSourceNaturality
+import Nyll.EtaleFundamentalGroups.Normalization.FiniteNormalFieldSource
+
+/-!
+# Normalization infrastructure
+
+Integral closures, normalization primes, localization comparisons, and product factors.
+-/
+
+
+/-! Canonical aggregate for EtaleFundamentalGroups.Normalization. -/

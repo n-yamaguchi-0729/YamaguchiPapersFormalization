@@ -1,0 +1,41 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.Model
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.AffineSchemeModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteFamilyModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FiniteTowerModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldCover
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldTower
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldRebase
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CoefficientPullback
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ModelOverlap
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.ConstantFieldLimit
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.SchemeHomDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.SchemePairDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RelativeGluing
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredOverlap
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredCoefficientTransitions
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredCoefficientRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverlapTransitionDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredFiniteStage
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredStageRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GlobalModel
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparablePullback
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.FieldFrobeniusFactorization
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffine
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableAffineDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableCoverRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PurelyInseparableGluing
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.PureInseparableDescent
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.GluingRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RawStageGlue
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.StageRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RawOverlapSupplier
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.CommonCoverRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoverRecovery
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.OverCoefficientCover
+
+/-! Finite-field models of finite étale covers. -/

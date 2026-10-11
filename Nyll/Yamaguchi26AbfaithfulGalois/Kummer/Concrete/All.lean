@@ -1,0 +1,42 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharAllPrimeCompleteDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCompleteDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicInvariant
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogAction
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogDifference
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicPowerWitness
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicRootFixing
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupFaithfulness
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharHenselianFaithfulness
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharInvariantKummerTrace
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharMovingRootDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharOpenSubgroupFaithfulness
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCompleteDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCyclotomicDetection
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharWildFaithfulness
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairs
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsAction
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsFixedSubgroup
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsOpenSubgroup
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.SeparableRootsDownstairs
+
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroInertiaDetection
+
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroUnramifiedFaithfulness
+
+import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroPrimeIndex
+
+/-!
+# Concrete local Kummer detection
+
+This aggregate collects mixed-characteristic Kummer detection and
+faithfulness arguments, roots downstairs, and residue-characteristic
+zero inertia and unramified detection.
+-/

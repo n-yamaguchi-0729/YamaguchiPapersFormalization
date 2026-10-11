@@ -1,0 +1,46 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismProfiniteCompletion
+import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
+import Nyll.EtaleFundamentalGroups.GaloisCategories.ContinuousHomComparison
+import Nyll.EtaleFundamentalGroups.GaloisCategories.DiscreteCharacters
+import Nyll.EtaleFundamentalGroups.GaloisCategories.ExactSequence
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorComparison
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorExactness
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorUniqueness
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FunctorFromHom
+import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FundamentalGroup
+import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+import Nyll.EtaleFundamentalGroups.GaloisCategories.Injectivity
+import Nyll.EtaleFundamentalGroups.GaloisCategories.NormalImage
+import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOver
+import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOverTransport
+import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedDeckTransport
+import Nyll.EtaleFundamentalGroups.GaloisCategories.RelativeDeckTransitivity
+import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
+import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
+import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialQuotient
+import Nyll.EtaleFundamentalGroups.GaloisCategories.SectionFactorizationEpi
+import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIsoKernel
+import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectFixedFiber
+import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismDescent
+import Nyll.EtaleFundamentalGroups.GaloisCategories.AutomorphismInverseLimit
+import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedSectionDescent
+import Nyll.EtaleFundamentalGroups.GaloisCategories.AutFunctorComparison
+import Nyll.EtaleFundamentalGroups.GaloisCategories.PointStabilizerMorphism
+
+/-!
+# Galois categories and finite continuous actions
+
+This facade collects reconstruction, fiber-functor comparison, functoriality,
+and exact-sequence results for Galois categories.
+-/
+
+
+/-! Canonical aggregate for EtaleFundamentalGroups.GaloisCategories. -/

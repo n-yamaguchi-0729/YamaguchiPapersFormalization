@@ -1,0 +1,36 @@
+/-
+Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
+-/
+
+import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionAnnihilatedBaseChange
+import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionQuotient
+import Nyll.EtaleFundamentalGroups.Purity.Local.AdicCompletionTorsionReflection
+import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteQuotient
+import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
+import Nyll.EtaleFundamentalGroups.Purity.Local.DepthTwoSections
+import Nyll.EtaleFundamentalGroups.Purity.Local.FiniteEtaleQuotientLift
+import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationExtOneBaseChange
+import Nyll.EtaleFundamentalGroups.Purity.Local.FinitePresentationHomBaseChange
+import Nyll.EtaleFundamentalGroups.Purity.Local.GeneratorRelationHOne
+import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtOneBaseChange
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionExtTorsion
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedBilinearDescent
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedEqualizer
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionMixedHomDescent
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleCoverDescent
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleGluingData
+import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletionModuleHomDescent
+import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
+import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedCoverExtensionCriterion
+import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
+import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
+
+import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteRegularLocalPurity
+import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
+import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
+
+/-! Canonical aggregate for EtaleFundamentalGroups.Purity.Local. -/
