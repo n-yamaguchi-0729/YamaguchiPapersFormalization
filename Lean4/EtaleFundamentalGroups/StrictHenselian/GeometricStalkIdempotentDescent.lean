@@ -29,7 +29,7 @@ literal germ images. All scalar structures are the existing structures on
 the actual objects under the base ring.
 
 This supplies the finite idempotent descent in external Stacks tag 0BSR,
-needed for StacksProjectChapter58.md:1096 / 0BST. Prime-fiber finiteness and
+needed for Stacks Project, Tag 0BST (https://stacks.math.columbia.edu/tag/0BST). Prime-fiber finiteness and
 residue-extension comparisons are separate prerequisites.
 -/
 

@@ -8,7 +8,7 @@ https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536
 Upstream NOTICE and per-file ATTRIBUTION (including earlier FLT and Mathlib notices):
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/NOTICE
 https://github.com/anthropics/fermats-last-theorem/blob/aa2d8b34692b16c70f699536de0d8e75b9a3e9ef/ATTRIBUTION.md
-See SchemeTheory/ANTHROPIC_FLT_SOURCE.md for retained notices.
+See the repository-root NOTICE for retained third-party notices.
 
 Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 AI assistance in local adaptation and maintenance: OpenAI Codex.

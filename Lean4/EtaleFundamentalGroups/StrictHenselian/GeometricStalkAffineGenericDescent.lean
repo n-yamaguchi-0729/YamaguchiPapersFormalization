@@ -35,7 +35,7 @@ geometric affine refinement then extends that equivalence along its actual
 section map. Both forward and inverse squares remain the literal generic
 germ squares. No finite presentation of K over R is required.
 
-This is a prerequisite for StacksProjectChapter58.md:1092 / 0BSM. The separate
+This is a prerequisite for Stacks Project, Tag 0BSM (https://stacks.math.columbia.edu/tag/0BSM). The separate
 principal-localization model construction is not used in this route.
 -/
 

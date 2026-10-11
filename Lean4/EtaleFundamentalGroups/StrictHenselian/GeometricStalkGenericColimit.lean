@@ -35,7 +35,7 @@ geometric-stalk germ maps.
 
 This constructs the colimit required for finite-presentation descent over K,
 without requiring finite presentation of K over R. It is a prerequisite for
-StacksProjectChapter58.md:1092 / 0BSM, not the full exact-sequence result.
+Stacks Project, Tag 0BSM (https://stacks.math.columbia.edu/tag/0BSM), not the full exact-sequence result.
 -/
 
 noncomputable section

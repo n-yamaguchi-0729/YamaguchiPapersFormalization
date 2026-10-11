@@ -28,8 +28,8 @@ over both the localization and the original ring, and its scalar extension
 to the original fraction field is the original algebra. No finite
 presentation of the entire fraction field over the original ring is assumed.
 
-This is the finite-model prerequisite for EFG StacksProjectChapter58.md:740 /
-0BSM. Descent of the strict splitting isomorphism remains a separate step.
+This is the finite-model prerequisite for Stacks Project, Tag 0BSM
+(https://stacks.math.columbia.edu/tag/0BSM). Descent of the strict splitting isomorphism remains a separate step.
 -/
 
 noncomputable section
