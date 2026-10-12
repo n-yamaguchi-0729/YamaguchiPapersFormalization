@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
 import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
 import Nyll.EtaleCohomology.Constructible.Representability
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.CategoryTheory.Equivalence
 import Mathlib.CategoryTheory.EssentialImage

@@ -14,9 +14,9 @@ import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
-import Nyll.SchemeTheory.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteLimits
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Products

@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianSectionAlgebra
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Morphisms.ProperNormalization
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

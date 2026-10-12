@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
 import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Normalization
 import Mathlib.AlgebraicGeometry.OpenImmersion

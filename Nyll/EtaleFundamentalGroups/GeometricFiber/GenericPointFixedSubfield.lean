@@ -8,7 +8,7 @@ import Nyll.EtaleFundamentalGroups.GeometricFiber.GenericPointEssentialImage
 import Nyll.EtaleFundamentalGroups.Inertia.NormalSubgroupEmbeddings
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.RingTheory.Etale.Field
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite subfields fixed by the generic Galois kernel

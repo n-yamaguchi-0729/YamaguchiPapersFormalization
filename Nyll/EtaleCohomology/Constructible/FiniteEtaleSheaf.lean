@@ -5,9 +5,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleCohomology.Sites.Subcanonical
-import Nyll.SchemeTheory.FiniteEtale.Basic
-import Nyll.SchemeTheory.FiniteEtale.Geometry
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.MorphismProperty.Comma
 import Mathlib.CategoryTheory.Adjunction.Basic

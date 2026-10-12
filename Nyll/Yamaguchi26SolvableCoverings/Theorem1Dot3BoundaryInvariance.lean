@@ -5,11 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
 import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
 import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
 import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
 import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
 import Mathlib.Data.Nat.Prime.Basic
+import Mathlib.GroupTheory.Coset.Card
 import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
@@ -25,6 +29,11 @@ The proof applies Lemma 1.2 to every prime divisor of each finite inertia group'
 order, then uses the kernel description in Lemma 1.1.
 
 Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Proposition 1.3.
+
+For a fixed finite Galois cover, only prime divisors of its deck group's order
+are needed. This refinement supplies the finite-inertia argument in Theorem 3.1
+of Shimizu and Yamaguchi, On branched coverings of the projective line over the integers,
+[arXiv:2608.15057v1](https://arxiv.org/abs/2608.15057v1).
 -/
 
 noncomputable section
@@ -35,6 +44,33 @@ open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 namespace Yamaguchi26SolvableCoverings
 
 variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+
+/-- A finite Galois cover has trivial boundary stabilizers if each boundary
+component has a normal-crossings point in every prime residue characteristic
+dividing the order of its deck group. -/
+theorem boundaryUnramified_of_normalCrossingPoints_at_card_primes
+    (D : X.EffectiveCartierDivisor) (hhor : IsHorizontal D)
+    (hreg : D.IsAmbientRegularAlongSupport) :
+    let : ConnectedSpace D.1.supportComplement := boundaryComplement_connectedSpace D hreg
+    ∀ (W : FiniteEtale D.1.supportComplement) (_hW : IsGalois W),
+      (∀ p : ℕ, p.Prime → p ∣ Nat.card (Aut W) →
+        D.HasNormalCrossingPointOfResidueCharacteristicOnEachComponent p) →
+      IsBoundaryUnramified D W := by
+  intro hConnected W hW hnc E z hz
+  have hcard : Nat.card (finiteCoverInertia D W E z) = 1 := by
+    apply Nat.eq_one_iff_not_exists_prime_dvd.mpr
+    intro p hp hpdvd
+    have hpW : p ∣ Nat.card (Aut W) :=
+      hpdvd.trans (finiteCoverInertia D W E z).card_subgroup_dvd_card
+    exact finite_inertia_control D hhor hreg E p hp
+      (hnc p hp hpW E.val E.property) W hW z hz hpdvd
+  have : Subsingleton (finiteCoverInertia D W E z) :=
+    (Nat.card_eq_one_iff_unique.mp hcard).1
+  apply le_antisymm ?_ bot_le
+  intro σ hσ
+  apply Subgroup.mem_bot.mpr
+  exact congrArg Subtype.val
+    (Subsingleton.elim (⟨σ, hσ⟩ : finiteCoverInertia D W E z) 1)
 
 /-- 命題 1.3。
 水平境界の各成分に全ての素数についてその剰余標数の正規交差点があれば、
@@ -55,19 +91,9 @@ theorem boundary_invariance_1_3
   intro Ω _ _ point
   have hunramified : ∀ (W : FiniteEtale D.1.supportComplement)
       (_hW : IsGalois W), IsBoundaryUnramified D W := by
-    intro W hW E z hz
-    have hcard : Nat.card (finiteCoverInertia D W E z) = 1 := by
-      apply Nat.eq_one_iff_not_exists_prime_dvd.mpr
-      intro p hp
-      exact finite_inertia_control D hhor hreg E p hp
-        (hnc p hp E.val E.property) W hW z hz
-    let _ : Subsingleton (finiteCoverInertia D W E z) :=
-      (Nat.card_eq_one_iff_unique.mp hcard).1
-    apply le_antisymm ?_ bot_le
-    intro σ hσ
-    apply Subgroup.mem_bot.mpr
-    exact congrArg Subtype.val
-      (Subsingleton.elim (⟨σ, hσ⟩ : finiteCoverInertia D W E z) 1)
+    intro W hW
+    exact boundaryUnramified_of_normalCrossingPoints_at_card_primes D hhor hreg W hW
+      (fun p hp _ => hnc p hp)
   let f : π₁ᵉᵗ(point) →ₜ* π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) :=
     fundamentalGroupHom D.1.supportComplement.ι point
   have hsurjective : Function.Surjective f := (hquotient Ω point).1
@@ -78,7 +104,7 @@ theorem boundary_invariance_1_3
     intro g hg
     have hall : g ∈ ⨅ (W : FiniteEtale D.1.supportComplement)
         (hW : IsGalois W) (w : (fiber point).obj W),
-        (letI : IsGalois W := hW
+        (let : IsGalois W := hW
          galoisObjectQuotientMonoidHom (fiber point) π₁ᵉᵗ(point) W w).ker := by
       simp only [boundaryUnramifiedKernelIntersection, Subgroup.mem_iInf] at hg
       simp only [Subgroup.mem_iInf]

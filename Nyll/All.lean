@@ -12,5 +12,12 @@ import Nyll.ClassFieldTheory.All
 import Nyll.AlgebraicCurves.All
 import Nyll.EtaleFundamentalGroups.All
 import Nyll.EtaleCohomology.All
+import Nyll.JacobianVarieties.All
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
+import Nyll.AnabelianGeometry.All
+import Nyll.ShimizuYamaguchi26BranchedCoverings.All
+
+/-!
+Aggregate of the maintained libraries included in this public extract.
+-/

@@ -10,7 +10,7 @@ import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
 import Nyll.EtaleCohomology.Constructible.GluedRepresentability
 import Nyll.EtaleCohomology.Constructible.LocalRepresenterGluing
 import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Cover.Directed
 import Mathlib.AlgebraicGeometry.Sites.Etale

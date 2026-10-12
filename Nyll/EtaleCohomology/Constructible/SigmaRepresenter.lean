@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
 import Nyll.EtaleCohomology.Sites.EtaleRestriction
 import Nyll.EtaleCohomology.Sites.Subcanonical
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Morphisms.SigmaPullback
 import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 import Mathlib.AlgebraicGeometry.Limits

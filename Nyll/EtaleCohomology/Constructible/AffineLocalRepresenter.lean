@@ -9,7 +9,7 @@ import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
 import Nyll.EtaleCohomology.Constructible.LocalRepresenters
 import Nyll.EtaleCohomology.Constructible.SigmaRepresenter
 import Nyll.EtaleCohomology.Sites.EtaleRestriction
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties

@@ -121,11 +121,9 @@ theorem
         (Localization.AtPrime P ≃ₐ[B]
           Localization.AtPrime q.asIdeal) := by
   let A := fun m : MaximalSpectrum G ↦ G ⧸ m.asIdeal
-  let eG : G ≃ₐ[B] (∀ m, A m) :=
-    (IsArtinianRing.equivPi G).restrictScalars B
   let eIC : integralClosure B G ≃ₐ[B]
       (∀ m, integralClosure B (A m)) :=
-    eG.mapIntegralClosure.trans (integralClosurePiAlgEquiv A)
+    SchemeTheory.integralClosureFactorsEquiv B G
   let Pprod : Ideal (∀ m, integralClosure B (A m)) :=
     P.map eIC.toRingEquiv
   let : Pprod.IsPrime := by

@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.Inertia.NormalizationOpenStalk
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 import Nyll.SchemeTheory.Divisors.AffineComplement
 import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Affine.ChartStalkLocalization
 import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
 import Nyll.SchemeTheory.RingTheory.RegularLocalDomain

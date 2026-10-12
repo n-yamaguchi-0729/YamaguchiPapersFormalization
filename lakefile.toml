@@ -32,6 +32,9 @@ globs = [
   "Nyll.AlgebraicCurves.+",
   "Nyll.EtaleFundamentalGroups.+",
   "Nyll.EtaleCohomology.+",
+  "Nyll.JacobianVarieties.+",
   "Nyll.Yamaguchi26AbfaithfulGalois.+",
   "Nyll.Yamaguchi26SolvableCoverings.+",
+  "Nyll.AnabelianGeometry.+",
+  "Nyll.ShimizuYamaguchi26BranchedCoverings.+",
 ]

@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Purity.RetrocompactSectionExtension
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.DensePullback
 import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
 import Nyll.SchemeTheory.WeilRestriction.Sheaf

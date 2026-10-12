@@ -20,6 +20,8 @@ import Nyll.EtaleFundamentalGroups.Purity.All
 import Nyll.EtaleFundamentalGroups.Ramification.All
 import Nyll.EtaleFundamentalGroups.StrictHenselian.All
 
+import Nyll.EtaleFundamentalGroups.Pi1.All
+
 /-!
 # Étale fundamental groups
 

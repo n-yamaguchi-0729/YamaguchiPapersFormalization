@@ -87,9 +87,18 @@ jobs:
       stage: depth2-etalecohomology
       target: +Nyll.EtaleCohomology.All
 
+  depth3-jacobianvarieties:
+    name: Nyll.JacobianVarieties.All
+    needs: depth2-etalecohomology
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-jacobianvarieties
+      target: +Nyll.JacobianVarieties.All
+
   depth3-yamaguchi26abfaithfulgalois:
     name: Nyll.Yamaguchi26AbfaithfulGalois.All
-    needs: depth2-etalecohomology
+    needs: depth3-jacobianvarieties
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
@@ -105,9 +114,27 @@ jobs:
       stage: depth3-yamaguchi26solvablecoverings
       target: +Nyll.Yamaguchi26SolvableCoverings.All
 
+  depth3-anabeliangeometry:
+    name: Nyll.AnabelianGeometry.All
+    needs: depth3-yamaguchi26solvablecoverings
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-anabeliangeometry
+      target: +Nyll.AnabelianGeometry.All
+
+  depth3-shimizuyamaguchi26branchedcoverings:
+    name: Nyll.ShimizuYamaguchi26BranchedCoverings.All
+    needs: depth3-anabeliangeometry
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: depth3-shimizuyamaguchi26branchedcoverings
+      target: +Nyll.ShimizuYamaguchi26BranchedCoverings.All
+
   all:
     name: Nyll.All
-    needs: depth3-yamaguchi26solvablecoverings
+    needs: depth3-shimizuyamaguchi26branchedcoverings
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:

@@ -10,7 +10,7 @@ import Nyll.EtaleCohomology.Constructible.Monodromy
 import Nyll.EtaleCohomology.Constructible.ModuleUnderlying
 import Nyll.EtaleCohomology.Constructible.LocallyConstantProducts
 import Nyll.EtaleCohomology.Sites.ModuleSetComparison
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 import Mathlib.Algebra.Category.ModuleCat.Basic
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Limits

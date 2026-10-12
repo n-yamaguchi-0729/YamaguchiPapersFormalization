@@ -6,7 +6,7 @@ https://github.com/n-yamaguchi-0729
 -/
 
 import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.CategoryTheory.Galois.Full
 
 /-!

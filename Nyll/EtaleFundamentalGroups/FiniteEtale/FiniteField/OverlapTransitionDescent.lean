@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.RecoveredCoefficientTransitions
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.SchemePairDescent
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
 /-!

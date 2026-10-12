@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Stalk
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 

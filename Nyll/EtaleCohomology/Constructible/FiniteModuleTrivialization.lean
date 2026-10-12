@@ -12,7 +12,7 @@ import Nyll.EtaleCohomology.Sites.ConnectedConstants
 import Nyll.EtaleCohomology.Sites.ModuleConstant
 import Nyll.EtaleCohomology.Sites.ModuleSetComparison
 import Nyll.EtaleCohomology.Sites.SheafFunctors
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.CategoryTheory.Limits.MorphismProperty

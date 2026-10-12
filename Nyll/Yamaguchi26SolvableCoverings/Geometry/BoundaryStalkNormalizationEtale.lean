@@ -8,7 +8,7 @@ import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkComponentHeightOn
 import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleAwayNormalization
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
 import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 

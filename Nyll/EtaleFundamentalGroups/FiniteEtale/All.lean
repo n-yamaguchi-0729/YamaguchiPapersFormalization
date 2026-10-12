@@ -19,7 +19,6 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullbackAbeli
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FiniteField.All
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
 import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisDomination
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.All
 import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.All
@@ -41,6 +40,7 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitModels
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFractions
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitStages
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFullness
+import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitEventualFaithfulness
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFaithfulness
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitDiagram
 import Nyll.EtaleFundamentalGroups.FiniteEtale.InverseLimitFundamentalGroup

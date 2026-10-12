@@ -19,7 +19,7 @@ import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
 import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
 import Nyll.EtaleFundamentalGroups.GaloisCategories.ExactSequence
 import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
 import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 import Mathlib.RingTheory.Ideal.Maps

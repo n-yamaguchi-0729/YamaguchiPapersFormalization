@@ -12,7 +12,7 @@ import Nyll.EtaleFundamentalGroups.Inertia.NormalSubgroupEmbeddings
 import Mathlib.CategoryTheory.EssentialImage
 import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 import Mathlib.RingTheory.Etale.Field
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Generic Galois maps using the supplied separable closure

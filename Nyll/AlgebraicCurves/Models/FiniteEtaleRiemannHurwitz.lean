@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.AlgebraicCurves.Models.CurveModel_exists_algHom_finiteAlong_pointEquivPlace_restrictAlong_of_isFinite
 import Nyll.AlgebraicCurves.Models.CurveModel_ramificationIndexAlong_pointEquivPlace_eq_one_of_formallyUnramified
 import Nyll.AlgebraicCurves.Cohomology.RiemannRoch.Two_mul_genusFF_sub_two_eq_of_isSeparable_of_tame
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 
 /-! # Riemann--Hurwitz for an actual finite étale morphism of curve models
 

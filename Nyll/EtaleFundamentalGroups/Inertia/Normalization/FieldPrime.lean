@@ -4,6 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Mathlib.Algebra.Module.Torsion.Basic
+import Mathlib.RingTheory.Flat.TorsionFree
 import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Field
 
 /-!
@@ -217,23 +219,20 @@ theorem localizedNormalizationInertia_card_eq_relative_ramificationIdx
     [CharZero (A ⧸ P)] :
     let V := Localization.AtPrime P
     let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
+    let _ : Algebra V K :=
+      localizationAtPrimeToFractionFieldAlgebra (K := K) P
+    let _ : Algebra V L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let _ : Algebra V F :=
+      localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
     let T := integralClosure V F
-    letI := localizedInertiaFieldIntegralClosureAlgebra
-      (K := K) (L := L) P Q
+    let _ : Algebra T (integralClosure V L) :=
+      localizedInertiaFieldIntegralClosureAlgebra (K := K) (L := L) P Q
     Nat.card (localizedNormalizationInertia (K := K) (L := L) P Q) =
       (localizedNormalizationPrime
         (K := K) (L := L) P Q).ramificationIdx T := by
-  let V := Localization.AtPrime P
-  let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : Algebra V F :=
-    localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
+  intro V F algVK algVL algVF T algTB
+  let B := integralClosure V L
   let : IsScalarTower V K F :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let : IsScalarTower V K L :=
@@ -243,11 +242,6 @@ theorem localizedNormalizationInertia_card_eq_relative_ramificationIdx
     IsScalarTower.of_algebraMap_eq fun x ↦ by
       change algebraMap K L (algebraMap V K x) = algebraMap V L x
       exact IsScalarTower.algebraMap_apply V K L x
-  let T := integralClosure V F
-  let B := integralClosure V L
-  let : Algebra T B :=
-    localizedInertiaFieldIntegralClosureAlgebra
-      (K := K) (L := L) P Q
   let : IsScalarTower V T B :=
     IsScalarTower.of_algebraMap_eq fun x ↦
       (localizedInertiaFieldIntegralClosureAlgHom
@@ -287,7 +281,6 @@ theorem localizedNormalizationInertia_card_eq_relative_ramificationIdx
     Module.isTorsionFree_iff_faithfulSMul.mpr
       (FaithfulSMul.of_field_isFractionRing T B F L)
   let : Module.Finite T B := Module.Finite.right V T B
-  let : Module.Flat T B := inferInstance
   let : q.IsPrime :=
     localizedNormalizationInertiaFieldPrime_isPrime
       (K := K) (L := L) P Q
@@ -350,18 +343,17 @@ theorem localizedNormalizationInertiaFieldPrime_ramificationIdx_eq_one
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
     [CharZero (A ⧸ P)] :
     let V := Localization.AtPrime P
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI := localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
+    let _ : Algebra V K :=
+      localizationAtPrimeToFractionFieldAlgebra (K := K) P
+    let _ : Algebra V
+        (localizedNormalizationInertiaField (K := K) (L := L) P Q) :=
+      localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
     (localizedNormalizationInertiaFieldPrime
       (K := K) (L := L) P Q).ramificationIdx V = 1 := by
-  let V := Localization.AtPrime P
+  intro V algVK algVF
   let F := localizedNormalizationInertiaField (K := K) (L := L) P Q
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
   let : Algebra V L :=
     localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : Algebra V F :=
-    localizationAtPrimeToInertiaFieldAlgebra (K := K) (L := L) P Q
   let : IsScalarTower V K F :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let : IsScalarTower V K L :=
@@ -401,10 +393,12 @@ theorem localizedNormalizationInertiaFieldPrime_ramificationIdx_eq_one
     IsIntegralClosure.isDedekindDomain V K F T
   let : Module.Finite V B :=
     IsIntegralClosure.finite V K L B
-  let : Module.IsTorsionFree T B :=
+  let hTB : Module.IsTorsionFree T B :=
     Module.isTorsionFree_iff_faithfulSMul.mpr
       (FaithfulSMul.of_field_isFractionRing T B F L)
-  let : Module.Flat T B := inferInstance
+  let : Module.Flat T B :=
+    (IsDedekindDomain.flat_iff_torsion_eq_bot (R := T) (M := B)).mpr
+      ((Submodule.isTorsionFree_iff_torsion_eq_bot (R := T) (M := B)).mp hTB)
   let : q.IsPrime :=
     localizedNormalizationInertiaFieldPrime_isPrime
       (K := K) (L := L) P Q
@@ -439,7 +433,7 @@ theorem localizedNormalizationInertiaFieldPrime_ramificationIdx_eq_one
   apply Eq.symm
   apply Nat.mul_right_cancel (Nat.pos_of_ne_zero hrelative0)
   calc
-    1 * Qlocal.ramificationIdx T = Qlocal.ramificationIdx T := by simp
+    1 * Qlocal.ramificationIdx T = Qlocal.ramificationIdx T := one_mul _
     _ = Qlocal.ramificationIdx V := heq.symm
     _ = q.ramificationIdx V * Qlocal.ramificationIdx T := htower
 

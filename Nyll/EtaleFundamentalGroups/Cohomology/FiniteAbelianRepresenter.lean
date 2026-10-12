@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 import Mathlib.CategoryTheory.Galois.Equivalence
 import Mathlib.CategoryTheory.Monoidal.Cartesian.CommGrp_
 import Mathlib.GroupTheory.GroupAction.Hom

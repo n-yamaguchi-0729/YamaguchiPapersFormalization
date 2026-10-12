@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
 import Nyll.SchemeTheory.RingTheory.DVRFractionFieldAway
+import Nyll.SchemeTheory.Divisors.RegularCartier
 
 /-!
 # The actual fraction-stalk pullback of a Cartier complement

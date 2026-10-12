@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
 import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantEquivalence
 import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import Mathlib.CategoryTheory.Action.Continuous
 import Mathlib.CategoryTheory.Equivalence

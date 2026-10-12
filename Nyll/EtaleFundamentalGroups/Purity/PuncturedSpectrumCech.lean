@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCover
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Pairwise intersections in the principal cover of a punctured spectrum

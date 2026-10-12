@@ -8,7 +8,7 @@ import Mathlib.CategoryTheory.Functor.FullyFaithful
 import Mathlib.FieldTheory.IntermediateField.Basic
 import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
 import Nyll.SchemeTheory.FiniteEtale.Algebra.FiniteFieldModel
 

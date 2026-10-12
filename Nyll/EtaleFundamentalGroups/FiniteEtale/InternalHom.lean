@@ -9,7 +9,7 @@ module
 public import Nyll.SchemeTheory.WeilRestriction.FiniteEtale
 public import Mathlib.CategoryTheory.Monoidal.Cartesian.Over
 public import Mathlib.CategoryTheory.Yoneda
-public import Nyll.SchemeTheory.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite étale internal Hom

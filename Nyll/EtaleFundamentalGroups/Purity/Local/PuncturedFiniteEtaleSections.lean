@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
 import Nyll.SchemeTheory.Affine.PrimePairHartogs
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.RingHom.Flat

@@ -18,7 +18,7 @@ import Nyll.SchemeTheory.Descent.AffineCocycle
 import Nyll.SchemeTheory.Descent.AlgebraCoaction
 import Nyll.SchemeTheory.Descent.EffectiveAffine
 import Nyll.SchemeTheory.Descent.FaithfullyFlatAlgebra
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Sites.Etale

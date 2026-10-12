@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.AlgebraicCurves.Foundations.FieldTheory.AdjoinRoot_etale_and_finite_X_pow_sub_C_of_isUnit
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 import Mathlib.RingTheory.Ideal.GoingUp
 import Mathlib.AlgebraicGeometry.Morphisms.FlatRank
 import Mathlib.RingTheory.Spectrum.Prime.FreeLocus

@@ -8,7 +8,7 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ConnectedSource
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeConstants
 import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
 import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 import Nyll.SchemeTheory.LocalGeometry.SmoothStalkNormality
 
 /-!

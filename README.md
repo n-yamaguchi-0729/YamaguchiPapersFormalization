@@ -22,6 +22,11 @@ For a connected locally Noetherian scheme `X` and a horizontal effective
 Cartier divisor `D`, the library studies the actual map of étale fundamental
 groups induced by `X ∖ Supp(D) → X`.
 
+The collection also includes an ongoing formalization of
+[*On branched coverings of the projective line over the integers*](https://arxiv.org/abs/2608.15057v1),
+using the numbering of arXiv v1. It develops arithmetic intersection calculations
+for rational sections and concrete quadratic covers of their complements.
+
 ## Main results
 
 ### Ab-faithfulness of absolute Galois groups
@@ -51,6 +56,15 @@ The shared group theory also contains the center-freeness criterion of
 Proposition 2.5 in [*Center-freeness of finite-step solvable groups arising from anabelian geometry*](https://arxiv.org/abs/2601.07112),
 in [SlimnessAndTorsion.lean](Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
 
+### Branched coverings of the projective line over the integers
+
+| Result | Mathematical content |
+| --- | --- |
+| [Lemma 2.3: intersection calculations](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3IntersectionMultiplicity.lean) | Local intersection multiplicities for rational sections, with supporting normal-crossing constructions. |
+| [Lemma 2.4](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot4DyadicCollision.lean) | The dyadic collision calculation for primitive section coordinates. |
+| [Proposition 2.5: quadratic quotient](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot5QuadraticQuotient.lean) | A connected quadratic cover supplies a quotient of the actual etale fundamental group under the stated determinant conditions. |
+| [Corollary 2.7: at least seven sections](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot7LargeBoundaryQuotient.lean) | The complement of at least seven rational sections has a continuous quotient onto the cyclic group of order two, at every geometric point of the constructed open. |
+
 ## Incomplete results
 
 **Ab-faithfulness of absolute Galois groups**
@@ -67,11 +81,19 @@ Example 1.4 is limited to `Spec ℤ`: the affine
 and projective spaces, moduli-space and plane-complement examples, and
 Corollary 2.7 on hyperplane arrangements are not yet included.
 
+**Branched coverings of the projective line over the integers**
+
+The full finite-divisor normal-crossing criterion and its comparison over `Z_p`,
+the remaining geometric hypotheses of the paper statements, and the main quotient
+criteria are not yet included. The results above cover the stated calculations
+and constructions, not the entire paper.
+
 ## Public API
 
 ```lean
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
+import Nyll.ShimizuYamaguchi26BranchedCoverings.All
 ```
 
 Selected results:

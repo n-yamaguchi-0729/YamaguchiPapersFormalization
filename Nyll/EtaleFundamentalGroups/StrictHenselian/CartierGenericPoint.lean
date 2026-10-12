@@ -12,6 +12,7 @@ import Nyll.SchemeTheory.Divisors.LocalComplement
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+import Nyll.SchemeTheory.Divisors.RegularCartier
 
 
 /-!

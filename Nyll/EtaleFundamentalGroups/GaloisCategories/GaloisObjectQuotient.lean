@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FundamentalGroup
+import Nyll.EtaleFundamentalGroups.Pi1.GaloisCategories.FundamentalGroup
 import Mathlib.CategoryTheory.Galois.GaloisObjects
 import Mathlib.CategoryTheory.Galois.Decomposition
 

@@ -24,11 +24,20 @@
     "EtaleCohomology": [
       "Nyll.EtaleCohomology"
     ],
+    "JacobianVarieties": [
+      "Nyll.JacobianVarieties"
+    ],
     "Yamaguchi26AbfaithfulGalois": [
       "Nyll.Yamaguchi26AbfaithfulGalois"
     ],
     "Yamaguchi26SolvableCoverings": [
       "Nyll.Yamaguchi26SolvableCoverings"
+    ],
+    "AnabelianGeometry": [
+      "Nyll.AnabelianGeometry"
+    ],
+    "ShimizuYamaguchi26BranchedCoverings": [
+      "Nyll.ShimizuYamaguchi26BranchedCoverings"
     ],
     "EntryPoint": [
       "Nyll"
@@ -69,8 +78,11 @@
     "AlgebraicCurves": 2,
     "EtaleFundamentalGroups": 2,
     "EtaleCohomology": 2,
+    "JacobianVarieties": 3,
     "Yamaguchi26AbfaithfulGalois": 3,
-    "Yamaguchi26SolvableCoverings": 3
+    "Yamaguchi26SolvableCoverings": 3,
+    "AnabelianGeometry": 3,
+    "ShimizuYamaguchi26BranchedCoverings": 3
   },
   "orderedLibraries": [
     "ProCGroups",
@@ -81,7 +93,10 @@
     "AlgebraicCurves",
     "EtaleFundamentalGroups",
     "EtaleCohomology",
+    "JacobianVarieties",
     "Yamaguchi26AbfaithfulGalois",
-    "Yamaguchi26SolvableCoverings"
+    "Yamaguchi26SolvableCoverings",
+    "AnabelianGeometry",
+    "ShimizuYamaguchi26BranchedCoverings"
   ]
 }

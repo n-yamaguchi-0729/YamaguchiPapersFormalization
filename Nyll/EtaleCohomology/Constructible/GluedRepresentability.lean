@@ -11,7 +11,7 @@ import Nyll.EtaleCohomology.Sites.EtaleRestriction
 import Nyll.EtaleCohomology.Sites.EtaleSlice
 import Nyll.EtaleCohomology.Sites.LocallyDirectedCover
 import Nyll.EtaleCohomology.Sites.Subcanonical
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.WeilRestriction.LocalRepresenters
 import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 import Mathlib.AlgebraicGeometry.Cover.Open

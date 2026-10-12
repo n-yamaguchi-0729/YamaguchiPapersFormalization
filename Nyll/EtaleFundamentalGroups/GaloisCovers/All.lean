@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+import Nyll.EtaleFundamentalGroups.GaloisCovers.DoubleCoverQuotient
 import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtendedQuotientKernel
 import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtensionAcrossSourceIso
 import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient

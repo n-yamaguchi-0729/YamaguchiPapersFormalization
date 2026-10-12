@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
 import Nyll.SchemeTheory.Divisors.LocalComplement
 import Mathlib.AlgebraicGeometry.OpenImmersion
+import Nyll.SchemeTheory.Divisors.RegularCartier
 
 /-!
 # The local fraction field as a point of the Cartier complement

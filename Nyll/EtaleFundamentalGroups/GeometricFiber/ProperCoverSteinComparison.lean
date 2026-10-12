@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNormalization
 import Nyll.EtaleFundamentalGroups.GeometricFiber.GeometricallyConnectedSectionDescent
 import Nyll.SchemeTheory.Morphisms.FiniteEtaleGeometricallyReduced
-import Nyll.SchemeTheory.FiniteEtale.Geometry
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 import Mathlib.AlgebraicGeometry.Morphisms.IsIso
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 

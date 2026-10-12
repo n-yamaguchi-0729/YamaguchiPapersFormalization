@@ -15,7 +15,6 @@ import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorUniqueness
 import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
 import Nyll.EtaleFundamentalGroups.GaloisCategories.FunctorFromHom
 import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FundamentalGroup
 import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
 import Nyll.EtaleFundamentalGroups.GaloisCategories.Injectivity
 import Nyll.EtaleFundamentalGroups.GaloisCategories.NormalImage

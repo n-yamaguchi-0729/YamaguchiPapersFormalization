@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 public import Mathlib.GroupTheory.GroupAction.Transitive
 
 /-!

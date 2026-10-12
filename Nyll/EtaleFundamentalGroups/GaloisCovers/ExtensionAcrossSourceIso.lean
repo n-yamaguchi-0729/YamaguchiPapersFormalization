@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
-import Nyll.SchemeTheory.Affine.Over
+import Nyll.SchemeTheory.Pi1.Affine.Over
 
 /-!
 # Transporting finite-etale extensions across a source isomorphism

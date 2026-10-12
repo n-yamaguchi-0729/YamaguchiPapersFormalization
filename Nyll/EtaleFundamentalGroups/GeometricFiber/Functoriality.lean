@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-public import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Functoriality of the étale fundamental group

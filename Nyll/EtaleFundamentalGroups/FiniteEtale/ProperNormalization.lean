@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperSectionAlgebra
 import Nyll.EtaleFundamentalGroups.FiniteEtale.ProperNoetherianConnectedFibers
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Morphisms.ProperNormalization
 import Nyll.SchemeTheory.Morphisms.NormalizationPushforward
 import Nyll.SchemeTheory.Morphisms.EtalePostcomposition

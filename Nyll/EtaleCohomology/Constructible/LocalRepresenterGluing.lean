@@ -9,7 +9,7 @@ import Nyll.EtaleCohomology.Sites.EtaleRestriction
 import Nyll.EtaleCohomology.Sites.EtaleSlice
 import Nyll.SchemeTheory.WeilRestriction.LocalRepresenters
 import Nyll.SchemeTheory.WeilRestriction.LocalRepresenterDiagram
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Cover.Directed
 import Mathlib.AlgebraicGeometry.Cover.MorphismProperty
 import Mathlib.AlgebraicGeometry.RelativeGluing

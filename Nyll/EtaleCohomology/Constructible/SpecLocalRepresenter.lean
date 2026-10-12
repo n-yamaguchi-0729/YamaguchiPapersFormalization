@@ -16,7 +16,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 import Nyll.EtaleCohomology.Constructible.FiniteEtaleSheaf
 import Nyll.EtaleCohomology.Constructible.FiniteLocallyConstantSet
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.AffineAnd
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties

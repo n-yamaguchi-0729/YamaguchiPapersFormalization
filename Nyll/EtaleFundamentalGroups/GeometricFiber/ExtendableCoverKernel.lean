@@ -8,7 +8,7 @@ import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
 import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
 import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GaloisCategory
+import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Detecting the fundamental-group kernel by covers that extend

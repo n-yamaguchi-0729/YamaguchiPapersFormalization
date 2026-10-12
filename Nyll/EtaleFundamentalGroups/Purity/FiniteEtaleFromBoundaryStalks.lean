@@ -7,7 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.SchemeTheory.FiniteEtale.Local.OfTargetLocalizations
 import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
 import Mathlib.AlgebraicGeometry.Noetherian
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite etaleness from the punctured locus and boundary stalks

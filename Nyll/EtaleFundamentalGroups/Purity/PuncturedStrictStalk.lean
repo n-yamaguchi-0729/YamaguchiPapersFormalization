@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncture
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkPuncturedSections
-import Nyll.SchemeTheory.FiniteEtale.Basic
+import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.FiniteEtale.DensePullback
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrumFlat
