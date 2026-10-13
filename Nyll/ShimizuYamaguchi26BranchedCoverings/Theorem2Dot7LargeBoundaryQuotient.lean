@@ -66,10 +66,6 @@ theorem large_boundary_quotient_2_7
           (rationalPointDenominator a))).toScheme) :
     ∃ φ : π₁ᵉᵗ(ξ) →ₜ* Multiplicative (ZMod 2), Function.Surjective φ := by
   classical
-  let O : Projectivization ℚ (ℚ × ℚ) → (ProjectiveLine ℤ).Opens := fun a =>
-    Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
-      (linearSectionEquation (rationalPointNumerator a) (rationalPointDenominator a))
-  let U : (ProjectiveLine ℤ).Opens := A.inf O
   have hsize : 6 < Fintype.card ↥A := by
     rw [Fintype.card_coe]
     exact lt_of_lt_of_le (by decide : 6 < 7) hcard
@@ -79,15 +75,8 @@ theorem large_boundary_quotient_2_7
       (fun a => rationalPointDenominator a.val)
       (fun a => rationalPointCoordinates_isCoprime a.val) hsize
   have hne : a.val ≠ b.val := fun h => hab (Subtype.ext h)
-  have hU : U ≤ integralPairComplement
-      (rationalPointNumerator a.val) (rationalPointDenominator a.val)
-      (rationalPointNumerator b.val) (rationalPointDenominator b.val) := by
-    change A.inf O ≤ O a.val ⊓ O b.val
-    exact le_inf (Finset.inf_le a.property) (Finset.inf_le b.property)
-  exact exists_surjective_cyclicTwo_of_four_dvd_pairDeterminant
-    (rationalPointNumerator a.val) (rationalPointDenominator a.val)
-    (rationalPointNumerator b.val) (rationalPointDenominator b.val)
-    (rationalPointCoordinates_isCoprime a.val) (rationalPointCoordinates_isCoprime b.val)
-    hfour (rationalPoint_coordinateDeterminant_ne_zero a.val b.val hne) U hU ξ
+  exact exists_surjective_cyclicTwo_of_four_dvd_delta_in_boundary A
+    a.val b.val a.property b.property hne
+    ((rationalPointDelta_dvd_iff 4 a.val b.val).mpr hfour) ξ
 
 end ShimizuYamaguchi26BranchedCoverings

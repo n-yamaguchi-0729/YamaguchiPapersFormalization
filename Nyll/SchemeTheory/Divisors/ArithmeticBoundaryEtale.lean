@@ -242,6 +242,76 @@ lemma stalkIdeal_finset_prod {ι : Type*} (s : Finset ι)
   | insert i s hi ih =>
     rw [Finset.prod_insert hi, Finset.prod_insert hi, stalkIdeal_mul, ih]
 
+/-- On any affine source chart lying over an affine target chart, pulling
+back a closed subscheme extends its defining ideal along the actual section
+map. Affineness of the original morphism is not required. -/
+lemma ideal_comap_of_affineOpens
+    (I : X.IdealSheafData) (f : Y ⟶ X)
+    (U : X.affineOpens) (V : Y.affineOpens) (hle : V.1 ≤ f ⁻¹ᵁ U.1) :
+    (I.comap f).ideal V = (I.ideal U).map (f.appLE U.1 V.1 hle).hom := by
+  let i := I.subschemeι
+  let P := pullback f i
+  let fst : P ⟶ Y := pullback.fst f i
+  let snd : P ⟶ I.subscheme := pullback.snd f i
+  let UX : I.subscheme.Opens := i ⁻¹ᵁ U.1
+  let UY : P.Opens := fst ⁻¹ᵁ V.1
+  have H : IsPullback snd fst i f := (IsPullback.of_hasPullback f i).flip
+  have hUY : UY = snd ⁻¹ᵁ UX ⊓ fst ⁻¹ᵁ V.1 := by
+    ext z
+    constructor
+    · intro hz
+      refine ⟨?_, hz⟩
+      change i (snd z) ∈ U.1
+      have hzU : f (fst z) ∈ U.1 := hle hz
+      rw [← Scheme.Hom.comp_apply, H.w, Scheme.Hom.comp_apply]
+      exact hzU
+    · exact fun hz => hz.2
+  have hUYsnd : UY ≤ snd ⁻¹ᵁ UX := by
+    rw [hUY]
+    exact inf_le_left
+  have hUX : IsAffineOpen UX := U.2.preimage i
+  have : IsIso (pushoutSection H hle
+      (show UX ≤ i ⁻¹ᵁ U.1 from le_rfl) hUY) :=
+    isIso_pushoutSection_of_isAffineOpen H hle le_rfl hUY U.2 V.2 hUX
+  have hpush : IsPushout (i.appLE U.1 UX le_rfl) (f.appLE U.1 V.1 hle)
+      (snd.appLE UX UY hUYsnd) (fst.appLE V.1 UY le_rfl) :=
+    (isIso_pushoutSection_iff H hle le_rfl hUY).mp inferInstance
+  have hi : i.appLE U.1 UX le_rfl = i.app U.1 := i.appLE_eq_app
+  have hfst : fst.appLE V.1 UY le_rfl = fst.app V.1 := fst.appLE_eq_app
+  have hpush' : IsPushout (i.app U.1) (f.appLE U.1 V.1 hle)
+      (snd.appLE UX UY hUYsnd) (fst.app V.1) := by
+    rw [hi, hfst] at hpush
+    exact hpush
+  rw [comap, Scheme.Hom.ker_apply]
+  change RingHom.ker (fst.app V.1).hom = _
+  rw [CommRingCat.ker_inr_of_isPushout_of_surjective hpush'
+    (i.app_surjective U.1 U.2)]
+  rw [I.ker_subschemeι_app U]
+
+/-- For every scheme morphism, the actual stalk ideal of a pulled-back
+closed subscheme is the extension of its original stalk ideal. -/
+lemma stalkIdeal_comap
+    (I : X.IdealSheafData) (f : Y ⟶ X) (y : Y) :
+    (I.comap f).stalkIdeal y =
+      (I.stalkIdeal (f y)).map (f.stalkMap y).hom := by
+  obtain ⟨U, hU, hfyU, _⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := f y)
+      (show f y ∈ (⊤ : X.Opens) from trivial)
+  obtain ⟨V, hV, hyV, hle⟩ :=
+    exists_isAffineOpen_mem_and_subset (X := Y) (U := f ⁻¹ᵁ U) (x := y) hfyU
+  let U' : X.affineOpens := ⟨U, hU⟩
+  let V' : Y.affineOpens := ⟨V, hV⟩
+  rw [stalkIdeal_eq_map_ideal (I.comap f) y V' hyV,
+    ideal_comap_of_affineOpens I f U' V' hle,
+    stalkIdeal_eq_map_ideal I (f y) U' hfyU, Ideal.map_map, Ideal.map_map]
+  have hcompat : f.appLE U V hle ≫ Y.presheaf.germ V y hyV =
+      X.presheaf.germ U (f y) hfyU ≫ f.stalkMap y := by
+    change (f.app U ≫ Y.presheaf.map (homOfLE (show V ≤ f ⁻¹ᵁ U from hle)).op) ≫
+      Y.presheaf.germ V y hyV = _
+    rw [Category.assoc, TopCat.Presheaf.germ_res']
+    exact (f.germ_stalkMap U y hfyU).symm
+  exact congrArg (fun g : Γ(X, U) ⟶ Y.presheaf.stalk y => (I.ideal U').map g.hom) hcompat
+
 /-- On an affine target chart, the ideal of a pulled-back closed subscheme is
 the extension of the original ideal. -/
 lemma ideal_comap_preimage_of_isAffineHom
@@ -249,68 +319,16 @@ lemma ideal_comap_preimage_of_isAffineHom
     (U : X.affineOpens) :
     (I.comap f).ideal ⟨f ⁻¹ᵁ U.1, U.2.preimage f⟩ =
       (I.ideal U).map (f.app U.1).hom := by
-  let i := I.subschemeι
-  let P := pullback f i
-  let fst : P ⟶ Y := pullback.fst f i
-  let snd : P ⟶ I.subscheme := pullback.snd f i
-  let V : Y.Opens := f ⁻¹ᵁ U.1
-  let UX : I.subscheme.Opens := i ⁻¹ᵁ U.1
-  let UY : P.Opens := fst ⁻¹ᵁ V
-  have H : IsPullback snd fst i f := (IsPullback.of_hasPullback f i).flip
-  have hUY : UY = snd ⁻¹ᵁ UX ⊓ fst ⁻¹ᵁ V := by
-    ext z
-    constructor
-    · intro hz
-      refine ⟨?_, hz⟩
-      change i (snd z) ∈ U.1
-      change f (fst z) ∈ U.1 at hz
-      rw [← Scheme.Hom.comp_apply, H.w, Scheme.Hom.comp_apply]
-      exact hz
-    · exact fun hz ↦ hz.2
-  have hUX : IsAffineOpen UX := U.2.preimage i
-  have hV : IsAffineOpen V := U.2.preimage f
-  let : IsIso (pushoutSection H (show V ≤ f ⁻¹ᵁ U.1 from le_rfl)
-      (show UX ≤ i ⁻¹ᵁ U.1 from le_rfl) hUY) :=
-    isIso_pushoutSection_of_isAffineOpen H le_rfl le_rfl hUY U.2 hV hUX
-  have hpush : IsPushout (i.appLE U.1 UX le_rfl) (f.appLE U.1 V le_rfl)
-      (snd.appLE UX UY (by simp [hUY])) (fst.appLE V UY (by simp [hUY])) :=
-    (isIso_pushoutSection_iff H le_rfl le_rfl hUY).mp inferInstance
-  have hi : i.appLE U.1 UX le_rfl = i.app U.1 := by
-    dsimp [UX]
-    exact i.appLE_eq_app
-  have hf : f.appLE U.1 V le_rfl = f.app U.1 := by
-    dsimp [V]
-    exact f.appLE_eq_app
-  have hfst : fst.appLE V UY (by simp [hUY]) = fst.app V := by
-    dsimp [UY]
-    exact fst.appLE_eq_app
-  have hpush' : IsPushout (i.app U.1) (f.app U.1)
-      (snd.appLE UX UY (by simp [hUY])) (fst.app V) := by
-    rw [hi, hf, hfst] at hpush
-    exact hpush
-  rw [comap, Scheme.Hom.ker_apply]
-  change RingHom.ker (fst.app V).hom = _
-  rw [CommRingCat.ker_inr_of_isPushout_of_surjective hpush'
-    (i.app_surjective U.1 U.2)]
-  rw [I.ker_subschemeι_app U]
+  simpa only [Scheme.Hom.appLE_eq_app] using
+    ideal_comap_of_affineOpens I f U ⟨f ⁻¹ᵁ U.1, U.2.preimage f⟩ le_rfl
 
 /-- For an affine morphism, the stalk ideal of a pulled-back ideal sheaf is
 the extension of the original stalk ideal. -/
 lemma stalkIdeal_comap_of_isAffineHom
     (I : X.IdealSheafData) (f : Y ⟶ X) [IsAffineHom f] (y : Y) :
     (I.comap f).stalkIdeal y =
-      (I.stalkIdeal (f y)).map (f.stalkMap y).hom := by
-  obtain ⟨U, hU, hfyU, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := f y) (by simp)
-  let U' : X.affineOpens := ⟨U, hU⟩
-  let V' : Y.affineOpens := ⟨f ⁻¹ᵁ U, hU.preimage f⟩
-  have hyV : y ∈ V'.1 := hfyU
-  rw [stalkIdeal_eq_map_ideal (I.comap f) y V' hyV,
-    ideal_comap_preimage_of_isAffineHom I f U',
-    stalkIdeal_eq_map_ideal I (f y) U' hfyU,
-    Ideal.map_map, Ideal.map_map]
-  congr 1
-  exact congrArg CommRingCat.Hom.hom (f.germ_stalkMap U (y : Y) hfyU).symm
+      (I.stalkIdeal (f y)).map (f.stalkMap y).hom :=
+  stalkIdeal_comap I f y
 
 /-- Ring homomorphisms commute with the product of an initial segment of a
 parameter family. -/
@@ -319,7 +337,7 @@ lemma _root_.AlgebraicGeometry.Scheme.initialParameterProduct_map
     {d : ℕ} (t : Fin d → R) (r : ℕ) (hr : r ≤ d) :
     φ (Scheme.initialParameterProduct t r hr) =
       Scheme.initialParameterProduct (fun j ↦ φ (t j)) r hr := by
-  simp [Scheme.initialParameterProduct]
+  simp only [Scheme.initialParameterProduct, map_prod]
 
 /-- Strict normal crossings at a point are preserved by finite-etale
 pullback. -/

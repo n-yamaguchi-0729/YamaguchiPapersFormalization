@@ -152,6 +152,19 @@ theorem rationalPointDelta_eq_signed_coordinateDeterminant
         one_mul, zero_mul, sub_zero]
     · simp only [rationalPointDelta, ite_eq_right hb, ite_eq_right ha]
 
+/-- Divisibility of the paper's integer agrees with divisibility of the signed
+homogeneous determinant, including either point at infinity. -/
+theorem rationalPointDelta_dvd_iff (p : ℕ)
+    (a b : Projectivization ℚ (ℚ × ℚ)) :
+    (p : ℤ) ∣ rationalPointDelta a b ↔
+      (p : ℤ) ∣ coordinateDeterminant (rationalPointNumerator a) (rationalPointDenominator a)
+        (rationalPointNumerator b) (rationalPointDenominator b) := by
+  rw [rationalPointDelta_eq_signed_coordinateDeterminant]
+  by_cases hb : b.rep.2 = 0
+  · rw [ite_eq_left hb]
+    exact Int.dvd_neg
+  · rw [ite_eq_right hb]
+
 /-- The extended determinant vanishes when both rational points coincide. -/
 theorem rationalPointDelta_self (a : Projectivization ℚ (ℚ × ℚ)) :
     rationalPointDelta a a = 0 := by

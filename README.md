@@ -6,7 +6,9 @@
 A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
 This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
-Bundled dependencies use the same `Nyll` imports as the complete library.
+<!-- nyll-publication:distribution:begin -->
+Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All`, `Nyll.ShimizuYamaguchi26BranchedCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.
+<!-- nyll-publication:distribution:end -->
 
 ## Scope
 
@@ -58,12 +60,16 @@ in [SlimnessAndTorsion.lean](Nyll/ProCGroups/FiniteStepSolvableQuotients/Slimnes
 
 ### Branched coverings of the projective line over the integers
 
+<!-- nyll-publication:branched-coverings-results:begin -->
 | Result | Mathematical content |
 | --- | --- |
-| [Lemma 2.3: intersection calculations](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3IntersectionMultiplicity.lean) | Local intersection multiplicities for rational sections, with supporting normal-crossing constructions. |
+| [Observation 2.1: complement geometry](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/RationalSectionComplementGeometry.lean) | The complement of finitely many rational sections is smooth over `Spec Z` and has geometrically connected fibres. |
+| [Lemma 2.3: normal crossings](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3NormalCrossings.lean); [intersection multiplicity](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3SpecialFiberMultiplicity.lean) | The finite rational-section divisor has ordinary normal crossings over `Z_p` exactly under the original special-fibre conditions. The local intersection length is the determinant valuation. |
 | [Lemma 2.4](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot4DyadicCollision.lean) | The dyadic collision calculation for primitive section coordinates. |
-| [Proposition 2.5: quadratic quotient](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot5QuadraticQuotient.lean) | A connected quadratic cover supplies a quotient of the actual etale fundamental group under the stated determinant conditions. |
+| [Proposition 2.5](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/PadicNormalCrossingsQuotient.lean) | Failure of ordinary normal crossings over `Z_2` gives a continuous quotient of the original complement's etale fundamental group onto the cyclic group of order two, at every geometric base point. |
 | [Corollary 2.7: at least seven sections](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot7LargeBoundaryQuotient.lean) | The complement of at least seven rational sections has a continuous quotient onto the cyclic group of order two, at every geometric point of the constructed open. |
+| [Example 2.8: geometry](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/SquareTripleNormalCrossings.lean) | The boundary `{0, p^2, infinity}` has ordinary normal crossings exactly away from `p`. Fundamental-group triviality remains unfinished. |
+<!-- nyll-publication:branched-coverings-results:end -->
 
 ## Incomplete results
 
@@ -83,10 +89,9 @@ Corollary 2.7 on hyperplane arrangements are not yet included.
 
 **Branched coverings of the projective line over the integers**
 
-The full finite-divisor normal-crossing criterion and its comparison over `Z_p`,
-the remaining geometric hypotheses of the paper statements, and the main quotient
-criteria are not yet included. The results above cover the stated calculations
-and constructions, not the entire paper.
+<!-- nyll-publication:branched-coverings-remaining:begin -->
+The geometric inertia inputs and the main solvable-quotient criterion of Theorem 2.6 remain incomplete.
+<!-- nyll-publication:branched-coverings-remaining:end -->
 
 ## Public API
 
@@ -126,6 +131,9 @@ Naganori Yamaguchi is also the author of the papers formalized here.
 
 ## License and acknowledgements
 
+<!-- nyll-publication:credits:begin -->
 Apache License 2.0. See [LICENSE](LICENSE).
-Supporting code includes adaptations from [pi1](https://github.com/chrisflav/pi1)
-and [Anthropic FLT](https://github.com/anthropics/fermats-last-theorem); see [NOTICE](NOTICE).
+
+Included adaptations from [pi1](https://github.com/chrisflav/pi1) and [Anthropic’s Fermat’s Last Theorem project](https://github.com/anthropics/fermats-last-theorem) retain their source-specific copyrights and authors.
+The included-file inventories and preserved upstream notices are in [NOTICE](NOTICE).
+<!-- nyll-publication:credits:end -->

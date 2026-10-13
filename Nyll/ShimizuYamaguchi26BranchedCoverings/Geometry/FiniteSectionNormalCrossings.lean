@@ -57,10 +57,11 @@ closed-point incidence and valuation conditions on the actual special fibre.
 These are the local one- and two-branch implications needed in Lemma 2.3 of
 Ryoji Shimizu and Naganori Yamaguchi,
 [On branched coverings of the projective line over the integers](https://arxiv.org/abs/2608.15057v1).
-The full finite-family criterion still needs the converse and comparison
-with base change to `Z_p`. Identifying this product
-with the reduced effective Cartier divisor of the paper is also a separate
-construction.
+The converse is proved in `Geometry/FiniteSectionNormalCrossingsConverse.lean`;
+comparison with base change to `Z_p` remains separate.
+`Geometry/RationalSectionFamily.lean` identifies
+this product with the reduced effective Cartier divisor formed from the
+original rational sections.
 -/
 
 noncomputable section
@@ -91,6 +92,27 @@ theorem rationalSectionFamily_isStrictNormalCrossingsAt_of_one_branch
     rationalSection_isStrictNormalCrossingsAt p b
   exact ⟨hregular, d, r, t, hrpos, hrd, hparameters, hstalk.trans hideal⟩
 
+/-- Away from the other sections, the stalk of the actual family product
+is the stalk of the selected pair. This calculation is shared by both
+directions of the normal-crossings criterion. -/
+theorem rationalSectionFamily_stalkIdeal_eq_pair_of_other_disjoint
+    (p : ℕ) [Fact p.Prime] (A : Finset (Projectivization ℚ (ℚ × ℚ)))
+    (a b : Projectivization ℚ (ℚ × ℚ)) (ha : a ∈ A) (hb : b ∈ A) (hab : a ≠ b)
+    (hother : ∀ c ∈ A, c ≠ a → c ≠ b → ¬(p : ℤ) ∣ rationalPointDelta c b) :
+    (∏ c ∈ A, (rationalSection c).ker).stalkIdeal
+        (rationalSection b (integerPrimePoint p)) =
+      ((rationalSection a).ker * (rationalSection b).ker).stalkIdeal
+        (rationalSection b (integerPrimePoint p)) := by
+  rw [Scheme.IdealSheafData.stalkIdeal_finset_prod,
+    Scheme.IdealSheafData.stalkIdeal_mul]
+  apply Finset.prod_eq_mul_of_mem a b ha hb hab
+  intro c hc hne
+  have hunit : (rationalSection c).ker.stalkIdeal
+      (rationalSection b (integerPrimePoint p)) = ⊤ :=
+    rationalSection_stalkIdeal_eq_top_of_not_dvd p c b hne.2
+      (hother c hc hne.1 hne.2)
+  exact hunit.trans Ideal.one_eq_top.symm
+
 /-- A finite product of actual section ideals has strict normal crossings
 at the point of `b` over `p` when exactly the selected two branches can meet
 there and their determinant has valuation one. -/
@@ -101,17 +123,8 @@ theorem rationalSectionFamily_isStrictNormalCrossingsAt_of_two_branches
     (hother : ∀ c ∈ A, c ≠ a → c ≠ b → ¬(p : ℤ) ∣ rationalPointDelta c b) :
     (∏ c ∈ A, (rationalSection c).ker).IsStrictNormalCrossingsAt
       (rationalSection b (integerPrimePoint p)) := by
-  let x : ProjectiveLine ℤ := rationalSection b (integerPrimePoint p)
-  have hstalk : (∏ c ∈ A, (rationalSection c).ker).stalkIdeal x =
-      ((rationalSection a).ker * (rationalSection b).ker).stalkIdeal x := by
-    rw [Scheme.IdealSheafData.stalkIdeal_finset_prod,
-      Scheme.IdealSheafData.stalkIdeal_mul]
-    apply Finset.prod_eq_mul_of_mem a b ha hb hab
-    intro c hc hne
-    have hunit : (rationalSection c).ker.stalkIdeal x = ⊤ :=
-      rationalSection_stalkIdeal_eq_top_of_not_dvd p c b hne.2
-        (hother c hc hne.1 hne.2)
-    exact hunit.trans Ideal.one_eq_top.symm
+  have hstalk := rationalSectionFamily_stalkIdeal_eq_pair_of_other_disjoint
+    p A a b ha hb hab hother
   obtain ⟨hregular, d, r, t, hrpos, hrd, hparameters, hideal⟩ :=
     rationalSectionPair_isStrictNormalCrossingsAt p a b hab hval
   exact ⟨hregular, d, r, t, hrpos, hrd, hparameters, hstalk.trans hideal⟩

@@ -9,12 +9,38 @@ if [[ "${GITHUB_ACTIONS:-}" != true || "${RUNNER_ENVIRONMENT:-}" != github-hoste
   echo 'This disk-guarded build is restricted to ephemeral GitHub-hosted runners.' >&2
   exit 2
 fi
-if (( $# < 2 )) || [[ ! "$1" =~ ^(depth[123](-[a-z0-9-]+)?|all)$ ]]; then
-  echo 'Usage: library-build.sh depthN[-library]|all +Module ...' >&2
+if (( $# < 1 )) || [[ ! "$1" =~ ^(depth[123](-[a-z0-9-]+)?|all)$ ]]; then
+  echo 'Usage: library-build.sh depthN | all +Nyll.All' >&2
   exit 2
 fi
 stage="$1"
 shift
+if [[ "$stage" =~ ^depth([123])$ ]]; then
+  if (( $# != 0 )); then
+    echo 'Depth targets are computed from the audited physical import graph.' >&2
+    exit 2
+  fi
+  depth="${BASH_REMATCH[1]}"
+  plan_dir="tmp/ci-libraries/$stage-plan"
+  python3 -B .github/scripts/build_stage.py --root . --depth "$depth" \
+    --output "$plan_dir" --plan-only
+  python3 -B - "$plan_dir/receipt.json" > "$plan_dir/targets.txt" <<'PY'
+import json
+import sys
+with open(sys.argv[1], encoding="utf-8") as stream:
+    plan = json.load(stream)
+if not plan["planOnly"] or plan["exitCode"] != 0 or not plan["frontier"]:
+    raise SystemExit("Invalid or empty audited depth frontier")
+for module in plan["frontier"]:
+    print("+" + module)
+PY
+  mapfile -t targets < "$plan_dir/targets.txt"
+  set -- "${targets[@]}"
+fi
+if (( $# == 0 )); then
+  echo 'Missing Lake target.' >&2
+  exit 2
+fi
 if [[ "$stage" == all ]]; then
   set -- "$@" +Nyll
 fi

@@ -100,17 +100,6 @@ def rationalSectionSpecialFiberPoint (p : ℕ) [Fact p.Prime]
   fieldSectionPoint (rationalPointNumerator a : ZMod p) (rationalPointDenominator a : ZMod p)
     (reduced_rationalPointCoordinates_ne_zero p a)
 
-private theorem prime_dvd_delta_iff (p : ℕ)
-    (a b : Projectivization ℚ (ℚ × ℚ)) :
-    (p : ℤ) ∣ rationalPointDelta a b ↔
-      (p : ℤ) ∣ coordinateDeterminant (rationalPointNumerator a) (rationalPointDenominator a)
-        (rationalPointNumerator b) (rationalPointDenominator b) := by
-  rw [rationalPointDelta_eq_signed_coordinateDeterminant]
-  by_cases hb : b.rep.2 = 0
-  · rw [ite_eq_left hb]
-    exact Int.dvd_neg
-  · rw [ite_eq_right hb]
-
 /-- The reduction point of the first section belongs to the second section
 exactly when the prime divides the paper's integer `Δ`. -/
 theorem rationalSectionSpecialFiberPoint_mem_iff (p : ℕ) [Fact p.Prime]
@@ -119,7 +108,7 @@ theorem rationalSectionSpecialFiberPoint_mem_iff (p : ℕ) [Fact p.Prime]
         rationalSectionSupport b ↔ (p : ℤ) ∣ rationalPointDelta a b := by
   rw [mem_rationalSectionSupport_baseChange_iff]
   unfold rationalSectionSpecialFiberPoint
-  rw [linearSectionEquation_mem_fieldSectionPoint_iff, prime_dvd_delta_iff,
+  rw [linearSectionEquation_mem_fieldSectionPoint_iff, rationalPointDelta_dvd_iff,
     ← ZMod.intCast_zmod_eq_zero_iff_dvd]
   simp only [coordinateDeterminant, Int.cast_sub, Int.cast_mul,
     mul_comm (rationalPointDenominator b : ZMod p) (rationalPointNumerator a : ZMod p),
@@ -149,7 +138,7 @@ theorem specialFiber_intersection_nonempty_iff (p : ℕ) [Fact p.Prime]
       (rationalPointNumerator b : ZMod p) (rationalPointDenominator b : ZMod p) x
       ((mem_rationalSectionSupport_baseChange_iff (ZMod p) a x).mp ha)
       ((mem_rationalSectionSupport_baseChange_iff (ZMod p) b x).mp hb)
-    apply (prime_dvd_delta_iff p a b).mpr
+    apply (rationalPointDelta_dvd_iff p a b).mpr
     apply (ZMod.intCast_zmod_eq_zero_iff_dvd _ p).mp
     simpa only [coordinateDeterminant, Int.cast_sub, Int.cast_mul] using hdet
   · intro hdiv

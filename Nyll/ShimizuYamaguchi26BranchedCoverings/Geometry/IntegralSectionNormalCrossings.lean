@@ -4,7 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_comap_mul
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.Basic
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
@@ -79,7 +78,7 @@ open scoped Polynomial
 
 namespace ShimizuYamaguchi26BranchedCoverings
 
-private theorem infinitySection_stalkIdeal_eq
+theorem infinitySection_stalkIdeal_eq
     (p : ℕ) [Fact p.Prime] :
     (integralSection 1 0 1 0 (by decide)).ker.stalkIdeal
       (integerProjectiveInfinityPoint p) =
@@ -217,13 +216,9 @@ private theorem integralSectionPair_isStrictNormalCrossingsAt_coordinateChange
     (integralSection u v c d hcd).ker * (integralSection u' v' c' d' hcd').ker
   let J : (ProjectiveLine ℤ).IdealSheafData :=
     (integralSection 1 0 1 0 (by decide)).ker * (integralSection U V A B hAB).ker
-  have hpull : I.comap e.inv = J := by
-    dsimp only [I, J, e]
-    rw [Scheme.IdealSheafData.comap_mul,
-      integralSection_ker_comap_coordinateChange_inv
-        u' v' c' d' u v c d A B hcd' hcd hAB,
-      integralSection_ker_comap_coordinateChange_inv_self u' v' c' d' hcd',
-      mul_comm]
+  have hpull : I.comap e.inv = J :=
+    integralSectionPair_ker_comap_coordinateChange_inv
+      u v c d u' v' c' d' A B hcd hcd' hAB
   have hback : J.comap e.hom = I := by
     rw [← hpull, ← Scheme.IdealSheafData.comap_comp,
       e.hom_inv_id, Scheme.IdealSheafData.comap_id]

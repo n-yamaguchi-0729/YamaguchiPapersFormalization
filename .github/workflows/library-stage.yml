@@ -7,15 +7,16 @@ on:
         required: true
         type: string
       target:
-        required: true
+        required: false
         type: string
+        default: ''
 
 permissions:
   contents: read
 
 jobs:
   build:
-    name: ${{ inputs.target }}
+    name: ${{ inputs.stage }}
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-24.04
     timeout-minutes: 360
@@ -110,7 +111,12 @@ jobs:
         env:
           LIBRARY_STAGE: ${{ inputs.stage }}
           LIBRARY_TARGET: ${{ inputs.target }}
-        run: bash .github/scripts/library-build.sh "$LIBRARY_STAGE" "$LIBRARY_TARGET"
+        run: |
+          if [[ -n "$LIBRARY_TARGET" ]]; then
+            bash .github/scripts/library-build.sh "$LIBRARY_STAGE" "$LIBRARY_TARGET"
+          else
+            bash .github/scripts/library-build.sh "$LIBRARY_STAGE"
+          fi
 
       - name: Measure reusable cache and require archive headroom
         id: capacity
@@ -141,5 +147,7 @@ jobs:
           path: |
             tmp/ci-libraries/*.log
             tmp/ci-libraries/*.json
+            tmp/ci-libraries/*-plan/receipt.json
+            tmp/ci-libraries/*-plan/targets.txt
           if-no-files-found: ignore
           retention-days: 7

@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.RationalProjectiveCoordinates
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticCover
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticConnected
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.QuadraticScheme
@@ -16,6 +17,9 @@ import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
 import Nyll.SchemeTheory.Normalization.Normal
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Mathlib.Algebra.Group.Int.Units
+import Mathlib.Data.Finset.Lattice.Fold
+import Mathlib.LinearAlgebra.Projectivization.Basic
+import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Algebra.Ring.Int.Parity
 import Mathlib.RingTheory.Coprime.Basic
 import Mathlib.Tactic.NormNum
@@ -52,9 +56,10 @@ Shimizu and Naganori Yamaguchi,
 The actual standard-chart comparison transports this quotient to every open
 subscheme of the projective complement of `T₁ = 0` and `v*T₀-u*T₁ = 0`.
 The explicit integral change of coordinates also gives the quotient for any
-two primitive equations with nonzero determinant divisible by four. Identifying
-their closed loci as section images and comparing normal crossings remain
-separate geometric assertions.
+two primitive equations with nonzero determinant divisible by four. The shared
+finite-boundary endpoint restricts this quotient to the original finite complement.
+`Geometry.DyadicNormalCrossingsQuotient` supplies the integral strict-normal-crossing
+obstruction; comparison with normal crossings after p-adic base change is separate.
 -/
 
 noncomputable section
@@ -62,6 +67,8 @@ noncomputable section
 open CategoryTheory AlgebraicGeometry
 
 namespace ShimizuYamaguchi26BranchedCoverings
+
+attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- The explicit dyadic affine complement has a continuous cyclic quotient
 of order two. The finite etale cover and its degree are constructed from the
@@ -154,5 +161,33 @@ theorem exists_surjective_cyclicTwo_of_four_dvd_pairDeterminant
   have : IsOpenImmersion j := inferInstance
   exact exists_surjective_cyclicTwo_of_openImmersion_twoSectionCoordinateRing
     (-(a * u' + b * v')) (coordinateDeterminant u v u' v') hodd hfour hne j ξ
+
+/-- A pair in the original finite boundary whose determinant is divisible by four
+supplies a quadratic quotient on its actual common complement. This shared
+restriction step is used both by the normal-crossing obstruction and the
+large-boundary argument. -/
+theorem exists_surjective_cyclicTwo_of_four_dvd_delta_in_boundary
+    (A : Finset (Projectivization ℚ (ℚ × ℚ)))
+    (a b : Projectivization ℚ (ℚ × ℚ)) (ha : a ∈ A) (hb : b ∈ A) (hab : a ≠ b)
+    (hfour : (4 : ℤ) ∣ rationalPointDelta a b)
+    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    (ξ : Spec (.of Ω) ⟶
+      (A.inf fun c => Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+        (linearSectionEquation (rationalPointNumerator c)
+          (rationalPointDenominator c))).toScheme) :
+    ∃ φ : π₁ᵉᵗ(ξ) →ₜ* Multiplicative (ZMod 2), Function.Surjective φ := by
+  let O : Projectivization ℚ (ℚ × ℚ) → (ProjectiveLine ℤ).Opens := fun c =>
+    Proj.basicOpen (MvPolynomial.homogeneousSubmodule (Fin 2) ℤ)
+      (linearSectionEquation (rationalPointNumerator c) (rationalPointDenominator c))
+  have hU : A.inf O ≤ integralPairComplement
+      (rationalPointNumerator a) (rationalPointDenominator a)
+      (rationalPointNumerator b) (rationalPointDenominator b) :=
+    le_inf (Finset.inf_le ha) (Finset.inf_le hb)
+  exact exists_surjective_cyclicTwo_of_four_dvd_pairDeterminant
+    (rationalPointNumerator a) (rationalPointDenominator a)
+    (rationalPointNumerator b) (rationalPointDenominator b)
+    (rationalPointCoordinates_isCoprime a) (rationalPointCoordinates_isCoprime b)
+    ((rationalPointDelta_dvd_iff 4 a b).mp hfour)
+    (rationalPoint_coordinateDeterminant_ne_zero a b hab) (A.inf O) hU ξ
 
 end ShimizuYamaguchi26BranchedCoverings

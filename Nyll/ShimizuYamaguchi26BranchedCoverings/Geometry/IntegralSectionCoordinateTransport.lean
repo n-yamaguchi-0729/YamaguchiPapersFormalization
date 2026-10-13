@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.AlgebraicCurves.Geometry.Sheaves.Scheme_IdealSheafData_comap_mul
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Arithmetic.Determinant
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralCoordinateChange
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSection
@@ -176,5 +177,25 @@ theorem integralSection_ker_comap_coordinateChange_inv_self
   exact (congrArg (fun Z : Set (ProjectiveLine ℤ) =>
     (integralCoordinateChange u v a b hab).inv ⁻¹' Z) hsource.symm).trans
       (hopen.trans htarget)
+
+/-- Pullback of the actual pair product by the coordinate change normalizing
+its second section. This identity is shared by both directions of the
+normal-crossings criterion. -/
+theorem integralSectionPair_ker_comap_coordinateChange_inv
+    (u v c d u' v' c' d' A B : ℤ)
+    (hcd : c * u + d * v = 1) (hcd' : c' * u' + d' * v' = 1)
+    (hAB : A * (-(c' * u + d' * v)) +
+      B * coordinateDeterminant u' v' u v = 1) :
+    ((integralSection u v c d hcd).ker *
+      (integralSection u' v' c' d' hcd').ker).comap
+        (integralCoordinateChange u' v' c' d' hcd').inv =
+      (integralSection 1 0 1 0 (by decide)).ker *
+        (integralSection (-(c' * u + d' * v))
+          (coordinateDeterminant u' v' u v) A B hAB).ker := by
+  rw [Scheme.IdealSheafData.comap_mul,
+    integralSection_ker_comap_coordinateChange_inv
+      u' v' c' d' u v c d A B hcd' hcd hAB,
+    integralSection_ker_comap_coordinateChange_inv_self u' v' c' d' hcd',
+    mul_comm]
 
 end ShimizuYamaguchi26BranchedCoverings

@@ -10,6 +10,7 @@ import Nyll.SchemeTheory.ProjectiveSpace.Basic
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSection
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.IntegralSectionIdeal
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityChartStalk
+import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.InfinityChartStalkIdeal
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.PrimitiveSectionIdeal
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.StandardAffineChart
 import Nyll.ShimizuYamaguchi26BranchedCoverings.Geometry.TwoSectionComplement
@@ -130,36 +131,7 @@ theorem integralSection_stalkIdeal_eq
     (q : Spec (CommRingCat.of ℤ[X])) :
     (integralSection u v a b hab).ker.stalkIdeal (infinityChartEmbedding ℤ q) =
       (infinitySectionIdeal u v).map (infinityChartGermAt ℤ q) := by
-  let X : Scheme := Spec (CommRingCat.of ℤ[X])
-  let j : X ⟶ ProjectiveLine ℤ := infinityChartEmbedding ℤ
-  have : IsAffineHom j := IsAffineHom.of_comp j (ProjSpace.π ℤ 1)
-  let I : (ProjectiveLine ℤ).IdealSheafData := (integralSection u v a b hab).ker
-  let K : X.IdealSheafData := I.comap j
-  let T : X.affineOpens := ⟨⊤, isAffineOpen_top X⟩
-  let e : (ProjectiveLine ℤ).presheaf.stalk (j q) ≅ X.presheaf.stalk q :=
-    asIso ((infinityChartEmbedding ℤ).stalkMap q)
-  let g : ℤ[X] →+* X.presheaf.stalk q :=
-    ((Scheme.ΓSpecIso (CommRingCat.of ℤ[X])).inv ≫ X.presheaf.germ ⊤ q trivial).hom
-  have htop : K.ideal T = (infinitySectionIdeal u v).map
-      (Scheme.ΓSpecIso (CommRingCat.of ℤ[X])).inv.hom :=
-    integralSection_infinityChart_ideal_top u v a b hab
-  have hK : K.stalkIdeal q = (infinitySectionIdeal u v).map g := by
-    rw [K.stalkIdeal_eq_map_ideal q T (show q ∈ T.1 from trivial), htop]
-    exact Ideal.map_map (Scheme.ΓSpecIso (CommRingCat.of ℤ[X])).inv.hom
-      (X.presheaf.germ ⊤ q trivial).hom
-  have hstalk : (I.stalkIdeal (j q)).map e.hom.hom =
-      (infinitySectionIdeal u v).map g := by
-    change (I.stalkIdeal (j q)).map (j.stalkMap q).hom = _
-    rw [← Scheme.IdealSheafData.stalkIdeal_comap_of_isAffineHom I j q]
-    exact hK
-  change I.stalkIdeal (j q) = _
-  calc
-    I.stalkIdeal (j q) = ((I.stalkIdeal (j q)).map e.hom.hom).map e.inv.hom := by
-      rw [Ideal.map_map, ← CommRingCat.hom_comp, e.hom_inv_id,
-        CommRingCat.hom_id, Ideal.map_id]
-    _ = ((infinitySectionIdeal u v).map g).map e.inv.hom :=
-      congrArg (Ideal.map e.inv.hom) hstalk
-    _ = (infinitySectionIdeal u v).map (infinityChartGermAt ℤ q) :=
-      Ideal.map_map g e.inv.hom
+  exact infinityChart_stalkIdeal_eq ℤ (integralSection u v a b hab).ker
+    (infinitySectionIdeal u v) (integralSection_infinityChart_ideal_top u v a b hab) q
 
 end ShimizuYamaguchi26BranchedCoverings

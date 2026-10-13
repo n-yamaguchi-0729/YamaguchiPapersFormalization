@@ -21,12 +21,6 @@
     "EtaleFundamentalGroups": [
       "Nyll.EtaleFundamentalGroups"
     ],
-    "EtaleCohomology": [
-      "Nyll.EtaleCohomology"
-    ],
-    "JacobianVarieties": [
-      "Nyll.JacobianVarieties"
-    ],
     "Yamaguchi26AbfaithfulGalois": [
       "Nyll.Yamaguchi26AbfaithfulGalois"
     ],
@@ -77,8 +71,6 @@
     "ClassFieldTheory": 2,
     "AlgebraicCurves": 2,
     "EtaleFundamentalGroups": 2,
-    "EtaleCohomology": 2,
-    "JacobianVarieties": 3,
     "Yamaguchi26AbfaithfulGalois": 3,
     "Yamaguchi26SolvableCoverings": 3,
     "AnabelianGeometry": 3,
@@ -92,11 +84,14 @@
     "ClassFieldTheory",
     "AlgebraicCurves",
     "EtaleFundamentalGroups",
-    "EtaleCohomology",
-    "JacobianVarieties",
     "Yamaguchi26AbfaithfulGalois",
     "Yamaguchi26SolvableCoverings",
     "AnabelianGeometry",
     "ShimizuYamaguchi26BranchedCoverings"
+  ],
+  "primaryRoots": [
+    "Nyll.Yamaguchi26AbfaithfulGalois.All",
+    "Nyll.Yamaguchi26SolvableCoverings.All",
+    "Nyll.ShimizuYamaguchi26BranchedCoverings.All"
   ]
 }

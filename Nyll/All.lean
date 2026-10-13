@@ -4,20 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.All
-import Nyll.ValuedFieldTheory.All
-import Nyll.GaloisCohomology.All
-import Nyll.SchemeTheory.All
-import Nyll.ClassFieldTheory.All
-import Nyll.AlgebraicCurves.All
-import Nyll.EtaleFundamentalGroups.All
-import Nyll.EtaleCohomology.All
-import Nyll.JacobianVarieties.All
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
-import Nyll.AnabelianGeometry.All
 import Nyll.ShimizuYamaguchi26BranchedCoverings.All
 
 /-!
-Aggregate of the maintained libraries included in this public extract.
+Public entry point for the primary libraries of this extract.
 -/
