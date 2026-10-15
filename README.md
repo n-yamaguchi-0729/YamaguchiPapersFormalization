@@ -5,6 +5,8 @@
 
 A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
+[Library overview and selected results](https://n-yamaguchi-0729.github.io/NYLL/libraries/research-papers/).
+
 This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
 <!-- nyll-publication:distribution:begin -->
 Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All`, `Nyll.ShimizuYamaguchi26BranchedCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.

@@ -3405,7 +3405,7 @@
     "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot4FiniteEtaleStability.lean": "0d8435f10f8bdf98840bf81f2ff16e516ed1faad722a72af3351bec1e1ed7714",
     "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot5PerfectKernel.lean": "10a092dc05a2e7d16a118979810b9b56b4c46335b91e7e803bcfa64e6da8136c",
     "Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean": "4e2ce460406545dc19201a4fa108c72b69cac41c1e226c0f28027973560c3e1a",
-    "README.md": "05093059f6552021012f4944f1bc90ebc3ee45cb92c9a9e998b8b224eabf3904",
+    "README.md": "7434185b8a852c8dc6d68967fd4b03e3c82f9b055087d8e57c04b560bcd6741e",
     "lake-manifest.json": "ad850380b47b59868a88c7b76f8775a3fa5a55e432e1d111a007ff2ebf056ded",
     "lakefile.toml": "1b629e587a6a5e0e1efc9ca3a85da4293f3a95d33826892d76fac24ca18b5747",
     "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a"
