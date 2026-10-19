@@ -1610,8 +1610,8 @@
     ".github/scripts/publication/tests/test_publication_readme.py": "9ac01e5839e422face6c6c6649cf93459bb72021aba11d4bfc1b2ea673d1d19c",
     ".github/scripts/publication/tests/test_readme_presentation.py": "3761d385efaa6687b16d0caca7afdc8bab7bbc7a23d0d7fe953f3fa44d40f7d0",
     ".github/scripts/publication/tests/test_sawin_source_review.py": "da8678727c3fb83e1c71f7a36a34d267a6045dcd3a54c967ffae442349681729",
-    ".github/scripts/publication/verification/ExportSelected.lean": "9370f7f59574d5bd10161ca2588ed270f75ad139ae6393ea217f71a27f12177e",
-    ".github/scripts/publication/verification/Inventory.lean": "46fa04377ee51009bfc08415e9546b88ce5a518f117d506b7b2f90adb0f56d4a",
+    ".github/scripts/publication/verification/ExportSelected.lean": "ba9a2426c26115a1f2843458de7f8d613225720f592c0c325aab9f555727f71f",
+    ".github/scripts/publication/verification/Inventory.lean": "4449213056a1cf1c1cb4b7d175e00539b57be9c2d8f862e04d90e7ad70353fbe",
     ".github/scripts/publication/verification/README.md": "82ed63583fa98bf4b884bc053a28a5bf7ee0326a4ad68a929ad5e25b9164b567",
     ".github/scripts/publication/verification/ReplayKernel.lean": "068090945d168cb21c627a3deeface6c27c4d46ab0901071f8ce36070d41a549",
     ".github/scripts/publication/verification/scope.py": "7b103dac437958f971609db9282d43ed00de0ab0ae06ff650b3adf6746fbb1bd",
@@ -3208,5 +3208,5 @@
     "lakefile.toml": "8dfbebf03a04b7941ee00e705c93124bd5a282179762af70796a6d5d5e6a62a3",
     "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a"
   },
-  "verification_source_commit": "e72975e2ff41fa6b7c13cdd57c06bd6fa6a3848f"
+  "verification_source_commit": "acf95d70b45dc590c97c4b09efaa30bacbe27f52"
 }
