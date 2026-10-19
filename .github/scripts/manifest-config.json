@@ -51,7 +51,8 @@
     "__pycache__"
   ],
   "excludedPaths": [
-    ".github/scripts"
+    ".github/scripts",
+    ".github/scripts/publication"
   ],
   "enforceSourcePolicy": true,
   "depths": {

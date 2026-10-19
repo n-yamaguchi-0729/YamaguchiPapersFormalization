@@ -45,3 +45,9 @@ jobs:
     with:
       stage: all
       target: +Nyll.All
+
+  verify:
+    name: NanoDa and Lean kernel replay
+    needs: all
+    if: github.event.repository.private == false
+    uses: ./.github/workflows/proof-check.yml
