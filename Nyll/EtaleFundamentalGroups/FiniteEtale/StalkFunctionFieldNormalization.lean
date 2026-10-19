@@ -149,7 +149,7 @@ theorem
   let : IsScalarTower A K L := IsScalarTower.of_algebraMap_eq' rfl
   obtain ⟨U, hU, hxU, -⟩ :=
     exists_isAffineOpen_mem_and_subset
-      (X := X) (U := ⊤) (x := x) (by simp)
+      (X := X) (U := ⊤) (x := x) trivial
   let : Nonempty U := ⟨⟨x, hxU⟩⟩
   let R := Γ(X, U)
   let : Algebra R K := (X.germToFunctionField U).hom.toAlgebra

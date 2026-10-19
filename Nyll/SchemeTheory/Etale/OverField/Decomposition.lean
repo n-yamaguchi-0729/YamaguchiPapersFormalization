@@ -30,7 +30,7 @@ namespace AlgebraicGeometry.Scheme.Etale
 field extensions, indexed canonically by its points. -/
 @[stacks 02GL "An étale scheme over a field is a disjoint union of spectra of finite separable \
 field extensions."]
-theorem exists_iso_sigmaSpec (K : Type u) [Field K]
+theorem exists_iso_sigmaSpec_with_point_labels (K : Type u) [Field K]
     (X : (Spec (.of K)).Etale) :
     ∃ (L : X.left → CommRingCat.{u})
       (a : ∀ x, CommRingCat.of K ⟶ L x)
@@ -38,7 +38,9 @@ theorem exists_iso_sigmaSpec (K : Type u) [Field K]
       (∀ x, IsField (L x)) ∧
         (∀ x, letI := (a x).hom.toAlgebra
           Module.Finite K (L x) ∧ Algebra.IsSeparable K (L x)) ∧
-        e.hom ≫ X.hom = Sigma.desc (fun x ↦ Spec.map (a x)) := by
+        e.hom ≫ X.hom = Sigma.desc (fun x ↦ Spec.map (a x)) ∧
+        (∀ x, ∃ z : Spec (L x),
+          e.hom (Sigma.ι (fun x ↦ Spec (L x)) x z) = x) := by
   let structureMap : X.left ⟶ Spec (.of K) := X.hom
   let : IsLocallyArtinian X.left := by
     rw [isLocallyArtinian_iff_openCover X.left.affineCover]
@@ -152,6 +154,54 @@ theorem exists_iso_sigmaSpec (K : Type u) [Field K]
       _ = Sigma.ι (fun x ↦ Spec (L x)) x ≫
           Sigma.desc (fun x ↦ Spec.map (a x)) :=
         (Sigma.ι_comp_desc (fun x ↦ Spec.map (a x)) x).symm
+  have hePoint (x : X.left) :
+      ∃ z : Spec (L x), e.hom (Sigma.ι (fun x ↦ Spec (L x)) x z) = x := by
+    let : Field (L x) := (hField x).toField
+    let : Subsingleton (Y x) := ⟨fun p q => by
+      apply Subtype.ext
+      have hp : p.1 = x := by
+        have hp_mem : p.1 ∈ ({x} : Set X.left) := p.property
+        exact Set.mem_singleton_iff.mp hp_mem
+      have hq : q.1 = x := by
+        have hq_mem : q.1 ∈ ({x} : Set X.left) := q.property
+        exact Set.mem_singleton_iff.mp hq_mem
+      exact hp.trans hq.symm⟩
+    let p : Y x := ⟨x, by
+      change x ∈ ({x} : Set X.left)
+      exact Set.mem_singleton x⟩
+    refine ⟨(Y x).isoSpec.hom p, ?_⟩
+    have hcomponent : Sigma.ι (fun x ↦ Spec (L x)) x ≫ e.hom =
+        (Y x).isoSpec.inv ≫ (U x).ι := by
+      simp only [e, Iso.trans_hom, Iso.symm_hom,
+        Sigma.ι_mapIso_inv_assoc, asIso_hom, d]
+      rw [Sigma.ι_comp_desc]
+    change (Sigma.ι (fun x ↦ Spec (L x)) x ≫ e.hom)
+      ((Y x).isoSpec.hom p) = x
+    rw [hcomponent]
+    have hIso : (Y x).isoSpec.inv ((Y x).isoSpec.hom p) = p := by
+      calc
+        _ = ((Y x).isoSpec.hom ≫ (Y x).isoSpec.inv) p := rfl
+        _ = p := by rw [Iso.hom_inv_id]; rfl
+    change (U x).ι ((Y x).isoSpec.inv ((Y x).isoSpec.hom p)) = x
+    rw [hIso]
+    rfl
+  exact ⟨L, a, e, hField, hFiniteSep, he, hePoint⟩
+
+/-- A scheme étale over a field is a coproduct of spectra of finite separable
+field extensions, indexed by its points. -/
+@[stacks 02GL "An étale scheme over a field is a disjoint union of spectra of finite separable \
+field extensions."]
+theorem exists_iso_sigmaSpec (K : Type u) [Field K]
+    (X : (Spec (.of K)).Etale) :
+    ∃ (L : X.left → CommRingCat.{u})
+      (a : ∀ x, CommRingCat.of K ⟶ L x)
+      (e : (∐ fun x ↦ Spec (L x)) ≅ X.left),
+      (∀ x, IsField (L x)) ∧
+        (∀ x, letI := (a x).hom.toAlgebra
+          Module.Finite K (L x) ∧ Algebra.IsSeparable K (L x)) ∧
+        e.hom ≫ X.hom = Sigma.desc (fun x ↦ Spec.map (a x)) := by
+  obtain ⟨L, a, e, hField, hFiniteSep, he, _⟩ :=
+    exists_iso_sigmaSpec_with_point_labels K X
   exact ⟨L, a, e, hField, hFiniteSep, he⟩
 
 end AlgebraicGeometry.Scheme.Etale

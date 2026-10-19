@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRootFixedComponentEtale
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+import Mathlib.Algebra.Algebra.Defs
 
 /-!
 # Literal localized normalization for an active Galois root
@@ -223,6 +224,14 @@ theorem
     integralClosure_strictNormalCrossingsGaloisActiveRoot_fixedComponent_etale
       (K := K) (L := L) hNC j hj P hP htjP hCharZero
         (D := D) qD m hm
+  have hQAlgebra :
+      genericTensorFieldComponentLeftScalarAlgebra (R := Q) m =
+        localizationAtPrimeToExtensionAlgebra (K := F) (L := M) qD := by
+    apply Algebra.algebra_ext _ _
+    intro x
+    rfl
+  dsimp only at hlocal
+  rw [hQAlgebra] at hlocal
   exact localization_integralClosure_etale_of_local_integralClosure_etale
     (A := D) (K := F) (L := M) qD hlocal
 

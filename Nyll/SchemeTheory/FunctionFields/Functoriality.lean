@@ -31,7 +31,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun w ↦ Z.presheaf.stalk w) h) =
       (Z.presheaf.stalkCongr (.of_eq h)).hom := by
   subst z'
-  simp
+  exact (Z.presheaf.stalkSpecializes_refl z).symm
 
 /-- A dense morphism between irreducible schemes sends the generic point to
 the generic point. -/
@@ -69,16 +69,13 @@ the generic point. -/
 theorem functionFieldMap_comp_germToFunctionField_top
     (f : Y ⟶ X) [IsIntegral X] [IsIntegral Y]
     (hf : DenseRange f) :
-    letI : Nonempty (⊤ : X.Opens) :=
-      ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
-    letI : Nonempty (⊤ : Y.Opens) :=
-      ⟨⟨Classical.choice (inferInstance : Nonempty Y), by simp⟩⟩
+    let _ : Nonempty (⊤ : X.Opens) :=
+      ⟨⟨Classical.choice (inferInstance : Nonempty X), by trivial⟩⟩
+    let _ : Nonempty (⊤ : Y.Opens) :=
+      ⟨⟨Classical.choice (inferInstance : Nonempty Y), by trivial⟩⟩
     (functionFieldMap f hf).comp (X.germToFunctionField ⊤).hom =
       (Y.germToFunctionField ⊤).hom.comp f.appTop.hom := by
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
-  let : Nonempty (⊤ : Y.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty Y), by simp⟩⟩
+  intro nonemptyX nonemptyY
   let h : genericPoint X = f (genericPoint Y) :=
     (map_genericPoint_of_denseRange f hf).symm
   have hEq : eqToHom (show
@@ -94,7 +91,7 @@ theorem functionFieldMap_comp_germToFunctionField_top
   simp only [TopCat.Presheaf.stalkCongr_hom]
   rw [← Category.assoc]
   erw [TopCat.Presheaf.germ_stalkSpecializes]
-  exact f.germ_stalkMap ⊤ (genericPoint Y) (by simp)
+  exact f.germ_stalkMap ⊤ (genericPoint Y) (by trivial)
 
 /-- The algebra structure on the target function field induced by a dense
 morphism of integral schemes. -/

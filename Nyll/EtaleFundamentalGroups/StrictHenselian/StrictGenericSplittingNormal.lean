@@ -8,8 +8,8 @@ import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
 import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.GenericTensorSplit
-import Nyll.SchemeTheory.RingTheory.IntegralClosureEtaleOfSplit
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.GenericTensorSplit
+import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
 import Mathlib.Algebra.Algebra.Defs
 import Mathlib.Algebra.Category.Ring.Under.Basic
 import Mathlib.AlgebraicGeometry.AffineScheme

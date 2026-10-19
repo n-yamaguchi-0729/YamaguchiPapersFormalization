@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenFunctionField
+import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 import Nyll.EtaleFundamentalGroups.Purity.ConnectedNormalizationExtension
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
@@ -33,7 +33,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun w ↦ Z.presheaf.stalk w) h) =
       (Z.presheaf.stalkCongr (.of_eq h)).hom := by
   subst z'
-  simp
+  exact (Z.presheaf.stalkSpecializes_refl z).symm
 
 /-- The generic-point morphism is natural for a dense morphism of integral
 schemes and the induced literal map on function fields. -/
@@ -83,12 +83,12 @@ noncomputable def normalizationSourceIso
       (a ≫ b) (𝟙 _) g.fromNormalization
     · simp [a, b]
     · simp [a, b]
-    · simp
+    · exact Category.id_comp _
   · apply Scheme.Hom.normalization.hom_ext f
       (b ≫ a) (𝟙 _) f.fromNormalization
     · simp [a, b]
     · simp [a, b]
-    · simp
+    · exact Category.id_comp _
 
 @[reassoc (attr := simp)]
 theorem normalizationSourceIso_hom_fromNormalization
@@ -198,7 +198,7 @@ theorem normalization_isFiniteEtale_of_sourceIso_connectedCover
       eZ.hom ≫ Z.hom =
           eZ.hom ≫ (eZ.inv ≫ fZ.fromNormalization) := by
         exact congrArg (fun k ↦ eZ.hom ≫ k) hInv.symm
-      _ = fZ.fromNormalization := by simp
+      _ = fZ.fromNormalization := Iso.hom_inv_id_assoc _ _
   have hTotal : eTotal.hom ≫ Z.hom = f.fromNormalization := by
     calc
       eTotal.hom ≫ Z.hom =

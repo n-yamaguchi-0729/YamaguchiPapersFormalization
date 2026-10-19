@@ -160,7 +160,7 @@ private theorem iteratedConstructionList_regularSystem
         simpa [aLastT] using hT.2
       have haLastT : aLastT ∈ maximalIdeal T := by
         rw [← hgenT]
-        exact Ideal.subset_span (by simp)
+        exact Ideal.subset_span List.mem_cons_self
       let : IsLocalRing (AdjoinRoot f) :=
         isLocalRing_adjoinRoot_X_pow_sub_C (hn (Fin.last r)) haLastT
       have hf : f.Monic :=
@@ -205,17 +205,12 @@ theorem iteratedLocalRootCoverParameterList_regularSystem
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A) :
     let B := iteratedRadical A r n a
     let bs := iteratedLocalRootCoverParameterList A n a rs
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
+    let _ : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span
+        (List.mem_append_left rs (List.mem_ofFn.mpr ⟨i, rfl⟩)))
     IsRegular B bs ∧ Ideal.ofList bs = maximalIdeal B := by
-  dsimp only
-  let B := iteratedRadical A r n a
-  have ha : ∀ i, a i ∈ maximalIdeal A := by
-    intro i
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+  intro B bs localB
   let : Module.Finite A B := finite_iteratedRadical n a hn
   let : IsNoetherianRing B := IsNoetherianRing.of_finite A B
   have hconstruction :=
@@ -271,7 +266,7 @@ theorem algebraMap_mem_iteratedLocalRootCoverParameterList
   rw [iteratedLocalRootCoverParameterList]
   simp only [List.mem_reverse]
   induction rs with
-  | nil => simp at hx
+  | nil => cases hx
   | cons y ys ih =>
       rw [constructionList_cons]
       simp only [List.mem_cons] at hx ⊢
@@ -291,22 +286,17 @@ theorem iteratedRadical_regularSystem_geometry
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A) :
     let B := iteratedRadical A r n a
     let bs := iteratedLocalRootCoverParameterList A n a rs
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
+    let _ : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span
+        (List.mem_append_left rs (List.mem_ofFn.mpr ⟨i, rfl⟩)))
     IsNoetherianRing B ∧ IsDomain B ∧ IsRegularLocalRing B ∧
       IsRegular B bs ∧ Ideal.ofList bs = maximalIdeal B ∧
       (∀ p ∈ bs, Prime p) ∧
       (∀ p ∈ bs,
         IsDomain (B ⧸ Ideal.span {p}) ∧
           IsRegularLocalRing (B ⧸ Ideal.span {p})) := by
-  dsimp only
-  let B := iteratedRadical A r n a
-  have ha : ∀ i, a i ∈ maximalIdeal A := by
-    intro i
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+  intro B bs localB
   let : Module.Finite A B := finite_iteratedRadical n a hn
   let : IsNoetherianRing B := IsNoetherianRing.of_finite A B
   have hsystem := iteratedLocalRootCoverParameterList_regularSystem
@@ -332,12 +322,6 @@ theorem isDomain_iteratedRadical_of_regular_parameters
     (hreg : IsRegular A (List.ofFn a ++ rs))
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A) :
     IsDomain (iteratedRadical A r n a) := by
-  let B := iteratedRadical A r n a
-  have ha : ∀ i, a i ∈ maximalIdeal A := by
-    intro i
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
   exact (iteratedRadical_regularSystem_geometry n a rs hn hreg hgen).2.1
 
 /-- Every indexed final root is prime, and its quotient is a regular local
@@ -349,21 +333,16 @@ theorem iteratedRadicalRoot_geometry_of_regular_parameters
     (hreg : IsRegular A (List.ofFn a ++ rs))
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A) :
     let B := iteratedRadical A r n a
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
+    let _ : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span
+        (List.mem_append_left rs (List.mem_ofFn.mpr ⟨i, rfl⟩)))
     ∀ i,
       Prime (iteratedRadicalRoot A n a i) ∧
         IsDomain (B ⧸ Ideal.span {iteratedRadicalRoot A n a i}) ∧
         IsRegularLocalRing
           (B ⧸ Ideal.span {iteratedRadicalRoot A n a i}) := by
-  dsimp only
-  let B := iteratedRadical A r n a
-  have ha : ∀ i, a i ∈ maximalIdeal A := by
-    intro i
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+  intro B localB
   obtain ⟨_, _, _, _, _, hprime, hquot⟩ :=
     iteratedRadical_regularSystem_geometry n a rs hn hreg hgen
   intro i
@@ -381,19 +360,14 @@ theorem iteratedRadicalMappedRadicand_geometry_of_exponent_one
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A)
     (i : Fin r) (hi : n i = 1) :
     let B := iteratedRadical A r n a
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun j => by
+    let _ : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun j => by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span
+        (List.mem_append_left rs (List.mem_ofFn.mpr ⟨j, rfl⟩)))
     Prime (algebraMap A B (a i)) ∧
       IsDomain (B ⧸ Ideal.span {algebraMap A B (a i)}) ∧
       IsRegularLocalRing (B ⧸ Ideal.span {algebraMap A B (a i)}) := by
-  dsimp only
-  let B := iteratedRadical A r n a
-  have ha : ∀ j, a j ∈ maximalIdeal A := by
-    intro j
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+  intro B localB
   have hroot :=
     iteratedRadicalRoot_geometry_of_regular_parameters n a rs hn hreg hgen i
   have heq : iteratedRadicalRoot A n a i = algebraMap A B (a i) := by
@@ -412,20 +386,15 @@ theorem iteratedRadicalRemainingParameter_geometry
     (hreg : IsRegular A (List.ofFn a ++ rs))
     (hgen : Ideal.ofList (List.ofFn a ++ rs) = maximalIdeal A) :
     let B := iteratedRadical A r n a
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
+    let _ : IsLocalRing B := isLocalRing_iteratedRadical n a hn (fun i => by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span
+        (List.mem_append_left rs (List.mem_ofFn.mpr ⟨i, rfl⟩)))
     ∀ x ∈ rs,
       Prime (algebraMap A B x) ∧
         IsDomain (B ⧸ Ideal.span {algebraMap A B x}) ∧
         IsRegularLocalRing (B ⧸ Ideal.span {algebraMap A B x}) := by
-  dsimp only
-  let B := iteratedRadical A r n a
-  have ha : ∀ i, a i ∈ maximalIdeal A := by
-    intro i
-    rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+  intro B localB
   obtain ⟨_, _, _, _, _, hprime, hquot⟩ :=
     iteratedRadical_regularSystem_geometry n a rs hn hreg hgen
   intro x hx

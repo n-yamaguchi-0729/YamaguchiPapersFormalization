@@ -45,7 +45,7 @@ theorem exists_rationalCyclotomicAutomorphism_inverting_torsionUnits :
   have hzmem :
       (z : rationalCyclotomicField) ∈ rationalCyclotomicLevel npos := by
     apply IntermediateField.subset_adjoin
-    exact ⟨(npos : ℕ), by simp, npos.ne_zero, by simpa [npos] using hzn'⟩
+    exact ⟨(npos : ℕ), Set.mem_singleton _, npos.ne_zero, by simpa [npos] using hzn'⟩
   let y : rationalCyclotomicLevel npos := ⟨(z : rationalCyclotomicField), hzmem⟩
   let a : (ZMod (npos : ℕ))ˣ :=
     IsCyclotomicExtension.Rat.galEquivZMod (npos : ℕ)
@@ -90,7 +90,8 @@ theorem exists_rationalCyclotomicAutomorphism_inverting_torsionUnits :
           Units.map (PadicInt.toZModPow k).toMonoidHom
               (-1 : ℤ_[p.1]ˣ) = -1 := by
         apply Units.ext
-        simp
+        change (PadicInt.toZModPow k) (-1) = -1
+        rw [map_neg, map_one]
       have hunitsMapNeg :
           ZMod.unitsMap hpow (-1) = (-1 : (ZMod (p.1 ^ k))ˣ) := by
         apply Units.ext
@@ -154,7 +155,8 @@ theorem exists_rationalCyclotomicAutomorphism_inverting_torsionUnits :
       calc
         (z : rationalCyclotomicField) ^ (n - 1) =
             ((z : rationalCyclotomicField) ^ (n - 1) * z) *
-              (z : rationalCyclotomicField)⁻¹ := by simp
+              (z : rationalCyclotomicField)⁻¹ := by
+                rw [mul_assoc, mul_inv_cancel₀ (Units.ne_zero z), mul_one]
         _ = (z : rationalCyclotomicField)⁻¹ := by rw [hpredMul, one_mul]
 
 private theorem exists_rationalCyclotomicAutomorphism_inverting_torsion :
@@ -338,9 +340,11 @@ theorem exists_algEquiv_inverting_torsionUnits_of_separableClosure_linearDisjoin
           separableClosure.isSepClosure ℚ (AlgebraicClosure ℚ)
         apply Algebra.IsSeparable.of_equiv_equiv e.symm
           (RingEquiv.refl (SeparableClosure ℚ))
-        ext q
-        rw [RingHom.algebraMap_toAlgebra]
-        simp
+        apply RingHom.ext
+        intro q
+        change algebraMap ℚ (SeparableClosure ℚ) (e (e.symm q)) =
+          algebraMap ℚ (SeparableClosure ℚ) q
+        rw [e.apply_symm_apply]
       exact IsSepClosure.mk inferInstance hsep
     obtain ⟨sigmaRat, hsigmaRat⟩ :=
       exists_separableClosureAutomorphism_inverting_torsion_of_ratEquiv k e
@@ -642,28 +646,26 @@ theorem inertia_isConj_inv_of_geometricallyIntegral_residue
     [CharZero (decompositionResidueField K V)]
     [Finite (inertiaGroup K V)]
     [IsSepClosure (decompositionResidueField K V) (selectedResidueField V)] :
-    letI : CharZero (selectedResidueField V) :=
+    let _ : CharZero (selectedResidueField V) :=
       charZero_of_injective_algebraMap
         (algebraMap (decompositionResidueField K V)
           (selectedResidueField V)).injective
-    letI : Algebra ℚ (decompositionResidueField K V) :=
+    let _ : Algebra ℚ (decompositionResidueField K V) :=
       DivisionRing.toRatAlgebra
-    letI : Algebra ℚ (selectedResidueField V) :=
+    let _ : Algebra ℚ (selectedResidueField V) :=
       DivisionRing.toRatAlgebra
-    letI : IsScalarTower ℚ (decompositionResidueField K V)
+    let _ : IsScalarTower ℚ (decompositionResidueField K V)
         (selectedResidueField V) :=
-      IsScalarTower.of_algebraMap_eq fun q => by simp
+      IsScalarTower.of_algebraMap_eq fun q =>
+        (RingHom.map_rat_algebraMap
+          (algebraMap (decompositionResidueField K V) (selectedResidueField V)) q).symm
     AlgebraicGeometry.GeometricallyIntegral
       (AlgebraicGeometry.Spec.map (CommRingCat.ofHom
         (algebraMap ℚ (decompositionResidueField K V)))) →
     ∀ sigma : inertiaGroup K V,
       IsConj (sigma : decompositionGroup K V)
         ((sigma⁻¹ : inertiaGroup K V) : decompositionGroup K V) := by
-  intro hgeo
-  let : CharZero (selectedResidueField V) :=
-    charZero_of_injective_algebraMap
-      (algebraMap (decompositionResidueField K V)
-        (selectedResidueField V)).injective
+  intro charZeroResidue rationalBase rationalResidue rationalTower hgeo
   apply inertia_isConj_inv_of_residue_linearDisjoint K V
   exact
     EtaleFundamentalGroups.separableClosure_linearDisjoint_of_geometricallyIntegral

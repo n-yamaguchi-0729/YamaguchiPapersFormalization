@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
-import Nyll.SchemeTheory.RingTheory.StrictHenselianFiniteDomainPointLift
+import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPointLift
 import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!

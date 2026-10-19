@@ -39,7 +39,10 @@ lemma Algebra.FormallySmooth.of_bijective_algebraMap {R S : Type u} [CommRing R]
     [Algebra R S] (h : Function.Bijective (algebraMap R S)) :
     Algebra.FormallySmooth R S :=
   Algebra.FormallySmooth.of_equiv
-    { __ := RingEquiv.ofBijective (algebraMap R S) h, commutes' := by simp }
+    { __ := RingEquiv.ofBijective (algebraMap R S) h
+      commutes' := fun r ↦ by
+        change algebraMap R S (algebraMap R R r) = algebraMap R S r
+        rw [Algebra.algebraMap_self_apply] }
 
 namespace Algebra
 

@@ -47,7 +47,7 @@ theorem mem_puncturedSpectrumOpen_iff
     x ∈ puncturedSpectrumOpen R ↔ x ≠ closedPoint R := by
   change x ∈ ({closedPoint R}ᶜ : Set (PrimeSpectrum R)) ↔
     x ≠ closedPoint R
-  simp
+  exact Iff.rfl
 
 /-- A positive-dimensional local domain has a nonempty punctured spectrum:
 its generic point is different from the closed point. -/
@@ -60,7 +60,7 @@ theorem puncturedSpectrum_nonempty_of_one_le_ringKrullDim
     have hdimZero : ringKrullDim R = 0 := by
       rw [← maximalIdeal_height_eq_ringKrullDim, hmaximal,
         Ideal.height_bot]
-      simp
+      rfl
     rw [hdimZero] at hdim
     exact (not_le_of_gt (by norm_num : (0 : WithBot ℕ∞) < 1)) hdim
   let η : PrimeSpectrum R := ⟨⊥, inferInstance⟩

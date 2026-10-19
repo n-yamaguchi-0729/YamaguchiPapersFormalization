@@ -43,7 +43,9 @@ theorem height_le_length_of_mem_minimalPrimes_ofList
   calc
     P.height ≤ Set.ncard {x : C | x ∈ xs} := hheight
     _ = xs.toFinset.card := by
-      rw [show {x : C | x ∈ xs} = (xs.toFinset : Set C) by ext; simp,
+      rw [show {x : C | x ∈ xs} = (xs.toFinset : Set C) by
+        ext x
+        exact List.mem_toFinset.symm,
         Set.ncard_coe_finset]
     _ ≤ xs.length := by exact_mod_cast List.toFinset_card_le xs
 

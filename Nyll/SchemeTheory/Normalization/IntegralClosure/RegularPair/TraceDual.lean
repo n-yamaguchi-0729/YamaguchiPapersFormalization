@@ -73,7 +73,7 @@ private theorem traceDual_one_finite :
         (IsIntegralClosure.isLocalization A K L B)
   have hspanLocalized :
       Submodule.span K (f '' (Set.univ : Set B)) = ⊤ :=
-    span_eq_top_of_isLocalizedModule K A⁰ f (by simp)
+    span_eq_top_of_isLocalizedModule K A⁰ f Submodule.span_univ
   have hspan :
       Submodule.span K ((J.restrictScalars A : Submodule A L) : Set L) = ⊤ := by
     change Submodule.span K ((J : Submodule B L) : Set L) = ⊤

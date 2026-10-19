@@ -11,8 +11,8 @@ import Nyll.SchemeTheory.Divisors.AffineComplement
 import Nyll.SchemeTheory.Divisors.Basic
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 import Nyll.SchemeTheory.Affine.ChartStalkLocalization
-import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Normalization
 import Mathlib.AlgebraicGeometry.Morphisms.Basic

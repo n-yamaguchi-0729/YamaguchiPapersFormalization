@@ -107,7 +107,7 @@ theorem intermediateField_eq_adjoin_pow_finrank_of_pureRadical
   have hαintM : IsIntegral M α := IsIntegral.of_finite M α
   let β : M := ⟨α ^ d, by
     apply IntermediateField.subset_adjoin
-    simp⟩
+    exact Set.mem_singleton _⟩
   have hroot : Polynomial.aeval α (X ^ d - C β) = 0 := by
     simp [β]
   have hdvd : minpoly M α ∣ X ^ d - C β := minpoly.dvd M α hroot

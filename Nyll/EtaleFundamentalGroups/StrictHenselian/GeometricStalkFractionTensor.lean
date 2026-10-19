@@ -16,7 +16,7 @@ import Mathlib.RingTheory.TensorProduct.Maps
 /-!
 # The actual fraction field of the geometric étale stalk
 
-For a normal local domain, the generic tensor of its actual geometric stalk
+For a normal domain, the generic tensor of its actual geometric stalk
 is a localization of a domain at nonzero elements. It is integral over the
 original fraction field, so every nonzero element is a unit. Thus it is the
 fraction ring of the actual stalk, with its canonical scalar map.
@@ -36,7 +36,7 @@ namespace EtaleFundamentalGroups.StrictHenselian
 universe u
 
 variable {R Ω : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
-  [IsLocalRing R] [Field Ω] (φ : R →+* Ω) [IsLocalHom φ]
+  [Field Ω] (φ : R →+* Ω)
 
 /-- The canonical generic tensor is a fraction ring of the actual geometric
 stalk: its integral elements over the base field are units when nonzero. -/
@@ -58,7 +58,8 @@ theorem geometricStalk_genericTensor_isFractionRing :
     rintro _ ⟨r, hr, rfl⟩
     apply mem_nonZeroDivisors_iff_ne_zero.mpr
     change geometricStalkStructureMap φ r ≠ 0
-    exact (map_ne_zero_iff _ (geometricStalkStructureMap_injective φ)).mpr
+    exact (map_ne_zero_iff _
+      (geometricStalkStructureMap_injective_of_isDomain φ)).mpr
       (nonZeroDivisors.ne_zero hr)
   have : IsLocalization M T := IsLocalization.tensorRight (R := R) (S := A) (A := K) R⁰
   have : IsDomain T := IsLocalization.isDomain_of_le_nonZeroDivisors T hM
@@ -69,7 +70,7 @@ theorem geometricStalk_genericTensor_isFractionRing :
     (IsLocalization.to_map_ne_zero_of_mem_nonZeroDivisors T hM ha)
 
 /-- Scalar extension of the original fraction field is the actual fraction
-field of the constructed geometric stalk over a normal local domain. -/
+field of the constructed geometric stalk over a normal domain. -/
 def geometricStalkFractionTensorEquiv :
     letI : Algebra R (geometricStalk (Spec.map (CommRingCat.ofHom φ))) :=
       (geometricStalkStructureMap φ).toAlgebra

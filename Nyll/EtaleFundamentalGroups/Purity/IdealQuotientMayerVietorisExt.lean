@@ -69,7 +69,7 @@ theorem idealQuotientMayerVietorisDifference_comp_diagonal
   | _ r =>
       change (Ideal.Quotient.mk (I ⊔ J)) r -
         (Ideal.Quotient.mk (I ⊔ J)) r = 0
-      simp
+      exact sub_self _
 
 theorem idealQuotientMayerVietorisDiagonal_injective (I J : Ideal R) :
     Function.Injective (idealQuotientMayerVietorisDiagonal I J) := by
@@ -95,7 +95,7 @@ theorem idealQuotientMayerVietorisDifference_surjective (I J : Ideal R) :
       refine ⟨(Submodule.Quotient.mk r, 0), ?_⟩
       change (Ideal.Quotient.mk (I ⊔ J)) r - 0 =
         (Ideal.Quotient.mk (I ⊔ J)) r
-      simp
+      exact sub_zero _
 
 theorem idealQuotientMayerVietoris_functionExact (I J : Ideal R) :
     Function.Exact (idealQuotientMayerVietorisDiagonal I J)

@@ -212,7 +212,7 @@ private theorem derivedLocalCohomology_span_singleton_succ_transition_one_eq_zer
   rw [CategoryTheory.Abelian.Ext.addEquiv₀_symm_apply]
   rw [CategoryTheory.Abelian.Ext.mk₀_comp_mk₀]
   rw [principalIdealPower_succ_inclusion_comp_eq_zero x M hx n b]
-  simp
+  rw [CategoryTheory.Abelian.Ext.mk₀_zero, CategoryTheory.Abelian.Ext.comp_zero]
 
 /-- If `x` annihilates `M`, then degree-one derived local cohomology of `M`
 supported at the principal ideal `(x)` vanishes. -/

@@ -62,8 +62,9 @@ theorem exists_heightTwo_prime_of_nonunit_natCast_mod_prime
   let : P.IsPrime := hPmin.isPrime
   let : (Ideal.span {t}).IsPrime :=
     Ideal.isPrime_span_singleton_of_prime ht
-  have htP : t ∈ P := hPmin.le (Ideal.subset_span (by simp))
-  have heP : (e : A) ∈ P := hPmin.le (Ideal.subset_span (by simp))
+  have htP : t ∈ P := hPmin.le (Ideal.subset_span (Set.mem_insert t {(e : A)}))
+  have heP : (e : A) ∈ P :=
+    hPmin.le (Ideal.subset_span (Set.mem_insert_of_mem t (Set.mem_singleton _)))
   have hspan_le : Ideal.span {t} ≤ P := Ideal.span_le.mpr (by simpa)
   have hspan_lt : Ideal.span {t} < P :=
     hspan_le.lt_of_not_ge fun hPspan ↦ he_notmem (hPspan heP)

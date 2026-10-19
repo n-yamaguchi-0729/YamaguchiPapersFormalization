@@ -448,7 +448,7 @@ private theorem tensorProduct_localization_right_maximalIdeal_core
       _ = 0 := by
         rw [Ideal.algebraMap_residueField_eq_zero.mpr
           ((Ideal.mem_of_liesOver (P := q) (p := p) x).mp hx)]
-        simp
+        exact TensorProduct.zero_tmul _ _
   let B := p'.Fiber A
   let rover : p'.primesOver A :=
     ⟨r.asIdeal, inferInstance, inferInstance⟩
@@ -485,8 +485,7 @@ private theorem tensorProduct_localization_right_maximalIdeal_core
                 ((x : R') ⊗ₜ[R] (1 : S)))) =
             (1 : q.ResidueField) ⊗ₜ[R] x
         rw [Algebra.TensorProduct.commRight_symm_tmul,
-          Algebra.TensorProduct.cancelBaseChange_tmul]
-        simp }
+          Algebra.TensorProduct.cancelBaseChange_tmul, one_smul] }
   let H := p'.ResidueField
   let G := H ⊗[p.ResidueField] q.ResidueField
   let eB0 : B ≃ₐ[H] (H ⊗[R] q.ResidueField) :=

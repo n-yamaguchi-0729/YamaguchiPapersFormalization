@@ -37,30 +37,19 @@ theorem adjoinRootLocalizationAtRootPrime_isDomain
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let _ : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let _ : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let _ : q.LiesOver P := span_root_liesOver_span_radicand hN hp
     let V := Localization.AtPrime P
-    letI : Algebra V (Localization.AtPrime q) :=
+    let _ : Algebra V (Localization.AtPrime q) :=
       Localization.AtPrime.algebraOfLiesOver P q
     IsDomain (Localization.AtPrime q) := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
-  let D := AdjoinRoot (X ^ N - C p)
-  let q := Ideal.span
-    ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-  let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-  let V := Localization.AtPrime P
-  let : IsDiscreteValuationRing V :=
-    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
-      R p hp
+  intro P D q hP hq hLiesOver V algVW
+  have hDvrV : IsDiscreteValuationRing V :=
+    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime R p hp
   let pV : V := algebraMap R V p
-  have hmaxV : IsLocalRing.maximalIdeal V =
-      Ideal.span ({pV} : Set V) :=
+  have hmaxV : IsLocalRing.maximalIdeal V = Ideal.span ({pV} : Set V) :=
     localizationAtPrime_maximalIdeal_eq_span_of_eq_span P p rfl
   have hpVne : pV ≠ 0 := by
     intro hpVzero
@@ -68,17 +57,12 @@ theorem adjoinRootLocalizationAtRootPrime_isDomain
     exact (IsLocalization.injective V P.primeCompl_le_nonZeroDivisors)
       (by simpa only [map_zero] using hpVzero)
   have hpV : Prime pV :=
-    (IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal
-      pV hpVne hmaxV).prime
+    (IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal pV hpVne hmaxV).prime
   let Rn := AdjoinRoot (X ^ N - C pV)
-  let : IsDomain Rn :=
+  have hDomainRn : IsDomain Rn :=
     isDomain_adjoinRoot_X_pow_sub_C_of_prime hN pV hpV
-  let : Algebra D Rn :=
-    adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  let W := Localization.AtPrime q
-  let : Algebra V W :=
-    Localization.AtPrime.algebraOfLiesOver P q
-  let eLocal : Rn ≃ₐ[V] W :=
+  let algDRn : Algebra D Rn := adjoinRootLocalizationBaseChangeAlgebra R N p hp
+  let eLocal : Rn ≃ₐ[V] Localization.AtPrime q :=
     adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
   exact eLocal.symm.toMulEquiv.isDomain Rn
 
@@ -91,32 +75,21 @@ theorem adjoinRootLocalizationAtRootPrime_isDiscreteValuationRing
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let _ : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let _ : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let _ : q.LiesOver P := span_root_liesOver_span_radicand hN hp
     let V := Localization.AtPrime P
-    letI : Algebra V (Localization.AtPrime q) :=
+    let _ : Algebra V (Localization.AtPrime q) :=
       Localization.AtPrime.algebraOfLiesOver P q
-    letI : IsDomain (Localization.AtPrime q) :=
+    let _ : IsDomain (Localization.AtPrime q) :=
       adjoinRootLocalizationAtRootPrime_isDomain hN hp
     IsDiscreteValuationRing (Localization.AtPrime q) := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
-  let D := AdjoinRoot (X ^ N - C p)
-  let q := Ideal.span
-    ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-  let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-  let V := Localization.AtPrime P
-  let : IsDiscreteValuationRing V :=
-    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
-      R p hp
+  intro P D q hP hq hLiesOver V algVW hDomainW
+  have hDvrV : IsDiscreteValuationRing V :=
+    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime R p hp
   let pV : V := algebraMap R V p
-  have hmaxV : IsLocalRing.maximalIdeal V =
-      Ideal.span ({pV} : Set V) :=
+  have hmaxV : IsLocalRing.maximalIdeal V = Ideal.span ({pV} : Set V) :=
     localizationAtPrime_maximalIdeal_eq_span_of_eq_span P p rfl
   have hpVne : pV ≠ 0 := by
     intro hpVzero
@@ -124,25 +97,16 @@ theorem adjoinRootLocalizationAtRootPrime_isDiscreteValuationRing
     exact (IsLocalization.injective V P.primeCompl_le_nonZeroDivisors)
       (by simpa only [map_zero] using hpVzero)
   have hpV : Prime pV :=
-    (IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal
-      pV hpVne hmaxV).prime
+    (IsDiscreteValuationRing.irreducible_of_span_eq_maximalIdeal pV hpVne hmaxV).prime
   let Rn := AdjoinRoot (X ^ N - C pV)
-  let : IsDomain Rn :=
+  have hDomainRn : IsDomain Rn :=
     isDomain_adjoinRoot_X_pow_sub_C_of_prime hN pV hpV
-  let : IsDiscreteValuationRing Rn :=
+  have hDvrRn : IsDiscreteValuationRing Rn :=
     isDiscreteValuationRing_adjoinRoot_X_pow_sub_C_of_prime hN pV hpV
-  let : Algebra D Rn :=
-    adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  let W := Localization.AtPrime q
-  let : Algebra V W :=
-    Localization.AtPrime.algebraOfLiesOver P q
-  let eLocal : Rn ≃ₐ[V] W :=
+  let algDRn : Algebra D Rn := adjoinRootLocalizationBaseChangeAlgebra R N p hp
+  let eLocal : Rn ≃ₐ[V] Localization.AtPrime q :=
     adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
-  let : IsDomain W :=
-    adjoinRootLocalizationAtRootPrime_isDomain hN hp
-  exact
-    IsDiscreteValuationRing.RingEquivClass.isDiscreteValuationRing
-      eLocal.toRingEquiv
+  exact IsDiscreteValuationRing.RingEquivClass.isDiscreteValuationRing eLocal.toRingEquiv
 
 /-- In the selected root localization, the image of the radicand DVR's
 maximal ideal is exactly the `N`-th power of the root DVR's maximal ideal.
@@ -155,35 +119,24 @@ theorem adjoinRootLocalizationAtRootPrime_maximalIdeal_map_eq_pow
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let _ : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let _ : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let _ : q.LiesOver P := span_root_liesOver_span_radicand hN hp
     let V := Localization.AtPrime P
     let W := Localization.AtPrime q
-    letI : Algebra V W :=
+    let _ : Algebra V W :=
       Localization.AtPrime.algebraOfLiesOver P q
     (IsLocalRing.maximalIdeal V).map (algebraMap V W) =
       IsLocalRing.maximalIdeal W ^ N := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
+  intro P D q hP hq hLiesOver V W algVW
   let fR : R[X] := X ^ N - C p
-  let D := AdjoinRoot fR
   let rootR := AdjoinRoot.root fR
-  let q := Ideal.span ({rootR} : Set D)
-  let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-  let V := Localization.AtPrime P
   let pV : V := algebraMap R V p
   let fV : V[X] := X ^ N - C pV
   let Rn := AdjoinRoot fV
-  let W := Localization.AtPrime q
   let : Algebra D Rn :=
     adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  let : Algebra V W :=
-    Localization.AtPrime.algebraOfLiesOver P q
   let eLocal : Rn ≃ₐ[V] W :=
     adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
   let rootV := AdjoinRoot.root fV
@@ -231,91 +184,57 @@ noncomputable def
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let _ : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let _ : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let _ : q.LiesOver P := span_root_liesOver_span_radicand hN hp
     let V := Localization.AtPrime P
-    letI : IsDiscreteValuationRing V :=
+    let _ : IsDiscreteValuationRing V :=
       EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
         R p hp
     let K := FractionRing V
     let Vhat := standardDVFCompletionValuationSubring V K
-    letI : Algebra V Vhat :=
+    let _ : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
     let pV := algebraMap R V p
     let pHat := standardDVRCompletionValuationSubringElement V K pV
     let Rhat := AdjoinRoot (X ^ N - C pHat)
     let W := Localization.AtPrime q
-    letI : Algebra V W :=
+    let _ : Algebra V W :=
       Localization.AtPrime.algebraOfLiesOver P q
-    letI : IsDomain W :=
+    let _ : IsDomain W :=
       adjoinRootLocalizationAtRootPrime_isDomain hN hp
-    letI : IsDiscreteValuationRing W :=
+    let _ : IsDiscreteValuationRing W :=
       adjoinRootLocalizationAtRootPrime_isDiscreteValuationRing hN hp
     let L := FractionRing W
     let What := standardDVFCompletionValuationSubring W L
-    letI : Algebra W What :=
+    let _ : Algebra W What :=
       standardDVFCompletionValuationSubringAlgebra W L
-    letI : Algebra W Rhat :=
+    let _ : Algebra W Rhat :=
       adjoinRootLocalizationAtRootPrimeCompletionAlgebra hN hp
     What ≃ₐ[W] Rhat := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
-  let fR : R[X] := X ^ N - C p
-  let D := AdjoinRoot fR
-  let q := Ideal.span
-    ({AdjoinRoot.root fR} : Set D)
-  letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-  let V := Localization.AtPrime P
-  letI : IsDiscreteValuationRing V :=
-    EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
-      R p hp
-  let K := FractionRing V
-  let Vhat := standardDVFCompletionValuationSubring V K
-  letI : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  let pV : V := algebraMap R V p
+  intro P D q hP hq hLiesOver V hDvrV K Vhat algVVhat pV pHat Rhat W algVW hDomainW hDvrW L
+    What algWWhat algWRhat
   let fV : V[X] := X ^ N - C pV
   let Rn := AdjoinRoot fV
-  let pHat := standardDVRCompletionValuationSubringElement V K pV
-  let Rhat := AdjoinRoot (X ^ N - C pHat)
-  let W := Localization.AtPrime q
-  letI : Algebra D Rn :=
-    adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  letI : Algebra V W :=
-    Localization.AtPrime.algebraOfLiesOver P q
-  let eLocal : Rn ≃ₐ[V] W :=
-    adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
-  letI : IsDomain W :=
-    adjoinRootLocalizationAtRootPrime_isDomain hN hp
-  letI : IsDiscreteValuationRing W :=
-    adjoinRootLocalizationAtRootPrime_isDiscreteValuationRing hN hp
-  let L := FractionRing W
-  let What := standardDVFCompletionValuationSubring W L
-  letI : Algebra W What :=
-    standardDVFCompletionValuationSubringAlgebra W L
-  letI : Algebra W Rhat :=
-    adjoinRootLocalizationAtRootPrimeCompletionAlgebra hN hp
+  let algDRn : Algebra D Rn := adjoinRootLocalizationBaseChangeAlgebra R N p hp
+  let eLocal : Rn ≃ₐ[V] W := adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
   let I := IsLocalRing.maximalIdeal V
   let J := IsLocalRing.maximalIdeal W
-  letI : Module.Finite V Rn :=
+  let : Module.Finite V Rn :=
     (Polynomial.monic_X_pow_sub_C pV hN.ne').finite_adjoinRoot
-  letI : Module.Free V Rn :=
+  let : Module.Free V Rn :=
     (Polynomial.monic_X_pow_sub_C pV hN.ne').free_adjoinRoot
-  letI : Module.Finite V W :=
+  let : Module.Finite V W :=
     Module.Finite.equiv eLocal.toLinearEquiv
-  letI : Module.Free V W :=
+  let : Module.Free V W :=
     Module.Free.of_equiv eLocal.toLinearEquiv
   let eBase : AdicCompletion I V ≃ₐ[V] Vhat :=
     standardDVRAdicCompletionEquivCompletionValuationSubring V K
   let T := Vhat ⊗[V] W
   let T₀ := AdicCompletion I V ⊗[V] W
-  letI : Algebra W T := Algebra.TensorProduct.rightAlgebra
-  letI : Algebra W T₀ := Algebra.TensorProduct.rightAlgebra
+  let : Algebra W T := Algebra.TensorProduct.rightAlgebra
+  let : Algebra W T₀ := Algebra.TensorProduct.rightAlgebra
   let eTensor₀ : T ≃ₐ[V] T₀ :=
     Algebra.TensorProduct.congr eBase.symm (AlgEquiv.refl : W ≃ₐ[V] W)
   let eTensor : T ≃ₐ[W] T₀ :=
@@ -326,7 +245,7 @@ noncomputable def
         (AlgEquiv.refl : W ≃ₐ[V] W)) (1 ⊗ₜ[V] w) = 1 ⊗ₜ[V] w
       rw [Algebra.TensorProduct.congr_apply,
         Algebra.TensorProduct.map_tmul]
-      simp)
+      simp only [map_one, AlgEquiv.refl_toAlgHom, AlgHom.id_apply])
   let eMapped₀ : T₀ ≃+*
       AdicCompletion (I.map (algebraMap V W)) W :=
     tensorProductMappedIdealCompletionFreeRingEquiv I

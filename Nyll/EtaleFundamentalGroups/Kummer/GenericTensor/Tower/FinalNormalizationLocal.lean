@@ -175,44 +175,42 @@ noncomputable def
     (m : Ideal (F' ⊗[K] L)) [m.IsMaximal]
     (p :
       let Pm := GenericTensorFieldComponent m
-      letI : Algebra B Pm :=
+      let : Algebra B Pm :=
         genericTensorFieldComponentLeftScalarAlgebra (R := B) m
       Ideal (integralClosure B Pm))
     [p.IsPrime] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let q := genericTensorTowerSecondIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       genericTensorTowerSecondIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let Pm := GenericTensorFieldComponent m
     let Pq := GenericTensorFieldComponent q
-    letI : Algebra B Pm :=
+    let : Algebra B Pm :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI : Algebra B Pq :=
+    let : Algebra B Pq :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) q
     let p' := genericTensorTowerFinalComponentIntegralClosurePrime
       (B := B) (K := K) (F := F) (F' := F') (L := L) m p
-    letI : p'.IsPrime :=
+    let : p'.IsPrime :=
       genericTensorTowerFinalComponentIntegralClosurePrime_isPrime
         (B := B) (K := K) (F := F) (F' := F') (L := L) m p
     Localization.AtPrime p ≃ₐ[B] Localization.AtPrime p' := by
-  dsimp only
-  let E := genericTensorTowerFinalComponentIntegralClosureAlgEquiv
-    (B := B) (K := K) (F := F) (F' := F') (L := L) m
-  let p' := genericTensorTowerFinalComponentIntegralClosurePrime
-    (B := B) (K := K) (F := F) (F' := F') (L := L) m p
-  letI : p'.IsPrime :=
-    genericTensorTowerFinalComponentIntegralClosurePrime_isPrime
-      (B := B) (K := K) (F := F) (F' := F') (L := L) m p
+  intro n hn q hq Pm Pq algebraPm algebraPq p' hp'
+  let E : integralClosure B Pm ≃ₐ[B] integralClosure B Pq :=
+    genericTensorTowerFinalComponentIntegralClosureAlgEquiv
+      (B := B) (K := K) (F := F) (F' := F') (L := L) m
   have hcomap : p = p'.comap E.toRingHom := by
     symm
     exact Ideal.comap_map_of_bijective E.toRingEquiv E.bijective
-  exact Localization.localAlgEquiv p p' E hcomap
+  exact Localization.localAlgEquiv
+    (R := B) (S := integralClosure B Pm) (P := integralClosure B Pq)
+    p p' E hcomap
 
 end EtaleFundamentalGroups.Kummer
 

@@ -48,7 +48,7 @@ noncomputable def specULiftZGenericResidueFieldEquivULiftQ :
       AlgEquiv.ofRingEquiv
         (f := (ULift.ringEquiv : ULift.{u} ℚ ≃+* ℚ).symm) (by
           intro z
-          simp)
+          exact map_intCast (ULift.ringEquiv : ULift.{u} ℚ ≃+* ℚ).symm z)
     let : IsFractionRing ℤ (ULift.{u} ℚ) :=
       IsFractionRing.of_algEquiv eQ
     apply IsFractionRing.of_ringEquiv_left
@@ -69,7 +69,7 @@ noncomputable def specULiftZGenericResidueFieldEquivULiftQ :
     AlgEquiv.ofRingEquiv (f := e) (by
       intro z
       rw [RingHom.algebraMap_toAlgebra]
-      simp)
+      exact e.apply_symm_apply _)
   have hx : x = (⊥ : PrimeSpectrum (ULift.{u} ℤ)) := by
     exact genericPoint_eq_bot_of_affine R
   letI : IsFractionRing (ULift.{u} ℤ) x.asIdeal.ResidueField := by

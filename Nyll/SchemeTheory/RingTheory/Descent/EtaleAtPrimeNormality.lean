@@ -63,7 +63,8 @@ theorem tensorMap_integralClosure_mem_bot (y : S ⊗[R] (integralClosure R K)) :
             RingHom.id_apply]
       _ = s ⊗ₜ[R] (r • (1 : K)) := TensorProduct.smul_tmul r s 1
       _ = s ⊗ₜ[R] (algebraMap R K r) := by rw [Algebra.algebraMap_eq_smul_one]
-      _ = (AlgHom.id S S) s ⊗ₜ[R] ((integralClosure R K).val k) := by rw [hr]; simp
+      _ = (AlgHom.id S S) s ⊗ₜ[R] ((integralClosure R K).val k) :=
+        congrArg (fun z : K ↦ s ⊗ₜ[R] z) hr
   | add a b ha hb =>
     rw [map_add]
     exact add_mem ha hb
@@ -167,7 +168,7 @@ theorem _root_.Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization_a
     apply hθinj
     rw [map_sum, map_one]
     simp only [hε]
-    exact Finset.univ_sum_single (1 : Π j, F j) ▸ by simp
+    exact Finset.univ_sum_single (1 : Π j, F j)
   obtain ⟨i, hi⟩ : ∃ i, ε i ∉ q := by
     by_contra h
     push Not at h

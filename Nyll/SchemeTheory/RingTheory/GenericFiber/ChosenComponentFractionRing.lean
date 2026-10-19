@@ -166,7 +166,7 @@ theorem genericFiberComponentFractionRingEquiv_quotient_mk
       (algebraMap (U ⧸ N) Ω (Ideal.Quotient.mk N x)) =
     algebraMap (U ⧸ N) (FractionRing (U ⧸ N))
       (Ideal.Quotient.mk N x)
-  simp
+  exact (FractionRing.algEquiv (A := U ⧸ N) Ω).symm.commutes _
 
 end EtaleFundamentalGroups
 

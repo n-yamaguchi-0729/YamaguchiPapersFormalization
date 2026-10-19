@@ -161,7 +161,7 @@ theorem tensorProduct_exact_of_faithfullyFlat
                 TensorProduct.sub_tmul, TensorProduct.tmul_sub, map_sub,
                 tensorProductBaseChangeFirstMultiplication_tmul,
                 tensorProductBaseChangeCounit_tmul]
-              simp
+              simp only [TensorProduct.mk_apply, mul_one]
     rw [hidentity x] at hcontract
     exact sub_eq_zero.mp hcontract
   · rintro ⟨y, rfl⟩

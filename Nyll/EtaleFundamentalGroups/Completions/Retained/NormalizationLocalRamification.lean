@@ -274,12 +274,11 @@ theorem
       refine ⟨↑u⁻¹, ?_⟩
       calc
         algebraMap W D (↑u⁻¹) =
-            algebraMap W D (↑u⁻¹) * 1 := by simp
+            algebraMap W D (↑u⁻¹) * 1 := (mul_one _).symm
         _ = algebraMap W D (↑u⁻¹) *
               (algebraMap W D (↑u) * d) := by rw [hprodD]
         _ = d := by
-          rw [← mul_assoc, ← map_mul]
-          simp
+          rw [← mul_assoc, ← map_mul, Units.inv_mul, map_one, one_mul]
   let eW : W ≃ₐ[W] D :=
     AlgEquiv.ofBijective (Algebra.ofId W D)
       ⟨hWDInjective, hWDSurjective⟩

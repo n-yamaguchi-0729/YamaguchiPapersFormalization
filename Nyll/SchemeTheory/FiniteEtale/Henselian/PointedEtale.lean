@@ -265,7 +265,7 @@ theorem algebraMap_localizationAtPrime_bijective_of_henselian_of_etale_of_residu
             algebraMap R T ry := by rw [map_mul, hy']
       _ = algebraMap R T rx := by
         rw [mul_assoc, ← map_mul, ← hunitY]
-        simp
+        rw [Units.inv_mul, map_one, mul_one]
       _ = algebraMap S T x := hx'
   let : Module.Flat R T := Module.Flat.trans R S T
   let : Module.FaithfullyFlat R T :=

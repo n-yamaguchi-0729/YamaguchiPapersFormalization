@@ -97,7 +97,7 @@ theorem isUnit_aeval_derivative_of_formallyUnramified
     intro x
     have hx : x = 0 := Subsingleton.elim _ _
     subst x
-    simp
+    simp only [map_zero]
   have hOne : (1 : AdjoinRoot f ⧸ I) = 0 := by
     calc
       (1 : AdjoinRoot f ⧸ I) = D (AdjoinRoot.root f) := hD_root.symm

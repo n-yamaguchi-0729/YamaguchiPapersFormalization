@@ -378,7 +378,7 @@ def localInertiaToGlobalIdealInertia :
     let vb : V :=
       ⟨algebraMap B L b, by
         change algebraMap B L b ∈ idealLocalizationSubalgebra B L P
-        exact ⟨b, 1, P.primeCompl.one_mem, by simp⟩⟩
+        exact ⟨b, 1, P.primeCompl.one_mem, by rw [map_one, inv_one, mul_one]⟩⟩
     have htauIdeal : (tau : decompositionGroup K V) ∈
         (IsLocalRing.maximalIdeal V).toAddSubgroup.inertia
           (decompositionGroup K V) := by

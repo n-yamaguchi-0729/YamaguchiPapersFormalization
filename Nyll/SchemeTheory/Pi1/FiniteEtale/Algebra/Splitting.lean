@@ -89,7 +89,7 @@ lemma OfLocalizationSpan.pi (hP : OfLocalizationSpan P)
         Function.update, Pi.zero_apply]
       by_cases h : j = i
       · subst h
-        simp
+        simp only [dite_true, map_one]
       · simp [h]
     change IsLocalization.Away
       ((RingHom.pi fun i ↦ (f i).comp <| Pi.evalRingHom R i) (Pi.single i 1)) (S i)
@@ -115,9 +115,11 @@ instance (R M N : Type*) [CommRing R] [AddCommGroup M] [AddCommGroup N]
         (TensorProduct.prodRight _ _ _ _ _).symm.toLinearMap ∘ₗ
           LinearMap.prodMap (Q.subtype.rTensor M) (Q.subtype.rTensor N) ∘ₗ
           (TensorProduct.prodRight _ _ _ _ _).toLinearMap := by
-    ext <;>
-    · apply (TensorProduct.prodRight R R P M N).injective
-      simp
+    apply TensorProduct.ext'
+    intro x yz
+    apply (TensorProduct.prodRight R R P M N).injective
+    simp only [LinearMap.comp_apply, LinearEquiv.coe_coe, LinearEquiv.apply_symm_apply,
+      LinearMap.rTensor_tmul, TensorProduct.prodRight_tmul, LinearMap.prodMap_apply]
   simp only [LinearMap.coe_comp, LinearEquiv.coe_coe, EmbeddingLike.comp_injective,
     EquivLike.injective_comp, heq]
   apply Function.Injective.prodMap <;>
@@ -215,7 +217,9 @@ lemma PrimeSpectrum.range_comap_tensorProduct (R S T : Type u) [CommRing R]
   · rintro ⟨p, rfl⟩
     use PrimeSpectrum.comap Algebra.TensorProduct.includeRight.toRingHom p
     have : (algebraMap S (S ⊗[R] T)).comp (algebraMap R S) =
-        Algebra.TensorProduct.includeRight.toRingHom.comp (algebraMap R T) := by ext; simp
+        Algebra.TensorProduct.includeRight.toRingHom.comp (algebraMap R T) :=
+      (IsScalarTower.algebraMap_eq R S (S ⊗[R] T)).symm.trans
+        Algebra.TensorProduct.includeRight.comp_algebraMap.symm
     exact congr(PrimeSpectrum.comap $(this) p).symm
   · rintro ⟨q, hp⟩
     obtain ⟨z, hz⟩ := AlgebraicGeometry.Scheme.Pullback.exists_preimage_pullback
@@ -472,10 +476,27 @@ lemma tensorEqualizer_comp_comp {R : Type*} (S : Type*) [CommRing R] [CommRing S
           (AlgHom.equalizerCongr
             (TensorProduct.congr .refl eA.symm)
             (TensorProduct.congr .refl eB.symm)
-            (by ext <;> simp) (by ext <;> simp)).toAlgHom
+            (by
+              apply Algebra.TensorProduct.ext'
+              intro t x
+              simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom,
+                Algebra.TensorProduct.congr_apply, Algebra.TensorProduct.map_tmul,
+                AlgEquiv.coe_refl, id_eq, AlgHom.id_apply, AlgEquiv.apply_symm_apply])
+            (by
+              apply Algebra.TensorProduct.ext'
+              intro t x
+              simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom,
+                Algebra.TensorProduct.congr_apply, Algebra.TensorProduct.map_tmul,
+                AlgEquiv.coe_refl, id_eq, AlgHom.id_apply, AlgEquiv.apply_symm_apply])).toAlgHom
           (AlgHom.comp (AlgHom.tensorEqualizer S T f g)
           (TensorProduct.congr .refl
-            (AlgHom.equalizerCongr eA eB (by ext; simp) (by ext; simp))).toAlgHom) := by
+            (AlgHom.equalizerCongr eA eB
+              (by
+                ext x
+                exact eB.apply_symm_apply (f (eA x)))
+              (by
+                ext x
+                exact eB.apply_symm_apply (g (eA x))))).toAlgHom) := by
   ext t
   · simp [AlgHom.tensorEqualizer_tmul_one', AlgHom.equalizerCongr_apply]
   · simp [AlgHom.tensorEqualizer_one_tmul, AlgHom.equalizerCongr_apply]

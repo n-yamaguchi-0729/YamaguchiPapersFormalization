@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 import Nyll.SchemeTheory.Divisors.SubschemeStalk
-import Nyll.SchemeTheory.RingTheory.RegularLocalQuotientLift
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
 import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.RingTheory.Flat.Basic

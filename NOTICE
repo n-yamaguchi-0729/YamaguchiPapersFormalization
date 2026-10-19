@@ -179,39 +179,6 @@ The cited pi1 file has no copyright notice; its holder requires review.
 Adapted from the pinned pi1 source:
 https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Ideal/Quotient/Operations.lean
 
-Anthropic FLT: AlgebraicCurves
-------------------------------
-
-Copyright 2026 Anthropic, PBC.
-License: Apache License, Version 2.0.
-Included-file source mapping: Nyll/AlgebraicCurves/ANTHROPIC_FLT_SOURCE.md
-Preserved upstream NOTICE: Nyll/AlgebraicCurves/ANTHROPIC_FLT_NOTICE
-Preserved earlier-source attribution: Nyll/AlgebraicCurves/ANTHROPIC_FLT_ATTRIBUTION.md
-Earlier copyright holders and authors are not replaced by Anthropic.
-
-Nyll/AlgebraicCurves/Foundations/CommutativeAlgebra/IsNoetherianRing_of_ringKrullDim_le_one_of_finiteDimensional_subalgebra.lean
-Nyll/AlgebraicCurves/Foundations/CommutativeAlgebra/Subalgebra_isNoetherianRing_and_dimensionLEOne_of_isFractionRing_of_finite.lean
-Nyll/AlgebraicCurves/Geometry/Picard/Functor.lean
-Nyll/AlgebraicCurves/Geometry/Projective/ProjSpace_exists_algHom_away_apply_ratio_eq.lean
-Nyll/AlgebraicCurves/Geometry/Schemes/SchemeHomOver.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/IdealSheafHom.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/IdealSheafModule.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/IdealSheafModuleMaps.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_IsInvertible_isInvertible_module.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_IsInvertible_isIso_pullbackModuleComparison.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_IsInvertible_nonempty_pullback_invModule_iso.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_comap_mul.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_pullbackModuleComparison_locallySurjective.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_IdealSheafData_range_moduleIota_app_and_injective.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_Modules_IsInvertible_dual.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_Modules_IsInvertible_isIso_of_locallySurjective.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_Modules_IsInvertible_pullback_dual.lean
-Nyll/AlgebraicCurves/Geometry/Sheaves/Scheme_Modules_nonempty_pullback_foldr_twist_iso.lean
-Nyll/AlgebraicCurves/RelativeDivisors/Cartier.lean
-Nyll/AlgebraicCurves/RelativeDivisors/RelEffCartierDiv.lean
-Nyll/AlgebraicCurves/RelativeDivisors/UniversalData.lean
-Nyll/AlgebraicCurves/Valuations/IsLocalRing_exists_valuationSubring_isDiscreteValuationRing_dominates.lean
-
 Anthropic FLT: SchemeTheory
 ---------------------------
 
@@ -222,32 +189,42 @@ Preserved upstream NOTICE: Nyll/SchemeTheory/ANTHROPIC_FLT_NOTICE
 Preserved earlier-source attribution: Nyll/SchemeTheory/ANTHROPIC_FLT_ATTRIBUTION.md
 Earlier copyright holders and authors are not replaced by Anthropic.
 
-Nyll/SchemeTheory/LocalGeometry/SmoothStalkNormality.lean
-Nyll/SchemeTheory/Modules/InternalHomSheaf.lean
-Nyll/SchemeTheory/Modules/Invertible.lean
-Nyll/SchemeTheory/Modules/Monoidal.lean
-Nyll/SchemeTheory/Modules/PresheafInternalHom.lean
-Nyll/SchemeTheory/Modules/PresheafPullbackMonoidal.lean
-Nyll/SchemeTheory/Modules/PullbackMonoidal.lean
-Nyll/SchemeTheory/Modules/SheafificationMonoidal.lean
+Nyll/SchemeTheory/LocalGeometry/SmoothStalks.lean
 Nyll/SchemeTheory/Morphisms/GeometricallyIntegralFieldDescent.lean
 Nyll/SchemeTheory/Morphisms/GeometricallyIrreducibleOverAlgebraicallyClosed.lean
-Nyll/SchemeTheory/ProjectiveSpace/BaseChange.lean
-Nyll/SchemeTheory/ProjectiveSpace/Basic.lean
-Nyll/SchemeTheory/RingTheory/CommonRegularElement.lean
 Nyll/SchemeTheory/RingTheory/Descent/EtaleAtPrimeNormality.lean
 Nyll/SchemeTheory/RingTheory/Descent/SmoothAtPrimeNormality.lean
-Nyll/SchemeTheory/RingTheory/FreeModuleRegularScalar.lean
-Nyll/SchemeTheory/RingTheory/FreeModuleRegularSequenceAux.lean
-Nyll/SchemeTheory/RingTheory/LocalAlgebra.lean
-Nyll/SchemeTheory/RingTheory/ModuleDepthBound.lean
-Nyll/SchemeTheory/RingTheory/ModuleDepthRegularQuotient.lean
-Nyll/SchemeTheory/RingTheory/RegularLocalDepth.lean
-Nyll/SchemeTheory/RingTheory/RegularLocalDepthFreeness.lean
-Nyll/SchemeTheory/RingTheory/RegularLocalDomain.lean
-Nyll/SchemeTheory/RingTheory/RegularLocalFiniteFreeResolution.lean
-Nyll/SchemeTheory/RingTheory/SeparableConstantsTensor.lean
-Nyll/SchemeTheory/RingTheory/SmoothReduced.lean
+Nyll/SchemeTheory/RingTheory/Dimension/NoetherianRingKrullDimensionLeOne.lean
+Nyll/SchemeTheory/RingTheory/Dimension/SubalgebraNoetherianDimensionLEOne.lean
+Nyll/SchemeTheory/RingTheory/FieldExtensions/SeparableConstantsTensor.lean
+Nyll/SchemeTheory/RingTheory/Localization/LocalAlgebra.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/CommonRegularElement.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/FreeModuleRegularScalar.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/FreeModuleRegularSequenceAux.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/ModuleDepthBound.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/ModuleDepthRegularQuotient.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDepth.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDepthFreeness.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDomain.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalFiniteFreeResolution.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalLocalizationAtPrimeEtale.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalLocalizationAtPrimeIsStandardSmooth.lean
+Nyll/SchemeTheory/RingTheory/Smooth/AlgebraIsStandardSmoothStandardSmooth.lean
+Nyll/SchemeTheory/RingTheory/Smooth/MathlibRingTheorySmoothAlgebraOverFieldRegularStalks.lean
+Nyll/SchemeTheory/RingTheory/Smooth/SmoothReduced.lean
+Nyll/SchemeTheory/RingTheory/Smooth/StandardSmoothFibreRegularity.lean
+
+Anthropic FLT: ValuedFieldTheory
+--------------------------------
+
+Copyright 2026 Anthropic, PBC.
+License: Apache License, Version 2.0.
+Included-file source mapping: Nyll/ValuedFieldTheory/ANTHROPIC_FLT_SOURCE.md
+Preserved upstream NOTICE: Nyll/ValuedFieldTheory/ANTHROPIC_FLT_NOTICE
+Preserved earlier-source attribution: Nyll/ValuedFieldTheory/ANTHROPIC_FLT_ATTRIBUTION.md
+Earlier copyright holders and authors are not replaced by Anthropic.
+
+Nyll/ValuedFieldTheory/Valuation/DiscreteValuationField/LocalRingValuationSubringDVRDominates.lean
 
 Additional source-specific credits
 ----------------------------------

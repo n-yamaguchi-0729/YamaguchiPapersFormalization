@@ -49,7 +49,8 @@ private noncomputable def mappedIdealQuotientEquiv
       (pow_smul_top_eq_restrictScalars_map_pow I n)).trans <|
     (Submodule.Quotient.restrictScalarsEquiv R
       ((I.map (algebraMap R S)) ^ n : Ideal S)).trans <|
-      (Submodule.quotEquivOfEq _ _ (by simp)).restrictScalars R
+      (Submodule.quotEquivOfEq _ _
+        (by rw [Ideal.smul_eq_mul, Ideal.mul_top])).restrictScalars R
 
 @[simp]
 private theorem mappedIdealQuotientEquiv_mk
@@ -126,8 +127,8 @@ noncomputable def completedBaseToMappedIdealCompletion
       AdicCompletion (I.map (algebraMap R S)) S where
   toFun x := mappedIdealCompletionLinearEquiv I
     (AdicCompletion.map I (Algebra.linearMap R S) x)
-  map_zero' := by simp
-  map_add' x y := by simp
+  map_zero' := by rw [map_zero, map_zero]
+  map_add' x y := by rw [map_add, map_add]
   map_one' := by
     apply AdicCompletion.ext
     intro n
@@ -142,7 +143,7 @@ noncomputable def completedBaseToMappedIdealCompletion
       Submodule.Quotient.mk
         (p := (((I.map (algebraMap R S)) ^ n : Ideal S) • ⊤ : Submodule S S)) 1
     rw [LinearMap.reduceModIdeal_apply, mappedIdealQuotientEquiv_mk]
-    simp
+    exact congrArg Submodule.Quotient.mk (map_one (algebraMap R S))
   map_mul' x y := by
     apply AdicCompletion.ext
     intro n
@@ -170,7 +171,9 @@ noncomputable def completedBaseToMappedIdealCompletion
       rw [LinearMap.reduceModIdeal_apply, LinearMap.reduceModIdeal_apply,
         LinearMap.reduceModIdeal_apply, mappedIdealQuotientEquiv_mk,
         mappedIdealQuotientEquiv_mk, mappedIdealQuotientEquiv_mk]
-      simp
+      change Ideal.Quotient.mk _ (algebraMap R S (x * y)) =
+        Ideal.Quotient.mk _ (algebraMap R S x) * Ideal.Quotient.mk _ (algebraMap R S y)
+      rw [map_mul, map_mul]
 
 @[simp]
 theorem completedBaseToMappedIdealCompletion_apply_val

@@ -119,7 +119,7 @@ theorem IdealSheafData.stalkIdeal_le_specializationPrime_of_mem_support
     (I : X.IdealSheafData) (hxy : x ⤳ y) (hxI : x ∈ I.support) :
     I.stalkIdeal y ≤ (specializationPrime hxy).asIdeal := by
   obtain ⟨U, hU, hyU, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := y) (by simp)
+    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := y) (by trivial)
   let V : X.affineOpens := ⟨U, hU⟩
   have hxU : x ∈ U := hxy.mem_open U.2 hyU
   rw [I.stalkIdeal_eq_map_ideal y V hyU,

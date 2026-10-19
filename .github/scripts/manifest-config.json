@@ -15,9 +15,6 @@
     "ClassFieldTheory": [
       "Nyll.ClassFieldTheory"
     ],
-    "AlgebraicCurves": [
-      "Nyll.AlgebraicCurves"
-    ],
     "EtaleFundamentalGroups": [
       "Nyll.EtaleFundamentalGroups"
     ],
@@ -26,12 +23,6 @@
     ],
     "Yamaguchi26SolvableCoverings": [
       "Nyll.Yamaguchi26SolvableCoverings"
-    ],
-    "AnabelianGeometry": [
-      "Nyll.AnabelianGeometry"
-    ],
-    "ShimizuYamaguchi26BranchedCoverings": [
-      "Nyll.ShimizuYamaguchi26BranchedCoverings"
     ],
     "EntryPoint": [
       "Nyll"
@@ -69,12 +60,9 @@
     "GaloisCohomology": 1,
     "SchemeTheory": 1,
     "ClassFieldTheory": 2,
-    "AlgebraicCurves": 2,
     "EtaleFundamentalGroups": 2,
     "Yamaguchi26AbfaithfulGalois": 3,
-    "Yamaguchi26SolvableCoverings": 3,
-    "AnabelianGeometry": 3,
-    "ShimizuYamaguchi26BranchedCoverings": 3
+    "Yamaguchi26SolvableCoverings": 3
   },
   "orderedLibraries": [
     "ProCGroups",
@@ -82,16 +70,12 @@
     "GaloisCohomology",
     "SchemeTheory",
     "ClassFieldTheory",
-    "AlgebraicCurves",
     "EtaleFundamentalGroups",
     "Yamaguchi26AbfaithfulGalois",
-    "Yamaguchi26SolvableCoverings",
-    "AnabelianGeometry",
-    "ShimizuYamaguchi26BranchedCoverings"
+    "Yamaguchi26SolvableCoverings"
   ],
   "primaryRoots": [
     "Nyll.Yamaguchi26AbfaithfulGalois.All",
-    "Nyll.Yamaguchi26SolvableCoverings.All",
-    "Nyll.ShimizuYamaguchi26BranchedCoverings.All"
+    "Nyll.Yamaguchi26SolvableCoverings.All"
   ]
 }

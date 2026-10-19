@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.SchemeTheory.RingTheory.JacobsonIntegral
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 public import Mathlib.RingTheory.Nakayama

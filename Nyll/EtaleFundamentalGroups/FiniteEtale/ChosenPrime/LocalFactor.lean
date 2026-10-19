@@ -439,8 +439,8 @@ theorem etaleChosenPointedTensorPrime_isPrime
         change (Algebra.TensorProduct.map
           (Algebra.ofId C Cₚ) (AlgHom.id R S))
             (1 ⊗ₜ[R] s) = 1 ⊗ₜ[R] s
-        rw [Algebra.TensorProduct.map_tmul]
-        simp)
+        rw [Algebra.TensorProduct.map_tmul, map_one]
+        rfl)
   exact IsLocalization.isPrime_of_isPrime_disjoint
     (Algebra.algebraMapSubmonoid T P.primeCompl) BS P'
     inferInstance (Ideal.disjoint_primeCompl_of_liesOver P' P)
@@ -476,8 +476,8 @@ theorem etaleChosenPointedTensorPrime_comap
         change (Algebra.TensorProduct.map
           (Algebra.ofId C Cₚ) (AlgHom.id R S))
             (1 ⊗ₜ[R] s) = 1 ⊗ₜ[R] s
-        rw [Algebra.TensorProduct.map_tmul]
-        simp)
+        rw [Algebra.TensorProduct.map_tmul, map_one]
+        rfl)
   have hover := IsLocalization.liesOver_map_of_isPrime_disjoint
     (Algebra.algebraMapSubmonoid T P.primeCompl) BS
     (Ideal.disjoint_primeCompl_of_liesOver P' P)
@@ -532,8 +532,8 @@ noncomputable def
         change (Algebra.TensorProduct.map
           (Algebra.ofId C Cₚ) (AlgHom.id R S))
             (1 ⊗ₜ[R] s) = 1 ⊗ₜ[R] s
-        rw [Algebra.TensorProduct.map_tmul]
-        simp)
+        rw [Algebra.TensorProduct.map_tmul, map_one]
+        rfl)
   have hPdisj :
       Disjoint
         ((Algebra.algebraMapSubmonoid T P.primeCompl : Submonoid T) : Set T)

@@ -139,8 +139,8 @@ theorem isFractionRing_adjoinRoot_of_pureRadical
   let fractionSubfield : Subfield F :=
     { carrier := {z | ∃ x y : R, y ≠ 0 ∧
           z = algebraMap R F x / algebraMap R F y}
-      zero_mem' := ⟨0, 1, one_ne_zero, by simp⟩
-      one_mem' := ⟨1, 1, one_ne_zero, by simp⟩
+      zero_mem' := ⟨0, 1, one_ne_zero, by simp only [map_zero, map_one, div_one]⟩
+      one_mem' := ⟨1, 1, one_ne_zero, by simp only [map_one, div_one]⟩
       add_mem' := by
         rintro z w ⟨a, b, hb, rfl⟩ ⟨c, d, hd, rfl⟩
         refine ⟨a * d + c * b, b * d, mul_ne_zero hb hd, ?_⟩

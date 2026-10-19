@@ -56,7 +56,7 @@ theorem regular_quotient_parameter_of_regular_pair
   let S := R ⧸ I
   have hyMem : y ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
   have hIle : I ≤ maximalIdeal R := by
     apply Ideal.span_le.mpr
     intro z hz
@@ -78,7 +78,7 @@ theorem regular_quotient_parameter_of_regular_pair
   have hspan_smul : y • (⊤ : Submodule R R) = (I : Submodule R R) := by
     rw [← Submodule.ideal_span_singleton_smul]
     change I • (⊤ : Submodule R R) = (I : Submodule R R)
-    simp
+    rw [Ideal.smul_eq_mul, Ideal.mul_top]
   have hxregQ : IsSMulRegular (QuotSMulTop y R) x :=
     ((isRegular_cons_iff (QuotSMulTop y R) x []).mp
       ((isRegular_cons_iff R y [x]).mp hregYX).2).1
@@ -152,13 +152,13 @@ private theorem isDomain_of_prime_regular_element
       induction k with
       | zero =>
           intro l a b hab
-          exact Or.inl (by simp)
+          exact Or.inl (by rw [pow_zero]; exact one_dvd a)
       | succ k ihK =>
           intro l
           induction l with
           | zero =>
               intro a b hab
-              exact Or.inr (by simp)
+              exact Or.inr (by rw [pow_zero]; exact one_dvd b)
           | succ l ihL =>
               intro a b hab
               have hpProd : p ∣ a * b := by rw [hab]; exact dvd_zero p
@@ -223,7 +223,7 @@ theorem oneRootCover_selectedDivisor_geometry
   have hn₁ : ∀ i, 0 < n₁ i := fun _ ↦ hn
   have hxMem : x ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have ha₁Mem : ∀ i, a₁ i ∈ maximalIdeal R := fun _ ↦ hxMem
   let : IsLocalRing B := isLocalRing_iteratedRadical n₁ a₁ hn₁ ha₁Mem
   have hregB : IsRegularLocalRing B := by
@@ -238,7 +238,7 @@ theorem oneRootCover_selectedDivisor_geometry
   let I : Ideal R := Ideal.span {y}
   have hyMem : y ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
   have hIle : I ≤ maximalIdeal R := by
     apply Ideal.span_le.mpr
     intro z hz

@@ -113,7 +113,7 @@ private theorem residue_natCast_eq_zero_of_ramification_prime_order
         exact Finset.sum_range_sub (fun i ↦ (g ^ i) x) ell
       _ = 0 := by
         rw [hgPow]
-        simp
+        simp only [pow_zero, sub_self, zero_div]
   have hsumV : ∑ i ∈ Finset.range ell, quotientV i = 0 := by
     apply V.subtype_injective
     rw [map_sum, map_zero]

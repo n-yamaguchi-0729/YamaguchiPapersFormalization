@@ -5,8 +5,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Nyll.SchemeTheory.RingTheory.RegularLocalDimensionOne
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Mathlib.AlgebraicGeometry.Properties
 import Mathlib.RingTheory.RegularLocalRing.Defs
 

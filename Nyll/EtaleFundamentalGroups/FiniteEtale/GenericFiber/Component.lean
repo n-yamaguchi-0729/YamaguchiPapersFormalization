@@ -88,10 +88,8 @@ theorem artinianSelectedComponentIdempotent_isIdempotentElem
   simp only [map_mul, IsArtinianRing.equivPi_apply]
   by_cases hM : M = (⟨m, inferInstance⟩ : MaximalSpectrum G)
   · subst M
-    rw [quotient_artinianSelectedComponentIdempotent]
-    simp
-  · rw [quotient_artinianSelectedComponentIdempotent_eq_zero m M hM]
-    simp
+    rw [quotient_artinianSelectedComponentIdempotent, one_mul]
+  · rw [quotient_artinianSelectedComponentIdempotent_eq_zero m M hM, zero_mul]
 
 /-- Multiplication by the selected primitive idempotent kills exactly the
 elements vanishing in the specified field component. -/
@@ -111,8 +109,7 @@ theorem artinianSelectedComponentIdempotent_mul_eq_zero_iff
     by_cases hM : M = (⟨m, inferInstance⟩ : MaximalSpectrum G)
     · subst M
       simpa using hx
-    · rw [quotient_artinianSelectedComponentIdempotent_eq_zero m M hM]
-      simp
+    · rw [quotient_artinianSelectedComponentIdempotent_eq_zero m M hM, zero_mul]
 
 /-- An integral element of a specified residue-field component, extended by
 zero on every other Artinian component, is represented by an integral element
@@ -143,7 +140,7 @@ theorem exists_integral_artinianElement_supported_at_component
           (R := R) (S := G) (T := R) (U := G ⧸ M.asIdeal)
           (φ := RingHom.id R)
           (ψ := Ideal.Quotient.mk M.asIdeal)
-          (by ext r; simp) f w)
+          (by ext r; rfl) f w)
     change Ideal.Quotient.mk M.asIdeal (aeval y q) = 0
     rw [hmap_aeval]
     by_cases hM : M = (⟨m, inferInstance⟩ : MaximalSpectrum G)
@@ -260,7 +257,8 @@ private theorem genericFiberComponentToIntegralClosure_core
       ((Algebra.TensorProduct.includeLeft : T →ₐ[R] G) (x - y)) = 0 ↔ _
     rw [← heT_image, ← map_mul]
     rw [show (0 : G) =
-      (Algebra.TensorProduct.includeLeft : T →ₐ[R] G) 0 by simp]
+      (Algebra.TensorProduct.includeLeft : T →ₐ[R] G) 0 from
+        (map_zero (Algebra.TensorProduct.includeLeft : T →ₐ[R] G)).symm]
     rw [hincludeLeft_injective.eq_iff]
     simp only [mul_sub, sub_eq_zero]
   let : IsLocalization.Away eT D :=

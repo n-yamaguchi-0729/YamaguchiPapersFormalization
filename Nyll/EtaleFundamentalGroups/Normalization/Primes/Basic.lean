@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
+import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 import Mathlib.RingTheory.Localization.AtPrime.Extension
 
 /-!
@@ -37,24 +38,26 @@ variable (P : Ideal A) [P.IsPrime]
 localizing the base at `P`. -/
 noncomputable def localizedNormalizationPrime
     (Q : Ideal (integralClosure A L)) :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-    Ideal (integralClosure (Localization.AtPrime P) L) :=
-  by
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower A (Localization.AtPrime P) L :=
+    let _hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let _hExtensionTower : IsScalarTower A (Localization.AtPrime P) L :=
       localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-    exact Q.map (integralClosureLocalizationRingHom (L := L) P)
+    Ideal (integralClosure (Localization.AtPrime P) L) := by
+  intro hExtensionAlgebra hExtensionTower
+  exact Q.map (integralClosureLocalizationRingHom (L := L) P)
 
 omit [IsDomain A] in
 /-- A prime above `P` remains prime in the localized normalization. -/
 private theorem localizedNormalizationPrime_isPrime
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P] :
     (localizedNormalizationPrime (K := K) (L := L) P Q).IsPrime := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  let _hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let := integralClosureLocalizationAlgebra (L := L) P
+  let hNormalizationAlgebra :
+      Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+    integralClosureLocalizationAlgebra (L := L) P
   let : IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
       (integralClosure (Localization.AtPrime P) L) :=
@@ -73,10 +76,13 @@ theorem localizedNormalizationPrime_liesOver
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P] :
     (localizedNormalizationPrime (K := K) (L := L) P Q).LiesOver
       (IsLocalRing.maximalIdeal (Localization.AtPrime P)) := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  let _hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let := integralClosureLocalizationAlgebra (L := L) P
+  let hNormalizationAlgebra :
+      Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+    integralClosureLocalizationAlgebra (L := L) P
   let : IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
       (integralClosure (Localization.AtPrime P) L) :=
@@ -120,10 +126,13 @@ theorem localizedNormalizationPrime_ramificationIdx
     (localizedNormalizationPrime (K := K) (L := L) P Q).ramificationIdx
         (Localization.AtPrime P) =
       Q.ramificationIdx A := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  let _hExtensionAlgebra : Algebra (Localization.AtPrime P) L :=
+    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let := integralClosureLocalizationAlgebra (L := L) P
+  let hNormalizationAlgebra :
+      Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+    integralClosureLocalizationAlgebra (L := L) P
   let : IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
       (integralClosure (Localization.AtPrime P) L) :=

@@ -7,9 +7,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkComponentHeightOne
 import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleAwayNormalization
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
-import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!

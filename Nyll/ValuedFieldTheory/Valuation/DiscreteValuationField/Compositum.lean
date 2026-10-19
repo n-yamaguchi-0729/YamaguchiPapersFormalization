@@ -139,7 +139,7 @@ theorem tensorProduct_exists_list_sum_tmul
     ∃ l : List (A × B), z = (l.map (fun p => p.1 ⊗ₜ[R] p.2)).sum := by
   refine TensorProduct.inductionOn z ?tmul ?add
   · intro a b
-    exact ⟨[(a, b)], by simp⟩
+    exact ⟨[(a, b)], by rw [List.map_singleton, List.sum_singleton]⟩
   · intro x y hx hy
     rcases hx with ⟨lx, hx⟩
     rcases hy with ⟨ly, hy⟩

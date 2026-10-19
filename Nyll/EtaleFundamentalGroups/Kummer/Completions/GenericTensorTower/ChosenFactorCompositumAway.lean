@@ -39,7 +39,7 @@ theorem oneIteratedRadicalIsDomain_of_regularPair
   let : IsDomain A := isDomain_of_regularSystem [y, z] hreg hgen
   have hymax : y ∈ IsLocalRing.maximalIdeal A := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   let Rn := AdjoinRoot (X ^ N - C y)
   let : IsLocalRing Rn :=
     isLocalRing_adjoinRoot_X_pow_sub_C hN hymax
@@ -92,7 +92,7 @@ theorem finiteEtaleResidueLift_pair_adjoinRoot_isDomain_of_regularPair
       hgeometry.2.2.2.1
   have hymax : yC ∈ IsLocalRing.maximalIdeal C₁ := by
     rw [← hgenC]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   let : IsLocalRing (AdjoinRoot (X ^ N - C yC)) :=
     isLocalRing_adjoinRoot_X_pow_sub_C hN hymax
   exact (localRootCover_regularSystem_geometry hN hregC hgenC).2.1

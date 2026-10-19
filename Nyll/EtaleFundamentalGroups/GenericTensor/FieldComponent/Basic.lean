@@ -149,7 +149,7 @@ theorem genericTensorFieldComponent_productMap_eq_quotient
       genericTensorFieldComponentRight_apply, Ideal.Quotient.mkₐ_eq_mk]
     rw [← map_mul]
     congr 1
-    simp
+    rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]
 
 /-- Consequently the selected maximal ideal is exactly the kernel of the
 canonical product map into its field component. -/

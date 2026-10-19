@@ -222,7 +222,7 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
     let Bhat := iteratedRadical A 1 n aHat
     let hy : y ∈ maximalIdeal R := by
       rw [← hgen]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     let ha : ∀ i, a i ∈ maximalIdeal R := fun _ ↦ hy
     let haHat : ∀ i, aHat i ∈ maximalIdeal A := fun i ↦ by
       rw [AdicCompletion.maximalIdeal_eq_map]
@@ -260,7 +260,7 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
   let Bhat := iteratedRadical A 1 n aHat
   have hy : y ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have ha : ∀ i, a i ∈ maximalIdeal R := fun _ ↦ hy
   have haHat : ∀ i, aHat i ∈ maximalIdeal A := fun i ↦ by
     rw [AdicCompletion.maximalIdeal_eq_map]

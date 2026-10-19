@@ -162,9 +162,9 @@ theorem allOneRootCover_selectedDivisor_geometry
   have hregR : IsRegularLocalRing R :=
     isRegularLocalRing_of_regularSystem [y, z] hreg hgen
   have hyPrime : Prime y :=
-    prime_of_mem_regularSystem hreg hgen (by simp)
+    prime_of_mem_regularSystem hreg hgen List.mem_cons_self
   have hyQuotient :=
-    quotient_geometry_of_mem_regularSystem hreg hgen (p := y) (by simp)
+    quotient_geometry_of_mem_regularSystem hreg hgen (p := y) List.mem_cons_self
   simpa using
     (show IsRegularLocalRing R ∧ IsDomain R ∧ Prime y ∧
         IsDomain (R ⧸ Ideal.span ({y} : Set R)) ∧

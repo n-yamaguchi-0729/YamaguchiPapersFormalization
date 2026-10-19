@@ -63,7 +63,7 @@ private theorem quotientFirstRegularParameter_isDVR
   let S := T ⧸ I
   let : I.IsPrime :=
     Ideal.isPrime_span_singleton_of_prime
-      (prime_of_mem_regularSystem hreg hgen (by simp))
+      (prime_of_mem_regularSystem hreg hgen List.mem_cons_self)
   let : IsLocalRing S :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
@@ -82,14 +82,14 @@ private theorem quotientFirstRegularParameter_isDVR
         IsLocalRing.map_maximalIdeal_of_surjective
           (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
   have hbPrime : Prime (Ideal.Quotient.mk I b) :=
-    prime_of_mem_regularSystem hregS hgenS (by simp)
+    prime_of_mem_regularSystem hregS hgenS List.mem_cons_self
   have hSNotField : ¬ IsField S := by
     intro hfield
     have hmaxBot : maximalIdeal S = ⊥ :=
       IsLocalRing.isField_iff_maximalIdeal_eq.mp hfield
     have hbMem : Ideal.Quotient.mk I b ∈ maximalIdeal S := by
       rw [← hgenS]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     have hbZero : Ideal.Quotient.mk I b = 0 := by
       rw [hmaxBot] at hbMem
       simpa using hbMem
@@ -274,7 +274,7 @@ private theorem completionQuotientFirstRegularParameter_isDVR_aux
   let mR := maximalIdeal R
   let : I.IsPrime :=
     Ideal.isPrime_span_singleton_of_prime
-      (prime_of_mem_regularSystem hreg hgen (by simp))
+      (prime_of_mem_regularSystem hreg hgen List.mem_cons_self)
   let : IsLocalRing S :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
@@ -351,7 +351,7 @@ theorem maximalAdicCompletion_prime_eq_mapped_span_first_of_under_eq
     let I : Ideal R := Ideal.span ({x} : Set R)
     let S := R ⧸ I
     have hxPrime : Prime x :=
-      prime_of_mem_regularSystem hreg hgen (by simp)
+      prime_of_mem_regularSystem hreg hgen List.mem_cons_self
     let : I.IsPrime :=
       Ideal.isPrime_span_singleton_of_prime hxPrime
     have hquot := regularSystem_quotientHead hreg hgen
@@ -369,7 +369,7 @@ theorem maximalAdicCompletion_prime_eq_mapped_span_first_of_under_eq
       change y ∈ Ideal.span ({x} : Set R)
       rw [hmax]
       rw [← hgen]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
     exact hyNonzero (Ideal.Quotient.eq_zero_iff_mem.mpr hyMem)
   have hqNotMax : q ≠ maximalIdeal Rhat := by
     intro hqmax

@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
 import Mathlib.RingTheory.Regular.RegularSequence
 

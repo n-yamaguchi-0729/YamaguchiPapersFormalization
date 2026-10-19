@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.Tactic.Abel
 
 /-! # Representatives and boundaries in continuous cohomology
 
@@ -22,6 +23,46 @@ universe u v
 
 variable {R : Type u} [Ring R] [TopologicalSpace R]
 variable {G : Type v} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
+
+open TopRep ContRepresentation
+
+/-- An actual homogeneous degree-two cocycle satisfies the alternating
+four-point identity, with no restriction on its coefficient action. -/
+theorem degreeTwo_cocycle_equation (X : TopRep.{v} R G)
+    (z : ContinuousCohomology.cocycles X 2)
+    (x₀ x₁ x₂ x₃ : G) :
+    (((homogeneousCochains X).iCycles 2).hom z).1 x₁ x₂ x₃ -
+        (((homogeneousCochains X).iCycles 2).hom z).1 x₀ x₂ x₃ +
+        (((homogeneousCochains X).iCycles 2).hom z).1 x₀ x₁ x₃ -
+      (((homogeneousCochains X).iCycles 2).hom z).1 x₀ x₁ x₂ = 0 := by
+  let C := homogeneousCochains X
+  let z₀ : C.X 2 := (C.iCycles 2).hom z
+  have hz : (C.d 2 3).hom z₀ = 0 := by
+    have h := congrArg (fun f ↦ TopModuleCat.Hom.hom f z) (C.iCycles_d 2 3)
+    simpa only [z₀, TopModuleCat.hom_comp, ContinuousLinearMap.comp_apply,
+      TopModuleCat.hom_zero, _root_.zero_apply] using h
+  have hzEval := congrArg (fun τ : C.X 3 => τ.1 x₀ x₁ x₂ x₃) hz
+  have hd := TopRep.homogeneousCochains.d_apply X 2 z₀
+  have hdEval := congrArg (fun τ => τ x₀ x₁ x₂ x₃) hd
+  rw [hdEval] at hzEval
+  change z₀.1 x₁ x₂ x₃ - (z₀.1 x₀ x₂ x₃ -
+    (z₀.1 x₀ x₁ x₃ - z₀.1 x₀ x₁ x₂)) = 0 at hzEval
+  abel_nf at hzEval ⊢
+  exact hzEval
+
+/-- An actual homogeneous degree-two cocycle is equivariant for its
+coefficient action. -/
+theorem degreeTwo_equivariant (X : TopRep.{v} R G)
+    (z : cocycles X 2) (g x₀ x₁ x₂ : G) :
+    X.ρ g ((((homogeneousCochains X).iCycles 2).hom z).1 x₀ x₁ x₂) =
+      (((homogeneousCochains X).iCycles 2).hom z).1
+        (g * x₀) (g * x₁) (g * x₂) := by
+  let z₀ := ((homogeneousCochains X).iCycles 2).hom z
+  change (resolutionX X 3).ρ.invariants at z₀
+  have h := congrArg (fun τ => τ (g * x₀) (g * x₁) (g * x₂)) (z₀.2 g)
+  change X.ρ g (z₀.1 (g⁻¹ * (g * x₀)) (g⁻¹ * (g * x₁))
+      (g⁻¹ * (g * x₂))) = z₀.1 (g * x₀) (g * x₁) (g * x₂) at h
+  simpa only [inv_mul_cancel_left] using h
 
 /-- Every continuous cohomology class has a homogeneous cocycle representative. -/
 theorem π_surjective (A : TopRep.{v} R G) (n : ℕ) :

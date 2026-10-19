@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.AlgebraicCurves.Valuations.FinitelyGeneratedMovingValuation
+import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedMovingValuation
 import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
 import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedExtensions
 import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection

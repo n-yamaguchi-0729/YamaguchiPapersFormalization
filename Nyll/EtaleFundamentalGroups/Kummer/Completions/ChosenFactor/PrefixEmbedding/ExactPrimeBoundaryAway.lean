@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensor.NormalizationPrime
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.PrefixEmbeddingCompositumAway
+import Mathlib.Algebra.Algebra.Defs
 
 /-!
 # Exact normalization prime in the literal prefix compositum
@@ -97,7 +98,7 @@ theorem
   let yC := algebraMap A C y
   have hyC : Prime yC := by
     apply hgeometryC.2.2.2.2.2.1 yC
-    exact List.mem_map.mpr ⟨y, by simp, rfl⟩
+    exact List.mem_map.mpr ⟨y, List.mem_cons_self, rfl⟩
   have hpC : (Ideal.span ({yC} : Set C)).IsPrime :=
     Ideal.isPrime_span_singleton_of_prime hyC
   let : q.IsPrime := hqPrime
@@ -132,6 +133,8 @@ theorem
   have hCOmegaAlgebra :
       genericTensorFieldComponentLeftScalarAlgebra (R := C) mKC =
         cOmegaAlgebra := by
+    apply Algebra.algebra_ext _ _
+    intro c
     rfl
   let : Algebra C Omega := cOmegaAlgebra
   obtain ⟨omegaToP, _, _, _, _, hBoundaryTail⟩ :=

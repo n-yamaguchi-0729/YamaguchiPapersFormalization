@@ -5,6 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+import Mathlib.RingTheory.Ideal.Pointwise
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+import Mathlib.RingTheory.Invariant.Galois
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
 import Mathlib.RingTheory.Ideal.Over
 
 /-!
@@ -32,12 +38,12 @@ noncomputable def finiteEtaleGaloisCoverIdealDecompositionMulEquiv
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -46,28 +52,16 @@ noncomputable def finiteEtaleGaloisCoverIdealDecompositionMulEquiv
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L]
       (P : Ideal B),
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       MulAction.stabilizer (Aut Y)ᵐᵒᵖ P ≃*
         MulAction.stabilizer Gal(L/K) P := by
-  letI : IsGalois Y := hY
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _ P
-  letI : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  letI : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure P hFinite hFieldAction hCoverAction
   exact Ideal.stabilizerEquiv P
     (finiteEtaleAutOpFunctionFieldMulEquiv Y hY)
     (finiteEtaleGaloisCoverNormalizationAction_smul Y hY A B)
@@ -79,12 +73,12 @@ noncomputable def finiteEtaleGaloisCoverIdealInertiaMulEquiv
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -93,28 +87,16 @@ noncomputable def finiteEtaleGaloisCoverIdealInertiaMulEquiv
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L]
       (P : Ideal B),
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       P.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ ≃*
         P.toAddSubgroup.inertia Gal(L/K) := by
-  letI : IsGalois Y := hY
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _ P
-  letI : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  letI : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure P hFinite hFieldAction hCoverAction
   exact Ideal.inertiaEquiv P
     (finiteEtaleAutOpFunctionFieldMulEquiv Y hY)
     (finiteEtaleGaloisCoverNormalizationAction_smul Y hY A B)
@@ -125,12 +107,12 @@ theorem natCard_finiteEtaleGaloisCoverIdealInertia_eq
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -139,28 +121,16 @@ theorem natCard_finiteEtaleGaloisCoverIdealInertia_eq
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L]
       (P : Ideal B),
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       Nat.card (P.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ) =
         Nat.card (P.toAddSubgroup.inertia Gal(L/K)) := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _ P
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure P hFinite hFieldAction hCoverAction
   exact Nat.card_congr
     (finiteEtaleGaloisCoverIdealInertiaMulEquiv Y hY A B P).toEquiv
 
@@ -171,12 +141,12 @@ theorem finiteEtaleGaloisCoverIdealInertia_eq_bot_iff
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -185,30 +155,18 @@ theorem finiteEtaleGaloisCoverIdealInertia_eq_bot_iff
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L]
       (P : Ideal B),
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       P.toAddSubgroup.inertia (Aut Y)ᵐᵒᵖ = ⊥ ↔
         P.toAddSubgroup.inertia Gal(L/K) = ⊥ := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _ P
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure P hFinite hFieldAction hCoverAction
   let : _root_.IsGalois K L :=
     isGalois_functionField_of_isGalois_finiteEtale Y hY
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
   rw [Subgroup.eq_bot_iff_card, Subgroup.eq_bot_iff_card,
     natCard_finiteEtaleGaloisCoverIdealInertia_eq Y hY A B P]
 

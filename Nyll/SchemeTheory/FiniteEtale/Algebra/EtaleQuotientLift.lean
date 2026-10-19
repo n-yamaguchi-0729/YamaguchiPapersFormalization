@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.SchemeTheory.RingTheory.JacobianLocalization
+public import Nyll.SchemeTheory.RingTheory.Smooth.JacobianLocalization
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.Algebra.Algebra.Tower

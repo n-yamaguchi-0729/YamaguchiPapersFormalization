@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeCo
 import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
 import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
 import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalkNormality
+import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # Connected finite étale covers of smooth arithmetic schemes

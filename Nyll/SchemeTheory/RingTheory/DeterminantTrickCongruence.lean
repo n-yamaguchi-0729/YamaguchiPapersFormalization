@@ -67,7 +67,7 @@ theorem exists_monic_aeval_eq_zero_map_eq_prod_of_residual_diagonal
     rw [map_add, Ideal.Quotient.eq_zero_iff_mem.mpr (c j i).property, add_zero]
     by_cases hij : i = j
     · subst j
-      simp
+      simp only [Matrix.diagonal_apply_eq]
     · simp [hij]
   refine ⟨A.charpoly, A.charpoly_monic, hchar, ?_⟩
   rw [← Matrix.charpoly_map, hAmap, Matrix.charpoly_diagonal]

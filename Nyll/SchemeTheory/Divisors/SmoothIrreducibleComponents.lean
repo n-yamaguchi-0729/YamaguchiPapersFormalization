@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponentMap
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalkNormality
+import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!

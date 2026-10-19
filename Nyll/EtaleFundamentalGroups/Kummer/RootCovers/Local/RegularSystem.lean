@@ -41,19 +41,17 @@ theorem localRootCover_regularSystem_geometry
     (hgen : Ideal.ofList (a :: rs) = maximalIdeal R) :
     let B := AdjoinRoot (X ^ n - C a)
     let bs := localRootCoverParameterList R n a rs
-    letI : IsLocalRing B := isLocalRing_adjoinRoot_X_pow_sub_C hn (by
+    let _ : IsLocalRing B := isLocalRing_adjoinRoot_X_pow_sub_C hn (by
       rw [← hgen]
-      exact Ideal.subset_span (by simp))
+      exact Ideal.subset_span List.mem_cons_self)
     IsNoetherianRing B ∧ IsDomain B ∧
       IsRegular B bs ∧ Ideal.ofList bs = maximalIdeal B ∧
       ∀ p ∈ bs, Prime p := by
-  dsimp only
+  intro B bs localB
   let f : R[X] := X ^ n - C a
-  let B := AdjoinRoot f
   have haMem : a ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
-  let : IsLocalRing B := isLocalRing_adjoinRoot_X_pow_sub_C hn haMem
+    exact Ideal.subset_span List.mem_cons_self
   have hf : f.Monic := Polynomial.monic_X_pow_sub_C a hn.ne'
   let : Module.Finite R B := hf.finite_adjoinRoot
   let : IsNoetherianRing B := IsNoetherianRing.of_finite R B
@@ -72,11 +70,17 @@ theorem localRootCover_regularSystem_geometry
     rw [Algebra.smul_def, AdjoinRoot.algebraMap_eq]
     rw [show AdjoinRoot.of f a = AdjoinRoot.root f ^ n by
       simpa [f] using (adjoinRoot_root_pow n a).symm]
-    obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn.ne'
-    rw [pow_succ, mul_assoc]
+    obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero hn.ne'
     have hz' : AdjoinRoot.root f * z = 0 := by
-      simpa only [smul_eq_mul] using hz
-    rw [hz', mul_zero]
+      exact hz
+    calc
+      (AdjoinRoot.root f : B) ^ n * z =
+          (AdjoinRoot.root f : B) ^ (k + 1) * z :=
+        congrArg (fun m : ℕ ↦ (AdjoinRoot.root f : B) ^ m * z) hk
+      _ = (AdjoinRoot.root f : B) ^ k * ((AdjoinRoot.root f : B) * z) :=
+        congrArg (fun t : B ↦ t * z) (pow_succ (AdjoinRoot.root f : B) k) |>.trans
+          (mul_assoc _ _ _)
+      _ = 0 := by rw [hz', mul_zero]
   let Iroot : Ideal B := Ideal.span {AdjoinRoot.root f}
   let Ia : Ideal R := Ideal.span {a}
   let QB := B ⧸ Iroot

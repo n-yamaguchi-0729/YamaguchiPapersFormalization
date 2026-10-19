@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
 import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompletionDescentFrontier
 import Nyll.SchemeTheory.FiniteEtale.AffinizationExtension
-import Nyll.SchemeTheory.RingTheory.RegularLocalDomain
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic

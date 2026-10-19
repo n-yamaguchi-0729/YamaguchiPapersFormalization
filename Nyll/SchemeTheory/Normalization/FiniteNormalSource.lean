@@ -234,4 +234,12 @@ theorem finiteNormalGenericIso_inv_fromNormalization
   exact Iso.inv_hom_id_assoc _ _
 
 
+/-- The chosen finite-normal normalization isomorphism preserves the original generic map. -/
+@[reassoc (attr := simp)]
+theorem toNormalization_finiteNormalGenericIso_hom
+    (f : Y ⟶ X) [IsFinite f] :
+    (Y.genericExtensionMorphism Y.functionField ≫ f).toNormalization ≫
+      (finiteNormalGenericIso f).hom = Y.genericExtensionMorphism Y.functionField := by
+  exact toNormalization_finiteNormalGenericDesc f
+
 end AlgebraicGeometry.Scheme.Hom

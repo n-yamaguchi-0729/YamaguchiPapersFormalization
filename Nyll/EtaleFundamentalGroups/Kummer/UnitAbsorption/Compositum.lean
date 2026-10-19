@@ -173,7 +173,7 @@ theorem exists_finiteEtale_integralFactor_of_pow_eq_unit
       _ = (unitA : A) * ((unitA⁻¹ : Aˣ) : A) := by
         rw [hxPow]
         rfl
-      _ = 1 := by simp
+      _ = 1 := Units.mul_inv _
   have hpDerivativeUnit : IsUnit (aeval x p.derivative) := by
     simpa [p, Polynomial.derivative_X_pow] using
       (hnUnit.map (algebraMap B A)).mul (hxUnit.pow (n - 1))

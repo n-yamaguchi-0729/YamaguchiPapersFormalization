@@ -159,7 +159,9 @@ private theorem spanFinrank_ofList_le_length
     (Ideal.ofList l).spanFinrank ≤ l.length := by
   classical
   refine (Submodule.spanFinrank_span_le_ncard_of_finite l.finite_toSet).trans ?_
-  rw [show {x : R | x ∈ l} = (l.toFinset : Set R) by ext; simp,
+  rw [show {x : R | x ∈ l} = (l.toFinset : Set R) by
+    ext x
+    exact List.mem_toFinset.symm,
     Set.ncard_coe_finset]
   exact List.toFinset_card_le l
 

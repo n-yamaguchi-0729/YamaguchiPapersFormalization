@@ -44,7 +44,7 @@ noncomputable def localizationAwayToExtensionAlgebra
       algebraMap K L (algebraMap A K f) = algebraMap A L f :=
         (IsScalarTower.algebraMap_apply A K L f).symm
       _ = 0 := hzero
-      _ = algebraMap K L (algebraMap A K 0) := by simp
+      _ = algebraMap K L (algebraMap A K 0) := by rw [map_zero, map_zero]
   exact (IsLocalization.Away.lift f hfUnit).toAlgebra
 
 omit [IsDomain A] in
@@ -107,7 +107,7 @@ noncomputable def localizationIntegralClosureAwayAlgEquiv
       algebraMap K L (algebraMap A K f) = algebraMap A L f :=
         (IsScalarTower.algebraMap_apply A K L f).symm
       _ = 0 := hzero
-      _ = algebraMap K L (algebraMap A K 0) := by simp
+      _ = algebraMap K L (algebraMap A K 0) := by rw [map_zero, map_zero]
   letI : IsLocalization.Away (algebraMap A L f) L :=
     IsLocalization.away_of_isUnit_of_bijective L
       (isUnit_iff_ne_zero.mpr hfL) Function.bijective_id

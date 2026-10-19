@@ -36,34 +36,29 @@ used. -/
 noncomputable def integralClosurePrimeLocalizationAlgEquiv
     (P : Ideal A) [P.IsPrime]
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := localizedNormalizationPrime (K := K) (L := L) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
     Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime q := by
+  intro algebraP_L towerP_L algebraP_Q q hq
   let V := Localization.AtPrime P
   let C := integralClosure A L
-  letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  letI : IsScalarTower A V L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let Cp := integralClosure V L
-  letI := integralClosureLocalizationAlgebra (L := L) P
+  let : Algebra C Cp := integralClosureLocalizationAlgebra (L := L) P
   let M := Algebra.algebraMapSubmonoid C P.primeCompl
-  letI : IsLocalization M Cp :=
+  let : IsLocalization M Cp :=
     isLocalization_integralClosure_localizationAtPrime
       (K := K) (L := L) P
-  let q := localizedNormalizationPrime (K := K) (L := L) P Q
-  letI : q.IsMaximal :=
-    localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
   let Dglobal := Localization.AtPrime Q
   let Dlocal := Localization.AtPrime q
-  letI : Algebra V Dglobal :=
-    Localization.AtPrime.algebraOfLiesOver P Q
   have hdisj : Disjoint (M : Set C) (Q : Set C) := by
     exact Set.disjoint_image_left.mpr
       (Set.disjoint_compl_left_iff_subset.mpr
@@ -71,7 +66,7 @@ noncomputable def integralClosurePrimeLocalizationAlgEquiv
   have hunder : q.under C = Q := by
     change (Q.map (algebraMap C Cp)).under C = Q
     exact IsLocalization.under_map_of_isPrime_disjoint M Cp inferInstance hdisj
-  letI : IsLocalization Q.primeCompl Dlocal := by
+  let : IsLocalization Q.primeCompl Dlocal := by
     have hloc :=
       IsLocalization.isLocalization_isLocalization_atPrime_isLocalization
         M Dlocal q
@@ -102,19 +97,21 @@ prime are both constructed canonically from `Q`. -/
 noncomputable def integralClosurePrimeLocalizationAtUnderAlgEquiv
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] :
     let P := Q.under A
-    letI : P.IsPrime := inferInstance
-    letI : Q.LiesOver P := inferInstance
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : P.IsPrime := inferInstance
+    let : Q.LiesOver P := inferInstance
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     let q := localizedNormalizationPrime (K := K) (L := L) P Q
-    letI : q.IsMaximal :=
+    let : q.IsMaximal :=
       localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
     Localization.AtPrime Q ≃ₐ[Localization.AtPrime P]
       Localization.AtPrime q := by
-  dsimp only
+  intro P hP hLiesOver algebraP_L towerP_L algebraP_Q q hq
   exact integralClosurePrimeLocalizationAlgEquiv
     (K := K) (L := L) (Q.under A) Q
 
@@ -133,19 +130,23 @@ theorem localization_awayMap_integralClosurePrime_etale_of_localized
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
     (f : Localization.AtPrime P)
     (hAway :
-      letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-      letI := localizationAtPrimeToExtension_isScalarTower
-        (K := K) (L := L) P
+      let : Algebra (Localization.AtPrime P) L :=
+        localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+      let : IsScalarTower A (Localization.AtPrime P) L :=
+        localizationAtPrimeToExtension_isScalarTower
+          (K := K) (L := L) P
       let q := localizedNormalizationPrime (K := K) (L := L) P Q
-      letI : q.IsMaximal :=
+      let : q.IsMaximal :=
         localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q
-      letI : q.IsPrime := (inferInstance : q.IsMaximal).isPrime
+      let : q.IsPrime := (inferInstance : q.IsMaximal).isPrime
       IsAwayMapEtale (R := Localization.AtPrime P)
         (D := Localization.AtPrime q) f) :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
-    letI : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     RingHom.Etale
       (R := Localization.Away f)
@@ -153,12 +154,8 @@ theorem localization_awayMap_integralClosurePrime_etale_of_localized
         (algebraMap (Localization.AtPrime P) (Localization.AtPrime Q) f))
       (Localization.awayMap
         (algebraMap (Localization.AtPrime P) (Localization.AtPrime Q)) f) := by
+  intro algebraP_L towerP_L algebraP_Q
   let V := Localization.AtPrime P
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower A V L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let : Algebra V (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
   let q := localizedNormalizationPrime (K := K) (L := L) P Q
   let : q.IsMaximal :=
     localizedNormalizationPrime_isMaximal (K := K) (L := L) P Q

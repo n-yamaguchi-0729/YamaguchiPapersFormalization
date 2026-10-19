@@ -8,10 +8,10 @@ module
 
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSection
 public import Nyll.SchemeTheory.Normalization.QuotientFiniteFactor
-public import Nyll.SchemeTheory.RingTheory.CyclicIdempotentFactor
-public import Nyll.SchemeTheory.RingTheory.HenselianIntegralCyclicIdempotent
-public import Nyll.SchemeTheory.RingTheory.JacobsonIdempotentFactor
-public import Nyll.SchemeTheory.RingTheory.LocalizationIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.CyclicIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIntegralCyclicIdempotent
+public import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.LocalizationIdempotentFactor
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 public import Mathlib.RingTheory.Unramified.LocalStructure

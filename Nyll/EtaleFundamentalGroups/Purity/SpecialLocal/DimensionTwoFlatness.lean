@@ -69,7 +69,7 @@ theorem module_free_of_isRegular_pair_of_span_eq_maximalIdeal
   have hxy := (isRegular_cons_iff' M x [y]).mp hregular
   have hxMem : x ∈ maximalIdeal R := by
     rw [← hspan]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   let R₁ := R ⧸ Ideal.span {x}
   let M₁ := QuotSMulTop x M
   let y₁ : R₁ := Ideal.Quotient.mk (Ideal.span {x}) y

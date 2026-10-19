@@ -61,10 +61,11 @@ noncomputable def integralClosureLocalizationAlgHom
     (P : Ideal A) [P.IsPrime]
     [Algebra (Localization.AtPrime P) L]
     [IsScalarTower A (Localization.AtPrime P) L] :
-    letI := integralClosureLocalizationAlgebra (L := L) P
+    let : Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+      integralClosureLocalizationAlgebra (L := L) P
     integralClosure A L →ₐ[A]
       integralClosure (Localization.AtPrime P) L := by
-  letI := integralClosureLocalizationAlgebra (L := L) P
+  intro algebraC_Cp
   refine
     { toRingHom := integralClosureLocalizationRingHom (L := L) P
       commutes' := fun x ↦ Subtype.ext ?_ }
@@ -75,27 +76,22 @@ omit [IsDomain A] in
 of the original normalization at the image of `Pᶜ`. -/
 theorem isLocalization_integralClosure_localizationAtPrime
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-    letI := integralClosureLocalizationAlgebra (L := L) P
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
+    let : Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+      integralClosureLocalizationAlgebra (L := L) P
     IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
       (integralClosure (Localization.AtPrime P) L) := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let hALocL : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let : IsScalarTower A (Localization.AtPrime P) L := hALocL
-  let := integralClosureLocalizationAlgebra (L := L) P
+  intro algebraP_L hALocL algebraC_Cp
   let hAB : IsScalarTower A (integralClosure A L)
       (integralClosure (Localization.AtPrime P) L) :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  let : IsScalarTower A (integralClosure A L)
-      (integralClosure (Localization.AtPrime P) L) := hAB
   let hBL : IsScalarTower (integralClosure A L)
       (integralClosure (Localization.AtPrime P) L) L :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  let : IsScalarTower (integralClosure A L)
-      (integralClosure (Localization.AtPrime P) L) L := hBL
   let : IsLocalization
       (Algebra.algebraMapSubmonoid L P.primeCompl) L :=
     IsLocalization.of_le_isUnit fun y hy ↦ by
@@ -105,13 +101,8 @@ theorem isLocalization_integralClosure_localizationAtPrime
         map_ne_zero_iff _ (algebraMap K L).injective,
         map_ne_zero_iff _ (IsFractionRing.injective A K)]
       exact fun h ↦ hx (h ▸ P.zero_mem)
-  have hLocal : IsLocalization
-      (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
-      (integralClosure (Localization.AtPrime P) L) :=
-    @IsLocalization.integralClosure
-      A _ L _ _ (Localization.AtPrime P) L _ _ _ _ _ _ _ hALocL
-      P.primeCompl _ _ (integralClosureLocalizationAlgebra (L := L) P) hBL hAB
-  exact hLocal
+  exact IsLocalization.integralClosure
+    (R := A) (S := L) (Rf := Localization.AtPrime P) (Sf := L) P.primeCompl
 
 omit [IsDomain A] in
 /-- Finiteness of a normalization is preserved when the base is localized
@@ -121,15 +112,16 @@ the localized ring is needed. -/
 theorem moduleFinite_integralClosure_localizationAtPrime
     [Module.Finite A (integralClosure A L)]
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI := localizationAtPrimeToExtension_isScalarTower
-      (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : IsScalarTower A (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtension_isScalarTower
+        (K := K) (L := L) P
     Module.Finite (Localization.AtPrime P)
       (integralClosure (Localization.AtPrime P) L) := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
-  let := integralClosureLocalizationAlgebra (L := L) P
+  intro algebraP_L towerP_L
+  let : Algebra (integralClosure A L) (integralClosure (Localization.AtPrime P) L) :=
+    integralClosureLocalizationAlgebra (L := L) P
   let : IsLocalization
       (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl)
       (integralClosure (Localization.AtPrime P) L) :=

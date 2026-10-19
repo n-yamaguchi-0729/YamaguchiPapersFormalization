@@ -219,7 +219,7 @@ theorem
         _ = algebraMap F M (algebraMap A F w) :=
           IsScalarTower.algebraMap_apply A F M w
   have hyne : y ≠ 0 :=
-    (prime_of_mem_regularSystem hreg hgen (by simp)).ne_zero
+    (prime_of_mem_regularSystem hreg hgen List.mem_cons_self).ne_zero
   have hAwayOmega :
       (Localization.awayMap
         (algebraMap C (integralClosure C Omega)) yC).Etale := by

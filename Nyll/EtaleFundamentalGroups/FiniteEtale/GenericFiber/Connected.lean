@@ -92,15 +92,15 @@ theorem finiteEtale_isDomain_of_connectedSpace_primeSpectrum
     intro heone
     have htop : RingHom.ker g.toRingHom = ⊤ := by
       rw [hker, heone]
-      simp
-    have hone : (1 : T) ∈ RingHom.ker g.toRingHom := by rw [htop]; simp
+      exact Ideal.span_singleton_one
+    have hone : (1 : T) ∈ RingHom.ker g.toRingHom := by rw [htop]; exact Submodule.mem_top
     have hD : (1 : D) = 0 := by
       simpa only [RingHom.mem_ker, map_one] using hone
     exact one_ne_zero hD
   have hezero : e = 0 := he_zero_or_one.resolve_right he_ne_one
   have hkerbot : RingHom.ker g.toRingHom = ⊥ := by
     rw [hker, hezero]
-    simp
+    exact Ideal.span_singleton_zero
   have hginjective : Function.Injective g := by
     rw [RingHom.injective_iff_ker_eq_bot]
     exact hkerbot
@@ -174,15 +174,15 @@ theorem finiteEtale_isIntegrallyClosed_of_connectedSpace_primeSpectrum
     intro heone
     have htop : RingHom.ker g.toRingHom = ⊤ := by
       rw [hker, heone]
-      simp
-    have hone : (1 : T) ∈ RingHom.ker g.toRingHom := by rw [htop]; simp
+      exact Ideal.span_singleton_one
+    have hone : (1 : T) ∈ RingHom.ker g.toRingHom := by rw [htop]; exact Submodule.mem_top
     have hD : (1 : D) = 0 := by
       simpa only [RingHom.mem_ker, map_one] using hone
     exact one_ne_zero hD
   have hezero : e = 0 := he_zero_or_one.resolve_right he_ne_one
   have hkerbot : RingHom.ker g.toRingHom = ⊥ := by
     rw [hker, hezero]
-    simp
+    exact Ideal.span_singleton_zero
   have hginjective : Function.Injective g := by
     rw [RingHom.injective_iff_ker_eq_bot]
     exact hkerbot

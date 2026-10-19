@@ -255,7 +255,7 @@ private theorem awayMap_formallyUnramified_of_normalization_etale
       _ = algebraMap D F (algebraMap A D t) :=
         IsScalarTower.algebraMap_apply A D F t
       _ = 0 := by rw [htD, map_zero]
-      _ = algebraMap K F (algebraMap A K 0) := by simp
+      _ = algebraMap K F (algebraMap A K 0) := by rw [map_zero, map_zero]
   let : IsDomain Ds := IsLocalization.Away.isDomain Ds htD
   let : Module.FaithfullyFlat Bs Ds := inferInstance
   have hFU : Algebra.FormallyUnramified S Bs :=
@@ -430,7 +430,7 @@ private theorem awayMap_formallyUnramified_of_embedded_normalization_etale
       _ = algebraMap D M (algebraMap A D t) :=
         IsScalarTower.algebraMap_apply A D M t
       _ = 0 := by rw [htD, map_zero]
-      _ = algebraMap K M (algebraMap A K 0) := by simp
+      _ = algebraMap K M (algebraMap A K 0) := by rw [map_zero, map_zero]
   let : IsDomain Ds := IsLocalization.Away.isDomain Ds htD
   let : Module.FaithfullyFlat Bs Ds := inferInstance
   have hFU : Algebra.FormallyUnramified S Bs :=
@@ -468,14 +468,14 @@ theorem selectedIntermediateRootExponent_isUnit_mod
     IsUnit (Module.finrank K F : A ⧸ Ideal.span {t}) := by
   let : IsDomain A := isDomain_of_regularSystem [t, y] hreg hgen
   have ht : Prime t :=
-    prime_of_mem_regularSystem hreg hgen (by simp)
+    prime_of_mem_regularSystem hreg hgen List.mem_cons_self
   have hα : α ≠ 0 := by
     intro hα
     apply ht.ne_zero
     apply IsFractionRing.injective A K
     apply (algebraMap K L).injective
     rw [← hpow, hα, zero_pow (Module.finrank_pos.ne')]
-    simp
+    rw [map_zero, map_zero]
   let m := Module.finrank K F
   have hm : 0 < m := Module.finrank_pos
   have hroots : ∀ ζ : L, ζ ^ Module.finrank K L = 1 →
@@ -609,14 +609,14 @@ theorem selectedIntermediateRootExponent_isUnit_mod_of_embedded_normalization_et
     IsUnit (Module.finrank K F : A ⧸ Ideal.span ({t} : Set A)) := by
   let : IsDomain A := isDomain_of_regularSystem [t, y] hreg hgen
   have ht : Prime t :=
-    prime_of_mem_regularSystem hreg hgen (by simp)
+    prime_of_mem_regularSystem hreg hgen List.mem_cons_self
   have hα : α ≠ 0 := by
     intro hα
     apply ht.ne_zero
     apply IsFractionRing.injective A K
     apply (algebraMap K L).injective
     rw [← hpow, hα, zero_pow (Module.finrank_pos.ne')]
-    simp
+    rw [map_zero, map_zero]
   let m := Module.finrank K F
   have hm : 0 < m := Module.finrank_pos
   have hroots : ∀ ζ : L, ζ ^ Module.finrank K L = 1 →

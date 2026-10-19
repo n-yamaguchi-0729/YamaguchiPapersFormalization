@@ -6,7 +6,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
-import Nyll.ShimizuYamaguchi26BranchedCoverings.All
 
 /-!
 Public entry point for the primary libraries of this extract.

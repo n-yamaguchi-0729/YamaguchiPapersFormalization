@@ -20,6 +20,8 @@ import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenF
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootExponentUnit
 import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.OneRootFiniteEtaleChosenFactor
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.SelectedComponent.ExactPrimeSource
+import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationMap
+import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationPrime
 import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverResidue
 
 /-!
@@ -1254,7 +1256,7 @@ private theorem selectedExponent_finish_local_factor
     let Broot := iteratedRadical A 1 n a
     let hymax : y ∈ maximalIdeal A := by
       rw [← hgen]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     let ha : ∀ i, a i ∈ maximalIdeal A := fun _ ↦ hymax
     letI : IsLocalRing Broot :=
       isLocalRing_iteratedRadical n a (fun _ ↦ hN) ha
@@ -1279,7 +1281,7 @@ private theorem selectedExponent_finish_local_factor
   let Broot := iteratedRadical A 1 n a
   have hymax : y ∈ maximalIdeal A := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have ha : ∀ i, a i ∈ maximalIdeal A := fun _ ↦ hymax
   let : IsLocalRing Broot :=
     isLocalRing_iteratedRadical n a (fun _ ↦ hN) ha
@@ -1468,7 +1470,7 @@ private theorem selectedExponent_finish_after_final_root
     let Broot := iteratedRadical A 1 n a
     let hymax : y ∈ maximalIdeal A := by
       rw [← hgen]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     let ha : ∀ i, a i ∈ maximalIdeal A := fun _ ↦ hymax
     letI : IsLocalRing Broot :=
       isLocalRing_iteratedRadical n a (fun _ ↦ hN) ha
@@ -1488,7 +1490,7 @@ private theorem selectedExponent_finish_after_final_root
   let Broot := iteratedRadical A 1 n a
   have hymax : y ∈ maximalIdeal A := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have ha : ∀ i, a i ∈ maximalIdeal A := fun _ ↦ hymax
   let : IsLocalRing Broot :=
     isLocalRing_iteratedRadical n a (fun _ ↦ hN) ha
@@ -2464,39 +2466,33 @@ theorem
           (K := K) (L := L) t hNC i : ℕ) :
         Localization.AtPrime P) := by
   classical
-  let e := heightTwoOtherBranchGaloisRamificationIndex
-    (K := K) (L := L) t hNC i
-  let N := heightTwoSelectedBranchGaloisRamificationIndex
-    (K := K) (L := L) t hNC i
-  have hN : 0 < N :=
-    heightTwoSelectedBranchGaloisRamificationIndex_pos
-      (K := K) (L := L) t hNC i
-  have he : ∀ k, 0 < e k :=
-    heightTwoOtherBranchGaloisRamificationIndex_pos
-      (K := K) (L := L) t hNC i
-  obtain
-      ⟨σ, hgeometryB, hgeometryD, hTower, hFin,
-        -, qGlobal, p,
-        hqGlobalPrime, hqGlobalOverD, -,
-        -, -, hqGlobalLe,
-        hpMax, hpOverD,
-        hqGlobalComap, hqPrefixPrime, hqPrefixOverB, hqPrefixExact,
-        -, -, -,
-        -, -, -, -,
-        -, hAwayPrefix, hfiniteFinal,
-        hEtaleFinal⟩ :=
+  have hsource :=
     splitStrictNormalCrossings_heightTwo_galoisFullRootCover_selectedComponent_exactPrimeSource
       (K := K) (L := L) hNC i hi P hP htiP hCharZero hAwayBase
-  let R := Localization.AtPrime P
-  let n := heightTwoConditionalOtherExponent t i r P e σ
-  let a : Fin d → R := heightTwoConditionalOtherRadicand t i P σ
-  let y : R := algebraMap A R (t i)
-  let hn : ∀ k, 0 < n k :=
-    heightTwoConditionalOtherExponent_pos_of_pos t i r P e he σ
-  let : Algebra R K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : IsFractionRing R K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
+  extract_lets -descend -merge e N at hsource
+  obtain ⟨σ, hsource⟩ := hsource
+  extract_lets -descend -merge R n a B y yB Froot D at hsource
+  obtain ⟨hgeometryB, hgeometryD, hsource⟩ := hsource
+  extract_lets -descend -merge regB domainB closedB regD domainD closedD
+    hn hN finiteBD integralBD ffRB faithfulRB ffBD faithfulBD faithfulRD
+    algRK fracRK KB KD faithfulRKB faithfulRKD faithfulBKD
+    algKKB algKKD algKBKD at hsource
+  obtain ⟨hTower, hsource⟩ := hsource
+  extract_lets -descend -merge towerKKBKD at hsource
+  obtain ⟨hFin, hsource⟩ := hsource
+  extract_lets -descend -merge finiteKBKD m hm n₀ hn₀ M₀
+    algBM₀ smulBM₀ towerBKBM₀ M algDM algBM smulDM smulBM
+    towerBDM towerDKDM pR qB qD hpR hqB hqD hqBpR hqDOverB hqDpR
+    V W algVW localVW algVK algVL algWKD algWM algLM algVM
+    Csel Cpost Cglobal algBCglobal algVCpost at hsource
+  obtain ⟨qPost, qGlobal, p, hqGlobalPrime, hqGlobalOverD,
+    _, _, _, hqGlobalLe, hpMax, hpOverD, hsource⟩ := hsource
+  extract_lets -descend -merge qPrefix qClosed at hsource
+  obtain ⟨hqGlobalComap, hqPrefixPrime, hqPrefixOverB, hqPrefixExact,
+    _, _, _, _, _, _, _, _, hAwayPrefix, hfiniteFinal, hEtaleFinal⟩ := hsource
+  let : IsScalarTower B D KD := IsScalarTower.of_algebraMap_eq' rfl
+  let : IsScalarTower B KB KD :=
+    FractionRing.isScalarTower_liftAlgebra B KD
   have hCharR :
       CharZero (R ⧸ Ideal.span ({y} : Set R)) := by
     change CharZero
@@ -2506,38 +2502,6 @@ theorem
             Set (Localization.AtPrime P)))
     exact charZero_quotient_algebraMap_localizationAtPrime P
       (hNC.2.2.2.1 i hi) htiP (hCharZero i hi)
-  let B := iteratedRadical R d n a
-  let yB : B := algebraMap R B y
-  let Froot : B[X] := X ^ N - C yB
-  let D := AdjoinRoot Froot
-  let : IsRegularLocalRing B := hgeometryB.1
-  let : IsDomain B := hgeometryB.2.1
-  let : IsRegularLocalRing D := hgeometryD.1
-  let : IsDomain D := hgeometryD.2.1
-  let : Module.Finite B D := by
-    simpa only [D, Froot] using
-      (monic_X_pow_sub_C yB hN.ne').finite_adjoinRoot
-  let : Module.FaithfullyFlat R B :=
-    faithfullyFlat_iteratedRadical n a hn
-  let : Module.FaithfullyFlat B D :=
-    faithfullyFlat_adjoinRoot_X_pow_sub_C hN yB
-  let KB := FractionRing B
-  let KD := FractionRing D
-  let : FaithfulSMul R KB := FaithfulSMul.trans R B KB
-  let : FaithfulSMul B KD := FaithfulSMul.trans B D KD
-  let : Algebra K KB :=
-    chosenFractionFieldToFaithfulFieldAlgebra
-      (R := R) (K := K) (F := KB)
-  let : Algebra K KD :=
-    galoisFullRootCoverFractionFieldAlgebra n a hn N hN y
-  let : IsScalarTower B D KD := IsScalarTower.of_algebraMap_eq' rfl
-  let : Algebra KB KD := FractionRing.liftAlgebra B KD
-  let : IsScalarTower B KB KD :=
-    FractionRing.isScalarTower_liftAlgebra B KD
-  let qB := Ideal.span ({yB} : Set B)
-  let qD := Ideal.span ({AdjoinRoot.root Froot} : Set D)
-  let hqDOverB : qD.LiesOver qB :=
-    span_root_liesOver_span_radicand hN hgeometryB.2.2.2.1
   have hCharB : CharZero (B ⧸ qB) := by
     have hmap := charZero_quotient_map_of_faithfullyFlat
       (S := B) (Ideal.span ({y} : Set R)) hCharR
@@ -2555,19 +2519,40 @@ theorem
       (Bhat ⊗[B] D) ≃ₐ[Bhat] AdjoinRoot (X ^ N - C yhat) := by
     simpa only [Bhat, D, Froot, yhat] using
       (oneRootBaseChangeAlgEquiv (A := B) (S := Bhat) N yB)
+  let algKBM : Algebra KB M :=
+    ((algebraMap KD M).comp (algebraMap KB KD)).toAlgebra
+  let smulKBM : SMul KB M := algKBM.toSMul
+  let towerBKBM : IsScalarTower B KB M := by
+    apply IsScalarTower.of_algebraMap_eq
+    intro b
+    change algebraMap KD M (algebraMap B KD b) =
+      algebraMap KD M (algebraMap KB KD (algebraMap B KB b))
+    rw [← IsScalarTower.algebraMap_apply B KB KD]
+  let towerBDCglobal : IsScalarTower B D Cglobal :=
+    IsScalarTower.of_algebraMap_eq' rfl
+  let g : integralClosure B M₀ →ₐ[B] Cglobal := by
+    let gRing := genericTensorTowerIntermediateNormalizationRingHom
+      (A := B) (B := D) (K := K) (F := KB) (F' := KD) (L := L) m
+    refine @AlgHom.mk B (integralClosure B M₀) Cglobal _ _ _ _
+      algBCglobal gRing ?_
+    intro b
+    apply Subtype.ext
+    exact
+      ((genericTensorTowerIntermediateComponentAlgHomRestrictBase
+        (A := B) (K := K) (F := KB) (F' := KD) (L := L) m).commutes b).trans
+        (congrArg (genericTensorFieldComponentLeft m)
+          (IsScalarTower.algebraMap_apply B D KD b))
   have hUnitB : IsUnit (N : B) :=
-    selectedExponent_completion_of_fixed_fraction_fields
-      (K := K) (L := L) (B := B) (D := D) (KB := KB) (KD := KD)
+    selectedExponent_completion_of_component_fields
+      (B := B) (D := D) (KB := KB) (KD := KD) (M₀ := M₀) (M := M)
+      (bM₀Algebra := algBM₀) (dMAlgebra := algDM) (bMAlgebra := algBM)
+      (kbMAlgebra := algKBM) (bEAlgebra := algBCglobal)
+      (bDETower := towerBDCglobal)
       yB zB N hN hregB hgenB hgeometryB.2.2.1
-      hgeometryB.2.2.2.1 hCharB qD hqDOverB eBaseRoot
-      (genericTensorTowerIntermediateNormalizationAlgHom
-        (A := B) (B := D) (K := K) (F := KB) (F' := KD) (L := L)
-        (genericTensorMaximalIdeal (K := K) (K' := KD) (L := L)))
+      hgeometryB.2.2.2.1 hCharB g qD hqDOverB
       qGlobal p hqGlobalPrime hqGlobalOverD hqGlobalLe hpMax hpOverD
-      (by rw [hqGlobalComap]; exact hqPrefixPrime)
-      (by rw [hqGlobalComap]; exact hqPrefixOverB)
-      (by rw [hqGlobalComap]; exact hqPrefixExact)
-      hAwayPrefix hfiniteFinal hEtaleFinal
+      qPrefix hqGlobalComap hqPrefixPrime hqPrefixOverB hqPrefixExact
+      hAwayPrefix hfiniteFinal hEtaleFinal eBaseRoot
   have hUnitR : IsUnit (N : R) :=
     isUnit_natCast_of_finite_local_extension
       (R := R) (S := B) (finite_iteratedRadical n a hn) N hUnitB

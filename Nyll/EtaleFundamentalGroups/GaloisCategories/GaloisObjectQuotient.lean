@@ -95,8 +95,9 @@ theorem galoisObjectQuotientMonoidHom_ker
   · intro hg
     apply MulOpposite.unop_injective
     apply (evaluationEquivOfIsGalois F A a).injective
-    rw [galoisObjectQuotientMonoidHom_unop_apply, hg]
-    simp
+    rw [galoisObjectQuotientMonoidHom_unop_apply, hg, Equiv.apply_symm_apply]
+    change a = F.map (𝟙 A) a
+    simp only [Functor.map_id, FintypeCat.id_apply]
 
 /-- A transitive fundamental-group action makes the quotient represented by
 a Galois object surjective. -/
@@ -110,8 +111,8 @@ theorem galoisObjectQuotientMonoidHom_surjective
   refine ⟨g, ?_⟩
   apply MulOpposite.unop_injective
   apply (evaluationEquivOfIsGalois F A a).injective
-  rw [galoisObjectQuotientMonoidHom_unop_apply, hg]
-  exact (evaluationEquivOfIsGalois F A a).apply_symm_apply _
+  rw [galoisObjectQuotientMonoidHom_unop_apply, hg, Equiv.apply_symm_apply]
+  exact (evaluationEquivOfIsGalois_apply F A a sigma.unop).symm
 
 /-- Pointed finite Galois quotients separate the automorphisms of a fiber
 functor. A natural automorphism fixing the fiber of every Galois object fixes

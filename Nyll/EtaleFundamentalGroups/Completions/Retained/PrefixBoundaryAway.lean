@@ -188,14 +188,13 @@ theorem retainedCompletedPrefix_normalization_boundaryAway
     (R := B) (R' := Bhat) (S := C) (K := K) (L := M)
     (K' := Khat) N
   let Omega := GenericTensorFieldComponent m
-  let : Algebra Bhat Omega :=
+  let omegaAlgebra : Algebra Bhat Omega :=
     genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) m
-  let : SMul Bhat Omega :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) m).toSMul
+  let : SMul Bhat Omega := omegaAlgebra.toSMul
   let : IsScalarTower Bhat Khat Omega :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have hyne : y ≠ 0 :=
-    (Kummer.prime_of_mem_regularSystem hreg hgen (by simp)).ne_zero
+    (Kummer.prime_of_mem_regularSystem hreg hgen (List.mem_cons_self)).ne_zero
   simpa only [Omega, yhat] using
     (localization_away_integralClosure_genericTensorFieldComponent_etale_of_awayMap
       (A := B) (C := C) (D := Bhat)

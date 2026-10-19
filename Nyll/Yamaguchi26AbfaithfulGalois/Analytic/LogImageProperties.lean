@@ -95,7 +95,7 @@ theorem principal_unit_log_image_torsion_free
     obtain ⟨n, hn⟩ := PadicInt.ideal_eq_span_pow_p hker
     have hpow : (p : ℤ_[p]) ^ n ∈ RingHom.ker f := by
       rw [hn]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span (Set.mem_singleton _)
     have hzero : f ((p : ℤ_[p]) ^ n) = 0 := RingHom.mem_ker.mp hpow
     have hpKpow : (p : K) ^ n = 0 := by
       simpa only [map_pow, map_natCast] using hzero

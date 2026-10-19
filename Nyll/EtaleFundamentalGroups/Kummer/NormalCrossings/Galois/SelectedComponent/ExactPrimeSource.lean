@@ -934,9 +934,9 @@ private theorem
                         (A := B) (B := D) (K := K) (F := KB)
                         (F' := KD) (L := L) m p
                     qGlobal.comap
-                        (genericTensorTowerIntermediateNormalizationAlgHom
+                        (genericTensorTowerIntermediateNormalizationRingHom
                           (A := B) (B := D) (K := K) (F := KB)
-                          (F' := KD) (L := L) m).toRingHom = qPrefix ∧
+                          (F' := KD) (L := L) m) = qPrefix ∧
                       qPrefix.IsPrime ∧ qPrefix.LiesOver qB ∧
                       qPrefix.ramificationIdx B = N ∧
                       qPrefix ≤ qClosed ∧ qClosed.IsMaximal ∧
@@ -1057,9 +1057,9 @@ private theorem
     genericTensorTowerIntermediateNormalizationPrime_liesOver_maximalIdeal
       (A := B) (B := D) (K := K) (F := KB) (F' := KD) (L := L)
       m p
-  let g := genericTensorTowerIntermediateNormalizationAlgHom
+  let g := genericTensorTowerIntermediateNormalizationRingHom
     (A := B) (B := D) (K := K) (F := KB) (F' := KD) (L := L) m
-  have hqGlobalComap : qGlobal.comap g.toRingHom = qPrefix :=
+  have hqGlobalComap : qGlobal.comap g = qPrefix :=
     genericTensorTowerIntermediateNormalizationAlgHom_comap_eq_prime
       (A := B) (B := D) (K := K) (F := KB) (F' := KD) (L := L)
       m qGlobal
@@ -1067,16 +1067,27 @@ private theorem
     Ideal.LiesOver.trans qGlobal qD qB
   have hqPrefixOver : qPrefix.LiesOver qB := by
     have hmap :
-        g.toRingHom.comp (algebraMap B (integralClosure B M₀)) =
+        g.comp (algebraMap B (integralClosure B M₀)) =
           algebraMap B Cglobal := by
+      let : Algebra B M :=
+        genericTensorFieldComponentLeftScalarAlgebra (R := B) m
+      let f : M₀ →ₐ[B] M :=
+        genericTensorTowerIntermediateComponentAlgHomRestrictBase
+          (A := B) (K := K) (F := KB) (F' := KD) (L := L) m
       apply RingHom.ext
       intro b
-      exact g.commutes b
+      apply Subtype.ext
+      change f (algebraMap B M₀ b) =
+        genericTensorFieldComponentLeft m
+          (algebraMap D KD (algebraMap B D b))
+      rw [f.commutes]
+      exact congrArg (genericTensorFieldComponentLeft m)
+        (IsScalarTower.algebraMap_apply B D KD b)
     constructor
     rw [Ideal.under_def, ← hqGlobalComap, Ideal.comap_comap, hmap]
     exact hqGlobalOverB.over
   have hqPrefixLe : qPrefix ≤ qClosed := by
-    change qGlobal.comap g.toRingHom ≤ p.comap g.toRingHom
+    change qGlobal.comap g ≤ p.comap g
     exact Ideal.comap_mono hqGlobalLe
   have hBaseRing :
       (algebraMap K KD).comp (algebraMap R K) =
@@ -1312,9 +1323,9 @@ theorem
                         (A := B) (B := D) (K := K) (F := KB)
                         (F' := KD) (L := L) m p
                     qGlobal.comap
-                        (genericTensorTowerIntermediateNormalizationAlgHom
+                        (genericTensorTowerIntermediateNormalizationRingHom
                           (A := B) (B := D) (K := K) (F := KB)
-                          (F' := KD) (L := L) m).toRingHom = qPrefix ∧
+                          (F' := KD) (L := L) m) = qPrefix ∧
                       qPrefix.IsPrime ∧ qPrefix.LiesOver qB ∧
                       qPrefix.ramificationIdx B = N ∧
                       qPrefix ≤ qClosed ∧ qClosed.IsMaximal ∧

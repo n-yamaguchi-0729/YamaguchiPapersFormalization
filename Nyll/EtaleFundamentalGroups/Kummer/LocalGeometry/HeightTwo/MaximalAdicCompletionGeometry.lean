@@ -76,13 +76,13 @@ theorem isDomain_of_prime_isSMulRegular_of_isHausdorff_maximalIdeal
       induction k with
       | zero =>
           intro l a b hab
-          exact Or.inl (by simp)
+          exact Or.inl (by rw [pow_zero]; exact one_dvd _)
       | succ k ihK =>
           intro l
           induction l with
           | zero =>
               intro a b hab
-              exact Or.inr (by simp)
+              exact Or.inr (by rw [pow_zero]; exact one_dvd _)
           | succ l ihL =>
               intro a b hab
               have hpProd : p ∣ a * b := by rw [hab]; exact dvd_zero p
@@ -194,7 +194,7 @@ theorem prime_first_maximalAdicCompletion_of_regularPair
   let S := B ⧸ I
   let Bhat := AdicCompletion (maximalIdeal B) B
   have hxPrime : Prime x :=
-    prime_of_mem_regularSystem hreg hgen (by simp)
+    prime_of_mem_regularSystem hreg hgen List.mem_cons_self
   let : I.IsPrime := by
     exact Ideal.isPrime_span_singleton_of_prime hxPrime
   let : IsLocalRing S :=
@@ -218,14 +218,14 @@ theorem prime_first_maximalAdicCompletion_of_regularPair
     isDomain_of_regularSystem [Ideal.Quotient.mk I y] hregS hgenS
   let : IsDomain S := hdomainS
   have hyPrime : Prime (Ideal.Quotient.mk I y) :=
-    prime_of_mem_regularSystem hregS hgenS (by simp)
+    prime_of_mem_regularSystem hregS hgenS List.mem_cons_self
   have hSNotField : ¬ IsField S := by
     intro hfield
     have hmaxBot : maximalIdeal S = ⊥ :=
       IsLocalRing.isField_iff_maximalIdeal_eq.mp hfield
     have hyMem : Ideal.Quotient.mk I y ∈ maximalIdeal S := by
       rw [← hgenS]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     have hyZero : Ideal.Quotient.mk I y = 0 := by
       rw [hmaxBot] at hyMem
       simpa using hyMem

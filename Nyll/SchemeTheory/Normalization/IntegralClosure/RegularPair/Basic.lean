@@ -82,7 +82,7 @@ theorem exists_integralClosure_factor_of_mul_eq_mul
           change ∃ (a s : A) (_ : s ∈ Submonoid.powers x),
             (algebraMap A K x)⁻¹ =
               algebraMap A K a * (algebraMap A K s)⁻¹
-          exact ⟨1, x, Submonoid.mem_powers x, by simp⟩⟩
+          exact ⟨1, x, Submonoid.mem_powers x, by rw [map_one, one_mul]⟩⟩
       have hbInt : IsIntegral Aₓ (b : L) :=
         b.2.map_of_comp_eq (algebraMap A Aₓ) (RingHom.id L) hbase
       have hlocal : IsIntegral Aₓ
@@ -114,7 +114,7 @@ theorem exists_integralClosure_factor_of_mul_eq_mul
           change ∃ (a s : A) (_ : s ∈ Submonoid.powers y),
             (algebraMap A K y)⁻¹ =
               algebraMap A K a * (algebraMap A K s)⁻¹
-          exact ⟨1, y, Submonoid.mem_powers y, by simp⟩⟩
+          exact ⟨1, y, Submonoid.mem_powers y, by rw [map_one, one_mul]⟩⟩
       have hcInt : IsIntegral Aᵧ (c : L) :=
         c.2.map_of_comp_eq (algebraMap A Aᵧ) (RingHom.id L) hbase
       have hlocal : IsIntegral Aᵧ

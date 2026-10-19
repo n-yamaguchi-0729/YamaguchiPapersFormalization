@@ -89,7 +89,7 @@ noncomputable def localizationIntegralClosureAtPrimeAlgEquiv
         (integralClosure A L) P.primeCompl)),
     IsScalarTower.algebraMap_apply A (integralClosure A L)
       (integralClosure (Localization.AtPrime P) L)]
-  simp
+  exact congrArg Subtype.val (e.commutes (algebraMap A (integralClosure A L) x))
 
 omit [IsDomain A] [IsScalarTower A K L] in
 /-- Etaleness of the normalization after localizing the base gives exactly

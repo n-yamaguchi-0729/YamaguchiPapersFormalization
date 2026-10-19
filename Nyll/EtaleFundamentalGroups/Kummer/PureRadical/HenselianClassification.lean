@@ -51,7 +51,8 @@ theorem rootOfUnity_mem_fractionBase_of_henselian_of_residue_bijective
   have hn : n ≠ 0 := by
     intro hn
     subst n
-    simp at hnUnit
+    rw [Nat.cast_zero] at hnUnit
+    exact not_isUnit_zero hnUnit
   let f : A[X] := X ^ n - C 1
   have hfMonic : f.Monic := Polynomial.monic_X_pow_sub_C 1 hn
   have hζIntegral : IsIntegral A ζ := by

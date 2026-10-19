@@ -585,10 +585,18 @@ noncomputable def lowerUnitFactorGenericFiberAlgEquiv
           exact SetLike.coe_mono
             (show Limage ≤ Limage ⊔ F from le_sup_left)
             (AlgHom.mem_fieldRange.mpr ⟨z, rfl⟩)⟩
-      map_one' := by apply Subtype.ext; simp
-      map_zero' := by apply Subtype.ext; simp
-      map_add' _ _ := by apply Subtype.ext; simp
-      map_mul' _ _ := by apply Subtype.ext; simp
+      map_one' := by
+        apply Subtype.ext
+        exact map_one (algebraMap L (AlgebraicClosure L))
+      map_zero' := by
+        apply Subtype.ext
+        exact map_zero (algebraMap L (AlgebraicClosure L))
+      map_add' x y := by
+        apply Subtype.ext
+        exact map_add (algebraMap L (AlgebraicClosure L)) x y
+      map_mul' x y := by
+        apply Subtype.ext
+        exact map_mul (algebraMap L (AlgebraicClosure L)) x y
       commutes' := fun z ↦ by
         apply Subtype.ext
         exact IsScalarTower.algebraMap_apply K L (AlgebraicClosure L) z }
@@ -827,7 +835,7 @@ theorem higherRadicalActualFactorData_of_unitFactorData
       apply Subtype.ext
       apply (algebraMap K (AlgebraicClosure L)).injective
       rw [← hbetaPow, hN0, pow_zero]
-      simp
+      exact (map_one (algebraMap K (AlgebraicClosure L))).symm
     rw [hvarpi_one]
     exact isUnit_one
   let F : IntermediateField K (AlgebraicClosure L) :=

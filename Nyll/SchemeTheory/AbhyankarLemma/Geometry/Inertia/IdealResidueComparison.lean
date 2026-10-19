@@ -139,7 +139,7 @@ private theorem globalDecomposition_maps_localization :
         (sigma : Gal(L/K))⁻¹ • P =
             (sigma : Gal(L/K))⁻¹ • ((sigma : Gal(L/K)) • P) :=
           congrArg ((sigma : Gal(L/K))⁻¹ • ·) sigma.property.symm
-        _ = P := by simp
+        _ = P := inv_smul_smul _ _
     have hsP : s ∈ P := by
       simpa [hinvP] using hsmul
     exact hs hsP

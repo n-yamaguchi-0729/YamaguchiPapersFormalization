@@ -66,13 +66,13 @@ theorem isDomain_of_prime_isSMulRegular
       induction k with
       | zero =>
           intro l a b hab
-          exact Or.inl (by simp)
+          exact Or.inl (by rw [pow_zero]; exact one_dvd a)
       | succ k ihK =>
           intro l
           induction l with
           | zero =>
               intro a b hab
-              exact Or.inr (by simp)
+              exact Or.inr (by rw [pow_zero]; exact one_dvd b)
           | succ l ihL =>
               intro a b hab
               have hpProd : p ∣ a * b := by rw [hab]; exact dvd_zero p
@@ -128,7 +128,7 @@ theorem regularSystem_quotientHead
   let S := R ⧸ I
   have hpMem : p ∈ maximalIdeal R := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hIle : I ≤ maximalIdeal R := by
     apply Ideal.span_le.mpr
     intro z hz
@@ -265,7 +265,7 @@ theorem isDomain_of_regularSystem
       let S := R ⧸ I
       have hpMem : p ∈ maximalIdeal R := by
         rw [← hgen]
-        exact Ideal.subset_span (by simp)
+        exact Ideal.subset_span List.mem_cons_self
       have hIle : I ≤ maximalIdeal R := by
         apply Ideal.span_le.mpr
         intro z hz
@@ -324,7 +324,9 @@ theorem isRegularLocalRing_of_regularSystem
   apply IsRegularLocalRing.of_spanFinrank_maximalIdeal_le
   have hspan : (Ideal.ofList ps).spanFinrank ≤ ps.length := by
     refine (Submodule.spanFinrank_span_le_ncard_of_finite ps.finite_toSet).trans ?_
-    rw [show {x : R | x ∈ ps} = (ps.toFinset : Set R) by ext; simp,
+    rw [show {x : R | x ∈ ps} = (ps.toFinset : Set R) by
+      ext x
+      exact List.mem_toFinset.symm,
       Set.ncard_coe_finset]
     exact List.toFinset_card_le ps
   have hdim := ringKrullDim_add_length_eq_ringKrullDim_of_isRegular ps hreg
@@ -465,7 +467,7 @@ theorem prime_of_mem_regularSystem
   let S := R ⧸ I
   have hpMem : p ∈ maximalIdeal R := by
     rw [← hgen']
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hIle : I ≤ maximalIdeal R := by
     apply Ideal.span_le.mpr
     intro z hz
@@ -531,7 +533,7 @@ theorem quotient_geometry_of_mem_regularSystem
   let S := R ⧸ I
   have hpMem : p ∈ maximalIdeal R := by
     rw [← hgen']
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hIle : I ≤ maximalIdeal R := by
     apply Ideal.span_le.mpr
     intro z hz

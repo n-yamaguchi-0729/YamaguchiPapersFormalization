@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FiniteTypeValuationModel
-import Nyll.AlgebraicCurves.Valuations.IsLocalRing_exists_valuationSubring_isDiscreteValuationRing_dominates
+import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
 import Mathlib.RingTheory.Localization.AsSubring
 
 /-!

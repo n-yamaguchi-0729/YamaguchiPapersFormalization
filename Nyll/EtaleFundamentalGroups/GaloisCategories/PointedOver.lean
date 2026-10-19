@@ -39,7 +39,10 @@ def fiberOver : Over X ⥤ FintypeCat.{w} where
     intro y
     change (⟨F.map (𝟙 U.left) y.1, _⟩ :
       { z : F.obj U.left // F.map U.hom z = x }) = y
-    simp
+    apply Subtype.ext
+    change F.map (𝟙 U.left) y.1 = y.1
+    rw [F.map_id]
+    rfl
   map_comp f g := by
     apply FintypeCat.hom_ext
     intro y
@@ -62,7 +65,7 @@ def productOver : C ⥤ Over X where
   obj Y := Over.mk (prod.snd : Y ⨯ X ⟶ X)
   map {Y Z} f := Over.homMk (prod.map f (𝟙 X)) (by
     change prod.map f (𝟙 X) ≫ prod.snd = prod.snd
-    simp)
+    rw [prod.map_snd, Category.comp_id])
   map_id Y := by
     ext
     change prod.map (𝟙 Y) (𝟙 X) = 𝟙 (Y ⨯ X)
@@ -79,8 +82,7 @@ private def productFiberEquiv (Y : C) :
       fiberBinaryProductEquiv_symm_snd_apply F y x⟩
   invFun z := ((fiberBinaryProductEquiv F Y X) z.1).1
   left_inv y := by
-    rw [← fiberBinaryProductEquiv_symm_fst_apply F y x]
-    simp
+    exact congrArg _root_.Prod.fst ((fiberBinaryProductEquiv F Y X).apply_symm_apply (y, x))
   right_inv z := by
     apply Subtype.ext
     let e := fiberBinaryProductEquiv F Y X
@@ -291,8 +293,8 @@ private def restrictAutToFiberOverObj
               calc
                 a.1⁻¹ • x = a.1⁻¹ • (a.1 • x) := congrArg (a.1⁻¹ • ·) a.2.symm
                 _ = x := inv_smul_smul a.1 x⟩
-      left_inv := fun y ↦ by apply Subtype.ext; simp
-      right_inv := fun y ↦ by apply Subtype.ext; simp }
+      left_inv := fun y ↦ Subtype.ext (inv_smul_smul a.1 y.1)
+      right_inv := fun y ↦ Subtype.ext (smul_inv_smul a.1 y.1) }
 
 /-- Restrict an automorphism of `F` fixing `x` to the fibers over `x`. -/
 def restrictAutToFiberOver :

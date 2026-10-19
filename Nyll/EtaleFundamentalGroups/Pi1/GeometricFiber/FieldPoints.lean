@@ -154,7 +154,7 @@ def homEquivAlgHom (X : FiniteEtale (Spec (.of k))) :
                   rw [hx]
             _ = CommRingCat.ofHom (algebraMap k K) := by
                   rw [Scheme.ΓSpecIso_naturality]
-                  simp
+                  exact Iso.inv_hom_id_assoc _ _
         rw [hbase]
         change (Scheme.ΓSpecIso (.of K)).hom.hom
           (x.left.appTop.hom
@@ -192,7 +192,8 @@ def homEquivAlgHom (X : FiniteEtale (Spec (.of k))) :
     let f : Spec (.of K) ⟶ X.left := x.left
     change ((Spec (.of K)).toSpecΓ ≫ Spec.map f.appTop) ≫ X.left.isoSpec.inv = f
     rw [← Scheme.toSpecΓ_naturality f]
-    simp
+    change (f ≫ X.left.isoSpec.hom) ≫ X.left.isoSpec.inv = f
+    rw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   right_inv x := by
     apply AlgHom.coe_ringHom_injective
     simp only [Over.homMk_left]

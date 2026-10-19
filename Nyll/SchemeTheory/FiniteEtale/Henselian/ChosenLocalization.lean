@@ -91,8 +91,7 @@ theorem moduleFinite_localizationAtPrime_of_henselian_of_etale
     exact IsLocalization.tensorProduct_tensorProduct R S P.primeCompl Cₚ (by
       ext
       change φ (1 ⊗ₜ[R] _) = 1 ⊗ₜ[R] _
-      rw [Algebra.TensorProduct.map_tmul]
-      simp)
+      rw [Algebra.TensorProduct.map_tmul, map_one, AlgHom.id_apply])
   let cancel : BS ≃ₐ[R] S :=
     (Algebra.TensorProduct.congr pointed.symm (AlgEquiv.refl)).trans
       (Algebra.TensorProduct.lid R S)
@@ -114,8 +113,10 @@ theorem moduleFinite_localizationAtPrime_of_henselian_of_etale
       ((Algebra.TensorProduct.congr pointed.symm (AlgEquiv.refl))
         ((Algebra.TensorProduct.map (Algebra.ofId C Cₚ) (AlgHom.id R S))
           (1 ⊗ₜ[R] s))) = s
-    rw [Algebra.TensorProduct.map_tmul]
-    simp
+    rw [Algebra.TensorProduct.map_tmul, map_one, AlgHom.id_apply,
+      Algebra.TensorProduct.congr_apply, Algebra.TensorProduct.map_tmul, map_one,
+      AlgEquiv.coe_toAlgHom, AlgEquiv.coe_refl, id_eq,
+      Algebra.TensorProduct.lid_tmul, one_smul]
   have hcancel_symm_right (s : S) :
       cancel.symm s = algebraMap B BS (Algebra.TensorProduct.includeRight s) :=
     (cancel.eq_symm_apply.mpr (hcancel_right s)).symm

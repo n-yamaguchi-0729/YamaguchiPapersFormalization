@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Mathlib.FieldTheory.KrullTopology
 import Mathlib.FieldTheory.Galois.Basic
+import Mathlib.FieldTheory.Galois.Infinite
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.Topology.Algebra.Group.Basic
 import Mathlib.Topology.Algebra.ContinuousMonoidHom
@@ -98,5 +99,30 @@ theorem fixingSubgroupContinuousEquiv_apply (σ : L.fixingSubgroup) :
 theorem fixingSubgroupContinuousEquiv_symm_apply (σ : Gal(Ω/L)) :
     (fixingSubgroupContinuousEquiv L).symm σ = L.fixingSubgroupEquiv.symm σ := by
   rfl
+
+/-- Every open subgroup of a Galois group is the relative Galois group
+of a finite intermediate field, with its actual Krull topology. -/
+theorem exists_finiteIntermediateField_openSubgroup_equiv
+    {K Ω : Type*} [Field K] [Field Ω] [Algebra K Ω] [IsGalois K Ω]
+    (H : OpenSubgroup Gal(Ω/K)) :
+    ∃ E : IntermediateField K Ω, FiniteDimensional K E ∧
+      Nonempty ((H : Subgroup Gal(Ω/K)) ≃ₜ* Gal(Ω/E)) := by
+  let E : IntermediateField K Ω :=
+    IntermediateField.fixedField (H : Subgroup Gal(Ω/K))
+  let closedH : ClosedSubgroup Gal(Ω/K) := ⟨H.toSubgroup, H.isClosed⟩
+  have hfix : E.fixingSubgroup = (H : Subgroup Gal(Ω/K)) :=
+    InfiniteGalois.fixingSubgroup_fixedField closedH
+  have hE : FiniteDimensional K E :=
+    (InfiniteGalois.isOpen_iff_finite E).mp (by
+      rw [hfix]
+      exact H.isOpen)
+  have : FiniteDimensional K E := hE
+  let e₀ : (H : Subgroup Gal(Ω/K)) ≃ₜ* E.fixingSubgroup :=
+    { toMulEquiv := MulEquiv.subgroupCongr hfix.symm
+      continuous_toFun := Continuous.subtype_mk continuous_subtype_val
+        (fun x => hfix.symm ▸ x.property)
+      continuous_invFun := Continuous.subtype_mk continuous_subtype_val
+        (fun x => hfix ▸ x.property) }
+  exact ⟨E, hE, ⟨e₀.trans (fixingSubgroupContinuousEquiv E)⟩⟩
 
 end KummerTheory

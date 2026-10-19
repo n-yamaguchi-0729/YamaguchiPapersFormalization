@@ -40,7 +40,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun q ↦ T.presheaf.stalk q) h) =
       (T.presheaf.stalkCongr (.of_eq h)).hom := by
   subst x'
-  simp
+  exact (T.presheaf.stalkSpecializes_refl x).symm
 
 /-- Function-field maps do not depend on the presentation of an equal dense
 morphism (nor on the proof of density). -/

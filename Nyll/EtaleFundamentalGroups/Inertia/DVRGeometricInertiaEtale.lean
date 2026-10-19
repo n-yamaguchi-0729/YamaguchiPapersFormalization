@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Inertia.IntegralClosureGaloisAction
 import Nyll.EtaleFundamentalGroups.Inertia.TrivialNormalizationInertiaEtale
-import Nyll.SchemeTheory.RingTheory.FiniteResidueGeometricPoint
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.FiniteResidueGeometricPoint
 
 /-!
 # Fixed geometric-point inertia implies étaleness over a DVR

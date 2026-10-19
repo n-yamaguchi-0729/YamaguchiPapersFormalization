@@ -9,7 +9,7 @@ import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityIntegralClosure
 import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrimeLocalization
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenFunctionField
+import Nyll.SchemeTheory.FunctionFields.OpenImmersion
 import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentFunctionField
 
 /-!
@@ -37,7 +37,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun w ↦ Z.presheaf.stalk w) h) =
       (Z.presheaf.stalkCongr (.of_eq h)).hom := by
   subst z'
-  simp
+  exact (Z.presheaf.stalkSpecializes_refl z).symm
 
 private theorem functionFieldMap_eq_of_eq
     {T S : Scheme.{u}} [IsIntegral T] [IsIntegral S]
@@ -94,7 +94,7 @@ theorem puncturedRestriction_nonempty_of_injective
     have hdimZero : ringKrullDim A = 0 := by
       rw [← maximalIdeal_height_eq_ringKrullDim, hmaximal,
         Ideal.height_bot]
-      simp
+      rfl
     rw [hdimZero] at hpos
     exact (not_le_of_gt (by norm_num : (0 : WithBot ℕ∞) < 1)) hpos
   have heta : etaA ∈ Scheme.puncturedSpectrumOpen A := by

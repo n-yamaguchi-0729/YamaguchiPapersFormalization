@@ -86,7 +86,7 @@ theorem
     intro hbot
     apply hvarpiImageNe
     rw [← Ideal.mem_bot, ← hbot, ← hgenerateC]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_singleton_self _)
   have hnotField : ¬ IsField C :=
     IsLocalRing.isField_iff_maximalIdeal_eq.not.mpr hmaximalNe
   have hprincipal : (maximalIdeal C).IsPrincipal := by

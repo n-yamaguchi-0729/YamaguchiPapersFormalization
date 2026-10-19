@@ -47,61 +47,6 @@ private theorem finiteDimensional_of_finite_valuationSubrings_exactChosen
     Module.Finite.base_change V K W
   exact Module.Finite.equiv eGeneric.toLinearEquiv
 
-private theorem fractionRingTargetBase_toSMul_faithful
-    {C R D : Type u}
-    [CommRing C] [IsDomain C]
-    [CommRing R] [IsDomain R] [Algebra C R] [FaithfulSMul C R]
-    [CommRing D] [IsDomain D] [Algebra C D]
-    (e : R ≃ₐ[C] D) :
-    @FaithfulSMul C (FractionRing D)
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  apply (@faithfulSMul_iff_algebraMap_injective
-    C (FractionRing D) _ _
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e)).mpr
-  have hCD : Function.Injective (algebraMap C D) := by
-    intro x y hxy
-    apply FaithfulSMul.algebraMap_injective C R
-    apply e.injective
-    simpa only [e.commutes] using hxy
-  change Function.Injective
-    ((algebraMap D (FractionRing D)).comp (algebraMap C D))
-  exact (IsFractionRing.injective D (FractionRing D)).comp hCD
-
-private theorem fractionRingTargetBase_toSMul_isScalarTower
-    {C R D : Type u}
-    [CommRing C] [CommRing R] [CommRing D]
-    [Algebra C R] [Algebra C D] [IsDomain D]
-    (e : R ≃ₐ[C] D) :
-    @IsScalarTower C D (FractionRing D)
-      (inferInstance : Algebra C D).toSMul
-      (inferInstance : Algebra D (FractionRing D)).toSMul
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  refine @IsScalarTower.of_algebraMap_eq C D (FractionRing D)
-    _ _ _ (inferInstance : Algebra C D)
-      (inferInstance : Algebra D (FractionRing D))
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e) ?_
-  intro x
-  rfl
-
-private theorem fractionRingAlgebra_toSMul_isScalarTower
-    {C R D : Type u}
-    [CommRing C] [IsDomain C]
-    [CommRing R] [IsDomain R] [Algebra C R] [FaithfulSMul C R]
-    [CommRing D] [IsDomain D] [Algebra C D]
-    (e : R ≃ₐ[C] D) :
-    @IsScalarTower C (FractionRing C) (FractionRing D)
-      (inferInstance : Algebra C (FractionRing C)).toSMul
-      (fractionRingAlgebraOfAlgEquiv e).toSMul
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  let : Algebra C (FractionRing D) :=
-    fractionRingTargetBaseAlgebraOfAlgEquiv e
-  let : @FaithfulSMul C (FractionRing D)
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul :=
-    fractionRingTargetBase_toSMul_faithful e
-  let : Algebra (FractionRing C) (FractionRing D) :=
-    fractionRingAlgebraOfAlgEquiv e
-  exact FractionRing.isScalarTower_liftAlgebra C (FractionRing D)
-
 /-- A complete chosen one-root factor produces canonical right-coordinate
 bijectivity after the finite residue lift, for every compatible target whose
 ramification index is the prescribed exponent.
@@ -196,35 +141,35 @@ theorem
               fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
             letI : @FaithfulSMul C P
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_faithful eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
             letI : @IsScalarTower C D P
                 (inferInstance : Algebra C D).toSMul
                 (inferInstance : Algebra D P).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_isScalarTower eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
             letI : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
             letI : @IsScalarTower C KC P
                 (inferInstance : Algebra C KC).toSMul
                 (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingAlgebra_toSMul_isScalarTower eRoot
+              fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
             letI : Algebra C Froot :=
               fractionRingTargetBaseAlgebraOfAlgEquiv eRefl
             letI : @FaithfulSMul C Froot
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-              fractionRingTargetBase_toSMul_faithful eRefl
+              fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRefl
             letI : @IsScalarTower C Rn Froot
                 (inferInstance : Algebra C Rn).toSMul
                 (inferInstance : Algebra Rn Froot).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-              fractionRingTargetBase_toSMul_isScalarTower eRefl
+              fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRefl
             letI : Algebra KC Froot :=
               fractionRingAlgebraOfAlgEquiv eRefl
             letI : @IsScalarTower C KC Froot
                 (inferInstance : Algebra C KC).toSMul
                 (fractionRingAlgebraOfAlgEquiv eRefl).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-              fractionRingAlgebra_toSMul_isScalarTower eRefl
+              fractionRingAlgebraOfAlgEquiv_isScalarTower eRefl
             ∀ {Omega : Type u} [Field Omega]
               [Algebra KC Omega] [Algebra Omega P]
               [IsScalarTower KC Omega P],
@@ -303,34 +248,34 @@ theorem
   let : Algebra C P := fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
   let : @FaithfulSMul C P
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_faithful eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
   let : @IsScalarTower C D P
       (inferInstance : Algebra C D).toSMul
       (inferInstance : Algebra D P).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_isScalarTower eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
   let : @IsScalarTower C KC P
       (inferInstance : Algebra C KC).toSMul
       (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingAlgebra_toSMul_isScalarTower eRoot
+    fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Algebra C Froot :=
     fractionRingTargetBaseAlgebraOfAlgEquiv eRefl
   let : @FaithfulSMul C Froot
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-    fractionRingTargetBase_toSMul_faithful eRefl
+    fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRefl
   let : @IsScalarTower C Rn Froot
       (inferInstance : Algebra C Rn).toSMul
       (inferInstance : Algebra Rn Froot).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-    fractionRingTargetBase_toSMul_isScalarTower eRefl
+    fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRefl
   let : Algebra KC Froot := fractionRingAlgebraOfAlgEquiv eRefl
   let : @IsScalarTower C KC Froot
       (inferInstance : Algebra C KC).toSMul
       (fractionRingAlgebraOfAlgEquiv eRefl).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRefl).toSMul :=
-    fractionRingAlgebra_toSMul_isScalarTower eRefl
+    fractionRingAlgebraOfAlgEquiv_isScalarTower eRefl
   let eFrac : Froot ≃ₐ[KC] P :=
     IsFractionRing.fieldEquivOfAlgEquiv KC Froot P eRoot
   let : FiniteDimensional KC Froot :=

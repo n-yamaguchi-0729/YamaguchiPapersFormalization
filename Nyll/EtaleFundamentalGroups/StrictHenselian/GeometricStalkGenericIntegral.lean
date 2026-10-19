@@ -5,11 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.RingTheory.Etale.Basic
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.RingTheory.RingHom.Etale
 import Mathlib.RingTheory.TensorProduct.Maps
 import Mathlib.RingTheory.Unramified.Finite
@@ -90,5 +93,38 @@ theorem geometricStalk_tensor_isIntegral (K : Type u) [Field K] [Algebra R K] :
       rw [hy]
     exact he ▸ (IsIntegral.of_finite K (k ⊗ₜ[R] y)).map e
   | add x y hx hy => exact hx.add hy
+
+/-- At an injective geometric point of a normal domain, the actual geometric
+étale stalk is a field. Its field structure follows from the integral field
+base change, not from an assumed identification with a separable closure. -/
+theorem geometricStalk_isField_of_injective [IsDomain R] [IsIntegrallyClosed R]
+    (hφ : Function.Injective φ) :
+    IsField (geometricStalk (Spec.map (CommRingCat.ofHom φ))) := by
+  let s := Spec.map (CommRingCat.ofHom φ)
+  let A := geometricStalk s
+  let K := FractionRing R
+  let : Algebra R A := (geometricStalkStructureMap φ).toAlgebra
+  have hm : ∀ r : nonZeroDivisors R, IsUnit (geometricStalkStructureMap φ r) := by
+    intro r
+    apply geometricStalk_isUnit_of_evaluation_ne_zero s
+    rw [geometricStalkStructureMap_evaluation_apply]
+    intro h
+    exact (mem_nonZeroDivisors_iff_ne_zero.mp r.property)
+      (hφ (h.trans (map_zero φ).symm))
+  let f : K →+* A := IsLocalization.lift (S := K)
+    (g := geometricStalkStructureMap φ) hm
+  let : Algebra K A := f.toAlgebra
+  have : IsScalarTower R K A := IsScalarTower.of_algebraMap_eq fun r =>
+    (RingHom.congr_fun (IsLocalization.lift_comp hm) r).symm
+  have : Algebra.IsIntegral K (K ⊗[R] A) := geometricStalk_tensor_isIntegral φ K
+  let e : (K ⊗[R] A) →ₐ[K] A :=
+    AlgHom.liftEquiv R K A A (AlgHom.id R A)
+  have he : Function.Surjective e := by
+    intro a
+    refine ⟨1 ⊗ₜ[R] a, ?_⟩
+    change (1 : K) • a = a
+    exact one_smul K a
+  have : Algebra.IsIntegral K A := Algebra.IsIntegral.of_surjective e he
+  exact isField_of_isIntegral_of_isField' (R := K) (S := A) (Field.toIsField K)
 
 end EtaleFundamentalGroups.StrictHenselian

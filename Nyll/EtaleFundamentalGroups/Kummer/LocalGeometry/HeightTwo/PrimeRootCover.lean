@@ -103,10 +103,10 @@ theorem prime_not_mem_maximalIdeal_sq_of_regular_quotient_dimension_two
         simp only [map_sub, map_mul, hc, mul_comm, hcS, sub_self]
       have hIle : I ≤ Ideal.span {p, z} := by
         change Ideal.span {p} ≤ Ideal.span {p, z}
-        exact Ideal.span_mono (by simp)
+        exact Ideal.span_mono (Set.singleton_subset_iff.mpr (Set.mem_insert _ _))
       have hcz : c * z ∈ Ideal.span {p, z} :=
         (Ideal.span {p, z}).mul_mem_left c
-          (Ideal.subset_span (by simp))
+          (Ideal.subset_span (Set.mem_insert_of_mem _ (Set.mem_singleton _)))
       have := (Ideal.span {p, z}).add_mem (hIle hac) hcz
       simpa only [sub_add_cancel] using this
   intro hpSq
@@ -114,7 +114,7 @@ theorem prime_not_mem_maximalIdeal_sq_of_regular_quotient_dimension_two
   have hzMem : z ∈ m := by
     change z ∈ maximalIdeal R
     rw [← hspanR]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (Set.mem_insert_of_mem _ (Set.mem_singleton _))
   let p' : m := ⟨p, by simpa only [m] using hpMem⟩
   let z' : m := ⟨z, hzMem⟩
   have hpCot : m.toCotangent p' = 0 := by

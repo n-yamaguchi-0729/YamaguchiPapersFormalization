@@ -6,8 +6,8 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsFiniteDominance
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothArithmeticConstants
-import Nyll.SchemeTheory.RingTheory.FiniteProductFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.TensorProductPrime
+import Nyll.SchemeTheory.RingTheory.Idempotents.FiniteProductFaithfullyFlat
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
 import Mathlib.RingTheory.Smooth.Pi
 import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
 

@@ -686,7 +686,8 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
                   Algebra.TensorProduct.includeLeft_apply,
                   compBB, idBB, compB, idB] using hcoord
         _ = (b ⊗ₜ[R] (1 : F.obj m) : B ⊗[R] F.obj m) := by
-              simp
+              rw [Algebra.TensorProduct.map_tmul, map_one]
+              rfl
     have hφ := congrArg (fun h ↦ h (1 ⊗ₜ[R] b)) hφBaseChange
     have hψ := congrArg (fun h ↦ h (φₖ (1 ⊗ₜ[R] b))) hψBaseChange
     have hstage :
@@ -719,7 +720,7 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
         Algebra.TensorProduct.comm_comp_map_apply fkm (AlgHom.id R B) _
       _ = (b ⊗ₜ[R] (1 : F.obj m) : B ⊗[R] F.obj m) := hcoord'
       _ = (Algebra.TensorProduct.comm R (F.obj m) B)
-            (1 ⊗ₜ[R] b) := by simp
+            (1 ⊗ₜ[R] b) := (Algebra.TensorProduct.comm_tmul R 1 b).symm
   have hright : φₘ.comp ψₘ = AlgHom.id (F.obj m) _ := by
     apply Algebra.TensorProduct.ext_ring
     ext d
@@ -749,7 +750,8 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
                   Algebra.TensorProduct.includeLeft_apply,
                   compDD, idDD, compD, idD] using hcoord
         _ = (d ⊗ₜ[R] (1 : F.obj m) : D ⊗[R] F.obj m) := by
-              simp
+              rw [Algebra.TensorProduct.map_tmul, map_one]
+              rfl
     have hψ := congrArg (fun h ↦ h (1 ⊗ₜ[R] d)) hψBaseChange
     have hφ := congrArg (fun h ↦ h (ψₖ (1 ⊗ₜ[R] d))) hφBaseChange
     have hstage :
@@ -782,7 +784,7 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
         Algebra.TensorProduct.comm_comp_map_apply fkm (AlgHom.id R D) _
       _ = (d ⊗ₜ[R] (1 : F.obj m) : D ⊗[R] F.obj m) := hcoord'
       _ = (Algebra.TensorProduct.comm R (F.obj m) D)
-            (1 ⊗ₜ[R] d) := by simp
+            (1 ⊗ₜ[R] d) := (Algebra.TensorProduct.comm_tmul R 1 d).symm
   let eₘ : (F.obj m ⊗[R] B) ≃ₐ[F.obj m] (F.obj m ⊗[R] D) :=
     AlgEquiv.ofAlgHom φₘ ψₘ hright hleft
   refine ⟨m, eₘ, ?_, ?_⟩

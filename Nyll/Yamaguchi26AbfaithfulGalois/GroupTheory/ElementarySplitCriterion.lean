@@ -46,13 +46,16 @@ private noncomputable def regularFiberNorm
     map_one' := ?_
     map_mul' := ?_ }
   · funext b
-    simp
+    change (∏ j : J, if ρ j = b then (1 : A) else 1) = 1
+    simp only [ite_self, Finset.prod_const_one]
   · intro f g
     funext b
     simp only [Pi.mul_apply, ← Finset.prod_mul_distrib]
     apply Finset.prod_congr rfl
     intro j _
-    by_cases hj : ρ j = b <;> simp [hj]
+    by_cases hj : ρ j = b
+    · simp only [ite_eq_left hj]
+    · simp only [ite_eq_right hj, one_mul]
 
 private theorem regularFiberNorm_equivariant
     {A Q B : Type u} [CommGroup A] [Group Q] [Finite Q] [Group B]

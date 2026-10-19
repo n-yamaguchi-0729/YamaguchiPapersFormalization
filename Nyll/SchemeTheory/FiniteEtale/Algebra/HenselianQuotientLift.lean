@@ -9,10 +9,10 @@ module
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleQuotientLift
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
 public import Nyll.SchemeTheory.Normalization.QuotientFiniteFactor
-public import Nyll.SchemeTheory.RingTheory.HenselianIdempotents
-public import Nyll.SchemeTheory.RingTheory.IdempotentFactorReduction
-public import Nyll.SchemeTheory.RingTheory.JacobsonIdempotentFactor
-public import Nyll.SchemeTheory.RingTheory.LocalizationIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
+public import Nyll.SchemeTheory.RingTheory.Idempotents.IdempotentFactorReduction
+public import Nyll.SchemeTheory.RingTheory.Idempotents.JacobsonIdempotentFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.LocalizationIdempotentFactor
 public import Mathlib.Algebra.Category.CommAlgCat.Basic
 public import Mathlib.Algebra.Category.Ring.Basic
 public import Mathlib.AlgebraicGeometry.OpenImmersion

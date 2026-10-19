@@ -40,14 +40,14 @@ private def quotientRightIso
     induction q using Quotient.inductionOn with
     | _ q =>
         change (⟦q * g⁻¹ * (g⁻¹)⁻¹⟧ : Aut F ⧸ N) = ⟦q⟧
-        simp
+        rw [mul_inv_cancel_right]
   inv_hom_id := by
     apply Action.hom_ext
     ext q
     induction q using Quotient.inductionOn with
     | _ q =>
         change (⟦q * g * g⁻¹⟧ : Aut F ⧸ N) = ⟦q⟧
-        simp
+        rw [mul_inv_cancel_right]
 
 /-- An object whose canonical fundamental-group action is an open-normal
 quotient is a Galois object. -/
@@ -79,7 +79,8 @@ theorem isGalois_of_fiber_iso_quotient_openNormal
     rw [hx]
     change (b * a⁻¹) • qx = qy
     rw [← ha, ← hb]
-    simp
+    change (⟦(b * a⁻¹) * a⟧ : Aut F ⧸ (U : Subgroup (Aut F))) = ⟦b⟧
+    rw [inv_mul_cancel_right]
   let : IsConnected X :=
     FiberFunctor.isConnected_of_isPretransitive F X
   apply (isGalois_iff_pretransitive F X).mpr
@@ -111,7 +112,7 @@ theorem isGalois_of_fiber_iso_quotient_openNormal
   rw [← ha, ← hb]
   change (⟦a * (b⁻¹ * a)⁻¹⟧ :
     Aut F ⧸ (U : Subgroup (Aut F))) = ⟦b⟧
-  simp
+  rw [mul_inv_rev, inv_inv, mul_inv_cancel_left]
 
 /-- Every open normal subgroup of the fundamental group of a Galois category
 is represented by a Galois object whose fiber is the corresponding quotient

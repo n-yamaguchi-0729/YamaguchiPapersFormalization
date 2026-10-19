@@ -42,10 +42,10 @@ theorem Etale.geometricallyReduced
     let R := Γ(Spec (.of K), ⊤)
     let T := Γ(Z.affineCover.X i, ⊤)
     let φ := g.appLE (⊤ : (Spec (.of K)).Opens) (⊤ : (Z.affineCover.X i).Opens)
-      (by simp)
+      (fun _ _ ↦ trivial)
     have hφ : φ.hom.Etale := by
       have : Etale g := by dsimp [g]; infer_instance
-      exact g.etale_appLE (isAffineOpen_top _) (isAffineOpen_top _) (by simp)
+      exact g.etale_appLE (isAffineOpen_top _) (isAffineOpen_top _) (fun _ _ ↦ trivial)
     let : Field R :=
       ((Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv.isField
         (Field.toIsField K)).toField

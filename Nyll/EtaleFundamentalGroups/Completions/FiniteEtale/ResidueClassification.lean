@@ -101,7 +101,8 @@ theorem exists_finiteEtaleLocalAlgEquivOfResidueAlgEquiv
       (T := IsLocalRing.ResidueField R)
       (U := IsLocalRing.ResidueField T)
       (φ := RingHom.id (IsLocalRing.ResidueField R))
-      (ψ := e.toRingHom) (by ext; simp) p β₀
+      (ψ := e.toRingHom)
+      (by ext r; exact (e.commutes r).symm) p β₀
     simpa [a₀] using hmap.symm
   have haeval_base_change (p : R[X]) :
       aeval a₀ (p.map (algebraMap R T)) =

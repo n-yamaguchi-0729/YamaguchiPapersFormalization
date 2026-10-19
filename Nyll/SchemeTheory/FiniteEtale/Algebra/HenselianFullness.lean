@@ -8,7 +8,7 @@ module
 
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.IdempotentFactor
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonSection
-public import Nyll.SchemeTheory.RingTheory.HenselianIdempotents
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
 public import Mathlib.CategoryTheory.Functor.FullyFaithful
 public import Mathlib.RingTheory.Etale.Finite
 public import Mathlib.RingTheory.FinitePresentation

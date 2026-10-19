@@ -201,10 +201,10 @@ theorem regularParameter_not_mem_localized_maximalIdeal_sq
         simp only [map_sub, map_mul, hc, mul_comm, hcS, sub_self]
       have hIle : I ≤ Ideal.span {x, y} := by
         change Ideal.span {x} ≤ Ideal.span {x, y}
-        exact Ideal.span_mono (by simp)
+        exact Ideal.span_mono (Set.singleton_subset_iff.mpr (Set.mem_insert x {y}))
       have hcy : c * y ∈ Ideal.span {x, y} :=
         (Ideal.span {x, y}).mul_mem_left c
-          (Ideal.subset_span (by simp))
+          (Ideal.subset_span (Set.mem_insert_of_mem x (Set.mem_singleton y)))
       have := (Ideal.span {x, y}).add_mem (hIle hac) hcy
       simpa only [sub_add_cancel] using this
   intro hxSq
@@ -212,7 +212,7 @@ theorem regularParameter_not_mem_localized_maximalIdeal_sq
   have hyMem : y ∈ m := by
     change y ∈ maximalIdeal R
     rw [← hspanR]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (Set.mem_insert_of_mem x (Set.mem_singleton y))
   let x' : m := ⟨x, by simpa only [m] using hxMem⟩
   let y' : m := ⟨y, hyMem⟩
   have hxCot : m.toCotangent x' = 0 := by

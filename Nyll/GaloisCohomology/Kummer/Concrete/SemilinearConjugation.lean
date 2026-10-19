@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Mathlib.Algebra.Algebra.Equiv
 import Mathlib.FieldTheory.Galois.Notation
+import Mathlib.RingTheory.SimpleRing.Basic
 
 /-!
 # Semilinear conjugation and independence of the extension
@@ -44,6 +45,19 @@ theorem semilinearGaloisConjugate_apply (τ : K ≃+* K) (e : Ω ≃+* Ω)
     (σ : Gal(Ω/K)) (x : Ω) :
     semilinearGaloisConjugate τ e he σ x = e (σ (e.symm x)) := by
   rfl
+
+/-- Transporting a nonzero root transports its scalar multiplier. This is the
+common cancellation step for proper and open Kummer characters. -/
+theorem semilinear_multiplier_eq {L : Type*} [Field L]
+    (ι : L →+* Ω) (τ : L ≃+* L) (a : Ω ≃+* Ω)
+    (hι : ∀ z : L, a (ι z) = ι (τ z))
+    (β : Ω) (hβ : β ≠ 0) (c d : L) (z : Ω)
+    (hc : ι c * β = z) (hd : ι d * a β = a z) : d = τ c := by
+  apply ι.injective
+  have h := congrArg a hc
+  rw [map_mul, hι] at h
+  have haβ : a β ≠ 0 := fun hz => hβ (a.injective (hz.trans (map_zero a).symm))
+  exact mul_right_cancel₀ haβ (hd.trans h.symm)
 
 /-- The identity extension lies over the identity base map. -/
 theorem semilinear_refl_algebraMap (k : K) :
@@ -162,3 +176,4 @@ theorem map_semilinearGaloisConjugate_eq {A : Type*} [CommGroup A]
     mul_right_comm, mul_inv_cancel, one_mul]
 
 end KummerTheory
+

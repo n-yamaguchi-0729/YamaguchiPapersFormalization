@@ -240,7 +240,7 @@ private theorem genericExtensionMorphism_appTop_eq_germ :
     let K : Type u := X.functionField
     letI : IsIntegral X := inferInstance
     letI : Nonempty (⊤ : X.Opens) :=
-      ⟨⟨genericPoint X, by simp⟩⟩
+      ⟨⟨genericPoint X, by trivial⟩⟩
     (X.genericExtensionMorphism K).appTop.hom =
       (Scheme.ΓSpecIso (.of K)).inv.hom.comp
         (X.germToFunctionField ⊤).hom := by
@@ -248,7 +248,7 @@ private theorem genericExtensionMorphism_appTop_eq_germ :
   let K : Type u := X.functionField
   let : IsIntegral X := inferInstance
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by simp⟩⟩
+    ⟨⟨genericPoint X, by trivial⟩⟩
   ext r
   let e : Γ(Spec (.of K), ⊤) ≃+* K :=
     (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv
@@ -275,7 +275,7 @@ theorem puncturedSpectrumGenericFiberToCover_appTop_comp
     let f := puncturedSpectrumCoverToSpec R W
     letI : IsIntegral X := inferInstance
     letI : Nonempty (⊤ : X.Opens) :=
-      ⟨⟨genericPoint X, by simp⟩⟩
+      ⟨⟨genericPoint X, by trivial⟩⟩
     q.appTop.hom.comp f.appTop.hom =
       (G.hom.appTop.hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom).comp
         (X.germToFunctionField ⊤).hom := by
@@ -287,7 +287,7 @@ theorem puncturedSpectrumGenericFiberToCover_appTop_comp
   let f := puncturedSpectrumCoverToSpec R W
   let : IsIntegral X := inferInstance
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by simp⟩⟩
+    ⟨⟨genericPoint X, by trivial⟩⟩
   dsimp only
   have hs : q ≫ f =
       (puncturedSpectrumGenericFiber R hdim W).hom ≫
@@ -338,7 +338,7 @@ theorem puncturedSpectrumNormalizationExtension_integralClosure_finite
   let : IsNormalIntegral X := inferInstance
   let : IsLocallyNoetherian X := inferInstance
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by simp⟩⟩
+    ⟨⟨genericPoint X, by trivial⟩⟩
   let : IsNoetherianRing A :=
     IsLocallyNoetherian.component_noetherian
       (⟨⊤, isAffineOpen_top X⟩ : X.affineOpens)

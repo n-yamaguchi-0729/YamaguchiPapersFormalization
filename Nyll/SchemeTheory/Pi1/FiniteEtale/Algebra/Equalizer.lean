@@ -106,8 +106,8 @@ def AlgHom.equalizerCongr {R A A' B B' : Type*} [CommSemiring R]
         mem_equalizer]
       apply eB.injective
       rw [hf', hg', AlgEquiv.apply_symm_apply, x.2])
-    (by ext; simp)
-    (by ext; simp)
+    (by ext x; exact eA.apply_symm_apply x)
+    (by ext x; exact eA.symm_apply_apply x)
    where
     hf' (x) : eB (f x) = f' (eA x) := DFunLike.congr_fun hf x
     hg' (x) : eB (g x) = g' (eA x) := DFunLike.congr_fun hg x
@@ -118,7 +118,7 @@ def AlgHom.equalizerCongrOfEq {R A B : Type*} [CommSemiring R] [Semiring A] [Sem
     (hf : f = f') (hg : g = g') :
     AlgHom.equalizer f g ≃ₐ[R] AlgHom.equalizer f' g' :=
   AlgHom.equalizerCongr AlgEquiv.refl AlgEquiv.refl
-    (by subst hf; simp) (by subst hg; simp)
+    (by subst hf; ext x; rfl) (by subst hg; ext x; rfl)
 
 end Equalizer
 
@@ -149,8 +149,7 @@ lemma Algebra.exists_cover_rankAtStalk_eq {R : Type*} (S : Type*) [CommRing R] [
   rw [Set.disjoint_left] at b
   simp only [SetLike.mem_coe, Ideal.coe_comap, Set.mem_preimage] at b
   apply b
-  use 1
-  simp
+  exact ⟨1, pow_one r⟩
 
 end rankAtStalk
 
@@ -204,8 +203,8 @@ def AlgHom.equalizerCompRightEquiv (R S : Type*) [CommRing R] [CommRing S] [Alge
     (by
       ext f x
       obtain ⟨x, rfl⟩ := Function.Coequalizer.mk_surjective _ _ x
-      simp)
-    (by ext f x; simp)
+      rfl)
+    (by ext f x; rfl)
 
 instance (R : Type*) [CommRing R] [Finite E] [Finite F] (σ τ : E → F) :
     Algebra.IsFiniteSplit R
@@ -222,7 +221,7 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
     apply H
     unfold IsIdempotentElem
     rw [← Pi.mul_apply, ← map_mul, ← Pi.single_mul_left]
-    simp
+    simp only [Pi.single_eq_same, one_mul]
   have (x : F) : ∃ (y : E), f (Pi.single y 1) x = 1 := by
     by_contra! hc
     replace hc (y : E) : f (Pi.single y 1) x = 0 := by
@@ -233,7 +232,7 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
       rw [← Fintype.sum_apply]
       rw [← map_sum, Finset.univ_sum_single, ← Pi.one_def, map_one, Pi.one_apply]
     simp_rw [hc] at this
-    simp at this
+    exact one_ne_zero (by simpa only [Finset.sum_const_zero] using this)
   have (x : F) : ∃! (y : E), f (Pi.single y 1) x = 1 := by
     apply existsUnique_of_exists_of_unique
     · exact this x
@@ -247,7 +246,7 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
   use σ
   ext x i
   induction x using Pi.single_induction with
-  | zero => simp
+  | zero => simp only [map_zero, Pi.zero_apply, AlgHom.compRight_apply]
   | add x y hx hy => simp [hx, hy]
   | single j r =>
       have : Pi.single j r = r • (Pi.single j 1 : E → R) := by simp [← Pi.single_smul]

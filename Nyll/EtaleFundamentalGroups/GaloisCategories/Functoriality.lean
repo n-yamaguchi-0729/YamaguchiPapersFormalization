@@ -173,7 +173,7 @@ def functorToContActionCompIso
         change a.hom.app (H.obj X) ≫ t.hom.app X =
           t.hom.app X ≫ t.inv.app X ≫
             a.hom.app (H.obj X) ≫ t.hom.app X
-        simp)))
+        simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp])))
     (fun {X Y} f ↦ by
       ext : 2
       change (H ⋙ F').map f ≫ t.hom.app Y =

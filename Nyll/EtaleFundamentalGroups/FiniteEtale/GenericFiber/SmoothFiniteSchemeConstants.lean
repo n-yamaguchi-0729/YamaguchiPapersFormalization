@@ -8,7 +8,7 @@ import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteCoverCon
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticFunctionField
 import Nyll.SchemeTheory.FunctionFields.Functoriality
 import Nyll.SchemeTheory.Normalization.Normal
-import Nyll.SchemeTheory.RingTheory.SeparableConstantsTensor
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.SeparableConstantsTensor
 import Mathlib.Algebra.CharZero.AddMonoidHom
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.Morphisms.Finite

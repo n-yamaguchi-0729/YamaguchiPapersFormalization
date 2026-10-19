@@ -4,6 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
+import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.FreeModule.Basic
 import Mathlib.RingTheory.TensorProduct.Finite
@@ -104,8 +105,9 @@ theorem finiteEtaleResidueLift_algebraMap_prime_of_mem_regularSystem
   apply hgeometry.2.2.2.2.2.1 (algebraMap A C y)
   exact List.mem_map.mpr ⟨y, hy, rfl⟩
 
-private theorem
-    finiteEtaleResidueLift_adjoinRoot_isDomain_of_mem_regularSystem
+/-- A root of a member of a regular system over the finite residue lift
+again generates a domain. -/
+theorem finiteEtaleResidueLift_adjoinRoot_isDomain_of_mem_regularSystem
     {A l : Type u}
     [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]
@@ -150,7 +152,7 @@ private theorem
     exact hperm.mem_iff.symm
   have hymax : yC ∈ IsLocalRing.maximalIdeal C := by
     rw [← hgenC]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   let : IsLocalRing (AdjoinRoot (X ^ N - Polynomial.C yC)) :=
     isLocalRing_adjoinRoot_X_pow_sub_C hN hymax
   exact (localRootCover_regularSystem_geometry hN hregC hgenC).2.1
@@ -242,61 +244,6 @@ private theorem finiteDimensional_of_finite_valuationSubrings_regularChosen
     Module.Finite.base_change V K W
   exact Module.Finite.equiv eGeneric.toLinearEquiv
 
-private theorem fractionRingTargetBase_toSMul_faithful_regular
-    {C R D : Type u}
-    [CommRing C] [IsDomain C]
-    [CommRing R] [IsDomain R] [Algebra C R] [FaithfulSMul C R]
-    [CommRing D] [IsDomain D] [Algebra C D]
-    (e : R ≃ₐ[C] D) :
-    @FaithfulSMul C (FractionRing D)
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  apply (@faithfulSMul_iff_algebraMap_injective
-    C (FractionRing D) _ _
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e)).mpr
-  have hCD : Function.Injective (algebraMap C D) := by
-    intro x y hxy
-    apply FaithfulSMul.algebraMap_injective C R
-    apply e.injective
-    simpa only [e.commutes] using hxy
-  change Function.Injective
-    ((algebraMap D (FractionRing D)).comp (algebraMap C D))
-  exact (IsFractionRing.injective D (FractionRing D)).comp hCD
-
-private theorem fractionRingTargetBase_toSMul_isScalarTower_regular
-    {C R D : Type u}
-    [CommRing C] [CommRing R] [CommRing D]
-    [Algebra C R] [Algebra C D] [IsDomain D]
-    (e : R ≃ₐ[C] D) :
-    @IsScalarTower C D (FractionRing D)
-      (inferInstance : Algebra C D).toSMul
-      (inferInstance : Algebra D (FractionRing D)).toSMul
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  refine @IsScalarTower.of_algebraMap_eq C D (FractionRing D)
-    _ _ _ (inferInstance : Algebra C D)
-      (inferInstance : Algebra D (FractionRing D))
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e) ?_
-  intro x
-  rfl
-
-private theorem fractionRingAlgebra_toSMul_isScalarTower_regular
-    {C R D : Type u}
-    [CommRing C] [IsDomain C]
-    [CommRing R] [IsDomain R] [Algebra C R] [FaithfulSMul C R]
-    [CommRing D] [IsDomain D] [Algebra C D]
-    (e : R ≃ₐ[C] D) :
-    @IsScalarTower C (FractionRing C) (FractionRing D)
-      (inferInstance : Algebra C (FractionRing C)).toSMul
-      (fractionRingAlgebraOfAlgEquiv e).toSMul
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul := by
-  let : Algebra C (FractionRing D) :=
-    fractionRingTargetBaseAlgebraOfAlgEquiv e
-  let : @FaithfulSMul C (FractionRing D)
-      (fractionRingTargetBaseAlgebraOfAlgEquiv e).toSMul :=
-    fractionRingTargetBase_toSMul_faithful_regular e
-  let : Algebra (FractionRing C) (FractionRing D) :=
-    fractionRingAlgebraOfAlgEquiv e
-  exact FractionRing.isScalarTower_liftAlgebra C (FractionRing D)
-
 private theorem compositeAlgebra_toSMul_isScalarTower_regular
     {C K E : Type u}
     [CommRing C] [CommRing K] [CommRing E]
@@ -336,18 +283,18 @@ private theorem rootCoordinate_fractionRing_finiteDimensional_finrank
   let : Algebra C P := fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
   let : @FaithfulSMul C P
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_faithful_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
   let : @IsScalarTower C D P
       (inferInstance : Algebra C D).toSMul
       (inferInstance : Algebra D P).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_isScalarTower_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
   let : @IsScalarTower C KC P
       (inferInstance : Algebra C KC).toSMul
       (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingAlgebra_toSMul_isScalarTower_regular eRoot
+    fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Module.Finite KC (KC ⊗[C] D) := Module.Finite.base_change C KC D
   let eGeneric : (KC ⊗[C] D) ≃ₐ[KC] P :=
     finiteGenericFiberAlgEquiv (R := C) (C := D) (K := KC) (E := P)
@@ -572,18 +519,18 @@ theorem
               fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
             letI : @FaithfulSMul C P
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_faithful_regular eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
             letI : @IsScalarTower C D P
                 (inferInstance : Algebra C D).toSMul
                 (inferInstance : Algebra D P).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_isScalarTower_regular eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
             letI : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
             letI : @IsScalarTower C KC P
                 (inferInstance : Algebra C KC).toSMul
                 (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingAlgebra_toSMul_isScalarTower_regular eRoot
+              fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
             ∀ {Omega : Type u} [Field Omega]
               [Algebra KC Omega] [Algebra Omega P]
               [IsScalarTower KC Omega P],
@@ -630,18 +577,18 @@ theorem
   let : Algebra C P := fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
   let : @FaithfulSMul C P
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_faithful_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
   let : @IsScalarTower C D P
       (inferInstance : Algebra C D).toSMul
       (inferInstance : Algebra D P).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_isScalarTower_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
   let : @IsScalarTower C KC P
       (inferInstance : Algebra C KC).toSMul
       (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingAlgebra_toSMul_isScalarTower_regular eRoot
+    fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
   let : FiniteDimensional KC P :=
     (rootCoordinate_fractionRing_finiteDimensional_finrank hN yC eRoot).1
   intro Omega _ _ _ _ base target _ _ hExact
@@ -691,7 +638,7 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
     let B := iteratedRadical A 1 n a
     let hymax : y ∈ IsLocalRing.maximalIdeal A := by
       rw [← hgen]
-      exact Ideal.subset_span (by simp)
+      exact Ideal.subset_span List.mem_cons_self
     letI : IsLocalRing B := isLocalRing_iteratedRadical n a
       (fun _ ↦ hN) (fun _ ↦ hymax)
     ∀ {D : Type u} [CommRing D] [Algebra B D]
@@ -747,7 +694,7 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
               oneRootChosenFactorAlgEquiv N y eTensor
             letI : IsDomain Rn :=
               finiteEtaleResidueLift_adjoinRoot_isDomain_of_mem_regularSystem
-                hreg hgen hN y (by simp)
+                hreg hgen hN y List.mem_cons_self
             letI : IsDomain D := eRoot.symm.toMulEquiv.isDomain Rn
             letI : Module.Free C Rn :=
               (monic_X_pow_sub_C yC hN.ne').free_adjoinRoot
@@ -758,18 +705,18 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
               fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
             letI : @FaithfulSMul C P
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_faithful_regular eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
             letI : @IsScalarTower C D P
                 (inferInstance : Algebra C D).toSMul
                 (inferInstance : Algebra D P).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingTargetBase_toSMul_isScalarTower_regular eRoot
+              fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
             letI : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
             letI : @IsScalarTower C KC P
                 (inferInstance : Algebra C KC).toSMul
                 (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
                 (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-              fractionRingAlgebra_toSMul_isScalarTower_regular eRoot
+              fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
             ∀ {K₀ L₀ : Type u} [Field K₀] [Field L₀]
               [Algebra K₀ KC] [Algebra K₀ L₀]
               [FiniteDimensional K₀ L₀] [IsGalois K₀ L₀],
@@ -835,18 +782,18 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
   let : Algebra C P := fractionRingTargetBaseAlgebraOfAlgEquiv eRoot
   let : @FaithfulSMul C P
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_faithful_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_faithfulSMul eRoot
   let : @IsScalarTower C D P
       (inferInstance : Algebra C D).toSMul
       (inferInstance : Algebra D P).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingTargetBase_toSMul_isScalarTower_regular eRoot
+    fractionRingTargetBaseAlgebraOfAlgEquiv_isScalarTower eRoot
   let : Algebra KC P := fractionRingAlgebraOfAlgEquiv eRoot
   let : @IsScalarTower C KC P
       (inferInstance : Algebra C KC).toSMul
       (fractionRingAlgebraOfAlgEquiv eRoot).toSMul
       (fractionRingTargetBaseAlgebraOfAlgEquiv eRoot).toSMul :=
-    fractionRingAlgebra_toSMul_isScalarTower_regular eRoot
+    fractionRingAlgebraOfAlgEquiv_isScalarTower eRoot
   have hyC : Prime yC :=
     finiteEtaleResidueLift_algebraMap_prime_of_mem_regularSystem
       hreg hgen y (by exact List.mem_cons_self)

@@ -8,7 +8,7 @@ module
 
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonConservativity
 public import Nyll.SchemeTheory.FiniteEtale.Algebra.JacobsonRigidity
-public import Nyll.SchemeTheory.RingTheory.JacobsonIntegral
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
 public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
 public import Mathlib.RingTheory.Etale.Finite
 public import Mathlib.RingTheory.TensorProduct.Quotient

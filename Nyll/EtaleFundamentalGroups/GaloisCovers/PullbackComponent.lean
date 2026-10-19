@@ -92,7 +92,8 @@ private theorem isGalois_of_stabilizer_normal
   simp only [p, Equiv.trans_apply, Equiv.apply_symm_apply]
   change qx * QuotientGroup.mk' N (g⁻¹ * h) = qy
   rw [← hg, ← hh]
-  simp
+  change QuotientGroup.mk' N g * QuotientGroup.mk' N (g⁻¹ * h) = QuotientGroup.mk' N h
+  rw [map_mul, map_inv, mul_inv_cancel_left]
 
 /-- A chosen geometric-fiber point of a pulled-back Galois cover lies in a
 connected component which is itself a Galois cover. -/

@@ -90,7 +90,7 @@ theorem localizationAwaySpecFunctionField_isFractionRing
       refine ⟨⟨algebraMap A S x, ?_⟩, 1, ?_⟩
       · rw [mem_nonZeroDivisors_iff_ne_zero]
         simpa using (IsLocalization.injective S hpow).ne hx
-      · simp
+      · simp only [OneMemClass.coe_one, map_one, mul_one]
   have hloc :
       IsLocalization
         (IsLocalization.localizationLocalizationSubmodule

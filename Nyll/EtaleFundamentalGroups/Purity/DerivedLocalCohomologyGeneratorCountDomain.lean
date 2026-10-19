@@ -44,7 +44,7 @@ theorem span_singleton_mul_ofList
   rw [Ideal.span_mul_span, Set.singleton_mul]
   congr 1
   ext z
-  simp
+  exact List.mem_map.symm
 
 /-- Derived local cohomology supported at the zero ideal vanishes in every
 positive degree. -/

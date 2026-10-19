@@ -58,8 +58,8 @@ theorem pullbackFiberIso_hom_fundamentalGroupHom_apply
     simp only [fundamentalGroupHom,
       CategoryTheory.PreGaloisCategory.autHomOfCompIso_apply,
       Iso.conjAut_hom, Iso.conj_apply, NatTrans.comp_app]
-    simp
-    rfl
+    exact (((pullbackFiberIso f xi).app A).hom_inv_id_assoc
+      (a.hom.app ((pullback f).obj A) ≫ (pullbackFiberIso f xi).hom.app A)).symm
   exact ConcreteCategory.congr_hom h y
 
 variable [IsSepClosed Omega]

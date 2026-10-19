@@ -67,9 +67,6 @@ noncomputable def retainedCompletedChosenComponentAlgHom
   let r'MAlgebra : Algebra R' M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := R') m
   letI : Algebra R' M := r'MAlgebra
-  letI : SMul R' M := r'MAlgebra.toSMul
-  letI : IsScalarTower R' K' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   exact
     ((Ideal.Quotient.mkₐ K' m).restrictScalars R').comp
       ((AlgHom.restrictScalars R'
@@ -89,30 +86,15 @@ noncomputable def retainedCompletedChosenNormalizationAlgHom
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let _ : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let M := GenericTensorFieldComponent m
-    letI : Algebra R' M :=
+    let _ : Algebra R' M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     (R' ⊗[R] S) →ₐ[R'] integralClosure R' M := by
-  dsimp only
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let M := GenericTensorFieldComponent m
-  let r'MAlgebra : Algebra R' M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-  letI : Algebra R' M := r'MAlgebra
-  letI : SMul R' M := r'MAlgebra.toSMul
-  letI : IsScalarTower R' K' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  letI : IsScalarTower R' R' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ by simp
-  letI : Module.Finite R' (R' ⊗[R] S) :=
+  intro m hm M r'MAlgebra
+  let _ : Module.Finite R' (R' ⊗[R] S) :=
     Module.Finite.base_change R R' S
   exact
     (retainedCompletedChosenComponentAlgHom
@@ -159,9 +141,6 @@ theorem retainedCompletedChosenComponentAlgHom_ker
   let r'MAlgebra : Algebra R' M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := R') m
   let : Algebra R' M := r'MAlgebra
-  let : SMul R' M := r'MAlgebra.toSMul
-  let : IsScalarTower R' K' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let : Algebra T G₀ := Algebra.TensorProduct.rightAlgebra
   let M : Submonoid T :=
     Algebra.algebraMapSubmonoid T (nonZeroDivisors R')
@@ -212,9 +191,6 @@ theorem retainedCompletedChosenNormalizationAlgHom_ker
   let r'MAlgebra : Algebra R' M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := R') m
   let : Algebra R' M := r'MAlgebra
-  let : SMul R' M := r'MAlgebra.toSMul
-  let : IsScalarTower R' K' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let j := retainedCompletedChosenNormalizationAlgHom
     (R := R) (R' := R') (S := S) (K := K) (L := L)
     (K' := K') N
@@ -278,9 +254,6 @@ theorem exists_retainedCompletedNormalizationPrimeChain
   let r'MAlgebra : Algebra R' M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := R') m
   let : Algebra R' M := r'MAlgebra
-  let : SMul R' M := r'MAlgebra.toSMul
-  let : IsScalarTower R' K' M :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let IC := integralClosure R' M
   let j := retainedCompletedChosenNormalizationAlgHom
     (R := R) (R' := R') (S := S) (K := K) (L := L)

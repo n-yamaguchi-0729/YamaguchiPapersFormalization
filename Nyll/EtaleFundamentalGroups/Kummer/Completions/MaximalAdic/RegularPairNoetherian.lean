@@ -70,10 +70,10 @@ theorem iteratedPowerSeries_surjective_maximalAdicCompletion_of_regularPair
   let : IsDomain Bhat := hgeometry.1
   have hxMem : x ∈ maximalIdeal B := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hyMem : y ∈ maximalIdeal B := by
     rw [← hgen]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
   have hxhatMem : xhat ∈ maximalIdeal Bhat := by
     rw [AdicCompletion.maximalIdeal_eq_map]
     exact Ideal.mem_map_of_mem (algebraMap B Bhat) hxMem

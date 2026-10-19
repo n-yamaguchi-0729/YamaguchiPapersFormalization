@@ -35,7 +35,8 @@ theorem legacyExt_isZero_of_subsingleton_derivedExt_zero
   let P := CategoryTheory.projectiveResolution X
   refine IsZero.of_iso ?_ (P.isoExt 0 Y)
   rw [← HomologicalComplex.exactAt_iff_isZero_homology]
-  rw [HomologicalComplex.exactAt_iff' _ 0 0 1 (by simp) (by simp),
+  rw [HomologicalComplex.exactAt_iff' _ 0 0 1
+      CochainComplex.prev_nat_zero (CochainComplex.next ℕ 0),
     ShortComplex.moduleCat_exact_iff]
   intro f hf
   change (P.complex.X 0 ⟶ Y) at f
@@ -62,7 +63,8 @@ theorem legacyExt_isZero_of_subsingleton_derivedExt_succ
   let P := CategoryTheory.projectiveResolution X
   refine IsZero.of_iso ?_ (P.isoExt (n + 1) Y)
   rw [← HomologicalComplex.exactAt_iff_isZero_homology]
-  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2) (by simp) (by simp),
+  rw [HomologicalComplex.exactAt_iff' _ n (n + 1) (n + 2)
+      (CochainComplex.prev_nat_succ n) (CochainComplex.next ℕ (n + 1)),
     ShortComplex.moduleCat_exact_iff]
   intro f hf
   change (P.complex.X (n + 1) ⟶ Y) at f

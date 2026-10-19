@@ -253,7 +253,7 @@ theorem formallyUnramified_of_traceForm_surjective
     _ = ∑ i, b.repr (b i) j • b.repr (s * x) i := by
       symm
       rw [Fintype.sum_eq_single j]
-      · simp
+      · rw [Basis.repr_self_apply, ite_eq_left rfl, one_smul]
       · intro i hij
         simp [Basis.repr_self, hij]
 

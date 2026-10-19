@@ -75,7 +75,8 @@ private theorem factorPow_evalₐ
     (AdicCompletion.evalₐ I n x)
   have hn : AdicCompletion.eval I R n x =
       Ideal.Quotient.mk (I ^ n • ⊤ : Ideal R) a := by
-    rw [← AdicCompletion.factor_evalₐ_eq_eval I x (by simp), ← ha,
+    rw [← AdicCompletion.factor_evalₐ_eq_eval I x
+      (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), ← ha,
       Ideal.Quotient.factor_mk]
   have hm : AdicCompletion.eval I R m x =
       Ideal.Quotient.mk (I ^ m • ⊤ : Ideal R) a := by
@@ -92,7 +93,8 @@ private theorem factorPow_evalₐ
         Ideal.Quotient.mk (I ^ m) a := by
       rw [← ha, Ideal.Quotient.factor_mk]
     _ = AdicCompletion.evalₐ I m x := by
-      rw [← AdicCompletion.factor_eval_eq_evalₐ I x (by simp), hm]
+      rw [← AdicCompletion.factor_eval_eq_evalₐ I x
+        (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
 private noncomputable def completionToAtPrimeQuotientRingHom (n : ℕ) :
@@ -174,7 +176,9 @@ private theorem completionToAtPrime_comp_fromAtPrime :
   intro x
   apply AdicCompletion.ext_evalₐ
   intro n
-  simp
+  simp only [RingHom.comp_apply, RingHom.id_apply,
+    evalₐ_completionToAtPrimeRingHom, evalₐ_completionFromAtPrimeRingHom,
+    AlgEquiv.apply_symm_apply]
 
 private theorem completionFromAtPrime_comp_toAtPrime :
     (completionFromAtPrimeRingHom Q).comp (completionToAtPrimeRingHom Q) =
@@ -183,7 +187,9 @@ private theorem completionFromAtPrime_comp_toAtPrime :
   intro x
   apply AdicCompletion.ext_evalₐ
   intro n
-  simp
+  simp only [RingHom.comp_apply, RingHom.id_apply,
+    evalₐ_completionFromAtPrimeRingHom, evalₐ_completionToAtPrimeRingHom,
+    AlgEquiv.symm_apply_apply]
 
 /-- Completion at a maximal ideal is canonically equivalent, as a ring, to
 completion of its localization at the local maximal ideal. -/

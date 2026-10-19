@@ -42,7 +42,7 @@ private theorem exists_add_pow_sub_pow_eq_linear_add_sq_mul
   obtain ⟨k, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hn.ne'
   induction k with
   | zero =>
-      exact ⟨0, by simp⟩
+      exact ⟨0, by ring⟩
   | succ k ih =>
       obtain ⟨q, hq⟩ := ih (Nat.succ_pos k)
       refine ⟨((k + 1 : ℕ) : R) * x ^ k + q * (x + y), ?_⟩
@@ -185,7 +185,7 @@ theorem rootOfUnity_mem_fractionBase_of_dvr_pureRadical
     rw [show AdjoinRoot.of p a = AdjoinRoot.mk p (C a) by rfl,
       AdjoinRoot.modByMonicHom_mk,
       (modByMonic_eq_self_iff hpMonic).2]
-    · simp
+    · exact Polynomial.coeff_C_zero
     · rw [degree_X_pow_sub_C hn pi]
       exact degree_C_lt.trans_le (by exact_mod_cast hn)
   have hcoeffZero_smul (a : V) (z : R) :

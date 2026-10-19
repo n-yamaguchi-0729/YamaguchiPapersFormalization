@@ -34,7 +34,7 @@ from germs of global sections. -/
     (Z : Scheme.{u}) [IsIntegral Z] :
     Algebra Γ(Z, ⊤) Z.functionField := by
   letI : Nonempty (⊤ : Z.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty Z), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty Z), trivial⟩⟩
   exact (Z.germToFunctionField ⊤).hom.toAlgebra
 
 /-- The canonical `Γ(X, ⊤)`-algebra structure on the function field of a
@@ -49,7 +49,7 @@ field of `X`. -/
   letI : IsIntegral Y.left :=
     isIntegral_left_of_isConnected_finiteEtale Y
   letI : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty X), trivial⟩⟩
   letI : Algebra Γ(X, ⊤) X.functionField :=
     topSectionFunctionFieldAlgebra X
   letI : Algebra X.functionField Y.left.functionField :=
@@ -78,9 +78,9 @@ theorem finiteEtale_sectionFunctionField_isScalarTower
     isIntegral_left_of_isConnected_finiteEtale Y
   let f : Y.left ⟶ X := Y.hom
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty X), trivial⟩⟩
   let : Nonempty (⊤ : Y.left.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty Y.left), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty Y.left), trivial⟩⟩
   let : Algebra Γ(X, ⊤) Γ(Y.left, ⊤) :=
     f.appTop.hom.toAlgebra
   let : Algebra X.functionField Y.left.functionField :=
@@ -116,9 +116,9 @@ theorem integralClosure_functionField_etale_of_finiteEtale_isConnected
   let : IsFiniteEtale f := Y.2
   let : IsAffine Y.left := isAffine_of_isAffineHom f
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty X), trivial⟩⟩
   let : Nonempty (⊤ : Y.left.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty Y.left), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty Y.left), trivial⟩⟩
   let R := Γ(X, ⊤)
   let T := Γ(Y.left, ⊤)
   let K := X.functionField

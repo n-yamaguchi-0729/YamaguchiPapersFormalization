@@ -42,18 +42,10 @@ def valuationSubringConjRingEquiv
     ⟨τ⁻¹ b,
       (_root_.ValuationSubring.mem_pointwise_smul_iff_inv_smul_mem
         (g := τ) (S := A) (x := (b : L))).mp b.property⟩
-  left_inv a := by
-    ext
-    simp
-  right_inv b := by
-    ext
-    simp
-  map_mul' a b := by
-    ext
-    simp
-  map_add' a b := by
-    ext
-    simp
+  left_inv a := Subtype.ext (τ.symm_apply_apply a)
+  right_inv b := Subtype.ext (τ.apply_symm_apply b)
+  map_mul' a b := Subtype.ext (map_mul τ (a : L) (b : L))
+  map_add' a b := Subtype.ext (map_add τ (a : L) (b : L))
 
 /-- The conjugation law:
 conjugation transports valuation-ring units. -/
@@ -86,8 +78,9 @@ def decompositionGroupConj
       change (τ * (σ : L ≃ₐ[K] L) * τ⁻¹) • (τ • A) = τ • A
       rw [mul_assoc, mul_smul, mul_smul, inv_smul_smul, σ.property]⟩
   map_one' := by
-    ext x
-    simp
+    apply Subtype.ext
+    change τ * 1 * τ⁻¹ = 1
+    rw [mul_one, mul_inv_cancel]
   map_mul' σ ρ := by
     ext x
     simp [mul_assoc]
@@ -113,8 +106,9 @@ def decompositionGroupConjInv
       have hσ : (σ : L ≃ₐ[K] L) • (τ • A) = τ • A := σ.property
       rw [hσ, inv_smul_smul]⟩
   map_one' := by
-    ext x
-    simp
+    apply Subtype.ext
+    change τ⁻¹ * 1 * τ = 1
+    rw [mul_one, inv_mul_cancel]
   map_mul' σ ρ := by
     ext x
     simp [mul_assoc]

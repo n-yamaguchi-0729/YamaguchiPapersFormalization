@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticGenericFiber
-import Nyll.SchemeTheory.RingTheory.FractionFieldTensorDomain
+import Nyll.SchemeTheory.RingTheory.FieldExtensions.FractionFieldTensorDomain
 import Mathlib.AlgebraicGeometry.Limits
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.RingTheory.Flat.TorsionFree

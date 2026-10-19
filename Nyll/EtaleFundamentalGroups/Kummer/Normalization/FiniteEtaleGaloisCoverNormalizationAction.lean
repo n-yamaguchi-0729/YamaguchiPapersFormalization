@@ -5,6 +5,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
 import Mathlib.RingTheory.Invariant.Galois
 
 /-!
@@ -34,12 +37,12 @@ noncomputable def finiteEtaleGaloisCoverNormalizationAction
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -48,17 +51,11 @@ noncomputable def finiteEtaleGaloisCoverNormalizationAction
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L],
       MulSemiringAction (Aut Y)ᵐᵒᵖ B := by
-  letI : IsGalois Y := hY
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _
-  letI : FiniteDimensional K L :=
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure
+  let hFinite : FiniteDimensional K L :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  letI : MulSemiringAction Gal(L/K) B :=
+  let hFieldAction : MulSemiringAction Gal(L/K) B :=
     IsIntegralClosure.MulSemiringAction A K L B
   exact MulSemiringAction.compHom B
     (finiteEtaleAutOpFunctionFieldMulEquiv Y hY).toMonoidHom
@@ -69,12 +66,12 @@ theorem finiteEtaleGaloisCoverNormalizationAction_smul
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -83,21 +80,15 @@ theorem finiteEtaleGaloisCoverNormalizationAction_smul
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L]
       (sigma : (Aut Y)ᵐᵒᵖ) (b : B),
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       (finiteEtaleAutOpFunctionFieldMulEquiv Y hY sigma) • b = sigma • b := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _ sigma b
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure sigma b hFinite hFieldAction hCoverAction
   rfl
 
 /-- The categorical cover action on the normalization commutes with the
@@ -106,12 +97,12 @@ theorem finiteEtaleGaloisCoverNormalizationSMulCommClass
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let _ : IsGalois Y := hY
+    let _ : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    let K := X.functionField
-    let L := Y.left.functionField
-    letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+    let K : Type u := X.functionField
+    let L : Type u := Y.left.functionField
+    let _ : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
     ∀ (A : Type uA) (B : Type uB)
       [CommRing A] [CommRing B]
       [Algebra A K] [IsFractionRing A K]
@@ -119,27 +110,15 @@ theorem finiteEtaleGaloisCoverNormalizationSMulCommClass
       [Algebra A B] [Algebra A L]
       [IsScalarTower A K L] [IsScalarTower A B L]
       [IsIntegrallyClosed A] [IsIntegralClosure B A L],
-      letI : FiniteDimensional K L :=
+      let _ : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : MulSemiringAction Gal(L/K) B :=
+      let _ : MulSemiringAction Gal(L/K) B :=
         IsIntegralClosure.MulSemiringAction A K L B
-      letI : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
+      let _ : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
         finiteEtaleGaloisCoverNormalizationAction Y hY A B
       SMulCommClass (Aut Y)ᵐᵒᵖ A B := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K := X.functionField
-  let L := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  dsimp only
-  intro A B _ _ _ _ _ _ _ _ _ _ _ _
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : MulSemiringAction Gal(L/K) B :=
-    IsIntegralClosure.MulSemiringAction A K L B
-  let : MulSemiringAction (Aut Y)ᵐᵒᵖ B :=
-    finiteEtaleGaloisCoverNormalizationAction Y hY A B
+  intro hCoverGalois hIntegral K L hKL A B hCommA hCommB hAK hFracAK hBL hFracBL hAB hAL hAKL
+    hABL hClosed hClosure hFinite hFieldAction hCoverAction
   constructor
   intro sigma a b
   change galRestrict A K L B

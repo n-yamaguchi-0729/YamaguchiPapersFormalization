@@ -162,7 +162,7 @@ private theorem map_maximalIdeal_ringEquiv
     intro hy
     exact hx (by simpa using hy.map (e.symm : S →+* R))
   · intro hy
-    refine ⟨e.symm y, ?_, by simp⟩
+    refine ⟨e.symm y, ?_, e.apply_symm_apply y⟩
     rw [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff] at hy ⊢
     intro hx
     exact hy (by simpa using hx.map (e : R →+* S))

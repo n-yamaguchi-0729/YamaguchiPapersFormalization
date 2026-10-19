@@ -608,7 +608,8 @@ private theorem factorPow_evalₐ
     (AdicCompletion.evalₐ I n x)
   have hn : AdicCompletion.eval I R n x =
       Ideal.Quotient.mk (I ^ n • ⊤ : Ideal R) a := by
-    rw [← AdicCompletion.factor_evalₐ_eq_eval I x (by simp), ← ha,
+    rw [← AdicCompletion.factor_evalₐ_eq_eval I x
+      (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), ← ha,
       Ideal.Quotient.factor_mk]
   have hm : AdicCompletion.eval I R m x =
       Ideal.Quotient.mk (I ^ m • ⊤ : Ideal R) a := by
@@ -625,7 +626,8 @@ private theorem factorPow_evalₐ
         Ideal.Quotient.mk (I ^ m) a := by
       rw [← ha, Ideal.Quotient.factor_mk]
     _ = AdicCompletion.evalₐ I m x := by
-      rw [← AdicCompletion.factor_eval_eq_evalₐ I x (by simp), hm]
+      rw [← AdicCompletion.factor_eval_eq_evalₐ I x
+        (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
 private noncomputable def completionToValuationSubringQuotientRingHom
@@ -712,7 +714,12 @@ private theorem completionToValuationSubring_comp_fromValuationSubring :
   intro x
   apply AdicCompletion.ext_evalₐ
   intro n
-  simp
+  change AdicCompletion.evalₐ I_hat n
+    (completionToValuationSubringCompletionRingHom V K
+      (valuationSubringCompletionToCompletionRingHom V K x)) =
+    AdicCompletion.evalₐ I_hat n x
+  rw [evalₐ_completionToValuationSubringCompletionRingHom,
+    evalₐ_valuationSubringCompletionToCompletionRingHom, AlgEquiv.apply_symm_apply]
 
 private theorem valuationSubringToCompletion_comp_fromCompletion :
     (valuationSubringCompletionToCompletionRingHom V K).comp
@@ -722,7 +729,12 @@ private theorem valuationSubringToCompletion_comp_fromCompletion :
   intro x
   apply AdicCompletion.ext_evalₐ
   intro n
-  simp
+  change AdicCompletion.evalₐ I_V n
+    (valuationSubringCompletionToCompletionRingHom V K
+      (completionToValuationSubringCompletionRingHom V K x)) =
+    AdicCompletion.evalₐ I_V n x
+  rw [evalₐ_valuationSubringCompletionToCompletionRingHom,
+    evalₐ_completionToValuationSubringCompletionRingHom, AlgEquiv.symm_apply_apply]
 
 /-- Inverse-limit lift of the finite quotient equivalences between the
 original DVR and the valuation subring in its actual valued completion. -/

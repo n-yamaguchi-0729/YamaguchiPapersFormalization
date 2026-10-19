@@ -56,7 +56,7 @@ theorem localization_awayMap_etale_of_isPushout
       change algebraMap A T a = mapST (algebraMap A S a)
       rw [show mapST (algebraMap A S a) =
           algebraMap B T (algebraMap A B a) by
-        simp [mapST, S, T, fB, IsLocalization.Away.map]]
+        simp only [mapST, T, fB, IsLocalization.Away.map, IsLocalization.map_eq]]
       exact IsScalarTower.algebraMap_apply A B T a
   let : IsScalarTower A C U := IsScalarTower.of_algebraMap_eq' rfl
   have hlocU : IsLocalization
@@ -65,8 +65,6 @@ theorem localization_awayMap_etale_of_isPushout
       ((Submonoid.powers f).map (algebraMap A C)) U
     rw [Submonoid.map_powers]
     exact Localization.isLocalization
-  let : IsLocalization
-      (Algebra.algebraMapSubmonoid C (Submonoid.powers f)) U := hlocU
   let mapSU : S →+* U :=
     Localization.awayMap (algebraMap A C) f
   let : Algebra S U := mapSU.toAlgebra
@@ -75,7 +73,7 @@ theorem localization_awayMap_etale_of_isPushout
       change algebraMap A U a = mapSU (algebraMap A S a)
       rw [show mapSU (algebraMap A S a) =
           algebraMap C U (algebraMap A C a) by
-        simp [mapSU, S, U, fC, IsLocalization.Away.map]]
+        simp only [mapSU, U, fC, IsLocalization.Away.map, IsLocalization.map_eq]]
       exact IsScalarTower.algebraMap_apply A C U a
   let : IsScalarTower B D V := IsScalarTower.of_algebraMap_eq' rfl
   have hfBD : algebraMap B D fB = fD := by
@@ -91,9 +89,6 @@ theorem localization_awayMap_etale_of_isPushout
       ((Submonoid.powers fB).map (algebraMap B D)) V
     rw [Submonoid.map_powers, hfBD]
     exact Localization.isLocalization
-  let : IsLocalization
-      (Algebra.algebraMapSubmonoid D (Submonoid.powers fB)) V :=
-    hlocVFromB
   let : Algebra T V :=
     localizationAlgebra (Submonoid.powers fB) D
   let : IsScalarTower B T V :=
@@ -107,9 +102,6 @@ theorem localization_awayMap_etale_of_isPushout
     rw [Submonoid.map_powers]
     change IsLocalization (Submonoid.powers fD) V
     exact Localization.isLocalization
-  let : IsLocalization
-      (Algebra.algebraMapSubmonoid D (Submonoid.powers fC)) V :=
-    hlocVFromC
   let mapUV : U →+* V :=
     Localization.awayMap (algebraMap C D) fC
   let : Algebra U V := mapUV.toAlgebra
@@ -118,7 +110,7 @@ theorem localization_awayMap_etale_of_isPushout
       change algebraMap C V c = mapUV (algebraMap C U c)
       rw [show mapUV (algebraMap C U c) =
           algebraMap D V (algebraMap C D c) by
-        simp [mapUV, U, V, fC, fD, IsLocalization.Away.map]]
+        simp only [mapUV, V, fD, IsLocalization.Away.map, IsLocalization.map_eq]]
       exact IsScalarTower.algebraMap_apply C D V c
   let : IsScalarTower A D V := IsScalarTower.of_algebraMap_eq' rfl
   let : IsScalarTower A T V :=
@@ -165,17 +157,14 @@ theorem localization_awayMap_etale_of_isPushout
   have hCLocalization : Algebra.IsPushout A S C U :=
     (Algebra.isPushout_of_isLocalization
       (Submonoid.powers f) S C U).symm
-  let : Algebra.IsPushout A S C U := hCLocalization
   have hAwayPushout : Algebra.IsPushout S T U V :=
     (Algebra.IsPushout.comp_iff A S C U).1 hBig
-  let : Algebra.IsPushout S T U V := hAwayPushout
   let e : U ⊗[S] T ≃ₐ[U] V :=
     Algebra.IsPushout.equiv (h := hAwayPushout.symm) S U T V
+  have hST : Algebra.Etale S T := hAway.toAlgebra
   have hBaseChange : Algebra.Etale U (U ⊗[S] T) :=
-    @Algebra.Etale.baseChange S T U _ _ _ _ _ hAway.toAlgebra
-  have hUV : Algebra.Etale U V :=
-    @Algebra.Etale.of_equiv U (U ⊗[S] T) V
-      _ _ _ _ _ hBaseChange e
+    Algebra.Etale.baseChange (R := S) (A := T) (B := U)
+  have hUV : Algebra.Etale U V := Algebra.Etale.of_equiv e
   change mapUV.Etale
   exact hUV
 

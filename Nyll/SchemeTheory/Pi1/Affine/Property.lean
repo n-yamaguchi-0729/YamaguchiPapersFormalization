@@ -262,7 +262,7 @@ lemma _root_.CommRingCat.Under.property_limit_of_hasFiniteProducts_of_hasEqualiz
     Q (limit D).hom.hom := by
   have := CommRingCat.Under.hasFiniteLimits hQi hQp hQe
   let D' : J ⥤ (RingHom.toMorphismProperty Q).Under ⊤ R :=
-    MorphismProperty.Comma.lift D h (by simp) (by simp)
+    MorphismProperty.Comma.lift D h (by intros; trivial) (by intros; trivial)
   let A := limit D'
   have : CreatesFiniteLimits (Under.forget (RingHom.toMorphismProperty Q) ⊤ R) :=
     CommRingCat.Under.createsFiniteLimitsForget hQi hQp hQe R
@@ -443,8 +443,8 @@ lemma _root_.AlgebraicGeometry.Scheme.Hom.appTop_bijective_of_isAffine
       ΓSpec_adjunction_homEquiv_eq f
     have hY :
         Y.isoSpec.inv.appTop ≫ (Scheme.ΓSpecIso Γ(Y, ⊤)).hom = 𝟙 _ := by
-      rw [← Scheme.toSpecΓ_appTop, ← Scheme.Hom.comp_appTop]
-      simp
+      rw [← Scheme.toSpecΓ_appTop, ← Scheme.Hom.comp_appTop,
+        Scheme.toSpecΓ_isoSpec_inv, Scheme.Hom.id_appTop]
     calc
       (g ≫ Y.isoSpec.inv).appTop = Y.isoSpec.inv.appTop ≫ g.appTop :=
         Scheme.Hom.comp_appTop _ _
@@ -537,8 +537,8 @@ lemma essSurj_ΓProp (hQi : RingHom.RespectsIso Q) {S : Scheme.{u}} [IsAffine S]
     let r : Γ(S, ⊤) ⟶ R.right := R.hom
     have hS : a ≫ d = 𝟙 _ := by
       change S.isoSpec.inv.appTop ≫ (Scheme.ΓSpecIso Γ(S, ⊤)).hom = 𝟙 _
-      rw [← Scheme.toSpecΓ_appTop, ← Scheme.Hom.comp_appTop]
-      simp
+      rw [← Scheme.toSpecΓ_appTop, ← Scheme.Hom.comp_appTop,
+        Scheme.toSpecΓ_isoSpec_inv, Scheme.Hom.id_appTop]
     have hcomp :
         (Spec.map R.hom ≫ S.isoSpec.inv).appTop = a ≫ b :=
       Scheme.Hom.comp_appTop _ _
@@ -736,7 +736,8 @@ def overSpecEquivUnderCompPushoutIso (hQi : RingHom.RespectsIso Q) {R S : CommRi
       (Over.pullback P ⊤ (Spec.map f)).op ⋙ (overSpecEquivUnder P hQi S).functor :=
   Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (Under.congrPushoutIso _ ⊤
-      (Spec.map f).appTop f (Scheme.ΓSpecIso R) (Scheme.ΓSpecIso S) (by simp)) ≪≫
+      (Spec.map f).appTop f (Scheme.ΓSpecIso R) (Scheme.ΓSpecIso S)
+        (Scheme.ΓSpecIso_naturality f)) ≪≫
       (Functor.associator _ _ _).symm ≪≫
       Functor.isoWhiskerRight (pullbackΓPropIso P hQi _).symm _ ≪≫
       Functor.associator _ _ _
@@ -826,7 +827,9 @@ lemma _root_.AlgebraicGeometry.IsLocalAtTarget.iff_of_openCover_of_over
     {X Y S : Scheme.{u}} [X.Over S] [Y.Over S]
     (f : X ⟶ Y) [f.IsOver S] (𝒰 : S.OpenCover) :
     P f ↔ ∀ i : 𝒰.I₀,
-      P (pullback.map (X ↘ S) (𝒰.f i) (Y ↘ S) (𝒰.f i) f (𝟙 _) (𝟙 _) (by simp) (by simp)) := by
+      P (pullback.map (X ↘ S) (𝒰.f i) (Y ↘ S) (𝒰.f i) f (𝟙 _) (𝟙 _)
+        (by rw [Category.comp_id]; exact HomIsOver.comp_over.symm)
+        (by rw [Category.comp_id, Category.id_comp])) := by
   let s : X ⟶ S := X ↘ S
   let t : Y ⟶ S := Y ↘ S
   have hover : f ≫ t = s := HomIsOver.comp_over
@@ -837,7 +840,8 @@ lemma _root_.AlgebraicGeometry.IsLocalAtTarget.iff_of_openCover_of_over
     pullback.congrHom hover rfl
   let m (i : 𝒰.I₀) : pullback s (𝒰.f i) ⟶ pullback t (𝒰.f i) :=
     pullback.map s (𝒰.f i) t (𝒰.f i) f (𝟙 _) (𝟙 _)
-      (by simpa only [Category.comp_id] using hover.symm) (by simp)
+      (by simpa only [Category.comp_id] using hover.symm)
+      (by rw [Category.comp_id, Category.id_comp])
   have heq (i : 𝒰.I₀) :
       pullback.snd f (pullback.fst t (𝒰.f i)) =
         (a i).hom ≫ (c i).hom ≫ m i := by

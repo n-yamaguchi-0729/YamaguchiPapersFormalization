@@ -167,7 +167,7 @@ theorem ker_evalRingHom_comp_ringEquiv_comp_eq_sup_of_idempotent_lift
             congrArg E (congrFun hmap i)
           _ = Pi.single i 1 := E.apply_symm_apply _
       rw [map_sub, map_one, map_sub, map_one, hei]
-      simp
+      simp only [Pi.sub_apply, Pi.one_apply, Pi.single_eq_same, sub_self]
 
 /-- The field factors of the closed fibre of a finite étale algebra over a
 complete Noetherian local ring determine a complete orthogonal family of

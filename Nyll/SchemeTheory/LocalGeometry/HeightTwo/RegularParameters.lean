@@ -88,7 +88,7 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two
     simp [x', y, eq_comm]
   have hspan : Ideal.ofList [x, y] = maximalIdeal R := by
     change Ideal.span {r | r ∈ [x, y]} = maximalIdeal R
-    rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by ext; simp]
+    rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by ext r; exact List.mem_pair]
     exact hspanSet
   have hyNotMem : y ∉ Ideal.span ({x} : Set R) := by
     intro hy

@@ -79,7 +79,7 @@ theorem exists_single_radical_generator_of_cyclic_galois_exponent
   obtain ⟨α, hαd, hαgen⟩ :=
     exists_root_adjoin_eq_top_of_isCyclic K L hμd
   by_cases hαzero : α = 0
-  · refine ⟨1, one_ne_zero, ⟨1, by simp⟩, ?_⟩
+  · refine ⟨1, one_ne_zero, ⟨1, by rw [map_one, one_pow]⟩, ?_⟩
     have hbot : (⊥ : IntermediateField K L) = ⊤ := by
       simpa [hαzero] using hαgen
     simpa using hbot

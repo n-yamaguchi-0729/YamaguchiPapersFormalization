@@ -185,7 +185,8 @@ theorem functionFieldProductMap_surjective_of_pullback_generic_residue
         fstResidue y * sndResidue x := by
     rw [show y ⊗ₜ[S.residueField T.s] x =
       (y ⊗ₜ (1 : X.residueField T.y)) *
-        ((1 : Y.residueField T.x) ⊗ₜ x) by simp]
+        ((1 : Y.residueField T.x) ⊗ₜ x) by
+        rw [Algebra.TensorProduct.tmul_mul_tmul, mul_one, one_mul]]
     rw [map_mul, hTensorLeftApply, hTensorRightApply]
   apply
     Algebra.TensorProduct.productMap_surjective_of_surjective_reversed_tensor

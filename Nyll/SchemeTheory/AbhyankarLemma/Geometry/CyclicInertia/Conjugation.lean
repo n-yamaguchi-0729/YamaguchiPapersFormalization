@@ -56,8 +56,9 @@ def inertiaConjugate
       exact (inertiaGroup_normal (K := K) V).conj_mem
         (sigma : decompositionGroup K V) sigma.property g⟩
   map_one' := by
-    ext
-    simp
+    apply Subtype.ext
+    change g * 1 * g⁻¹ = 1
+    rw [mul_one, mul_inv_cancel]
   map_mul' sigma tau := by
     ext
     simp [mul_assoc]

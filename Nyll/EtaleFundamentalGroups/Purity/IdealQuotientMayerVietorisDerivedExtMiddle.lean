@@ -35,8 +35,14 @@ def pointwiseBiprodFunctor
     (A B : D ⥤ C) : D ⥤ C where
   obj d := A.obj d ⊞ B.obj d
   map f := biprod.map (A.map f) (B.map f)
-  map_id d := by ext <;> simp
-  map_comp f g := by ext <;> simp
+  map_id d := by
+    apply biprod.hom_ext <;>
+      simp only [biprod.map_fst, biprod.map_snd, CategoryTheory.Functor.map_id,
+        Category.id_comp, Category.comp_id]
+  map_comp f g := by
+    apply biprod.hom_ext <;>
+      simp only [Category.assoc, biprod.map_fst, biprod.map_snd,
+        biprod.map_fst_assoc, biprod.map_snd_assoc, CategoryTheory.Functor.map_comp]
 
 /-- Taking opposites carries a pointwise biproduct diagram to the pointwise
 biproduct of the opposite diagrams. -/

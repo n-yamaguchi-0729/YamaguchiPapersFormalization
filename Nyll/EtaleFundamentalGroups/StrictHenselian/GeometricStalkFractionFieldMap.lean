@@ -10,12 +10,12 @@ import Mathlib.RingTheory.Localization.FractionRing
 
 
 /-!
-# The actual strict generic field map over a normal local domain
+# The actual strict generic field map over a normal domain
 
-The actual geometric stalk is a domain, and its local structure map is
-faithfully flat and injective. Localizing this injection constructs the map
-between the actual fraction fields and its compatibility with the original
-structure map. Neither a DVR nor a generic tensor comparison is required.
+The actual geometric stalk is a domain, and its structure map is flat, hence
+injective. Localizing this injection constructs the map between the actual
+fraction fields and its compatibility with the original structure map. Neither
+a DVR nor a generic tensor comparison is required.
 -/
 
 noncomputable section
@@ -28,12 +28,12 @@ namespace EtaleFundamentalGroups.StrictHenselian
 universe u
 
 variable {R Ω : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
-  [IsLocalRing R] [Field Ω] (φ : R →+* Ω) [IsLocalHom φ]
+  [Field Ω] (φ : R →+* Ω)
 
 /-- The actual field map obtained from the actual geometric-stalk injection. -/
 def geometricStalkFractionFieldMap :
     FractionRing R →+* FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ))) :=
-  IsFractionRing.map (geometricStalkStructureMap_injective φ)
+  IsFractionRing.map (geometricStalkStructureMap_injective_of_isDomain φ)
 
 /-- The induced fraction-field map extends the actual local structure map. -/
 theorem geometricStalkFractionFieldMap_algebraMap (r : R) :
@@ -43,6 +43,7 @@ theorem geometricStalkFractionFieldMap_algebraMap (r : R) :
         (geometricStalkStructureMap φ r) :=
   IsLocalization.map_eq
     (nonZeroDivisors_le_comap_nonZeroDivisors_of_injective
-      (geometricStalkStructureMap φ) (geometricStalkStructureMap_injective φ)) r
+      (geometricStalkStructureMap φ)
+      (geometricStalkStructureMap_injective_of_isDomain φ)) r
 
 end EtaleFundamentalGroups.StrictHenselian

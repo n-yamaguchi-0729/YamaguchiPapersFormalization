@@ -119,10 +119,10 @@ theorem isRegular_pair_of_finrank_cotangentSpace_eq_two_of_span_eq
     IsRegular R [x, y] := by
   have hxMem : x ∈ maximalIdeal R := by
     rw [← hspan]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hyMem : y ∈ maximalIdeal R := by
     rw [← hspan]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
   have hx : x ≠ 0 := by
     intro hx
     have hprincipal : (maximalIdeal R).IsPrincipal := by
@@ -270,7 +270,9 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two_unconstrained
     simp [x, y]
   have hspan : Ideal.ofList [x, y] = maximalIdeal R := by
     change Ideal.span {r | r ∈ [x, y]} = maximalIdeal R
-    rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by ext; simp]
+    rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by
+      ext r
+      exact List.mem_pair]
     exact hspanSet
   exact ⟨x, y,
     isRegular_pair_of_finrank_cotangentSpace_eq_two_of_span_eq

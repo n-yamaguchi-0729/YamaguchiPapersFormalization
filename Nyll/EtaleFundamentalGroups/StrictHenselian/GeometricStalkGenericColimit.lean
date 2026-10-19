@@ -48,7 +48,7 @@ namespace EtaleFundamentalGroups.StrictHenselian
 universe u
 
 variable {R Ω : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
-  [IsLocalRing R] [Field Ω] (φ : R →+* Ω) [IsLocalHom φ]
+  [Field Ω] (φ : R →+* Ω)
 
 /-- The generic tensor comparison respects the actual original fraction-field
 map, rather than an independently chosen action on the strict generic field. -/

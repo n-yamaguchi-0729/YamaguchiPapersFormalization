@@ -5,7 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericTrivialCover
-import Nyll.EtaleFundamentalGroups.Normalization.GenericFiber
+import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
 import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationAction
 import Nyll.SchemeTheory.Normalization.AffineFiniteEtale

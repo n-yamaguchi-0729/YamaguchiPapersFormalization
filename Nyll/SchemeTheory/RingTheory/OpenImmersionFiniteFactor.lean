@@ -8,9 +8,9 @@ module
 
 public import Nyll.SchemeTheory.Morphisms.OpenImmersionLocalization
 public import Nyll.SchemeTheory.Morphisms.OpenImmersionQuotient
-public import Nyll.SchemeTheory.RingTheory.FiniteOpenFactor
-public import Nyll.SchemeTheory.RingTheory.IdempotentLiftSupport
-public import Nyll.SchemeTheory.RingTheory.IdempotentQuotientFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.FiniteOpenFactor
+public import Nyll.SchemeTheory.RingTheory.Idempotents.IdempotentLiftSupport
+public import Nyll.SchemeTheory.RingTheory.Idempotents.IdempotentQuotientFactor
 public import Nyll.SchemeTheory.RingTheory.QuotientBaseChange
 public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 

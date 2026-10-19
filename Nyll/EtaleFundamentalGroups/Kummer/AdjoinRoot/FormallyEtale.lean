@@ -38,7 +38,7 @@ theorem formallyEtale_adjoinRoot_of_monic_of_isUnit_aeval_derivative
     { f := f
       monic_f := hf
       g := f.derivative
-      cond := ⟨1, 0, 1, by simp⟩ }
+      cond := ⟨1, 0, 1, by rw [mul_one, mul_zero, add_zero, pow_one]⟩ }
   have hP : IsUnit (AdjoinRoot.mk P.f P.g) := by
     change IsUnit (AdjoinRoot.mk f f.derivative)
     exact hmk

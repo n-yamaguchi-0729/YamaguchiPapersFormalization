@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
 import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteRegularLocalPurity
-import Nyll.SchemeTheory.RingTheory.RegularLocalTrace
+import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
 
 /-!
 # Purity for complete regular local rings

@@ -125,7 +125,8 @@ theorem regular_pair_localizationAtPrime_of_two_splitStrictNormalCrossingsParame
         IsLocalRing.map_maximalIdeal_of_surjective
           (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective
   have htjBarPrime : Prime (Ideal.Quotient.mk I (t j)) :=
-    Kummer.prime_of_mem_regularSystem hregS hgenS (by simp)
+    Kummer.prime_of_mem_regularSystem hregS hgenS
+      (List.mem_map.mpr ⟨t j, List.mem_cons_self, rfl⟩)
   let J : Ideal S := Ideal.span {Ideal.Quotient.mk I (t j)}
   have hJprime : J.IsPrime := by
     apply (Ideal.span_singleton_prime htjBarPrime.ne_zero).mpr
@@ -135,8 +136,9 @@ theorem regular_pair_localizationAtPrime_of_two_splitStrictNormalCrossingsParame
     dsimp only [Q, J, I]
     rw [Ideal.ofList_cons, Ideal.ofList_cons, Ideal.ofList_nil, sup_bot_eq]
     rw [Ideal.map_sup, Ideal.map_span, Ideal.map_span]
-    simp
-    rfl
+    rw [Set.image_singleton, Set.image_singleton,
+      Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton _)),
+      Ideal.span_singleton_zero, bot_sup_eq]
   have hIQ : I ≤ Q := by
     change Ideal.span {t i} ≤ Ideal.ofList [t i, t j]
     rw [Ideal.ofList_cons, Ideal.ofList_cons, Ideal.ofList_nil,
@@ -159,7 +161,7 @@ theorem regular_pair_localizationAtPrime_of_two_splitStrictNormalCrossingsParame
     intro hIQeq
     apply htjNotI
     rw [hIQeq]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span (List.mem_cons_of_mem (t i) List.mem_cons_self)
   have hIheight : I.height = 1 := by
     exact Ideal.height_span_singleton_eq_one_of_mem_nonZeroDivisors
       (mem_nonZeroDivisors_iff_ne_zero.mpr htiPrime.ne_zero)

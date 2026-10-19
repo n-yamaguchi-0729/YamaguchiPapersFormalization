@@ -212,12 +212,12 @@ theorem hasPuncturedPurity_of_complete_regularSystem_of_two_le_length
   obtain ⟨xs, y, z, rfl⟩ : ∃ (xs : List R) (y z : R),
       ps = xs ++ [y, z] := by
     induction ps using List.reverseRecOn with
-    | nil => simp at hlen
+    | nil => exact (Nat.not_succ_le_zero 1 hlen).elim
     | append_singleton l z =>
         induction l using List.reverseRecOn with
-        | nil => simp at hlen
+        | nil => exact (Nat.not_succ_le_self 1 hlen).elim
         | append_singleton xs y =>
-            exact ⟨xs, y, z, by simp⟩
+            exact ⟨xs, y, z, List.append_assoc xs [y] [z]⟩
   exact hasPuncturedPurity_of_complete_regularSystem_prefix_two
     xs y z hreg hgen
 

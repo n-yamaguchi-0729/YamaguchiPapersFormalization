@@ -32,7 +32,7 @@ private theorem ideal_map_isNilpotent
   obtain ⟨n, hn⟩ := hI
   refine ⟨n, ?_⟩
   rw [← Ideal.map_pow, hn]
-  simp
+  simp only [Ideal.zero_eq_bot, Ideal.map_bot]
 
 /-- If reduction to the extended quotient ideal is bijective on maps out of
 an algebra, then scalar extension to the quotient of the base ring is also

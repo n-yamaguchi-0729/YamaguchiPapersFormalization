@@ -32,7 +32,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun q ↦ T.presheaf.stalk q) h) =
       (T.presheaf.stalkCongr (.of_eq h)).hom := by
   subst x'
-  simp
+  exact (T.presheaf.stalkSpecializes_refl x).symm
 
 /-- Identifying function fields with generic-point residue fields commutes
 with the maps induced by a dense morphism of integral schemes. -/

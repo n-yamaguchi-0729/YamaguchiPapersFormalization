@@ -64,18 +64,20 @@ omit [IsDomain A] in
 map from `A`. -/
 theorem localizationAtPrimeToFractionField_isScalarTower
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+    let : Algebra (Localization.AtPrime P) K :=
+      localizationAtPrimeToFractionFieldAlgebra (K := K) P
     IsScalarTower A (Localization.AtPrime P) K := by
-  let := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+  intro algebraP_K
   exact IsScalarTower.of_algebraMap_eq' (IsLocalization.lift_comp _).symm
 
 /-- A chosen fraction field of `A` is also a fraction field of every prime
 localization of `A`, for the canonical map above. -/
 theorem localizationAtPrimeToFractionField_isFractionRing
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+    let : Algebra (Localization.AtPrime P) K :=
+      localizationAtPrimeToFractionFieldAlgebra (K := K) P
     IsFractionRing (Localization.AtPrime P) K := by
-  let := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+  intro algebraP_K
   let : IsScalarTower A (Localization.AtPrime P) K :=
     localizationAtPrimeToFractionField_isScalarTower (K := K) P
   exact IsFractionRing.isFractionRing_of_isDomain_of_isLocalization
@@ -88,7 +90,8 @@ through the chosen fraction field `K`. -/
 noncomputable abbrev localizationAtPrimeToExtensionAlgebra
     (P : Ideal A) [P.IsPrime] :
     Algebra (Localization.AtPrime P) L := by
-  letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+  let : Algebra (Localization.AtPrime P) K :=
+    localizationAtPrimeToFractionFieldAlgebra (K := K) P
   exact ((algebraMap K L).comp
     (algebraMap (Localization.AtPrime P) K)).toAlgebra
 
@@ -97,11 +100,12 @@ omit [IsDomain A] in
 tower by construction. -/
 theorem localizationAtPrimeToFractionFieldToExtension_isScalarTower
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) K :=
+      localizationAtPrimeToFractionFieldAlgebra (K := K) P
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     IsScalarTower (Localization.AtPrime P) K L := by
-  let := localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro algebraP_K algebraP_L
   exact IsScalarTower.of_algebraMap_eq' rfl
 
 variable [Algebra A L] [IsScalarTower A K L]
@@ -111,12 +115,14 @@ omit [IsDomain A] in
 `A → L`. -/
 theorem localizationAtPrimeToExtension_isScalarTower
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let : Algebra (Localization.AtPrime P) L :=
+      localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     IsScalarTower A (Localization.AtPrime P) L := by
-  let := localizationAtPrimeToFractionFieldAlgebra (K := K) P
+  intro algebraP_L
+  let : Algebra (Localization.AtPrime P) K :=
+    localizationAtPrimeToFractionFieldAlgebra (K := K) P
   let : IsScalarTower A (Localization.AtPrime P) K :=
     localizationAtPrimeToFractionField_isScalarTower (K := K) P
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
   refine IsScalarTower.of_algebraMap_eq fun x ↦ ?_
   change algebraMap A L x =
     algebraMap K L

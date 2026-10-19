@@ -206,7 +206,7 @@ theorem isIntegral_left_of_isConnected_finiteEtale
   have hAffine (y : Y.left) :
       ∃ U : X.Opens, IsAffineOpen U ∧ Y.hom.base y ∈ U ∧ U ≤ ⊤ :=
     exists_isAffineOpen_mem_and_subset
-      (X := X) (U := ⊤) (x := Y.hom.base y) (by simp)
+      (X := X) (U := ⊤) (x := Y.hom.base y) trivial
   let U (y : Y.left) : X.Opens := Classical.choose (hAffine y)
   have hrestrEtale (y : Y.left) : IsFiniteEtale (Y.hom ∣_ U y) := by
     exact MorphismProperty.of_isPullback
@@ -333,7 +333,7 @@ theorem isNormalIntegral_left_of_isConnected_finiteEtale
   have hAffine :
       ∃ U : X.Opens, IsAffineOpen U ∧ Y.hom.base y ∈ U ∧ U ≤ ⊤ :=
     exists_isAffineOpen_mem_and_subset
-      (X := X) (U := ⊤) (x := Y.hom.base y) (by simp)
+      (X := X) (U := ⊤) (x := Y.hom.base y) trivial
   let U : X.Opens := Classical.choose hAffine
   have hUaffine : IsAffineOpen U :=
     (Classical.choose_spec hAffine).1

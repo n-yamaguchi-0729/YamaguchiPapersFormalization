@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.SmoothReduced
+import Nyll.SchemeTheory.RingTheory.Smooth.SmoothReduced
 import Mathlib.Data.Int.Order.Units
 import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import Mathlib.NumberTheory.NumberField.Discriminant.Basic

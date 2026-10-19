@@ -87,7 +87,7 @@ def geometricNeighborhoodGenericMap
 end Neighborhood
 
 variable {R Ω : Type u} [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
-  [IsLocalRing R] [Field Ω] [IsSepClosed Ω] (φ : R →+* Ω) [IsLocalHom φ]
+  [Field Ω] [IsSepClosed Ω] (φ : R →+* Ω)
 
 /-- The actual germ map as a morphism under R. -/
 def geometricNeighborhoodGerm (W : (Spec (CommRingCat.of R)).Etale)

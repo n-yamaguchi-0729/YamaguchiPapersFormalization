@@ -54,7 +54,24 @@ def _root_.AlgHom.equalizerCancelBaseChange (f g : A →ₐ[R] B) (T : Type u) [
   AlgHom.equalizerCongr
     (TensorProduct.cancelBaseChange R T (T ⊗[R] S) (T ⊗[R] S) A)
     (TensorProduct.cancelBaseChange R T (T ⊗[R] S) (T ⊗[R] S) B)
-    (by ext; simp) (by ext; simp) |>.restrictScalars T
+    (by
+      apply Algebra.TensorProduct.ext'
+      intro x y
+      induction y using TensorProduct.inductionOn with
+      | tmul t a =>
+          simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom,
+            Algebra.TensorProduct.map_tmul, Algebra.TensorProduct.cancelBaseChange_tmul,
+            AlgHom.id_apply, AlgHom.map_smul_of_tower]
+      | add y z hy hz => simp only [TensorProduct.tmul_add, map_add, hy, hz])
+    (by
+      apply Algebra.TensorProduct.ext'
+      intro x y
+      induction y using TensorProduct.inductionOn with
+      | tmul t a =>
+          simp only [AlgHom.comp_apply, AlgEquiv.coe_toAlgHom,
+            Algebra.TensorProduct.map_tmul, Algebra.TensorProduct.cancelBaseChange_tmul,
+            AlgHom.id_apply, AlgHom.map_smul_of_tower]
+      | add y z hy hz => simp only [TensorProduct.tmul_add, map_add, hy, hz]) |>.restrictScalars T
 
 @[simp]
 lemma _root_.AlgHom.equalizerCancelBaseChange_algebraMap (f g : A →ₐ[R] B) (T : Type u) [CommRing T]
@@ -103,8 +120,10 @@ lemma _root_.AlgHom.tensorEqualizerEquiv_symm_apply
     (f.tensorEqualizerEquiv S T g).symm ⟨1 ⊗ₜ x, by simp [show f x = g x from hx]⟩ =
       1 ⊗ₜ ⟨x, hx⟩ := by
   apply (f.tensorEqualizerEquiv S T g).injective
-  ext
-  simp
+  ext : 1
+  simp only [AlgEquiv.apply_symm_apply, AlgHom.tensorEqualizerEquiv_apply,
+    AlgHom.coe_tensorEqualizer, Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
+    Subalgebra.coe_val]
 
 /-- For flat `T`, identifies the base change of the equalizer of the `S`-base-changed maps
 with the equalizer of the further base-changed maps over `T ⊗[R] S`. -/
@@ -222,7 +241,11 @@ lemma _root_.AlgHom.tensorEqualizer_tmul_one' {R : Type*} (S : Type*) [CommRing 
       [Algebra R T] [Algebra S T] [IsScalarTower R S T]
       {A B : Type*} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
       (f g : A →ₐ[R] B) (x : T) :
-    f.tensorEqualizer S T g (x ⊗ₜ 1) = ⟨x ⊗ₜ 1, by simp⟩ :=
+    f.tensorEqualizer S T g (x ⊗ₜ 1) = ⟨x ⊗ₜ 1, by
+      change Algebra.TensorProduct.map (AlgHom.id S T) f (x ⊗ₜ[R] 1) =
+        Algebra.TensorProduct.map (AlgHom.id S T) g (x ⊗ₜ[R] 1)
+      rw [Algebra.TensorProduct.map_tmul, Algebra.TensorProduct.map_tmul,
+        map_one, map_one]⟩ :=
   rfl
 
 variable (S) in

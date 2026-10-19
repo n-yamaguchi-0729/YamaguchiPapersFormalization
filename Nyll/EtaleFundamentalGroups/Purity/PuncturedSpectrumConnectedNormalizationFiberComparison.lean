@@ -87,13 +87,13 @@ noncomputable def pullbackPuncturedSpectrumIsoOfIntegral
     Limits.pullback (Spec.map (CommRingCat.ofHom f))
         (puncturedSpectrumInclusion A) ≅
       puncturedSpectrum B := by
-  letI : IsOpenImmersion (puncturedSpectrumInclusion A) := by
+  let : IsOpenImmersion (puncturedSpectrumInclusion A) := by
     dsimp only [puncturedSpectrumInclusion]
     infer_instance
-  letI : IsOpenImmersion
+  let : IsOpenImmersion
       (Limits.pullback.fst (Spec.map (CommRingCat.ofHom f))
         (puncturedSpectrumInclusion A)) := inferInstance
-  letI : IsOpenImmersion (puncturedSpectrumInclusion B) := by
+  let : IsOpenImmersion (puncturedSpectrumInclusion B) := by
     dsimp only [puncturedSpectrumInclusion]
     infer_instance
   apply IsOpenImmersion.isoOfRangeEq
@@ -116,13 +116,13 @@ noncomputable def puncturedSpectrumIsoOfRingEquiv
     Spec.map (CommRingCat.ofHom e.toRingHom)
   let p : puncturedSpectrum A ⟶ Spec (.of A) :=
     puncturedSpectrumInclusion A
-  letI : IsIso (CommRingCat.ofHom e.toRingHom) :=
+  let : IsIso (CommRingCat.ofHom e.toRingHom) :=
     (ConcreteCategory.isIso_iff_bijective
       (CommRingCat.ofHom e.toRingHom)).mpr e.bijective
-  letI : IsIso f := by
+  let : IsIso f := by
     dsimp only [f]
     infer_instance
-  letI : IsIso (Limits.pullback.snd f p) := inferInstance
+  let : IsIso (Limits.pullback.snd f p) := inferInstance
   exact (asIso (Limits.pullback.snd f p)).symm ≪≫
     pullbackPuncturedSpectrumIsoOfIntegral e.toRingHom
       (e.toRingHom.isIntegral_of_surjective e.surjective)
@@ -143,37 +143,22 @@ private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ_source_forFib
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-    letI : Nonempty (⊤ : U.Opens) :=
+    let : Nonempty (⊤ : U.Opens) :=
       ⟨⟨genericPoint U, by trivial⟩⟩
     puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension R hpos
         (X.germToFunctionField ⊤ r) =
       U.germToFunctionField ⊤ (j.appTop r) := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  let : Nonempty (⊤ : U.Opens) :=
-    ⟨⟨genericPoint U, by trivial⟩⟩
+  intro X U j hU hj hIntegralU hXtop algebraR_X hUtop
   let hgen : j (genericPoint U) = genericPoint X :=
     genericPoint_eq_of_isOpenImmersion j
   change j.stalkMap (genericPoint U)
@@ -199,22 +184,13 @@ omit [IsLocalRing R] [IsNoetherianRing R] [IsIntegrallyClosed R] in
 private theorem specFunctionField_algebraMap_ΓSpecIso_hom_source_forFiber
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
     algebraMap R X.functionField ((Scheme.ΓSpecIso (.of R)).hom r) =
       X.germToFunctionField ⊤ r := by
-  dsimp only
-  let X := Spec (.of R)
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  change X.presheaf.germ ⊤ (genericPoint X) (by trivial)
-      ((Scheme.ΓSpecIso (.of R)).inv
-        ((Scheme.ΓSpecIso (.of R)).hom r)) =
-    X.germToFunctionField ⊤ r
+  intro X hXtop algebraR_X
   change X.presheaf.germ ⊤ (genericPoint X) (by trivial)
       ((Scheme.ΓSpecIso (.of R)).inv
         ((Scheme.ΓSpecIso (.of R)).hom r)) =
@@ -228,24 +204,24 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsCom
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
       connectedCoverGenericComposite W ≫ j
@@ -254,41 +230,20 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsCom
       e.toRingHom.comp g.fromNormalization.appTop.hom =
         (algebraMap R (integralClosure R W.left.functionField)).comp
           (Scheme.ΓSpecIso (.of R)).hom.hom } := by
-  dsimp only
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower g
   let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Nonempty (⊤ : X.Opens) :=
+  let hXtop : Nonempty (⊤ : X.Opens) :=
     ⟨⟨genericPoint X, by trivial⟩⟩
-  letI : Nonempty (⊤ : U.Opens) :=
+  let hUtop : Nonempty (⊤ : U.Opens) :=
     ⟨⟨genericPoint U, by trivial⟩⟩
-  letI : Algebra R X.functionField :=
+  let algebraR_X : Algebra R X.functionField :=
     AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
   let L : Type u := W.left.functionField
   let f : Spec (.of L) ⟶ U := connectedCoverGenericComposite W
-  let g : Spec (.of L) ⟶ X := f ≫ j
   let A : Type u := Γ(X, ⊤)
   let S : Type u := Γ(Spec (.of L), g ⁻¹ᵁ (⊤ : X.Opens))
-  letI : Algebra A S := g.appTop.hom.toAlgebra
+  let : Algebra A S := g.appTop.hom.toAlgebra
   let eBase : A ≃+* R :=
     (Scheme.ΓSpecIso (.of R)).commRingCatIsoToRingEquiv
   let eAmbientCat : CommRingCat.of S ≅ CommRingCat.of L := by
@@ -318,7 +273,7 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsCom
       (specFunctionField_algebraMap_ΓSpecIso_hom_source_forFiber R a).symm
   let C0 : Type u := integralClosure A S
   let C : Type u := integralClosure R L
-  letI : Algebra A C :=
+  let : Algebra A C :=
     EtaleFundamentalGroups.integralClosureBaseRingAlgebra eBase
   let eC : C0 ≃ₐ[A] C :=
     EtaleFundamentalGroups.integralClosureAlgEquivOfBaseAndAmbientEquiv
@@ -338,7 +293,8 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsCom
       g.fromNormalization.appTop ≫ eN.hom =
           (CommRingCat.ofHom (algebraMap A C0) ≫ eN.inv) ≫
             eN.hom := congrArg (fun k ↦ k ≫ eN.hom) hz'
-      _ = CommRingCat.ofHom (algebraMap A C0) := by simp
+      _ = CommRingCat.ofHom (algebraMap A C0) := by
+        rw [Category.assoc, eN.inv_hom_id, Category.comp_id]
   apply RingHom.ext
   intro a
   have hmain : e (g.fromNormalization.appTop a) =
@@ -351,8 +307,7 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsCom
       CommRingCat.hom_ofHom] at heN
     rw [heN]
     exact eC.commutes a
-  dsimp only [e, g, j, C, eBase, L, f, X, A] at hmain ⊢
-  convert hmain using 1 <;> rfl
+  exact hmain
 
 /-- The global sections of the generic-field normalization are the literal
 integral closure of `R` in the connected cover's function field. -/
@@ -361,24 +316,24 @@ noncomputable def connectedPuncturedCoverGenericNormalizationSectionsRingEquiv
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     Γ((connectedCoverGenericComposite W ≫ j).normalization, ⊤) ≃+*
       integralClosure R W.left.functionField :=
@@ -392,24 +347,24 @@ theorem connectedPuncturedCoverGenericNormalizationSectionsRingEquiv_appTop
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
       connectedCoverGenericComposite W ≫ j
@@ -425,24 +380,24 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecInte
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
@@ -450,37 +405,14 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecInte
     { e : g.normalization ≅ Spec (.of C) //
       e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap R C)) =
         g.fromNormalization } := by
-  dsimp only
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C g
   let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let L : Type u := W.left.functionField
-  let C : Type u := integralClosure R L
-  let g : Spec (.of L) ⟶ X := connectedCoverGenericComposite W ≫ j
   let Z : Scheme.{u} := g.normalization
   let z : Z ⟶ X := g.fromNormalization
-  letI : IsFinite z :=
+  let : IsFinite z :=
     connectedPuncturedCoverGenericNormalization_isFinite R hpos W
-  letI : IsAffine Z := isAffine_of_isAffineHom z
+  let : IsAffine Z := isAffine_of_isAffineHom z
   let eRing : Γ(Z, ⊤) ≃+* C :=
     connectedPuncturedCoverGenericNormalizationSectionsRingEquiv R hpos W
   let eRingIso : CommRingCat.of Γ(Z, ⊤) ≅ CommRingCat.of C :=
@@ -494,7 +426,7 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecInte
         apply CommRingCat.hom_ext
         ext a
         exact congrArg Subtype.val (eRing.apply_symm_apply a) }
-  letI : IsIso eRingIso.hom := eRingIso.isIso_hom
+  let : IsIso eRingIso.hom := eRingIso.isIso_hom
   let e : Z ≅ Spec (.of C) :=
     Z.isoSpec ≪≫
       Scheme.Spec.mapIso eRingIso.symm.op
@@ -516,7 +448,7 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecInte
     apply (cancel_mono eRingIso.hom).1
     simp only [Category.assoc]
     rw [hRingCat]
-    simp
+    rw [eRingIso.inv_hom_id, Category.comp_id, Iso.inv_hom_id_assoc]
   have hSpec :
       Spec.map eRingIso.inv ≫
           Spec.map (CommRingCat.ofHom (algebraMap R C)) =
@@ -531,7 +463,7 @@ private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecInte
   rw [Scheme.isoSpec_hom_naturality_assoc]
   dsimp only [X]
   rw [Scheme.isoSpec_Spec_hom, ← Spec.map_comp]
-  simp
+  rw [Iso.inv_hom_id, Spec.map_id, Category.comp_id]
 
 /-- The generic-field normalization over the affine local base is the
 spectrum of the literal integral-closure algebra. -/
@@ -540,24 +472,24 @@ noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClos
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     (connectedCoverGenericComposite W ≫ j).normalization ≅
       Spec (.of (integralClosure R W.left.functionField)) :=
@@ -570,24 +502,24 @@ theorem connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure_hom_fr
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     (connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure
         R hpos W).hom ≫
@@ -605,7 +537,8 @@ private noncomputable def pullbackIsoOfIsoOverForNormalizationFiber
     (w : e.hom ≫ h = f) :
     Limits.pullback f g ≅ Limits.pullback h g :=
   asIso <| Limits.pullback.map f g h g e.hom (𝟙 _) (𝟙 _)
-    (by simpa only [Category.comp_id] using w.symm) (by simp)
+    (by simpa only [Category.comp_id] using w.symm)
+    (by rw [Category.comp_id, Category.id_comp])
 
 private noncomputable def affineQuotientPullbackIsoData
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]
@@ -617,10 +550,9 @@ private noncomputable def affineQuotientPullbackIsoData
     { e : Limits.pullback z q ≅ Spec (.of Q) //
       e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap (A ⧸ I) Q)) =
         Limits.pullback.snd z q } := by
-  let Q := B ⧸ I.map (algebraMap A B)
+  intro Q q
   let T := A ⧸ I
   let c := Spec.map (CommRingCat.ofHom (algebraMap A B))
-  let q := Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))
   let eFiber : Limits.pullback z q ≅ Limits.pullback c q :=
     pullbackIsoOfIsoOverForNormalizationFiber eZ z c q heZ
   have heFiber :
@@ -674,24 +606,24 @@ private noncomputable def
     (I : Ideal R) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let Q := C ⧸ I.map (algebraMap R C)
@@ -700,31 +632,10 @@ private noncomputable def
           Spec (.of Q) //
       e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap (R ⧸ I) Q)) =
         (connectedPuncturedCoverNormalizationClosedFiber R hpos W I).hom } := by
-  dsimp only
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C Q
   let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
   let L : Type u := W.left.functionField
-  let C : Type u := integralClosure R L
   let g : Spec (.of L) ⟶ X := connectedCoverGenericComposite W ≫ j
   let Z : Scheme.{u} := g.normalization
   let z : Z ⟶ X := g.fromNormalization
@@ -746,24 +657,24 @@ noncomputable def connectedPuncturedCoverNormalizationClosedFiberIsoSpecQuotient
     (I : Ideal R) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     (connectedPuncturedCoverNormalizationClosedFiber R hpos W I).left ≅
       Spec (.of ((integralClosure R W.left.functionField) ⧸
@@ -778,24 +689,24 @@ theorem connectedPuncturedCoverNormalizationClosedFiberIsoSpecQuotient_hom_over
     (I : Ideal R) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     (connectedPuncturedCoverNormalizationClosedFiberIsoSpecQuotient
         R hpos W I).hom ≫
@@ -817,96 +728,59 @@ noncomputable def
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let J := I.map (algebraMap R C)
     let Q := C ⧸ J
-    letI : IsLocalRing C :=
+    let : IsLocalRing C :=
       connectedPuncturedCover_integralClosure_isLocalRing (R := R) hpos W
-    letI : IsLocalHom (algebraMap R C) :=
+    let : IsLocalHom (algebraMap R C) :=
       Scheme.isLocalHom_of_isIntegral_between_localRings
         (algebraMap R C) (algebraMap_isIntegral_iff.mpr inferInstance)
     let hJ : J ≤ maximalIdeal C :=
       (Ideal.map_mono hI).trans (map_maximalIdeal_le (algebraMap R C))
-    letI : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr <|
+    let : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr <|
       ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hJ
-    letI : IsLocalRing Q :=
+    let : IsLocalRing Q :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk J)
         Ideal.Quotient.mk_surjective
     connectedPuncturedCoverNormalizationPuncturedFiber
         R hpos W I hI ≅
       Scheme.puncturedSpectrum Q := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let L : Type u := W.left.functionField
-  let C : Type u := integralClosure R L
-  let J : Ideal C := I.map (algebraMap R C)
-  let Q : Type u := C ⧸ J
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C J Q hLocalC hLocalHom hJ
+    hNontrivialQ hLocalQ
   let T : Type u := R ⧸ I
-  letI : IsLocalRing C :=
-    connectedPuncturedCover_integralClosure_isLocalRing (R := R) hpos W
-  letI : IsLocalHom (algebraMap R C) :=
-    Scheme.isLocalHom_of_isIntegral_between_localRings
-      (algebraMap R C) (algebraMap_isIntegral_iff.mpr inferInstance)
-  have hJ : J ≤ maximalIdeal C := by
-    exact (Ideal.map_mono hI).trans (map_maximalIdeal_le (algebraMap R C))
-  have hJne : J ≠ ⊤ :=
-    ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hJ
-  letI : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr hJne
-  letI : IsLocalRing Q :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk J)
-      Ideal.Quotient.mk_surjective
-  letI : Nontrivial T :=
+  let : Nontrivial T :=
     Ideal.Quotient.nontrivial_iff.mpr
       (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-  letI : IsLocalRing T :=
+  let : IsLocalRing T :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
-  letI : Module.Finite R C :=
+  let : Module.Finite R C :=
     connectedPuncturedCover_integralClosure_finite_of_positiveDimension
       R hpos W
   let eRing : Q ≃ₐ[T] T ⊗[R] C :=
     Algebra.TensorProduct.quotIdealMapEquivQuotTensor C I
-  letI : Module.Finite T Q :=
+  let : Module.Finite T Q :=
     Module.Finite.equiv eRing.symm.toLinearEquiv
   have hf : (algebraMap T Q).IsIntegral :=
     algebraMap_isIntegral_iff.mpr inferInstance
@@ -937,96 +811,59 @@ noncomputable def
     (x : R) (hx : x ∈ maximalIdeal R) :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     let C := integralClosure R W.left.functionField
     let xC : C := algebraMap R C x
     let J := Ideal.span {xC}
     let Q := C ⧸ J
-    letI : IsLocalRing C :=
+    let : IsLocalRing C :=
       connectedPuncturedCover_integralClosure_isLocalRing (R := R) hpos W
-    letI : IsLocalHom (algebraMap R C) :=
+    let : IsLocalHom (algebraMap R C) :=
       Scheme.isLocalHom_of_isIntegral_between_localRings
         (algebraMap R C) (algebraMap_isIntegral_iff.mpr inferInstance)
     let hxC : xC ∈ maximalIdeal C :=
       map_nonunit (algebraMap R C) x hx
-    letI : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr <|
+    let : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr <|
       ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top <|
         (maximalIdeal C).span_singleton_le_iff_mem.mpr hxC
-    letI : IsLocalRing Q :=
+    let : IsLocalRing Q :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk J)
         Ideal.Quotient.mk_surjective
     connectedPuncturedCoverNormalizationPuncturedFiber R hpos W
         (Ideal.span {x})
         ((maximalIdeal R).span_singleton_le_iff_mem.mpr hx) ≅
       Scheme.puncturedSpectrum Q := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  letI : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  letI : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  letI : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  letI : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  letI : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
-  let C : Type u := integralClosure R W.left.functionField
-  let xC : C := algebraMap R C x
+  intro U j hU hj hIntegralU algebraR_U hFractionU hIntegralW
+    algebraU_W algebraR_W tower C xC Jspan B hLocalC hLocalHom hxC
+    hNontrivialB hLocalB
   let Jmap : Ideal C := (Ideal.span {x}).map (algebraMap R C)
-  let Jspan : Ideal C := Ideal.span {xC}
   let A : Type u := C ⧸ Jmap
-  let B : Type u := C ⧸ Jspan
-  letI : IsLocalRing C :=
-    connectedPuncturedCover_integralClosure_isLocalRing (R := R) hpos W
-  letI : IsLocalHom (algebraMap R C) :=
-    Scheme.isLocalHom_of_isIntegral_between_localRings
-      (algebraMap R C) (algebraMap_isIntegral_iff.mpr inferInstance)
-  have hxC : xC ∈ maximalIdeal C :=
-    map_nonunit (algebraMap R C) x hx
   have hJmap : Jmap ≤ maximalIdeal C :=
     (Ideal.map_mono
       ((maximalIdeal R).span_singleton_le_iff_mem.mpr hx)).trans
         (map_maximalIdeal_le (algebraMap R C))
-  have hJspan : Jspan ≤ maximalIdeal C :=
-    (maximalIdeal C).span_singleton_le_iff_mem.mpr hxC
-  letI : Nontrivial A := Ideal.Quotient.nontrivial_iff.mpr <|
+  let : Nontrivial A := Ideal.Quotient.nontrivial_iff.mpr <|
     ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hJmap
-  letI : IsLocalRing A :=
+  let : IsLocalRing A :=
     IsLocalRing.of_surjective' (Ideal.Quotient.mk Jmap)
-      Ideal.Quotient.mk_surjective
-  letI : Nontrivial B := Ideal.Quotient.nontrivial_iff.mpr <|
-    ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hJspan
-  letI : IsLocalRing B :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk Jspan)
       Ideal.Quotient.mk_surjective
   have hmap :
       Jmap = Jspan := by
@@ -1063,12 +900,7 @@ theorem connectedSpace_connectedPuncturedCoverNormalizationPuncturedFiber_ofList
     ConnectedSpace
       (connectedPuncturedCoverNormalizationPuncturedFiber R hpos W
         (Ideal.ofList xs) hI) := by
-  dsimp only
-  have hbase : (1 : WithBot ℕ∞) ≤
-      (((xs.length + 2 : ℕ) : ℕ∞) : WithBot ℕ∞) := by
-    exact_mod_cast (by omega : 1 ≤ xs.length + 2)
-  have hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R :=
-    hbase.trans hdim
+  intro hpos
   let X := Spec (.of R)
   let U := Scheme.puncturedSpectrum R
   let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
@@ -1147,9 +979,7 @@ theorem connectedSpace_connectedPuncturedCoverNormalizationPuncturedFiber_span_s
       (connectedPuncturedCoverNormalizationPuncturedFiber R hpos W
         (Ideal.span {x})
         ((maximalIdeal R).span_singleton_le_iff_mem.mpr hx)) := by
-  dsimp only
-  have hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R :=
-    (by norm_num : (1 : WithBot ℕ∞) ≤ (3 : ℕ∞)).trans hdim
+  intro hpos
   let X := Spec (.of R)
   let U := Scheme.puncturedSpectrum R
   let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R

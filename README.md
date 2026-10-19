@@ -9,7 +9,9 @@ A Lean 4 library formalizing Naganori Yamaguchi's papers.
 
 This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
 <!-- nyll-publication:distribution:begin -->
-Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All`, `Nyll.ShimizuYamaguchi26BranchedCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.
+Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.
+
+Supporting modules are included from [ClassFieldTheory](Nyll/ClassFieldTheory/), [EtaleFundamentalGroups](Nyll/EtaleFundamentalGroups/), [GaloisCohomology](Nyll/GaloisCohomology/), [ProCGroups](Nyll/ProCGroups/), [SchemeTheory](Nyll/SchemeTheory/), [ValuedFieldTheory](Nyll/ValuedFieldTheory/). These dependency libraries are included only to the extent required by the imports.
 <!-- nyll-publication:distribution:end -->
 
 ## Scope
@@ -26,11 +28,6 @@ For a connected locally Noetherian scheme `X` and a horizontal effective
 Cartier divisor `D`, the library studies the actual map of étale fundamental
 groups induced by `X ∖ Supp(D) → X`.
 
-The collection also includes an ongoing formalization of
-[*On branched coverings of the projective line over the integers*](https://arxiv.org/abs/2608.15057v1),
-using the numbering of arXiv v1. It develops arithmetic intersection calculations
-for rational sections and concrete quadratic covers of their complements.
-
 ## Main results
 
 ### Ab-faithfulness of absolute Galois groups
@@ -40,8 +37,8 @@ for rational sections and concrete quadratic covers of their complements.
 | [Theorem 3.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean) | The absolute Galois group of a mixed-characteristic discretely valued field is `p`-ab-faithful, where `p` is the residue characteristic. Completeness is not required. |
 | [Theorem 4.2](Nyll/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean) | Ab-faithfulness of the absolute Galois group of a higher local field of positive dimension. |
 | [Theorem 6.4](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot4RelativeCriterion.lean) and [Corollary 6.5](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot5GroupCriterion.lean) | Center-freeness and slimness criteria for finite-step solvable quotients, using ab-faithfulness and orientations satisfying formal Hilbert 90. |
-| [Corollary 6.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean) | Applications to absolute Galois groups, with the cyclotomic and positive-characteristic hypotheses stated in the paper. |
-| [Example 6.7(1)–(3)](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean) | Applications to torally Kummer-faithful ab-faithful fields of characteristic zero, sub-`p`-adic fields, and higher local fields. |
+| [`absoluteGalois_finiteStepSolvable_centerfree`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L30) ; [`absoluteGalois_finiteStepSolvable_slim_of_cyclotomic_and_cyclic_extensions`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L50) | For every m ≥ 2, ab-faithfulness of the absolute Galois group implies center-freeness of its maximal m-step solvable quotient in any characteristic. Slimness additionally assumes infinite p-primary cyclotomic extensions for p different from the characteristic, and a cyclic degree-p extension in characteristic p. Formal Hilbert 90 is constructed from the field, not supplied as input. |
+| [`torallyKummerFaithful_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L52) ; [`finitelyGenerated_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L88) ; [`subpadic_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L68) ; [`higherLocalField_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L114) | For every m ≥ 2, slimness is proved directly for infinite fields finitely generated over their prime field, fields embedding into a finitely generated extension of Q_p, and positive-dimensional higher local fields. The separate toral application assumes characteristic zero, toral Kummer-faithfulness and ab-faithfulness. Slimness means every open subgroup has trivial centralizer in the ambient quotient. |
 
 ### Extension of solvable coverings
 
@@ -60,19 +57,6 @@ The shared group theory also contains the center-freeness criterion of
 Proposition 2.5 in [*Center-freeness of finite-step solvable groups arising from anabelian geometry*](https://arxiv.org/abs/2601.07112),
 in [SlimnessAndTorsion.lean](Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
 
-### Branched coverings of the projective line over the integers
-
-<!-- nyll-publication:branched-coverings-results:begin -->
-| Result | Mathematical content |
-| --- | --- |
-| [Observation 2.1: complement geometry](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/RationalSectionComplementGeometry.lean) | The complement of finitely many rational sections is smooth over `Spec Z` and has geometrically connected fibres. |
-| [Lemma 2.3: normal crossings](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3NormalCrossings.lean); [intersection multiplicity](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot3SpecialFiberMultiplicity.lean) | The finite rational-section divisor has ordinary normal crossings over `Z_p` exactly under the original special-fibre conditions. The local intersection length is the determinant valuation. |
-| [Lemma 2.4](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot4DyadicCollision.lean) | The dyadic collision calculation for primitive section coordinates. |
-| [Proposition 2.5](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/PadicNormalCrossingsQuotient.lean) | Failure of ordinary normal crossings over `Z_2` gives a continuous quotient of the original complement's etale fundamental group onto the cyclic group of order two, at every geometric base point. |
-| [Corollary 2.7: at least seven sections](Nyll/ShimizuYamaguchi26BranchedCoverings/Theorem2Dot7LargeBoundaryQuotient.lean) | The complement of at least seven rational sections has a continuous quotient onto the cyclic group of order two, at every geometric point of the constructed open. |
-| [Example 2.8: geometry](Nyll/ShimizuYamaguchi26BranchedCoverings/Geometry/SquareTripleNormalCrossings.lean) | The boundary `{0, p^2, infinity}` has ordinary normal crossings exactly away from `p`. Fundamental-group triviality remains unfinished. |
-<!-- nyll-publication:branched-coverings-results:end -->
-
 ## Incomplete results
 
 **Ab-faithfulness of absolute Galois groups**
@@ -89,18 +73,11 @@ Example 1.4 is limited to `Spec ℤ`: the affine
 and projective spaces, moduli-space and plane-complement examples, and
 Corollary 2.7 on hyperplane arrangements are not yet included.
 
-**Branched coverings of the projective line over the integers**
-
-<!-- nyll-publication:branched-coverings-remaining:begin -->
-The geometric inertia inputs and the main solvable-quotient criterion of Theorem 2.6 remain incomplete.
-<!-- nyll-publication:branched-coverings-remaining:end -->
-
 ## Public API
 
 ```lean
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
-import Nyll.ShimizuYamaguchi26BranchedCoverings.All
 ```
 
 Selected results:

@@ -10,6 +10,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.RingTheory.Flat.EquationalCriterion
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Mathlib.RingTheory.Flat.TorsionFree
 import Mathlib.RingTheory.RingHom.FaithfullyFlat
 import Mathlib.RingTheory.RingHom.Flat
 
@@ -180,5 +181,26 @@ theorem geometricStalkStructureMap_faithfullyFlat [IsLocalRing R] [IsLocalHom φ
 theorem geometricStalkStructureMap_injective [IsLocalRing R] [IsLocalHom φ] :
     Function.Injective (geometricStalkStructureMap φ) :=
   (geometricStalkStructureMap_faithfullyFlat φ).injective
+
+/-- Over a domain, flatness embeds the base into the actual geometric stalk
+at any geometric point; the base need not itself be local. -/
+theorem geometricStalkStructureMap_injective_of_isDomain [IsDomain R] :
+    Function.Injective (geometricStalkStructureMap φ) := by
+  let A := geometricStalk (Spec.map (CommRingCat.ofHom φ))
+  let : Algebra R A := (geometricStalkStructureMap φ).toAlgebra
+  let : Module.Flat R A := geometricStalkStructureMap_flat φ
+  intro a b hab
+  apply sub_eq_zero.mp
+  by_contra h
+  have hm : geometricStalkStructureMap φ (a - b) = 0 := by
+    rw [map_sub, hab, sub_self]
+  have hrel : (a - b) • (1 : A) = (a - b) • (0 : A) := by
+    change geometricStalkStructureMap φ (a - b) * 1 =
+      geometricStalkStructureMap φ (a - b) * 0
+    rw [hm]
+    simp only [zero_mul]
+  exact one_ne_zero
+    (Module.Flat.isSMulRegular_of_nonZeroDivisors (M := A)
+      (mem_nonZeroDivisors_iff_ne_zero.mpr h) hrel)
 
 end EtaleFundamentalGroups.StrictHenselian

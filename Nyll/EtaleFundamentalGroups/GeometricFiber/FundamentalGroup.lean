@@ -464,13 +464,15 @@ instance isGalois_of_isGalois (X : FiniteEtale (Spec (.of k))) [IsGalois X] :
         change e.hom.appTop.hom.comp e.inv.appTop.hom =
           RingHom.id Γ(X.left, ⊤)
         rw [← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, e.hom_inv_id]
-        simp) (by
+        rw [Scheme.Hom.id_appTop]
+        rfl) (by
         let e : X.left ≅ X.left := (forget _ ⋙ Over.forget _).mapIso σ
         apply AlgHom.coe_ringHom_injective
         change e.inv.appTop.hom.comp e.hom.appTop.hom =
           RingHom.id Γ(X.left, ⊤)
         rw [← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, e.inv_hom_id]
-        simp)
+        rw [Scheme.Hom.id_appTop]
+        rfl)
     have haut_injective : Function.Injective autToAlgEquiv := by
       intro σ τ h
       apply Aut.ext

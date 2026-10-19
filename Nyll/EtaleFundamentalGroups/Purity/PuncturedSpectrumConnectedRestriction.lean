@@ -76,7 +76,7 @@ global sections is the canonical map through the two function fields. -/
 theorem connectedCoverGenericCompositeSectionsIso_hom_appTop
     (W : FiniteEtale X) [IsConnected W] (r : Γ(X, ⊤)) :
     letI : Nonempty (⊤ : X.Opens) :=
-      ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
+      ⟨⟨Classical.choice (inferInstance : Nonempty X), by trivial⟩⟩
     letI : Algebra X.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
     (connectedCoverGenericCompositeSectionsIso W).hom
@@ -89,7 +89,7 @@ theorem connectedCoverGenericCompositeSectionsIso_hom_appTop
   let : IsIntegral W.left :=
     EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
   let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by simp⟩⟩
+    ⟨⟨Classical.choice (inferInstance : Nonempty X), by trivial⟩⟩
   let : Nonempty (⊤ : W.left.Opens) :=
     let y : W.left := Classical.choice (inferInstance : Nonempty W.left)
     ⟨⟨y, by trivial⟩⟩
@@ -104,7 +104,7 @@ theorem connectedCoverGenericCompositeSectionsIso_hom_appTop
           ((W.left.genericExtensionMorphism W.left.functionField).app
             (⊤ : W.left.Opens) (W.hom.appTop r)) = _
     rw [W.left.genericExtensionSectionsIso_hom_app]
-    simp
+    exact Algebra.algebraMap_self_apply _
   rw [hGeneric]
   have hFieldMap :
       (@Scheme.Hom.functionFieldMap X W.left W.hom inferInstance
@@ -167,12 +167,12 @@ private noncomputable def normalizationSourceIso
       (a ≫ b) (𝟙 _) g.fromNormalization
     · simp [a, b]
     · simp [a, b]
-    · simp
+    · exact Category.id_comp _
   · apply Scheme.Hom.normalization.hom_ext f
       (b ≫ a) (𝟙 _) f.fromNormalization
     · simp [a, b]
     · simp [a, b]
-    · simp
+    · exact Category.id_comp _
 
 @[reassoc (attr := simp)]
 private lemma normalizationSourceIso_hom_fromNormalization
@@ -199,6 +199,16 @@ private lemma normalizationSourceIsoOfEq_hom_fromNormalization
       g.fromNormalization := by
   subst g
   exact normalizationSourceIso_hom_fromNormalization e f
+
+@[reassoc (attr := simp)]
+private lemma toNormalization_normalizationSourceIsoOfEq_hom
+    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z) (g : Y ⟶ Z)
+    [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g]
+    [QuasiSeparated g] (h : e.hom ≫ f = g) :
+    g.toNormalization ≫ (normalizationSourceIsoOfEq e f g h).hom =
+      e.hom ≫ f.toNormalization := by
+  subst g
+  simp [normalizationSourceIsoOfEq, normalizationSourceIso]
 
 private theorem monoFactorIsPullback {Y X S : Scheme.{u}}
     (j : X ⟶ S) [Mono j] (f : Y ⟶ X) :
@@ -242,7 +252,7 @@ theorem connectedCoverGenericNormalizationIso_inv_fromNormalization
   rw [← connectedCoverGenericNormalizationDesc_comp W]
   change (connectedCoverGenericNormalizationIso W).inv ≫
       (connectedCoverGenericNormalizationIso W).hom ≫ W.hom = W.hom
-  simp
+  exact Iso.inv_hom_id_assoc _ _
 
 /-- If `X` maps smoothly and monomorphically to an ambient scheme, the
 normalization of that ambient scheme in the function field of a connected
@@ -298,5 +308,54 @@ theorem connectedCoverGenericNormalizationPullbackIso_hom_snd
   rw [hNormalization]
   dsimp only [f]
   exact connectedCoverGenericNormalizationIso_inv_fromNormalization W
+
+/-- The chosen pullback identification preserves the actual generic source. -/
+@[reassoc]
+theorem connectedCoverGenericMorphism_normalizationPullbackIso_fst
+    {S : Scheme.{u}} (W : FiniteEtale X) [IsConnected W]
+    (j : X ⟶ S) [Mono j] [Smooth j] [QuasiCompact j]
+    [QuasiSeparated j] :
+    connectedCoverGenericMorphism W ≫
+        (connectedCoverGenericNormalizationPullbackIso W j).hom ≫
+        Limits.pullback.fst
+          (connectedCoverGenericComposite W ≫ j).fromNormalization j =
+      (connectedCoverGenericComposite W ≫ j).toNormalization := by
+  let f : Spec (.of W.left.functionField) ⟶ X :=
+    connectedCoverGenericComposite W
+  let g : Spec (.of W.left.functionField) ⟶ S := f ≫ j
+  let p : Limits.pullback g j ⟶ X := Limits.pullback.snd g j
+  let eSource : Spec (.of W.left.functionField) ≅ Limits.pullback g j :=
+    monoFactorPullbackIso j f
+  let hSource : eSource.hom ≫ p = f :=
+    monoFactorPullbackIso_hom_snd j f
+  let eNormalization : f.normalization ≅ p.normalization :=
+    normalizationSourceIsoOfEq eSource p f hSource
+  have hW :
+      connectedCoverGenericMorphism W ≫
+          (connectedCoverGenericNormalizationIso W).inv =
+        f.toNormalization := by
+    apply (cancel_mono (connectedCoverGenericNormalizationIso W).hom).mp
+    rw [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    symm
+    let hIntegral : IsIntegralHom W.hom :=
+      (IsFinite.iff_isIntegralHom_and_locallyOfFiniteType W.hom).mp
+        W.prop.toIsFinite |>.1
+    change f.toNormalization ≫ connectedCoverGenericNormalizationDesc W =
+      connectedCoverGenericMorphism W
+    exact @Scheme.Hom.toNormalization_normalizationDesc _ _
+      f inferInstance inferInstance _
+      (connectedCoverGenericMorphism W) W.hom hIntegral rfl
+  have hfst : eSource.hom ≫ Limits.pullback.fst g j = 𝟙 _ :=
+    (monoFactorIsPullback j f).isoPullback_hom_fst
+  change connectedCoverGenericMorphism W ≫
+      ((connectedCoverGenericNormalizationIso W).symm ≪≫
+        eNormalization ≪≫ asIso (g.normalizationPullback j)).hom ≫
+      Limits.pullback.fst g.fromNormalization j = g.toNormalization
+  simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc]
+  rw [← Category.assoc (connectedCoverGenericMorphism W)
+      (connectedCoverGenericNormalizationIso W).inv, hW]
+  rw [toNormalization_normalizationSourceIsoOfEq_hom_assoc eSource p f hSource]
+  rw [Scheme.Hom.toNormalization_normalizationPullback_fst]
+  rw [← Category.assoc, hfst, Category.id_comp]
 
 end AlgebraicGeometry.FiniteEtale

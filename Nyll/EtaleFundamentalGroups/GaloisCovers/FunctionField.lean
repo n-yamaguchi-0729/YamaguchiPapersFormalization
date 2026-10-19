@@ -30,7 +30,7 @@ private theorem eqToHom_stalk_eq_stalkCongr
     eqToHom (congrArg (fun w ↦ Z.presheaf.stalk w) h) =
       (Z.presheaf.stalkCongr (.of_eq h)).hom := by
   subst z'
-  simp
+  exact (Z.presheaf.stalkSpecializes_refl z).symm
 
 private noncomputable def genericPointFunctionFieldMap
     (Z : Scheme.{u}) [IsIntegral Z]
@@ -734,5 +734,49 @@ theorem isGalois_functionField_of_isGalois_finiteEtale
       (finiteEtaleAutFunctionFieldAlgEquiv_injective Y)
   exact IsGalois.of_card_aut_eq_finrank
     X.functionField Y.left.functionField (le_antisymm hle hge)
+
+/-- The field embedding of a specified generic lift reconstructs that same
+geometric point, rather than merely a point over the same base. -/
+theorem finiteEtaleGenericHomFunctionFieldAlgHom_spec
+    {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
+    [IsLocallyNoetherian X]
+    (Y : FiniteEtale X) [IsConnected Y]
+    {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
+    (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
+    letI : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+    letI : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+    Spec.map (CommRingCat.ofHom (finiteEtaleGenericHomFunctionFieldAlgHom Y g).toRingHom) ≫
+        Y.left.fromSpecStalk (genericPoint Y.left) =
+      (eqToIso (Over.mk_left (X.genericExtensionMorphism Ω))).inv ≫ g.left := by
+  let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+  let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+  let j := finiteEtaleGenericHomFunctionFieldAlgHom Y g
+  let : Algebra Y.left.functionField Ω := j.toRingHom.toAlgebra
+  change Y.left.genericExtensionMorphism Ω = finiteEtaleGenericHom Y g
+  apply genericPointMorphism_eq_of_stalkMap_eq Y.left
+    (Y.left.genericExtensionMorphism Ω) (finiteEtaleGenericHom Y g)
+    (Y.left.genericExtensionMorphism_apply_closedPoint Ω)
+    (finiteEtale_genericPoint_of_over_genericExtension Y g)
+  rw [stalkClosedPointTo_genericExtensionMorphism]
+  rfl
+
+/-- Reconstructing the prescribed generic lift also preserves its original
+map to the base scheme. -/
+theorem finiteEtaleGenericHomFunctionFieldAlgHom_spec_comp
+    {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
+    [IsLocallyNoetherian X]
+    (Y : FiniteEtale X) [IsConnected Y]
+    {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
+    (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
+    letI : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+    letI : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+    (Spec.map (CommRingCat.ofHom (finiteEtaleGenericHomFunctionFieldAlgHom Y g).toRingHom) ≫
+        Y.left.fromSpecStalk (genericPoint Y.left)) ≫ Y.hom =
+      X.genericExtensionMorphism Ω := by
+  let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+  let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+  exact (congrArg (fun q : Spec (.of Ω) ⟶ Y.left => q ≫ Y.hom)
+    (finiteEtaleGenericHomFunctionFieldAlgHom_spec Y g)).trans
+      (finiteEtaleGenericHom_comp Y g)
 
 end EtaleFundamentalGroups

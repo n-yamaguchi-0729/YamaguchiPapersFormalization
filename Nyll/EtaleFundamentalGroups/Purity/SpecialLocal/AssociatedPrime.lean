@@ -90,7 +90,7 @@ theorem exists_minimal_nonEtaleCotangentSupport_of_not_formallyEtale
       rw [hTempty] at this
       exact Set.notMem_empty P this
     rw [hΩ, hH1]
-    simp
+    rw [Set.compl_empty, Set.univ_inter]
   obtain ⟨P₀, hP₀⟩ := hT
   let IΩ := Module.annihilator S Ω[S⁄R]
   let IH1 := Module.annihilator S (Algebra.H1Cotangent R S)

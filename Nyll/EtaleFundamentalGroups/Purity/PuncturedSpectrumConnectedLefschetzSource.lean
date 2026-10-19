@@ -139,7 +139,8 @@ private noncomputable def pullbackIsoOfIsoOver
     (w : e.hom ≫ h = f) :
     Limits.pullback f g ≅ Limits.pullback h g :=
   asIso <| Limits.pullback.map f g h g e.hom (𝟙 _) (𝟙 _)
-    (by simpa only [Category.comp_id] using w.symm) (by simp)
+    (by simpa only [Category.comp_id] using w.symm)
+    (by rw [Category.comp_id, Category.id_comp])
 
 omit [IsDomain R] [IsIntegrallyClosed R] in
 /-- The closed fibre of any finite morphism with integral source over a
@@ -183,7 +184,8 @@ theorem connectedSpace_normalizationClosedFiber_of_isFinite_of_isIntegral
     change Z.isoSpec.hom ≫ Spec.map z.appTop ≫
         Spec.map (Scheme.ΓSpecIso (.of R)).inv = z
     rw [Scheme.isoSpec_hom_naturality_assoc]
-    simp
+    rw [Scheme.isoSpec_Spec_hom, ← Spec.map_comp, Iso.inv_hom_id, Spec.map_id,
+      Category.comp_id]
   let eFiber :
       Limits.pullback z
           (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ≅

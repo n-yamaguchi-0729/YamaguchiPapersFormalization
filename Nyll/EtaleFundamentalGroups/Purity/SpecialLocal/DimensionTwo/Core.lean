@@ -93,7 +93,7 @@ theorem exists_height_one_prime_of_regular_pair
     exact one_ne_zero (hxRegular.right_eq_zero_of_smul (by simp [hx]))
   have hxMem : x ∈ maximalIdeal A := by
     rw [← hspan]
-    exact Ideal.subset_span (by simp)
+    exact Ideal.subset_span List.mem_cons_self
   have hxNotUnit : ¬ IsUnit x := by
     simpa only [IsLocalRing.mem_maximalIdeal, mem_nonunits_iff] using hxMem
   obtain ⟨p, hpPrime, hpHeight, -⟩ :=

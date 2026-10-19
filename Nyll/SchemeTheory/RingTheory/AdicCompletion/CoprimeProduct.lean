@@ -81,7 +81,8 @@ private theorem factorPow_evalₐ
     (AdicCompletion.evalₐ K n x)
   have hn : AdicCompletion.eval K R n x =
       Ideal.Quotient.mk (K ^ n • ⊤ : Ideal R) a := by
-    rw [← AdicCompletion.factor_evalₐ_eq_eval K x (by simp), ← ha,
+    rw [← AdicCompletion.factor_evalₐ_eq_eval K x
+      (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), ← ha,
       Ideal.Quotient.factor_mk]
   have hm : AdicCompletion.eval K R m x =
       Ideal.Quotient.mk (K ^ m • ⊤ : Ideal R) a := by
@@ -98,7 +99,8 @@ private theorem factorPow_evalₐ
         Ideal.Quotient.mk (K ^ m) a := by
       rw [← ha, Ideal.Quotient.factor_mk]
     _ = AdicCompletion.evalₐ K m x := by
-      rw [← AdicCompletion.factor_eval_eq_evalₐ K x (by simp), hm]
+      rw [← AdicCompletion.factor_eval_eq_evalₐ K x
+        (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
 private noncomputable def quotientProjectionRingHom

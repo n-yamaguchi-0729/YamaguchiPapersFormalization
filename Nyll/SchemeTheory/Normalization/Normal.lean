@@ -44,7 +44,7 @@ theorem affine_isIntegrallyClosed (U : X.Opens) (hU : IsAffineOpen U) [Nonempty 
 theorem stalk_isIntegrallyClosed (x : X) :
     IsIntegrallyClosed (X.presheaf.stalk x) := by
   obtain ⟨U, hU, hxU, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := x) (by simp)
+    exists_isAffineOpen_mem_and_subset (X := X) (U := ⊤) (x := x) (by trivial)
   let : Nonempty U := ⟨x, hxU⟩
   let : IsIntegrallyClosed Γ(X, U) :=
     IsNormalIntegral.affine_isIntegrallyClosed U hU
@@ -123,9 +123,9 @@ theorem IsNormalIntegral.of_isAffine
     let y : PrimeSpectrum Γ(X, U) := ⟨P, inferInstance⟩
     let x : X := hU.fromSpec y
     have hxU : x ∈ U := (hU.isoSpec.inv y).2
-    let xTop : (⊤ : X.Opens) := ⟨x, by simp⟩
+    let xTop : (⊤ : X.Opens) := ⟨x, by trivial⟩
     let : Algebra Γ(X, ⊤) (X.presheaf.stalk x) :=
-      (X.presheaf.germ ⊤ x (by simp)).hom.toAlgebra
+      (X.presheaf.germ ⊤ x (by trivial)).hom.toAlgebra
     let : IsLocalization.AtPrime (X.presheaf.stalk x)
         ((isAffineOpen_top X).primeIdealOf xTop).asIdeal :=
       (isAffineOpen_top X).isLocalization_stalk xTop

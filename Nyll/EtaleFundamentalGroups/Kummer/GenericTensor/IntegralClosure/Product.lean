@@ -36,8 +36,7 @@ noncomputable def genericTensorFieldComponentLeftScalarAlgebra
     [Algebra R F] [Algebra K F] [Algebra K L]
     (m : Ideal (F ⊗[K] L)) [m.IsMaximal] :
     Algebra R (GenericTensorFieldComponent m) :=
-  ((genericTensorFieldComponentLeft m).toRingHom.comp
-    (algebraMap R F)).toAlgebra
+  inferInstanceAs (Algebra R ((F ⊗[K] L) ⧸ m))
 
 /-- The algebra structure on the whole generic tensor product induced by
 the canonical left factor and a specified map `R → F`. -/
@@ -47,8 +46,7 @@ noncomputable def genericTensorProductLeftScalarAlgebra
     [CommRing R] [Field K] [Field F] [Field L]
     [Algebra R F] [Algebra K F] [Algebra K L] :
     Algebra R (F ⊗[K] L) :=
-  ((Algebra.TensorProduct.includeLeft : F →ₐ[K] F ⊗[K] L).toRingHom.comp
-    (algebraMap R F)).toAlgebra
+  Algebra.TensorProduct.leftAlgebra
 
 /-- The reduced Artinian generic tensor product as the product of its
 literal maximal-ideal quotient fields, upgraded to an equivalence over the

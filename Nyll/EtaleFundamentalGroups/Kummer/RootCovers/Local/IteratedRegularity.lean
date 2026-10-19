@@ -89,7 +89,7 @@ theorem iteratedLocalRootCoverRoots_length
         (AdjoinRoot.of f) ++ [AdjoinRoot.root f]).length = r + 1
       rw [List.length_append, List.length_map,
         ih (Fin.init n) (Fin.init a)]
-      simp
+      rw [List.length_singleton]
 
 @[simp]
 theorem iteratedLocalRootCoverParameterList_length
@@ -114,7 +114,8 @@ theorem iteratedLocalRootCoverParameterList_length
       have hlen := ih (Fin.init n) (Fin.init a)
       rw [iteratedLocalRootCoverParameterList, List.length_reverse] at hlen
       rw [hlen]
-      simp
+      simp only [List.length_append, List.length_ofFn, List.length_singleton]
+      omega
 
 private theorem ideal_ofList_move_middle_to_front
     {R : Type u} [CommRing R] (xs ys : List R) (x : R) :
@@ -129,7 +130,7 @@ private theorem radicands_mem_maximalIdeal
     ∀ i, a i ∈ maximalIdeal A := by
   intro i
   rw [← hgen]
-  exact Ideal.subset_span (by simp)
+  exact Ideal.subset_span (List.mem_append_left rs (List.mem_ofFn.mpr ⟨i, rfl⟩))
 
 private theorem ideal_ofList_eq_of_perm
     {R : Type u} [CommRing R] {xs ys : List R} (h : xs.Perm ys) :
@@ -288,7 +289,9 @@ private theorem spanFinrank_ofList_le_length
     (Ideal.ofList l).spanFinrank ≤ l.length := by
   classical
   refine (Submodule.spanFinrank_span_le_ncard_of_finite l.finite_toSet).trans ?_
-  rw [show {x : R | x ∈ l} = (l.toFinset : Set R) by ext; simp,
+  rw [show {x : R | x ∈ l} = (l.toFinset : Set R) by
+    ext x
+    exact List.mem_toFinset.symm,
     Set.ncard_coe_finset]
   exact List.toFinset_card_le l
 
