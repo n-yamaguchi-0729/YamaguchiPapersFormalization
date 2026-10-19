@@ -3,16 +3,11 @@
 [![Lean](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization/actions/workflows/lean.yml/badge.svg)](https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization/actions/workflows/lean.yml)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-A Lean 4 library formalizing Naganori Yamaguchi's papers.
-
-[Library overview and selected results](https://n-yamaguchi-0729.github.io/NYLL/libraries/research-papers/).
-
-This library is extracted from [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
-<!-- nyll-publication:distribution:begin -->
-Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.
-
-Supporting modules are included from [ClassFieldTheory](Nyll/ClassFieldTheory/), [EtaleFundamentalGroups](Nyll/EtaleFundamentalGroups/), [GaloisCohomology](Nyll/GaloisCohomology/), [ProCGroups](Nyll/ProCGroups/), [SchemeTheory](Nyll/SchemeTheory/), [ValuedFieldTheory](Nyll/ValuedFieldTheory/). These dependency libraries are included only to the extent required by the imports.
-<!-- nyll-publication:distribution:end -->
+Developed within [NYLL](https://github.com/n-yamaguchi-0729/NYLL), this Lean library formalizes Naganori Yamaguchi’s
+papers on ab-faithfulness of absolute Galois groups and extension of solvable
+coverings across horizontal divisors. The [mathematical guide](https://n-yamaguchi-0729.github.io/NYLL/libraries/research-papers/) explains the selected arithmetic
+and geometric results, while the sections below relate them to the papers
+and identify the parts that remain unfinished.
 
 ## Scope
 
@@ -37,8 +32,8 @@ groups induced by `X ∖ Supp(D) → X`.
 | [Theorem 3.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean) | The absolute Galois group of a mixed-characteristic discretely valued field is `p`-ab-faithful, where `p` is the residue characteristic. Completeness is not required. |
 | [Theorem 4.2](Nyll/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean) | Ab-faithfulness of the absolute Galois group of a higher local field of positive dimension. |
 | [Theorem 6.4](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot4RelativeCriterion.lean) and [Corollary 6.5](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot5GroupCriterion.lean) | Center-freeness and slimness criteria for finite-step solvable quotients, using ab-faithfulness and orientations satisfying formal Hilbert 90. |
-| [`absoluteGalois_finiteStepSolvable_centerfree`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L30) ; [`absoluteGalois_finiteStepSolvable_slim_of_cyclotomic_and_cyclic_extensions`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L50) | For every m ≥ 2, ab-faithfulness of the absolute Galois group implies center-freeness of its maximal m-step solvable quotient in any characteristic. Slimness additionally assumes infinite p-primary cyclotomic extensions for p different from the characteristic, and a cyclic degree-p extension in characteristic p. Formal Hilbert 90 is constructed from the field, not supplied as input. |
-| [`torallyKummerFaithful_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L52) ; [`finitelyGenerated_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L88) ; [`subpadic_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L68) ; [`higherLocalField_finiteStepSolvable_slim`](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L114) | For every m ≥ 2, slimness is proved directly for infinite fields finitely generated over their prime field, fields embedding into a finitely generated extension of Q_p, and positive-dimensional higher local fields. The separate toral application assumes characteristic zero, toral Kummer-faithfulness and ab-faithfulness. Slimness means every open subgroup has trivial centralizer in the ambient quotient. |
+| [Theorem 6.6: center-freeness](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L30) ; [slimness](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L50) | For every m ≥ 2, ab-faithfulness of the absolute Galois group implies center-freeness of its maximal m-step solvable quotient in any characteristic. Slimness additionally assumes infinite p-primary cyclotomic extensions for p different from the characteristic, and a cyclic degree-p extension in characteristic p. Formal Hilbert 90 is constructed from the field, not supplied as input. |
+| [Toral fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L52); [Finitely generated fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L88); [Sub-p-adic fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L68); [Higher local fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L114) | For every m ≥ 2, slimness is proved directly for infinite fields finitely generated over their prime field, fields embedding into a finitely generated extension of Q_p, and positive-dimensional higher local fields. The separate toral application assumes characteristic zero, toral Kummer-faithfulness and ab-faithfulness. Slimness means every open subgroup has trivial centralizer in the ambient quotient. |
 
 ### Extension of solvable coverings
 
@@ -72,6 +67,14 @@ are outside the current formalization.
 Example 1.4 is limited to `Spec ℤ`: the affine
 and projective spaces, moduli-space and plane-complement examples, and
 Corollary 2.7 on hyperplane arrangements are not yet included.
+
+## Included sources
+
+<!-- nyll-publication:distribution:begin -->
+Only the module-level import closure of `Nyll.Yamaguchi26AbfaithfulGalois.All`, `Nyll.Yamaguchi26SolvableCoverings.All` is bundled. Dependencies retain their canonical `Nyll` imports.
+
+Supporting modules are included from [ClassFieldTheory](Nyll/ClassFieldTheory/), [EtaleFundamentalGroups](Nyll/EtaleFundamentalGroups/), [GaloisCohomology](Nyll/GaloisCohomology/), [ProCGroups](Nyll/ProCGroups/), [SchemeTheory](Nyll/SchemeTheory/), [ValuedFieldTheory](Nyll/ValuedFieldTheory/). These dependency libraries are included only to the extent required by the imports.
+<!-- nyll-publication:distribution:end -->
 
 ## Public API
 
