@@ -29,28 +29,15 @@ groups induced by `X ∖ Supp(D) → X`.
 
 | Result | Mathematical content |
 | --- | --- |
-| [Theorem 3.6](Nyll/Yamaguchi26AbfaithfulGalois/Theorem3Dot6MixedCharacteristic.lean) | The absolute Galois group of a mixed-characteristic discretely valued field is `p`-ab-faithful, where `p` is the residue characteristic. |
 | [Theorem 4.2](Nyll/Yamaguchi26AbfaithfulGalois/Theorem4Dot2HigherLocalFields.lean) | Ab-faithfulness of the absolute Galois group of a higher local field of positive dimension. |
-| [Theorem 6.4](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot4RelativeCriterion.lean) and [Corollary 6.5](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot5GroupCriterion.lean) | Center-freeness and slimness criteria for finite-step solvable quotients, using ab-faithfulness and orientations satisfying formal Hilbert 90. |
-| [Theorem 6.6: center-freeness](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L30) ; [slimness](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot6AbsoluteCenter.lean#L50) | For every m ≥ 2, ab-faithfulness of the absolute Galois group implies center-freeness of its maximal m-step solvable quotient in any characteristic. Slimness additionally assumes infinite p-primary cyclotomic extensions for p different from the characteristic, and a cyclic degree-p extension in characteristic p. |
 | [Toral fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L52); [Finitely generated fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L88); [Sub-p-adic fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L68); [Higher local fields](Nyll/Yamaguchi26AbfaithfulGalois/Theorem6Dot7FieldSlimExamples.lean#L114) | For every m ≥ 2, slimness is proved directly for infinite fields finitely generated over their prime field, fields embedding into a finitely generated extension of Q_p, and positive-dimensional higher local fields. The separate toral application assumes characteristic zero, toral Kummer-faithfulness and ab-faithfulness. Slimness means every open subgroup has trivial centralizer in the ambient quotient. |
 
 ### Extension of solvable coverings
 
 | Result | Mathematical content |
 | --- | --- |
-| [Lemma 1.1](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot1BoundaryQuotient.lean) and [Lemma 1.2](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot2InertiaControl.lean) | Surjectivity and normal generation of the kernel by boundary inertia, together with prime-to-residue-characteristic restrictions on finite inertia images. |
-| [Proposition 1.3](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot3BoundaryInvariance.lean) | Invariance of the full étale fundamental group under the paper's boundary hypotheses for every prime. |
-| [Example 1.4: Spec ℤ](Nyll/Yamaguchi26SolvableCoverings/Theorem1Dot4FundamentalGroupIntegers.lean) | Triviality of the étale fundamental group of `Spec ℤ`, using Minkowski's discriminant bound. |
 | [Theorem 2.5 / Theorem A](Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot5PerfectKernel.lean) | Under boundary condition `(†)`, the kernel is topologically perfect and the inclusion induces an isomorphism on maximal prosolvable quotients. |
 | [Corollary 2.6](Nyll/Yamaguchi26SolvableCoverings/Theorem2Dot6ResidualExtension.lean) | A continuous matrix representation over a complete Noetherian local ring with finite residue field extends across the divisor exactly when its residual representation does; the extension is unique. |
-
-The formalization includes numbered results 2.1–2.6 and the supporting boundary and
-finite-étale stability results.
-
-The shared group theory also contains the center-freeness criterion of
-Proposition 2.5 in [*Center-freeness of finite-step solvable groups arising from anabelian geometry*](https://arxiv.org/abs/2601.07112),
-in [SlimnessAndTorsion.lean](Nyll/ProCGroups/FiniteStepSolvableQuotients/SlimnessAndTorsion.lean).
 
 ## Incomplete results
 
@@ -70,30 +57,34 @@ Corollary 2.7 on hyperplane arrangements are not yet included.
 
 ## Public API
 
+Use [leanprover/lean4:v4.35.0-rc2](lean-toolchain) and the Mathlib revision pinned in
+[lake-manifest.json](lake-manifest.json). Add this dependency to your project’s
+lakefile.toml:
+
+```toml
+[[require]]
+name = "Nyll"
+git = "https://github.com/n-yamaguchi-0729/YamaguchiPapersFormalization.git"
+rev = "main"
+```
+
+Run `lake update Nyll`, then commit your generated lake-manifest.json to retain
+the resolved revisions. Import the library in a Lean file:
+
 ```lean
 import Nyll.Yamaguchi26AbfaithfulGalois.All
 import Nyll.Yamaguchi26SolvableCoverings.All
 ```
 
-Selected results:
+The standalone distributions share the package name Nyll. Choose one distribution;
+for several libraries together, use [NYLL](https://github.com/n-yamaguchi-0729/NYLL).
 
-```lean
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
-```
+To build a checkout of this repository, run from its root:
 
-## Build
-
-The toolchain and dependencies are pinned in [`lean-toolchain`](lean-toolchain)
-and [`lakefile.toml`](lakefile.toml).
-
-```console
+```sh
 lake exe cache get
 lake --wfail build
 ```
-
-[CI](.github/workflows/lean.yml) checks imports and builds the libraries
-with warnings treated as errors.
 
 ## Authorship
 
