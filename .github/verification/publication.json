@@ -2,7 +2,7 @@
   "format_version": 1,
   "canonical_repository": "n-yamaguchi-0729/NYLL",
   "repository": "n-yamaguchi-0729/YamaguchiPapersFormalization",
-  "source_commit": "546123dca6492161540bcbbbbdaae42066b1e4b4",
+  "source_commit": "8c1b16d10afaca09e0dc72753c6575e230d31a55",
   "primaryRoots": [
     "Nyll.Yamaguchi26AbfaithfulGalois.All",
     "Nyll.Yamaguchi26SolvableCoverings.All"
@@ -1604,7 +1604,7 @@
     ".github/scripts/publication/sawin-reviewed-source-updates.json": "d8d927229a26b11b0919ec0b7a3cea14a4370cebc1f46e34235ac5e61d5ebc0d",
     ".github/scripts/publication/tests/test_build_stage.py": "6237a145389c883e7da572ebd001cb172b7bcc2bf78c6957a3fc44845cde184d",
     ".github/scripts/publication/tests/test_import_headers.py": "a917e612abfc3517c0535a3c2cd287269570b2af9ad5e000402e585cb3c99c5b",
-    ".github/scripts/publication/tests/test_proof_verification.py": "4d35e0ad0369ef9df277d5d8c1c8bedcf82c80d5906ffb5584c01972517e5981",
+    ".github/scripts/publication/tests/test_proof_verification.py": "2b05e5339d7e10c8921f10965beecfcc94826ef498f12cac70a6f5ed46e383fd",
     ".github/scripts/publication/tests/test_publication.py": "a5a087474d553a56d178627708644a0f4ce73d1ea8956cc090c6f8733afc8fd0",
     ".github/scripts/publication/tests/test_publication_policy.py": "ad7200c957b5a1497c083044f2af0e36665fc52560059ce6907ba696f7b67d06",
     ".github/scripts/publication/tests/test_publication_readme.py": "9ac01e5839e422face6c6c6649cf93459bb72021aba11d4bfc1b2ea673d1d19c",
@@ -1616,7 +1616,7 @@
     ".github/scripts/publication/verification/ReplayKernel.lean": "068090945d168cb21c627a3deeface6c27c4d46ab0901071f8ce36070d41a549",
     ".github/scripts/publication/verification/scope.py": "7b103dac437958f971609db9282d43ed00de0ab0ae06ff650b3adf6746fbb1bd",
     ".github/scripts/publication/verification/setup_tools.py": "c8eedac80d879dbc9310aacfc22521173281ac035db302d7fe13269c41a69b08",
-    ".github/scripts/publication/verification/verify.py": "9c8e5df647f044e40231e272553fefbe4d20a3c92571efad8a14c44cda71cac1",
+    ".github/scripts/publication/verification/verify.py": "73f6d1b1f13e8ff10984d1ffa51b57d65a153621858b9d6fda3962a4dd9a0e0f",
     ".github/scripts/publication/workflow_templates/auto-sync.yml": "612f35770d94e8aa31cf6cce6e9791992fa407d241bc7455fcbf6350e80b3a88",
     ".github/workflows/lean.yml": "8cd9523a6448fe731535e0d7454b6842a47e6d9b18d344a9d7062342508b946c",
     ".github/workflows/library-stage.yml": "3eebe861809f5a2fe8a6052932dcee9733c064cf43475c5d860219a018f50fd5",
@@ -3207,6 +3207,5 @@
     "lake-manifest.json": "ad850380b47b59868a88c7b76f8775a3fa5a55e432e1d111a007ff2ebf056ded",
     "lakefile.toml": "8dfbebf03a04b7941ee00e705c93124bd5a282179762af70796a6d5d5e6a62a3",
     "lean-toolchain": "8dc8d6f560141069d9073e370611716ef77ada0da8ffa37e2149f44b2e63ac7a"
-  },
-  "verification_source_commit": "acf95d70b45dc590c97c4b09efaa30bacbe27f52"
+  }
 }

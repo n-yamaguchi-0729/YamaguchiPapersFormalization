@@ -81,6 +81,16 @@ def contained_file(base, relative):
     return path
 
 
+def verification_workflows(root):
+    """Bind the actual entry workflow and both local reusable workflows."""
+    directory = root / ".github/workflows"
+    entries = [directory / name for name in ("lean.yml", "libraries.yml")
+               if (directory / name).is_file()]
+    require(len(entries) == 1, "Exactly one Lean entry workflow is required")
+    paths = entries + [directory / "library-stage.yml", directory / "proof-check.yml"]
+    return [contained_file(root, str(path.relative_to(root))) for path in paths]
+
+
 def physical_manifest(root, manifest_path):
     """Bind every manifest path; discovery of omitted maintained files is external."""
     manifest = read_json(manifest_path)
@@ -216,7 +226,7 @@ class Pipeline:
         self.check_physical_snapshot()
         self.paths += [p for p in HERE.rglob("*")
                        if p.is_file() and "__pycache__" not in p.parts]
-        self.paths.append(self.root / ".github/workflows/lean.yml")
+        self.paths.extend(verification_workflows(self.root))
         for name in WRAPPERS:
             path = HERE / name
             require(path.is_file(), "Missing audit wrapper: " + name)
@@ -246,7 +256,8 @@ class Pipeline:
         lake = shutil.which("lake")
         require(lake is not None, "Missing Lake executable")
         self.paths.append(Path(lake).resolve())
-        require(all(p.is_file() for p in self.paths), "Missing pinned input artifact")
+        missing = [str(p) for p in self.paths if not p.is_file()]
+        require(not missing, "Missing pinned input artifacts: " + ", ".join(missing))
         self.paths = sorted(set(self.paths))
         self.baseline = {str(p): digest(p) for p in self.paths}
         self.provenance.update(leanVersion=version, leanExecutable=str(self.lean),
@@ -465,6 +476,7 @@ class Pipeline:
             code = 0
         except BaseException as error:
             final.update(status="failed", error=str(error))
+            print("Verification failed: " + str(error), file=sys.stderr, flush=True)
         finally:
             final.update(completedUtc=utc(), elapsedSeconds=round(time.monotonic() - start, 3),
                          exitCode=code, stages=self.stages,

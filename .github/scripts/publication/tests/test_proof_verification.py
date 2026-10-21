@@ -4,7 +4,7 @@ Copyright (c) 2026 Naganori Yamaguchi. Apache-2.0.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex).
 """
 from argparse import Namespace
-from contextlib import redirect_stdout
+from contextlib import redirect_stderr, redirect_stdout
 from io import StringIO
 import json
 import io
@@ -103,6 +103,58 @@ class PipelineTests(unittest.TestCase):
             nanoda_binary=self.root / "nanoda/bin")
         self.pipeline = verify.Pipeline(args)
         self.pipeline.out.mkdir()
+
+    def workflow_fixture(self, entry):
+        directory = self.root / ".github/workflows"
+        directory.mkdir(parents=True, exist_ok=True)
+        for name in (entry, "library-stage.yml", "proof-check.yml"):
+            (directory / name).write_text("name: CI\n")
+        return directory
+
+    def test_public_and_nyll_workflow_layouts_are_supported(self):
+        for entry in ("lean.yml", "libraries.yml"):
+            with self.subTest(entry=entry):
+                directory = self.workflow_fixture(entry)
+                paths = verify.verification_workflows(self.root)
+                self.assertEqual({p.name for p in paths},
+                                 {entry, "library-stage.yml", "proof-check.yml"})
+                (directory / entry).unlink()
+
+    def test_missing_entry_workflow_is_rejected(self):
+        with self.assertRaisesRegex(verify.VerificationError, "entry workflow"):
+            verify.verification_workflows(self.root)
+
+    def test_ambiguous_entry_workflows_are_rejected(self):
+        directory = self.workflow_fixture("libraries.yml")
+        (directory / "lean.yml").write_text("name: another CI\n")
+        with self.assertRaisesRegex(verify.VerificationError, "Exactly one"):
+            verify.verification_workflows(self.root)
+
+    def test_missing_reusable_workflow_is_rejected(self):
+        directory = self.workflow_fixture("libraries.yml")
+        (directory / "proof-check.yml").unlink()
+        with self.assertRaisesRegex(verify.VerificationError, "proof-check.yml"):
+            verify.verification_workflows(self.root)
+
+    def test_reusable_workflow_change_invalidates_input_guard(self):
+        directory = self.workflow_fixture("libraries.yml")
+        self.pipeline.paths = verify.verification_workflows(self.root)
+        self.pipeline.baseline = {str(p): verify.digest(p) for p in self.pipeline.paths}
+        with patch.object(verify, "git_identity", return_value={}):
+            self.pipeline.guard()
+            (directory / "proof-check.yml").write_text("name: changed verification\n")
+            with self.assertRaisesRegex(verify.VerificationError, "input changed"):
+                self.pipeline.guard()
+
+    def test_input_failure_is_reported_before_any_stage_starts(self):
+        self.pipeline.out.rmdir()
+        with patch.object(self.pipeline, "inputs", side_effect=verify.VerificationError(
+                "Missing workflow")), redirect_stderr(StringIO()) as log:
+            self.assertEqual(self.pipeline.execute(), 1)
+        self.assertIn("Missing workflow", log.getvalue())
+        receipt = json.loads((self.pipeline.out / "final.json").read_text())
+        self.assertFalse(receipt["passed"])
+        self.assertEqual(receipt["stages"], [])
 
     def test_failed_command_has_failed_receipt_and_surfaces_log(self):
         with patch.object(self.pipeline, "guard", return_value="fixed"), redirect_stdout(StringIO()) as log:
