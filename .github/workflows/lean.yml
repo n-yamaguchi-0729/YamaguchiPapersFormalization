@@ -14,32 +14,206 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  depth1:
-    name: Import depth 1
+  library-procgroups:
+    name: ProCGroups
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth1
+      stage: library-procgroups
+      library: ProCGroups
 
-  depth2:
-    name: Import depth 2
-    needs: depth1
+  library-valuedfieldtheory:
+    name: ValuedFieldTheory
+    needs: library-procgroups
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth2
+      stage: library-valuedfieldtheory
+      library: ValuedFieldTheory
 
-  depth3:
-    name: Import depth 3
-    needs: depth2
+  library-galoiscohomology:
+    name: GaloisCohomology
+    needs: library-valuedfieldtheory
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
-      stage: depth3
+      stage: library-galoiscohomology
+      library: GaloisCohomology
+
+  library-schemetheory:
+    name: SchemeTheory
+    needs: library-galoiscohomology
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-schemetheory
+      library: SchemeTheory
+
+  library-classfieldtheory-algebra:
+    name: ClassFieldTheory.Algebra
+    needs: library-schemetheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-algebra
+      library: ClassFieldTheory.Algebra
+
+  library-classfieldtheory-abstractclassfieldtheory:
+    name: ClassFieldTheory.AbstractClassFieldTheory
+    needs: library-classfieldtheory-algebra
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-abstractclassfieldtheory
+      library: ClassFieldTheory.AbstractClassFieldTheory
+
+  library-classfieldtheory-localfieldtheory:
+    name: ClassFieldTheory.LocalFieldTheory
+    needs: library-classfieldtheory-abstractclassfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-localfieldtheory
+      library: ClassFieldTheory.LocalFieldTheory
+
+  library-classfieldtheory-ramificationtheory:
+    name: ClassFieldTheory.RamificationTheory
+    needs: library-classfieldtheory-localfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-ramificationtheory
+      library: ClassFieldTheory.RamificationTheory
+
+  library-classfieldtheory-lubintate:
+    name: ClassFieldTheory.LubinTate
+    needs: library-classfieldtheory-ramificationtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-lubintate
+      library: ClassFieldTheory.LubinTate
+
+  library-classfieldtheory-algebraicnumbertheory:
+    name: ClassFieldTheory.AlgebraicNumberTheory
+    needs: library-classfieldtheory-lubintate
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-algebraicnumbertheory
+      library: ClassFieldTheory.AlgebraicNumberTheory
+
+  library-classfieldtheory-algebraicfunctionfieldtheory:
+    name: ClassFieldTheory.AlgebraicFunctionFieldTheory
+    needs: library-classfieldtheory-algebraicnumbertheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-algebraicfunctionfieldtheory
+      library: ClassFieldTheory.AlgebraicFunctionFieldTheory
+
+  library-classfieldtheory-kummertheory:
+    name: ClassFieldTheory.KummerTheory
+    needs: library-classfieldtheory-algebraicfunctionfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-kummertheory
+      library: ClassFieldTheory.KummerTheory
+
+  library-classfieldtheory-localclassfieldtheory-classformation:
+    name: ClassFieldTheory.LocalClassFieldTheory.ClassFormation
+    needs: library-classfieldtheory-kummertheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-localclassfieldtheory-classformation
+      library: ClassFieldTheory.LocalClassFieldTheory.ClassFormation
+
+  library-classfieldtheory-localclassfieldtheory-lubintateapplication:
+    name: ClassFieldTheory.LocalClassFieldTheory.LubinTateApplication
+    needs: library-classfieldtheory-localclassfieldtheory-classformation
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-localclassfieldtheory-lubintateapplication
+      library: ClassFieldTheory.LocalClassFieldTheory.LubinTateApplication
+
+  library-classfieldtheory-localclassfieldtheory-finite:
+    name: ClassFieldTheory.LocalClassFieldTheory.Finite
+    needs: library-classfieldtheory-localclassfieldtheory-lubintateapplication
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-localclassfieldtheory-finite
+      library: ClassFieldTheory.LocalClassFieldTheory.Finite
+
+  library-classfieldtheory-localclassfieldtheory:
+    name: ClassFieldTheory.LocalClassFieldTheory
+    needs: library-classfieldtheory-localclassfieldtheory-finite
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-localclassfieldtheory
+      library: ClassFieldTheory.LocalClassFieldTheory
+
+  library-classfieldtheory-globalclassfieldtheory:
+    name: ClassFieldTheory.GlobalClassFieldTheory
+    needs: library-classfieldtheory-localclassfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-globalclassfieldtheory
+      library: ClassFieldTheory.GlobalClassFieldTheory
+
+  library-classfieldtheory-kroneckerweber:
+    name: ClassFieldTheory.KroneckerWeber
+    needs: library-classfieldtheory-globalclassfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory-kroneckerweber
+      library: ClassFieldTheory.KroneckerWeber
+
+  library-classfieldtheory:
+    name: ClassFieldTheory
+    needs: library-classfieldtheory-kroneckerweber
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-classfieldtheory
+      library: ClassFieldTheory
+
+  library-etalefundamentalgroups:
+    name: EtaleFundamentalGroups
+    needs: library-classfieldtheory
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-etalefundamentalgroups
+      library: EtaleFundamentalGroups
+
+  library-yamaguchi26abfaithfulgalois:
+    name: Yamaguchi26AbfaithfulGalois
+    needs: library-etalefundamentalgroups
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-yamaguchi26abfaithfulgalois
+      library: Yamaguchi26AbfaithfulGalois
+
+  library-yamaguchi26solvablecoverings:
+    name: Yamaguchi26SolvableCoverings
+    needs: library-yamaguchi26abfaithfulgalois
+    if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
+    uses: ./.github/workflows/library-stage.yml
+    with:
+      stage: library-yamaguchi26solvablecoverings
+      library: Yamaguchi26SolvableCoverings
 
   all:
     name: Nyll.All and Nyll
-    needs: depth3
+    needs: library-yamaguchi26solvablecoverings
     if: github.event.repository.private == false || github.event_name == 'workflow_dispatch'
     uses: ./.github/workflows/library-stage.yml
     with:
@@ -51,3 +225,14 @@ jobs:
     needs: all
     if: github.event.repository.private == false
     uses: ./.github/workflows/proof-check.yml
+
+  publish-cache:
+    name: Publish verified Lean cache
+    needs: verify
+    if: github.event.repository.private == false && github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+    uses: ./.github/workflows/cache-release.yml
+    with:
+      cache-kind: modern
+      cache-prefix: proof-build-v4
