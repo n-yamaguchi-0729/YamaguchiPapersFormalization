@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Nyll.SchemeTheory.Divisors.CartierEtale
-import Nyll.SchemeTheory.Divisors.ConnectedComplement
-import Nyll.SchemeTheory.Divisors.EtaleRegularity
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Nyll.SchemeTheory.Divisors.CartierEtale
+public import Nyll.SchemeTheory.Divisors.ConnectedComplement
+public import Nyll.SchemeTheory.Divisors.EtaleRegularity
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
 
 /-!
 # Connectedness across a regular Cartier boundary
@@ -19,6 +21,8 @@ Regularity is required only along the boundary.  Applying connectedness of
 Cartier complements to each connected finite étale cover proves the
 surjectivity assertion of Lemma 1.1 by the connected-object criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

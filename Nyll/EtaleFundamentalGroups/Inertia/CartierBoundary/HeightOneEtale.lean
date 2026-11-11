@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalNormalizationEtale
-import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.LocalNormalizationEtale
+public import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 /-!
 # Height-one étaleness over arbitrary boundary stalks
@@ -21,7 +23,11 @@ normalization over that component's DVR therefore remains étale after passing
 to the chosen prime localization of the original stalk.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open CategoryTheory.PreGaloisCategory AlgebraicGeometry.FiniteEtale
@@ -30,7 +36,7 @@ open EtaleFundamentalGroups
 namespace Yamaguchi26SolvableCoverings
 
 private theorem localizationAtPrimeTo_factor
-    (X : Scheme.{0}) (x : X) (q : Spec (X.presheaf.stalk x))
+    (X : Scheme.{u}) (x : X) (q : Spec (X.presheaf.stalk x))
     [hq : q.asIdeal.IsPrime] :
     (Spec.map (Spec.stalkIso (X.presheaf.stalk x) q).hom ≫
       Spec.map ((X.fromSpecStalk x).stalkMap q)) ≫
@@ -57,7 +63,7 @@ private theorem localizationAtPrimeTo_factor
   exact congrArg (fun k => Spec.map k ≫ X.fromSpecStalk x) h
 
 private theorem etale_pullback_snd_comp
-    {N X S T : Scheme.{0}} (g : N ⟶ X) (b : S ⟶ X) (l : T ⟶ S)
+    {N X S T : Scheme.{u}} (g : N ⟶ X) (b : S ⟶ X) (l : T ⟶ S)
     [Etale (pullback.snd g b)] : Etale (pullback.snd g (l ≫ b)) := by
   let H := (IsPullback.of_hasPullback (pullback.snd g b) l).paste_horiz
     (IsPullback.of_hasPullback g b)
@@ -69,7 +75,7 @@ private theorem etale_pullback_snd_comp
   have ht : Etale (e.hom ≫ pullback.snd (pullback.snd g b) l) := inferInstance
   exact he ▸ ht
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- Height-one points on a Cartier boundary come from its generic component
 points. Etaleness of the actual normalization at those component stalks

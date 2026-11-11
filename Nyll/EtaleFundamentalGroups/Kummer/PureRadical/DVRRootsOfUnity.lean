@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntegralClosure
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntegralClosure
 
 /-!
 # Roots of unity in a tame pure-radical DVR extension
@@ -25,6 +27,8 @@ the linear term of the binomial expansion has the same order, whereas the
 whole expression comes from the base DVR and hence has order divisible by
 `n`, a contradiction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

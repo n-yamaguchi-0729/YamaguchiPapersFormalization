@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Core
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Core
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 
 /-!
 # Tame inertia cyclicity over a DVR
@@ -17,6 +19,8 @@ coprimality with the exponential residue characteristic into cyclicity of
 the inertia group.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

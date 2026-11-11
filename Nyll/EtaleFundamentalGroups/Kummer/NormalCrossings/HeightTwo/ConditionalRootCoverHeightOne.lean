@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.BoundaryPrimeDichotomy
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularSystem
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCover.Core
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BoundaryLocalization
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.BoundaryPrimeDichotomy
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularSystem
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCover.Core
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BoundaryLocalization
 
 /-!
 # Height-one primes of the height-two conditional root cover
@@ -23,6 +25,8 @@ The key comparison below records that deleting degree-one tail stages fixes
 the actual first root.  Thus primality of that root is transported from the
 one-step cover rather than assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

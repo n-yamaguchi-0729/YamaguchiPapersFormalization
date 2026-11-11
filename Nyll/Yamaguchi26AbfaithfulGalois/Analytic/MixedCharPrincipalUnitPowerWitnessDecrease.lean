@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.BoundedCyclotomicCoefficient
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.GroupWithZero.Units.Basic
-import Mathlib.Algebra.GroupWithZero.Units.Lemmas
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.BoundedCyclotomicCoefficient
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.GroupWithZero.Units.Basic
+public import Mathlib.Algebra.GroupWithZero.Units.Lemmas
 
 /-!
 # A smaller logarithmic eigenvector from a power witness
@@ -19,6 +21,8 @@ principal unit. A nontrivial bounded exponent therefore produces a scalar
 multiple in the same lower-field character part, still in the logarithm
 image and with strictly smaller integer valuation.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

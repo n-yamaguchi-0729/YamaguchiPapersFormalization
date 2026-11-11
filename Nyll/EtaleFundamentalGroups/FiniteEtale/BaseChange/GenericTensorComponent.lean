@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # Fixed tensor components after finite-etale base change
@@ -21,6 +23,8 @@ This is the component-preserving form used on the complement of the boundary:
 the maximal ideal is data produced by the global chosen component, rather
 than an abstract field or a postulated comparison isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,7 +57,7 @@ theorem integralClosure_genericTensorFieldComponent_etale_of_finiteEtale_baseCha
     (m : Ideal (K ⊗[F] E)) [m.IsMaximal] :
     let M := GenericTensorFieldComponent m
     Algebra.Etale B (integralClosure B M) := by
-  let M := GenericTensorFieldComponent m
+  intro M
   let : IsScalarTower B K M := inferInstance
   let eGeneric : (F ⊗[A] T) ≃ₐ[F] E :=
     finiteGenericFiberAlgEquiv (R := A) (C := T) (K := F) (E := E)

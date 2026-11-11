@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleLocalization
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.RingTheory.Flat.Localization
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleLocalization
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.RingTheory.Flat.Localization
 
 /-!
 # The two-term principal localization complex
@@ -17,6 +19,8 @@ The complex has a coefficient module in degree zero, its localization in
 degree one, and zero in higher degrees. Its positive cohomology vanishes
 on injective modules over Noetherian rings, and its terms preserve flatness.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,13 +32,15 @@ universe u
 
 variable {R : Type u} [CommRing R]
 
-private def principalLocalizationTerm (x : R) (M : ModuleCat.{u} R) :
+/-- The terms of the principal localization complex. -/
+def principalLocalizationTerm (x : R) (M : ModuleCat.{u} R) :
     ℕ → ModuleCat.{u} R
   | 0 => M
   | 1 => ModuleCat.of R (LocalizedModule (Submonoid.powers x) M)
   | _ + 2 => ModuleCat.of R PUnit
 
-private def principalLocalizationDifferential (x : R) (M : ModuleCat.{u} R) :
+/-- The localization map followed by zero differentials. -/
+def principalLocalizationDifferential (x : R) (M : ModuleCat.{u} R) :
     ∀ n, principalLocalizationTerm x M n ⟶ principalLocalizationTerm x M (n + 1)
   | 0 => ModuleCat.ofHom (LocalizedModule.mkLinearMap (Submonoid.powers x) M)
   | _ + 1 => 0

@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.InvariantCompletionCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionCharacterExtension
-import Nyll.ValuedFieldTheory.Valuation.Completion.CyclotomicCompletion
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.InvariantCompletionCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionCharacterExtension
+public import Nyll.ValuedFieldTheory.Valuation.Completion.CyclotomicCompletion
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
 
 /-!
 # Completion characters by cyclotomic descent
@@ -20,6 +22,8 @@ cyclotomic extension using an invariant character lift and restriction
 at each completion. The resulting simultaneous approximation applies
 whenever the prime modulus differs from the field characteristic.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

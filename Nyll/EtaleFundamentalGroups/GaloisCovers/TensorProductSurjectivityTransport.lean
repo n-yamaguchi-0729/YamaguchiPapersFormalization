@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Transporting tensor-product surjectivity
@@ -15,6 +17,8 @@ field tensor product.  Surjectivity is transported using equivalences of the
 two factors and of the target; compatibility only has to be checked on pure
 tensors.
 -/
+
+@[expose] public section
 
 noncomputable section
 

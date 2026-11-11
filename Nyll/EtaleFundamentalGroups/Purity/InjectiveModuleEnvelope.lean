@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaps
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaximalExtension
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaps
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaximalExtension
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Injective envelopes inside an injective ambient module
@@ -25,6 +27,8 @@ The resulting map `M → E` retracts the inclusion.  Extending maps from
 ideals into `M` and composing with this retraction proves Baer's criterion
 for `E`.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

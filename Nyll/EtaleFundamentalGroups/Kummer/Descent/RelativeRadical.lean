@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
 
 /-!
 # Descent through a relative Kummer radical
@@ -20,6 +22,8 @@ prefix.
 All algebra structures and scalar towers below are the canonical instances
 provided by `AdjoinRoot`.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

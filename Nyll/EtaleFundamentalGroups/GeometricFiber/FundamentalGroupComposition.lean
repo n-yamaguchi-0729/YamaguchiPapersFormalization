@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
 
 /-!
 # Composition of maps on geometric fundamental groups
@@ -15,6 +18,8 @@ the same map on fundamental groups as the corresponding composite pullback
 comparison.  Two factorizations of one scheme morphism therefore induce maps
 which differ by an explicit inner automorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -75,9 +80,9 @@ private theorem pullbackComp_conjAut
   apply Aut.ext
   ext C c
   apply ConcreteCategory.congr_hom
-  change (fiber xi).map (pc.inv.app C) ≫ a.hom.app _ ≫
-      (fiber xi).map (pc.hom.app C) = a.hom.app _
-  rw [← a.hom.naturality (pc.hom.app C)]
+  change (fiber xi).map (pc.inv.app C) ≫ a.asIso.hom.app _ ≫
+      (fiber xi).map (pc.hom.app C) = a.asIso.hom.app _
+  rw [← a.asIso.hom.naturality (pc.hom.app C)]
   have hcancel : (fiber xi).map (pc.inv.app C) ≫
       (fiber xi).map (pc.hom.app C) = 𝟙 _ := by
     calc
@@ -136,7 +141,7 @@ theorem fundamentalGroupHom_comp_eq_autHomOfCompIso
           (fiber (xi ≫ f)) ((pullbackFiberIso f xi).conjAut b)) := by
     apply Aut.ext
     ext C c
-    simp only [Iso.conjAut_hom, Iso.conj_apply, NatTrans.comp_app]
+    simp only [Iso.conjAut_hom, Iso.conj_apply_asHom, NatTrans.comp_app]
     rfl
   unfold fundamentalGroupHom
   simp only [CategoryTheory.PreGaloisCategory.autHomOfCompIso_apply]
@@ -192,8 +197,8 @@ noncomputable def fundamentalGroupFactorizationConjugator
     (xi : Spec (.of Omega) ⟶ X) (eta : Spec (.of Omega) ⟶ Z)
     (heta₁ : (xi ≫ f₁) ≫ g₁ = eta)
     (heta₂ : (xi ≫ f₂) ≫ g₂ = eta) : π₁ᵉᵗ(eta) :=
-  (pullbackCompositeFiberIsoOfEq f₂ g₂ m hm₂ xi eta heta₂).symm ≪≫
-    pullbackCompositeFiberIsoOfEq f₁ g₁ m hm₁ xi eta heta₁
+  Aut.of ((pullbackCompositeFiberIsoOfEq f₂ g₂ m hm₂ xi eta heta₂).symm ≪≫
+    pullbackCompositeFiberIsoOfEq f₁ g₁ m hm₁ xi eta heta₁)
 
 /-- The maps on fundamental groups associated to two factorizations of one
 scheme morphism agree up to the explicit inner automorphism above. -/

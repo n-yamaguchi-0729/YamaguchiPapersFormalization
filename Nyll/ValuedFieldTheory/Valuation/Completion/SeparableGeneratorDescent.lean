@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableRootApproximation
-import Mathlib.FieldTheory.IntermediateField.Algebraic
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.Minpoly.Field
-import Mathlib.FieldTheory.Separable
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.Polynomial.Lifts
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableRootApproximation
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Minpoly.Field
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Algebra.Polynomial.Lifts
 
 /-!
 # Descending separable generators to a dense subfield
@@ -21,6 +23,8 @@ extension as the original separable element. Comparing the degrees also
 shows that the new generator is separable over the dense subfield, with
 the original extension degree.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

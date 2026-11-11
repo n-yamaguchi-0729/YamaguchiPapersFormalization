@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictLocalModel
-import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianKernel
-import Nyll.EtaleFundamentalGroups.Inertia.ClosedNormalGeneration
-import Nyll.EtaleFundamentalGroups.GeometricFiber.BasePoint
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIsoKernel
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectFixedFiber
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StrictLocalModel
+public import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianKernel
+public import Nyll.EtaleFundamentalGroups.Inertia.ClosedNormalGeneration
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.BasePoint
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIsoKernel
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectFixedFiber
 
 /-!
 # Strict local inertia at a common global base point
@@ -25,7 +27,11 @@ the complement inclusion. Its finite Galois quotient criterion also recovers
 triviality of each local image on the entire fiber of the cover.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -34,13 +40,13 @@ open EtaleFundamentalGroups.StrictHenselian
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- All strict generic inertia elements, transported along all geometric paths
 to the specified global base point. -/
 def boundaryStrictInertiaGenerators
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) : Set π₁ᵉᵗ(point) :=
   {g | ∃ E : Component D,
     let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
@@ -53,7 +59,7 @@ def boundaryStrictInertiaGenerators
 inertia groups at every prime boundary component. -/
 def boundaryStrictInertiaClosure
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) : Subgroup π₁ᵉᵗ(point) :=
   (Subgroup.normalClosure (boundaryStrictInertiaGenerators D hreg point)).topologicalClosure
 
@@ -61,7 +67,7 @@ def boundaryStrictInertiaClosure
 homomorphism, regardless of the chosen geometric path. -/
 theorem boundaryStrictInertiaGenerators_subset_kernel
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     boundaryStrictInertiaGenerators D hreg point ⊆
       (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker := by
@@ -87,7 +93,7 @@ theorem boundaryStrictInertiaGenerators_subset_kernel
 kernel of the inclusion-induced fundamental-group homomorphism. -/
 theorem boundaryStrictInertiaClosure_le_kernel
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     boundaryStrictInertiaClosure D hreg point ≤
       (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker := by
@@ -102,7 +108,7 @@ Galois quotients that kill all its generators. -/
 theorem boundaryStrictInertiaClosure_eq_iInf_galoisQuotient
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     boundaryStrictInertiaClosure D hreg point =
       ⨅ (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
@@ -120,7 +126,7 @@ geometric path is obtained from connectedness of the complement. -/
 theorem boundaryStrict_fiber_fixed_of_generators_subset_kernel
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement)
     (W : FiniteEtale D.1.supportComplement) [IsGalois W]
     (w : (fiber point).obj W)
@@ -144,7 +150,7 @@ complement is connected. No comparison is assumed as input. -/
 theorem exists_boundaryStrictFiberPaths
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     Nonempty (∀ E : Component D,
       let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
@@ -161,26 +167,21 @@ each component. Every other choice differs by conjugation, already accounted
 for by normal generation. -/
 theorem boundaryStrictInertiaClosure_eq_of_paths
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement)
     (paths : ∀ E : Component D,
       let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
       fiber (boundaryStrictGenericPoint D hreg E ≫ boundaryStrictGenericMorphism D hreg E) ≅
         fiber point) :
+    let s : Set π₁ᵉᵗ(point) := {g | ∃ E : Component D,
+      let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
+      ∃ a : π₁ᵉᵗ(boundaryStrictGenericPoint D hreg E),
+        continuousConjAut (paths E)
+          (fundamentalGroupHom (boundaryStrictGenericMorphism D hreg E)
+            (boundaryStrictGenericPoint D hreg E) a) = g}
     boundaryStrictInertiaClosure D hreg point =
-      (Subgroup.normalClosure {g | ∃ E : Component D,
-        let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
-        ∃ a : π₁ᵉᵗ(boundaryStrictGenericPoint D hreg E),
-          continuousConjAut (paths E)
-            (fundamentalGroupHom (boundaryStrictGenericMorphism D hreg E)
-              (boundaryStrictGenericPoint D hreg E) a) = g}).topologicalClosure := by
-  let s : Set π₁ᵉᵗ(point) := {g | ∃ E : Component D,
-    let : Field (boundaryStrictFractionField D E) := boundaryStrictFractionFieldField D hreg E
-    ∃ a : π₁ᵉᵗ(boundaryStrictGenericPoint D hreg E),
-      continuousConjAut (paths E)
-        (fundamentalGroupHom (boundaryStrictGenericMorphism D hreg E)
-          (boundaryStrictGenericPoint D hreg E) a) = g}
-  change boundaryStrictInertiaClosure D hreg point = (Subgroup.normalClosure s).topologicalClosure
+      (Subgroup.normalClosure s).topologicalClosure := by
+  intro s
   apply congrArg Subgroup.topologicalClosure
   apply le_antisymm
   · apply Subgroup.normalClosure_le_normal

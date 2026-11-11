@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.RingTheory.Etale.Pi
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.Etale.Pi
 
 /-!
 # Etale descent from all completed DVR factors
@@ -17,6 +19,8 @@ every factor is etale over the completed base DVR, the completed tensor
 product is etale; faithful flatness of DVR completion then descends etaleness
 to the original extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

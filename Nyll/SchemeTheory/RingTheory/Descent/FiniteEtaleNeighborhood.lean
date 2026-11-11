@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Spreading etaleness around a fiber of an integral algebra
@@ -15,6 +17,8 @@ The complement of the etale locus has closed image under an integral map.
 A fiber contained in the etale locus therefore has an entire principal
 neighborhood contained in that locus.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

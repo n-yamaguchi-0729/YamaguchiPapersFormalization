@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Analysis.Normed.Field.Approximation
-import Mathlib.Analysis.Normed.Field.Krasner
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Mathlib.Analysis.Normed.Field.Approximation
+public import Mathlib.Analysis.Normed.Field.Krasner
+public import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Approximating separable generators over a dense subfield
@@ -16,6 +18,8 @@ Approximate the minimal polynomial by a monic polynomial over the dense
 subfield. Continuity of roots produces a nearby root in the algebraic
 closure, and Krasner's lemma places the original generator in its adjoin.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

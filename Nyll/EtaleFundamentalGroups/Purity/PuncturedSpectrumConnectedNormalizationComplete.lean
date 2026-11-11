@@ -4,9 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationLocal
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AdicPower
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AdicPower
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Maximal-adic completeness of connected finite normalizations
@@ -15,6 +20,8 @@ A finite local integral algebra over a complete Noetherian local ring is
 complete for its own maximal ideal.  This supplies the completeness input
 for the finite normalization attached to a connected punctured cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

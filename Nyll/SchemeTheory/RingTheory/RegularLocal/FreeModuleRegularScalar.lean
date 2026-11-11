@@ -11,9 +11,11 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Regular.SMul
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.Tactic.Ext
+module
+
+public import Mathlib.Algebra.Regular.SMul
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.Tactic.Ext
 
 /-!
 # Regular scalar multiplication on a nontrivial free module
@@ -21,6 +23,8 @@ import Mathlib.Tactic.Ext
 Scalar multiplication by a ring element is injective on a nontrivial free module exactly
 when multiplication by that element is injective on the ring.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -34,8 +38,12 @@ theorem _root_.isSMulRegular_iff_of_free {R M : Type*} [CommRing R]
   constructor
   · intro H m n h
     have i : I := Nonempty.some inferInstance
-    have := @H (m • b i) (n • b i) (by simp_all [← mul_smul])
-    simpa using congr(b.repr $this i)
+    have := @H (m • b i) (n • b i) (by
+      change r • (m • b i) = r • (n • b i)
+      rw [← mul_smul, ← mul_smul]
+      exact congrArg (fun a : R => a • b i) h)
+    simpa only [map_smul, Module.Basis.repr_self, Finsupp.smul_single_one,
+      Finsupp.single_eq_same] using congr(b.repr $this i)
   · intro H m n h
     apply b.repr.injective
     ext i

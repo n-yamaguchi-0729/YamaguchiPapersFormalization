@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The action on continuous absolute Galois characters
@@ -14,6 +16,8 @@ import Mathlib.Topology.Algebra.ContinuousMonoidHom
 Inverse semilinear conjugation preserves continuity. Restricting the algebraic
 character action therefore gives the action on continuous abelian characters.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

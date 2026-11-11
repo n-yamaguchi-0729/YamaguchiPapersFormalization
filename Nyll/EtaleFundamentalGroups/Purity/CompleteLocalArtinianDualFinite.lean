@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ArtinianSocleFiniteLength
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalResidueFieldHullArtinian
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.FiniteLengthInjectiveEmbedding
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerTorsionSocle
-import Mathlib.Algebra.BigOperators.Pi
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.FiniteLength
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ArtinianSocleFiniteLength
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalResidueFieldHullArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteLengthInjectiveEmbedding
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerTorsionSocle
+public import Mathlib.Algebra.BigOperators.Pi
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.FiniteLength
 
 /-!
 # Finite duals of Artinian power-torsion modules
@@ -30,6 +32,8 @@ The coordinate maps generate its dual: extend an arbitrary dual map to
 the finite product and use the scalar description of each endomorphism
 of the hull.  Completeness enters only through this scalar description.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

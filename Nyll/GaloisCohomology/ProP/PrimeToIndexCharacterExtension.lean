@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProP.FiniteIndexTransfer
-import Nyll.GaloisCohomology.ProP.TransferRestriction
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Topology.Algebra.Ring.Basic
+module
+
+public import Nyll.GaloisCohomology.ProP.FiniteIndexTransfer
+public import Nyll.GaloisCohomology.ProP.TransferRestriction
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Topology.Algebra.Ring.Basic
 
 /-!
 # Extending invariant characters across a coprime index
@@ -17,6 +19,8 @@ import Mathlib.Topology.Algebra.Ring.Basic
 Transfer followed by multiplication by the inverse index extends a conjugation-invariant
 character on an open normal subgroup. The modulus need not be prime.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Cohomology
 

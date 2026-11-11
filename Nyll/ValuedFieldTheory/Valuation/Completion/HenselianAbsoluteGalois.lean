@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosureTopology
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosureTopology
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
 
 /-!
 # The absolute Galois group of a Henselian DVF and its completion
@@ -16,6 +18,8 @@ purely inseparable comparison with algebraic closures connects it to the
 actual `Field.absoluteGaloisGroup`, with its Krull topology, in every
 characteristic. The chosen separable-closure embedding records the choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

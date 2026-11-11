@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughInjectives
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.CategoryTheory.Limits.Shapes.ZeroMorphisms
 
 /-!
 # Acyclicity of ideal-power torsion coefficients
@@ -26,6 +28,8 @@ connecting map is both zero and an epimorphism.  In higher degrees,
 induction on the quotient term and injectivity of the middle term give
 the vanishing through the same connecting epimorphism.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

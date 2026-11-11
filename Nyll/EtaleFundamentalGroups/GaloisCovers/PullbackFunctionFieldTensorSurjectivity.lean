@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueAtSourceGeneric
-import Nyll.EtaleFundamentalGroups.GaloisCovers.TensorProductSurjectivityTransport
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueTensorProduct
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueAtSourceGeneric
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.TensorProductSurjectivityTransport
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueTensorProduct
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
 
 /-!
 # Function-field tensors selected by a pullback component
@@ -17,6 +19,8 @@ two pullback projections.  At the image of the generic point of an integral
 closed component, these factor maps identify with the corresponding
 function-field maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

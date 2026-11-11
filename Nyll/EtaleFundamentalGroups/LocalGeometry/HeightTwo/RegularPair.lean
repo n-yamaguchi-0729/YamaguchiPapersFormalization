@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.KrullDimension.Zero
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
+module
+
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.KrullDimension.Zero
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
 
 /-!
 # An unconstrained regular parameter pair in dimension two
@@ -23,6 +26,8 @@ by the first lift, the maximal ideal is principal.  If its generator were a
 zero-divisor, Krull intersection would make it nilpotent and force the quotient
 to have dimension zero, contradicting the principal-ideal dimension bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,7 +65,8 @@ private theorem isSMulRegular_of_span_singleton_eq_maximalIdeal_of_not_krullDimL
   have hn0 : n ≠ 0 := by
     intro hn0
     apply hn
-    simp [hn0]
+    rw [hn0, pow_zero, Ideal.one_eq_top]
+    exact Submodule.mem_top
   obtain ⟨k, hk⟩ := Nat.exists_eq_succ_of_ne_zero hn0
   have haPow : a ∈ maximalIdeal S ^ k := by
     by_contra hak
@@ -161,8 +167,9 @@ theorem isRegular_pair_of_finrank_cotangentSpace_eq_two_of_span_eq
     rw [← IsLocalRing.map_maximalIdeal_of_surjective
       (Ideal.Quotient.mk I) Ideal.Quotient.mk_surjective,
       ← hspan, Ideal.map_ofList]
-    simp [I, ybar]
-    rfl
+    change Ideal.span {ybar} = Ideal.ofList [Ideal.Quotient.mk I x, ybar]
+    rw [Ideal.Quotient.mk_singleton_self, Ideal.ofList_cons,
+      Ideal.ofList_singleton, Ideal.span_singleton_zero, bot_sup_eq]
   have hdimS : ¬ Ring.KrullDimLE 0 S := by
     intro hzero
     have hzero' : ringKrullDim S = 0 :=
@@ -236,8 +243,8 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two_unconstrained
   have hv : v = b := by
     funext i
     fin_cases i
-    · simpa [v] using hx'
-    · simpa [v] using hy'
+    · exact hx'
+    · exact hy'
   have hvSpan :
       Submodule.span (ResidueField R) (Set.range v) = ⊤ := by
     rw [hv]
@@ -266,8 +273,7 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two_unconstrained
     change Ideal.span ({x, y} : Set R) = m
     rw [← hmapSpan, Submodule.map_span]
     congr 1
-    ext z
-    simp [x, y]
+    exact (Set.image_pair m.subtype x' y').symm
   have hspan : Ideal.ofList [x, y] = maximalIdeal R := by
     change Ideal.span {r | r ∈ [x, y]} = maximalIdeal R
     rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by

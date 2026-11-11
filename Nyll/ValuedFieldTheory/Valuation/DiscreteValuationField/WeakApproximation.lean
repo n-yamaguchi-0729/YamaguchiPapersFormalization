@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.AbsoluteValues
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Mathlib.Order.ConditionallyCompleteLattice.Finset
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.AbsoluteValues
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Mathlib.Order.ConditionallyCompleteLattice.Finset
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Weak approximation for discrete valuations
@@ -17,6 +19,8 @@ import Mathlib.Data.Fintype.EquivFin
 A finite family of inequivalent discrete valuations admits simultaneous
 approximation, with independently prescribed nonzero valuation radii.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

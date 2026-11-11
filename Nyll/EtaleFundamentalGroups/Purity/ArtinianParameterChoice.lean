@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ArtinianSecondaryAnnihilator
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ArtinianSecondaryAnnihilator
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Choosing parameters on Artinian modules
@@ -24,6 +26,8 @@ so the scalar cokernel has finite length as well.
 This is the Artinian parameter-choice step in the induction for top local
 cohomology.  It uses secondary decomposition rather than Matlis duality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Algebra.Algebra.Rat
+module
+
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Algebra.Algebra.Rat
 
 /-!
 # Tensor domains after passage to a fraction field
@@ -17,6 +19,8 @@ faithful algebra. If that tensor product is a domain, localizing the original
 algebra to its fraction field preserves this property. Over the integers this
 also compares the integral and rational tensor products of fraction fields.
 -/
+
+@[expose] public section
 
 open scoped TensorProduct
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Finite subalgebras realizing two localizations
@@ -19,6 +21,8 @@ If two localizations are finite, the numerators of their module generators can
 be chosen together. The resulting subalgebra has exactly the original two
 localizations. This is the finite approximation used near a boundary point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

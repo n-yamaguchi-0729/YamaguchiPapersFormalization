@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.NormalBasis
-import Mathlib.LinearAlgebra.Basis.Defs
-import Mathlib.Algebra.Notation.Indicator
-import Mathlib.Algebra.Group.Basic
-import Mathlib.Algebra.Group.Subgroup.Defs
-import Mathlib.Algebra.BigOperators.Finsupp.Basic
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.NormalBasis
+public import Mathlib.LinearAlgebra.Basis.Defs
+public import Mathlib.Algebra.Notation.Indicator
+public import Mathlib.Algebra.Group.Basic
+public import Mathlib.Algebra.Group.Subgroup.Defs
+public import Mathlib.Algebra.BigOperators.Finsupp.Basic
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Subgroup character vectors with a prescribed failure of the full action
@@ -22,6 +24,8 @@ on that subgroup, while an automorphism outside it moves the support away
 from the identity. Its identity coordinate distinguishes the two vectors.
 Neither a characteristic restriction nor normality of the subgroup is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

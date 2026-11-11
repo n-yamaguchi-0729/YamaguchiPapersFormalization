@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.Cohomology.ContinuousMapFiniteStage
-import Nyll.ProCGroups.ProC.InverseLimits.FiniteQuotients
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ProCGroups.Cohomology.ContinuousMapFiniteStage
+public import Nyll.ProCGroups.ProC.InverseLimits.FiniteQuotients
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Finite Galois stages for continuous functions in two variables
@@ -15,6 +17,8 @@ import Mathlib.FieldTheory.Galois.Profinite
 Finite discrete-valued continuous functions on a pair of Galois groups
 factor through one actual finite Galois intermediate field.
 -/
+
+@[expose] public section
 
 namespace GaloisCohomology
 open scoped Topology

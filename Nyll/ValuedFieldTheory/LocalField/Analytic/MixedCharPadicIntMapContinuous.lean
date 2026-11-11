@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMap
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMap
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Continuity of the p-adic integer map into a complete valued field
@@ -16,6 +18,8 @@ The lifted map carries the open kernel of reduction modulo `p^n` into the
 `n`th maximal-ideal power. The adic topology on the valuation ring is its
 actual subtype topology, so the map to the field is continuous.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

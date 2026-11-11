@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponents
+module
+
+public import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponents
 
 /-!
 # Étale morphisms on reduced components
@@ -14,6 +16,8 @@ cover. A component of the original source lifts to a closed component in that
 pullback. Domain stalks make this lifted component open, which proves that the
 induced map of reduced components is finite étale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,17 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.CompositumEmbedding
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalizationGoingUp
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.BoundaryAway
-import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationClosedPrime
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.Prefix.FullRootCombined
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.RamificationIndexExact
+module
+
+public import Nyll.SchemeTheory.Normalization.CompositumEmbedding
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalizationGoingUp
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.BoundaryAway
+public import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationClosedPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.Prefix.FullRootCombined
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.OtherPrefixEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.RamificationIndexExact
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
 
 /-!
 # The selected normalization prime attached to the retained full component
@@ -31,6 +34,8 @@ normalization prime, a component comparison, nor a ramification-index
 identity is an input.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped TensorProduct
@@ -40,69 +45,6 @@ namespace EtaleFundamentalGroups.Kummer
 open Polynomial
 
 universe uA uK uL
-
-/-- The fraction-field actions used below are both induced from the same
-fraction field of the base.  Hence the canonical lift through the
-intermediate fraction ring is compatible with them. -/
-private theorem fractionFieldTower_isScalarTower_exactPrimeSource
-    {R B D : Type uA} {K : Type uK}
-    [CommRing R] [IsDomain R]
-    [CommRing B] [IsDomain B] [Algebra R B]
-    [CommRing D] [IsDomain D] [Algebra B D] [Algebra R D]
-    [IsScalarTower R B D]
-    [Field K] [algRK : Algebra R K] [IsFractionRing R K]
-    [algKKB : Algebra K (FractionRing B)]
-    [towerR_K_KB : IsScalarTower R K (FractionRing B)]
-    [algKKD : Algebra K (FractionRing D)]
-    [towerR_K_KD : IsScalarTower R K (FractionRing D)]
-    [algKBKD : Algebra (FractionRing B) (FractionRing D)]
-    [towerR_KB_KD : IsScalarTower R (FractionRing B) (FractionRing D)] :
-    IsScalarTower K (FractionRing B) (FractionRing D) := by
-  apply IsScalarTower.of_algebraMap_eq
-  intro x
-  have hmaps :
-      algebraMap K (FractionRing D) =
-        (algebraMap (FractionRing B) (FractionRing D)).comp
-          (algebraMap K (FractionRing B)) := by
-    apply IsFractionRing.ringHom_ext (A := R)
-    intro z
-    calc
-      algebraMap K (FractionRing D) (algebraMap R K z) =
-          algebraMap R (FractionRing D) z :=
-        (IsScalarTower.algebraMap_apply R K (FractionRing D) z).symm
-      _ = algebraMap (FractionRing B) (FractionRing D)
-            (algebraMap R (FractionRing B) z) :=
-        IsScalarTower.algebraMap_apply R (FractionRing B) (FractionRing D) z
-      _ = algebraMap (FractionRing B) (FractionRing D)
-            (algebraMap K (FractionRing B) (algebraMap R K z)) := by
-        exact congrArg (algebraMap (FractionRing B) (FractionRing D))
-          (IsScalarTower.algebraMap_apply R K (FractionRing B) z)
-  exact DFunLike.congr_fun hmaps x
-
-/-- Restrict an algebra equivalence over the base of a localization to an
-equivalence over that localization. -/
-private noncomputable def algEquivOverLocalizationBase_exactPrimeSource
-    {R S U V : Type*}
-    [CommRing R] [CommRing S] [CommRing U] [CommRing V]
-    (M : Submonoid R)
-    [Algebra R S] [IsLocalization M S]
-    [Algebra R U] [Algebra R V]
-    [Algebra S U] [Algebra S V]
-    [IsScalarTower R S U] [IsScalarTower R S V]
-    (e : U ≃ₐ[R] V) : U ≃ₐ[S] V :=
-  { toRingEquiv := e.toRingEquiv
-    commutes' := by
-      intro z
-      have hmaps :
-          e.toRingHom.comp (algebraMap S U) = algebraMap S V := by
-        apply IsLocalization.ringHom_ext M
-        ext x
-        change e (algebraMap S U (algebraMap R S x)) =
-          algebraMap S V (algebraMap R S x)
-        rw [← IsScalarTower.algebraMap_apply R S U,
-          ← IsScalarTower.algebraMap_apply R S V]
-        exact e.commutes x
-      exact DFunLike.congr_fun hmaps z }
 
 /-- Right-handed form of finite-etale generic-component base change.
 

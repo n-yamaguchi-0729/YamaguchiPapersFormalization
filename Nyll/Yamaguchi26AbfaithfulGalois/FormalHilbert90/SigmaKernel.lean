@@ -4,11 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
-import Nyll.ProCGroups.Abelian.PrimePowerCharacters
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
+public import Nyll.ProCGroups.Abelian.PrimePowerCharacters
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-! # The kernel of the maximal abelian pro-Σ quotient inside an ambient group -/
+
+@[expose] public section
 
 noncomputable section
 

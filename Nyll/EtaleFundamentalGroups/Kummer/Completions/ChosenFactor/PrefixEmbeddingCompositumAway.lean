@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositum
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositum
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # The literal prefix compositum selected by a completed chosen factor
@@ -27,6 +29,8 @@ original prefix boundary Away statement to the normalization of that
 literal component.  No tensor factor, comparison equivalence, or
 normalization statement is supplied as an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -105,13 +109,13 @@ theorem
       regularPair_fractionFieldTower_of_finiteEtale_commonTarget
         (A := A) (C := C) (F := F) (KC := KC) (P := P)
         y z hreg hgen
-    letI : IsScalarTower F KC P := hTowerFKCP
+    let : IsScalarTower F KC P := hTowerFKCP
     let fKC : KC →ₐ[F] P := IsScalarTower.toAlgHom F KC P
     let Eimage : IntermediateField F P := fPrefix.fieldRange
     let Kimage : IntermediateField F P := fKC.fieldRange
     let hfiniteEimage : FiniteDimensional F Eimage :=
       fPrefix.toLinearMap.finiteDimensional_range
-    letI : FiniteDimensional F Eimage := hfiniteEimage
+    let : FiniteDimensional F Eimage := hfiniteEimage
     let eGeneric : (F ⊗[F] M) ≃ₐ[F] Eimage :=
       (Algebra.TensorProduct.lid F M).trans fPrefix.equivFieldRange
     let mActual := actualCompositumGenericComponentIdeal
@@ -127,9 +131,9 @@ theorem
     let hmKC : mKC.IsMaximal :=
       hmActual.comap_bijective eTensorKC.toRingEquiv.toRingHom
         eTensorKC.bijective
-    letI : mKC.IsMaximal := hmKC
+    let : mKC.IsMaximal := hmKC
     let Omega := GenericTensorFieldComponent mKC
-    letI : Algebra C Omega :=
+    let : Algebra C Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := C) mKC
     ∃ omegaToP : Omega →ₐ[KC] P,
       Function.Injective omegaToP ∧
@@ -150,7 +154,8 @@ theorem
             (algebraMap C (integralClosure C Omega))
             (algebraMap A C y)).Etale := by
   classical
-  dsimp only
+  intro hTowerFKCP suppliedTowerFKCP fKC Eimage Kimage hfiniteEimage suppliedFiniteEimage eGeneric
+    mActual hmActual eKC eTensorKC mKC hmKC suppliedMaximalKC Omega suppliedComponentAlgebra
   let : IsDomain A := isDomain_of_regularSystem [y, z] hreg hgen
   let : IsRegularLocalRing A :=
     isRegularLocalRing_of_regularSystem [y, z] hreg hgen
@@ -173,33 +178,6 @@ theorem
   let : IsIntegrallyClosed C :=
     SpecialLocalPurity.isIntegrallyClosed_of_isRegular_pair_of_span_eq_maximalIdeal
       C yC zC hregC hgenC
-  let : IsScalarTower F KC P :=
-    regularPair_fractionFieldTower_of_finiteEtale_commonTarget
-      (A := A) (C := C) (F := F) (KC := KC) (P := P)
-      y z hreg hgen
-  let fKC : KC →ₐ[F] P := IsScalarTower.toAlgHom F KC P
-  let Eimage : IntermediateField F P := fPrefix.fieldRange
-  let Kimage : IntermediateField F P := fKC.fieldRange
-  let : FiniteDimensional F Eimage :=
-    fPrefix.toLinearMap.finiteDimensional_range
-  let eGeneric : (F ⊗[F] M) ≃ₐ[F] Eimage :=
-    (Algebra.TensorProduct.lid F M).trans fPrefix.equivFieldRange
-  let mActual := actualCompositumGenericComponentIdeal
-    (A := F) (T := M) (F := F) (Omega := P)
-    Eimage Kimage eGeneric
-  let : mActual.IsMaximal :=
-    actualCompositumGenericComponentIdeal_isMaximal
-      Eimage Kimage eGeneric
-  let eKC : KC ≃ₐ[F] Kimage := fKC.equivFieldRange
-  let eTensorKC : (KC ⊗[F] M) ≃ₐ[F] (Kimage ⊗[F] M) :=
-    Algebra.TensorProduct.congr eKC (AlgEquiv.refl : M ≃ₐ[F] M)
-  let mKC := mActual.comap eTensorKC.toRingEquiv.toRingHom
-  let : mKC.IsMaximal :=
-    (inferInstance : mActual.IsMaximal).comap_bijective
-      eTensorKC.toRingEquiv.toRingHom eTensorKC.bijective
-  let Omega := GenericTensorFieldComponent mKC
-  let : Algebra C Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := C) mKC
   let C₀ := integralClosure A M
   let : Module.Finite A C₀ :=
     SpecialLocalPurity.integralClosure_finite_of_isRegularLocalRing_dimension_two

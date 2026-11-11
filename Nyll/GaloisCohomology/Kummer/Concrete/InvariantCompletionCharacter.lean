@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.ProlongationCharacterApproximation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAverage
-import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
-import Mathlib.Basic.Finite.Prod
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.ProlongationCharacterApproximation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteCharacterAverage
+public import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Invariant lifts of completion characters
@@ -20,6 +22,8 @@ a simultaneous lift of prescribed completion characters. Averaging the
 lift over the Galois group gives invariance while retaining every local
 character when the extension degree is prime to the modulus.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

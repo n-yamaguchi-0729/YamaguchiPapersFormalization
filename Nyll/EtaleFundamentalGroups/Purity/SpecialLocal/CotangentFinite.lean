@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Extension.Cotangent.Basic
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Module
+module
+
+public import Mathlib.RingTheory.Extension.Cotangent.Basic
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Localization
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Module
 
 /-!
 # Finite cotangent modules for special local purity
@@ -22,6 +24,8 @@ This supplies the finiteness needed to replace minimal points of either
 cotangent support by associated primes.  No purity or support-vanishing
 hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

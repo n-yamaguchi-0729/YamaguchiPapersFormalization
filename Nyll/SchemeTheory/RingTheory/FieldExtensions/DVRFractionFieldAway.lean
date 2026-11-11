@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # A DVR fraction field is a principal localization
@@ -16,6 +18,8 @@ a uniformizer divides that nonunit, while each denominator is associated
 to a power of the uniformizer. Thus localization at that nonunit already
 inverts all nonzero elements.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

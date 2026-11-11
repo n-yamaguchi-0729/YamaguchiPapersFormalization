@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # Normalization primes in a retained completed component
@@ -18,6 +20,8 @@ kernel is the supplied generic prime.  Integral going-up therefore lifts the
 remaining two primes to a height-one/closed chain in the normalization of
 the *same* component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,24 +53,14 @@ noncomputable def retainedCompletedChosenComponentAlgHom
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let M := GenericTensorFieldComponent m
-    letI : Algebra R' M :=
+    let : Algebra R' M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     (R' ⊗[R] S) →ₐ[R'] M := by
-  dsimp only
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let M := GenericTensorFieldComponent m
-  let r'MAlgebra : Algebra R' M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-  letI : Algebra R' M := r'MAlgebra
+  intro m maximalM M r'MAlgebra
   exact
     ((Ideal.Quotient.mkₐ K' m).restrictScalars R').comp
       ((AlgHom.restrictScalars R'
@@ -114,16 +108,17 @@ theorem retainedCompletedChosenComponentAlgHom_ker
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let M := GenericTensorFieldComponent m
-    letI : Algebra R' M :=
+    let : Algebra R' M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     RingHom.ker
         (retainedCompletedChosenComponentAlgHom
           (R := R) (R' := R') (S := S) (K := K) (L := L)
           (K' := K') N).toRingHom = N := by
+  intro m maximalM M r'MAlgebra
   let T := R' ⊗[R] S
   let G₀ := retainedCompletedFiniteBaseChangeGenericFiber
     (R := R) (R' := R') (S := S) (K' := K')
@@ -131,28 +126,18 @@ theorem retainedCompletedChosenComponentAlgHom_ker
     (R := R) (R' := R') (S := S) (K := K) (L := L) (K' := K')
   let n₀ := retainedCompletedGenericIdeal
     (R := R) (R' := R') (S := S) (K' := K') N
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let M := GenericTensorFieldComponent m
-  let r'MAlgebra : Algebra R' M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-  let : Algebra R' M := r'MAlgebra
   let : Algebra T G₀ := Algebra.TensorProduct.rightAlgebra
-  let M : Submonoid T :=
+  let S_inv : Submonoid T :=
     Algebra.algebraMapSubmonoid T (nonZeroDivisors R')
-  let : IsLocalization M G₀ :=
+  let : IsLocalization S_inv G₀ :=
     IsLocalization.tensorRight (R := R') (S := T) (A := K')
       (nonZeroDivisors R')
-  have hdisjoint : Disjoint (M : Set T) (N : Set T) :=
+  have hdisjoint : Disjoint (S_inv : Set T) (N : Set T) :=
     retainedCompletedGenericPrime_disjoint
       (R := R) (R' := R') (S := S) N
   have hn₀Comap : n₀.comap (algebraMap T G₀) = N :=
     IsLocalization.under_map_of_isPrime_disjoint
-      M G₀ (inferInstance : N.IsPrime) hdisjoint
+      S_inv G₀ (inferInstance : N.IsPrime) hdisjoint
   have hmComap : m.comap e.toRingEquiv.toRingHom = n₀ := by
     exact Ideal.comap_map_of_bijective
       e.toRingEquiv.toRingHom e.toRingEquiv.bijective
@@ -171,26 +156,17 @@ theorem retainedCompletedChosenNormalizationAlgHom_ker
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let M := GenericTensorFieldComponent m
-    letI : Algebra R' M :=
+    let : Algebra R' M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     RingHom.ker
         (retainedCompletedChosenNormalizationAlgHom
           (R := R) (R' := R') (S := S) (K := K) (L := L)
           (K' := K') N).toRingHom = N := by
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let M := GenericTensorFieldComponent m
-  let r'MAlgebra : Algebra R' M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-  let : Algebra R' M := r'MAlgebra
+  intro m maximalM M r'MAlgebra
   let j := retainedCompletedChosenNormalizationAlgHom
     (R := R) (R' := R') (S := S) (K := K) (L := L)
     (K' := K') N
@@ -215,17 +191,17 @@ def HasRetainedCompletedNormalizationPrimeChain
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let M := GenericTensorFieldComponent m
-    letI : Algebra R' M :=
+    let : Algebra R' M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     let IC := integralClosure R' M
     let j := retainedCompletedChosenNormalizationAlgHom
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : Algebra (R' ⊗[R] S) IC := j.toAlgebra
+    let : Algebra (R' ⊗[R] S) IC := j.toAlgebra
     ∃ q p : Ideal IC,
       q ≤ p ∧ q.IsPrime ∧ q.LiesOver Q ∧
         p.IsMaximal ∧ p.LiesOver P
@@ -241,24 +217,9 @@ theorem exists_retainedCompletedNormalizationPrimeChain
     HasRetainedCompletedNormalizationPrimeChain
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N Q P := by
-  unfold HasRetainedCompletedNormalizationPrimeChain
-  dsimp only
+  delta HasRetainedCompletedNormalizationPrimeChain
+  intro m maximalM M r'MAlgebra IC j finiteModelAlgebra
   let T := R' ⊗[R] S
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let M := GenericTensorFieldComponent m
-  let r'MAlgebra : Algebra R' M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-  let : Algebra R' M := r'MAlgebra
-  let IC := integralClosure R' M
-  let j := retainedCompletedChosenNormalizationAlgHom
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : Algebra T IC := j.toAlgebra
   let : IsScalarTower R' T IC :=
     IsScalarTower.of_algebraMap_eq fun x ↦ (j.commutes x).symm
   let : Algebra.IsIntegral R' IC :=

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.ChosenComponentFractionRing
-import Nyll.SchemeTheory.Normalization.Products.DVRPrimeBelowCoordinate
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.ChosenComponentFractionRing
+public import Nyll.SchemeTheory.Normalization.Products.DVRPrimeBelowCoordinate
 
 /-!
 # Chosen generic components of a product of DVRs
@@ -15,6 +17,8 @@ lies strictly below a specified coordinate maximal prime selects the fraction
 field of that same coordinate.  The kernel identification is produced by the
 prime structure of the DVR factor, rather than supplied as an assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

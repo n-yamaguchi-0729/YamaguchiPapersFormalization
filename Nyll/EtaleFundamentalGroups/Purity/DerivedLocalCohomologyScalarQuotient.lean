@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Scalar quotients of local cohomology
@@ -19,6 +21,8 @@ For a regular scalar, the coefficient long exact sequence identifies
 local cohomology of the scalar quotient with the quotient of local
 cohomology by that scalar whenever the next cohomological degree vanishes.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

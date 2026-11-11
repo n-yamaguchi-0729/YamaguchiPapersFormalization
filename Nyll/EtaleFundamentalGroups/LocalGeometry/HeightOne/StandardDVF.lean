@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
 
 /-!
 # The standard discrete valuation field attached to a DVR
@@ -17,6 +19,8 @@ as a `DVF`, transports a local map of DVRs to an extension of the packaged
 valuations, and compares the resulting `DVF` ramification index with the
 original ideal-theoretic ramification index.
 -/
+
+@[expose] public section
 
 noncomputable section
 

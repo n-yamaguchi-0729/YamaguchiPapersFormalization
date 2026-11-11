@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.PrimeOverRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.OtherBranchEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.PrimeOverRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.OtherBranchEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
 
 /-!
 # Height-one etaleness for a fixed component of the exact Galois full cover
@@ -21,6 +23,8 @@ active-root descent theorem, while primes away from the boundary are handled
 by the original finite-etale normalization.  The output is the literal
 localized normalization required by special local purity.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -239,11 +243,8 @@ theorem
             Algebra.Etale Q
               (Localization (Algebra.algebraMapSubmonoid
                 (integralClosure D M) q.primeCompl)) := by
+  intro e N
   classical
-  let e := heightTwoOtherBranchGaloisRamificationIndex
-    (K := K) (L := L) t hNC i
-  let N := heightTwoSelectedBranchGaloisRamificationIndex
-    (K := K) (L := L) t hNC i
   have he : ∀ k, 0 < e k :=
     heightTwoOtherBranchGaloisRamificationIndex_pos
       (K := K) (L := L) t hNC i

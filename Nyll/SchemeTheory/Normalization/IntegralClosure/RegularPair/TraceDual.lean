@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Int
-import Mathlib.RingTheory.DedekindDomain.Different
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Int
+public import Mathlib.RingTheory.DedekindDomain.Different
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Regular pairs on a finite normalization via the trace dual
@@ -21,6 +23,8 @@ of `B` is a nonzero finite `B`-module.  Its double trace dual is `B`, by the
 determinant trick and integral closedness of `B` inside `L`.  A regular pair
 on `A` can then test membership in that double trace dual.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -219,7 +223,7 @@ theorem exists_integralClosure_factor_of_mul_eq_mul_of_isRegular
   have hpair := (isRegular_cons_iff A x [y]).mp hregular
   have hx : x ≠ 0 := by
     intro hxzero
-    exact one_ne_zero (hpair.1.right_eq_zero_of_smul (by simp [hxzero]))
+    exact one_ne_zero (hpair.1.right_eq_zero_of_smul (by rw [hxzero, zero_smul]))
   have hxK : algebraMap A K x ≠ 0 := by
     simpa only [map_zero] using (IsFractionRing.injective A K).ne hx
   have hxL : algebraMap A L x ≠ 0 := by

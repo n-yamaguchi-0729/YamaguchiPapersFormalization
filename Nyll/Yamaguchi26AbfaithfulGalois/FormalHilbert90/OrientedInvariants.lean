@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FixedInclusion
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.OrientedConsequences
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FixedInclusion
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.OrientedConsequences
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Proposition: oriented invariants
@@ -18,6 +22,8 @@ injectivity of the fixed-inclusion map.
 The fixed-point assertions use the natural map between residual pro-ℓ
 quotients of topological abelianizations.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

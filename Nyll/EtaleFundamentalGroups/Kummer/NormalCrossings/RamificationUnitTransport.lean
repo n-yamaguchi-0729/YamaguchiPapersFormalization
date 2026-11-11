@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Transporting the selected root exponent to a normalization branch
@@ -16,6 +18,8 @@ normalization branch at a larger height-two prime preserves the same index.
 Consequently unitness of the selected root exponent is exactly the local
 ramification-index unit statement needed for globalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,23 +48,18 @@ theorem
       ((heightTwoSelectedBranchGaloisRamificationIndex
           (K := K) (L := L) t hNC i : ℕ) :
         Localization.AtPrime P)) :
-    letI : Algebra (Localization.AtPrime P) L :=
+    let : Algebra (Localization.AtPrime P) L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower A (Localization.AtPrime P) L :=
+    let : IsScalarTower A (Localization.AtPrime P) L :=
       localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     let q := localizedNormalizationPrime (K := K) (L := L) P Q
     IsUnit
       ((q.ramificationIdx (Localization.AtPrime P) : ℕ) :
         Localization.AtPrime P) := by
-  dsimp only
-  let : Algebra (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower A (Localization.AtPrime P) L :=
-    localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
+  intro sharedOwner1 sharedOwner2 q
   have hQP : Q.under A ≤ P := by
     rw [← Q.over_def (Ideal.span ({t i} : Set A))]
     exact P.span_singleton_le_iff_mem.mpr htiP
-  let q := localizedNormalizationPrime (K := K) (L := L) P Q
   have hramLocal : q.ramificationIdx (Localization.AtPrime P) =
       Q.ramificationIdx A :=
     localizedNormalizationPrime_ramificationIdx_of_under_le

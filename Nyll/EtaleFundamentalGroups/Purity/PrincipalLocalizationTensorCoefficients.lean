@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Module.LocalizedModule.IsLocalization
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Tensor coefficients for the principal localization complex
@@ -19,6 +21,8 @@ the ring's principal localization complex with the principal complex of
 the coefficient module. Compatibility with the differential is checked
 on pure tensors using the actual localization maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -31,7 +35,8 @@ open scoped TensorProduct
 
 variable {R : Type u} [CommRing R]
 
-private def tensorLocalizedRingEquiv (S : Submonoid R) (M : ModuleCat.{u} R) :
+/-- Tensoring with a localized ring agrees with localization of the coefficient module. -/
+def tensorLocalizedRingEquiv (S : Submonoid R) (M : ModuleCat.{u} R) :
     M ⊗[R] LocalizedModule S R ≃ₗ[R] LocalizedModule S M :=
   (TensorProduct.congr (LinearEquiv.refl R M)
     (IsLocalizedModule.linearEquiv S (LocalizedModule.mkLinearMap S R)
@@ -39,7 +44,9 @@ private def tensorLocalizedRingEquiv (S : Submonoid R) (M : ModuleCat.{u} R) :
     ((TensorProduct.comm R M (Localization S)).trans
       ((LocalizedModule.equivTensorProduct S M).symm.restrictScalars R))
 
-private theorem tensorLocalizedRingEquiv_mk (S : Submonoid R)
+/-- The tensor-localization equivalence sends an elementary tensor to scalar multiplication in
+the localized module. -/
+theorem tensorLocalizedRingEquiv_mk (S : Submonoid R)
     (M : ModuleCat.{u} R) (m : M) (r : R) :
     tensorLocalizedRingEquiv S M
       (m ⊗ₜ[R] LocalizedModule.mkLinearMap S R r) =
@@ -57,7 +64,8 @@ private theorem tensorLocalizedRingEquiv_mk (S : Submonoid R)
   rw [LocalizedModule.equivTensorProduct_symm_apply_tmul]
   exact ((LocalizedModule.mkLinearMap S M).map_smul r m).symm
 
-private def principalTensorCoefficientXIso (x : R) (M : ModuleCat.{u} R) :
+/-- The degreewise coefficient comparison for the principal localization complex. -/
+def principalTensorCoefficientXIso (x : R) (M : ModuleCat.{u} R) :
     ∀ n : ℕ,
       (((tensorLeft M).mapHomologicalComplex (ComplexShape.up ℕ)).obj
         (principalLocalizationComplex x (ModuleCat.of R R))).X n ≅

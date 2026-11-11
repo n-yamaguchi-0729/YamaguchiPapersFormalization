@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
-import Mathlib.GroupTheory.ArchimedeanDensely
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+public import Mathlib.GroupTheory.ArchimedeanDensely
 
 /-!
 # Integral multiples by powers of the residue characteristic
@@ -14,6 +16,8 @@ The residue characteristic has value less than one. Its powers therefore
 make any field element integral, by the Archimedean property of the
 multiplicative integers with zero. Completeness is not needed.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

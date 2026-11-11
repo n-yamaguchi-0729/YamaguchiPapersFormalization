@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ConnectedSource
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeConstants
-import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
-import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ConnectedSource
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothFiniteSchemeConstants
+public import Nyll.SchemeTheory.FunctionFields.ArithmeticGeometricIntegrality
+public import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
 
 /-!
 # Connected finite étale covers of smooth arithmetic schemes
@@ -20,9 +22,16 @@ integrality, normality and characteristic-zero inputs are constructed here
 from smoothness and the given geometric connectedness of the base generic fiber.
 -/
 
+@[expose] public section
+
 noncomputable section
 
+universe u
+
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits TopologicalSpace
+
+attribute [local instance] uliftIntegerBaseIsDomain uliftIntegerBaseIsNoetherian
+  uliftIntegerBaseIsIntegrallyClosed
 
 namespace EtaleFundamentalGroups
 
@@ -30,25 +39,26 @@ namespace EtaleFundamentalGroups
 arithmetic scheme with geometrically connected generic fiber has geometrically
 integral generic fiber. -/
 theorem geometricallyIntegral_genericFiber_of_connected_finiteEtale_over_smooth_integers
-    {E : Scheme} (p : E ⟶ Spec (CommRingCat.of ℤ))
+    {E : Scheme.{u}} (p : E ⟶ Spec (CommRingCat.of (ULift.{u} ℤ)))
     [Smooth p] [QuasiCompact p] [Surjective p]
     [GeometricallyConnected
-      (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of ℤ))))]
+      (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ)))))]
     (T : FiniteEtale E) [ConnectedSpace T.left] :
     GeometricallyIntegral
-      ((T.hom ≫ p).fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of ℤ)))) := by
-  let : IsDomain Γ(Spec (CommRingCat.of ℤ), ⊤) :=
-    Function.Injective.isDomain (Scheme.ΓSpecIso (CommRingCat.of ℤ)).hom.hom
-      (Scheme.ΓSpecIso (CommRingCat.of ℤ)).commRingCatIsoToRingEquiv.injective
-  let : IsIntegrallyClosed Γ(Spec (CommRingCat.of ℤ), ⊤) :=
+      ((T.hom ≫ p).fiberToSpecResidueField
+        (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) := by
+  let : IsDomain Γ(Spec (CommRingCat.of (ULift.{u} ℤ)), ⊤) :=
+    Function.Injective.isDomain (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).hom.hom
+      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).commRingCatIsoToRingEquiv.injective
+  let : IsIntegrallyClosed Γ(Spec (CommRingCat.of (ULift.{u} ℤ)), ⊤) :=
     IsIntegrallyClosed.of_equiv
-      (Scheme.ΓSpecIso (CommRingCat.of ℤ)).symm.commRingCatIsoToRingEquiv
+      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).symm.commRingCatIsoToRingEquiv
   let : IsLocallyNoetherian E := LocallyOfFiniteType.isLocallyNoetherian p
   let : ConnectedSpace E := p.connectedSpace_of_geometricallyConnected_genericFiber
   let : IsIntegral E := isIntegral_of_connected_of_isDomain_stalk E
     (fun x => (Smooth.isDomain_and_isIntegrallyClosed_stalk p x).1)
   let f : T.left ⟶ E := T.hom
-  let q : T.left ⟶ Spec (CommRingCat.of ℤ) := f ≫ p
+  let q : T.left ⟶ Spec (CommRingCat.of (ULift.{u} ℤ)) := f ≫ p
   let : IsLocallyNoetherian T.left := LocallyOfFiniteType.isLocallyNoetherian q
   let : IsIntegral T.left := isIntegral_of_connected_of_isDomain_stalk T.left
     (fun x => (Smooth.isDomain_and_isIntegrallyClosed_stalk q x).1)
@@ -57,12 +67,13 @@ theorem geometricallyIntegral_genericFiber_of_connected_finiteEtale_over_smooth_
   let : Surjective f := IsFiniteEtale.surjective f
   let : CharZero E.functionField := charZero_functionField_of_dominant_integers p
   let : CharZero T.left.functionField := charZero_functionField_of_dominant_integers q
-  let : Smooth (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of ℤ)))) := by
+  let : Smooth (p.fiberToSpecResidueField
+      (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) := by
     exact MorphismProperty.of_isPullback
-      (IsPullback.of_hasPullback p ((Spec (CommRingCat.of ℤ)).fromSpecResidueField
-        (genericPoint (Spec (CommRingCat.of ℤ))))) (inferInstance : Smooth p)
+      (IsPullback.of_hasPullback p ((Spec (CommRingCat.of (ULift.{u} ℤ))).fromSpecResidueField
+        (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ)))))) (inferInstance : Smooth p)
   let : GeometricallyIntegral
-      (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of ℤ)))) :=
+      (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) :=
     Smooth.geometricallyIntegral_of_geometricallyConnected _
   exact geometricallyIntegral_arithmeticGenericFiber_of_functionField_tensor_isField q
     (isField_tensor_algebraicClosure_of_smooth_finite_scheme_cover f p)

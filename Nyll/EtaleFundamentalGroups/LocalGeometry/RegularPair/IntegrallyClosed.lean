@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LocalizedModule.Int
-import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
-import Mathlib.RingTheory.Ideal.Colon
-import Mathlib.RingTheory.Ideal.IsPrincipal
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Regular.RegularSequence
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoFlatness
+module
+
+public import Mathlib.Algebra.Module.LocalizedModule.Int
+public import Mathlib.LinearAlgebra.Dimension.FreeAndStrongRankCondition
+public import Mathlib.RingTheory.Ideal.Colon
+public import Mathlib.RingTheory.Ideal.IsPrincipal
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoFlatness
 
 /-!
 # Integral closedness from a regular parameter pair
@@ -26,6 +28,8 @@ conductor, so dimension-two freeness makes it a free ideal.  Its rank is at
 most one, hence it is principal.  Stability under `z` and cancellation of a
 nonzero generator then show that `z` already lies in `A`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -97,7 +101,7 @@ private theorem conductorIdeal_isWeaklyRegular_pair
   have hxne : x ≠ 0 := by
     intro hx
     have hone : (1 : A) = 0 :=
-      hxRegular.right_eq_zero_of_smul (by simp [hx])
+      hxRegular.right_eq_zero_of_smul (by rw [hx, zero_smul])
     exact one_ne_zero hone
   have hxI : IsSMulRegular I x := hxRegular.submodule I x
   have hyI : IsSMulRegular (QuotSMulTop x I) y := by

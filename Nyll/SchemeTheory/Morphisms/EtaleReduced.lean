@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.Etale.Field
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.Etale.Field
 
 /-!
 # Reducedness of etale morphisms
@@ -21,6 +23,8 @@ base.
 Mathlib defines `Etale`, `GeometricallyReduced`, and the relevant reducedness
 descent theorem, but currently does not provide the implication proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

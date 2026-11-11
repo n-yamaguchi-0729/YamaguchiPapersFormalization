@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Regular.Free
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Regular.Free
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Domains and prime parameters from a regular system
@@ -19,6 +22,8 @@ a Noetherian local ring admitting a regular sequence which generates its
 maximal ideal is a domain, and every member of that regular system is prime.
 No domain or primality conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -123,9 +128,7 @@ theorem regularSystem_quotientHead
     IsRegular S (ps.map (Ideal.Quotient.mk I)) ∧
       Ideal.ofList (ps.map (Ideal.Quotient.mk I)) =
         (maximalIdeal R).map (Ideal.Quotient.mk I) := by
-  dsimp only
-  let I : Ideal R := Ideal.span {p}
-  let S := R ⧸ I
+  intro I S
   have hpMem : p ∈ maximalIdeal R := by
     rw [← hgen]
     exact Ideal.subset_span List.mem_cons_self
@@ -179,29 +182,19 @@ theorem regularSystem_quotientPrefix
           exact le_sup_left
         _ = maximalIdeal R := hgen
     let S := R ⧸ I
-    letI : Nontrivial S :=
+    let : Nontrivial S :=
       Ideal.Quotient.nontrivial_iff.mpr
         (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-    letI : IsLocalRing S :=
+    let : IsLocalRing S :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     IsRegular S (ys.map (Ideal.Quotient.mk I)) ∧
       Ideal.ofList (ys.map (Ideal.Quotient.mk I)) = maximalIdeal S := by
-  dsimp only
-  let I : Ideal R := Ideal.ofList xs
-  have hI : I ≤ maximalIdeal R := by
-    calc
-      I ≤ Ideal.ofList (xs ++ ys) := by
-        rw [Ideal.ofList_append]
-        exact le_sup_left
-      _ = maximalIdeal R := hgen
-  let S := R ⧸ I
+  intro I hI S sharedOwner1 sharedOwner2
   let q : R →+* S := Ideal.Quotient.mk I
-  have hIne : I ≠ ⊤ :=
-    ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI
-  let : Nontrivial S := Ideal.Quotient.nontrivial_iff.mpr hIne
+  let : Nontrivial S := sharedOwner1
   let : IsLocalRing S :=
-    IsLocalRing.of_surjective' q Ideal.Quotient.mk_surjective
+    sharedOwner2
   let : IsNoetherianRing S :=
     isNoetherianRing_of_surjective R S q Ideal.Quotient.mk_surjective
   have hweakQuotient :=

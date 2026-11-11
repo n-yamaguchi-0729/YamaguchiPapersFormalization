@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Ideal.Over
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Ideal.Over
 
 /-!
 # The local map into a localization at a prime above the maximal ideal
@@ -14,6 +16,8 @@ For a local ring `R`, localizing an `R`-algebra at a prime above the maximal
 ideal gives a local map from `R`. This uses the actual localization and
 lying-over data, without integrality or finiteness assumptions.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

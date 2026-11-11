@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedModel
-import Mathlib.RingTheory.Valuation.LocalSubring
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.FieldTheory.AlgebraicClosure
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedModel
+public import Mathlib.RingTheory.Valuation.LocalSubring
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.FieldTheory.AlgebraicClosure
 
 /-!
 # Detecting nonconstant elements by discrete valuations
@@ -19,6 +21,8 @@ A valuation that excludes a nonintegral element admits a finitely generated
 integral model containing the inverse. A dominating discrete valuation ring
 preserves the inverse as a nonunit. This avoids separability restrictions.
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 universe u

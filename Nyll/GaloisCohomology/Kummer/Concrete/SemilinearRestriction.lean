@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Normal.Defs
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Normal.Defs
 
 /-!
 # Restriction of semilinear Galois conjugation
@@ -17,6 +19,8 @@ of scalars. For two field towers, restriction to a normal field supplies the
 lower automorphism and its actual compatibility with the upper automorphism.
 An ambient lift then inherits this lower semilinearity through the tower.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

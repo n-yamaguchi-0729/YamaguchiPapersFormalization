@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
+module
+
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 
 /-!
 # Coordinates on roots of unity
@@ -13,6 +15,8 @@ import Mathlib.NumberTheory.Cyclotomic.CyclotomicCharacter
 Primitive roots identify additive residue classes with roots of unity. These
 coordinates respect reduction and the actual cyclotomic Galois action.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 universe u
@@ -22,6 +26,12 @@ variable {Ω : Type u} [Field Ω]
 noncomputable def primitiveRootCoordinate {n : ℕ} {ζ : Ωˣ}
     (hζ : IsPrimitiveRoot ζ n) (a : ZMod n) : Ωˣ :=
   (hζ.zmodEquivZPowers a).toMul.1
+
+/-- The supplied primitive-root coordinate as an additive coefficient map. -/
+noncomputable def primitiveRootCoordinateAddHom {n : ℕ} {ζ : Ωˣ}
+    (hζ : IsPrimitiveRoot ζ n) : ZMod n →+ Additive Ωˣ :=
+  (Subgroup.subtype (Subgroup.zpowers ζ)).toAdditive.comp
+    hζ.zmodEquivZPowers.toAddMonoidHom
 
 theorem primitiveRootCoordinate_injective {n : ℕ} {ζ : Ωˣ}
     (hζ : IsPrimitiveRoot ζ n) :
@@ -37,6 +47,14 @@ theorem primitiveRootCoordinate_natCast {n : ℕ} {ζ : Ωˣ}
   congrArg (fun z : Additive (Subgroup.zpowers ζ) => z.toMul.1)
     (hζ.zmodEquivZPowers_apply_coe_nat a)
 
+/-- The supplied coordinate retains the signed exponent of an
+integer divisor degree, including negative degrees. -/
+theorem primitiveRootCoordinate_intCast {n : ℕ} {ζ : Ωˣ}
+    (hζ : IsPrimitiveRoot ζ n) (a : ℤ) :
+    primitiveRootCoordinate hζ (a : ZMod n) = ζ ^ a :=
+  congrArg (fun z : Additive (Subgroup.zpowers ζ) => z.toMul.1)
+    (hζ.zmodEquivZPowers_apply_coe_int a)
+
 theorem primitiveRootCoordinate_eq_pow_val {n : ℕ} [NeZero n] {ζ : Ωˣ}
     (hζ : IsPrimitiveRoot ζ n) (a : ZMod n) :
     primitiveRootCoordinate hζ a = ζ ^ a.val := by
@@ -44,6 +62,16 @@ theorem primitiveRootCoordinate_eq_pow_val {n : ℕ} [NeZero n] {ζ : Ωˣ}
     primitiveRootCoordinate hζ a = primitiveRootCoordinate hζ (a.val : ZMod n) :=
       congrArg _ (ZMod.natCast_zmod_val a).symm
     _ = ζ ^ a.val := primitiveRootCoordinate_natCast hζ a.val
+
+/-- Primitive-root coordinates commute with a field embedding and its
+actual map on units. In particular a supplied coherent root is preserved. -/
+theorem primitiveRootCoordinate_map
+    {Ω' : Type*} [Field Ω'] {n : ℕ} [NeZero n] {ζ : Ωˣ}
+    (hζ : IsPrimitiveRoot ζ n) (f : Ω →+* Ω') (a : ZMod n) :
+    Units.map f.toMonoidHom (primitiveRootCoordinate hζ a) =
+      primitiveRootCoordinate
+        (hζ.map_of_injective (Units.map_injective (f := f.toMonoidHom) f.injective)) a := by
+  rw [primitiveRootCoordinate_eq_pow_val, map_pow, primitiveRootCoordinate_eq_pow_val]
 
 theorem primitiveRootCoordinate_add {n : ℕ} {ζ : Ωˣ}
     (hζ : IsPrimitiveRoot ζ n) (a b : ZMod n) :

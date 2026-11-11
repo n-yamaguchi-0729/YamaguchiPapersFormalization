@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
-import Nyll.SchemeTheory.FiniteEtale.SectionsDescent
-import Nyll.SchemeTheory.Affine.AffinizationDescent
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
+public import Nyll.SchemeTheory.FiniteEtale.SectionsDescent
+public import Nyll.SchemeTheory.Affine.AffinizationDescent
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite étale extension by affinization
@@ -21,6 +24,8 @@ affinization once that affinization is an open immersion and its section
 algebra is finite étale. Density of the canonical affinization and properness
 of the comparison with the restricted finite cover prove surjectivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

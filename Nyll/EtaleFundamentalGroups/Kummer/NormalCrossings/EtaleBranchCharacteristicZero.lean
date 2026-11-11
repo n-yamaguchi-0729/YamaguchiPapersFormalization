@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Nyll.SchemeTheory.Divisors.SurjectiveArithmeticBoundary
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticAllBranchCharacteristicZero
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Nyll.SchemeTheory.Divisors.SurjectiveArithmeticBoundary
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Characteristic-zero branches on etale normal-crossings charts
@@ -17,6 +19,8 @@ Height-one primes contract to height-one primes along an etale stalk map.
 Consequently, characteristic zero along every branch of a horizontal
 boundary passes to the strict chart witnessing normal crossings.
 -/
+
+@[expose] public section
 
 noncomputable section
 

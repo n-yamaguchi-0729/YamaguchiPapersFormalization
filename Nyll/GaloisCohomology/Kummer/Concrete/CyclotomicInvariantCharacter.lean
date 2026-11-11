@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
-import Mathlib.GroupTheory.OrderOfElement
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
+public import Mathlib.GroupTheory.OrderOfElement
 
 /-!
 # Cyclotomic eigenclasses give invariant Kummer characters
@@ -16,11 +18,13 @@ the roots of unity, Kummer naturality cancels these two actions. Coprimality
 of the exponent makes the power map injective on the character values.
 -/
 
+@[expose] public section
+
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
-variable (K : Type*) [Field K] [CharZero K]
+variable (K : Type*) [Field K] [PerfectField K]
 
 /-- A power eigenclass whose exponent matches the actual cyclotomic action
 gives a Kummer character fixed by Galois conjugation. -/

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationAction
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationAction
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
 
 /-!
 # The geometric and canonical algebras for a finite etale cover of an away open
@@ -14,6 +16,8 @@ The two algebras are compared on actual maps of global sections and their
 germs. This keeps the canonical scalar structures of the local ramification
 theorems while connecting them to the actual relative normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

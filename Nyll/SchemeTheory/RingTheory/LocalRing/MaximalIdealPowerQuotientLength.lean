@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finite length of maximal-ideal-power quotients
@@ -18,6 +20,8 @@ A positive power of the maximal ideal has that same maximal ideal as its
 only minimal prime.  Its quotient is Artinian, and restriction of scalars
 gives finite length over the original Noetherian local ring.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothConnectedCovers
-import Nyll.SchemeTheory.Divisors.SmoothIrreducibleComponents
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothConnectedCovers
+public import Nyll.SchemeTheory.Divisors.SmoothIrreducibleComponents
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
 /-!
 # Remark 2.3 — 滑らかな境界成分から一般ファイバーの幾何的整性を得る
@@ -50,10 +52,17 @@ normal crossings 点の存在までは主張しない。
 すべての連結有限 étale 被覆の後の幾何的整性を要求する。
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory TopologicalSpace
 open AlgebraicGeometry.FiniteEtale
+
+attribute [local instance] uliftIntegerBaseIsDomain uliftIntegerBaseIsNoetherian
+  uliftIntegerBaseIsIntegrallyClosed
 
 namespace Yamaguchi26SolvableCoverings
 
@@ -62,20 +71,20 @@ namespace Yamaguchi26SolvableCoverings
 一般ファイバーが幾何的整である。これを境界の各素成分に仮定すれば、条件 `(†)` の
 第三条件である全連結有限 étale 被覆後の一般成分の幾何的整性が従う。 -/
 theorem smooth_boundary_2_3 :
-    (∀ (E : Scheme.{0}),
+    (∀ (E : Scheme.{u}),
       Smooth (toIntegers E) →
       LocallyOfFiniteType (toIntegers E) →
       QuasiCompact (toIntegers E) →
       Surjective (toIntegers E) →
       GeometricallyConnected
         ((toIntegers E).fiberToSpecResidueField
-          (genericPoint (Spec (CommRingCat.of ℤ)))) →
+          (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) →
       ∀ (T : FiniteEtale E) (Z : Set T.left)
         (hZ : Z ∈ irreducibleComponents T.left),
         GeometricallyIntegral
           ((T.left.reducedIrreducibleComponentι Z hZ ≫ T.hom ≫ toIntegers E).fiberToSpecResidueField
-            (genericPoint (Spec (CommRingCat.of ℤ))))) ∧
-    (∀ (X : Scheme.{0}) [ConnectedSpace X] [IsLocallyNoetherian X]
+            (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ)))))) ∧
+    (∀ (X : Scheme.{u}) [ConnectedSpace X] [IsLocallyNoetherian X]
       (D : X.EffectiveCartierDivisor),
       IsHorizontal D →
       (∀ (Z : Set D.1.subscheme) (hZ : Z ∈ irreducibleComponents D.1.subscheme),
@@ -85,14 +94,14 @@ theorem smooth_boundary_2_3 :
         Surjective (D.1.componentToBase (toIntegers X) Z hZ) ∧
         GeometricallyConnected
           ((D.1.componentToBase (toIntegers X) Z hZ).fiberToSpecResidueField
-            (genericPoint (Spec (CommRingCat.of ℤ))))) →
+            (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ)))))) →
       HasGeometricallyIntegralGenericComponentsAfterCovers D) := by
-  let : IsDomain Γ(Spec (CommRingCat.of ℤ), ⊤) :=
-    Function.Injective.isDomain (Scheme.ΓSpecIso (CommRingCat.of ℤ)).hom.hom
-      (Scheme.ΓSpecIso (CommRingCat.of ℤ)).commRingCatIsoToRingEquiv.injective
-  let : IsIntegrallyClosed Γ(Spec (CommRingCat.of ℤ), ⊤) :=
+  let : IsDomain Γ(Spec (CommRingCat.of (ULift.{u} ℤ)), ⊤) :=
+    Function.Injective.isDomain (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).hom.hom
+      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).commRingCatIsoToRingEquiv.injective
+  let : IsIntegrallyClosed Γ(Spec (CommRingCat.of (ULift.{u} ℤ)), ⊤) :=
     IsIntegrallyClosed.of_equiv
-      (Scheme.ΓSpecIso (CommRingCat.of ℤ)).symm.commRingCatIsoToRingEquiv
+      (Scheme.ΓSpecIso (CommRingCat.of (ULift.{u} ℤ))).symm.commRingCatIsoToRingEquiv
   constructor
   · intro E hsm _ hqc hsurj hgc T Z hZ
     let : Smooth (toIntegers E) := hsm
@@ -100,7 +109,7 @@ theorem smooth_boundary_2_3 :
     let : Surjective (toIntegers E) := hsurj
     let : GeometricallyConnected
         ((toIntegers E).fiberToSpecResidueField
-          (genericPoint (Spec (CommRingCat.of ℤ)))) := hgc
+          (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) := hgc
     let i : T.left.reducedIrreducibleComponent Z hZ ⟶ T.left :=
       T.left.reducedIrreducibleComponentι Z hZ
     let : IsFiniteEtale i :=
@@ -122,14 +131,14 @@ theorem smooth_boundary_2_3 :
     obtain ⟨W, hW, himage⟩ :=
       D.1.exists_irreducibleComponent_image_comapSubschemeTo_eq Y.hom Z hZ
     obtain ⟨hsm, _, hqc, hsurj, hgc⟩ := hD W hW
-    let E : Scheme := D.1.subscheme.reducedIrreducibleComponent W hW
-    let p : E ⟶ Spec (CommRingCat.of ℤ) :=
+    let E : Scheme.{u} := D.1.subscheme.reducedIrreducibleComponent W hW
+    let p : E ⟶ Spec (CommRingCat.of (ULift.{u} ℤ)) :=
       D.1.componentToBase (toIntegers X) W hW
     let : Smooth p := hsm
     let : QuasiCompact p := hqc
     let : Surjective p := hsurj
     let : GeometricallyConnected
-        (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of ℤ)))) := hgc
+        (p.fiberToSpecResidueField (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ))))) := hgc
     let f : (D.1.comap Y.hom).subscheme ⟶ D.1.subscheme := D.1.comapSubschemeTo Y.hom
     let c : (D.1.comap Y.hom).subscheme.reducedIrreducibleComponent Z hZ ⟶ E :=
       (D.1.comap Y.hom).subscheme.reducedIrreducibleComponentMap f Z hZ W hW himage
@@ -142,11 +151,11 @@ theorem smooth_boundary_2_3 :
     let : ConnectedSpace C.left := inferInstanceAs
       (ConnectedSpace ((D.1.comap Y.hom).subscheme.reducedIrreducibleComponent Z hZ))
     have hbase : (D.1.comap Y.hom).componentToBase (toIntegers Y.left) Z hZ = c ≫ p := by
-      rw [show toIntegers Y.left = Y.hom ≫ toIntegers X from specZIsTerminal.hom_ext _ _]
+      rw [show toIntegers Y.left = Y.hom ≫ toIntegers X from specULiftZIsTerminal.hom_ext _ _]
       exact D.1.componentToBase_comap_eq Y.hom (toIntegers X) Z hZ W hW himage
     change GeometricallyIntegral
       (((D.1.comap Y.hom).componentToBase (toIntegers Y.left) Z hZ).fiberToSpecResidueField
-        (genericPoint (Spec (CommRingCat.of ℤ))))
+        (genericPoint (Spec (CommRingCat.of (ULift.{u} ℤ)))))
     rw [hbase]
     exact (open _root_.EtaleFundamentalGroups in
       geometricallyIntegral_genericFiber_of_connected_finiteEtale_over_smooth_integers p C)

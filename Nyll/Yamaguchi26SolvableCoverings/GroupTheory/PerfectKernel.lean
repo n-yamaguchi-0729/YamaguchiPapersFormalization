@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.Basic
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
-import Mathlib.GroupTheory.IsPerfect
+module
+
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.Basic
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
+public import Mathlib.GroupTheory.IsPerfect
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-!
 # 定理 2.5 に用いる位相的完全核の群論
@@ -23,6 +27,8 @@ import Mathlib.GroupTheory.IsPerfect
 局所アーベル化の単射性を実際に導く必要がある。
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped ProCGroupsSolvableQuotients
@@ -31,11 +37,11 @@ namespace Yamaguchi26SolvableCoverings
 
 open ProCGroups.FiniteStepSolvableQuotients
 
-universe u
+universe u v w
 
 /-- 局所アーベル化が単射である全射の核は、任意の離散商の中で完全群を像に持つ。 -/
 theorem isPerfect_kernel_image_of_openNormalAbelianizationInjective
-    {G Q S : Type u}
+    {G : Type u} {Q : Type v} {S : Type w}
     [TopologicalSpace G] [Group G] [IsTopologicalGroup G] [CompactSpace G]
     [TopologicalSpace Q] [Group Q] [IsTopologicalGroup Q] [T2Space Q]
     [TopologicalSpace S] [Group S] [DiscreteTopology S]
@@ -112,7 +118,7 @@ theorem isPerfect_kernel_image_of_openNormalAbelianizationInjective
 
 /-- 局所アーベル化の単射性から、核自身の位相についての完全性を導く。 -/
 theorem kernel_topologicallyPerfect_of_openNormalAbelianizationInjective
-    {G Q : Type u}
+    {G : Type u} {Q : Type v}
     [TopologicalSpace G] [Group G] [IsTopologicalGroup G]
     [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]
     [TopologicalSpace Q] [Group Q] [IsTopologicalGroup Q] [T2Space Q]

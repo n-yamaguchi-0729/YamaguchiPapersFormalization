@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationSpreading
-import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationSpreading
+public import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite normalization over a principal affine chart
@@ -18,6 +20,8 @@ the canonical source-normalization isomorphism preserves every base change.
 The ring-level spreading theorem therefore applies to the original scheme
 normalization, without a global normality assumption on the affine base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

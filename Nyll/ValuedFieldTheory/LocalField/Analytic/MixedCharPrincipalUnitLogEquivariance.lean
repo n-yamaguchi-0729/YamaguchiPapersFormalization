@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.AutomorphismEquivariance
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.AutomorphismEquivariance
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
 
 /-!
 # Equivariance of the mixed-characteristic principal-unit logarithm
@@ -16,6 +18,8 @@ group, and its field action commutes with the logarithm of that unit. Both
 the action and the continuity used to transport the infinite sum are supplied
 by the preceding constructions.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

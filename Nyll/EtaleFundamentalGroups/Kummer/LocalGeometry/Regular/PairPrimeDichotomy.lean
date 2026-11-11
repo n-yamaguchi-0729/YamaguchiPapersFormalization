@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.KrullDimension.Zero
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.MaximalAdicCompletionGeometry
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Mathlib.RingTheory.KrullDimension.Zero
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.MaximalAdicCompletionGeometry
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-!
 # Prime ideals containing one member of a regular pair
@@ -19,6 +21,8 @@ branch rules out the second alternative and hence identifies the completed
 branch without a formal-fibre comparison hypothesis.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Kummer
@@ -30,7 +34,7 @@ universe u
 
 /-- Domainhood needed to state the DVR structure on the completed
 parameter quotient. -/
-private theorem completionQuotientFirstRegularParameter_isDomain
+theorem completionQuotientFirstRegularParameter_isDomain
     {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     {x y : R}
     (hreg : IsRegular R [x, y])

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutContinuous
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutContinuous
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # The Krull topology on separable closures across completion
@@ -16,6 +18,8 @@ Restriction is continuous. The source of restriction is the compact Galois
 group of a separable closure, and the target is Hausdorff, so its inverse
 is continuous as well. Both maps retain the chosen embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 

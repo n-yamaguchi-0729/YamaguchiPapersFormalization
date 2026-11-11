@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Ring.TransferInstance
-import Mathlib.Algebra.Ring.MinimalAxioms
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.Algebra.Ring.TransferInstance
+public import Mathlib.Algebra.Ring.MinimalAxioms
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Module completion and completion at the mapped ideal
@@ -21,6 +23,8 @@ the canonical comparison directly at every finite level and passes it to the
 inverse limits.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups
@@ -32,7 +36,8 @@ universe uR uS
 variable {R : Type uR} [CommRing R]
 variable {S : Type uS} [CommRing S] [Algebra R S]
 
-private theorem pow_smul_top_eq_restrictScalars_map_pow
+/-- The module filtration is the mapped-ideal filtration after restricting scalars. -/
+theorem pow_smul_top_eq_restrictScalars_map_pow
     (I : Ideal R) (n : ℕ) :
     (I ^ n • ⊤ : Submodule R S) =
       ((I.map (algebraMap R S)) ^ n : Ideal S).restrictScalars R := by
@@ -41,7 +46,7 @@ private theorem pow_smul_top_eq_restrictScalars_map_pow
 
 /-- The finite-level linear equivalence between the quotient used in the
 module completion and the quotient used in the mapped-ideal ring completion. -/
-private noncomputable def mappedIdealQuotientEquiv
+noncomputable def mappedIdealQuotientEquiv
     (I : Ideal R) (n : ℕ) :
     (S ⧸ (I ^ n • ⊤ : Submodule R S)) ≃ₗ[R]
       S ⧸ (((I.map (algebraMap R S)) ^ n : Ideal S) • ⊤ : Submodule S S) :=
@@ -61,7 +66,8 @@ private theorem mappedIdealQuotientEquiv_mk
         (p := (((I.map (algebraMap R S)) ^ n : Ideal S) • ⊤ : Submodule S S)) x := by
   rfl
 
-private theorem mappedIdealQuotientEquiv_transitionMap
+/-- The quotient comparison commutes with transition maps. -/
+theorem mappedIdealQuotientEquiv_transitionMap
     (I : Ideal R) {m n : ℕ} (hmn : m ≤ n)
     (x : S ⧸ (I ^ n • ⊤ : Submodule R S)) :
     AdicCompletion.transitionMap (I.map (algebraMap R S)) S hmn
@@ -71,7 +77,8 @@ private theorem mappedIdealQuotientEquiv_transitionMap
   induction x using Quotient.inductionOn' with
   | _ x => rfl
 
-private theorem mappedIdealQuotientEquiv_symm_transitionMap
+/-- The inverse quotient comparison commutes with transition maps. -/
+theorem mappedIdealQuotientEquiv_symm_transitionMap
     (I : Ideal R) {m n : ℕ} (hmn : m ≤ n)
     (x : S ⧸ (((I.map (algebraMap R S)) ^ n : Ideal S) • ⊤ : Submodule S S)) :
     AdicCompletion.transitionMap I S hmn
@@ -268,8 +275,12 @@ theorem mappedIdealCompletionLinearEquiv_smul
           (Submodule.Quotient.mk
             (p := (I ^ n • ⊤ : Submodule R S)) x)
     rw [LinearMap.reduceModIdeal_apply, mappedIdealQuotientEquiv_mk,
-      mappedIdealQuotientEquiv_mk, mappedIdealQuotientEquiv_mk]
-    simp [Algebra.smul_def]
+      mappedIdealQuotientEquiv_mk, mappedIdealQuotientEquiv_mk, Algebra.linearMap_apply]
+    let J : Ideal S := ((I.map (algebraMap R S)) ^ n : Ideal S) • (⊤ : Submodule S S)
+    change Ideal.Quotient.mk J (r • x) =
+      Ideal.Quotient.mk J (algebraMap R S r) * Ideal.Quotient.mk J x
+    exact (congrArg (Ideal.Quotient.mk J) (Algebra.smul_def r x)).trans
+      (map_mul (Ideal.Quotient.mk J) (algebraMap R S r) x)
 
 /-- The canonical comparison as a linear equivalence over the completed base
 ring. -/
@@ -324,24 +335,27 @@ theorem tensorProductToMappedIdealCompletionAlgHom_apply
   | tmul r s =>
       simp [mappedIdealCompletionLinearEquiv_smul,
         mappedIdealCompletionLinearEquiv_of]
-  | add x y hx hy => simp [hx, hy]
+  | add x y hx hy => simp only [map_add, hx, hy]
 
 end CompletedBaseComparison
 
+/-- Multiplication transported from the mapped-ideal ring completion. -/
 @[reducible]
-private noncomputable def mappedIdealCompletionMul
+noncomputable def mappedIdealCompletionMul
     (I : Ideal R) : Mul (AdicCompletion I S) :=
   ⟨fun x y ↦ (mappedIdealCompletionLinearEquiv I).symm
     (mappedIdealCompletionLinearEquiv I x * mappedIdealCompletionLinearEquiv I y)⟩
 
+/-- The unit transported from the mapped-ideal ring completion. -/
 @[reducible]
-private noncomputable def mappedIdealCompletionOne
+noncomputable def mappedIdealCompletionOne
     (I : Ideal R) : One (AdicCompletion I S) :=
   ⟨(mappedIdealCompletionLinearEquiv I).symm 1⟩
 
 section MappedIdealCompletionRingConstruction
 
-private theorem mappedIdealCompletionLinearEquiv_mul
+/-- The completion comparison preserves the transported multiplication. -/
+theorem mappedIdealCompletionLinearEquiv_mul
     (I : Ideal R)
     (x y : AdicCompletion I S) :
     letI : Mul (AdicCompletion I S) := mappedIdealCompletionMul I
@@ -349,7 +363,8 @@ private theorem mappedIdealCompletionLinearEquiv_mul
       mappedIdealCompletionLinearEquiv I x * mappedIdealCompletionLinearEquiv I y := by
   exact (mappedIdealCompletionLinearEquiv I).apply_symm_apply _
 
-private theorem mappedIdealCompletionLinearEquiv_one
+/-- The completion comparison preserves the transported unit. -/
+theorem mappedIdealCompletionLinearEquiv_one
     (I : Ideal R) :
     letI : One (AdicCompletion I S) := mappedIdealCompletionOne I
     mappedIdealCompletionLinearEquiv I (1 : AdicCompletion I S) = 1 := by
@@ -390,12 +405,12 @@ section MappedIdealCompletionTransportedRing
 the ring completion along the mapped ideal `I S`. -/
 noncomputable def mappedIdealCompletionRingEquiv
     (I : Ideal R) :
-    letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+    let : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
     AdicCompletion I S ≃+* AdicCompletion (I.map (algebraMap R S)) S := by
   let e : AdicCompletion I S ≃
       AdicCompletion (I.map (algebraMap R S)) S :=
     (mappedIdealCompletionLinearEquiv I).toEquiv
-  letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+  intro sharedOwner1
   exact
     { toEquiv := e
       map_add' := fun x y ↦ by
@@ -417,9 +432,9 @@ canonical comparison with the mapped-ideal ring completion. -/
 @[reducible]
 noncomputable def mappedIdealCompletionAlgebra
     (I : Ideal R) :
-    letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+    let : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
     Algebra R (AdicCompletion I S) := by
-  letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+  intro sharedDefinitionOwner1
   let e : AdicCompletion I S ≃+*
       AdicCompletion (I.map (algebraMap R S)) S :=
     mappedIdealCompletionRingEquiv I
@@ -430,11 +445,11 @@ noncomputable def mappedIdealCompletionAlgebra
 `I` and the ring completion along the mapped ideal `I S`. -/
 noncomputable def mappedIdealCompletionAlgEquiv
     (I : Ideal R) :
-    letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+    let : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
     letI : Algebra R (AdicCompletion I S) := mappedIdealCompletionAlgebra I
     AdicCompletion I S ≃ₐ[R]
       AdicCompletion (I.map (algebraMap R S)) S := by
-  letI : CommRing (AdicCompletion I S) := mappedIdealCompletionCommRing I
+  intro sharedDefinitionOwner1
   let e : AdicCompletion I S ≃+*
       AdicCompletion (I.map (algebraMap R S)) S :=
     mappedIdealCompletionRingEquiv I

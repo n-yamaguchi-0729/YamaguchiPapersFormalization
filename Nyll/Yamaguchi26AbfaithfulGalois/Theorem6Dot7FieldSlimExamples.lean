@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FieldSlim
-import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Properties
-import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierNonSurjective
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedConsequences
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.Subpadic
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedPositiveChar
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedRoots
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FieldSlim
+public import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Properties
+public import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierNonSurjective
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedConsequences
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.Subpadic
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedPositiveChar
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedRoots
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Applications of the field slimness criterion
@@ -24,6 +26,8 @@ The toral Kummer condition is imposed on actual units of every finite extension.
 The higher-local-field Artin--Schreier condition follows directly from the
 first discrete valuation, using a reciprocal uniformizer.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

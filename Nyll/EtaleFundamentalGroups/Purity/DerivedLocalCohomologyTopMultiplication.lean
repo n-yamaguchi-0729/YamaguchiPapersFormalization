@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedTop
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedTop
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Multiplication on top maximal-support local cohomology
@@ -21,6 +23,8 @@ nonzero member of the maximal ideal is regular, and its quotient has zero
 top local cohomology by the annihilated-coefficient theorem.  Exactness
 therefore makes multiplication by that member surjective in top degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

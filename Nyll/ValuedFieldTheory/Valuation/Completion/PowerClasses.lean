@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.WeakApproximation
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
-import Nyll.ValuedFieldTheory.Valuation.Henselian.PrincipalUnitRoots
-import Mathlib.Topology.Algebra.IsOpenUnits
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WeakApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.PrincipalUnitRoots
+public import Mathlib.Topology.Algebra.IsOpenUnits
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Simultaneous prescription of power classes in completions
@@ -18,6 +20,8 @@ multiplicative power classes is represented by a single global unit.
 Hensel's lemma supplies the open local power subgroups; weak approximation
 then supplies the global representative.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

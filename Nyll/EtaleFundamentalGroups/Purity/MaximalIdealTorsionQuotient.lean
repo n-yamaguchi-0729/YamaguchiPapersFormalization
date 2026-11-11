@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Removing maximal-ideal-power torsion
@@ -25,6 +27,8 @@ is zero.
 For the maximal ideal of a local ring, this excludes the maximal ideal
 from the associated primes of the quotient.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

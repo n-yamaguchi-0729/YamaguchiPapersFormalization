@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticCondition
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticCondition
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 
 /-!
 # Arithmetic-boundary conclusions for Galois pullbacks
@@ -13,6 +15,8 @@ import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 The declarations in this module are the categorical Galois-cover layer over
 the general finite étale divisor lemmas in SchemeTheory.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -86,7 +90,7 @@ lemma galoisPullback_regularAlong_and_componentConclusions_overIntegers
     (D : EffectiveCartierDivisor X)
     (hD : D.SatisfiesResidueCharacteristicTwoBoundaryConditionOverIntegers)
     (Y' : FiniteEtale X) (hY' : CategoryTheory.PreGaloisCategory.IsGalois Y') :
-    letI : IsDomain (ULift.{u} ℤ) :=
+    let : IsDomain (ULift.{u} ℤ) :=
       (ULift.ringEquiv : ULift.{u} ℤ ≃+* ℤ).toMulEquiv.isDomain ℤ
     (D.1.comap Y'.hom).IsAmbientRegularAlongSupport ∧
       ∀ (Z : Set (D.1.comap Y'.hom).subscheme)
@@ -101,8 +105,7 @@ lemma galoisPullback_regularAlong_and_componentConclusions_overIntegers
                 ((D.1.comap Y'.hom).subschemeι y)) = 2 ∧
                 (D.1.comap Y'.hom).IsNormalCrossingsAt
                   ((D.1.comap Y'.hom).subschemeι y) := by
-  let : IsDomain (ULift.{u} ℤ) :=
-    (ULift.ringEquiv : ULift.{u} ℤ ≃+* ℤ).toMulEquiv.isDomain ℤ
+  intro sharedOwner1
   apply galoisPullback_regularAlong_and_componentConclusions D
     (specULiftZIsTerminal.from X) _ Y' hY'
   exact hD

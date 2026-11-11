@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -18,6 +20,8 @@ extended equivalence. Both compatibility squares with a later coefficient
 algebra are retained. No additional algebra structure between the two
 coefficient rings is installed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

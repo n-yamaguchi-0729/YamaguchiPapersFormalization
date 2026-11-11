@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceDisconnectedReduction
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceDisconnectedReduction
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Direct algebra on the complete-local connectedness frontier
@@ -16,6 +18,8 @@ the principal element is nonzero.  The component ideals also determine two
 nonmaximal minimal primes over the principal ideal; Krull's principal ideal
 theorem bounds both of their heights by one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisLiftComparison
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisLiftComparison
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
 
 /-!
 # Comparing restriction and semilinear absolute Galois conjugation
@@ -13,6 +15,8 @@ import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
 Restriction along the inverse field automorphism and conjugation by a chosen
 extension of the field automorphism agree on all commutative characters.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

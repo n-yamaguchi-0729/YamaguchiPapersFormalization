@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerQuotientLength
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.LocalRing.MaximalIdealPowerQuotientLength
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finite length of finite maximal-ideal-power torsion modules
@@ -21,6 +23,8 @@ A finite generating set bounds the ideal-power exponents needed to kill
 individual elements.  In the local Noetherian case the module is then finite
 over an Artinian maximal-ideal-power quotient, so it has finite length.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
-import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
+public import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Injectivity on mod-prime abelianizations of valued completions
@@ -16,6 +18,8 @@ import Mathlib.FieldTheory.Galois.Profinite
 When the prime is different from the field characteristic, extension of
 completion characters separates every class in the local abelian quotient.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open ValuationTheory.DiscreteValuationField ProCGroups.Abelian

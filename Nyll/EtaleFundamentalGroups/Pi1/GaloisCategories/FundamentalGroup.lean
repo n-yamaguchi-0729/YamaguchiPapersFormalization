@@ -28,7 +28,7 @@ open CategoryTheory
 
 @[simp]
 lemma CategoryTheory.Aut.one_hom {C : Type*} [Category C] (X : C) :
-    (1 : Aut X).hom = (1 : End X) := rfl
+    (1 : Aut X).asIso.hom = (1 : End X).asHom := rfl
 
 namespace CategoryTheory.PreGaloisCategory
 
@@ -38,8 +38,18 @@ variable (G : Type*) [Group G] [∀ X, MulAction G (F.obj X)] [IsNaturalSMul F G
 
 lemma ker_toAut : (toAut F G).ker = ⨅ (X : C) (x : F.obj X), MulAction.stabilizer G x := by
   ext g : 1
-  simp [MonoidHom.mem_ker, Subgroup.mem_iInf, Aut.ext_iff, NatTrans.ext'_iff, funext_iff,
-    FintypeCat.hom_ext_iff]
+  simp only [MonoidHom.mem_ker, Subgroup.mem_iInf, MulAction.mem_stabilizer_iff]
+  constructor
+  · intro h X x
+    exact congrArg (fun a : Aut F => a.asIso.hom.app X x) h
+  · intro h
+    apply Aut.ext
+    apply Iso.ext
+    apply NatTrans.ext
+    funext X
+    apply FintypeCat.hom_ext
+    intro x
+    exact h X x
 
 variable [GaloisCategory C] [FiberFunctor F]
 variable [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G]

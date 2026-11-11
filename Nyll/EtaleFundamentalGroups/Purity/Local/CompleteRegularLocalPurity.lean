@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteRegularLocalPurity
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteRegularLocalPurity
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
 
 /-!
 # Purity for complete regular local rings
@@ -14,6 +17,8 @@ import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
 Regularity supplies both integral closedness and a generating regular system
 of parameters, giving punctured purity without either as an extra hypothesis.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

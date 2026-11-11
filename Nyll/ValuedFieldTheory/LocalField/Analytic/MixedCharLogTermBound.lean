@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.IntegerValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.IntegerValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
 
 /-!
 # A uniform bound for mixed-characteristic logarithm terms
@@ -15,6 +17,8 @@ If `v(x) < 1`, the integer valuation of the `n`th logarithm term is at least
 `n + 1 - e * v_p(n + 1)`. This bound is independent of `x`. The scale `e` and
 the denominator values are obtained from the actual residue prime.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

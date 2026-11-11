@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupFaithfulness
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Perfect
-import Mathlib.GroupTheory.Index
-import Mathlib.Topology.Algebra.Group.ClosedSubgroup
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupFaithfulness
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Topology.Algebra.Group.ClosedSubgroup
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Complete mixed-characteristic faithfulness for open normal subgroups
@@ -22,6 +24,8 @@ Infinite Galois correspondence constructs the finite Galois fixed field of
 an open normal subgroup. Its degree is the given index, so the established
 field detection applies to the subgroup's actual pro-p residual quotient.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

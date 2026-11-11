@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
 
 /-!
 # Relative normalization along an actual commuting square
@@ -13,6 +15,8 @@ A commuting square induces a map on relative normalizations, by applying the
 universal property to the pullback of the target normalization. The map
 preserves the base and commutes with compatible source endomorphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -27,7 +31,8 @@ variable {A B S T : Scheme.{u}}
   [QuasiCompact g] [QuasiSeparated g]
   (a : A ⟶ B) (b : S ⟶ T) (h : a ≫ g = f ≫ b)
 
-private def normalizationSquareLift :
+/-- The universal lift to the pullback of the target normalization. -/
+def normalizationSquareLift :
     f.normalization ⟶ pullback g.fromNormalization b :=
   f.normalizationDesc
     (pullback.lift (a ≫ g.toNormalization) f (by

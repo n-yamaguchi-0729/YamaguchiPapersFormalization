@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinianZero
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalarKernelArtinian
-import Nyll.EtaleFundamentalGroups.Purity.PrimeQuotientCoefficients
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinianZero
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalarKernelArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.PrimeQuotientCoefficients
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Artinianness of maximal-support local cohomology
@@ -26,6 +28,8 @@ cohomology.  Every other prime factor has a regular scalar in the maximal
 ideal, and its scalar quotient reduces the degree.  The coefficient
 exact sequence preserves Artinianness under finite extensions.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

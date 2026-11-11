@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechInjectiveHomotopy
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationDegreeZero
-import Nyll.EtaleFundamentalGroups.Purity.CechTensorCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationTensorCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionSum
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationHomotopy
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.Monoidal
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.Algebra.Homology.BifunctorAssociator
-import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechInjectiveHomotopy
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationDegreeZero
+public import Nyll.EtaleFundamentalGroups.Purity.CechTensorCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationTensorCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionSum
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationHomotopy
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Algebra.Homology.BifunctorAssociator
+public import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 
 /-!
 # Degree-zero maps in the injective Čech contraction
@@ -25,6 +27,8 @@ import Mathlib.Tactic.CategoryTheory.Monoidal.Basic
 The degree-zero map of the injective Čech contraction is identified with the
 canonical torsion inclusion using the tensor coefficient comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 

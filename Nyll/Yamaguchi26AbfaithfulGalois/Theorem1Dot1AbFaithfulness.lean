@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.AbFaithfulness
+module
+
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.AbFaithfulness
 
 /-!
 # Definition 1.1: ab-faithfulness
@@ -28,3 +30,4 @@ split problems with that kernel class is
 `HasFiniteSplitAbelianKernelEmbeddingSolutions
   (FiniteGroupClass.abelianExponent q) G`.
 -/
+@[expose] public section

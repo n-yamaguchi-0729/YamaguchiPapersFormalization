@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
 
 /-!
 # Galois invariance of extensions of Henselian discrete valuations
@@ -15,6 +17,8 @@ Every base-field automorphism of a finite extension preserves the actual
 extension valuation. Henselianity supplies uniqueness of the valuation ring;
 the finite order of the automorphism then forces equality of values.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

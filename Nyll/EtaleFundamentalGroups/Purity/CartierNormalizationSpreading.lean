@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalNormalizationSpreading
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationOpenStalk
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.SchemeTheory.Divisors.AffineComplement
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Affine.ChartStalkLocalization
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalNormalizationSpreading
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationOpenStalk
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.SchemeTheory.Divisors.AffineComplement
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Affine.ChartStalkLocalization
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
 
 /-!
 # Spreading finite étale normalization along a Cartier boundary
@@ -27,6 +29,8 @@ transport the given local finite étaleness to the affine normalization.
 The principal spreading theorem and locality on the target then give finite
 étaleness of the original relative normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

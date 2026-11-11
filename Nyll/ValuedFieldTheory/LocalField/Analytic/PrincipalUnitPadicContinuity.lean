@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitValuationTopology
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.ResidueCharPrincipalUnitModule
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitValuationTopology
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.ResidueCharPrincipalUnitModule
 
 /-!
 # Continuity of the principal-unit p-adic action for the actual valuation
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

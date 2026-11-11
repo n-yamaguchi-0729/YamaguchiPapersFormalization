@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Eisenstein irreducibility for an explicit Kummer polynomial
@@ -18,6 +20,8 @@ this irreducibility to its fraction field.  This is the field shared by the
 original domain and its boundary localization, where the Kummer cover is
 etale.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 
@@ -50,9 +54,13 @@ theorem isEisensteinAt_X_pow_sub_C_of_prime
     rw [Ideal.mem_span_singleton]
     by_cases hi₀ : i = 0
     · subst i
-      simp [Polynomial.coeff_X_pow, hn.ne'.symm]
+      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, ite_eq_right hn.ne'.symm,
+        Polynomial.coeff_C_zero, zero_sub]
+      exact dvd_neg.mpr (dvd_refl t)
     · have hin : i ≠ n := Nat.ne_of_lt hi
-      simp [Polynomial.coeff_X_pow, Polynomial.coeff_C, hi₀, hin]
+      rw [Polynomial.coeff_sub, Polynomial.coeff_X_pow, ite_eq_right hin,
+        Polynomial.coeff_C, ite_eq_right hi₀, sub_self]
+      exact dvd_zero t
   · simpa [Polynomial.coeff_X_pow, hn.ne'.symm, Ideal.neg_mem_iff] using
       prime_notMem_span_singleton_sq ht
 

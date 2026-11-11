@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-!
 # Cyclotomic extensions and infinite orientations
@@ -14,6 +18,8 @@ Adjoining every primary root of unity gives the primary cyclotomic
 extension. Infinite degree of that extension forces the absolute
 cyclotomic orientation to have infinite image.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.Algebra.Ring.Hom.InjSurj
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Fraction fields from generic-fibre equivalences
@@ -14,6 +17,8 @@ An equivalence between the generic fibre `K ⊗[R] C` and a field `E`
 canonically embeds `C` in `E`.  When `C` is a domain, this embedding makes
 `E` a fraction field of `C`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,19 +61,19 @@ theorem isFractionRing_of_genericFiberAlgEquiv
     [Field K] [Algebra R K] [IsFractionRing R K]
     [Field E] [Algebra K E] [Algebra R E] [IsScalarTower R K E]
     (e : (K ⊗[R] C) ≃ₐ[K] E) :
-    letI : Algebra C E :=
+    let : Algebra C E :=
       (genericFiberRightAlgHom e).toRingHom.toAlgebra
     IsFractionRing C E := by
   let M : Submonoid C :=
     Algebra.algebraMapSubmonoid C (nonZeroDivisors R)
   let T := K ⊗[R] C
   let f : C →ₐ[R] E := genericFiberRightAlgHom e
-  let : Algebra C E := f.toRingHom.toAlgebra
+  intro genericFiberAlgebra
   have hRE : Function.Injective (algebraMap R E) := by
     rw [IsScalarTower.algebraMap_eq R K E]
     exact (algebraMap K E).injective.comp
       (FaithfulSMul.algebraMap_injective R K)
-  let : IsDomain R := hRE.isDomain _
+  let : IsDomain R := Function.Injective.isDomain (algebraMap R E) hRE
   have hRC : Function.Injective (algebraMap R C) := by
     intro x y hxy
     apply hRE

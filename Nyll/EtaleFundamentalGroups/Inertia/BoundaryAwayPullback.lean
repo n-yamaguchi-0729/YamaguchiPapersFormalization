@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Actual pullback squares for the boundary-away chart
@@ -17,6 +20,8 @@ subscheme as the inverse image of the original complement. Their canonical
 maps form pullback squares. This identifies the source of a base-changed
 relative normalization with the actual finite-etale pullback cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

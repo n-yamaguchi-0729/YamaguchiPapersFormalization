@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.LocalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.LocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
 
 /-!
 # A conditional active root in the exact Galois cover
@@ -15,6 +17,8 @@ Galois branch index and the corresponding localized boundary parameter.
 This leaf performs those two rewrites before specializing the active-root
 fixed-component theorem, keeping the larger full-cover dispatcher small.
 -/
+
+@[expose] public section
 
 noncomputable section
 

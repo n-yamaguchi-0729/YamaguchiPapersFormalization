@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.FiniteLevelCyclotomicInversion
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
+module
+
+public import Mathlib.FieldTheory.Fixed
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.FiniteLevelCyclotomicInversion
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
 
 /-!
 # Cyclotomic inversion for normalization-ideal inertia
@@ -15,6 +18,8 @@ with inertia for the corresponding discrete valuation subring.  Finite-level
 cyclotomic inversion therefore gives conjugacy to inversion directly in the
 ambient finite Galois group.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,7 +70,7 @@ theorem idealInertia_isConj_inv_of_geometricallyIntegral_residue_of_ratEquiv
         ((sigma⁻¹ : P.toAddSubgroup.inertia Gal(L/K)) : Gal(L/K)) := by
   let := IsIntegralClosure.MulSemiringAction A K L B
   let V := idealLocalizationValuationSubring B L P hP
-  let : Finite Gal(L/K) := IsGaloisGroup.finite Gal(L/K) K L
+  have : Finite Gal(L/K) := inferInstance
   let : Finite (inertiaGroup K V) := inferInstance
   obtain ⟨g, hg⟩ :=
     exists_inertiaConjugate_eq_inv_of_geometricallyIntegral_residueExtension_of_ratEquiv

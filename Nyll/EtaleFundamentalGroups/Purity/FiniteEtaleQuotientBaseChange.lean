@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientLift
-import Mathlib.RingTheory.Etale.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientLift
+public import Mathlib.RingTheory.Etale.Finite
 
 /-!
 # Essential surjectivity of finite-etale base change to a quotient
@@ -15,6 +17,8 @@ quotient by an ideal in the maximal ideal comes by base change from the
 original ring.  This file packages the algebraic lifting theorem as the
 canonical categorical `EssSurj` statement for finite-etale algebras.
 -/
+
+@[expose] public section
 
 noncomputable section
 

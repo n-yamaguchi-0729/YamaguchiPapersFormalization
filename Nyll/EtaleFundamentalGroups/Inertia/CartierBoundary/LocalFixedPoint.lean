@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSquare
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSquare
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Boundary-unramifiedness on an actual local Galois component
@@ -18,7 +21,11 @@ canonical component quotient transfer the original boundary condition to
 this point. No normality assumption on the ambient scheme is used.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open CategoryTheory.PreGaloisCategory AlgebraicGeometry.FiniteEtale
@@ -26,7 +33,7 @@ open EtaleFundamentalGroups.Inertia
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
   (D : X.EffectiveCartierDivisor) (E : Component D)
   [IsDomain (X.presheaf.stalk (componentPoint D E))]
   [ConnectedSpace D.1.supportComplement]
@@ -41,7 +48,7 @@ local notation "a₀" => Spec.map (CommRingCat.ofHom (algebraMap R K))
 /-- The original boundary-unramified condition forces the actual normalized
 fixed-point stabilizers of every pointed local Galois component to be trivial. -/
 theorem boundaryUnramified_localComponent_fixed_eq_one
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (xi : Spec (.of Ω) ⟶ Spec (.of K))
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
     (hU : IsBoundaryUnramified D W)
@@ -61,11 +68,12 @@ theorem boundaryUnramified_localComponent_fixed_eq_one
             (IsLocalRing.residue R))))
     (τ : Aut Z)
     (hτ : z ≫ normalizationEndomorphism
-      ((show Z.left ⟶ Spec (.of K) from Z.hom) ≫ a₀) τ.hom.left
+      ((show Z.left ⟶ Spec (.of K) from Z.hom) ≫ a₀) τ.asIso.hom.left
       (by
-        have hw : τ.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
-            (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.hom.w
-        exact (Category.assoc τ.hom.left (show Z.left ⟶ Spec (.of K) from Z.hom) a₀).symm.trans
+        have hw : τ.asIso.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
+            (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.asIso.hom.w
+        exact (Category.assoc τ.asIso.hom.left
+          (show Z.left ⟶ Spec (.of K) from Z.hom) a₀).symm.trans
           (congrArg (fun k => k ≫ a₀) hw)) = z) :
     τ = 1 := by
   let f : Z.left ⟶ Spec (.of R) := (show Z.left ⟶ Spec (.of K) from Z.hom) ≫ a₀
@@ -102,19 +110,19 @@ theorem boundaryUnramified_localComponent_fixed_eq_one
       _ = f ≫ b := (Category.assoc _ _ _).symm
   let q := galoisPullbackComponentQuotientMonoidHom c xi W hW w Z i v hiv hZ hi
   let σ : Aut W := (q (MulOpposite.op τ)).unop
-  have hσ : σ.hom.left ≫ g = g := by
-    have hw : σ.hom.left ≫ (show W.left ⟶ D.1.supportComplement from W.hom) =
-        (show W.left ⟶ D.1.supportComplement from W.hom) := σ.hom.w
+  have hσ : σ.asIso.hom.left ≫ g = g := by
+    have hw : σ.asIso.hom.left ≫ (show W.left ⟶ D.1.supportComplement from W.hom) =
+        (show W.left ⟶ D.1.supportComplement from W.hom) := σ.asIso.hom.w
     exact (Category.assoc _ _ _).symm.trans
       (congrArg (fun k => k ≫ D.1.supportComplement.ι) hw)
-  have hequiv : τ.hom.left ≫ a = a ≫ σ.hom.left := by
+  have hequiv : τ.asIso.hom.left ≫ a = a ≫ σ.asIso.hom.left := by
     have hh := congrArg (fun k : Z ⟶ (FiniteEtale.pullback c).obj W => k.left)
       (galoisPullbackComponentQuotientMonoidHom_equivariant
         c xi W hW w Z i v hiv hZ hi (MulOpposite.op τ))
-    change τ.hom.left ≫ i.left =
-      i.left ≫ ((FiniteEtale.pullback c).map σ.hom).left at hh
-    have hmap : ((FiniteEtale.pullback c).map σ.hom).left ≫
-        Limits.pullback.fst W.hom c = Limits.pullback.fst W.hom c ≫ σ.hom.left :=
+    change τ.asIso.hom.left ≫ i.left =
+      i.left ≫ ((FiniteEtale.pullback c).map σ.asIso.hom).left at hh
+    have hmap : ((FiniteEtale.pullback c).map σ.asIso.hom).left ≫
+        Limits.pullback.fst W.hom c = Limits.pullback.fst W.hom c ≫ σ.asIso.hom.left :=
       Limits.pullback.lift_fst _ _ _
     exact (Category.assoc _ _ _).symm.trans
       ((congrArg (fun k => k ≫ Limits.pullback.fst W.hom c) hh).trans
@@ -130,15 +138,15 @@ theorem boundaryUnramified_localComponent_fixed_eq_one
         (CommRingCat.ofHom (algebraMap (X.residueField (componentPoint D E))
           (AlgebraicClosure (X.residueField (componentPoint D E))))))).trans
       (Category.assoc _ _ _)
-  have hτf : τ.hom.left ≫ f = f := by
-    have hw : τ.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
-        (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.hom.w
+  have hτf : τ.asIso.hom.left ≫ f = f := by
+    have hw : τ.asIso.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
+        (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.asIso.hom.w
     exact (Category.assoc _ _ _).symm.trans (congrArg (fun k => k ≫ a₀) hw)
   have hnfix : (z ≫ n) ≫ normalizationDeck D W σ = z ≫ n := by
-    change (z ≫ n) ≫ normalizationEndomorphism g σ.hom.left hσ = z ≫ n
+    change (z ≫ n) ≫ normalizationEndomorphism g σ.asIso.hom.left hσ = z ≫ n
     rw [Category.assoc, ← normalizationMapOfSquare_endomorphism
-      f g a b hsquare τ.hom.left hτf
-      σ.hom.left hσ hequiv, ← Category.assoc, hτ]
+      f g a b hsquare τ.asIso.hom.left hτf
+      σ.asIso.hom.left hσ hequiv, ← Category.assoc, hτ]
   have hσone : σ = 1 := by
     have hm : σ ∈ finiteCoverInertia D W E (z ≫ n) := hnfix
     rw [hU E (z ≫ n) hnbase] at hm

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Finite
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Nyll.SchemeTheory.FiniteEtale.Algebra.FormallyEtaleNilpotent
+module
+
+public import Mathlib.RingTheory.Etale.Finite
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.FormallyEtaleNilpotent
 
 /-!
 # Finite-etale morphisms across nilpotent base change
@@ -16,6 +18,8 @@ Using the canonical identification
 `(R ⧸ I) ⊗[R] B ≃ B ⧸ I B`, this gives full faithfulness of finite-etale
 base change along a nilpotent quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

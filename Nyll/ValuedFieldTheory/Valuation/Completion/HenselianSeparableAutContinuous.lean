@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutEquiv
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutEquiv
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Continuity of restriction across Henselian completion
@@ -16,6 +18,8 @@ A finite separable intermediate field has a primitive element. The open
 stabilizer of its image is sent into the subgroup fixing that intermediate
 field, proving continuity for the Krull topologies at the identity.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

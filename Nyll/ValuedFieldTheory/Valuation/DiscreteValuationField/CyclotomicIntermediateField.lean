@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.NumberTheory.Cyclotomic.Basic
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.NumberTheory.Cyclotomic.Basic
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Cyclotomic intermediate fields inside an algebraic closure
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 A primitive root in the given closure generates an actual cyclotomic
 intermediate field. The characteristic only needs to avoid the root order.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 
@@ -28,7 +32,7 @@ theorem exists_cyclotomic_intermediateField
     simpa only [map_natCast] using
       (‹NeZero (n : K)›.of_injective (algebraMap K Ω).injective)
   have : IsAlgClosed Ω := IsAlgClosure.isAlgClosed K
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω n
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω n
   exact ⟨IntermediateField.adjoin K {ζ},
     hζ.intermediateField_adjoin_isCyclotomicExtension K⟩
 

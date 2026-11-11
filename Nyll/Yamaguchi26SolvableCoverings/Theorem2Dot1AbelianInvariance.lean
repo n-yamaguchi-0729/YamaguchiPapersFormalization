@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryCyclotomic
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
-import Nyll.EtaleFundamentalGroups.GaloisCategories.DiscreteCharacters
-import Nyll.ProCGroups.Abelian.CharacterDetection
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationKernel
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryCyclotomic
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Quotient
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.DiscreteCharacters
+public import Nyll.ProCGroups.Abelian.CharacterDetection
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationKernel
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # 補題 2.1：境界を除いても基本群のアーベル化は変わらない
@@ -39,6 +43,8 @@ Lean では `D.1.supportComplement` が `U`、その `.ι` が `j` を表す。
 したがって、結論の同型は包含から誘導される写像と一致する。
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -46,9 +52,9 @@ open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 
 namespace Yamaguchi26SolvableCoverings
 
-universe v
+universe u v
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- A finite cover whose deck group embeds into an abelian group has trivial
 boundary stabilizers under the arithmetic hypotheses. Cyclotomic inversion
@@ -95,7 +101,7 @@ theorem abelian_invariance_2_1
     (hnc : D.HasNormalCrossingPointOfResidueCharacteristicOnEachComponent 2)
     (hgeom : HasGeometricallyIntegralGenericComponents D.1) :
     ConnectedSpace D.1.supportComplement ∧
-      ∀ (Ω : Type) [Field Ω] [IsSepClosed Ω]
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
         (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement),
         ∃ e : TopologicalAbelianization π₁ᵉᵗ(point) ≃ₜ*
             TopologicalAbelianization π₁ᵉᵗ(point ≫ D.1.supportComplement.ι),

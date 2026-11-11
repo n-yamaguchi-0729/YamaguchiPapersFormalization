@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntermediateField
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntermediateField
 
 /-!
 # Pure-radical classification over a Henselian local base
@@ -17,6 +19,8 @@ file produces that input from the integral local model used in the
 one-divisor Abhyankar argument: a Henselian base, an integral normal local
 algebra with the same residue field, and its fraction field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -57,7 +61,7 @@ theorem rootOfUnity_mem_fractionBase_of_henselian_of_residue_bijective
   have hfMonic : f.Monic := Polynomial.monic_X_pow_sub_C 1 hn
   have hζIntegral : IsIntegral A ζ := by
     refine ⟨f, hfMonic, ?_⟩
-    simp [f, hζpow]
+    simp only [map_one, eval₂_sub, eval₂_X_pow, hζpow, eval₂_one, sub_self, f]
   let b : B := IsIntegralClosure.mk' B ζ hζIntegral
   have hbL : algebraMap B L b = ζ := by
     exact IsIntegralClosure.algebraMap_mk' B ζ hζIntegral
@@ -83,7 +87,7 @@ theorem rootOfUnity_mem_fractionBase_of_henselian_of_residue_bijective
     simpa using
       (IsLocalRing.residue_ne_zero_iff_isUnit (n : A)).2 hnUnit
   have hfRootResidue : Polynomial.aeval a₀ f = 0 := by
-    simp [f, ha₀pow]
+    simp only [map_one, aeval_sub, map_pow, aeval_X, ha₀pow, sub_self, f]
   have hfDerivativeResidue : Polynomial.aeval a₀ f.derivative ≠ 0 := by
     simpa [f, Polynomial.derivative_X_pow] using
       mul_ne_zero hnResidue (pow_ne_zero (n - 1) ha₀ne)
@@ -101,9 +105,10 @@ theorem rootOfUnity_mem_fractionBase_of_henselian_of_residue_bijective
     rw [← IsLocalRing.ResidueField.map_residue, haResidue, ha₀]
   have hnotUnit : ¬ IsUnit (b - algebraMap A B a) := by
     rw [← IsLocalRing.residue_ne_zero_iff_isUnit]
-    simp [hresidueB]
+    simp only [map_sub, hresidueB, sub_self, ne_eq, not_true_eq_false, not_false_eq_true]
   have hbRoot : (f.map (algebraMap A B)).eval b = 0 := by
-    simp [f, hbpow]
+    simp only [map_one, Polynomial.map_sub, Polynomial.map_pow, map_X, Polynomial.map_one, eval_sub,
+      eval_pow, eval_X, hbpow, eval_one, sub_self, f]
   have hmapRoot :
       (f.map (algebraMap A B)).eval (algebraMap A B a) = 0 := by
     simpa [Polynomial.eval_map] using

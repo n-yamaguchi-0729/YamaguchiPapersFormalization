@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.Maps.Basic
-import Mathlib.Topology.Sober
+module
+
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.Maps.Basic
+public import Mathlib.Topology.Sober
 
 /-!
 # A connected generic fibre of an open morphism
@@ -23,6 +25,8 @@ scheme `E` from the geometric connectedness of `E_ℚ`. Smoothness gives
 universal openness through flatness and local finite presentation. Neither
 properness nor connectedness of every special fibre is assumed here.
 -/
+
+@[expose] public section
 
 namespace AlgebraicGeometry.Scheme.Hom
 

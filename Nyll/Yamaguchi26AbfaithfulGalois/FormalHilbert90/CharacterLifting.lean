@@ -4,10 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CocycleLifting
-import Nyll.ProCGroups.Cohomology.FiniteCharacterExtension
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CocycleLifting
+public import Nyll.ProCGroups.Cohomology.FiniteCharacterExtension
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-! # Lifting characters on the closed kernel of an orientation -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

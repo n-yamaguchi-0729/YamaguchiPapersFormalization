@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianDVF
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableFactorCoefficients
-import Mathlib.Algebra.Polynomial.Lifts
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianDVF
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableFactorCoefficients
+public import Mathlib.Algebra.Polynomial.Lifts
 
 /-!
 # Descending factors from the completion of a Henselian DVF
@@ -15,6 +17,8 @@ The coefficients of a monic divisor of a separable polynomial are separable
 over the original field. Separable algebraic closedness in the completion
 therefore descends the divisor, preserving monicity and divisibility.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

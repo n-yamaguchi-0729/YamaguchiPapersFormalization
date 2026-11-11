@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaStructure
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Prime-order inertia detects residual roots
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 The faithful residue-unit character in characteristic zero turns a nonidentity
 prime-order inertia element into an actual primitive root in the residue field.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

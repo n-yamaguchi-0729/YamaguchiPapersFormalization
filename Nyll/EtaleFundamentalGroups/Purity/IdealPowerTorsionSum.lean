@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.Algebra.Module.Submodule.Equiv
+module
+
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.Algebra.Module.Submodule.Equiv
 
 /-!
 # Power torsion for the sum of two ideals
@@ -16,6 +18,8 @@ for a sum with the intersection of the two power-torsion submodules. This
 also constructs the linear equivalence needed to iterate principal torsion
 in the finite Čech complex.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 
@@ -61,7 +65,8 @@ private theorem primaryComponent_submodule (N : Submodule R M) (J : Ideal R) :
   · rintro ⟨n, hn⟩
     exact ⟨n, fun a ha => Subtype.ext (hn a ha)⟩
 
-private theorem primaryComponent_iterated_eq_comap (I J : Ideal R) :
+/-- Iterated power torsion is the pullback of torsion for the sum ideal. -/
+theorem primaryComponent_iterated_eq_comap (I J : Ideal R) :
     Ideal.primaryComponent (Ideal.primaryComponent M I) J =
       (Ideal.primaryComponent M (I ⊔ J)).comap (Ideal.primaryComponent M I).subtype := by
   rw [primaryComponent_submodule]

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.IntegralClosureGaloisAction
-import Nyll.EtaleFundamentalGroups.Inertia.TrivialNormalizationInertiaEtale
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.FiniteResidueGeometricPoint
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.IntegralClosureGaloisAction
+public import Nyll.EtaleFundamentalGroups.Inertia.TrivialNormalizationInertiaEtale
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.FiniteResidueGeometricPoint
 
 /-!
 # Fixed geometric-point inertia implies étaleness over a DVR
@@ -15,6 +17,8 @@ Every prime over the closed point is represented in the fixed algebraic
 closure of the base residue field. The actual affine normalization comparison
 then turns geometric fixed-point triviality into the ideal inertia condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

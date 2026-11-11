@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Module.Submodule.Map
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Module.Submodule.Map
 
 /-!
 # Essentiality inside an intermediate submodule
@@ -14,6 +16,8 @@ Essentiality of `N` inside `S` can be tested on the ambient submodules
 contained in `S`.  Intersecting an arbitrary submodule with `S` then
 proves transitivity of essential extensions.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

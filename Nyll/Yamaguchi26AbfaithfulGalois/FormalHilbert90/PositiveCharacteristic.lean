@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.TwoCocycleLifting
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.Equivalence
-import Nyll.GaloisCohomology.ArtinSchreier.OpenCohomologyVanishing
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.TwoCocycleLifting
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.Equivalence
+public import Nyll.GaloisCohomology.ArtinSchreier.OpenCohomologyVanishing
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-! # Formal Hilbert 90 in positive characteristic -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u v

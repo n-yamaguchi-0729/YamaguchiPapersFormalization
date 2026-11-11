@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
-import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
-import Nyll.ProCGroups.ProC.InverseLimits.FiniteQuotients
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Mathlib.Algebra.Group.ULift
-import Mathlib.Algebra.Group.TypeTags.Finite
-import Mathlib.GroupTheory.PGroup
-import Mathlib.Topology.Constructions
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
+public import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
+public import Nyll.ProCGroups.ProC.InverseLimits.FiniteQuotients
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Mathlib.Algebra.Group.ULift
+public import Mathlib.Algebra.Group.TypeTags.Finite
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.Topology.Constructions
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Finite p-power characters detect residual abelianized conjugation
@@ -23,6 +25,8 @@ A changed continuous cyclic p-power character factors through the actual
 maximal pro-p residual quotient. Its change therefore detects conjugation
 on the topological abelianization of that quotient.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.ProP
 

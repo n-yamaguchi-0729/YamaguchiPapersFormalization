@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
 
 /-!
 # A normalization prime after localization at a larger base prime
@@ -19,6 +21,8 @@ Unlike `NormalizationPrime`, the contraction of `q` need not equal `P` here.
 This is the form needed when a height-one ramification prime is viewed inside
 a height-two localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

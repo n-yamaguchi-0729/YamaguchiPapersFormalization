@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Instances.AddCircle.Real
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Mathlib.Topology.Instances.AddCircle.Real
+public import Mathlib.Topology.Instances.ZMod
 
 /-! # Finite cyclic characters inside the additive circle -/
+
+@[expose] public section
 
 namespace ZMod
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 
 /-!
 # Degree-zero coefficient maps on power-torsion modules
@@ -22,6 +24,8 @@ torsion, its evaluation map is surjective.  Exactness of the coefficient
 sequence and injectivity of evaluation on the last module then imply
 surjectivity of the degree-zero local-cohomology coefficient map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

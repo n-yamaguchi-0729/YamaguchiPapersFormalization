@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Localization.Integral
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Localization.Integral
 
 /-!
 # Localizing a normalization away from one element
@@ -15,6 +17,8 @@ original normalization.  This file records the comparison as an algebra
 equivalence over the localized base and transports étaleness back to the
 literal away map used by the global exponent obstruction.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -52,11 +56,10 @@ omit [IsDomain A] in
 original map from `A`. -/
 theorem localizationAwayToExtension_isScalarTower
     (f : A) (hf : f ≠ 0) :
-    letI : Algebra (Localization.Away f) L :=
+    let : Algebra (Localization.Away f) L :=
       localizationAwayToExtensionAlgebra (K := K) f hf
     IsScalarTower A (Localization.Away f) L := by
-  let : Algebra (Localization.Away f) L :=
-    localizationAwayToExtensionAlgebra (K := K) f hf
+  intro localizationAlgebra
   exact IsScalarTower.of_algebraMap_eq'
     (IsLocalization.Away.lift_comp f _).symm
 
@@ -68,21 +71,15 @@ noncomputable def localizationIntegralClosureAwayAlgEquiv
     let S := Localization.Away f
     let C := integralClosure A L
     let T := Localization.Away (algebraMap A C f)
-    letI : Algebra S L :=
+    let : Algebra S L :=
       localizationAwayToExtensionAlgebra (K := K) f hf
-    letI : Algebra S T :=
+    let : Algebra S T :=
       (Localization.awayMap (algebraMap A C) f).toAlgebra
     T ≃ₐ[S] integralClosure S L := by
-  dsimp only
-  let S := Localization.Away f
-  let C := integralClosure A L
-  let T := Localization.Away (algebraMap A C f)
-  letI : Algebra S L :=
-    localizationAwayToExtensionAlgebra (K := K) f hf
+  intro S C T localizationAlgebra targetAlgebra
   letI : IsScalarTower A S L :=
     localizationAwayToExtension_isScalarTower (K := K) f hf
   let mapST : S →+* T := Localization.awayMap (algebraMap A C) f
-  letI : Algebra S T := mapST.toAlgebra
   let E := integralClosure S L
   let liftCE : C →ₐ[A] E :=
     { toFun := fun x ↦ ⟨x.1, x.2.tower_top⟩
@@ -94,7 +91,7 @@ noncomputable def localizationIntegralClosureAwayAlgEquiv
         apply Subtype.ext
         simp only [Subalgebra.coe_algebraMap] }
   letI : Algebra C E := liftCE.toRingHom.toAlgebra
-  letI : IsScalarTower A C E :=
+  let hACE : IsScalarTower A C E :=
     IsScalarTower.of_algebraMap_eq fun x ↦ (liftCE.commutes x).symm
   letI : IsScalarTower C E L :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
@@ -111,7 +108,6 @@ noncomputable def localizationIntegralClosureAwayAlgEquiv
   letI : IsLocalization.Away (algebraMap A L f) L :=
     IsLocalization.away_of_isUnit_of_bijective L
       (isUnit_iff_ne_zero.mpr hfL) Function.bijective_id
-  have hACE : IsScalarTower A C E := inferInstance
   letI : IsLocalization.Away (algebraMap A C f) E :=
     @IsLocalization.Away.integralClosure
       A (inferInstance : CommRing A)
@@ -152,21 +148,13 @@ theorem localization_integralClosure_away_etale_of_local_integralClosure_etale
     let S := Localization.Away f
     let C := integralClosure A L
     let T := Localization.Away (algebraMap A C f)
-    letI : Algebra S L :=
+    let : Algebra S L :=
       localizationAwayToExtensionAlgebra (K := K) f hf
-    letI : Algebra S T :=
+    let : Algebra S T :=
       (Localization.awayMap (algebraMap A C) f).toAlgebra
     Algebra.Etale S (integralClosure S L) →
       Algebra.Etale S T := by
-  dsimp only
-  let S := Localization.Away f
-  let C := integralClosure A L
-  let T := Localization.Away (algebraMap A C f)
-  let : Algebra S L :=
-    localizationAwayToExtensionAlgebra (K := K) f hf
-  let : Algebra S T :=
-    (Localization.awayMap (algebraMap A C) f).toAlgebra
-  intro h
+  intro S C T localizationAlgebra targetAlgebra h
   let : Algebra.Etale S (integralClosure S L) := h
   exact Algebra.Etale.of_equiv
     (localizationIntegralClosureAwayAlgEquiv

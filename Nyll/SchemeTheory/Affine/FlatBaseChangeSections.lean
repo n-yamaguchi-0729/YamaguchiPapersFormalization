@@ -5,8 +5,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Andrew Yang, Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.Algebra.Category.Ring.Constructions
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
 # Flat base change on affine sections
@@ -20,6 +22,8 @@ The construction is extracted from Andrew Yang's normalization base-change proof
 https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283ce0ce2c4055aa55/Mathlib/AlgebraicGeometry/Normalization.lean
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

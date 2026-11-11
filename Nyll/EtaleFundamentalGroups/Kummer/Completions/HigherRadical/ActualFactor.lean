@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.Henselian.UniformizerDecomposition
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
 
 /-!
 # Actual higher-radical factors over a complete discrete valuation field
@@ -18,6 +20,8 @@ construction can be applied at the intrinsic ramification index without
 assuming a target valuation ring, its finiteness, a target uniformizer, or a
 root in an algebraic closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

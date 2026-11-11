@@ -11,12 +11,14 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Data.ENat.Lattice
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.Topology.Algebra.Ring.Basic
+module
+
+public import Mathlib.Data.ENat.Lattice
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.Topology.Algebra.Ring.Basic
 
 /-!
 # Adic local algebras and module depth
@@ -25,6 +27,8 @@ A local ring is adic when its maximal ideal defines its topology. Topological fi
 generation means that finitely many algebra generators form a dense subalgebra.
 Module depth is the supremum of the lengths of weakly regular sequences in the maximal ideal.
 -/
+
+@[expose] public section
 
 open IsLocalRing
 

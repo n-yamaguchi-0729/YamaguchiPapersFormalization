@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
-import Mathlib.FieldTheory.Galois.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFTensorMap
+public import Mathlib.FieldTheory.Galois.Basic
 
 /-!
 # Completion of a finite Galois extension with invariant valuation
@@ -17,6 +19,8 @@ If all automorphisms preserve the valuation class, comparison with the canonical
 surjective tensor map shows that the degree is unchanged and that every
 completion automorphism is obtained in this way.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace ValuationTheory.DiscreteValuationField.DVF

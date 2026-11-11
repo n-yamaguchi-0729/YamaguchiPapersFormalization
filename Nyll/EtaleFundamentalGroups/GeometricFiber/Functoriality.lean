@@ -75,7 +75,7 @@ theorem fundamentalGroupHom_eq_conj_of_comparison
     (σ : π₁ᵉᵗ(ξ)) :
     CategoryTheory.PreGaloisCategory.autHomOfCompIso (pullback f) t σ =
       MulAut.conj (G := π₁ᵉᵗ(ξ ≫ f))
-        ((pullbackFiberIso f ξ).symm ≪≫ t)
+        (Aut.of ((pullbackFiberIso f ξ).symm ≪≫ t))
         (fundamentalGroupHom f ξ σ) := by
   exact CategoryTheory.PreGaloisCategory.autHomOfCompIso_eq_conj
     (pullback f) (pullbackFiberIso f ξ) t σ

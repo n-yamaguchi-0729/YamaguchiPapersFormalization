@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharHenselianFaithfulness
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaMaximalQuotient
-import Nyll.ProCGroups.FiniteGroups.PrimeSigma
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationMonotonicity
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.IntermediateField.Algebraic
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharHenselianFaithfulness
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaMaximalQuotient
+public import Nyll.ProCGroups.FiniteGroups.PrimeSigma
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationMonotonicity
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Sigma-ab-faithfulness in mixed characteristic
@@ -27,6 +29,8 @@ constructed from the base. Prime-index detection, including primes distinct
 from the residue characteristic, therefore applies on every open layer.
 The unrestricted prime-order criterion gives the full singleton-p property.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

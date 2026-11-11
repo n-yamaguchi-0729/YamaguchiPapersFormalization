@@ -15,6 +15,7 @@ public import Nyll.SchemeTheory.RingTheory.Idempotents.LocalizationIdempotentFac
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.RingTheory.Localization.Away.AdjoinRoot
 public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Nyll.SchemeTheory.RingTheory.QuotientBaseChange
 
 /-!
 # An integral factor extending an étale section over a Henselian pair

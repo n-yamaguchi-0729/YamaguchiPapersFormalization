@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
 
 /-!
 # Transporting normalization boundary-away maps across field equivalences
@@ -13,6 +15,8 @@ When a map in a scalar tower of fields is bijective, it gives an algebra
 equivalence of the ambient fields.  Mapping integral closures along that
 equivalence transports the literal boundary-away etaleness statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

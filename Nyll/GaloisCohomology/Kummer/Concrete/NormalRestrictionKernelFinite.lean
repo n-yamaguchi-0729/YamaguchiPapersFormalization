@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.GroupTheory.Index
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.GroupTheory.Index
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Finite normal restriction kernels
@@ -19,6 +21,8 @@ subgroup of its actual image in the upper field. If the upper extension
 is normal and the finite extension is Galois, restriction is surjective
 and this kernel has index equal to the field degree.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

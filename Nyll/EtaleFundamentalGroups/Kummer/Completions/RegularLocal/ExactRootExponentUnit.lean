@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
-import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExponentUnit.Core
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootRightComparison
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
+public import Nyll.SchemeTheory.FiniteEtale.Away.AlgEquivTransport
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BoundaryAwayFieldEquiv
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExponentUnit.Core
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootRightComparison
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
 
 /-!
 # The maximal-adic chosen-factor terminal for one selected root
@@ -30,6 +32,8 @@ the finite-etale base `A -> C` gives the literal boundary Away map required by
 the complete chosen-factor exponent terminal.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Kummer
@@ -42,7 +46,7 @@ open ValuationTheory.DiscreteValuationField.ValuedExtension
 
 universe u v w
 
-private theorem compositeAlgebra_toSMul_isScalarTower_exponentUnit
+theorem compositeAlgebra_toSMul_isScalarTower_exponentUnit
     {C K E : Type u}
     [CommRing C] [CommRing K] [CommRing E]
     [Algebra C K] [Algebra K E] :

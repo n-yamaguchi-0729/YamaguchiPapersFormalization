@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Galois.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.Galois.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
 
 /-!
 # Lifting deck transformations from normalized components
@@ -20,6 +22,8 @@ The inverse image of a normalized component is the original finite-etale
 component. This supplies the passage from component preservation on the
 normalization to component preservation on the cover itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -121,39 +125,39 @@ the open immersion of the component and the connected-object axiom. -/
 theorem exists_aut_component_lift_of_preserves_range
     (i : Z ⟶ W) [Mono i] [IsConnected Z]
     (sigma : Aut W)
-    (hpreserve : Set.range (i.left ≫ sigma.hom.left) ⊆ Set.range i.left) :
-    ∃ tau : Aut Z, tau.hom ≫ i = i ≫ sigma.hom := by
+    (hpreserve : Set.range (i.left ≫ sigma.asIso.hom.left) ⊆ Set.range i.left) :
+    ∃ tau : Aut Z, tau.asIso.hom ≫ i = i ≫ sigma.asIso.hom := by
   let : IsOpenImmersion i.left := (FiniteEtale.mono_iff U Z W i).mp inferInstance |>.1
   let l : Z.left ⟶ Z.left :=
-    IsOpenImmersion.lift i.left (i.left ≫ sigma.hom.left) hpreserve
-  have hl : l ≫ i.left = i.left ≫ sigma.hom.left :=
-    IsOpenImmersion.lift_fac i.left (i.left ≫ sigma.hom.left) hpreserve
+    IsOpenImmersion.lift i.left (i.left ≫ sigma.asIso.hom.left) hpreserve
+  have hl : l ≫ i.left = i.left ≫ sigma.asIso.hom.left :=
+    IsOpenImmersion.lift_fac i.left (i.left ≫ sigma.asIso.hom.left) hpreserve
   have hiw : i.left ≫ W.hom = Z.hom := i.w
-  have hsigmaw : sigma.hom.left ≫ W.hom = W.hom := sigma.hom.w
+  have hsigmaw : sigma.asIso.hom.left ≫ W.hom = W.hom := sigma.asIso.hom.w
   have hbase : l ≫ Z.hom = Z.hom := by
     calc
       l ≫ Z.hom = l ≫ i.left ≫ W.hom := by rw [hiw]
-      _ = (i.left ≫ sigma.hom.left) ≫ W.hom := by rw [← Category.assoc, hl]
+      _ = (i.left ≫ sigma.asIso.hom.left) ≫ W.hom := by rw [← Category.assoc, hl]
       _ = Z.hom := by rw [Category.assoc, hsigmaw, hiw]
   let t : Z ⟶ Z := MorphismProperty.Over.homMk l hbase
-  have ht : t ≫ i = i ≫ sigma.hom :=
+  have ht : t ≫ i = i ≫ sigma.asIso.hom :=
     MorphismProperty.Over.Hom.ext hl
   let : Mono t := by
     constructor
     intro T a b hab
     apply (cancel_mono i).mp
-    have hsig : (a ≫ i) ≫ sigma.hom = (b ≫ i) ≫ sigma.hom := by
+    have hsig : (a ≫ i) ≫ sigma.asIso.hom = (b ≫ i) ≫ sigma.asIso.hom := by
       calc
-        (a ≫ i) ≫ sigma.hom = (a ≫ t) ≫ i := by
+        (a ≫ i) ≫ sigma.asIso.hom = (a ≫ t) ≫ i := by
           rw [Category.assoc, ← ht, ← Category.assoc]
         _ = (b ≫ t) ≫ i := congrArg (fun q : T ⟶ Z => q ≫ i) hab
-        _ = (b ≫ i) ≫ sigma.hom := by
+        _ = (b ≫ i) ≫ sigma.asIso.hom := by
           rw [Category.assoc, ht, ← Category.assoc]
-    have hsigmaId : sigma.hom ≫ sigma.inv = 𝟙 W := sigma.hom_inv_id
-    have hcancel := congrArg (fun q : T ⟶ W => q ≫ sigma.inv) hsig
+    have hsigmaId : sigma.asIso.hom ≫ sigma.asIso.inv = 𝟙 W := sigma.asIso.hom_inv_id
+    have hcancel := congrArg (fun q : T ⟶ W => q ≫ sigma.asIso.inv) hsig
     simpa only [Category.assoc, hsigmaId, Category.comp_id] using hcancel
   let : IsIso t := IsConnected.noTrivialComponent Z t (IsConnected.notInitial (X := Z))
-  exact ⟨asIso t, ht⟩
+  exact ⟨Aut.of (asIso t), ht⟩
 
 /-- Normalization of a component inclusion intertwines any commuting
 endomorphisms of the actual covers. -/
@@ -187,25 +191,25 @@ theorem exists_aut_component_lift_of_fixes_normalized_geometricPoint
     (i : Z ⟶ W) [Mono i] [IsConnected Z] [IsIntegral Z.left]
     {Omega : Type u} [Field Omega]
     (z : Spec (.of Omega) ⟶ (i.left ≫ f).normalization)
-    (sigma : Aut W) (hsigma : sigma.hom.left ≫ f = f)
+    (sigma : Aut W) (hsigma : sigma.asIso.hom.left ≫ f = f)
     (hfix : z ≫ normalizationComponentInclusion f i ≫
-        normalizationEndomorphism f sigma.hom.left hsigma =
+        normalizationEndomorphism f sigma.asIso.hom.left hsigma =
       z ≫ normalizationComponentInclusion f i) :
-    ∃ (tau : Aut Z) (htau : tau.hom ≫ i = i ≫ sigma.hom),
-      z ≫ normalizationEndomorphism (i.left ≫ f) tau.hom.left (by
+    ∃ (tau : Aut Z) (htau : tau.asIso.hom ≫ i = i ≫ sigma.asIso.hom),
+      z ≫ normalizationEndomorphism (i.left ≫ f) tau.asIso.hom.left (by
         have h := congrArg (fun q : Z ⟶ W => q.left) htau
-        change tau.hom.left ≫ i.left = i.left ≫ sigma.hom.left at h
+        change tau.asIso.hom.left ≫ i.left = i.left ≫ sigma.asIso.hom.left at h
         rw [← Category.assoc, h, Category.assoc, hsigma]) = z := by
   obtain ⟨tau, htau⟩ := exists_aut_component_lift_of_preserves_range i sigma
     (range_comp_subset_of_fixes_normalized_component_geometricPoint
-      f i z sigma.hom.left hsigma hfix)
+      f i z sigma.asIso.hom.left hsigma hfix)
   refine ⟨tau, htau, ?_⟩
-  have htauLeft : tau.hom.left ≫ i.left = i.left ≫ sigma.hom.left :=
+  have htauLeft : tau.asIso.hom.left ≫ i.left = i.left ≫ sigma.asIso.hom.left :=
     congrArg (fun q : Z ⟶ W => q.left) htau
   apply (cancel_mono (normalizationComponentInclusion f i)).mp
   rw [Category.assoc,
-    normalizationComponentInclusion_endomorphism f i sigma.hom.left hsigma
-      tau.hom.left htauLeft]
+    normalizationComponentInclusion_endomorphism f i sigma.asIso.hom.left hsigma
+      tau.asIso.hom.left htauLeft]
   exact hfix
 
 end EtaleFundamentalGroups.Inertia

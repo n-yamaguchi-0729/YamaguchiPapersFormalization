@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Adic completion commutes with localization at a maximal ideal
@@ -17,6 +19,8 @@ of `Localization.AtPrime Q` by the `n`-th power of its maximal ideal.  We prove
 that these finite-level equivalences commute with the power transition maps and
 lift them to an equivalence of adic completions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -97,12 +101,14 @@ private theorem factorPow_evalₐ
         (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
-private noncomputable def completionToAtPrimeQuotientRingHom (n : ℕ) :
+/-- Map the original completion to a quotient of the localization by a maximal-ideal power. -/
+noncomputable def completionToAtPrimeQuotientRingHom (n : ℕ) :
     AdicCompletion Q S →+* S_Q ⧸ m_Q ^ n :=
   (IsLocalization.AtPrime.equivQuotMaximalIdealPow Q S_Q n).toRingEquiv.toRingHom.comp
     (AdicCompletion.evalₐ Q n).toRingHom
 
-private theorem completionToAtPrimeQuotientRingHom_compatible :
+/-- The quotient maps to the localization commute with ideal-power transitions. -/
+theorem completionToAtPrimeQuotientRingHom_compatible :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow m_Q hmn).comp
           (completionToAtPrimeQuotientRingHom Q n) =
@@ -117,7 +123,8 @@ private theorem completionToAtPrimeQuotientRingHom_compatible :
   rw [localizationAtPrimeQuotientPowEquiv_factorPow Q hmn,
     factorPow_evalₐ Q hmn]
 
-private noncomputable def completionToAtPrimeRingHom :
+/-- Map the original completion to the completion of its localization at the maximal ideal. -/
+noncomputable def completionToAtPrimeRingHom :
     AdicCompletion Q S →+* AdicCompletion m_Q S_Q :=
   AdicCompletion.liftRingHom m_Q
     (completionToAtPrimeQuotientRingHom Q)
@@ -133,12 +140,14 @@ private theorem evalₐ_completionToAtPrimeRingHom
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private noncomputable def atPrimeCompletionToQuotientRingHom (n : ℕ) :
+/-- Map the localized completion back to a quotient by a power of the original maximal ideal. -/
+noncomputable def atPrimeCompletionToQuotientRingHom (n : ℕ) :
     AdicCompletion m_Q S_Q →+* S ⧸ Q ^ n :=
   (IsLocalization.AtPrime.equivQuotMaximalIdealPow Q S_Q n).symm.toRingEquiv.toRingHom.comp
     (AdicCompletion.evalₐ m_Q n).toRingHom
 
-private theorem atPrimeCompletionToQuotientRingHom_compatible :
+/-- The quotient maps from the localized completion commute with ideal-power transitions. -/
+theorem atPrimeCompletionToQuotientRingHom_compatible :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow Q hmn).comp
           (atPrimeCompletionToQuotientRingHom Q n) =
@@ -153,7 +162,8 @@ private theorem atPrimeCompletionToQuotientRingHom_compatible :
   rw [localizationAtPrimeQuotientPowEquiv_symm_factorPow Q hmn,
     factorPow_evalₐ m_Q hmn]
 
-private noncomputable def completionFromAtPrimeRingHom :
+/-- Map the completion of the localization back to the original completion. -/
+noncomputable def completionFromAtPrimeRingHom :
     AdicCompletion m_Q S_Q →+* AdicCompletion Q S :=
   AdicCompletion.liftRingHom Q
     (atPrimeCompletionToQuotientRingHom Q)
@@ -169,7 +179,8 @@ private theorem evalₐ_completionFromAtPrimeRingHom
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private theorem completionToAtPrime_comp_fromAtPrime :
+/-- The two comparison maps compose to the identity on the localized completion. -/
+theorem completionToAtPrime_comp_fromAtPrime :
     (completionToAtPrimeRingHom Q).comp (completionFromAtPrimeRingHom Q) =
       RingHom.id (AdicCompletion m_Q S_Q) := by
   apply RingHom.ext
@@ -180,7 +191,8 @@ private theorem completionToAtPrime_comp_fromAtPrime :
     evalₐ_completionToAtPrimeRingHom, evalₐ_completionFromAtPrimeRingHom,
     AlgEquiv.apply_symm_apply]
 
-private theorem completionFromAtPrime_comp_toAtPrime :
+/-- The two comparison maps compose to the identity on the original completion. -/
+theorem completionFromAtPrime_comp_toAtPrime :
     (completionFromAtPrimeRingHom Q).comp (completionToAtPrimeRingHom Q) =
       RingHom.id (AdicCompletion Q S) := by
   apply RingHom.ext

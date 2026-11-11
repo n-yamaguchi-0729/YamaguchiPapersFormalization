@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 
 /-!
 # Scalar endomorphisms and torsion in derived local cohomology
@@ -20,6 +22,8 @@ An element of an ideal annihilates Ext out of the quotient by that ideal.
 Consequently every local-cohomology class is annihilated by all members of
 some power of its support ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

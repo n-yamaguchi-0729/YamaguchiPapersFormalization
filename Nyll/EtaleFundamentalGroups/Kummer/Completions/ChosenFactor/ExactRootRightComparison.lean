@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
 
 /-!
 # Right comparison from an exact complete chosen factor
@@ -20,6 +22,8 @@ index already has degree at least that exponent.  Its embedding in the
 chosen-factor fraction field consequently has equal source and target
 dimensions and is surjective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

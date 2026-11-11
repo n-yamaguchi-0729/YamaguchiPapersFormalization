@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Trivial H¹ actions fix continuous characters
@@ -18,6 +20,8 @@ Triviality of the relative action on H¹ gives invariance under forward
 conjugation by applying the inverse automorphism's action. The constructed
 closure comparison then gives invariance under any actual semilinear lift.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

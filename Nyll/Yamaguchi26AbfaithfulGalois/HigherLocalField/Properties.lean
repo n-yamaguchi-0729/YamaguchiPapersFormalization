@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
-import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.PositiveCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicFaithfulness
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFaithfulness
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.GroupTheory.Torsion
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
+public import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.PositiveCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicFaithfulness
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFaithfulness
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.GroupTheory.Torsion
 
 /-!
 # Prime-power roots of unity and ab-faithfulness in higher local fields
@@ -21,6 +23,8 @@ import Mathlib.GroupTheory.Torsion
 The stronger joint root-finiteness and ab-faithfulness statement supporting
 Theorem 4.2 of [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1).
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Coset.Card
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+module
+
+public import Mathlib.GroupTheory.Coset.Card
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
 
 /-!
 # Divisibility of a Galois ramification index by the field degree
@@ -15,6 +17,8 @@ order of the corresponding inertia subgroup.  Lagrange's theorem therefore
 makes it divide the order of the full Galois group, which is the field
 degree.
 -/
+
+@[expose] public section
 
 noncomputable section
 

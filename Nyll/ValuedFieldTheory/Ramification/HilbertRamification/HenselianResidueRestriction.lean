@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
 
 /-!
 # Restriction of trivial Henselian residue actions
@@ -13,6 +15,8 @@ import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtensio
 Trivial residue action remains trivial on an intermediate Galois extension
 through the canonical residue-field maps of the chosen valuations.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

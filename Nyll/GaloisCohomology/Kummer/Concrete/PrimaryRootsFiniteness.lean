@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.FieldTheory.IntermediateField.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.GroupTheory.Torsion
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.GroupTheory.Torsion
 
 /-!
 # Transport of finite primary roots along field embeddings
@@ -15,6 +17,8 @@ import Mathlib.GroupTheory.Torsion
 Primary roots embed through the actual map on units. A finite extension embedded
 in a chosen overfield is identified with its actual intermediate field range.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 universe u v w

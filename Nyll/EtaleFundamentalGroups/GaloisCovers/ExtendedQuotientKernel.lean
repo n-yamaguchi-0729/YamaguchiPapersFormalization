@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ClosedCommutator
-import Nyll.ProCGroups.Profinite.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ClosedCommutator
+public import Nyll.ProCGroups.Profinite.Basic
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Kernels and finite-etale quotient extensions
@@ -19,6 +22,8 @@ fundamental groups fixes every point of its geometric fibre.  For a pointed
 Galois cover this says that the kernel is killed by the represented finite
 quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

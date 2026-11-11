@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Base change of a literal etale away map
@@ -16,6 +18,8 @@ through a pushout.  The proof pastes the original pushout with the four
 canonical localization squares, so it never assumes that the unlocalized
 map is etale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

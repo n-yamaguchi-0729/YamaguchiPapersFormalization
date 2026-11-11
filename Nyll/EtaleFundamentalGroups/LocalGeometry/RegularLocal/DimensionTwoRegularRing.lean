@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimensionTwoDVR
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimensionTwoDVR
 
 /-!
 # Two-dimensional regular local domains are regular rings
@@ -18,6 +20,8 @@ point is a field, every nonmaximal nonzero prime has height one and hence a
 DVR localization, and localization at the maximal ideal is the original
 regular local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -47,7 +51,10 @@ theorem isRegularRing_of_isRegularLocalRing_dimension_two
         Localization.AtPrime (IsLocalRing.maximalIdeal R) :=
       IsLocalization.atUnits R
         (IsLocalRing.maximalIdeal R).primeCompl
-        (fun x ↦ by simpa using! fun a ↦ a)
+        (by
+          intro x hx
+          change IsUnit x
+          exact IsLocalRing.notMem_maximalIdeal.mp hx)
     exact IsRegularLocalRing.of_ringEquiv e.toRingEquiv
   · have hpLe : p ≤ IsLocalRing.maximalIdeal R :=
       IsLocalRing.le_maximalIdeal_of_isPrime p

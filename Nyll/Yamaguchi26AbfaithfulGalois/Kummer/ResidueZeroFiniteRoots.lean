@@ -5,14 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.DiscreteAbsoluteCenter
-import Nyll.ValuedFieldTheory.Valuation.Henselian.FiniteResidueRootLifting
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FiniteFieldExtensions
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimFieldExtensions
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.DiscreteAbsoluteCenter
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.FiniteResidueRootLifting
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsDivisibility
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FiniteFieldExtensions
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimFieldExtensions
 
 /-!
 # Finite residue root groups from slimness
@@ -21,6 +23,8 @@ Slimness over a residue-zero Henselian discrete valuation forces finite
 primary root groups in every finite residue extension. Ab-faithfulness
 provides the corresponding specialization.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.NormalBasisCharacterEigenvector
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogScaling
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.NormalBasisCharacterEigenvector
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogScaling
 
 /-!
 # Nonzero character eigenvectors in an overfield's logarithm image
@@ -15,6 +17,8 @@ multiplication by a power of the residue prime. In a complete mixed-characterist
 overfield, a suitable such multiple is a principal-unit logarithm.
 No valuation or completeness assumption on the intermediate field is needed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

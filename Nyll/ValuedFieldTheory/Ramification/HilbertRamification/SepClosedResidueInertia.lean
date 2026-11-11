@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Inertia over a separably closed residue field
@@ -18,6 +20,8 @@ The algebraic residue extension is purely inseparable, so its Galois action
 is trivial. On each finite Galois layer the inertia character sends the
 commutator to one, placing it in the actual wild ramification group.
 -/
+
+@[expose] public section
 
 open scoped commutatorElement Topology
 

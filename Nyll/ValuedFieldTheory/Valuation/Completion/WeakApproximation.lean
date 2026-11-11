@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WeakApproximation
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Mathlib.Topology.NhdsWithin
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WeakApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Mathlib.Topology.NhdsWithin
 
 /-!
 # Simultaneous density in valued completions
@@ -14,6 +16,8 @@ import Mathlib.Topology.NhdsWithin
 Weak approximation gives a dense diagonal embedding in a finite product of
 inequivalent valued fields, and hence in the product of their completions.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

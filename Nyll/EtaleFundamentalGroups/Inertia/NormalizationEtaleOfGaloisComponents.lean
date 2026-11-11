@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentPoint
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentPoint
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
 
 /-!
 # Étaleness from the actual normalized Galois components
@@ -14,6 +17,8 @@ Every normalization point lifts to a normalized component of the pulled-back
 cover. These component inclusions are open immersions, and therefore supply
 an actual open cover on which étaleness can be checked.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,6 +70,9 @@ theorem etale_normalization_of_galoisComponents
       mem₀ := by
         rw [Scheme.presieve₀_mem_precoverage_iff]
         exact ⟨fun x => ⟨x, hcover x⟩, hj⟩ }
-  exact IsZariskiLocalAtSource.of_openCover (P := @Etale) cover hEtale
+  have : IsZariskiLocalAtSource (@Etale : MorphismProperty Scheme.{u}) :=
+    HasRingHomProperty.instIsZariskiLocalAtSource
+      (P := @Etale.{u}) (Q := RingHom.Etale)
+  exact IsZariskiLocalAtSource.of_openCover (P := @Etale.{u}) cover hEtale
 
 end EtaleFundamentalGroups.Inertia

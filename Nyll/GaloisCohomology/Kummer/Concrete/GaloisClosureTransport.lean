@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Transport of Galois groups between equivalent extension fields
@@ -17,6 +19,8 @@ preserves their Krull topologies. A finite intermediate field pulls back to a
 finite intermediate field under the inverse equivalence, so no algebraicity
 assumption on the ambient extensions is needed.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

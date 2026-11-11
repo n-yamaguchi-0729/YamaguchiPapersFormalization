@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.FieldTheory.Normal.Defs
-import Mathlib.NumberTheory.Cyclotomic.Basic
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.FieldTheory.Normal.Defs
+public import Mathlib.NumberTheory.Cyclotomic.Basic
 
 /-!
 # Commuting automorphisms in a cyclotomic compositum
@@ -16,6 +18,8 @@ automorphism fixing the other normal field. A primitive root in the lower
 field generates the upper cyclotomic extension, so their commutation on
 the two fields determines their commutation everywhere.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.RegularSection
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayTensorDetection
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.SchemeTheory.Affine.RegularSection
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayTensorDetection
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Hartogs extension after flat base change
@@ -16,6 +18,8 @@ open has a global numerator after multiplication by a power of its regular
 defining section. Two prime parameters then give a global section uniquely.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

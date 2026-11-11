@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
-import Nyll.ValuedFieldTheory.Valuation.Completion.DenseTensorProduct
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianTensorField
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Topology.Algebra.MulAction
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DenseTensorProduct
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianTensorField
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Topology.Algebra.MulAction
 
 /-!
 # The tensor map for an extension of discrete valuations
@@ -23,6 +25,8 @@ Class-valued statements specify this algebra's scalar action explicitly,
 avoiding a search through the completion's general scalar-action instance.
 The module-local algebra is the same data, used to elaborate the proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -70,7 +74,8 @@ def toCompletionAlgHom : L →ₐ[K] target.valuation.Completion where
   __ := algebraMap L target.valuation.Completion
   commutes' _ := rfl
 
-private def completionMapAlgHom :
+/-- The map of valuation completions as an algebra homomorphism over the original base field. -/
+def completionMapAlgHom :
     base.valuation.Completion →ₐ[K] target.valuation.Completion where
   __ := completionMap base target
   commutes' k := completionMap_coe_base base target k

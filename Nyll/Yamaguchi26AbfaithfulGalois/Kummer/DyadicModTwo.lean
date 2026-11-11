@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.QuadraticSquareClasses
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DyadicNorm
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.TrivialAction
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.ProCGroups.Abelian.AbelianModPower
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.QuadraticSquareClasses
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.DyadicNorm
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.TrivialAction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
 
 /-!
 # Nontrivial dyadic mod-two action
@@ -19,6 +22,8 @@ square classes gives a nonsquare norm in the extension. Trivial conjugation
 on the actual mod-two abelianization would make every norm a square by
 Kummer theory, which is a contradiction.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
-import Nyll.EtaleFundamentalGroups.Purity.TensorComplexCoefficientFunctor
-import Mathlib.Algebra.Homology.Monoidal
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
+public import Nyll.EtaleFundamentalGroups.Purity.TensorComplexCoefficientFunctor
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 
 /-!
 # The canonical degree-zero term of the Čech complex
@@ -17,6 +19,8 @@ Its inclusion identifies the zeroth term of each Čech factor with the
 ring. Tensoring this identification gives the canonical coefficient
 identification, natural in every module.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,7 +32,8 @@ universe u
 
 variable {R : Type u} [CommRing R]
 
-private def tensorZeroSummandOut (K L : CochainComplex (ModuleCat.{u} R) ℕ)
+/-- Project the unique degree-zero tensor summand to the tensor product of the zeroth terms. -/
+def tensorZeroSummandOut (K L : CochainComplex (ModuleCat.{u} R) ℕ)
     (i j : ℕ) (hij : ComplexShape.π (ComplexShape.up ℕ) (ComplexShape.up ℕ)
       (ComplexShape.up ℕ) (i, j) = 0) :
     ((curriedTensor (ModuleCat.{u} R)).obj (K.X i)).obj (L.X j) ⟶ K.X 0 ⊗ L.X 0 := by

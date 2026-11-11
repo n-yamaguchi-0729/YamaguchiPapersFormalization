@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentLift
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentStabilizer
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentLift
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentStabilizer
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Normalized component stabilizers and the canonical deck quotient
@@ -15,6 +18,8 @@ maps to the prescribed deck transformation under the actual pointed-component
 quotient. The map is the canonical quotient already defined using the two
 fundamental-group quotients; equivariance determines its value uniquely.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,20 +48,21 @@ quotient image. The only lifting input is the displayed equality of actual
 cover maps, which is supplied geometrically below. -/
 theorem galoisPullbackComponentQuotient_eq_of_equivariant
     (tau : Aut Z) (sigma : Aut W)
-    (htau : tau.hom ≫ i = i ≫ (pullback f).map sigma.hom) :
+    (htau : tau.asIso.hom ≫ i = i ≫ (pullback f).map sigma.asIso.hom) :
     galoisPullbackComponentQuotientMonoidHom
         f xi W hW w Z i z hiz hZ hi (MulOpposite.op tau) =
       MulOpposite.op sigma := by
   let : Mono i := hi
-  have hmem : (fiber xi).map ((pullback f).map sigma.hom)
+  have hmem : (fiber xi).map ((pullback f).map sigma.asIso.hom)
       ((fiber xi).map i z) ∈ Set.range ((fiber xi).map i) := by
-    refine ⟨(fiber xi).map tau.hom z, ?_⟩
+    refine ⟨(fiber xi).map tau.asIso.hom z, ?_⟩
     have h := congrArg (fun k : Z ⟶ (pullback f).obj W => (fiber xi).map k z) htau
     simpa only [Functor.map_comp, FintypeCat.comp_apply] using h
   obtain ⟨tau', hphi, hequiv⟩ :=
     galoisPullbackComponentQuotient_exists_lift_of_mem_range
       f xi W hW w Z i z hiz hZ hi (MulOpposite.op sigma) hmem
   have heq : tau'.unop = tau := by
+    apply Aut.ext
     apply Iso.ext
     exact (cancel_mono i).mp (hequiv.trans htau.symm)
   have heqOp : tau' = MulOpposite.op tau :=
@@ -74,25 +80,25 @@ theorem galoisPullbackComponentQuotient_exists_normalized_fixed_lift
     {Omega' : Type u} [Field Omega']
     (q : Spec (.of Omega') ⟶ (i.left ≫ g).normalization)
     (sigma : Aut W)
-    (hsigma : ((pullback f).map sigma.hom).left ≫ g = g)
+    (hsigma : ((pullback f).map sigma.asIso.hom).left ≫ g = g)
     (hfix : q ≫ normalizationComponentInclusion g i ≫
-        normalizationEndomorphism g ((pullback f).map sigma.hom).left hsigma =
+        normalizationEndomorphism g ((pullback f).map sigma.asIso.hom).left hsigma =
       q ≫ normalizationComponentInclusion g i) :
     ∃ (tau : Aut Z)
-      (htau : tau.hom ≫ i = i ≫ (pullback f).map sigma.hom),
+      (htau : tau.asIso.hom ≫ i = i ≫ (pullback f).map sigma.asIso.hom),
       galoisPullbackComponentQuotientMonoidHom
           f xi W hW w Z i z hiz hZ hi (MulOpposite.op tau) =
         MulOpposite.op sigma ∧
-      q ≫ normalizationEndomorphism (i.left ≫ g) tau.hom.left (by
+      q ≫ normalizationEndomorphism (i.left ≫ g) tau.asIso.hom.left (by
         have h := congrArg (fun k : Z ⟶ (pullback f).obj W => k.left) htau
-        change tau.hom.left ≫ i.left =
-          i.left ≫ ((pullback f).map sigma.hom).left at h
+        change tau.asIso.hom.left ≫ i.left =
+          i.left ≫ ((pullback f).map sigma.asIso.hom).left at h
         rw [← Category.assoc, h, Category.assoc, hsigma]) = q := by
   let : Mono i := hi
   let : IsGalois Z := hZ
   obtain ⟨tau, htau, hfixed⟩ :=
     exists_aut_component_lift_of_fixes_normalized_geometricPoint
-      g i q ((pullback f).mapIso sigma) hsigma hfix
+      g i q ((pullback f).mapAut W sigma) hsigma hfix
   exact ⟨tau, htau,
     galoisPullbackComponentQuotient_eq_of_equivariant
       f xi W hW w Z i z hiz hZ hi tau sigma htau,

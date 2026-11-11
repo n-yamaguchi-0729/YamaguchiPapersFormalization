@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.NumberField.Basic
-import Mathlib.FieldTheory.LinearDisjoint
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
+module
+
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
 
 /-!
 # Dominance after adjoining arithmetic constants
@@ -19,7 +21,11 @@ disjoint from the integers of a number field. This proves injectivity of
 the actual multiplication map used in the arithmetic constants argument.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe uA uB uF uK uL
 
 open scoped TensorProduct NumberField
 
@@ -29,7 +35,7 @@ namespace EtaleFundamentalGroups
 the given fraction field. The map is constructed by restricting to the
 range of the original inclusion into the fraction field. -/
 def ringOfIntegersToNormalDomain
-    (A K L : Type) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]
+    (A : Type uA) (K : Type uK) (L : Type uL) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]
     [Field K] [NumberField K] [Field L] [CharZero L]
     [Algebra A L] [IsFractionRing A L] (g : K →ₐ[ℚ] L) :
     𝓞 K →ₐ[ℤ] A :=
@@ -45,7 +51,7 @@ def ringOfIntegersToNormalDomain
 /-- The constructed map of integer rings has the prescribed value in the
 original fraction field. -/
 theorem algebraMap_ringOfIntegersToNormalDomain
-    (A K L : Type) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]
+    (A : Type uA) (K : Type uK) (L : Type uL) [CommRing A] [IsDomain A] [IsIntegrallyClosed A]
     [Field K] [NumberField K] [Field L] [CharZero L]
     [Algebra A L] [IsFractionRing A L] (g : K →ₐ[ℚ] L) (z : 𝓞 K) :
     algebraMap A L (ringOfIntegersToNormalDomain A K L g z) = g (z : K) := by
@@ -60,7 +66,7 @@ theorem algebraMap_ringOfIntegersToNormalDomain
 /-- An integral constant extension embeds in a common overfield when the
 corresponding rational tensor product is a domain. -/
 theorem arithmeticConstantsTensor_lift_injective
-    {B F K L : Type} [CommRing B] [Field F] [CharZero F]
+    {B : Type uB} {F : Type uF} {K : Type uK} {L : Type uL} [CommRing B] [Field F] [CharZero F]
     [Field K] [NumberField K] [Field L] [CharZero L]
     (i : B →ₐ[ℤ] F) (hi : Function.Injective i)
     (f : F →ₐ[ℚ] L) (g : K →ₐ[ℚ] L)

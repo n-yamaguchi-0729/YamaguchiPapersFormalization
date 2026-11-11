@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 
 /-!
@@ -24,6 +26,8 @@ its residue field into the chosen separably closed field. Neither flatness of
 this structure map nor a comparison with a separately chosen strict
 henselization is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

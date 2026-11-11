@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
+public import Mathlib.FieldTheory.Galois.Infinite
 
 /-! # Nontrivial cyclic characters from Artin–Schreier obstructions -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 universe u v

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientProductLift
-import Nyll.EtaleFundamentalGroups.Purity.IdempotentFactorProduct
-import Nyll.EtaleFundamentalGroups.Purity.Local.FiniteEtaleQuotientLift
-import Mathlib.RingTheory.Etale.Pi
-import Mathlib.RingTheory.TensorProduct.Pi
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientProductLift
+public import Nyll.EtaleFundamentalGroups.Purity.IdempotentFactorProduct
+public import Nyll.EtaleFundamentalGroups.Purity.Local.FiniteEtaleQuotientLift
+public import Mathlib.RingTheory.Etale.Pi
+public import Mathlib.RingTheory.TensorProduct.Pi
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Finite étale algebras over quotients of complete local rings
@@ -19,6 +21,8 @@ splits into finitely many local factors.  Lifting those factors separately and
 taking their product gives a finite étale algebra over the original ring whose
 base change is the given algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

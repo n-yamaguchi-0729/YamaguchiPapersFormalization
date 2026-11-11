@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Function fields of dominant morphisms
@@ -13,6 +15,8 @@ A morphism with dense image between integral schemes sends the generic point
 to the generic point.  Its map on local rings therefore gives the canonical
 embedding of function fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 

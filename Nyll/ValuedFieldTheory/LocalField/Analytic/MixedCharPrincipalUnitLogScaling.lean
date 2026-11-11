@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PrimePowerIntegralMultiple
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogImage
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PrimePowerIntegralMultiple
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogImage
 
 /-!
 # Prime-power multiples in the principal-unit logarithm image
@@ -14,6 +16,8 @@ First multiply an arbitrary field element by a power of the residue prime
 to make it integral. The existing exponential construction then realizes
 an additional factor of `p²` as the logarithm of an actual principal unit.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

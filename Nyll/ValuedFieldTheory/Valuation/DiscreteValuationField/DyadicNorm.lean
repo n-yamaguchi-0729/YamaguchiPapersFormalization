@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DyadicNormObstruction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DyadicNormObstruction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
 
 /-!
 # Dyadic quadratic norm forms
@@ -16,6 +18,8 @@ The normalized valuation and its uniformizer are constructed from the original
 valuation ring. Thus the norm obstruction needs only the Henselian discrete
 valuation and residue characteristic two.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

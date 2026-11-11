@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Iterated
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Iterated
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
 
 /-!
 # Regularity of finite iterated local Kummer root covers
@@ -21,6 +23,8 @@ regular local ring.
 The recursive local-ring and module structures are installed only inside
 proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

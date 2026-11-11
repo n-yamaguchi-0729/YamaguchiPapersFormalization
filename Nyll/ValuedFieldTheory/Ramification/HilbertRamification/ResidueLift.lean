@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
 
 /-!
 # Lifting residue automorphisms through a decomposition group
@@ -14,6 +16,8 @@ residue field over the residue field of the decomposition field lifts to an
 ambient Galois automorphism stabilizing the chosen valuation.  This is the
 elementwise form of the residue-action exact sequence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.EtaleFundamentalGroups.ContinuousActions.InjectiveRestriction
-import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.ContinuousActions.InjectiveRestriction
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
 
 /-!
 # Injectivity of the map attached to a functor of Galois categories
@@ -16,6 +18,8 @@ The map on profinite automorphism groups induced by a functor of Galois
 categories is injective exactly when every connected target object admits the
 epi--mono span of [Stacks Project, Tag 0BN7](https://stacks.math.columbia.edu/tag/0BN7).
 -/
+
+@[expose] public section
 
 noncomputable section
 

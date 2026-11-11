@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ResidueField
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ResidueField
 
 /-!
 # Residue characteristic under pullback of a valuation subring
@@ -15,6 +17,8 @@ valuation subring. Consequently equality of integer residues downstairs
 implies equality upstairs, so residue characteristic zero descends.
 No algebraicity, Henselianity, or rank assumption is used.
 -/
+
+@[expose] public section
 
 namespace ValuationSubring
 

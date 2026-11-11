@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPowMod
-import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
-import Mathlib.Data.ZMod.Basic
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPowMod
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Invariant Kummer characters of actual cyclotomic eigenunits
@@ -20,6 +22,8 @@ Kummer quotient. The actual finite cyclotomic character supplies the same
 power action on all roots at the selected level. These two actions cancel
 in the Kummer character.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

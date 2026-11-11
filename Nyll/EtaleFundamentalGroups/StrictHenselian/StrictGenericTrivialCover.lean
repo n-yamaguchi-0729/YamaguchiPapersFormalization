@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
-import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericSplittingNormal
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 
 /-!
@@ -21,6 +23,8 @@ finite etale cover of the local base becomes trivial over the strict generic
 field because it pulls back through the actual geometric stalk.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.FiniteEtale
@@ -29,7 +33,8 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-private theorem finiteEtale_spec_of_finite_etale_algebra
+/-- The spectrum of a finite etale algebra is finite etale over the base spectrum. -/
+theorem finiteEtale_spec_of_finite_etale_algebra
     (K B : Type u) [CommRing K] [CommRing B] [Algebra K B]
     [Module.Finite K B] [Algebra.Etale K B] :
     IsFiniteEtale (Spec.map (CommRingCat.ofHom (algebraMap K B))) := by

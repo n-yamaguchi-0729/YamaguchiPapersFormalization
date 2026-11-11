@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.RamificationInertia.Ramification
+module
+
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Flat.Stability
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.QuasiFinite.Basic
+public import Mathlib.RingTheory.RamificationInertia.Ramification
 
 /-!
 # Ramification under a finite, flat tensor square
@@ -31,6 +34,8 @@ localizations are therefore fields, which says that the vertical
 ramification index is one.  The tensor prime itself, rather than an
 independently selected component, is retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Solvable
-import Mathlib.GroupTheory.SemidirectProduct
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Algebra.Group.ULift
-import Mathlib.Algebra.Group.TypeTags.Finite
-import Mathlib.Basic.Finite.Prod
-import Mathlib.Data.Fintype.Pi
+module
+
+public import Mathlib.GroupTheory.Solvable
+public import Mathlib.GroupTheory.SemidirectProduct
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Algebra.Group.ULift
+public import Mathlib.Algebra.Group.TypeTags.Finite
+public import Mathlib.Basic.Finite.Prod
+public import Mathlib.Data.Fintype.Pi
 
 /-!
 # Lemma 5.1: faithful abelian extensions with bounded derived length
@@ -21,6 +23,8 @@ last derived subgroup. It contains the manuscript's `W` and transversal function
 Its difference map is invariant under left translation; its kernel consists of
 functions on the quotient. This gives the same bound on the derived length.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 namespace FaithfulAbelianExtension

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
+module
+
+public import Mathlib.RingTheory.Etale.Basic
 
 /-!
 # Formally étale lifting across nilpotent thickenings
@@ -14,6 +16,8 @@ formal unramifiedness gives uniqueness.  This file combines the two halves
 for formally étale algebras and records the resulting rigidity of two
 nilpotent thickenings of the same algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

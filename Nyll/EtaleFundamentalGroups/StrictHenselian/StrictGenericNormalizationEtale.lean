@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericTrivialCover
-import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationAction
-import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericTrivialCover
+public import Nyll.SchemeTheory.Normalization.GenericFiber.IntegralClosure
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationAction
+public import Nyll.SchemeTheory.Normalization.AffineFiniteEtale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 
 
 /-!
@@ -21,6 +23,8 @@ both scalar structures supplied by its morphisms. All isomorphisms of covers
 and relative normalizations are constructed from the canonical affine map.
 No connectedness or Galois hypothesis on the finite cover is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.KummerFiniteInertia
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicInertiaCentrality
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.KummerFiniteInertia
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.AlgebraicInertiaCentrality
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Absolute Galois centers over Henselian discrete valuations
@@ -17,6 +19,8 @@ For a Henselian discrete valuation field of residue characteristic zero
 containing all p-power roots, a Kummer extension supplies nontrivial inertia
 and hence a nonidentity element of the absolute Galois center.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

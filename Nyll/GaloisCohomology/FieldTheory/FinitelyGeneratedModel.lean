@@ -3,19 +3,23 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.FiniteType
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.Algebra.Field.Subfield.Basic
-import Mathlib.RingTheory.Jacobson.Ring
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.Algebra.Ring.Int.Units
-import Lean.Elab.Tactic.Omega
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.FiniteType
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.Algebra.Field.Subfield.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.Algebra.Ring.Int.Units
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Affine integral models of finitely generated fields
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 

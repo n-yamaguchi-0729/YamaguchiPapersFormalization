@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.Smooth.Flat
 
 /-!
 # Ramification index under an étale tensor base change
@@ -19,6 +21,8 @@ The nondefault algebra structure on the right tensor factor, its scalar tower, a
 étale structure are kept local to the proof so that importing this leaf does not add global
 instances.
 -/
+
+@[expose] public section
 
 noncomputable section
 

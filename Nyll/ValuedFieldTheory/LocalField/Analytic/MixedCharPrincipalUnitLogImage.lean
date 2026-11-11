@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharExpThreshold
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpComposition
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharExpThreshold
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpComposition
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WithZeroCompleteSpace
 
 /-!
 # The principal-unit logarithm contains the square of the residue prime
@@ -16,6 +20,8 @@ actual principal unit with logarithm `p² a`. The convergence threshold is
 proved from the valuation of the residue prime. No normalized uniformizer,
 finite residue field, or restriction excluding the prime two is needed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

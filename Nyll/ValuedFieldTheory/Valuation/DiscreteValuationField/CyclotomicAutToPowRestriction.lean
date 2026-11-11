@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Cyclotomic exponents under restriction
@@ -15,6 +17,8 @@ on primitive roots. The primitive roots in the two fields may be chosen
 independently; neither bijectivity of restriction nor a compositum
 hypothesis is needed.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

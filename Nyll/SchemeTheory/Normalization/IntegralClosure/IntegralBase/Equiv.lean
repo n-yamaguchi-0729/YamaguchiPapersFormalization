@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Integral closure after an integral enlargement of the base
@@ -16,6 +18,8 @@ over `B`.  Thus the two literal integral-closure types are canonically
 equivalent.  This is the comparison used when a radical root ring has already
 been embedded in a chosen normalization factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,33 +42,30 @@ noncomputable def integralClosureIntegralBaseAlgebra :
 /-- The canonical lift of `B` into the `A`-integral closure is compatible
 with the original map `A → B`. -/
 theorem integralClosureIntegralBase_isScalarTower :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     IsScalarTower A B (integralClosure A L) := by
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   exact IsScalarTower.of_algebraMap_eq fun a ↦
     (IsIntegralClosure.lift A (integralClosure A L) L).commutes a |>.symm
 
 /-- The canonical lift into the integral closure has the expected composite
 map to the ambient ring. -/
 theorem integralClosureIntegralBase_toAmbient_isScalarTower :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     IsScalarTower B (integralClosure A L) L := by
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   exact IsScalarTower.of_algebraMap_eq fun b ↦
     (IsIntegralClosure.algebraMap_lift A (integralClosure A L) L b).symm
 
 /-- Enlarging a base integrally does not change its integral closure inside
 one fixed ambient ring. -/
 noncomputable def integralClosureIntegralBaseAlgEquiv :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     integralClosure B L ≃ₐ[B] integralClosure A L := by
-  letI : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   letI : IsScalarTower A B (integralClosure A L) :=
     integralClosureIntegralBase_isScalarTower
   letI : IsScalarTower B (integralClosure A L) L :=
@@ -79,11 +80,10 @@ noncomputable def integralClosureIntegralBaseAlgEquiv :
 same normalization as the integral closure over the original base. -/
 theorem moduleFinite_integralClosure_of_integralBase
     [Module.Finite B (integralClosure B L)] :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     Module.Finite B (integralClosure A L) := by
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   exact Module.Finite.equiv
     integralClosureIntegralBaseAlgEquiv.toLinearEquiv
 
@@ -91,11 +91,10 @@ theorem moduleFinite_integralClosure_of_integralBase
 normalization written as the integral closure over the original base. -/
 theorem integralClosure_etale_of_integralBase
     (hEtale : Algebra.Etale B (integralClosure B L)) :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     Algebra.Etale B (integralClosure A L) := by
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   let : Algebra.Etale B (integralClosure B L) := hEtale
   exact Algebra.Etale.of_equiv integralClosureIntegralBaseAlgEquiv
 
@@ -104,13 +103,12 @@ ambient ring. -/
 @[simp]
 theorem algebraMap_integralClosureIntegralBaseAlgEquiv
     (x : integralClosure B L) :
-    letI : Algebra B (integralClosure A L) :=
+    let : Algebra B (integralClosure A L) :=
       integralClosureIntegralBaseAlgebra
     algebraMap (integralClosure A L) L
         (integralClosureIntegralBaseAlgEquiv x) =
       algebraMap (integralClosure B L) L x := by
-  let : Algebra B (integralClosure A L) :=
-    integralClosureIntegralBaseAlgebra
+  intro integralBaseAlgebra
   let : IsScalarTower A B (integralClosure A L) :=
     integralClosureIntegralBase_isScalarTower
   let : IsScalarTower B (integralClosure A L) L :=

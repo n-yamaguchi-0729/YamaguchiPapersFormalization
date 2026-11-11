@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # Closed primes in a completion base change
@@ -19,6 +21,8 @@ with unchanged residue field carries that particular prime to a maximal
 ideal of the tensor product.  For maximal-adic completion this gives the
 canonical completed closed point before any local factor is split off.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,10 +54,9 @@ theorem tensorProduct_map_isMaximal_of_residueFieldMap_bijective
     (hres : Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap R R'))) :
     let T := R' ⊗[R] S
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     (q.map (algebraMap S T)).IsMaximal := by
-  let T := R' ⊗[R] S
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro T sharedOwner2
   let : IsScalarTower R S T :=
     Algebra.TensorProduct.right_isScalarTower
   let : Module.FaithfullyFlat S T :=
@@ -167,11 +170,10 @@ theorem tensorProduct_map_liesOver_maximalIdeal_of_residueFieldMap_bijective
     (hres : Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap R R'))) :
     let T := R' ⊗[R] S
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     let q' := q.map (algebraMap S T)
     q'.IsMaximal ∧ q'.LiesOver (IsLocalRing.maximalIdeal R') := by
-  let T := R' ⊗[R] S
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro T sharedOwner2
   let : IsScalarTower R S T :=
     Algebra.TensorProduct.right_isScalarTower
   let : Algebra R' T := Algebra.TensorProduct.leftAlgebra
@@ -208,7 +210,7 @@ theorem adicCompletion_tensorProduct_map_liesOver_maximalIdeal
     letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
     let q' := q.map (algebraMap S T)
     q'.IsMaximal ∧ q'.LiesOver (IsLocalRing.maximalIdeal R') := by
-  let R' := AdicCompletion (IsLocalRing.maximalIdeal R) R
+  intro R'
   let : Module.FaithfullyFlat R R' :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
   exact
@@ -226,15 +228,12 @@ theorem adicCompletion_finiteEtale_closedPrime
     [q.LiesOver (IsLocalRing.maximalIdeal R)] :
     let R' := AdicCompletion (IsLocalRing.maximalIdeal R) R
     let T := R' ⊗[R] S
-    letI : Algebra R' T := Algebra.TensorProduct.leftAlgebra
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra R' T := Algebra.TensorProduct.leftAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     let q' := q.map (algebraMap S T)
     q'.IsMaximal ∧ q'.LiesOver (IsLocalRing.maximalIdeal R') ∧
       Module.Finite R' T ∧ Algebra.Etale R' T := by
-  let R' := AdicCompletion (IsLocalRing.maximalIdeal R) R
-  let T := R' ⊗[R] S
-  let : Algebra R' T := Algebra.TensorProduct.leftAlgebra
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro R' T sharedOwner3 sharedOwner4
   have hq := adicCompletion_tensorProduct_map_liesOver_maximalIdeal
     (R := R) (S := S) q
   exact ⟨hq.1, hq.2, inferInstance, inferInstance⟩

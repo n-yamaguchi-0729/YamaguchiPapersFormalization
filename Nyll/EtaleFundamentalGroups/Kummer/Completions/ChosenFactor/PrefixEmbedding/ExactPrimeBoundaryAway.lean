@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensor.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.PrefixEmbeddingCompositumAway
-import Mathlib.Algebra.Algebra.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensor.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.PrefixEmbeddingCompositumAway
+public import Mathlib.Algebra.Algebra.Defs
 
 /-!
 # Exact normalization prime in the literal prefix compositum
@@ -21,6 +23,8 @@ This is the source-producing boundary between the literal-compositum
 construction and complete chosen-factor terminals.  The component and prime
 are constructed here; neither is supplied by the caller.
 -/
+
+@[expose] public section
 
 noncomputable section
 

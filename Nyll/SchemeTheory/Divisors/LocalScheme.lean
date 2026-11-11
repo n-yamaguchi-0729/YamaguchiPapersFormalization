@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Basic
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.CategoryTheory.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Iso
-import Nyll.SchemeTheory.Affine.StalkLocalization
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+module
+
+public import Mathlib.Algebra.Category.Ring.Basic
+public import Mathlib.AlgebraicGeometry.Scheme
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.CategoryTheory.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Iso
+public import Nyll.SchemeTheory.Affine.StalkLocalization
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 
 /-!
 # Divisors on spectra of local rings
@@ -20,6 +22,8 @@ ideals of its local ring.  It contains the point-level bridge used when a
 codimension-two localization is selected inside a local ramification
 argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

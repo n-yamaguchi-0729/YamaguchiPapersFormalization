@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.Abelian.FiniteInvariantQuotients
-import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.Abelian.FiniteInvariantQuotients
+public import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Finite abelian embedding problems
@@ -16,6 +20,8 @@ An invariant finite quotient of the abelianization of an open normal subgroup
 produces an open normal subgroup of the ambient group and a proper finite
 embedding problem.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

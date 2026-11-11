@@ -4,9 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.TrivialOrientation
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbTorsionFree
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.TrivialOrientation
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbTorsionFree
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Nyll.ProCGroups.Abelian.PrimaryTorsion
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # The trivial orientation and ab-torsion-freeness
@@ -16,6 +21,8 @@ formal Hilbert 90 for the trivial orientation with the absence of ℓ-torsion
 in every open-subgroup abelianization. Ab-torsion-freeness then supplies
 formal Hilbert 90 for the trivial orientation at each prime.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

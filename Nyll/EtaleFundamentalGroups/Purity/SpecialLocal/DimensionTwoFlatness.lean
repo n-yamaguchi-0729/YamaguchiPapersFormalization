@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.LocalRing.Quotient
-import Mathlib.RingTheory.Regular.Free
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Regular.Free
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # The two-parameter freeness input to dimension-two purity
@@ -21,6 +24,8 @@ For a finite normal algebra over a two-dimensional regular local ring, the
 remaining algebraic input is therefore exactly that a regular parameter pair
 is regular on the algebra (the `S₂` consequence of normality).
 -/
+
+@[expose] public section
 
 noncomputable section
 

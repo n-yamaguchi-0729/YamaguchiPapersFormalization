@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.ActualRootFirst.LocalizationEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.ActualRootFirst.LocalizationEtale
 
 /-!
 # The active other branch of the exact Galois full cover
@@ -12,6 +14,8 @@ import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.A
 The actual-root-first construction is compiled in the preceding source leaf.
 This module only installs the full-cover geometry and dispatches to it.
 -/
+
+@[expose] public section
 
 noncomputable section
 

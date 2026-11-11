@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentQuotient
 
 /-!
 # Equivariance of the actual inclusion of a Galois pullback component
@@ -21,6 +23,8 @@ normalization geometric-point stabilizers. It does not identify those
 stabilizers with mapped local ideal inertia: choosing and comparing the
 normalization points is a separate geometric step.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,10 +53,10 @@ theorem galoisPullbackComponentQuotientMonoidHom_equivariant
       transportedPointOfCompIso (pullback f) (pullbackFiberIso f xi) W w)
     (hZ : IsGalois Z) (hi : Mono i)
     (sigma : (Aut Z)ᵐᵒᵖ) :
-    sigma.unop.hom ≫ i =
+    sigma.unop.asIso.hom ≫ i =
       i ≫ (pullback f).map
         ((galoisPullbackComponentQuotientMonoidHom
-          f xi W hW w Z i z hiz hZ hi sigma).unop.hom) := by
+          f xi W hW w Z i z hiz hZ hi sigma).unop.asIso.hom) := by
   let : IsGalois W := hW
   let : IsGalois Z := hZ
   let F := fiber (xi ≫ f)
@@ -69,31 +73,31 @@ theorem galoisPullbackComponentQuotientMonoidHom_equivariant
     MonoidHom.ext_iff.mp
       (galoisPullbackComponentQuotientMonoidHom_comp
         f xi W hW w Z i z hiz hZ hi) gamma
-  change (qZ gamma).unop.hom ≫ i = i ≫ H.map ((phi (qZ gamma)).unop.hom)
+  change (qZ gamma).unop.asIso.hom ≫ i = i ≫ H.map ((phi (qZ gamma)).unop.asIso.hom)
   rw [hphi]
   apply evaluation_injective_of_isConnected F' Z (H.obj W) z
-  change F'.map ((qZ gamma).unop.hom ≫ i) z =
-    F'.map (i ≫ H.map ((qW gamma).unop.hom)) z
+  change F'.map ((qZ gamma).unop.asIso.hom ≫ i) z =
+    F'.map (i ≫ H.map ((qW gamma).unop.asIso.hom)) z
   rw [Functor.map_comp, Functor.map_comp, FintypeCat.comp_apply,
     FintypeCat.comp_apply]
-  have hcomponent : F'.map ((qZ gamma).unop.hom) z = gamma • z :=
+  have hcomponent : F'.map ((qZ gamma).unop.asIso.hom) z = gamma • z :=
     finiteEtaleGaloisCoverQuotientMonoidHom_evaluation xi Z hZ z gamma
   rw [hcomponent, ← mulAction_naturality, hiz]
-  change gamma • y = F'.map (H.map ((qW gamma).unop.hom)) y
-  have hquotient : F.map ((qW gamma).unop.hom) w =
+  change gamma • y = F'.map (H.map ((qW gamma).unop.asIso.hom)) y
+  have hquotient : F.map ((qW gamma).unop.asIso.hom) w =
       (fundamentalGroupHom f xi gamma) • w :=
     finiteEtaleGaloisCoverQuotientMonoidHom_evaluation
       (xi ≫ f) W hW w (fundamentalGroupHom f xi gamma)
   have haction : (t.inv.app W) ((fundamentalGroupHom f xi gamma) • w) =
       gamma • y := by
     change (t.inv.app W) ((t.hom.app W)
-      (gamma.hom.app (H.obj W) ((t.inv.app W) w))) =
-        gamma.hom.app (H.obj W) ((t.inv.app W) w)
+      (gamma.asIso.hom.app (H.obj W) ((t.inv.app W) w))) =
+        gamma.asIso.hom.app (H.obj W) ((t.inv.app W) w)
     exact FintypeCat.hom_inv_id_apply (t.app W) _
   have hnat := ConcreteCategory.congr_hom
-    (t.inv.naturality ((qW gamma).unop.hom)) w
-  change (t.inv.app W) (F.map ((qW gamma).unop.hom) w) =
-    F'.map (H.map ((qW gamma).unop.hom)) y at hnat
+    (t.inv.naturality ((qW gamma).unop.asIso.hom)) w
+  change (t.inv.app W) (F.map ((qW gamma).unop.asIso.hom) w) =
+    F'.map (H.map ((qW gamma).unop.asIso.hom)) y at hnat
   rw [hquotient, haction] at hnat
   exact hnat
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
-import Nyll.EtaleFundamentalGroups.GenericTensor.ComponentRestrictBase
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTower
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.ComponentRestrictBase
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTower
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
 
 /-!
 # Etaleness at the selected root prime
@@ -20,6 +22,8 @@ post-root tensor component after extending the left field.  It is the exact
 surjective map needed to keep both the original global component and a
 chosen completed component fixed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

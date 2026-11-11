@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Valuation.ValuationSubring
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 /-!
 # Finite-type models inside valuation rings
@@ -15,6 +17,8 @@ An essentially finite-type extension of a fraction field admits an
 integral finite-type model inside any valuation ring containing the base
 ring.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u v w

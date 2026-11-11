@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Finite dimension and the geometric Hartshorne--Lichtenbaum frontier
@@ -16,6 +18,8 @@ than only a `WithBot ENat` value.  We also record the geometric content of
 a proper radical support being different from the maximal ideal: its closed
 set contains a point of the punctured spectrum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

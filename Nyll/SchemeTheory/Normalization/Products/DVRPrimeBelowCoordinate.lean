@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
 
 /-!
 # Generic primes below a selected DVR product factor
@@ -15,6 +17,8 @@ If that coordinate is a DVR, the only strictly smaller prime is the kernel of
 coordinate evaluation.  This identifies a selected generic component with the
 generic point of the specified DVR factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

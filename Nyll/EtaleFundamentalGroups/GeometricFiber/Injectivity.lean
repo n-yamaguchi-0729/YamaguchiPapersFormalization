@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Injectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Injectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 
 /-!
 # Injectivity from essential surjectivity of finite-etale pullback
@@ -15,6 +17,8 @@ surjective, then the induced homomorphism on automorphism groups of geometric
 fiber functors is injective. The categorical result requires no fullness
 assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

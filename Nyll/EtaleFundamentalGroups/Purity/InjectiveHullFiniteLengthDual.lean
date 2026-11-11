@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.LinearAlgebra.BilinearMap
-import Mathlib.LinearAlgebra.LeftExact
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.SimpleModule.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.LinearAlgebra.BilinearMap
+public import Mathlib.LinearAlgebra.LeftExact
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.SimpleModule.Basic
 
 /-!
 # Finite-length duals into an injective residue-field hull
@@ -29,6 +31,8 @@ along a composition series then shows that duality preserves length.
 The evaluation map is injective because maps into the hull separate
 elements.  Equality of finite lengths makes it an isomorphism.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

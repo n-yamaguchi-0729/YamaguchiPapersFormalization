@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Localization of an injective module
@@ -20,6 +22,8 @@ an appropriate division map well-defined on a principal ideal; injectivity
 extends that map to the ring. For a principal localization the kernel is
 exactly the principal ideal-power torsion submodule.
 -/
+
+@[expose] public section
 
 noncomputable section
 

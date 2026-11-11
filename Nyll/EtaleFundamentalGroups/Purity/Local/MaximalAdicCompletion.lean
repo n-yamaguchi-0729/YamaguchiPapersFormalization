@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.MvPowerSeriesNoetherian
-import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
+module
+
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.MvPowerSeriesNoetherian
+public import Nyll.SchemeTheory.RingTheory.Descent.FaithfullyFlatModuleEqualizer
 
 /-!
 # Regular local geometry of the maximal-adic completion
@@ -25,6 +27,8 @@ Mathlib currently supplies flatness of a Noetherian adic completion, but not
 Noetherianity of the completed ring itself.  Separate source-producing results
 can discharge that hypothesis without changing these statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Etale.StandardEtale
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Etale.StandardEtale
 
 /-!
 # Lifting points of standard étale algebras
@@ -15,6 +17,8 @@ standard étale algebra to the base ring. The defining monic polynomial and
 its derivative condition supply the Hensel input, and the Jacobson condition
 makes the localization denominator invertible at the lifted root.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

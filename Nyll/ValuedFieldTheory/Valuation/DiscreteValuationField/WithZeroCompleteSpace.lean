@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
-import Mathlib.Analysis.Normed.Field.Lemmas
-import Mathlib.RingTheory.AdicCompletion.Topology
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Topology.Algebra.Valued.NormedValued
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Mathlib.Analysis.Normed.Field.Lemmas
+public import Mathlib.RingTheory.AdicCompletion.Topology
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Topology.Algebra.Valued.NormedValued
 
 /-!
 # Completeness for the actual topology of an integer-valued DVF
@@ -19,6 +21,8 @@ the closed unit ball, whose completeness implies completeness of the field.
 The norm retains the original valuation uniformity. No residue-field
 finiteness or local compactness is required.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.Valuation
 

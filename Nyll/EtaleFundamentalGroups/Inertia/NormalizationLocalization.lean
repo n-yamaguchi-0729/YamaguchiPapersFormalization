@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.Affine
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Affine relative normalization and arbitrary localization
@@ -27,6 +29,8 @@ It requires no domain, normality, finite-type, or smoothness assumptions.
 This file treats the affine comparison; it does not claim that the canonical
 map from a scheme's stalk spectrum is smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

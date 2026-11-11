@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
-import Mathlib.Data.Int.WithZero
-import Mathlib.Topology.Algebra.Valued.WithVal
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
+public import Mathlib.Data.Int.WithZero
+public import Mathlib.Topology.Algebra.Valued.WithVal
 
 /-!
 # Continuity for an extension of discrete valuations
@@ -15,6 +17,8 @@ The uniformly continuous map on the `WithVal` models is transported to the
 actual valuation topologies on the original fields. No completion, finite
 degree, or choice of normalized absolute value is required.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.Valuation
 

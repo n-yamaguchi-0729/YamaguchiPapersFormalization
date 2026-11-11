@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Mathlib.FieldTheory.Galois.Profinite
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianInertiaRestriction
 
 /-!
 # Restriction maps between finite inertia groups
@@ -16,6 +18,8 @@ Define finite inertia restriction and transition maps, compare them with
 Galois restriction, and prove compatibility and surjectivity over a
 Henselian base.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

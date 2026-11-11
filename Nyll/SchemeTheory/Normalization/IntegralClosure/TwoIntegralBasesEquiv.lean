@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
 
 /-!
 # Comparing integral closures over two integral bases
@@ -15,6 +17,8 @@ subring of `L`, although their literal Lean types differ.  This file gives
 the canonical comparison through `integralClosure A L` and records that it
 is the identity in the ambient ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,15 +55,14 @@ noncomputable def integralClosureTwoIntegralBasesAlgebra :
 /-- Integral closures over two integral bases are canonically equivalent.
 The target `B`-algebra structure is the preceding transported structure. -/
 noncomputable def integralClosureTwoIntegralBasesAlgEquiv :
-    letI : Algebra B (integralClosure C L) :=
+    let : Algebra B (integralClosure C L) :=
       integralClosureTwoIntegralBasesAlgebra (A := A) (B := B) (C := C) (L := L)
     integralClosure B L ≃ₐ[B] integralClosure C L := by
   letI : Algebra B (integralClosure A L) :=
     integralClosureIntegralBaseAlgebra
   letI : Algebra C (integralClosure A L) :=
     integralClosureIntegralBaseAlgebra
-  letI : Algebra B (integralClosure C L) :=
-    integralClosureTwoIntegralBasesAlgebra (A := A) (B := B) (C := C) (L := L)
+  intro targetAlgebra
   let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
     integralClosureIntegralBaseAlgEquiv
   let eC : integralClosure C L ≃ₐ[C] integralClosure A L :=
@@ -77,7 +80,7 @@ after coercion to their common ambient ring. -/
 @[simp]
 theorem algebraMap_integralClosureTwoIntegralBasesAlgEquiv
     (x : integralClosure B L) :
-    letI : Algebra B (integralClosure C L) :=
+    let : Algebra B (integralClosure C L) :=
       integralClosureTwoIntegralBasesAlgebra (A := A) (B := B) (C := C) (L := L)
     algebraMap (integralClosure C L) L
         (integralClosureTwoIntegralBasesAlgEquiv
@@ -87,8 +90,7 @@ theorem algebraMap_integralClosureTwoIntegralBasesAlgEquiv
     integralClosureIntegralBaseAlgebra
   let : Algebra C (integralClosure A L) :=
     integralClosureIntegralBaseAlgebra
-  let : Algebra B (integralClosure C L) :=
-    integralClosureTwoIntegralBasesAlgebra (A := A) (B := B) (C := C) (L := L)
+  intro targetAlgebra
   let eB : integralClosure B L ≃ₐ[B] integralClosure A L :=
     integralClosureIntegralBaseAlgEquiv
   let eC : integralClosure C L ≃ₐ[C] integralClosure A L :=

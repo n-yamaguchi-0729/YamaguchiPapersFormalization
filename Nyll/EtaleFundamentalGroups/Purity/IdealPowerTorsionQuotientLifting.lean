@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Lifting power-torsion elements through quotient maps
@@ -20,6 +22,8 @@ maps therefore lifts every power-torsion vector to a power-torsion
 vector. This proves surjectivity on the torsion submodules directly,
 without constructing a filtered-colimit comparison.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

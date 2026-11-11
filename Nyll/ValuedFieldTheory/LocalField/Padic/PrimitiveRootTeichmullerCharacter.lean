@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Teichmüller characters from a specified primitive root
@@ -23,6 +25,8 @@ The ambient algebra need not be a cyclotomic extension. No finiteness,
 normality, characteristic-zero, or prime-to-`p` group-order assumption is
 required. A scalar tower is supplied once; no local instances are installed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

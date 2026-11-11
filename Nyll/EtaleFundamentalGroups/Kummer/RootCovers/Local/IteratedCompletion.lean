@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Finiteness.Ideal
-import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Complete local iterated root covers
@@ -22,6 +24,8 @@ power lies in that extended ideal.
 
 All algebraic and local structures are installed only inside the proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

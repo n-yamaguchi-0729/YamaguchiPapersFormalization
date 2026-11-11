@@ -46,12 +46,12 @@ instance {R S : Type*} [CommRing R] [CommRing S] [Algebra R S] [Subsingleton S]
   let P : SubmersivePresentation R S (Fin (n + 1)) Unit :=
     { __ := P'
       relation _ := 1
-      span_range_relation_eq_ker := by simp [hker]
+      span_range_relation_eq_ker := by rw [Set.range_const, Ideal.span_singleton_one, hker]
       map _ := (0 : Fin (n + 1))
       map_inj _ _ _ := rfl
       jacobian_isUnit := isUnit_of_subsingleton _ }
   refine ⟨Fin (n + 1), Unit, inferInstance, inferInstance, P, ?_⟩
-  simp [Presentation.dimension]
+  rw [Presentation.dimension, Nat.card_fin, Nat.card_unique, Nat.add_sub_cancel]
 
 instance (priority := low) {R S : Type*} [CommRing R] [CommRing S] [Algebra R S]
     [IsStandardSmooth R S] [FormallyUnramified R S] :

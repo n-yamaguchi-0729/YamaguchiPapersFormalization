@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # Stalk localization in an affine chart
@@ -14,6 +16,8 @@ The local-ring isomorphism induced by the open chart identifies its literal
 prime localization map with the canonical map from the original stalk.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

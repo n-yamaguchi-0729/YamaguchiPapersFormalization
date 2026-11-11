@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.HenselLemma
-import Mathlib.RingTheory.RootsOfUnity.Basic
-import Mathlib.Algebra.Order.GroupWithZero.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.HenselLemma
+public import Mathlib.RingTheory.RootsOfUnity.Basic
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
 
 /-!
 # Reduction of roots of unity over a Henselian DVF
@@ -15,6 +17,8 @@ If the root order is nonzero in the residue field, Hensel lifting and
 uniqueness make reduction bijective on roots of unity. No completeness or
 finiteness assumption on the residue field is needed.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 
@@ -101,7 +105,8 @@ noncomputable def rootsOfUnityReductionEquiv (n : ℕ) [NeZero (n : F.residueFie
     (ζ : rootsOfUnity n F.valuationSubring) :
     rootsOfUnityReductionEquiv F n ζ = rootsOfUnityReduction F n ζ := rfl
 
-private theorem rootsOfUnity_toField_bijective (D : DVF.{u, v} K)
+/-- Inclusion of the valuation ring induces a bijection on roots of nonzero order. -/
+theorem rootsOfUnity_toField_bijective (D : DVF.{u, v} K)
     (n : ℕ) [NeZero n] :
     Function.Bijective (restrictRootsOfUnity (algebraMap D.valuationSubring K) n) := by
   constructor
@@ -124,7 +129,8 @@ private theorem rootsOfUnity_toField_bijective (D : DVF.{u, v} K)
     apply rootsOfUnity.coe_injective
     rfl
 
-private noncomputable def rootsOfUnityFieldEquiv (D : DVF.{u, v} K)
+/-- Roots of nonzero order in the valuation ring identified with those in the field. -/
+noncomputable def rootsOfUnityFieldEquiv (D : DVF.{u, v} K)
     (n : ℕ) [NeZero n] : rootsOfUnity n D.valuationSubring ≃* rootsOfUnity n K :=
   MulEquiv.ofBijective (restrictRootsOfUnity (algebraMap D.valuationSubring K) n)
     (rootsOfUnity_toField_bijective D n)

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Local normality under an etale algebra
@@ -16,6 +18,8 @@ Only the local ring of the base at the contracted prime is assumed normal.
 Localizing the etale algebra over that ring and then at the lifted prime gives
 the original local ring, through the actual localization comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

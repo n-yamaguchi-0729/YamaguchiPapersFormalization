@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.LocalRing.Module
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
+module
+
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.LocalRing.Module
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
 
 /-!
 # Etaleness of a chosen Henselian local factor
@@ -18,6 +20,8 @@ supplies finiteness.  Flatness then makes this finite module free over the local
 finitely presented.  Together with formal etaleness of localization, this upgrades the chosen
 local factor itself to an etale algebra over the Henselian base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

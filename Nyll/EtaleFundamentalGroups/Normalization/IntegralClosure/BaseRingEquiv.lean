@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Transporting integral closure across an equivalent base ring
@@ -18,6 +20,8 @@ uses it to transport etaleness.  A second version simultaneously transports
 the ambient ring, which is the form needed when two canonical completed
 fraction fields have first been identified.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,11 +50,10 @@ The target is read as an `R`-algebra through
 noncomputable def integralClosureBaseRingAlgEquiv
     (e : R ≃+* S)
     (h : (algebraMap S A).comp e.toRingHom = algebraMap R A) :
-    letI : Algebra R (integralClosure S A) :=
+    let : Algebra R (integralClosure S A) :=
       integralClosureBaseRingAlgebra e
     integralClosure R A ≃ₐ[R] integralClosure S A := by
-  letI : Algebra R (integralClosure S A) :=
-    integralClosureBaseRingAlgebra e
+  intro sharedDefinitionOwner1
   let f : integralClosure R A →+* integralClosure S A :=
     { toFun := fun x ↦
         ⟨x.1, (e.isIntegral_iff h x.1).mp x.2⟩
@@ -115,7 +118,7 @@ noncomputable def integralClosureAlgEquivOfBaseAndAmbientEquiv
     (eBase : R ≃+* S) (eAmbient : A ≃+* B)
     (h : eAmbient.toRingHom.comp (algebraMap R A) =
       (algebraMap S B).comp eBase.toRingHom) :
-    letI : Algebra R (integralClosure S B) :=
+    let : Algebra R (integralClosure S B) :=
       integralClosureBaseRingAlgebra eBase
     integralClosure R A ≃ₐ[R] integralClosure S B := by
   letI : Algebra R B :=
@@ -123,8 +126,7 @@ noncomputable def integralClosureAlgEquivOfBaseAndAmbientEquiv
   let eAmbientR : A ≃ₐ[R] B :=
     AlgEquiv.ofRingEquiv (f := eAmbient) fun r ↦ by
       exact congrArg (fun k : R →+* B ↦ k r) h
-  letI : Algebra R (integralClosure S B) :=
-    integralClosureBaseRingAlgebra eBase
+  intro sharedOwner1
   have hBase :
       (algebraMap S B).comp eBase.toRingHom = algebraMap R B := rfl
   exact eAmbientR.mapIntegralClosure |>.trans

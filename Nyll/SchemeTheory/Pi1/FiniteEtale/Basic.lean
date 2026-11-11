@@ -30,6 +30,8 @@ public import Nyll.SchemeTheory.Pi1.Morphisms.Finite
 public import Nyll.SchemeTheory.Pi1.Etale.RingHom
 public import Nyll.SchemeTheory.Pi1.Affine.Property
 public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Splitting
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Equalizer
 
 /-!
 # Finite étale morphisms
@@ -42,7 +44,7 @@ the category of finite etale schemes over `X`.
 
 noncomputable section
 
-universe u
+universe u v
 
 open CategoryTheory Limits
 
@@ -53,11 +55,12 @@ end Algebra
 namespace RingHom
 
 /-- A ring homomorphism is finite étale if the induced algebra is finite étale. -/
-def FiniteEtale {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) : Prop :=
+def FiniteEtale {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) : Prop :=
   letI := f.toAlgebra
   Algebra.FiniteEtale R S
 
-lemma finiteEtale_algebraMap_iff {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] :
+lemma finiteEtale_algebraMap_iff {R : Type u} {S : Type v}
+    [CommRing R] [CommRing S] [Algebra R S] :
     (algebraMap R S).FiniteEtale ↔ Algebra.FiniteEtale R S := by
   simp only [RingHom.FiniteEtale]
   congr!
@@ -66,13 +69,14 @@ lemma finiteEtale_algebraMap_iff {R S : Type u} [CommRing R] [CommRing S] [Algeb
 namespace FiniteEtale
 
 lemma iff_finite_and_etale
-    {R S : Type u} [CommRing R] [CommRing S] (f : R →+* S) :
+    {R : Type u} {S : Type v} [CommRing R] [CommRing S] (f : R →+* S) :
     f.FiniteEtale ↔ f.Etale ∧ f.Finite := by
   rw [FiniteEtale, Finite, Etale]
   rw [Algebra.finiteEtale_iff]
 
 lemma eq_and :
-    @FiniteEtale = (fun R S (_ : CommRing R) (_ : CommRing S) f ↦ f.Etale ∧ f.Finite) := by
+    @FiniteEtale.{u, v} =
+      (fun R S (_ : CommRing R) (_ : CommRing S) f ↦ f.Etale ∧ f.Finite) := by
   ext
   rw [iff_finite_and_etale]
 

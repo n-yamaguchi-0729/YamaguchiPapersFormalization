@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
 
 /-!
 # Literal away maps for fixed generic tensor components
@@ -16,6 +18,8 @@ generic tensor component.  This file returns the result for the literal away
 localization of the component's normalization, rather than only at a
 height-one localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

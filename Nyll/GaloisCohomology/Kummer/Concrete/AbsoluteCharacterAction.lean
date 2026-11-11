@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Mathlib.Algebra.Ring.Aut
-import Mathlib.Algebra.Group.Hom.Instances
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Mathlib.Algebra.Ring.Aut
+public import Mathlib.Algebra.Group.Hom.Instances
 
 /-!
 # The canonical action on abelian absolute Galois characters
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Group.Hom.Instances
 Precomposition with inverse conjugation gives a left action. Its group law
 uses independence from the chosen extensions to the algebraic closure.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Scalar surjectivity in top degree with torsion-free coefficients
@@ -20,6 +22,8 @@ For a finite torsion-free module, quotienting by a nonzero scalar lowers
 support dimension. The coefficient exact sequence therefore makes that
 scalar surjective on top local cohomology for every support ideal.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

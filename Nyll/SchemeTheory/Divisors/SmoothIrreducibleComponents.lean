@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponentMap
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+module
+
+public import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponentMap
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Components smooth over a normal affine base
@@ -14,6 +16,8 @@ import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 The local normality theorem for smooth morphisms supplies the domain stalks
 needed to identify reduced irreducible components as finite étale covers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

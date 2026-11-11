@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Prime boundary parameters after localization
@@ -18,6 +20,8 @@ case, characteristic zero of its generic residue ring is preserved by the
 localization.  These are the exact inputs needed by prime-or-unit
 multi-boundary unit descent.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

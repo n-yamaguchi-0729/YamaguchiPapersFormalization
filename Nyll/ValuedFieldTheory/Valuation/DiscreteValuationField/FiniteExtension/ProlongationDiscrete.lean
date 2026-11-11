@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
-import Nyll.ValuedFieldTheory.Valuation.DiscreteEquivalence
-import Mathlib.RingTheory.Valuation.Integral
-import Mathlib.RingTheory.Localization.AsSubring
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteEquivalence
+public import Mathlib.RingTheory.Valuation.Integral
+public import Mathlib.RingTheory.Localization.AsSubring
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Discrete prolongations to finite separable extensions
@@ -18,6 +20,8 @@ Finite separable field extensions carry discrete prolongations of the original
 valuation. These can use the original value-group universe and preserve the
 residue characteristic.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

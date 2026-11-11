@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCocycleLifting
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCocycleLifting
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Mathlib.FieldTheory.Galois.Infinite
 
 /-!
 # Cyclotomic cocycle lifting on open Galois subgroups
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.Galois.Infinite
 The fixed field of an open subgroup is finite over the base. Its actual
 relative Galois group supplies the cocycle lift without extra hypotheses.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 universe u v

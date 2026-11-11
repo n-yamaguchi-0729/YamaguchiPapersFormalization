@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem1Dot1AbFaithfulness
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.FiniteGroups.SigmaMonotonicity
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationMonotonicity
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem1Dot1AbFaithfulness
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.FiniteGroups.SigmaMonotonicity
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationMonotonicity
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Sigma-abelianization-faithfulness
@@ -18,6 +20,8 @@ The quantifiers range over all open subgroups and all their open normal
 subgroups, without restricting the prime divisors of the relative index.
 The action is the existing conjugation action on the actual residual quotient.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

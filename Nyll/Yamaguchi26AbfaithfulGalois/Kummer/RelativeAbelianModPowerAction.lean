@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.ProCGroups.Abelian.AbelianModPower
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Relative Galois conjugation on the abelianization modulo powers
@@ -16,6 +18,8 @@ The conjugation map on the absolute Galois group is a continuous
 automorphism. Passing to its topological abelianization and then modulo
 `q`-th powers gives the actual map used in Section 3.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 
@@ -61,13 +65,13 @@ namespace Yamaguchi26AbfaithfulGalois
 
 open KummerTheory ProCGroups.Abelian
 
-universe u
+universe u v
 
 /-- The map on `G_Lᵃᵇ/q` induced by a relative Galois automorphism.
 It is constructed from the chosen continuous conjugation of `G_L`; the
 choice disappears on abelianization. -/
 noncomputable def relativeGaloisAbelianModPowerTransform
-    (K L : Type u) [Field K] [Field L] [Algebra K L]
+    (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L]
     (q : ℕ) (τ : Gal(L/K)) :
     abelianModPower Gal(AlgebraicClosure L/L) q →*
       abelianModPower Gal(AlgebraicClosure L/L) q :=
@@ -77,7 +81,7 @@ noncomputable def relativeGaloisAbelianModPowerTransform
 
 /-- Conjugation on `G_Lᵃᵇ/q` evaluates on the canonical quotient image. -/
 theorem relativeGaloisAbelianModPowerTransform_apply_mk
-    (K L : Type u) [Field K] [Field L] [Algebra K L]
+    (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L]
     (q : ℕ) (τ : Gal(L/K)) (σ : Gal(AlgebraicClosure L/L)) :
     relativeGaloisAbelianModPowerTransform K L q τ
         ((TopologicalAbelianization.mk Gal(AlgebraicClosure L/L) σ :
@@ -92,7 +96,7 @@ theorem relativeGaloisAbelianModPowerTransform_apply_mk
 /-- A nontrivial inverse action on continuous H¹ moves an element of the
 actual quotient `G_Lᵃᵇ/q` under forward relative Galois conjugation. -/
 theorem exists_moved_abelianModPower_of_inverse_relativeH1Action_ne_one
-    (K L : Type u) [Field K] [Field L] [Algebra K L]
+    (K : Type u) (L : Type v) [Field K] [Field L] [Algebra K L]
     (q : ℕ) (τ : Gal(L/K))
     (hτ : relativeGaloisH1Action (n := q) K L τ⁻¹ ≠ 1) :
     ∃ z : abelianModPower Gal(AlgebraicClosure L/L) q,

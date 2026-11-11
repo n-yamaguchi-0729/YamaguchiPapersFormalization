@@ -5,14 +5,17 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ProCGroups.ProC.Quotients.ClosedSubgroupNeighborhoods
-import Nyll.ProCGroups.ProC.Quotients.LeftQuotientProjectionSections
-import Nyll.EtaleFundamentalGroups.ContinuousActions.FiniteLimitsAndColimits
-import Mathlib.CategoryTheory.Action.Concrete
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.GroupTheory.GroupAction.Transitive
-import Mathlib.GroupTheory.GroupAction.Quotient
-import Mathlib.Topology.Algebra.ClopenNhdofOne
+module
+
+public import Nyll.ProCGroups.ProC.Quotients.ClosedSubgroupNeighborhoods
+public import Nyll.ProCGroups.ProC.Quotients.LeftQuotientProjectionSections
+public import Nyll.EtaleFundamentalGroups.ContinuousActions.FiniteLimitsAndColimits
+public import Mathlib.CategoryTheory.Action.Concrete
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.GroupTheory.GroupAction.Transitive
+public import Mathlib.GroupTheory.GroupAction.Quotient
+public import Mathlib.Topology.Algebra.ClopenNhdofOne
+public import Nyll.ProCGroups.Profinite.OpenSubgroups
 
 /-!
 # Injectivity detected by finite continuous actions
@@ -21,6 +24,8 @@ A continuous homomorphism of profinite groups is injective exactly when every
 nonempty transitive finite continuous action of the source has the
 epi--mono span of [Stacks Project, Tag 0BN7](https://stacks.math.columbia.edu/tag/0BN7).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -291,23 +296,23 @@ private theorem injective_of_exists_epi_mono_span
     ConcreteCategory.injective_of_mono_of_preservesPullback i
   obtain ⟨y, hy⟩ := hqsurj x₀
   have hki :
-      ConcreteCategory.hom i ((Y.obj.ρ k).hom y) =
+      ConcreteCategory.hom i ((Y.obj.ρ k).asHom y) =
         ConcreteCategory.hom i y := by
     have hcomm := ConcreteCategory.congr_hom (i.hom.comm k) y
-    change ConcreteCategory.hom i ((Y.obj.ρ k).hom y) =
-      (X.obj.ρ (h.toMonoidHom k)).hom
+    change ConcreteCategory.hom i ((Y.obj.ρ k).asHom y) =
+      (X.obj.ρ (h.toMonoidHom k)).asHom
         (ConcreteCategory.hom i y) at hcomm
     rw [hkmap, Action.ρ_one] at hcomm
     exact hcomm.trans (ConcreteCategory.id_apply _)
-  have hky : (Y.obj.ρ k).hom y = y := hiinj hki
-  have hkxρ : (X'.obj.ρ k).hom x₀ = x₀ := by
+  have hky : (Y.obj.ρ k).asHom y = y := hiinj hki
+  have hkxρ : (X'.obj.ρ k).asHom x₀ = x₀ := by
     rw [← hy]
     have hcomm := ConcreteCategory.congr_hom (q.hom.comm k) y
-    change ConcreteCategory.hom q ((Y.obj.ρ k).hom y) =
-      (X'.obj.ρ k).hom (ConcreteCategory.hom q y) at hcomm
+    change ConcreteCategory.hom q ((Y.obj.ρ k).asHom y) =
+      (X'.obj.ρ k).asHom (ConcreteCategory.hom q y) at hcomm
     rw [← hcomm, hky]
   have hkx : k • x₀ = x₀ := by
-    change (X'.obj.ρ k).hom x₀ = x₀
+    change (X'.obj.ρ k).asHom x₀ = x₀
     exact hkxρ
   have hkstab :
       k ∈ MulAction.stabilizer G'

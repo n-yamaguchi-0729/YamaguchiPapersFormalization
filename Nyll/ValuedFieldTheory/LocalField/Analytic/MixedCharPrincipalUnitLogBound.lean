@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogDenominatorLowerBound
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.ValuationLimit
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharLogTermBound
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogDenominatorLowerBound
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.ValuationLimit
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharLogTermBound
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WithZeroCompleteSpace
 
 /-!
 # A lower bound for valuations in the principal-unit logarithm image
@@ -17,6 +20,8 @@ minimum. Every nonzero principal-unit logarithm has integer valuation at
 least that minimum. The bound is uniform over all principal units, including
 when the residue field is infinite.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

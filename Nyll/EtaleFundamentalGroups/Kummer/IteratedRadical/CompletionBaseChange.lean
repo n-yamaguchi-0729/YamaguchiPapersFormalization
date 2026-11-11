@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedCompletion
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedCompletion
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
 
 /-!
 # Completion base change of an iterated radical
@@ -17,6 +19,8 @@ algebra structure in the right-factor direction and records the local,
 residue, finite-etale, and chosen-closed-prime data needed by complete-local
 factor consumers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -70,20 +74,14 @@ noncomputable def iteratedRadicalCompletionRightAlgEquiv
     let B := iteratedRadical A r n a
     let Bhat := iteratedRadical Ahat r n
       (fun i ↦ algebraMap A Ahat (a i))
-    letI : Algebra B (Ahat ⊗[A] B) :=
+    let : Algebra B (Ahat ⊗[A] B) :=
       Algebra.TensorProduct.rightAlgebra
-    letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
     (Ahat ⊗[A] B) ≃ₐ[B] Bhat := by
-  dsimp only
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let B := iteratedRadical A r n a
-  let Bhat := iteratedRadical Ahat r n
-    (fun i ↦ algebraMap A Ahat (a i))
+  intro Ahat B Bhat
   let e : Ahat ⊗[A] B ≃ₐ[Ahat] Bhat :=
     iteratedRadicalCompletionBaseChangeAlgEquiv n a
-  letI : Algebra B (Ahat ⊗[A] B) :=
-    Algebra.TensorProduct.rightAlgebra
-  letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+  intro sharedOwner5 sharedOwner6
   refine
     { toRingEquiv := e.toRingEquiv
       commutes' := ?_ }
@@ -104,18 +102,13 @@ theorem faithfullyFlat_iteratedRadicalCompletion
     let B := iteratedRadical A r n a
     let Bhat := iteratedRadical Ahat r n
       (fun i ↦ algebraMap A Ahat (a i))
-    letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
     Module.FaithfullyFlat B Bhat := by
-  dsimp only
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let B := iteratedRadical A r n a
-  let Bhat := iteratedRadical Ahat r n
-    (fun i ↦ algebraMap A Ahat (a i))
+  intro Ahat B Bhat sharedOwner1
   let : Module.FaithfullyFlat A Ahat :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
   let : Algebra B (Ahat ⊗[A] B) :=
     Algebra.TensorProduct.rightAlgebra
-  let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
   let eComm : (B ⊗[A] Ahat) ≃ₐ[B] (Ahat ⊗[A] B) :=
     { toRingEquiv := (Algebra.TensorProduct.comm A B Ahat).toRingEquiv
       commutes' := by
@@ -137,17 +130,12 @@ theorem iteratedRadicalCompletion_algebraMap_comp_apply
     let B := iteratedRadical A r n a
     let Bhat := iteratedRadical Ahat r n
       (fun i ↦ algebraMap A Ahat (a i))
-    letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
     algebraMap B Bhat (algebraMap A B x) =
       algebraMap Ahat Bhat (algebraMap A Ahat x) := by
-  dsimp only
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let B := iteratedRadical A r n a
-  let Bhat := iteratedRadical Ahat r n
-    (fun i ↦ algebraMap A Ahat (a i))
+  intro Ahat B Bhat sharedOwner1
   let e : Ahat ⊗[A] B ≃ₐ[Ahat] Bhat :=
     iteratedRadicalCompletionBaseChangeAlgEquiv n a
-  let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
   change e (1 ⊗ₜ[A] algebraMap A B x) =
     algebraMap Ahat Bhat (algebraMap A Ahat x)
   rw [← Algebra.TensorProduct.tmul_one_eq_one_tmul]
@@ -168,33 +156,19 @@ theorem residueFieldMap_bijective_iteratedRadicalCompletion
         IsLocalRing.maximalIdeal Ahat := fun i ↦ by
       rw [AdicCompletion.maximalIdeal_eq_map]
       exact Ideal.mem_map_of_mem (algebraMap A Ahat) (ha i)
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
-    letI : IsLocalRing Bhat :=
+    let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+    let : IsLocalRing Bhat :=
       isLocalRing_iteratedRadical n _ hn haHat
-    letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
-    letI : Module.FaithfullyFlat B Bhat :=
+    let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Module.FaithfullyFlat B Bhat :=
       faithfullyFlat_iteratedRadicalCompletion n a
     Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap B Bhat)) := by
-  dsimp only
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let B := iteratedRadical A r n a
-  let Bhat := iteratedRadical Ahat r n
-    (fun i ↦ algebraMap A Ahat (a i))
-  have haHat : ∀ i, algebraMap A Ahat (a i) ∈
-      IsLocalRing.maximalIdeal Ahat := fun i ↦ by
-    rw [AdicCompletion.maximalIdeal_eq_map]
-    exact Ideal.mem_map_of_mem (algebraMap A Ahat) (ha i)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
-  let : IsLocalRing Bhat :=
-    isLocalRing_iteratedRadical n _ hn haHat
+  intro Ahat B Bhat haHat sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4
   let : Module.FaithfullyFlat A B :=
     faithfullyFlat_iteratedRadical n a hn
   let : Module.FaithfullyFlat Ahat Bhat :=
     faithfullyFlat_iteratedRadical n _ hn
-  let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
-  let : Module.FaithfullyFlat B Bhat :=
-    faithfullyFlat_iteratedRadicalCompletion n a
   have hdiagram (y : IsLocalRing.ResidueField A) :
       IsLocalRing.ResidueField.map (algebraMap B Bhat)
           (IsLocalRing.ResidueField.map (algebraMap A B) y) =
@@ -238,31 +212,19 @@ theorem maximalIdeal_map_iteratedRadicalCompletion
         IsLocalRing.maximalIdeal Ahat := fun i ↦ by
       rw [AdicCompletion.maximalIdeal_eq_map]
       exact Ideal.mem_map_of_mem (algebraMap A Ahat) (ha i)
-    letI : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
-    letI : IsLocalRing Bhat :=
+    let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
+    let : IsLocalRing Bhat :=
       isLocalRing_iteratedRadical n _ hn haHat
-    letI : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
     (IsLocalRing.maximalIdeal B).map (algebraMap B Bhat) =
       IsLocalRing.maximalIdeal Bhat := by
-  dsimp only
-  let Ahat := AdicCompletion (IsLocalRing.maximalIdeal A) A
-  let B := iteratedRadical A r n a
-  let Bhat := iteratedRadical Ahat r n
-    (fun i ↦ algebraMap A Ahat (a i))
+  intro Ahat B Bhat haHat sharedOwner1 sharedOwner2 sharedOwner3
   let T := Ahat ⊗[A] B
-  have haHat : ∀ i, algebraMap A Ahat (a i) ∈
-      IsLocalRing.maximalIdeal Ahat := fun i ↦ by
-    rw [AdicCompletion.maximalIdeal_eq_map]
-    exact Ideal.mem_map_of_mem (algebraMap A Ahat) (ha i)
-  let : IsLocalRing B := isLocalRing_iteratedRadical n a hn ha
-  let : IsLocalRing Bhat :=
-    isLocalRing_iteratedRadical n _ hn haHat
   let : Module.FaithfullyFlat A B :=
     faithfullyFlat_iteratedRadical n a hn
   let : Module.FaithfullyFlat A Ahat :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
   let : Algebra B T := Algebra.TensorProduct.rightAlgebra
-  let : Algebra B Bhat := iteratedRadicalCompletionAlgebra n a
   let e : T ≃ₐ[B] Bhat := iteratedRadicalCompletionRightAlgEquiv n a
   let q := IsLocalRing.maximalIdeal B
   let qT := q.map (algebraMap B T)

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.IrreducibleComponentMap
-import Nyll.SchemeTheory.FunctionFields.Functoriality
-import Mathlib.AlgebraicGeometry.Cover.Open
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.SchemeTheory.Divisors.IrreducibleComponentMap
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
+public import Mathlib.AlgebraicGeometry.Cover.Open
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Geometry of reduced irreducible components
@@ -18,6 +20,8 @@ Its generic point maps to the canonical generic point of the chosen component.
 These facts let later local-chart constructions select the correct prime of an
 ambient affine neighbourhood without introducing an extra component point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

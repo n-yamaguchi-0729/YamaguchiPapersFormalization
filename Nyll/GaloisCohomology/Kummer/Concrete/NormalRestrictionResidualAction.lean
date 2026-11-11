@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernel
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
-import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernel
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # The restriction kernel and the absolute residual action
@@ -20,6 +22,8 @@ The actual kernel of normal restriction identifies with the upper field's
 absolute Galois group. Transport through both actual quotient maps preserves
 conjugation by the same lift of the relative automorphism.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

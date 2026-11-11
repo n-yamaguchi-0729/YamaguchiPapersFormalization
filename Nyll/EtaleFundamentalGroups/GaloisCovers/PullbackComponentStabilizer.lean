@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
-import Mathlib.CategoryTheory.Galois.GaloisObjects
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
+public import Mathlib.CategoryTheory.Galois.GaloisObjects
 
 /-!
 # The deck group of a pullback component and its setwise stabilizer
@@ -22,6 +24,8 @@ No lifting or equivariance assumption is introduced. To use it for inertia
 on a normalization, one must still prove geometrically that fixing the
 chosen normalization point preserves the relevant component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,12 +54,12 @@ soon as it maps the distinguished fiber point back into that component.
 The lift is constructed using the transitive component deck action. -/
 theorem galoisPullbackComponentQuotient_exists_lift_of_mem_range
     (sigma : (Aut W)ᵐᵒᵖ)
-    (hsigma : (fiber xi).map ((pullback f).map sigma.unop.hom)
+    (hsigma : (fiber xi).map ((pullback f).map sigma.unop.asIso.hom)
       ((fiber xi).map i z) ∈ Set.range ((fiber xi).map i)) :
     ∃ tau : (Aut Z)ᵐᵒᵖ,
       galoisPullbackComponentQuotientMonoidHom
           f xi W hW w Z i z hiz hZ hi tau = sigma ∧
-        tau.unop.hom ≫ i = i ≫ (pullback f).map sigma.unop.hom := by
+        tau.unop.asIso.hom ≫ i = i ≫ (pullback f).map sigma.unop.asIso.hom := by
   let : IsGalois W := hW
   let : IsGalois Z := hZ
   let F := fiber (xi ≫ f)
@@ -66,25 +70,25 @@ theorem galoisPullbackComponentQuotient_exists_lift_of_mem_range
     f xi W hW w Z i z hiz hZ hi
   obtain ⟨z', hz'⟩ := hsigma
   obtain ⟨tau, htau⟩ := evaluation_aut_surjective_of_isGalois F' Z z z'
-  have hequiv : tau.hom ≫ i = i ≫ H.map ((phi (MulOpposite.op tau)).unop.hom) :=
+  have hequiv : tau.asIso.hom ≫ i = i ≫ H.map ((phi (MulOpposite.op tau)).unop.asIso.hom) :=
     galoisPullbackComponentQuotientMonoidHom_equivariant
       f xi W hW w Z i z hiz hZ hi (MulOpposite.op tau)
   have heval :
-      F'.map (H.map ((phi (MulOpposite.op tau)).unop.hom)) (F'.map i z) =
-        F'.map (H.map sigma.unop.hom) (F'.map i z) := by
+      F'.map (H.map ((phi (MulOpposite.op tau)).unop.asIso.hom)) (F'.map i z) =
+        F'.map (H.map sigma.unop.asIso.hom) (F'.map i z) := by
     calc
-      F'.map (H.map ((phi (MulOpposite.op tau)).unop.hom)) (F'.map i z) =
-          F'.map i (F'.map tau.hom z) := by
+      F'.map (H.map ((phi (MulOpposite.op tau)).unop.asIso.hom)) (F'.map i z) =
+          F'.map i (F'.map tau.asIso.hom z) := by
         have h := congrArg (fun k ↦ F'.map k z) hequiv
         simpa only [Functor.map_comp, FintypeCat.comp_apply] using h.symm
       _ = F'.map i z' := congrArg (F'.map i) htau
-      _ = F'.map (H.map sigma.unop.hom) (F'.map i z) := hz'
+      _ = F'.map (H.map sigma.unop.asIso.hom) (F'.map i z) := hz'
   have hnat (a : (Aut W)ᵐᵒᵖ) :
-      (t.inv.app W) (F.map a.unop.hom w) =
-        F'.map (H.map a.unop.hom) (F'.map i z) := by
-    have h := ConcreteCategory.congr_hom (t.inv.naturality a.unop.hom) w
-    change (t.inv.app W) (F.map a.unop.hom w) =
-      F'.map (H.map a.unop.hom)
+      (t.inv.app W) (F.map a.unop.asIso.hom w) =
+        F'.map (H.map a.unop.asIso.hom) (F'.map i z) := by
+    have h := ConcreteCategory.congr_hom (t.inv.naturality a.unop.asIso.hom) w
+    change (t.inv.app W) (F.map a.unop.asIso.hom w) =
+      F'.map (H.map a.unop.asIso.hom)
         (transportedPointOfCompIso H t W w) at h
     rw [← hiz] at h
     exact h
@@ -97,7 +101,7 @@ theorem galoisPullbackComponentQuotient_exists_lift_of_mem_range
       FintypeCat.inv_hom_id_apply (t.app W) x
     simpa only [hinv] using h
   refine ⟨MulOpposite.op tau, hphi, ?_⟩
-  exact hequiv.trans (congrArg (fun a : (Aut W)ᵐᵒᵖ ↦ i ≫ H.map a.unop.hom) hphi)
+  exact hequiv.trans (congrArg (fun a : (Aut W)ᵐᵒᵖ ↦ i ≫ H.map a.unop.asIso.hom) hphi)
 
 /-- The image of the component deck group is precisely the setwise
 stabilizer of its geometric-fiber range under original deck transformations.
@@ -106,7 +110,7 @@ theorem galoisPullbackComponentQuotientMonoidHom_mem_range_iff_preserves_compone
     (sigma : (Aut W)ᵐᵒᵖ) :
     sigma ∈ (galoisPullbackComponentQuotientMonoidHom
         f xi W hW w Z i z hiz hZ hi).range ↔
-      (fiber xi).map ((pullback f).map sigma.unop.hom) ''
+      (fiber xi).map ((pullback f).map sigma.unop.asIso.hom) ''
           Set.range ((fiber xi).map i) = Set.range ((fiber xi).map i) := by
   let F' := fiber xi
   let H := pullback f
@@ -115,8 +119,8 @@ theorem galoisPullbackComponentQuotientMonoidHom_mem_range_iff_preserves_compone
   constructor
   · rintro ⟨tau, rfl⟩
     have hpoint (a : F'.obj Z) :
-        F'.map (H.map ((phi tau).unop.hom)) (F'.map i a) =
-          F'.map i (F'.map tau.unop.hom a) := by
+        F'.map (H.map ((phi tau).unop.asIso.hom)) (F'.map i a) =
+          F'.map i (F'.map tau.unop.asIso.hom a) := by
       have h := congrArg (fun k ↦ F'.map k a)
         (galoisPullbackComponentQuotientMonoidHom_equivariant
           f xi W hW w Z i z hiz hZ hi tau)
@@ -125,15 +129,15 @@ theorem galoisPullbackComponentQuotientMonoidHom_mem_range_iff_preserves_compone
     intro a
     constructor
     · rintro ⟨b, ⟨c, rfl⟩, rfl⟩
-      exact ⟨F'.map tau.unop.hom c, (hpoint c).symm⟩
+      exact ⟨F'.map tau.unop.asIso.hom c, (hpoint c).symm⟩
     · rintro ⟨b, rfl⟩
-      refine ⟨F'.map i (F'.map tau.unop.inv b),
-        ⟨F'.map tau.unop.inv b, rfl⟩, ?_⟩
+      refine ⟨F'.map i (F'.map tau.unop.asIso.inv b),
+        ⟨F'.map tau.unop.asIso.inv b, rfl⟩, ?_⟩
       rw [hpoint]
       exact congrArg (F'.map i)
-        (FintypeCat.inv_hom_id_apply (F'.mapIso tau.unop) b)
+        (FintypeCat.inv_hom_id_apply (F'.mapIso tau.unop.asIso) b)
   · intro hset
-    have hmem : F'.map (H.map sigma.unop.hom) (F'.map i z) ∈
+    have hmem : F'.map (H.map sigma.unop.asIso.hom) (F'.map i z) ∈
         Set.range (F'.map i) := by
       rw [← hset]
       exact ⟨F'.map i z, ⟨z, rfl⟩, rfl⟩

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialIdealPowerTorsion
-import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.LinearAlgebra.Quotient.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialIdealPowerTorsion
+public import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-!
 # Injective presentations preserving ideal-power torsion
@@ -21,6 +23,8 @@ is again ideal-power torsion because its embedded image is essential.
 The quotient inherits power torsion from the hull.  The inclusion and the
 quotient map form a concrete short exact coefficient complex.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Discrete valuation stalks at Cartier component generic points
@@ -22,6 +24,8 @@ Regularity supplies the domain structure through the general regular-local
 ring theorem. The component has coheight one, so the shared one-dimensional
 regular-local criterion gives the DVR structure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

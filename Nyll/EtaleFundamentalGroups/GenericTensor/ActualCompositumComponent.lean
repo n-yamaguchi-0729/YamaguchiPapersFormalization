@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
 
 /-!
 # The literal generic component of an actual compositum
@@ -16,6 +18,8 @@ map, its kernel, and the resulting quotient-field equivalence.  A completed
 lower Kummer factor can therefore be followed into a later fixed tensor
 component without reselecting an abstract field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

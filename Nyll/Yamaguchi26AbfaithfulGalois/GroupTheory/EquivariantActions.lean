@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.End
+module
+
+public import Mathlib.Algebra.Group.End
 
 /-!
 # Equivariant actions
 
 The unnumbered equivariant-action observation in Section 1 of [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1).
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

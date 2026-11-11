@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFEmbedding
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
 
 /-!
 # Equivariance of maps between discrete valued completions
@@ -13,6 +15,8 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
 A relative field automorphism carrying one prolongation to another induces
 a completion isomorphism commuting with the map from the completed base field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionQuotientLifting
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
-import Nyll.EtaleFundamentalGroups.Purity.TensorLinearDualComplex
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.CategoryTheory.Linear.Yoneda
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionQuotientLifting
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
+public import Nyll.EtaleFundamentalGroups.Purity.TensorLinearDualComplex
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.CategoryTheory.Linear.Yoneda
 
 /-!
 # Degree-zero tensor vanishing and dual torsion lifting
@@ -22,6 +24,8 @@ makes every map from those quotients into the degree-zero dual lift to
 degree one. Cofinality then gives surjectivity of the differential on
 ideal-power torsion. This is the base of the injective-chain argument.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

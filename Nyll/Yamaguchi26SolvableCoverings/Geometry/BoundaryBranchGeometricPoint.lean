@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.SchemeTheory.Affine.GeometricPointLocalization
-import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
-import Nyll.SchemeTheory.FunctionFields.PlainIntegerBase
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentMappedFiniteQuotientInertia
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.SchemeTheory.Affine.GeometricPointLocalization
+public import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
+public import Nyll.SchemeTheory.FunctionFields.IntegerBase
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.ComponentMappedFiniteQuotientInertia
 
 /-!
 # The fixed component geometric point on a local arithmetic chart
@@ -21,28 +24,34 @@ morphism as `componentGeometricPoint`. This makes the local chart usable for
 the stabilizer of the specified global normalization point.
 -/
 
+@[expose] public section
+
 noncomputable section
 
+universe u
+
 open AlgebraicGeometry CategoryTheory IsLocalRing TopologicalSpace
+
+attribute [local instance] uliftIntegerBaseIsDomain
 
 namespace Yamaguchi26SolvableCoverings
 
 private theorem fromSpecStalk_eq_of_ideal_transport
-    {X : Scheme} {x x' : X} (h : x = x')
+    {X : Scheme.{u}} {x x' : X} (h : x = x')
     (r : Spec (X.presheaf.stalk x)) (q : Spec (X.presheaf.stalk x'))
     (hqr : q.asIdeal = h ▸ r.asIdeal) :
     X.fromSpecStalk x' q = X.fromSpecStalk x r := by
   subst x'
   exact congrArg (X.fromSpecStalk x) (PrimeSpectrum.ext hqr)
 
-variable {X : Scheme.{0}}
+variable {X : Scheme.{u}}
 
 /-- A chart branch contracting to the canonical component branch maps to
 that exact component generic point, including the change of centre point. -/
 theorem image_etaleBranch_eq_componentPoint
     (D : X.EffectiveCartierDivisor) (E : Component D)
     (x : D.1.subscheme) (hx : x ∈ E.val)
-    {U : Scheme.{0}} (f : U ⟶ X) (u : U)
+    {U : Scheme.{u}} (f : U ⟶ X) (u : U)
     (hfu : f u = D.1.subschemeι x)
     (q : Ideal (U.presheaf.stalk u)) [hq : q.IsPrime]
     (hqcomap : q.comap (f.stalkMap u).hom =
@@ -69,7 +78,7 @@ algebraically closed field is left as an additional assumption. -/
 theorem exists_componentGeometricPoint_localized_etaleBranch
     (D : X.EffectiveCartierDivisor) (E : Component D)
     (x : D.1.subscheme) (hx : x ∈ E.val)
-    {U : Scheme.{0}} (f : U ⟶ X) [Etale f] (u : U)
+    {U : Scheme.{u}} (f : U ⟶ X) [Etale f] (u : U)
     (hfu : f u = D.1.subschemeι x)
     (q : Ideal (U.presheaf.stalk u)) [hq : q.IsPrime]
     (hqcomap : q.comap (f.stalkMap u).hom =
@@ -103,7 +112,7 @@ theorem exists_arithmeticBoundaryChart_with_componentGeometricPoint
         D.IsNormalCrossingsAt (D.1.subschemeι x)) :
     letI : ConnectedSpace D.1.supportComplement :=
       AlgebraicGeometry.FiniteEtale.boundaryComplement_connectedSpace D hreg
-    ∃ (U : Scheme.{0}) (f : U ⟶ X) (_hf : Etale f) (u : U)
+    ∃ (U : Scheme.{u}) (f : U ⟶ X) (_hf : Etale f) (u : U)
       (q : Ideal (U.presheaf.stalk u)) (_hq : q.IsPrime),
       D.1.HasMappedQuotientIdealInertiaCoprime f u q p ∧
       ∀ (P : Ideal (U.presheaf.stalk u)) (_hP : P.IsPrime), q ≤ P →
@@ -118,8 +127,9 @@ theorem exists_arithmeticBoundaryChart_with_componentGeometricPoint
   let : ConnectedSpace D.1.supportComplement :=
     AlgebraicGeometry.FiniteEtale.boundaryComplement_connectedSpace D hreg
   obtain ⟨x, hx, hchar, hnc⟩ := hnc
-  let : CharZero ((Spec (.of ℤ)).residueField (genericPoint (Spec (.of ℤ)))) :=
-    specZGenericResidueFieldEquivQ.toRingHom.charZero
+  let : CharZero ((Spec (.of (ULift.{u} ℤ))).residueField
+      (genericPoint (Spec (.of (ULift.{u} ℤ))))) :=
+    specULiftZGenericResidueFieldEquivQ.toRingHom.charZero
   let : CharP (X.residueField (D.1.subschemeι x)) p := ringChar.of_eq hchar
   have hhorizontal : D.ComponentsThroughPointAreHorizontal (toIntegers X) x :=
     fun Z hZ _ => hhor Z hZ

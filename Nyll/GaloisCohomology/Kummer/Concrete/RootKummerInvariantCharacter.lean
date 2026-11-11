@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Algebra.Ring.Basic
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Algebra.Ring.Basic
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Roots give invariant Kummer characters
@@ -20,11 +22,13 @@ Kummer coefficient roots. Their cyclotomic actions cancel. The resulting
 constant-coefficient Kummer character is fixed by the true left action.
 -/
 
+@[expose] public section
+
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
-variable (K : Type*) [Field K] [CharZero K]
+variable (K : Type*) [Field K] [PerfectField K]
 
 /-- A unit which is an n-th root of unity has an invariant Kummer character
 under every field automorphism. -/

@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Algebra.Ring.Aut
-import Mathlib.Order.Monotone.Basic
+module
+
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Algebra.Ring.Aut
+public import Mathlib.Order.Monotone.Basic
 
 /-!
 # Finite-order automorphisms preserving a valuation class
@@ -16,6 +18,8 @@ An order-preserving permutation of a finite orbit cannot change the valuation
 value at any point. Thus finite-order automorphisms preserving a valuation
 class preserve the valuation itself.
 -/
+
+@[expose] public section
 
 namespace Valuation
 variable {K Γ : Type*} [Field K] [LinearOrderedCommGroupWithZero Γ]

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PrimePowerRoots
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.Data.Nat.Totient
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PrimePowerRoots
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Data.Nat.Totient
 
 /-!
 # Finiteness of prime-power roots in mixed-characteristic discrete valuation fields
@@ -15,6 +17,8 @@ import Mathlib.Data.Nat.Totient
 Roots of unity belong to the valuation ring. The cyclotomic valuation bound gives a
 single exponent annihilating every root of prime-power order, so they form a finite set.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

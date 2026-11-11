@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicUnitInfiniteImage
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.PrimePowerRoots
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicUnitInfiniteImage
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.PrimePowerRoots
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Prime cyclic characters of mixed-characteristic discretely valued fields
@@ -18,6 +20,8 @@ Finiteness of primary roots in every finite extension forces the cyclotomic
 character to have infinite image. Its image therefore has a cyclic quotient
 of order equal to the residue characteristic.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open ValuationTheory.DiscreteValuationField

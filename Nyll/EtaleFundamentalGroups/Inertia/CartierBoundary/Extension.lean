@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.EtaleFundamentalGroups.Inertia.ExtendableNormalizationStabilizer
-import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendableCoverKernel
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.Inertia.ExtendableNormalizationStabilizer
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.ExtendableCoverKernel
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
 
 /-!
 # Boundary inertia of finite etale extensions
@@ -17,21 +19,25 @@ inertia at every boundary component. This proves one inclusion in the kernel
 formula of Lemma 1.1 without requiring ambient normality or integrality.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- An actual finite etale extension kills every normalized-point boundary
 stabilizer. Boundary regularity supplies full faithfulness of restriction. -/
 theorem isBoundaryUnramified_of_extension
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement)
     (W : FiniteEtale D.1.supportComplement) [IsConnected W]
     (hW : ∃ V : FiniteEtale X,
@@ -50,7 +56,7 @@ of the ambient fundamental-group map. -/
 theorem boundaryUnramifiedKernelIntersection_le_kernel
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     boundaryUnramifiedKernelIntersection D point ≤
       (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker := by

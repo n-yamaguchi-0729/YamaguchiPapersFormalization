@@ -9,6 +9,7 @@ import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualPrimeExclusion
 import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
 import Nyll.ProCGroups.ProC.Subgroups.Closed
 import Nyll.ProCGroups.Profinite.Basic
+import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Sigma-faithfulness excludes normal pro-p subgroups

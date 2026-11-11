@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Torsion
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.Tactic.Push
-import Lean.Elab.Tactic.Omega
+module
+
+public import Mathlib.GroupTheory.Torsion
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Data.Nat.Prime.Basic
+public import Mathlib.Tactic.Push
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Divisibility of an infinite primary group of roots of unity
@@ -18,6 +20,8 @@ of every prime-power order. Its power maps are surjective. Consequently, if the
 only unit divisible by every positive integer is one, every primary root group
 is finite. No assumption on characteristic is needed.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 universe u

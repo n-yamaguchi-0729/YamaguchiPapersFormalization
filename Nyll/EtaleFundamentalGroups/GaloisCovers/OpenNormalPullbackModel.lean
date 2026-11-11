@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalExtendedQuotientKernel
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentNaturality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalExtendedQuotientKernel
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentNaturality
+public import Nyll.ProCGroups.Profinite.OpenSubgroups
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-!
 # Geometric models of open-normal pullbacks
@@ -16,6 +20,8 @@ component of its pullback.  This file packages those choices uniformly, so
 the local finite-cover extension argument can be passed directly to the
 open-normal prosolvable criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

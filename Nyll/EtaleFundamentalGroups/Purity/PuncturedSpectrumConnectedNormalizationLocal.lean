@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceAmbientIdeals
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceAmbientIdeals
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Locality of connected finite normalizations over complete local rings
@@ -18,6 +22,8 @@ its prime spectrum is discrete and consists of one point.  The Jacobson
 radical comparison for finite algebras then lifts uniqueness of the maximal
 ideal to the original algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

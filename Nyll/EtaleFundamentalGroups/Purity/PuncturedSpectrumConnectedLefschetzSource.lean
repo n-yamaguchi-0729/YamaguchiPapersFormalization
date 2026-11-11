@@ -4,14 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFinite
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.CompleteOrthogonalIdempotents
-import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
-import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteQuotient
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFinite
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.CompleteOrthogonalIdempotents
+public import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
+public import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteQuotient
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
 
 /-!
 # Finite normalization sources for punctured hypersurface restriction
@@ -26,6 +32,8 @@ This file constructs that source and the canonical comparison with the
 restriction of the original cover.  No connectedness or effectivity
 conclusion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -133,7 +141,7 @@ theorem connectedSpace_pullback_spec_quotient_of_finiteDomain_of_maximalAdicComp
 
 /-- Pulling back two isomorphic objects over the same base gives isomorphic
 pullbacks. -/
-private noncomputable def pullbackIsoOfIsoOver
+noncomputable def pullbackIsoOfIsoOver
     {A B X Y : Scheme.{u}} (e : A ≅ B)
     (f : A ⟶ X) (h : B ⟶ X) (g : Y ⟶ X)
     (w : e.hom ≫ h = f) :
@@ -212,37 +220,22 @@ private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ_source
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-    letI : Nonempty (⊤ : U.Opens) :=
+    let : Nonempty (⊤ : U.Opens) :=
       ⟨⟨genericPoint U, by trivial⟩⟩
     puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension R hpos
         (X.germToFunctionField ⊤ r) =
       U.germToFunctionField ⊤ (j.appTop r) := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  let : Nonempty (⊤ : U.Opens) :=
-    ⟨⟨genericPoint U, by trivial⟩⟩
+  intro X U j sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6
   let hgen : j (genericPoint U) = genericPoint X :=
     genericPoint_eq_of_isOpenImmersion j
   change j.stalkMap (genericPoint U)
@@ -268,18 +261,13 @@ omit [IsLocalRing R] [IsNoetherianRing R] [IsIntegrallyClosed R] in
 private theorem specFunctionField_algebraMap_ΓSpecIso_hom_source
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
     algebraMap R X.functionField ((Scheme.ΓSpecIso (.of R)).hom r) =
       X.germToFunctionField ⊤ r := by
-  dsimp only
-  let X := Spec (.of R)
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
+  intro X sharedOwner1 sharedOwner2
   change X.presheaf.germ ⊤ (genericPoint X) (by trivial)
       ((Scheme.ΓSpecIso (.of R)).inv
         ((Scheme.ΓSpecIso (.of R)).hom r)) =

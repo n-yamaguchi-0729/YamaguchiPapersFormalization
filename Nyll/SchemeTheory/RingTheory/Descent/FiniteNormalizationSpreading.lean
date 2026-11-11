@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationModel
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteEtaleNeighborhood
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.RingTheory.Localization.Finiteness
-import Mathlib.RingTheory.Ideal.Maximal
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationModel
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteNormalizationNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteEtaleNeighborhood
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.RingTheory.Localization.Finiteness
+public import Mathlib.RingTheory.Ideal.Maximal
 
 /-!
 # Spreading finite etale normalizations from base local rings
@@ -20,6 +22,8 @@ Its etale locus spreads around the whole fiber, and boundary normality
 identifies that model with the integral closure on this neighborhood.
 The resulting principal neighborhoods then give global finite generation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

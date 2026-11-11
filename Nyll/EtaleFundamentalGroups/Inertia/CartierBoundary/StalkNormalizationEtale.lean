@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkComponentHeightOne
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleAwayNormalization
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StalkComponentHeightOne
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleAwayNormalization
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalTrace
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Finite etale normalization at every boundary stalk
@@ -24,7 +26,11 @@ finite etale, and the canonical localization comparison returns the actual
 base change of the original relative normalization.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open CategoryTheory.PreGaloisCategory AlgebraicGeometry.FiniteEtale
@@ -33,7 +39,7 @@ open EtaleFundamentalGroups EtaleFundamentalGroups.Inertia
 namespace Yamaguchi26SolvableCoverings
 
 private theorem exists_nonzero_stalk_cartier_equation
-    {X : Scheme.{0}} (D : X.EffectiveCartierDivisor) (x : X)
+    {X : Scheme.{u}} (D : X.EffectiveCartierDivisor) (x : X)
     [IsDomain (X.presheaf.stalk x)] :
     ∃ d : X.presheaf.stalk x, d ≠ 0 ∧ D.1.stalkIdeal x = Ideal.span {d} := by
   obtain ⟨U, hx, t, ht, hI⟩ := D.2 x
@@ -49,7 +55,7 @@ private theorem exists_nonzero_stalk_cartier_equation
   rw [Scheme.IdealSheafData.stalkIdeal_eq_map_ideal D.1 x U hx, hI,
     Ideal.map_span, Set.image_singleton]
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- At every point of the regular Cartier boundary, the actual relative
 normalization of a Galois cover is finite etale if it is etale at

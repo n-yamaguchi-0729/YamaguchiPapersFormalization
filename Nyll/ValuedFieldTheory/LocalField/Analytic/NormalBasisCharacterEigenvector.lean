@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.NormalBasis
+module
+
+public import Mathlib.FieldTheory.Galois.NormalBasis
 
 /-!
 # Nonzero character eigenvectors from a normal basis
@@ -13,6 +15,8 @@ An inverse-character weighted sum of the normal basis transforms by the
 character. Its coordinate at the identity automorphism is one, so the sum
 is nonzero, without any assumption on the characteristic or group order.
 -/
+
+@[expose] public section
 
 noncomputable section
 

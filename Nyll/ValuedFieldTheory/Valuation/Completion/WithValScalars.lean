@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Algebra.Valued.WithVal
+module
+
+public import Mathlib.Topology.Algebra.Valued.WithVal
 
 /-!
 # Ground-field scalars on a valued completion
@@ -13,6 +15,8 @@ Scalar multiplication on `WithVal v` is multiplication by the image of the
 scalar. Its uniform continuity supplies the existing completion algebra over
 the original field, without choosing a topology on that field.
 -/
+
+@[expose] public section
 
 namespace WithVal
 

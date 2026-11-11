@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.Divisors.LocalScheme
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.DimensionOneRegularRing
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.Divisors.LocalScheme
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.DimensionOneRegularRing
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
 
 /-!
 # Scheme strict-normal-crossings charts and local algebra
@@ -20,6 +22,8 @@ The scheme predicate itself produces the regular system, so domain,
 primality, and regular-local quotient properties are conclusions rather than
 additional hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,12 +50,14 @@ theorem boundaryProduct_eq_initialParameterProduct
   let e := fun (i : Fin d) (hi : i ∈ s) ↦
     (⟨i.val, (Finset.mem_filter.mp hi).2⟩ : Fin r)
   refine Finset.prod_bij e ?_ ?_ ?_ ?_
-  · simp [e]
+  · intro a ha
+    exact Finset.mem_univ (e a ha)
   · intro a₁ _ a₂ _ h
     apply Fin.ext
     exact congrArg (fun z : Fin r ↦ z.val) h
   · intro b _
-    refine ⟨Fin.castLE hr b, by simp [s], ?_⟩
+    refine ⟨Fin.castLE hr b,
+      Finset.mem_filter.mpr ⟨Finset.mem_univ _, b.isLt⟩, ?_⟩
     apply Fin.ext
     rfl
   · intro a _

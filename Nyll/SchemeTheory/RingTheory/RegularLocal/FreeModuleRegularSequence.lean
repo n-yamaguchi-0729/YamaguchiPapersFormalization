@@ -10,7 +10,9 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequenceAux
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequenceAux
 
 /-!
 # Weak regular sequences on free modules
@@ -19,6 +21,8 @@ Weak regularity of a sequence on a nontrivial free module is equivalent to weak
 regularity on the ring. The public statement uses the free-module comparison proved in
 the auxiliary module.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

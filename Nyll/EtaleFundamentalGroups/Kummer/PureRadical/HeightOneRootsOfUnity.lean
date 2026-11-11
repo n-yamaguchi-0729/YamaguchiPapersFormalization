@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.DVRRootsOfUnity
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.DVRRootsOfUnity
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Roots of unity at a prime boundary parameter
@@ -17,6 +19,8 @@ produces a DVR whose uniformizer is the image of `t`.  Characteristic zero on
 the boundary residue field makes the pure-radical degree a unit in that DVR,
 so the DVR roots-of-unity descent theorem applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

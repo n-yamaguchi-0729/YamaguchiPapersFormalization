@@ -15,10 +15,13 @@ Nyll/EtaleFundamentalGroups/Pi1/ATTRIBUTION.md and UPSTREAM.json.
 
 module
 
+public import Mathlib.Algebra.Group.Idempotent
+public import Mathlib.Algebra.GroupWithZero.Pi
 public import Mathlib.AlgebraicGeometry.PullbackCarrier
 public import Mathlib.RingTheory.RingHom.Bijective
 public import Mathlib.RingTheory.Etale.Basic
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Descent
 public import Mathlib.RingTheory.Spectrum.Prime.Chevalley
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
 public import Mathlib.RingTheory.TensorProduct.Maps
@@ -81,7 +84,7 @@ lemma OfLocalizationSpan.pi (hP : OfLocalizationSpan P)
   refine ⟨R i, S i, inferInstance, inferInstance, i₁, i₂, ?_, ?_, f i, ?_, hf i⟩
   · refine IsLocalization.away_of_isIdempotentElem ?_ (RingHom.ker_evalRingHom _ _)
       ((Pi.evalRingHom R i).surjective)
-    simp [IsIdempotentElem, ← Pi.single_mul_left]
+    exact (IsIdempotentElem.one (M := R i)).map (MulHom.single (α := R) i)
   · have : (RingHom.pi fun i ↦ (f i).comp <| Pi.evalRingHom R i)
         (Pi.single i 1) = Pi.single i 1 := by
       ext j
@@ -90,13 +93,13 @@ lemma OfLocalizationSpan.pi (hP : OfLocalizationSpan P)
       by_cases h : j = i
       · subst h
         simp only [dite_true, map_one]
-      · simp [h]
+      · simp only [dite_eq_right h, map_zero]
     change IsLocalization.Away
       ((RingHom.pi fun i ↦ (f i).comp <| Pi.evalRingHom R i) (Pi.single i 1)) (S i)
     rw [this]
     refine IsLocalization.away_of_isIdempotentElem ?_ (RingHom.ker_evalRingHom _ _)
       ((Pi.evalRingHom S i).surjective)
-    simp [IsIdempotentElem, ← Pi.single_mul_left]
+    exact (IsIdempotentElem.one (M := S i)).map (MulHom.single (α := S) i)
   · ext j x
     simp [RingHom.algebraMap_toAlgebra]
 
@@ -519,7 +522,10 @@ nonrec theorem tensorEqualizer_bijective_of_finite_of_etale (f g : A →ₐ[R] B
   obtain ⟨n, m, eA, eB, σ, rfl⟩ := hf
   let g' : (Fin n → R) →ₐ[R] (Fin m → R) :=
     eB.toAlgHom.comp (g.comp eA.symm.toAlgHom)
-  have : g = eB.symm.toAlgHom.comp (g'.comp eA.toAlgHom) := by ext; simp [g']
+  have : g = eB.symm.toAlgHom.comp (g'.comp eA.toAlgHom) := by
+    ext x
+    exact ((eB.symm_apply_apply (g (eA.symm (eA x)))).trans
+      (congrArg g (eA.symm_apply_apply x))).symm
   rw [this]
   have : Function.Bijective (AlgHom.tensorEqualizer R S (.compRight R R σ) g') := by
     let _ : AddCommMonoid ↥(AlgHom.compRight R R σ ≟ₐ g') := AddCommGroup.toAddCommMonoid

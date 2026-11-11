@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
-import Mathlib.RingTheory.Etale.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
+public import Mathlib.RingTheory.Etale.Basic
 
 /-!
 # Localizing a normalization at a base prime
@@ -16,6 +18,8 @@ The equivalence is over the localized base itself, so it transports the local
 etaleness statements produced by the height-one branch arguments directly to
 the target required by dimension-two purity.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,7 +41,7 @@ The algebra structure `A_P → L` is the canonical factorization through the
 chosen fraction field `K`. -/
 noncomputable def localizationIntegralClosureAtPrimeAlgEquiv
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower
       (K := K) (L := L) P
     letI := integralClosureLocalizationAlgebra (L := L) P
@@ -45,7 +49,7 @@ noncomputable def localizationIntegralClosureAtPrimeAlgEquiv
         (Algebra.algebraMapSubmonoid (integralClosure A L) P.primeCompl) ≃ₐ[
           Localization.AtPrime P]
       integralClosure (Localization.AtPrime P) L := by
-  letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedDefinitionOwner1
   letI : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   letI := integralClosureLocalizationAlgebra (L := L) P
@@ -97,7 +101,7 @@ the localized-normalization target used by the height-one input of purity. -/
 theorem localization_integralClosure_etale_of_local_integralClosure_etale
     [IsScalarTower A K L]
     (P : Ideal A) [P.IsPrime] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower
       (K := K) (L := L) P
     letI := integralClosureLocalizationAlgebra (L := L) P
@@ -106,7 +110,7 @@ theorem localization_integralClosure_etale_of_local_integralClosure_etale
       Algebra.Etale (Localization.AtPrime P)
         (Localization (Algebra.algebraMapSubmonoid
           (integralClosure A L) P.primeCompl)) := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let := integralClosureLocalizationAlgebra (L := L) P

@@ -4,19 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.EtalePrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Completion
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletionField
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
-import Mathlib.Algebra.Algebra.Basic
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Module.Torsion.Field
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.DVR.IntegralExtensionEtaleDescent
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RootTensor.EtalePrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Completion
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletionField
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
+public import Mathlib.Algebra.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Module.Torsion.Field
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # Etale descent at the selected root prime
@@ -27,6 +30,8 @@ identified with a refined component of the completed root tensor product.
 The prescribed-exponent component theorem makes those factors etale, and
 faithfully flat completion descends etaleness to the selected root DVR.
 -/
+
+@[expose] public section
 
 noncomputable section
 

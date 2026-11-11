@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.Basic
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Mathlib.RingTheory.Smooth.IntegralClosure
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.Basic
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
 
 /-!
 # The non-Henselian local factor selected by Tag 00UJ
@@ -22,6 +24,8 @@ localization of that factor is finite over the pointed base localization.
 No Henselian hypothesis is used here.  This is the part of the chosen-factor
 construction which precedes any root-cover or purity argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -281,36 +285,23 @@ noncomputable def etaleChosenLocalFactorToIntegralClosureAlgHom
     (hunique : ∀ P'' : Ideal (TensorProduct R C S),
       P''.IsPrime → P''.LiesOver P → e ∉ P'' → P'' = P') :
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
     let Cₚ := Localization.AtPrime P
     let Dₚ := Localization.AtPrime Q
-    letI : Algebra Cₚ Dₚ :=
+    let : Algebra Cₚ Dₚ :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    letI : Module.Finite Cₚ Dₚ :=
+    let : Module.Finite Cₚ Dₚ :=
       moduleFinite_etaleChosenAway_localizationAtPrime
         P e P' heP' hfinite hunique
     let Ω := FractionRing Dₚ
-    letI : Algebra Cₚ Ω :=
+    let : Algebra Cₚ Ω :=
       ((algebraMap Dₚ Ω).comp (algebraMap Cₚ Dₚ)).toAlgebra
     Dₚ →ₐ[Cₚ] integralClosure Cₚ Ω := by
-  dsimp only
-  let Q := etaleChosenAwayPrime e P'
-  letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
-  let Dₚ := Localization.AtPrime Q
-  letI : Algebra Cₚ Dₚ :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  letI : Module.Finite Cₚ Dₚ :=
-    moduleFinite_etaleChosenAway_localizationAtPrime
-      P e P' heP' hfinite hunique
+  intro Q sharedOwner16 sharedOwner17 sharedOwner18 Cₚ Dₚ sharedOwner19 sharedOwner20
   letI : Algebra.IsIntegral Cₚ Dₚ := Algebra.IsIntegral.of_finite Cₚ Dₚ
-  let Ω := FractionRing Dₚ
-  letI : Algebra Cₚ Ω :=
-    ((algebraMap Dₚ Ω).comp (algebraMap Cₚ Dₚ)).toAlgebra
+  intro Ω sharedOwner21
   let toΩ : Dₚ →ₐ[Cₚ] Ω :=
     { toRingHom := algebraMap Dₚ Ω
       commutes' := fun _ ↦ rfl }
@@ -330,38 +321,24 @@ theorem etaleChosenLocalFactorToIntegralClosureAlgHom_injective
     (hunique : ∀ P'' : Ideal (TensorProduct R C S),
       P''.IsPrime → P''.LiesOver P → e ∉ P'' → P'' = P') :
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
     let Cₚ := Localization.AtPrime P
     let Dₚ := Localization.AtPrime Q
-    letI : Algebra Cₚ Dₚ :=
+    let : Algebra Cₚ Dₚ :=
       Localization.AtPrime.algebraOfLiesOver P Q
-    letI : Module.Finite Cₚ Dₚ :=
+    let : Module.Finite Cₚ Dₚ :=
       moduleFinite_etaleChosenAway_localizationAtPrime
         P e P' heP' hfinite hunique
     let Ω := FractionRing Dₚ
-    letI : Algebra Cₚ Ω :=
+    let : Algebra Cₚ Ω :=
       ((algebraMap Dₚ Ω).comp (algebraMap Cₚ Dₚ)).toAlgebra
     Function.Injective
       (etaleChosenLocalFactorToIntegralClosureAlgHom
         P e P' heP' hfinite hunique) := by
-  dsimp only
-  let Q := etaleChosenAwayPrime e P'
-  let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let Cₚ := Localization.AtPrime P
-  let Dₚ := Localization.AtPrime Q
-  let : Algebra Cₚ Dₚ :=
-    Localization.AtPrime.algebraOfLiesOver P Q
-  let : Module.Finite Cₚ Dₚ :=
-    moduleFinite_etaleChosenAway_localizationAtPrime
-      P e P' heP' hfinite hunique
-  let Ω := FractionRing Dₚ
-  let : Algebra Cₚ Ω :=
-    ((algebraMap Dₚ Ω).comp (algebraMap Cₚ Dₚ)).toAlgebra
-  intro x y hxy
+  intro Q sharedOwner1 sharedOwner2 sharedOwner3 Cₚ Dₚ sharedOwner4 sharedOwner5 Ω sharedOwner6 x y
+    hxy
   apply IsFractionRing.injective Dₚ Ω
   have hxy' := congrArg Subtype.val hxy
   change algebraMap Dₚ Ω x = algebraMap Dₚ Ω y at hxy'
@@ -427,9 +404,8 @@ theorem etaleChosenPointedTensorPrime_isPrime
   let : IsScalarTower C T BS :=
     IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
   let : IsScalarTower R T BS :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext r
-      simp [RingHom.algebraMap_toAlgebra, φ])
+    IsScalarTower.of_algebraMap_eq'
+      (φ.restrictScalars R).comp_algebraMap.symm
   let : IsLocalization
       (Algebra.algebraMapSubmonoid T P.primeCompl) BS := by
     exact IsLocalization.tensorProduct_tensorProduct
@@ -464,9 +440,8 @@ theorem etaleChosenPointedTensorPrime_comap
   let : IsScalarTower C T BS :=
     IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
   let : IsScalarTower R T BS :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext r
-      simp [RingHom.algebraMap_toAlgebra, φ])
+    IsScalarTower.of_algebraMap_eq'
+      (φ.restrictScalars R).comp_algebraMap.symm
   let : IsLocalization
       (Algebra.algebraMapSubmonoid T P.primeCompl) BS := by
     exact IsLocalization.tensorProduct_tensorProduct
@@ -520,9 +495,8 @@ noncomputable def
   letI : IsScalarTower C T BS :=
     IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
   letI : IsScalarTower R T BS :=
-    IsScalarTower.of_algebraMap_eq' (by
-      ext r
-      simp [RingHom.algebraMap_toAlgebra, φ])
+    IsScalarTower.of_algebraMap_eq'
+      (φ.restrictScalars R).comp_algebraMap.symm
   letI hBS : IsLocalization
       (Algebra.algebraMapSubmonoid T P.primeCompl) BS := by
     exact IsLocalization.tensorProduct_tensorProduct
@@ -592,28 +566,16 @@ noncomputable def
     let PBS := etaleChosenPointedTensorPrime
       (R := R) (S := S) P P'
     let Cₚ := Localization.AtPrime P
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-    letI : PBS.IsPrime :=
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : PBS.IsPrime :=
       etaleChosenPointedTensorPrime_isPrime
         (R := R) (S := S) P P'
-    letI : Algebra Cₚ (Localization.AtPrime Q) :=
+    let : Algebra Cₚ (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     Localization.AtPrime Q ≃ₐ[Cₚ] Localization.AtPrime PBS := by
-  dsimp only
-  let Q := etaleChosenAwayPrime e P'
-  let PBS := etaleChosenPointedTensorPrime
-    (R := R) (S := S) P P'
-  let Cₚ := Localization.AtPrime P
-  letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  letI : PBS.IsPrime :=
-    etaleChosenPointedTensorPrime_isPrime
-      (R := R) (S := S) P P'
-  letI : Algebra Cₚ (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
+  intro Q PBS Cₚ sharedOwner11 sharedOwner12 sharedOwner13 sharedOwner14 sharedOwner15
   let EC : Localization.AtPrime Q ≃ₐ[C]
       Localization.AtPrime PBS :=
     etaleChosenAwayPointedBaseChangeLocalizationAlgEquiv
@@ -654,7 +616,7 @@ normalization with the relative integral closure in the base-changed
 ambient algebra.  This is the production smooth comparison, retained as an
 equivalence so that the actual Tag prime can be localized without choosing
 a new component. -/
-private noncomputable def smoothNormalizationBaseChangeAlgEquiv :
+noncomputable def smoothNormalizationBaseChangeAlgEquiv :
     (C ⊗[R] integralClosure R L) ≃ₐ[C]
       integralClosure C (C ⊗[R] L) :=
   AlgEquiv.ofBijective
@@ -736,10 +698,10 @@ theorem
     let Cₚ := Localization.AtPrime P
     let G := Cₚ ⊗[R] L
     let Q := etaleChosenAwayPrime e P'
-    letI : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-    letI : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-    letI : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-    letI : Algebra Cₚ (Localization.AtPrime Q) :=
+    let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
+    let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
+    let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
+    let : Algebra Cₚ (Localization.AtPrime Q) :=
       Localization.AtPrime.algebraOfLiesOver P Q
     ∃ (m : MaximalSpectrum G)
       (q : PrimeSpectrum
@@ -748,19 +710,11 @@ theorem
       Nonempty
         (Localization.AtPrime Q ≃ₐ[Cₚ]
           Localization.AtPrime q.asIdeal) := by
-  dsimp only
-  let Cₚ := Localization.AtPrime P
+  intro Cₚ G Q sharedOwner7 sharedOwner8 sharedOwner9 sharedOwner10
   let Sₙ := integralClosure R L
   let BS := Cₚ ⊗[R] Sₙ
-  let G := Cₚ ⊗[R] L
-  let Q := etaleChosenAwayPrime e P'
   let PBS := etaleChosenPointedTensorPrime
     (R := R) (S := Sₙ) P P'
-  let : Q.IsPrime := etaleChosenAwayPrime_isPrime e P' heP'
-  let : Q.LiesOver P' := etaleChosenAwayPrime_liesOver e P' heP'
-  let : Q.LiesOver P := Ideal.LiesOver.trans Q P' P
-  let : Algebra Cₚ (Localization.AtPrime Q) :=
-    Localization.AtPrime.algebraOfLiesOver P Q
   let : PBS.IsPrime :=
     etaleChosenPointedTensorPrime_isPrime
       (R := R) (S := Sₙ) P P'

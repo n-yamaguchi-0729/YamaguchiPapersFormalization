@@ -58,10 +58,15 @@ instance (L : Type*) [Field L] [Algebra k L] [Algebra L K] [IsScalarTower k L K]
   change ((σx.symm.trans σy : K ≃ₐ[k] K) : K →ₐ[k] K).comp x = y
   ext a
   have hy : y a = σy (algebraMap _ _ a) := by
-    simp [← AlgEquiv.restrictNormal_commutes, hy, AlgHom.restrictNormal']
+    simp only [← AlgEquiv.restrictNormal_commutes, hy, AlgHom.restrictNormal',
+      AlgEquiv.coe_ofBijective, AlgHom.restrictNormal_commutes, Algebra.algebraMap_self,
+      RingHom.id_apply]
   have hx : x a = σx (algebraMap _ _ a) := by
-    simp [← AlgEquiv.restrictNormal_commutes, hx, AlgHom.restrictNormal']
-  simp [hx, hy]
+    simp only [← AlgEquiv.restrictNormal_commutes, hx, AlgHom.restrictNormal',
+      AlgEquiv.coe_ofBijective, AlgHom.restrictNormal_commutes, Algebra.algebraMap_self,
+      RingHom.id_apply]
+  simp only [AlgHom.coe_comp, AlgEquiv.coe_toAlgHom, AlgEquiv.coe_trans, Function.comp_apply, hx,
+    AlgEquiv.symm_apply_apply, hy]
 
 end
 
@@ -100,13 +105,15 @@ instance : MulAction (K ≃ₐ[k] K) (Over.mk (ξ k K) ⟶ X.toComma) where
   one_smul x := by
     ext1
     change Spec.map (CommRingCat.ofHom ((1 : K ≃ₐ[k] K) : K →+* K)) ≫ x.left = x.left
-    simp [AlgEquiv.aut_one]
+    simp only [AlgEquiv.aut_one, AlgEquiv.refl_toRingHom, CommRingCat.ofHom_id, Spec.map_id,
+      Category.id_comp]
   mul_smul g h x := by
     ext1
     change Spec.map (CommRingCat.ofHom ((g * h : K ≃ₐ[k] K) : K →+* K)) ≫ x.left =
       Spec.map (CommRingCat.ofHom (g : K →+* K)) ≫
         Spec.map (CommRingCat.ofHom (h : K →+* K)) ≫ x.left
-    simp [AlgEquiv.aut_mul, Category.assoc]
+    simp only [AlgEquiv.aut_mul, AlgEquiv.toRingHom_trans, CommRingCat.ofHom_comp, Spec.map_comp,
+      Category.assoc]
 
 @[simp]
 lemma algEquiv_smul_hom (g : K ≃ₐ[k] K) (x : Over.mk (ξ k K) ⟶ X.toComma) :
@@ -131,8 +138,10 @@ def homEquivAlgHom (X : FiniteEtale (Spec (.of k))) :
         have hbase :
             algebraMap k Γ(X.left, ⊤) =
               X.hom.appTop.hom.comp (Scheme.ΓSpecIso (.of k)).inv.hom := by
-          simp [RingHom.algebraMap_toAlgebra, Iso.commRingCatIsoToRingEquiv,
-            RingEquiv.coe_ringHom_ofRingHom, Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+          simp only [RingHom.algebraMap_toAlgebra, OverClass.fromOver_over,
+            Iso.commRingCatIsoToRingEquiv, RingEquiv.ofRingHom_symm, RingEquiv.toRingHom_eq_coe,
+            RingEquiv.toRingHom_ofRingHom, Functor.const_obj_obj, Functor.id_obj, Scheme.Hom.appTop,
+            Scheme.Hom.app_eq_appLE, TopologicalSpace.Opens.map_top]
         have h :
             (Scheme.ΓSpecIso (.of k)).inv ≫ X.hom.appTop ≫ x.left.appTop ≫
                 (Scheme.ΓSpecIso (.of K)).hom =
@@ -183,7 +192,8 @@ def homEquivAlgHom (X : FiniteEtale (Spec (.of k))) :
       ext a
       rfl
     rw [hiso]
-    simp [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+    simp only [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE, TopologicalSpace.Opens.map_top,
+      RingEquiv.toRingHom_eq_coe, OverClass.fromOver_over, homOfLE_leOfHom, Scheme.Hom.appLE_map]
   left_inv x := by
     ext1
     simp only [Over.homMk_left]
@@ -195,7 +205,7 @@ def homEquivAlgHom (X : FiniteEtale (Spec (.of k))) :
     change (f ≫ X.left.isoSpec.hom) ≫ X.left.isoSpec.inv = f
     rw [Category.assoc, Iso.hom_inv_id, Category.comp_id]
   right_inv x := by
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     simp only [Over.homMk_left]
     change (Scheme.ΓSpecIso (.of K)).hom.hom.comp
         ((Spec.map (CommRingCat.ofHom x.toRingHom :

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
-import Mathlib.NumberTheory.Padics.RingHoms
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
+public import Mathlib.NumberTheory.Padics.RingHoms
 
 /-!
 # P-adic exponents modulo prime powers
@@ -15,6 +17,8 @@ Reduction of a p-adic exponent modulo `p^s` changes its action on a principal
 unit by an actual `p^s`-th power. The witness is constructed in the principal
 unit group and then mapped into the field unit group.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

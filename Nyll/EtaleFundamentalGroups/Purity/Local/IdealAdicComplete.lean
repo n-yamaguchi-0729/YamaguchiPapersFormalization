@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Noetherian
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
 
 /-!
 # Adic completeness for ideals in a complete Noetherian local ring
@@ -15,6 +17,8 @@ The key point is that the submodules `I ^ n • M` are closed for the
 maximal-adic topology: their quotients are finite modules and hence
 maximal-adically Hausdorff.
 -/
+
+@[expose] public section
 
 noncomputable section
 

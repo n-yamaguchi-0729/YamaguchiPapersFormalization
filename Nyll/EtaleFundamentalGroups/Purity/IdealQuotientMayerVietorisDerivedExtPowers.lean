@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisPowers
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisPowers
 
 /-!
 # Derived-Ext Mayer--Vietoris sequences along powers
@@ -14,6 +16,8 @@ functorial in morphisms of short complexes.  Applying that naturality to the
 power-compatible ideal-quotient Mayer--Vietoris complexes produces the exact
 sequence diagram that precedes an AB5 filtered-colimit argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

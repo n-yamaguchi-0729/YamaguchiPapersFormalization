@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentQuotient
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComponentInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentQuotient
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComponentInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Inertia images from Galois pullback components
@@ -15,6 +19,8 @@ maps injectively into the deck group of the original cover.  Consequently,
 the local normal-crossings coprimality statement remains true for its actual
 image in the original finite quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

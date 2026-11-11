@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.SubfieldMixedCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.SubfieldRoots
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.PadicFiniteTypeRoots
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.SubfieldMixedCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.SubfieldRoots
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.PadicFiniteTypeRoots
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
 
 /-!
 # Abelian faithfulness of sub-p-adic fields
@@ -17,6 +19,8 @@ An embedding into an essentially finite-type p-adic extension supplies
 abelian faithfulness and finiteness of primary roots of unity in every
 finite extension of the embedded field.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ProCGroups.FiniteStepSolvableQuotients

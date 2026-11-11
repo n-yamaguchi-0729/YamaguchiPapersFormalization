@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Transport of Sigma-ab-faithfulness
@@ -15,6 +17,8 @@ import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 A topological group equivalence identifies every open layer and its normal
 quotient action on the actual residual abelianization.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 open ProCGroups.ProC

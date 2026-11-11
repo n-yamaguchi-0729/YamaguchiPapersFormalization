@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+module
+
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
 
 /-!
 # Conjugation of absolute Galois automorphisms by a field automorphism
@@ -16,6 +18,8 @@ A chosen extension of a field automorphism to its algebraic closure conjugates
 base-linear automorphisms to base-linear automorphisms. Root quotients transform
 by the same extension; this is the concrete identity underlying Kummer naturality.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

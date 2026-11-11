@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.SchemeTheory.FiniteEtale.DensePullback
-import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.SchemeTheory.FiniteEtale.DensePullback
+public import Mathlib.AlgebraicGeometry.Morphisms.Preimmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
 
 /-!
 # Finite-etale pullback along dominant preimmersions
@@ -19,6 +21,8 @@ If the original cover is a Galois object, faithfulness of pullback and
 invariance of the finite-etale rank show that the pulled-back connected cover
 is again Galois.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,20 +70,6 @@ theorem irreducibleSpace_of_isPreimmersion_of_isDominant
 
 namespace FiniteEtale
 
-local instance preimmersionStableUnderBaseChangeAlongDominant
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsPreimmersion : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsPreimmersion : MorphismProperty Scheme.{u})) h hf⟩
-
-local instance quasiCompactStableUnderBaseChangeAlongDominant
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@QuasiCompact : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@QuasiCompact : MorphismProperty Scheme.{u})) h hf⟩
-
 /-- A dominant quasi-compact preimmersion from a connected scheme into a
 normal integral base preserves connectedness of connected
 finite-etale covers. -/
@@ -97,8 +87,9 @@ theorem pullback_obj_isConnected_of_isPreimmersion_of_isDominant
   let iP : P.left ⟶ W.left := Limits.pullback.fst W.hom j
   let : IsPreimmersion iP := by
     dsimp only [iP]
-    exact MorphismProperty.pullback_fst (P := @IsPreimmersion)
-      W.hom j hjpre
+    exact MorphismProperty.of_isPullback
+      (P := (@IsPreimmersion : MorphismProperty Scheme.{u}))
+      (IsPullback.of_hasPullback W.hom j).flip hjpre
   let hstd : IsSchemeTheoreticallyDominant j :=
     IsSchemeTheoreticallyDominant.of_isDominant j
   let hflat : Flat W.hom :=
@@ -109,8 +100,9 @@ theorem pullback_obj_isConnected_of_isPreimmersion_of_isDominant
       W.hom j hstd hjqc hflat
   let : QuasiCompact iP := by
     dsimp only [iP]
-    exact MorphismProperty.pullback_fst (P := @QuasiCompact)
-      W.hom j hjqc
+    exact MorphismProperty.of_isPullback
+      (P := (@QuasiCompact : MorphismProperty Scheme.{u}))
+      (IsPullback.of_hasPullback W.hom j).flip hjqc
   let : IsDominant iP := inferInstance
   let : IrreducibleSpace P.left :=
     irreducibleSpace_of_isPreimmersion_of_isDominant iP
@@ -139,8 +131,9 @@ theorem pullback_obj_isGalois_of_isPreimmersion_of_isDominant
   have hAutInj : Function.Injective (F.mapAut W) := by
     intro σ τ hστ
     apply Aut.ext
+    apply Iso.ext
     apply F.map_injective
-    exact congrArg Iso.hom hστ
+    exact congrArg (fun a : Aut P => a.asIso.hom) hστ
   have hAutLe : Nat.card (Aut W) ≤ Nat.card (Aut P) :=
     Nat.card_le_card_of_injective (F.mapAut W) hAutInj
   let u : U := Classical.choice j.denseRange.nonempty

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.Limits.Cones
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Limits.IsLimit
-import Mathlib.CategoryTheory.Limits.Preserves.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAlgebraColimit
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionTensor
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Limits.IsLimit
+public import Mathlib.CategoryTheory.Limits.Preserves.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 
 /-!
@@ -37,6 +39,8 @@ This constructs the colimit required for finite-presentation descent over K,
 without requiring finite presentation of K over R. It is a prerequisite for
 [Stacks, Tag 0BSM](https://stacks.math.columbia.edu/tag/0BSM), not the full exact-sequence result.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -192,8 +196,7 @@ theorem geometricStalkGenericFieldCocone_tmul (i : GeometricStalkAlgebraIndex φ
         algebraMap (geometricStalk (Spec.map (CommRingCat.ofHom φ)))
           (FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ))))
           (((geometricStalkSmallAlgebraCocone φ).ι.app i).right z) := by
-  let : Algebra R ((geometricStalkSmallAlgebraDiagram φ).obj i).right :=
-    ((geometricStalkSmallAlgebraDiagram φ).obj i).hom.hom.toAlgebra
+  intro sharedOwner1
   let A := geometricStalk (Spec.map (CommRingCat.ofHom φ))
   let : Algebra R A := (geometricStalkStructureMap φ).toAlgebra
   let : Algebra (FractionRing R) (FractionRing A) :=

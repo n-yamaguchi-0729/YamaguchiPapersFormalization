@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Nat.Choose.Sum
-import Mathlib.Data.Nat.Choose.Dvd
-import Mathlib.Algebra.Group.Torsion
-import Mathlib.Algebra.Module.End
-import Mathlib.Tactic.Abel
+module
+
+public import Mathlib.Data.Nat.Choose.Sum
+public import Mathlib.Data.Nat.Choose.Dvd
+public import Mathlib.Algebra.Group.Torsion
+public import Mathlib.Algebra.Module.End
+public import Mathlib.Tactic.Abel
 /-!
 # Odd prime order actions trivial modulo the prime
 
@@ -16,6 +18,8 @@ A binomial expansion shows that the augmentation image of such an action
 on a torsion-free additive group is p-divisible. This does not require
 finite generation or any topology on the group.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 
@@ -83,12 +87,10 @@ theorem primeOrder_action_sub_divisible
   let d : AddMonoid.End M :=
     { toFun := fun x => Classical.choose (hdiv x)
       map_zero' := by
-        apply nsmul_right_injective hp.ne_zero
-        dsimp only
+        apply eq_of_nsmul_eq_nsmul_of_addCommute hp.ne_zero (AddCommute.all _ _)
         rw [← Classical.choose_spec (hdiv 0), map_zero, sub_self, nsmul_zero]
       map_add' := fun x y => by
-        apply nsmul_right_injective hp.ne_zero
-        dsimp only
+        apply eq_of_nsmul_eq_nsmul_of_addCommute hp.ne_zero (AddCommute.all _ _)
         rw [← Classical.choose_spec (hdiv (x + y)), nsmul_add,
           ← Classical.choose_spec (hdiv x), ← Classical.choose_spec (hdiv y), map_add]
         abel }
@@ -103,7 +105,8 @@ theorem primeOrder_action_sub_divisible
     have hx := congrArg (fun f : AddMonoid.End M => f x) hb
     change p ^ 2 • d x = p ^ 3 • d (b x) at hx
     rw [show p ^ 3 = p ^ 2 * p by ring, mul_smul] at hx
-    exact nsmul_right_injective (pow_ne_zero 2 hp.ne_zero) hx
+    exact eq_of_nsmul_eq_nsmul_of_addCommute
+      (pow_ne_zero 2 hp.ne_zero) (AddCommute.all _ _) hx
   intro x
   exact ⟨b x, by rw [hd, hdb x, hd]⟩
 

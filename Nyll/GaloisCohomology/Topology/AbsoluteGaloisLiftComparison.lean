@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
 
 /-!
 # Independence of closure lifts for commutative characters
@@ -13,6 +15,8 @@ A closure embedding intertwining two Galois automorphisms identifies their
 values under every continuous character with commutative target. Its difference
 from mathlib's chosen lift is removed by an inner automorphism.
 -/
+
+@[expose] public section
 
 namespace Field.absoluteGaloisGroup
 

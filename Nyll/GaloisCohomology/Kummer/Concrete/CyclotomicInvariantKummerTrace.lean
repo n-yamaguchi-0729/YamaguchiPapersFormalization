@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.GroupTheory.FiniteOrbitProduct
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.RootKummerInvariantCharacter
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicCompositumCommutation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Mathlib.Algebra.Group.Commute.Hom
-import Mathlib.Algebra.Ring.Action.Group
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Algebra.Group.TypeTags.Finite
-import Mathlib.Data.ZMod.Defs
+module
+
+public import Nyll.GaloisCohomology.GroupTheory.FiniteOrbitProduct
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootKummerInvariantCharacter
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicCompositumCommutation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Mathlib.Algebra.Group.Commute.Hom
+public import Mathlib.Algebra.Ring.Action.Group
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Algebra.Group.TypeTags.Finite
+public import Mathlib.Data.ZMod.Defs
 
 /-!
 # An invariant Kummer trace retaining a nontrivial difference
@@ -23,6 +25,8 @@ the upper cyclotomic group. The commuting automorphism changes it by the
 root's Kummer character to the cyclotomic degree. Coprimality prevents this
 nontrivial difference from disappearing.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

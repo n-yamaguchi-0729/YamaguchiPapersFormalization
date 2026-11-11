@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Finite local DVR factors and their standard DVFs
@@ -28,6 +30,8 @@ The distinction is important: a raw prime localization of a finite algebra
 need not itself be finite over the corresponding base localization.  No
 such assertion is made here.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,21 +57,14 @@ theorem localizationAtPrime_maximalIdeal_ramificationIdx_eq
     (q : Ideal S) [q.IsPrime] (N : ℕ)
     (hRam : q.ramificationIdx R = N) :
     let p := q.under R
-    letI : p.IsPrime := Ideal.IsPrime.under R q
-    letI : q.LiesOver p := ⟨rfl⟩
+    let : p.IsPrime := Ideal.IsPrime.under R q
+    let : q.LiesOver p := ⟨rfl⟩
     let Rp := Localization.AtPrime p
     let Sq := Localization.AtPrime q
-    letI : Algebra Rp Sq :=
+    let : Algebra Rp Sq :=
       Localization.AtPrime.algebraOfLiesOver p q
     (IsLocalRing.maximalIdeal Sq).ramificationIdx Rp = N := by
-  dsimp only
-  let p := q.under R
-  let : p.IsPrime := Ideal.IsPrime.under R q
-  let : q.LiesOver p := ⟨rfl⟩
-  let Rp := Localization.AtPrime p
-  let Sq := Localization.AtPrime q
-  let : Algebra Rp Sq :=
-    Localization.AtPrime.algebraOfLiesOver p q
+  intro p sharedOwner1 sharedOwner2 Rp Sq sharedOwner3
   have hLocal :=
     ramificationIdx_map_eq_of_isLocalization
       (R := R) (S := S) (R' := Rp) (S' := Sq)

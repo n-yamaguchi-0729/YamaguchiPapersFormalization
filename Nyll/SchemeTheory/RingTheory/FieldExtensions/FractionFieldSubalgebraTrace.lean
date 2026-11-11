@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Trace.Basic
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Trace.Basic
 
 /-!
 # Traces after localizing a subalgebra of a fraction field
@@ -18,6 +20,8 @@ inclusion B to K, and each element of K is the image of k tensor 1.
 Consequently the trace of multiplication by b after base change is b itself.
 The result does not assume that R is integrally closed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,11 +34,14 @@ universe u v
 variable (R : Type u) [CommRing R]
 variable (K : Type v) [Field K] [Algebra R K] [IsFractionRing R K]
 
-private def fractionFieldTensorSubalgebraHom (B : Subalgebra R K) :
+/-- The multiplication map from the base change of a fraction-field subalgebra. -/
+def fractionFieldTensorSubalgebraHom (B : Subalgebra R K) :
     K ⊗[R] B →ₐ[K] K :=
   (AlgHom.liftEquiv R K B K) B.val
 
-private theorem fractionFieldTensorSubalgebraHom_bijective (B : Subalgebra R K) :
+/-- Multiplication identifies the base change of a fraction-field subalgebra bijectively
+with the field. -/
+theorem fractionFieldTensorSubalgebraHom_bijective (B : Subalgebra R K) :
     Function.Bijective (fractionFieldTensorSubalgebraHom R K B) := by
   let : Module.Flat R K := IsLocalization.flat K (nonZeroDivisors R)
   let e : K ⊗[R] K ≃ₐ[K] K := IsLocalization.algebraLid (nonZeroDivisors R) K K

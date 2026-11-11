@@ -46,7 +46,8 @@ lemma Algebra.FormallySmooth.of_bijective_algebraMap {R S : Type u} [CommRing R]
 
 namespace Algebra
 
-instance {k ι : Type u} [Field k] : FormallySmooth k (FractionRing (MvPolynomial ι k)) :=
+instance formallySmooth_fractionRing_mvPolynomial {k ι : Type u} [Field k] :
+    FormallySmooth k (FractionRing (MvPolynomial ι k)) :=
   have : FormallySmooth k (MvPolynomial ι k) := inferInstance
   have : FormallySmooth (MvPolynomial ι k) (FractionRing (MvPolynomial ι k)) :=
     .of_isLocalization (nonZeroDivisors _)

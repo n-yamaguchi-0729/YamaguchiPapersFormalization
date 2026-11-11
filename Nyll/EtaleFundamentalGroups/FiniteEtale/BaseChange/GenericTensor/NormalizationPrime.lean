@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Ideal.GoingUp
-import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
-import Nyll.SchemeTheory.Normalization.IntegralClosure.TwoIntegralBasesEquiv
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Nyll.SchemeTheory.RingTheory.Ramification.Etale.SquareRamification
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.TwoIntegralBasesEquiv
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # A retained normalization prime in a fixed finite-etale generic component
@@ -25,6 +27,8 @@ The component map, the etale normalization square, and the lifted prime are
 all constructed below.  In particular, no comparison of independently
 chosen tensor factors or normalization primes is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,14 +64,13 @@ theorem
     [q.LiesOver (Ideal.span ({y} : Set A))]
     (hpC : (Ideal.span ({algebraMap A C y} : Set C)).IsPrime) :
     let Omega := GenericTensorFieldComponent m
-    letI : Algebra C Omega :=
+    let : Algebra C Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := C) m
     ∃ Q : Ideal (integralClosure C Omega), Q.IsPrime ∧
       Q.LiesOver (Ideal.span ({algebraMap A C y} : Set C)) ∧
       Q.ramificationIdx C = q.ramificationIdx A := by
   classical
-  dsimp only
-  let Omega := GenericTensorFieldComponent m
+  intro Omega sharedOwner1
   let C0 := integralClosure A M
   let pA := Ideal.span ({y} : Set A)
   let pC := Ideal.span ({algebraMap A C y} : Set C)
@@ -77,8 +80,6 @@ theorem
   /- Keep the two field coordinates of the literal quotient component.
   The direct `A`-action is taken through the right coordinate `M`; the
   tensor relation proves that it is also the action through `C` and `KC`. -/
-  let : Algebra C Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := C) m
   let : SMul C Omega :=
     (genericTensorFieldComponentLeftScalarAlgebra (R := C) m).toSMul
   let : Algebra M Omega := genericTensorFieldComponentRightAlgebra m

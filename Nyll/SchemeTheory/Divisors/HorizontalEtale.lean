@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 
 /-!
 # Horizontal boundary components after finite etale pullback
@@ -15,6 +17,8 @@ the structural morphism has dense range.  The statement is made directly
 for the pulled-back ideal sheaf, before packaging it as an effective Cartier
 divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

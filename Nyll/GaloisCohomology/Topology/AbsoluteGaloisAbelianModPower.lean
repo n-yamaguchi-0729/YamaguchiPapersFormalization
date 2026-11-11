@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
-import Nyll.ProCGroups.Abelian.AbelianModPower
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
+public import Nyll.ProCGroups.Abelian.AbelianModPower
 
 /-!
 # Functoriality of absolute Galois abelianizations modulo powers
@@ -13,6 +15,8 @@ import Nyll.ProCGroups.Abelian.AbelianModPower
 The inner discrepancy in the choice of algebraic-closure embeddings disappears
 in every commutative quotient, including the quotient modulo `q`-th powers.
 -/
+
+@[expose] public section
 
 namespace Field.absoluteGaloisGroup
 

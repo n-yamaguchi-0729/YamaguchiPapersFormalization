@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Homology.LocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtPowers
+module
+
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Homology.LocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtPowers
 
 /-!
 # Local cohomology from derived-category Ext
@@ -18,6 +20,8 @@ corresponding ideal-power diagram and its colimit.  It provides the common
 object used by the derived Mayer--Vietoris construction without asserting a
 comparison with the legacy implementation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

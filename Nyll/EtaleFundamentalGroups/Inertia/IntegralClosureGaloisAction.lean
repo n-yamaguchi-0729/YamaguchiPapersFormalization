@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
-import Mathlib.RingTheory.Invariant.Galois
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
+public import Mathlib.RingTheory.Invariant.Galois
 
 /-!
 # The two actual Galois actions on an integral closure
@@ -15,6 +17,8 @@ restriction used by normalization geometry agree on the embedded integral
 closure. The comparison follows by applying its injective inclusion into the
 common field, where both automorphisms are the original field automorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 

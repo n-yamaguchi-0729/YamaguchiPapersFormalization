@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Basic
+module
+
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Basic
 
 /-!
 # The actual compositum in finite-etale unit absorption
@@ -23,6 +25,8 @@ base change.
   field factor selected by `delta`, rather than merely the whole split
   Kummer algebra, has a finite-etale integral model.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -447,7 +451,7 @@ theorem exists_finiteEtale_unitAbsorption_actualCompositum
                                     (AdjoinRoot.root
                                       (X ^ n - C (varpi : K))) =
                                   IntermediateField.AdjoinSimple.gen K alpha := by
-  let n := ramificationIndex base target
+  intro n
   have hn_ne : n ≠ 0 := by
     simpa [n, ramificationIndex] using
       (Ideal.IsDedekindDomain.ramificationIdx'_ne_zero

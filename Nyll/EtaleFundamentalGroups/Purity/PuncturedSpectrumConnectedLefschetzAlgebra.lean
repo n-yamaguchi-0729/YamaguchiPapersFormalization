@@ -4,8 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzSource
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzSource
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Algebraic inputs for connected hypersurface restrictions
@@ -17,6 +23,8 @@ connectedness theorem for a punctured hypersurface.
 
 No connectedness conclusion is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

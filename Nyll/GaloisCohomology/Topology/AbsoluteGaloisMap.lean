@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.FieldTheory.Normal.Basic
+module
+
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.FieldTheory.Normal.Basic
 
 /-!
 # Composing absolute Galois restrictions with commutative targets
@@ -14,6 +16,8 @@ The chosen algebraic-closure embeddings behind `absoluteGaloisGroup.map`
 need not compose. Their discrepancy is an inner automorphism, so restriction
 of a continuous homomorphism with commutative target does compose exactly.
 -/
+
+@[expose] public section
 
 namespace Field.absoluteGaloisGroup
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationExtensionContinuous
-import Mathlib.Topology.DenseEmbedding
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationExtensionContinuous
+public import Mathlib.Topology.DenseEmbedding
 
 /-!
 # Compatibility of the actual p-adic integer maps under valued extensions
@@ -14,6 +16,8 @@ import Mathlib.Topology.DenseEmbedding
 The two maps agree on natural numbers. Their continuity in the actual
 valuation topologies extends this equality to all p-adic integers.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

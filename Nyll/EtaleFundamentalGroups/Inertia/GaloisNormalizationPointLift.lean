@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentPoint
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentQuotient
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponentQuotient
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Lifting a normalized-point stabilizer to the selected Galois component
@@ -17,6 +20,8 @@ identity of source schemes over the base. The resulting deck lift and its
 canonical quotient image are constructed for every element fixing the given
 point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -52,17 +57,18 @@ theorem exists_galoisComponent_normalizationPoint_fixed_lift
       qZ ≫ ((show Z.left ⟶ U from Z.hom) ≫ a).fromNormalization =
         q ≫ g.fromNormalization ∧
       ∀ σ : Aut W,
-        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.hom).left
+        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.asIso.hom).left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)) = q →
+            exact congrArg (fun k => k ≫ a)
+              (((FiniteEtale.pullback c).map σ.asIso.hom).w)) = q →
         ∃ τ : Aut Z,
           FiniteEtale.galoisPullbackComponentQuotientMonoidHom
             c xi W hW w Z i z hiz hZ hi (MulOpposite.op τ) = MulOpposite.op σ ∧
           qZ ≫ normalizationEndomorphism ((show Z.left ⟶ U from Z.hom) ≫ a)
-            τ.hom.left (by
+            τ.asIso.hom.left (by
               rw [← Category.assoc]
-              exact congrArg (fun k => k ≫ a) τ.hom.w) = qZ := by
+              exact congrArg (fun k => k ≫ a) τ.asIso.hom.w) = qZ := by
   intro A g
   obtain ⟨Z, i, q₀, z, w, hi, hZ, hq₀, hiz⟩ :=
     exists_galoisNormalizationComponent_geometricPoint c xi W hW g q
@@ -84,24 +90,25 @@ theorem exists_galoisComponent_normalizationPoint_fixed_lift
     congr 1
     exact (Scheme.Hom.normalizationDesc_comp _ _ _ _).symm
   · intro σ hσfix
-    have hσ : ((FiniteEtale.pullback c).map σ.hom).left ≫ g = g := by
+    have hσ : ((FiniteEtale.pullback c).map σ.asIso.hom).left ≫ g = g := by
       dsimp only [g]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)
+      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.asIso.hom).w)
     obtain ⟨τ, hτ, hquotient, hτfix⟩ :=
       FiniteEtale.galoisPullbackComponentQuotient_exists_normalized_fixed_lift
         c xi W hW w Z i z hiz hZ hi g q₀ σ hσ (by rw [← Category.assoc, hq₀]; exact hσfix)
-    have hτZ : τ.hom.left ≫ gZ = gZ := by
+    have hτZ : τ.asIso.hom.left ≫ gZ = gZ := by
       dsimp only [gZ]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ a) τ.hom.w
-    have hτg : τ.hom.left ≫ (i.left ≫ g) = i.left ≫ g := by
+      exact congrArg (fun k => k ≫ a) τ.asIso.hom.w
+    have hτg : τ.asIso.hom.left ≫ (i.left ≫ g) = i.left ≫ g := by
       have ht := congrArg (fun k : Z ⟶ A => k.left) hτ
-      change τ.hom.left ≫ i.left = i.left ≫ ((FiniteEtale.pullback c).map σ.hom).left at ht
+      change τ.asIso.hom.left ≫ i.left =
+        i.left ≫ ((FiniteEtale.pullback c).map σ.asIso.hom).left at ht
       rw [← Category.assoc, ht, Category.assoc, hσ]
     refine ⟨τ, hquotient, ?_⟩
     exact (normalizationSourceIso_fixes_iff (i.left ≫ g) gZ
-      (Iso.refl Z.left) he q₀ τ.hom.left hτg τ.hom.left hτZ
+      (Iso.refl Z.left) he q₀ τ.asIso.hom.left hτg τ.asIso.hom.left hτZ
       (by rw [Iso.refl_hom, Category.comp_id, Category.id_comp])).mpr hτfix
 
 end EtaleFundamentalGroups.Inertia

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Nyll.SchemeTheory.Normalization.FiniteEtaleOpen
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.SchemeTheory.Normalization.FiniteEtaleOpen
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # Relative normalization across a punctured local spectrum
@@ -21,6 +23,8 @@ No global finiteness or etaleness of the normalization morphism is asserted
 here.  Those are separate algebraic inputs in a purity argument.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory Limits
@@ -31,7 +35,8 @@ universe u
 
 variable (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 
-private theorem puncturedSpectrumInclusion_isOpenImmersion
+/-- The punctured-spectrum inclusion is an open immersion. -/
+theorem puncturedSpectrumInclusion_isOpenImmersion
     (R : Type u) [CommRing R] [IsLocalRing R] :
     IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
   dsimp only [Scheme.puncturedSpectrumInclusion]
@@ -45,7 +50,8 @@ def puncturedSpectrumCoverToSpec
     W.left ⟶ Spec (.of R) :=
   W.hom ≫ Scheme.puncturedSpectrumInclusion R
 
-private theorem puncturedSpectrumComposite_quasiCompact
+/-- A finite étale punctured cover is quasi-compact over the Noetherian local base. -/
+theorem puncturedSpectrumComposite_quasiCompact
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) :
     QuasiCompact (puncturedSpectrumCoverToSpec R W) := by
   change QuasiCompact (W.hom ≫ Scheme.puncturedSpectrumInclusion R)
@@ -60,7 +66,8 @@ private theorem puncturedSpectrumComposite_quasiCompact
     hW hj
 
 omit [IsNoetherianRing R] in
-private theorem puncturedSpectrumComposite_quasiSeparated
+/-- A finite étale punctured cover is quasi-separated over the local base. -/
+theorem puncturedSpectrumComposite_quasiSeparated
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) :
     QuasiSeparated (puncturedSpectrumCoverToSpec R W) := by
   change QuasiSeparated (W.hom ≫ Scheme.puncturedSpectrumInclusion R)

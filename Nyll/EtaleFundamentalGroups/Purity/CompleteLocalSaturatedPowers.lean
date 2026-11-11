@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalChevalley
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
-import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.Tactic.Push
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalChevalley
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSymbolicPowers
+public import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.Tactic.Push
 
 /-!
 # Maximal-ideal saturation of powers
@@ -25,6 +27,8 @@ powers and ordinary powers are cofinal. The finite-length error module
 is the maximal-ideal-primary component itself, so no coheight assumption
 on the containing prime is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -11,14 +11,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.Algebra.Group.Action.Defs
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Noetherian.Defs
-import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.Algebra.Group.Action.Defs
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Noetherian.Defs
+public import Nyll.SchemeTheory.RingTheory.Dimension.SubalgebraNoetherianDimensionLEOne
 
 /-!
 # Noetherian subalgebras of finite fraction-field extensions
@@ -27,6 +29,8 @@ Subalgebras of finite-dimensional fraction-field extensions of Noetherian
 domains of Krull dimension at most one are Noetherian and have Krull
 dimension at most one.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

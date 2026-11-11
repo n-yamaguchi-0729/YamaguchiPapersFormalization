@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.Core
 
 /-!
 # A uniquely chosen finite etale factor in a separate universe
@@ -14,6 +16,8 @@ factor carriers living in the same universe.  This file records the
 universe-polymorphic form needed when the factor is a localization of an
 integral closure in a generic tensor component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

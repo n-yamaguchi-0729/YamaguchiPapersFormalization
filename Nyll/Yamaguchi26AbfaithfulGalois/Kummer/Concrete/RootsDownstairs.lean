@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Roots downstairs detect prime-degree Galois automorphisms
@@ -16,6 +18,8 @@ For a prime-degree Galois extension with finite prime-power roots all in the bas
 each nonidentity automorphism moves a continuous degree-one class. The eigenunit,
 coefficient exponent, character, and point detecting movement are all constructed.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

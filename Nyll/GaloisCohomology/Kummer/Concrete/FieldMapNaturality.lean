@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
-import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+public import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
 
 /-!
 # Kummer characters under embeddings of arbitrary fields
@@ -15,6 +17,8 @@ carries root quotients to root quotients. This gives the naturality of Kummer
 characters under actual absolute Galois restriction, in every characteristic
 prime to the exponent.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

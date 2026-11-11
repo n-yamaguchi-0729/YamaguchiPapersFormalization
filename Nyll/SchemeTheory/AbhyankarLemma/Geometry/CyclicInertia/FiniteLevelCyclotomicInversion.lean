@@ -4,7 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicRestriction
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicRestriction
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicInversion
+public import Nyll.SchemeTheory.FunctionFields.IntegerBase
+public import Nyll.SchemeTheory.FunctionFields.SeparableClosure.GeometricallyIntegralRestriction
 
 /-!
 # Cyclotomic inversion in finite-level inertia
@@ -14,6 +19,8 @@ a genuine separable closure.  Cyclotomic inversion restricts to that normal
 extension and the residue exact sequence lifts it back to the decomposition
 group.  The selected residue field itself need not be a separable closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -122,12 +129,6 @@ section IntegerBase
 
 local instance : IsDomain (ULift.{v} ℤ) :=
   (ULift.ringEquiv : ULift.{v} ℤ ≃+* ℤ).toMulEquiv.isDomain ℤ
-
-private abbrev integerGenericResidueField : Type v :=
-  AlgebraicGeometry.Scheme.residueField
-    (AlgebraicGeometry.Spec (CommRingCat.of (ULift.{v} ℤ)))
-    (_root_.genericPoint
-      (AlgebraicGeometry.Spec (CommRingCat.of (ULift.{v} ℤ))))
 
 /-- The generic residue field of the integer base supplies finite-level
 cyclotomic inversion without requiring the selected residue field to be a

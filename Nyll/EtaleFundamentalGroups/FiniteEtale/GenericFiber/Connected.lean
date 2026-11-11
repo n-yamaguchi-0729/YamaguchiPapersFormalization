@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.IdempotentFG
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+module
+
+public import Mathlib.RingTheory.Ideal.IdempotentFG
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
 
 /-!
 # Connected finite-etale algebras over normal domains
@@ -16,6 +18,8 @@ one generic-fibre field component.  The selected-component normalization is
 an idempotent factor of the algebra; connectedness makes that factor the
 whole algebra, and hence embeds the algebra into a field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

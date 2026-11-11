@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationPrime
 
 /-!
 # The closed prime on an intermediate tensor-component normalization
@@ -13,6 +15,8 @@ A maximal prime on the final normalization contracts to the closed point of
 the canonical intermediate normalization.  The same literal final component,
 normalization map, and prime are retained throughout.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,24 +52,17 @@ theorem
       Ideal (integralClosure B M)) [p.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
     (genericTensorTowerIntermediateNormalizationPrime
       (A := A) (B := B) (K := K) (F := F) (F' := F') (L := L)
       m p).LiesOver (IsLocalRing.maximalIdeal A) := by
-  dsimp only at p ⊢
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  let : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
+  intro n suppliedMaximal M₀ suppliedIntermediateAlgebra
+  dsimp only at p
   let q := genericTensorTowerIntermediateNormalizationPrime
     (A := A) (B := B) (K := K) (F := F) (F' := F') (L := L)
     m p

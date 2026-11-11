@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairs
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ProCGroups.ProP.ContinuousH1
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairs
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ProCGroups.ProP.ContinuousH1
 
 /-!
 # Roots downstairs and the canonical actions
@@ -15,6 +17,8 @@ import Nyll.ProCGroups.ProP.ContinuousH1
 The moved classes constructed from eigenunits detect the genuine relative
 Galois action on H¹ and the canonical action on topological abelianization.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

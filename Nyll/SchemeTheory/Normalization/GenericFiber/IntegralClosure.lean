@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Integral
-import Nyll.SchemeTheory.Normalization.Affine
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Integral
+public import Nyll.SchemeTheory.Normalization.Affine
 
 
 /-!
@@ -21,6 +23,8 @@ localizing the integral closure of `R` in `L` at the nonzero elements of
 including when `L` is a finite product rather than a field.
 The comparison uses the original inclusions into `L` on both sides.
 -/
+
+@[expose] public section
 
 noncomputable section
 

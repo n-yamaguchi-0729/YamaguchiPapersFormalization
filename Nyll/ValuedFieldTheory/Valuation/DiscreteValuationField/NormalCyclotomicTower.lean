@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.NormalSplittingPolynomial
-import Mathlib.NumberTheory.Cyclotomic.Basic
-import Mathlib.FieldTheory.SplittingField.IsSplittingField
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.NormalSplittingPolynomial
+public import Mathlib.NumberTheory.Cyclotomic.Basic
+public import Mathlib.FieldTheory.SplittingField.IsSplittingField
 
 /-!
 # Cyclotomic extensions above finite normal extensions
@@ -15,6 +17,8 @@ Adjoining roots of unity to a finite normal extension preserves normality
 over the original field. The upper field is the splitting field of the
 product of a nonzero lower splitting polynomial and `X^n - 1`.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

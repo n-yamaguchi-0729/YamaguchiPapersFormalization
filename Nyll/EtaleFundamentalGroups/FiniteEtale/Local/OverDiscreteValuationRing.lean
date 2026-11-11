@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
 
 /-!
 # Local etale algebras over a discrete valuation ring
@@ -17,6 +19,8 @@ structure map, is again a discrete valuation ring.  No module-finiteness of
 the localized target is needed: finite presentation gives Noetherianity, and
 the mapped uniformizer is a regular generator of the target maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
 
 /-!
 # Embedding a normalization into a compositum normalization
@@ -17,6 +19,8 @@ actual normalization embedding and uses integrality to lift a chosen prime.
 No compositum field or prime is chosen here; those remain inputs produced by
 the generic tensor-component construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

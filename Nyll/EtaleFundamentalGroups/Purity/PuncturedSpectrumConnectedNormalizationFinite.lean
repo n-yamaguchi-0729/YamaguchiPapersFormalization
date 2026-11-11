@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumFunctionField
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Finite connected normalizations across a punctured spectrum
@@ -15,6 +19,8 @@ positive-dimensional normal Noetherian local domain, the integral closure in
 the cover's function field is finite over the local domain.  No finite-type
 hypothesis over `ℤ`, and no dimension-two hypothesis, is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

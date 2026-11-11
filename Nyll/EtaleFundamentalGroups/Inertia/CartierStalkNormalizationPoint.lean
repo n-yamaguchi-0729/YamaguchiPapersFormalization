@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
 
 /-!
 # Normalization points above a Cartier component's discrete valuation stalk
@@ -16,6 +18,8 @@ the local fraction field with the pullback over the stalk. The canonical
 normalization comparison is an isomorphism and therefore transports every
 specified point, preserving its fixing condition for all deck transformations.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -61,15 +65,15 @@ theorem exists_fractionStalk_normalizationPoint
     ∃ q : T ⟶ g.normalization,
       q ≫ g.fromNormalization = y ∧
       ∀ σ : Aut W,
-        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.hom).left
+        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.asIso.hom).left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)) = q ↔
+            exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.asIso.hom).w)) = q ↔
         z ≫ normalizationEndomorphism
           ((show W.left ⟶ I.supportComplement.toScheme from W.hom) ≫ I.supportComplement.ι)
-          σ.hom.left (by
+          σ.asIso.hom.left (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.hom.w) = z := by
+            exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.asIso.hom.w) = z := by
   intro c A a g
   let F : W.left ⟶ X :=
     (show W.left ⟶ I.supportComplement.toScheme from W.hom) ≫ I.supportComplement.ι
@@ -99,27 +103,27 @@ theorem exists_fractionStalk_normalizationPoint
       ((congrArg (fun k : F₁.normalization ⟶ Spec (X.presheaf.stalk x) => q₀ ≫ k)
         (normalizationSourceIso_hom_fromNormalization F₁ g e he)).trans hq₀)
   · intro σ
-    have hσ : σ.hom.left ≫ F = F := by
+    have hσ : σ.asIso.hom.left ≫ F = F := by
       dsimp only [F]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.hom.w
-    let τ₁ := pullbackEndomorphism F b σ.hom.left hσ
-    have hτ₁ : τ₁ ≫ F₁ = F₁ := pullbackEndomorphism_snd F b σ.hom.left hσ
-    let τ := ((FiniteEtale.pullback c).map σ.hom).left
+      exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.asIso.hom.w
+    let τ₁ := pullbackEndomorphism F b σ.asIso.hom.left hσ
+    have hτ₁ : τ₁ ≫ F₁ = F₁ := pullbackEndomorphism_snd F b σ.asIso.hom.left hσ
+    let τ := ((FiniteEtale.pullback c).map σ.asIso.hom).left
     have hτ : τ ≫ g = g := by
       dsimp only [g]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)
+      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.asIso.hom).w)
     have hτfst : τ ≫
         pullback.fst (show W.left ⟶ I.supportComplement.toScheme from W.hom) c =
         pullback.fst (show W.left ⟶ I.supportComplement.toScheme from W.hom) c ≫
-          σ.hom.left := by
+          σ.asIso.hom.left := by
       change pullback.lift _ _ _ ≫ pullback.fst _ _ = _
       exact pullback.lift_fst _ _ _
     have hcommute : τ₁ ≫ e.hom = e.hom ≫ τ :=
-      pullbackSquare_iso_intertwines H₁ Hcover τ₁ τ σ.hom.left
-        (pullbackEndomorphism_fst F b σ.hom.left hσ) hτ₁ hτfst hτ
+      pullbackSquare_iso_intertwines H₁ Hcover τ₁ τ σ.asIso.hom.left
+        (pullbackEndomorphism_fst F b σ.asIso.hom.left hσ) hτ₁ hτfst hτ
     exact (normalizationSourceIso_fixes_iff F₁ g e he q₀ τ₁ hτ₁ τ hτ hcommute).trans
-      (normalizationPullback_fixes_point_iff F b z y _hzy σ.hom.left hσ)
+      (normalizationPullback_fixes_point_iff F b z y _hzy σ.asIso.hom.left hσ)
 
 end EtaleFundamentalGroups.Inertia

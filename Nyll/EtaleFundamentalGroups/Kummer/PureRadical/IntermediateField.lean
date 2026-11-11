@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.Norm.Basic
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.Norm.Basic
 
 /-!
 # Intermediate fields of a pure radical extension
@@ -24,6 +26,8 @@ comparison.
 This is the field-theoretic core of Stacks Project, Lemma 15.115.4
 (tag `0EXP`), used in the DVR pure-radical classification of tag `09EV`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

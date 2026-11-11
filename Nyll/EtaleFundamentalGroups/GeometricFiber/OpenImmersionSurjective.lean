@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 
 /-!
 # Fundamental groups and nonempty open immersions
@@ -17,6 +19,8 @@ uses the connected-object criterion for surjectivity: a connected finite-etale
 cover has integral source, so its pullback to a nonempty open remains
 connected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Invariant.Galois
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Invariant.Galois
 
 /-!
 # Ideal inertia and localization at a height-one prime
@@ -19,6 +21,8 @@ localization subalgebra, so the comparison does not depend on a choice of a
 completion or of a henselization.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,7 +48,8 @@ abbrev idealLocalizationSubalgebra (P : Ideal B) [P.IsPrime] :
   Localization.subalgebra.ofField L P.primeCompl
     P.primeCompl_le_nonZeroDivisors
 
-private theorem idealLocalizationSubalgebra_dvr
+/-- The embedded localization of a Dedekind domain at a nonzero prime is a DVR. -/
+theorem idealLocalizationSubalgebra_dvr
     (P : Ideal B) [P.IsPrime] (hP : P ≠ ⊥) :
     IsDiscreteValuationRing (idealLocalizationSubalgebra B L P) :=
   IsLocalization.AtPrime.isDiscreteValuationRing_of_dedekind_domain
@@ -217,7 +222,8 @@ private theorem globalInertia_maps_localization :
   simp only [map_mul, map_inv₀,
     algebraMap_normalization_smul (A := A)]
 
-private theorem globalInertia_maps_localization_iff :
+/-- Global ideal inertia preserves membership in the localized valuation subring. -/
+theorem globalInertia_maps_localization_iff :
     letI := IsIntegralClosure.MulSemiringAction A K L B
     ∀ (sigma : P.toAddSubgroup.inertia Gal(L/K)) (x : L),
       ((sigma : Gal(L/K)) : L ≃ₐ[K] L) x ∈
@@ -251,7 +257,9 @@ def globalIdealInertiaToDecomposition :
   exact globalInertia_maps_localization_iff
     (A := A) (P := P) (hP := hP) sigma⁻¹ x
 
-private theorem globalIdealInertiaToDecomposition_mem_localIdealInertia :
+/-- A global ideal-inertia element acts trivially on the residue field of the localized
+valuation ring. -/
+theorem globalIdealInertiaToDecomposition_mem_localIdealInertia :
     letI := IsIntegralClosure.MulSemiringAction A K L B
     ∀ sigma : P.toAddSubgroup.inertia Gal(L/K),
       globalIdealInertiaToDecomposition
@@ -274,7 +282,8 @@ private theorem globalIdealInertiaToDecomposition_mem_localIdealInertia :
   have hs0 : s ≠ 0 := by
     intro hszero
     apply hs
-    simp [hszero]
+    rw [hszero]
+    exact zero_mem _
   have hdeltaA : (sigma : Gal(L/K)) • a - a ∈ P := sigma.property a
   have hdeltaS : (sigma : Gal(L/K)) • s - s ∈ P := sigma.property s
   have hsigma : (sigma : Gal(L/K)) • s ∈ P.primeCompl := by

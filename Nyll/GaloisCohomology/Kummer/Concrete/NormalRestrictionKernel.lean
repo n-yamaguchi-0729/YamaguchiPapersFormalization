@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.Normal.Defs
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.Normal.Defs
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # The actual normal-restriction kernel
@@ -21,6 +23,8 @@ same underlying field automorphisms. For finite M/K and Galois Ω/K this is
 a continuous equivalence. Actual subgroup conjugation becomes semilinear
 conjugation by the same ambient automorphism.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 
@@ -99,7 +103,8 @@ variable [FiniteDimensional K M]
 
 -- The finite intermediate field E adds only its canonical scalar restrictions.
 -- The K/M/Ω field-algebra tower is fixed once; no alternate module is installed.
-private theorem normalRestrictionKernelEquiv_continuous :
+/-- The restriction-kernel equivalence is continuous for the Krull topologies. -/
+theorem normalRestrictionKernelEquiv_continuous :
     Continuous (normalRestrictionKernelEquiv (K := K) M Ω) := by
   apply continuous_of_tendsto_nhds_one (normalRestrictionKernelEquiv M Ω)
   rw [Filter.tendsto_def]

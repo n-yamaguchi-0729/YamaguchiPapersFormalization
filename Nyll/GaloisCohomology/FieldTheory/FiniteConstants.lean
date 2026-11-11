@@ -3,10 +3,12 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.FieldTheory.AlgebraicClosure
-import Mathlib.GroupTheory.Torsion
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Data.Fintype.Card
+module
+
+public import Mathlib.FieldTheory.AlgebraicClosure
+public import Mathlib.GroupTheory.Torsion
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Data.Fintype.Card
 
 /-!
 # Finite algebraic constant fields
@@ -14,6 +16,8 @@ import Mathlib.Data.Fintype.Card
 A finite relative algebraic closure contains all roots of unity. It also
 supplies an element outside the image of every map `x ↦ x ^ n - x`, for `n > 1`.
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 

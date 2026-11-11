@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
+module
+
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
 
 /-!
 # A finite normal source is its generic relative normalization
@@ -14,6 +16,8 @@ covers to any finite morphism with normal integral source. It applies at
 ramified boundary points as well. The resulting isomorphism is over the
 original target, not merely an abstract isomorphism of schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -25,12 +29,8 @@ universe u
 
 variable {X Y : Scheme.{u}} [IsIntegral Y] [IsNormalIntegral Y]
 
-private local instance fieldSpecQuasiCompact
-    {L : Type u} [Field L] {S : Scheme.{u}} (f : Spec (.of L) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
-
-private noncomputable def finiteNormalGenericDesc
+/-- The canonical descent map from the generic relative normalization to the finite source. -/
+noncomputable def finiteNormalGenericDesc
     (f : Y ⟶ X) [IsFinite f] :
     ((Y.genericExtensionMorphism Y.functionField ≫ f)).normalization ⟶ Y := by
   let hIntegral : IsIntegralHom f :=
@@ -232,7 +232,6 @@ theorem finiteNormalGenericIso_inv_fromNormalization
   change (finiteNormalGenericIso f).inv ≫
       (finiteNormalGenericIso f).hom ≫ f = f
   exact Iso.inv_hom_id_assoc _ _
-
 
 /-- The chosen finite-normal normalization isomorphism preserves the original generic map. -/
 @[reassoc (attr := simp)]

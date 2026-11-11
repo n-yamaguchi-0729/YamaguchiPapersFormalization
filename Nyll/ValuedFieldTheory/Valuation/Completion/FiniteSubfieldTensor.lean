@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.TensorProduct.Finiteness
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Algebraic.Integral
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Tensor elements over finite intermediate fields
@@ -17,6 +19,8 @@ Only finitely many coefficients from the algebraic extension occur in a
 tensor element. Adjoining those coefficients gives a finite intermediate
 field over which the element is already defined.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

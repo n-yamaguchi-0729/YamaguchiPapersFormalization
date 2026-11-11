@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Algebraic.Integral
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
+module
+
+public import Mathlib.RingTheory.Algebraic.Integral
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.RingExtension
 
 /-!
 # Fraction fields along a finite local extension
@@ -16,6 +18,8 @@ This file fixes all canonical algebra structures between the two prime
 localizations and the fraction field of `D`.  It also transports finite
 dimensionality to the literal fraction field of `Sₚ`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -74,20 +78,15 @@ omit [Module.Finite S D] in
 /-- The maps `Sₚ → Frac(S) → Frac(D)` form the defining scalar tower. -/
 theorem finiteExtensionAtPrime_fractionRingTower
     (p : Ideal S) [p.IsPrime] :
-    letI : Algebra (Localization.AtPrime p) (FractionRing S) :=
+    let : Algebra (Localization.AtPrime p) (FractionRing S) :=
       localizationAtPrimeToFractionFieldAlgebra (K := FractionRing S) p
-    letI : Algebra (FractionRing S) (FractionRing D) :=
+    let : Algebra (FractionRing S) (FractionRing D) :=
       finiteExtensionFractionRingAlgebra (S := S) (D := D)
-    letI : Algebra (Localization.AtPrime p) (FractionRing D) :=
+    let : Algebra (Localization.AtPrime p) (FractionRing D) :=
       finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
     IsScalarTower (Localization.AtPrime p) (FractionRing S)
       (FractionRing D) := by
-  let : Algebra (Localization.AtPrime p) (FractionRing S) :=
-    localizationAtPrimeToFractionFieldAlgebra (K := FractionRing S) p
-  let : Algebra (FractionRing S) (FractionRing D) :=
-    finiteExtensionFractionRingAlgebra (S := S) (D := D)
-  let : Algebra (Localization.AtPrime p) (FractionRing D) :=
-    finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
+  intro localizationAlgebra extensionAlgebra compositeAlgebra
   exact IsScalarTower.of_algebraMap_eq' rfl
 
 omit [Module.Finite S D] in
@@ -95,9 +94,9 @@ omit [Module.Finite S D] in
 fraction field of `Sₚ`. -/
 theorem finiteExtensionAtPrime_literalFractionRingTower
     (p : Ideal S) [p.IsPrime] :
-    letI : Algebra (Localization.AtPrime p) (FractionRing D) :=
+    let : Algebra (Localization.AtPrime p) (FractionRing D) :=
       finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
-    letI : Algebra (FractionRing (Localization.AtPrime p))
+    let : Algebra (FractionRing (Localization.AtPrime p))
         (FractionRing D) :=
       finiteExtensionAtPrimeFractionRingAlgebra (S := S) (D := D) p
     IsScalarTower (Localization.AtPrime p)
@@ -106,11 +105,7 @@ theorem finiteExtensionAtPrime_literalFractionRingTower
     localizationAtPrimeToFractionFieldAlgebra (K := FractionRing S) p
   let : Algebra (FractionRing S) (FractionRing D) :=
     finiteExtensionFractionRingAlgebra (S := S) (D := D)
-  let : Algebra (Localization.AtPrime p) (FractionRing D) :=
-    finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
-  let : Algebra (FractionRing (Localization.AtPrime p))
-      (FractionRing D) :=
-    finiteExtensionAtPrimeFractionRingAlgebra (S := S) (D := D) p
+  intro localizationAlgebra extensionAlgebra
   let : IsScalarTower (Localization.AtPrime p) (FractionRing S)
       (FractionRing D) :=
     finiteExtensionAtPrime_fractionRingTower (S := S) (D := D) p
@@ -145,20 +140,15 @@ omit [Module.Finite S D] in
 `Sₚ → Frac(S) → Frac(D)` agree. -/
 theorem finiteLiesOverLocalization_fractionRingTower
     (p : Ideal S) (q : Ideal D) [p.IsPrime] [q.IsPrime] [q.LiesOver p] :
-    letI : Algebra (Localization.AtPrime p) (Localization.AtPrime q) :=
+    let : Algebra (Localization.AtPrime p) (Localization.AtPrime q) :=
       finiteLiesOverLocalizationAlgebra p q
-    letI : Algebra (Localization.AtPrime q) (FractionRing D) :=
+    let : Algebra (Localization.AtPrime q) (FractionRing D) :=
       finiteLiesOverLocalizationToFractionRingAlgebra q
-    letI : Algebra (Localization.AtPrime p) (FractionRing D) :=
+    let : Algebra (Localization.AtPrime p) (FractionRing D) :=
       finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
     IsScalarTower (Localization.AtPrime p) (Localization.AtPrime q)
       (FractionRing D) := by
-  let : Algebra (Localization.AtPrime p) (Localization.AtPrime q) :=
-    finiteLiesOverLocalizationAlgebra p q
-  let : Algebra (Localization.AtPrime q) (FractionRing D) :=
-    finiteLiesOverLocalizationToFractionRingAlgebra q
-  let : Algebra (Localization.AtPrime p) (FractionRing D) :=
-    finiteExtensionAtPrimeToFractionRingAlgebra (S := S) (D := D) p
+  intro localizationAlgebra fractionAlgebra compositeAlgebra
   let : Algebra (Localization.AtPrime p) (FractionRing S) :=
     localizationAtPrimeToFractionFieldAlgebra (K := FractionRing S) p
   let : Algebra (FractionRing S) (FractionRing D) :=

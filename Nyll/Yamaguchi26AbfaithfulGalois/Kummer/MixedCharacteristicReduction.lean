@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeReduction
-import Nyll.ProCGroups.Abelian.AbelianModPower
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
-import Mathlib.Algebra.CharP.Algebra
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Valuation.Extension
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeReduction
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
+public import Mathlib.Algebra.CharP.Algebra
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Valuation.Extension
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
 
 /-!
 # Prime-degree reduction for mixed-characteristic valuations
@@ -26,6 +28,8 @@ extension. Finite extensions
 preserve discreteness and residue characteristic, allowing the prime-order
 test to be applied on every open layer.
 -/
+
+@[expose] public section
 
 noncomputable section
 

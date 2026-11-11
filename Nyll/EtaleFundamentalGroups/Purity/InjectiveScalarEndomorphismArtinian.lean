@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Order.Hom.Basic
-import Mathlib.RingTheory.Artinian.Defs
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Order.Hom.Basic
+public import Mathlib.RingTheory.Artinian.Defs
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Double annihilators and the descending chain condition
@@ -19,6 +21,8 @@ separation gives the double-annihilator equality for every submodule.
 Annihilators then embed its submodule lattice into the opposite ideal
 lattice.  Over a Noetherian ring, the module is consequently Artinian.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

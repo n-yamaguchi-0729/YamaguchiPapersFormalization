@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint
-import Nyll.SchemeTheory.Normalization.Affine
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-!
 # Geometric-point inertia in an affine relative normalization
@@ -24,6 +26,8 @@ For a point obtained from the algebraic closure of the residue field of `P`,
 the ideal is literally `P`.  No integrality, normality, finiteness, or Galois
 assumption on `R` or `B` is required for this affine comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -107,14 +111,13 @@ normalization extension fixes the corresponding geometric point. -/
 theorem mem_idealInertia_iff_fixes_affineNormalizationGeometricPoint
     {Ω : Type u} [Field Ω]
     (φ : integralClosure R B →+* Ω) (σ : B ≃ₐ[R] B) :
-    letI : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
+    let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
       integralClosureAutAction R B
     σ ∈ (RingHom.ker φ).inertia (B ≃ₐ[R] B) ↔
       (Spec.map (CommRingCat.ofHom φ) ≫ (specNormalizationIso R B).inv) ≫
           affineNormalizationDeck R B σ =
         Spec.map (CommRingCat.ofHom φ) ≫ (specNormalizationIso R B).inv := by
-  let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
-    integralClosureAutAction R B
+  intro sharedOwner1
   have haction : MulSemiringAction.toRingHom (B ≃ₐ[R] B)
       (integralClosure R B) σ = σ.toAlgHom.mapIntegralClosure.toRingHom := by
     apply RingHom.ext
@@ -165,12 +168,11 @@ def affineNormalizationGeometricPointStabilizer
 subgroup for the integral-closure restriction action. -/
 theorem affineNormalizationGeometricPointStabilizer_eq_idealInertia
     {Ω : Type u} [Field Ω] (φ : integralClosure R B →+* Ω) :
-    letI : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
+    let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
       integralClosureAutAction R B
     affineNormalizationGeometricPointStabilizer R B φ =
       (RingHom.ker φ).inertia (B ≃ₐ[R] B) := by
-  let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
-    integralClosureAutAction R B
+  intro sharedOwner1
   ext σ
   exact (mem_idealInertia_iff_fixes_affineNormalizationGeometricPoint R B φ σ).symm
 
@@ -178,14 +180,13 @@ theorem affineNormalizationGeometricPointStabilizer_eq_idealInertia
 the stabilizer ideal is the given prime itself. -/
 theorem affineNormalizationResidueGeometricPointStabilizer_eq_idealInertia
     (P : Ideal (integralClosure R B)) [P.IsPrime] :
-    letI : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
+    let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
       integralClosureAutAction R B
     affineNormalizationGeometricPointStabilizer R B
         ((algebraMap P.ResidueField (AlgebraicClosure P.ResidueField)).comp
           (algebraMap (integralClosure R B) P.ResidueField)) =
       P.inertia (B ≃ₐ[R] B) := by
-  let : MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
-    integralClosureAutAction R B
+  intro sharedOwner1
   rw [affineNormalizationGeometricPointStabilizer_eq_idealInertia,
     RingHom.ker_comp_of_injective (algebraMap (integralClosure R B) P.ResidueField)
       (algebraMap P.ResidueField (AlgebraicClosure P.ResidueField)).injective,

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.RegularPair
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.RegularPair
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
 
 /-!
 # Normality of two-dimensional regular local domains
@@ -17,6 +19,8 @@ regular-pair construction supplies the normality statement needed by the
 generic-component normalization argument without that missing general
 localization theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

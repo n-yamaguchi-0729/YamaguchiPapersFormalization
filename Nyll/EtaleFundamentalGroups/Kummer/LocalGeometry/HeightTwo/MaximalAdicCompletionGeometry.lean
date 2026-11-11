@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Regular.Flat
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Regular.Flat
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-!
 # Height-two regular geometry after maximal-adic completion
@@ -28,6 +30,8 @@ Thus all geometry used below is produced from existing completion, tensor,
 regular-sequence, and standard-DVR APIs; no analytic-irreducibility or
 completion-regularity assumption is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Tactic.Abel
-import Mathlib.RingTheory.Ideal.Quotient.Defs
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Tactic.Abel
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-!
 # Mayer--Vietoris Ext sequence for two ideal quotients
@@ -21,6 +23,8 @@ exact sequence.  This is the finite-stage algebraic input for a future
 Mayer--Vietoris construction in local cohomology; no comparison with the
 legacy Ext colimit used by `localCohomology` is asserted here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

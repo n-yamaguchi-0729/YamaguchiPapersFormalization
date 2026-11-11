@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.Order.Zorn
+module
+
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.Order.Zorn
 
 /-!
 # Essential extensions obtained from a maximal disjoint submodule
@@ -18,6 +20,8 @@ disjoint from `N`.  The image of `N` in `M / P` is then essential: the
 inverse image of a submodule disjoint from that image is a larger submodule
 disjoint from `N`, so maximality forces it to equal `P`.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

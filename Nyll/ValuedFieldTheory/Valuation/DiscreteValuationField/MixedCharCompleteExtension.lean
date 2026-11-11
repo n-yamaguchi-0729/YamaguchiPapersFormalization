@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalizedCompleteExtension
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalizedCompleteExtension
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Complete extension valuations with the base residue characteristic
@@ -15,6 +17,8 @@ import Mathlib.Algebra.CharP.Algebra
 A finite separable extension receives an integer-valued complete discrete
 valuation. The induced embedding of residue fields preserves characteristic.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.ValuedExtension
 

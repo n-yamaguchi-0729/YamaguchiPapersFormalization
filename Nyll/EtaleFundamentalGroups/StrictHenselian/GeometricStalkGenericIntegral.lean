@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.Unramified.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineRepresentative
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.Unramified.Finite
 
 
 /-!
@@ -32,6 +34,8 @@ This argument needs no finite presentation of a fraction field over the
 original ring. No domain or normality assumption on the base is needed for
 this integrality result.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,28 +63,13 @@ theorem geometricStalk_tensor_isIntegral (K : Type u) [Field K] [Algebra R K] :
   refine ⟨fun x => ?_⟩
   induction x using TensorProduct.inductionOn with
   | tmul k a =>
-    obtain ⟨W, t, z, hz⟩ := geometricStalk_exists_representative s a
-    obtain ⟨V, v, j, hVaffine, hj⟩ := geometricStalk_exists_affine_refinement s W t
+    obtain ⟨V, v, hVaffine, y, hy⟩ := geometricStalk_exists_affine_representative s a
     have : IsAffine V.left := hVaffine
-    let y : Γ(V.left, ⊤) := j.left.appTop z
-    have hy : geometricStalkGerm s V v y = a := by
-      have h := (Scheme.pointEtaleNeighborhoods s).toPresheafFiber_w
-        j v (etaleSections (Spec (CommRingCat.of R)))
-      rw [hj] at h
-      exact (ConcreteCategory.congr_hom h z).trans hz
     let S := Γ(V.left, ⊤)
     let β : R →+* S :=
       ((Scheme.ΓSpecIso (CommRingCat.of R)).inv ≫ V.hom.appTop).hom
     let : Algebra R S := β.toAlgebra
-    have hβ : β.Etale := by
-      change (V.hom.appTop.hom.comp (Scheme.ΓSpecIso (CommRingCat.of R)).inv.hom).Etale
-      apply RingHom.Etale.stableUnderComposition
-      · exact RingHom.Etale.of_bijective
-          ((ConcreteCategory.isIso_iff_bijective (Scheme.ΓSpecIso (CommRingCat.of R)).inv).mp
-            inferInstance)
-      · exact HasRingHomProperty.appTop (P := @Etale)
-          (show V.left ⟶ Spec (CommRingCat.of R) from V.hom) inferInstance
-    have : Algebra.Etale R S := hβ
+    have : Algebra.Etale R S := geometricNeighborhood_structureMap_etale V
     let γ : S →ₐ[R] A :=
       { __ := (geometricStalkGerm s V v).hom
         commutes' r := RingHom.congr_fun (geometricStalkGerm_comp_structure φ V v) r }

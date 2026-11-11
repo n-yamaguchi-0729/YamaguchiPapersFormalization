@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
-import Mathlib.Algebra.Group.Units.Hom
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Exact Kummer differences under the character action
@@ -21,11 +23,13 @@ The fixed coordinate identification with cyclic coefficients preserves this
 formula and the nontrivial difference supplied by an eigenunit.
 -/
 
+@[expose] public section
+
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
-variable (K : Type*) [Field K] [CharZero K]
+variable (K : Type*) [Field K] [PerfectField K]
 
 /-- The actual left character action agrees with the action on Kummer
 classes when the coefficient roots are fixed. -/

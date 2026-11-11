@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Unramified.Basic
-import Mathlib.Algebra.Polynomial.Derivation
+module
+
+public import Mathlib.RingTheory.Unramified.Basic
+public import Mathlib.Algebra.Polynomial.Derivation
 
 /-!
 # The derivative criterion for a monogenic etale algebra
@@ -16,6 +18,8 @@ descends the usual polynomial derivative to the quotient by the derivative
 value.  This descended derivation sends the distinguished root to one, while
 formal unramifiedness says that every such derivation is zero.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

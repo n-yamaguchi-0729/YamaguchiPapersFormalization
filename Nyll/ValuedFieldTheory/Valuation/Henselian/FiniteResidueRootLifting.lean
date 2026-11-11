@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
-import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Lifting residue roots of unity in one finite field extension
@@ -20,6 +22,8 @@ residue extension determines one finite intermediate field in which its primitiv
 roots of unity lift for every positive order. The field is constructed from the
 residue Galois stabilizer.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
-import Nyll.SchemeTheory.FunctionFields.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
 
 /-!
 # Naturality of generic-point residue fields
@@ -16,6 +18,8 @@ This is the comparison needed to transport tensor-product maps between
 function fields to the residue-field tensor appearing in the pullback
 carrier description.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,15 +52,7 @@ theorem functionFieldResidueFieldRingEquiv_naturality
     CommRingCat.ofHom (g.functionFieldMap hg) ≫
       CommRingCat.ofHom
         (Scheme.functionFieldResidueFieldRingEquiv Z).toRingHom := by
-  let hη : genericPoint X = g (genericPoint Z) :=
-    (g.map_genericPoint_of_denseRange hg).symm
-  change CommRingCat.ofHom
-        (Scheme.functionFieldResidueFieldRingEquiv X).toRingHom ≫
-      (X.residueFieldCongr hη).hom ≫
-      g.residueFieldMap (genericPoint Z) =
-    CommRingCat.ofHom (g.functionFieldMap hg) ≫
-      CommRingCat.ofHom
-        (Scheme.functionFieldResidueFieldRingEquiv Z).toRingHom
+  intro hη
   change X.residue (genericPoint X) ≫
       (X.residueFieldCongr hη).hom ≫
       g.residueFieldMap (genericPoint Z) =

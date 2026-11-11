@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
-import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
 
 
 /-!
@@ -18,6 +20,8 @@ geometric etale stalk after composition with the open inclusion. The latter
 spectrum has trivial fundamental group. Comparing the two factorizations
 therefore kills its local generic inertia in the ambient scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

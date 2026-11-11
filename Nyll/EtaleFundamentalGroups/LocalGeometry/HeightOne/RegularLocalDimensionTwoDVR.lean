@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
 
 /-!
 # Height-one localizations of two-dimensional regular local domains
@@ -19,6 +21,8 @@ valuation ring.
 This argument deliberately does not pass through an `IsRegularRing` instance
 on the original local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

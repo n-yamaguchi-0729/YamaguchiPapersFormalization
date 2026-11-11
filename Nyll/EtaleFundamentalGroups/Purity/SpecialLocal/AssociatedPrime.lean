@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.CotangentFinite
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.CotangentFinite
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
 
 /-!
 # Minimal cotangent support and associated primes
@@ -20,6 +22,8 @@ height one.
 This is the exact interface at which a depth or branch-locus theorem must
 enter; no height bound or purity conclusion is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicRootFixing
-import Nyll.GaloisCohomology.Kummer.Concrete.MovingRootOfUnity
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
-import Mathlib.Algebra.Ring.CharZero
-import Mathlib.FieldTheory.Perfect
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicRootFixing
+public import Nyll.GaloisCohomology.Kummer.Concrete.MovingRootOfUnity
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
+public import Mathlib.Algebra.Ring.CharZero
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Detection when a prime-power root does not descend
@@ -19,6 +21,8 @@ A root outside the lower cyclotomic field is moved by a Galois automorphism.
 Its restriction cannot act trivially on H¹, since the logarithmic minimum
 argument would then fix that same root.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

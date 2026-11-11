@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealCoprimality
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+module
+
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealCoprimality
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Arithmetic normal-crossings charts and finite-quotient inertia
@@ -17,6 +21,8 @@ characteristic produces its height-two local chart together with the actual
 finite-quotient inertia coprimality statement.  The height-two prime, the
 localized branch, and the residue-field map are all constructed internally.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,39 +50,39 @@ def PointedGaloisQuotientInertiaCoprime
       EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
         hNC
     let S := Localization.Away f
-    letI : IsDomain S := IsLocalization.Away.isDomain S hf
-    letI : IsIntegrallyClosed S :=
+    let : IsDomain S := IsLocalization.Away.isDomain S hf
+    let : IsIntegrallyClosed S :=
       isIntegrallyClosed_of_isLocalization S (Submonoid.powers f)
         (Submonoid.powers_le.mpr
           (mem_nonZeroDivisors_iff_ne_zero.mpr hf))
     ∀ hY : IsGalois Y,
-      letI : IsGalois Y := hY
-      letI : IsIntegral Y.left :=
+      let : IsGalois Y := hY
+      let : IsIntegral Y.left :=
         isIntegral_left_of_isConnected_finiteEtale Y
       let K := (Spec (.of S)).functionField
       let L := Y.left.functionField
-      letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-      letI : Algebra V K := localizationAwaySpecFunctionFieldAlgebra f hf
-      letI : Algebra V L := finiteEtaleAwayFunctionFieldAlgebra f hf Y
-      letI : IsScalarTower V K L :=
+      let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
+      let : Algebra V K := localizationAwaySpecFunctionFieldAlgebra f hf
+      let : Algebra V L := finiteEtaleAwayFunctionFieldAlgebra f hf Y
+      let : IsScalarTower V K L :=
         finiteEtaleAway_functionField_isScalarTower f hf Y
-      letI : IsFractionRing V K :=
+      let : IsFractionRing V K :=
         localizationAwaySpecFunctionField_isFractionRing f hf
-      letI : FiniteDimensional K L :=
+      let : FiniteDimensional K L :=
         finiteDimensional_functionField_of_finiteEtale_isConnected Y
-      letI : _root_.IsGalois K L :=
+      let : _root_.IsGalois K L :=
         isGalois_functionField_of_isGalois_finiteEtale Y hY
       ∀ {Omega : Type u} [Field Omega] [IsSepClosed Omega]
         (xi : Spec (.of Omega) ⟶ Spec (.of S))
         (y : (FiniteEtale.fiber xi).obj Y)
         (Q : Ideal (integralClosure V L)) (_ : Q.IsPrime),
         Q.LiesOver qV →
-          letI : IsFractionRing (integralClosure V L) L :=
+          let : IsFractionRing (integralClosure V L) L :=
             IsIntegralClosure.isFractionRing_of_finite_extension
               V K L (integralClosure V L)
-          letI : MulSemiringAction Gal(L/K) (integralClosure V L) :=
+          let : MulSemiringAction Gal(L/K) (integralClosure V L) :=
             IsIntegralClosure.MulSemiringAction V K L (integralClosure V L)
-          letI : MulSemiringAction (Aut Y)ᵐᵒᵖ (integralClosure V L) :=
+          let : MulSemiringAction (Aut Y)ᵐᵒᵖ (integralClosure V L) :=
             EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
               Y hY V (integralClosure V L)
           Nat.Coprime
@@ -149,39 +155,14 @@ theorem
       hdimV
   refine ⟨r, t, i, hVdomain, hVregular,
     hVnormal, hboundary, hNC, hi, hqi, hlocalizedCharZero, hpV, ?_⟩
-  dsimp only [PointedGaloisQuotientInertiaCoprime]
-  intro Y
+  delta PointedGaloisQuotientInertiaCoprime
+  intro Y f hf S domainS normalS hY galoisY integralY K L algebraKL algebraVK algebraVL
+    towerVKL fractionVK finiteKL galoisKL Omega instField instSepClosed xi y Q hQprime hQq
+    fractionBLocalL galoisAction coverAction
   let hquotient :=
     Kummer.splitStrictNormalCrossings_finiteEtaleGaloisCover_quotientIdealInertia_coprime
       (A := V) (k := V ⧸ maximalIdeal V)
       hNC i hi hlocalizedCharZero Y
-  let f := boundaryProduct t r
-  have hf : f ≠ 0 :=
-    EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hNC
-  let S := Localization.Away f
-  let : IsDomain S := IsLocalization.Away.isDomain S hf
-  let : IsIntegrallyClosed S :=
-    isIntegrallyClosed_of_isLocalization S (Submonoid.powers f)
-      (Submonoid.powers_le.mpr
-        (mem_nonZeroDivisors_iff_ne_zero.mpr hf))
-  intro hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let K : Type u := (Spec (.of S)).functionField
-  let L : Type u := Y.left.functionField
-  let : Algebra K L := finiteEtaleFunctionFieldAlgebra Y
-  let : Algebra V K := localizationAwaySpecFunctionFieldAlgebra f hf
-  let : Algebra V L := finiteEtaleAwayFunctionFieldAlgebra f hf Y
-  let : IsScalarTower V K L :=
-    finiteEtaleAway_functionField_isScalarTower f hf Y
-  let : IsFractionRing V K :=
-    localizationAwaySpecFunctionField_isFractionRing f hf
-  let : FiniteDimensional K L :=
-    finiteDimensional_functionField_of_finiteEtale_isConnected Y
-  let : _root_.IsGalois K L :=
-    isGalois_functionField_of_isGalois_finiteEtale Y hY
-  intro Omega instField instSepClosed xi y Q hQprime hQq
   have hQbranch : Q.LiesOver (Ideal.span ({t i} : Set V)) := by
     rw [← hqi]
     exact hQq

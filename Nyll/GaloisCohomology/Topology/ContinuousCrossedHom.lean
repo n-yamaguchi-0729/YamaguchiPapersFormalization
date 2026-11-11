@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousCohomologyRepresentatives
 
 /-! # Continuous crossed homomorphisms and homogeneous one-cocycles -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 open scoped Topology
@@ -73,7 +77,8 @@ theorem homogeneous_mem_cycles (c : CrossedHom X) :
 local instance {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R] :
     ContinuousSMul R (ULift.{u} R) := ⟨continuous_of_discreteTopology⟩
 
-private def scalarLine {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
+/-- The continuous linear map from the lifted discrete scalar ring determined by one vector. -/
+def scalarLine {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
     {M : TopModuleCat.{u} R} (x : M) :
     TopModuleCat.of R (ULift.{u} R) ⟶ M := by
   exact TopModuleCat.ofHom
@@ -87,7 +92,8 @@ private theorem scalarLine_one {R : Type} [Ring R] [TopologicalSpace R] [Discret
     {M : TopModuleCat.{u} R} (x : M) : scalarLine x (ULift.up 1) = x :=
   one_smul R x
 
-private theorem scalarLine_comp_eq_zero
+/-- A linear map annihilating a vector annihilates its scalar line. -/
+theorem scalarLine_comp_eq_zero
     {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
     {M N : TopModuleCat.{u} R} (x : M) (f : M ⟶ N) (hx : f.hom x = 0) :
     scalarLine x ≫ f = 0 := by

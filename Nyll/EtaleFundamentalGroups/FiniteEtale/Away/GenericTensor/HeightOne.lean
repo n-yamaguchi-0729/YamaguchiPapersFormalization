@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
 
 /-!
 # Away components at height-one primes
@@ -18,6 +20,8 @@ the canonical localization map.  These maps let the finite-etale away
 component theorem feed directly into the localized-normalization target used
 by purity, while retaining the specified maximal tensor component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -138,11 +142,11 @@ theorem awayFractionFieldToFractionFieldAlgebra_algebraMap
     [IsFractionRing (Localization.Away f) F]
     [Field K] [Algebra D K] [IsFractionRing D K]
     (x : Localization.Away f) :
-    letI : Algebra F K :=
+    let : Algebra F K :=
       awayFractionFieldToFractionFieldAlgebra f
     algebraMap F K (algebraMap (Localization.Away f) F x) =
       awayToFractionFieldRingHom (F := F) (K := K) f x := by
-  let : Algebra F K := awayFractionFieldToFractionFieldAlgebra f
+  intro sharedOwner1
   exact IsFractionRing.lift_algebraMap
     (awayToFractionFieldRingHom_injective (F := F) (K := K) f) x
 
@@ -155,16 +159,16 @@ theorem awayFractionFieldToFractionField_isScalarTower
     [Field F] [Algebra (Localization.Away f) F]
     [IsFractionRing (Localization.Away f) F]
     [Field K] [Algebra D K] [IsFractionRing D K] :
-    letI : Algebra D F :=
+    let : Algebra D F :=
       ((algebraMap (Localization.Away f) F).comp
         (algebraMap D (Localization.Away f))).toAlgebra
-    letI : Algebra F K :=
+    let : Algebra F K :=
       awayFractionFieldToFractionFieldAlgebra f
     IsScalarTower D F K := by
+  intro sharedOwner2 sharedOwner3
   let S := Localization.Away f
   let : Algebra D F :=
-    ((algebraMap S F).comp (algebraMap D S)).toAlgebra
-  let : Algebra F K := awayFractionFieldToFractionFieldAlgebra f
+    sharedOwner2
   apply IsScalarTower.of_algebraMap_eq
   intro x
   change algebraMap D K x =
@@ -219,14 +223,14 @@ theorem localization_integralClosure_genericTensorFieldComponent_etale_of_away
     (q : Ideal D) [q.IsPrime]
     (hdisj : Disjoint
       ((Submonoid.powers f : Submonoid D) : Set D) (q : Set D)) :
-    letI : Algebra D F :=
+    let : Algebra D F :=
       ((algebraMap (Localization.Away f) F).comp
         (algebraMap D (Localization.Away f))).toAlgebra
-    letI : IsScalarTower D (Localization.Away f) F :=
+    let : IsScalarTower D (Localization.Away f) F :=
       IsScalarTower.of_algebraMap_eq' rfl
-    letI : Algebra F K :=
+    let : Algebra F K :=
       awayFractionFieldToFractionFieldAlgebra f
-    letI : IsScalarTower D F K :=
+    let : IsScalarTower D F K :=
       awayFractionFieldToFractionField_isScalarTower f
     ∀ (m : Ideal (K ⊗[F] E)), [m.IsMaximal] →
       let M := GenericTensorFieldComponent m
@@ -247,16 +251,16 @@ theorem localization_integralClosure_genericTensorFieldComponent_etale_of_away
       Algebra.Etale (Localization.AtPrime q)
         (Localization (Algebra.algebraMapSubmonoid
           (integralClosure D M) q.primeCompl)) := by
+  intro sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5
   let S := Localization.Away f
   let B := Localization.AtPrime q
-  let : Algebra F K := awayFractionFieldToFractionFieldAlgebra f
   intro m _
   let M := GenericTensorFieldComponent m
   let : Algebra D F :=
-    ((algebraMap S F).comp (algebraMap D S)).toAlgebra
-  let : IsScalarTower D S F := IsScalarTower.of_algebraMap_eq' rfl
+    sharedOwner2
+  let : IsScalarTower D S F := sharedOwner3
   let : IsScalarTower D F K :=
-    awayFractionFieldToFractionField_isScalarTower f
+    sharedOwner5
   let : IsScalarTower F K M := genericTensorFieldComponent_isScalarTower m
   let : IsScalarTower D K M := by
     apply IsScalarTower.of_algebraMap_eq

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.Cyclotomic.Gal
-import Mathlib.GroupTheory.Coset.Card
-import Mathlib.Data.Nat.Totient
-import Mathlib.Data.Nat.GCD.Basic
+module
+
+public import Mathlib.NumberTheory.Cyclotomic.Gal
+public import Mathlib.GroupTheory.Coset.Card
+public import Mathlib.Data.Nat.Totient
+public import Mathlib.Data.Nat.GCD.Basic
 
 /-!
 # Prime-order cyclotomic extensions have prime-to-prime Galois groups
@@ -16,6 +18,8 @@ The action on a primitive root embeds the automorphism group into the units
 of `ZMod p`. The primitive root and its generating property come from the
 cyclotomic extension itself; no irreducibility assumption is needed.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

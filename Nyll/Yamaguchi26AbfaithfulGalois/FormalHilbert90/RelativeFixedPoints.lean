@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
-import Nyll.ProCGroups.Abelian.SubgroupCommutator
-import Nyll.ProCGroups.Abelian.PrimaryDetection
-import Nyll.ProCGroups.GroupTheory.RelativeQuotientCentralizers
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
+public import Nyll.ProCGroups.Abelian.SubgroupCommutator
+public import Nyll.ProCGroups.Abelian.PrimaryDetection
+public import Nyll.ProCGroups.GroupTheory.RelativeQuotientCentralizers
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Relative derived quotients and fixed primary classes
@@ -16,6 +21,8 @@ Centralizing classes in relative derived quotients yield fixed primary
 abelianization classes. Vanishing of these fixed classes forces the
 centralizing quotient class to be trivial.
 -/
+
+@[expose] public section
 
 open scoped commutatorElement
 namespace Yamaguchi26AbfaithfulGalois

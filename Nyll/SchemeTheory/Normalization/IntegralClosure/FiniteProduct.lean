@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Etale.Pi
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Spectrum.Maximal.Basic
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Etale.Pi
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Spectrum.Maximal.Basic
 
 /-!
 # Integral closure in a finite product
@@ -22,6 +24,8 @@ This file proves that comparison directly from monic equations. For a reduced
 Artinian algebra, its canonical product of maximal-ideal quotients then gives
 the corresponding product decomposition of its integral closure.
 -/
+
+@[expose] public section
 
 noncomputable section
 

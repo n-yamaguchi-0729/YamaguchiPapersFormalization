@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.DyadicModTwo
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCompleteDetection
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
-import Mathlib.FieldTheory.Galois.Profinite
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.ProCGroups.Abelian.AbelianModPower
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.DyadicModTwo
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCompleteDetection
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.ProCGroups.Abelian.AbelianModPower
 
 /-!
 # Kummer theory and discretely valued fields
@@ -21,6 +23,8 @@ formed on the actual quotient `G_Lᵃᵇ/p`.
 The prime-to-`p` branch uses faithful mod-`p` H¹ and its character-dual
 action on the actual abelianization quotient.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

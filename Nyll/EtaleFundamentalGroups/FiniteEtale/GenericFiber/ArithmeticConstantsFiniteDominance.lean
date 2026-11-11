@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsTensor
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsTensor
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
 
 /-!
 # Surjectivity over integral constant extensions
@@ -18,13 +20,18 @@ extension. Geometric integrality of the base's function field makes this
 map dominant; finiteness then makes it surjective on prime spectra.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe uB uA uF uK uL
 
 open scoped TensorProduct NumberField
 
 namespace EtaleFundamentalGroups
 
-variable (B A F K L : Type) [CommRing B]
+variable (B : Type uB) (A : Type uA) (F : Type uF) (K : Type uK) (L : Type uL)
+  [CommRing B]
   [CommRing A] [IsDomain A] [IsIntegrallyClosed A] [Algebra B A]
   [Field F] [CharZero F] [Algebra B F] [IsFractionRing B F]
   [Field K] [NumberField K] [Field L] [CharZero L]

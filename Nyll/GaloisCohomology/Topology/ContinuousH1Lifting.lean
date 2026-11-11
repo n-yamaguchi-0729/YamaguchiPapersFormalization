@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousCrossedHom
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousCrossedHom
 
 /-! # Lifting crossed homomorphisms through a surjective H¹ map -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 

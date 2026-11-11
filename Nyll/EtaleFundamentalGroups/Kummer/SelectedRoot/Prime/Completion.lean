@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionResidue
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVFResidue
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTowerProduct
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionResidue
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVFResidue
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.LocalizationAtRootPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorTowerProduct
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.RootCompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
 
 /-!
 # Completion of the selected root divisor
@@ -21,6 +24,8 @@ Thus the completed selected local ring is the *same* completed root ring
 used by the complete higher-radical actual-factor theorem; no second root
 cover is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 

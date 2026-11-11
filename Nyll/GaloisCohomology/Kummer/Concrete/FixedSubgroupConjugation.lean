@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
 
 /-!
 # Conjugation on a normal intermediate field's fixing subgroup
@@ -17,6 +19,8 @@ Restriction supplies the base map of an ambient automorphism. The fixing
 subgroup equivalence intertwines its actual subgroup conjugation with that
 semilinear conjugation, and therefore intertwines their abelianized actions.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianFractionNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSquare
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianFractionNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSquare
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentEquivariance
 
 /-!
 # Strict local monodromy fixes an actual normalization point
@@ -18,6 +20,8 @@ commuting square maps this point to the original relative normalization.
 The canonical component quotient and its proved equivariance show that the
 entire local monodromy image fixes the resulting point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,10 +52,10 @@ theorem exists_normalizationPoint_fixed_by_strictHenselian_finiteImage
       z ≫ (W.hom ≫ u).fromNormalization = Spec.map (CommRingCat.ofHom ψ) ≫ b ∧
       ∀ σ : (Aut W)ᵐᵒᵖ,
         σ ∈ (finiteEtaleGaloisCoverQuotientOfMorphism j xi W hW w).range →
-        z ≫ normalizationEndomorphism (W.hom ≫ u) σ.unop.hom.left
+        z ≫ normalizationEndomorphism (W.hom ≫ u) σ.unop.asIso.hom.left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ u) σ.unop.hom.w) = z := by
+            exact congrArg (fun k => k ≫ u) σ.unop.asIso.hom.w) = z := by
   obtain ⟨Z, i, point, hiz, hZ, hi⟩ :=
     FiniteEtale.exists_galoisComponent_pullback j xi W hW w
   let : IsGalois Z := hZ
@@ -84,34 +88,34 @@ theorem exists_normalizationPoint_fixed_by_strictHenselian_finiteImage
       FiniteEtale.galoisPullbackComponentQuotientMonoidHom_range
         j xi W hW w Z i point hiz hZ hi
     obtain ⟨τ, rfl⟩ := (show σ ∈ μ.range from hrange.symm ▸ hσ)
-    have hτ : τ.unop.hom.left ≫ f = f := by
-      have hw : τ.unop.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
-          (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.unop.hom.w
+    have hτ : τ.unop.asIso.hom.left ≫ f = f := by
+      have hw : τ.unop.asIso.hom.left ≫ (show Z.left ⟶ Spec (.of K) from Z.hom) =
+          (show Z.left ⟶ Spec (.of K) from Z.hom) := τ.unop.asIso.hom.w
       exact (Category.assoc _ _ _).symm.trans (congrArg (fun k => k ≫ g) hw)
-    have hμ : (μ τ).unop.hom.left ≫ F = F := by
-      have hw : (μ τ).unop.hom.left ≫ W.hom = W.hom := (μ τ).unop.hom.w
+    have hμ : (μ τ).unop.asIso.hom.left ≫ F = F := by
+      have hw : (μ τ).unop.asIso.hom.left ≫ W.hom = W.hom := (μ τ).unop.asIso.hom.w
       exact (Category.assoc _ _ _).symm.trans (congrArg (fun k => k ≫ u) hw)
-    have he : τ.unop.hom.left ≫ a = a ≫ (μ τ).unop.hom.left := by
+    have he : τ.unop.asIso.hom.left ≫ a = a ≫ (μ τ).unop.asIso.hom.left := by
       have hiEquiv := congrArg
         (fun k : Z ⟶ (FiniteEtale.pullback j).obj W => k.left)
         (FiniteEtale.galoisPullbackComponentQuotientMonoidHom_equivariant
           j xi W hW w Z i point hiz hZ hi τ)
-      change τ.unop.hom.left ≫ i.left =
-        i.left ≫ ((FiniteEtale.pullback j).map (μ τ).unop.hom).left at hiEquiv
-      have hfst : ((FiniteEtale.pullback j).map (μ τ).unop.hom).left ≫
-          pullback.fst W.hom j = pullback.fst W.hom j ≫ (μ τ).unop.hom.left :=
+      change τ.unop.asIso.hom.left ≫ i.left =
+        i.left ≫ ((FiniteEtale.pullback j).map (μ τ).unop.asIso.hom).left at hiEquiv
+      have hfst : ((FiniteEtale.pullback j).map (μ τ).unop.asIso.hom).left ≫
+          pullback.fst W.hom j = pullback.fst W.hom j ≫ (μ τ).unop.asIso.hom.left :=
         pullback.lift_fst _ _ _
-      change τ.unop.hom.left ≫ (i.left ≫ pullback.fst W.hom j) =
-        (i.left ≫ pullback.fst W.hom j) ≫ (μ τ).unop.hom.left
-      exact (Category.assoc τ.unop.hom.left i.left (pullback.fst W.hom j)).symm.trans
+      change τ.unop.asIso.hom.left ≫ (i.left ≫ pullback.fst W.hom j) =
+        (i.left ≫ pullback.fst W.hom j) ≫ (μ τ).unop.asIso.hom.left
+      exact (Category.assoc τ.unop.asIso.hom.left i.left (pullback.fst W.hom j)).symm.trans
         ((congrArg (fun k => k ≫ pullback.fst W.hom j) hiEquiv).trans
           ((Category.assoc _ _ _).trans
             ((congrArg (fun k => i.left ≫ k) hfst).trans (Category.assoc _ _ _).symm)))
-    have hn : normalizationEndomorphism f τ.unop.hom.left hτ ≫ n =
-        n ≫ normalizationEndomorphism F (μ τ).unop.hom.left hμ :=
+    have hn : normalizationEndomorphism f τ.unop.asIso.hom.left hτ ≫ n =
+        n ≫ normalizationEndomorphism F (μ τ).unop.asIso.hom.left hμ :=
       normalizationMapOfSquare_endomorphism f F a b ha
-        τ.unop.hom.left hτ (μ τ).unop.hom.left hμ he
-    change (q ≫ n) ≫ normalizationEndomorphism F (μ τ).unop.hom.left hμ = q ≫ n
+        τ.unop.asIso.hom.left hτ (μ τ).unop.asIso.hom.left hμ he
+    change (q ≫ n) ≫ normalizationEndomorphism F (μ τ).unop.asIso.hom.left hμ = q ≫ n
     rw [Category.assoc, ← hn, ← Category.assoc, hqfixed τ.unop]
 
 end EtaleFundamentalGroups.Inertia

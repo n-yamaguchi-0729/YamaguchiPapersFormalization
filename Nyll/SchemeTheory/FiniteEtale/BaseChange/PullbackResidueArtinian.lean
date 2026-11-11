@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidue
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidue
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Artinian residue tensors at pullback points
@@ -15,6 +17,8 @@ tensor product with the other projected residue field is finite-dimensional
 over that other field.  The categorical tensor in the pullback-carrier API
 is therefore Artinian as well.
 -/
+
+@[expose] public section
 
 noncomputable section
 

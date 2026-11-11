@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPoint
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPoint
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Lifting a specified geometric closed point to a finite domain
@@ -17,6 +19,8 @@ scalar map into the same field. Composing with the residue map constructs a
 local point over the prescribed one. Strict Henselianity then makes every
 automorphism of the finite algebra fix this constructed point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Module.Torsion.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Module.Torsion.Basic
 
 /-!
 # Degree-zero local cohomology inside the coefficient module
@@ -26,6 +28,8 @@ injective.  If every coefficient vector is killed by a power of the
 support ideal, the map is also surjective.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory Limits Opposite
@@ -36,14 +40,17 @@ universe u
 
 variable {R : Type u} [CommRing R]
 
-private def derivedExtZeroQuotientTorsionEquiv (J : Ideal R) (M : ModuleCat.{u} R) :
+/-- Degree-zero Ext from a quotient ring identifies with its annihilator in the coefficient
+module. -/
+def derivedExtZeroQuotientTorsionEquiv (J : Ideal R) (M : ModuleCat.{u} R) :
     CategoryTheory.Abelian.Ext.{u} (ModuleCat.of R (R ⧸ J)) M 0 ≃ₗ[R]
       Submodule.torsionBySet R M J :=
   (CategoryTheory.Abelian.Ext.linearEquiv₀.trans
     (ModuleCat.homLinearEquiv (R := R) (S := R))).trans
       (Purity.quotientHomEquivTorsionBySet J)
 
-private def derivedExtZeroQuotientEvaluation (J : Ideal R) (M : ModuleCat.{u} R) :
+/-- Evaluation at one maps degree-zero Ext from a quotient ring into the coefficient module. -/
+def derivedExtZeroQuotientEvaluation (J : Ideal R) (M : ModuleCat.{u} R) :
     CategoryTheory.Abelian.Ext.{u} (ModuleCat.of R (R ⧸ J)) M 0 →ₗ[R] M :=
   (Submodule.torsionBySet R M J).subtype.comp
     (derivedExtZeroQuotientTorsionEquiv J M).toLinearMap
@@ -77,7 +84,9 @@ private theorem derivedExtZeroQuotientEvaluation_exists_preimage
   exact congrArg Subtype.val
     ((derivedExtZeroQuotientTorsionEquiv J M).apply_symm_apply zJ)
 
-private def derivedLocalCohomologyZeroEvaluationCocone
+/-- Evaluation at one is compatible with the transition maps defining degree-zero local
+cohomology. -/
+def derivedLocalCohomologyZeroEvaluationCocone
     (I : Ideal R) (M : ModuleCat.{u} R) :
     Cocone (derivedLocalCohomologyPowersDiagram I M 0) where
   pt := AddCommGrpCat.of M
@@ -106,7 +115,8 @@ private def derivedLocalCohomologyZeroEvaluationCocone
           f'.hom (Ideal.Quotient.mk (I ^ unop (unop j)) (1 : R))
         congr 1 }
 
-private def derivedLocalCohomologyZeroEvaluation
+/-- The evaluation map from degree-zero local cohomology to the additive coefficient group. -/
+def derivedLocalCohomologyZeroEvaluation
     (I : Ideal R) (M : ModuleCat.{u} R) :
     derivedLocalCohomology I M 0 ⟶ AddCommGrpCat.of M :=
   colimit.desc (derivedLocalCohomologyPowersDiagram I M 0)

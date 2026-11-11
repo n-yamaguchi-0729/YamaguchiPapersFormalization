@@ -10,13 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.IntegralClosure
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.Tactic.Push
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.Tactic.Push
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # Normality of etale algebras localized at primes
@@ -26,11 +28,13 @@ algebra. These comparisons yield the domain and integral-closure properties of a
 algebra localized at a prime.
 -/
 
+@[expose] public section
+
 section ProofImplementation
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace Algebra_Etale_isDomain_and_isIntegrallyClosed_of_isLocalization_atPrime
-universe u
+universe u v w
 open scoped TensorProduct
 
 namespace EtaleLocNormalAux
@@ -43,9 +47,9 @@ theorem isIntegral_of_isIdempotentElem {T B : Type*} [CommRing T] [CommRing B] [
     map_one, mul_sub, mul_one, he.eq, sub_self]
 
 section Core
-variable (R K : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
+variable (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
   [Field K] [Algebra R K] [IsFractionRing R K]
-variable (S : Type u) [CommRing S] [Algebra R S]
+variable (S : Type w) [CommRing S] [Algebra R S]
 
 omit [IsDomain R] in
 theorem tensorMap_integralClosure_mem_bot (y : S ⊗[R] (integralClosure R K)) :
@@ -137,8 +141,8 @@ end EtaleLocNormalAux
 open EtaleLocNormalAux in
 theorem _root_.Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization_atPrime
     (P : Type u) [CommRing P] [IsDomain P] [IsIntegrallyClosed P]
-    (A : Type u) [CommRing A] [Algebra P A] [Algebra.Etale P A]
-    (q : Ideal A) [q.IsPrime] (A_q : Type u) [CommRing A_q]
+    (A : Type v) [CommRing A] [Algebra P A] [Algebra.Etale P A]
+    (q : Ideal A) [q.IsPrime] (A_q : Type w) [CommRing A_q]
     [Algebra A A_q] [IsLocalization.AtPrime A_q q] :
     IsDomain A_q ∧ IsIntegrallyClosed A_q := by
   classical
@@ -159,7 +163,7 @@ theorem _root_.Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization_a
     intro j
     have hid : IsIdempotentElem (e₀.symm (Pi.single j 1) : B₀) := by
       have : IsIdempotentElem (Pi.single j (1 : F j) : Π j, F j) := by
-        simp [IsIdempotentElem, ← Pi.single_mul]
+        simp only [IsIdempotentElem, ← Pi.single_mul, mul_one]
       simpa [IsIdempotentElem, map_mul] using congrArg e₀.symm this.eq
     obtain ⟨a, ha⟩ := hIC _ (isIntegral_of_isIdempotentElem hid)
     exact ⟨a, by rw [hθ, ha, RingEquiv.apply_symm_apply]⟩
@@ -181,8 +185,8 @@ theorem _root_.Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization_a
     rw [map_mul, hε]
     ext j
     by_cases hj : j = i
-    · subst hj; simp [hρ]
-    · simp [hj]
+    · subst hj; simp only [Pi.mul_apply, Pi.single_eq_same, mul_one, hρ]
+    · simp only [Pi.mul_apply, ne_eq, hj, not_false_eq_true, Pi.single_eq_of_ne, mul_zero]
   have hker : ∀ a, ρ a = 0 → a * ε i = 0 := by
     intro a ha
     apply hθinj
@@ -241,7 +245,7 @@ theorem _root_.Algebra.Etale.isDomain_and_isIntegrallyClosed_of_isLocalization_a
   obtain ⟨a₀, ha₀⟩ := hIC y hy
   have hρa₀ : ρ a₀ = w := by
     rw [hρ, hθ, ha₀]
-    simp [y]
+    simp only [RingEquiv.apply_symm_apply, Pi.single_eq_same, y]
   rw [Algebra.mem_bot]
   refine ⟨IsLocalization.mk' A_q a₀ (⟨m, hm⟩ : q.primeCompl), ?_⟩
   change ρ' _ = z

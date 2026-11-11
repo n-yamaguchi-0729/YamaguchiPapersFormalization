@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # Selected tensor components through an intermediate field
@@ -16,6 +18,8 @@ extending only to an intermediate field `F`.  This file keeps the original
 maximal ideal and constructs the second-stage quotient map rather than
 postulating a comparison of abstract fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -49,10 +53,9 @@ noncomputable def genericTensorTowerAlgebra :
 tensor product. -/
 noncomputable def genericTensorTowerBaseChangeAlgEquiv :
     let A := F ⊗[K] L
-    letI : Algebra A (F' ⊗[K] L) := genericTensorTowerAlgebra
+    let : Algebra A (F' ⊗[K] L) := genericTensorTowerAlgebra
     (A ⊗[F] F') ≃ₐ[A] (F' ⊗[K] L) := by
-  let A := F ⊗[K] L
-  letI : Algebra A (F' ⊗[K] L) := genericTensorTowerAlgebra
+  intro A sharedDefinitionOwner2
   let eRing : (A ⊗[F] F') ≃+* (F' ⊗[K] L) :=
     (Algebra.TensorProduct.comm F A F').toRingEquiv.trans
       (Algebra.TensorProduct.cancelBaseChange K F F' F' L).toRingEquiv
@@ -117,15 +120,11 @@ noncomputable def genericTensorTowerIntermediateComponentMap
     [FiniteDimensional F F'] (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     GenericTensorFieldComponent n →ₐ[K] GenericTensorFieldComponent m := by
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
+  intro n sharedDefinitionOwner2
   let g : (F ⊗[K] L) →ₐ[K] GenericTensorFieldComponent m :=
     (Ideal.Quotient.mkₐ K m).comp
       (genericTensorTowerMap (K := K) (F := F) (F' := F') (L := L))
@@ -158,13 +157,11 @@ noncomputable def genericTensorTowerFinalComponentAlgebra
 `F`-algebra map. -/
 noncomputable def genericTensorTowerFinalLeftAlgHom
     (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
-    letI : Algebra F (GenericTensorFieldComponent m) :=
+    let : Algebra F (GenericTensorFieldComponent m) :=
       genericTensorTowerFinalComponentAlgebra
         (K := K) (F := F) (F' := F') (L := L) m
     F' →ₐ[F] GenericTensorFieldComponent m := by
-  letI : Algebra F (GenericTensorFieldComponent m) :=
-    genericTensorTowerFinalComponentAlgebra
-      (K := K) (F := F) (F' := F') (L := L) m
+  intro sharedDefinitionOwner1
   exact
     { (genericTensorFieldComponentLeft m).toRingHom with
       commutes' := fun _ ↦ rfl }
@@ -175,21 +172,14 @@ noncomputable def genericTensorTowerIntermediateComponentAlgHom
     [FiniteDimensional F F'] (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
-    letI : Algebra F (GenericTensorFieldComponent m) :=
+    let : Algebra F (GenericTensorFieldComponent m) :=
       genericTensorTowerFinalComponentAlgebra
         (K := K) (F := F) (F' := F') (L := L) m
     GenericTensorFieldComponent n →ₐ[F] GenericTensorFieldComponent m := by
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  letI : Algebra F (GenericTensorFieldComponent m) :=
-    genericTensorTowerFinalComponentAlgebra
-      (K := K) (F := F) (F' := F') (L := L) m
+  intro n sharedDefinitionOwner2 sharedDefinitionOwner3
   exact
     { (genericTensorTowerIntermediateComponentMap
         (K := K) (F := F) (F' := F') (L := L) m).toRingHom with
@@ -210,16 +200,12 @@ noncomputable def genericTensorTowerSecondComponentMap
     [FiniteDimensional F F'] (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     (F' ⊗[F] GenericTensorFieldComponent n) →ₐ[F']
       GenericTensorFieldComponent m := by
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
+  intro n sharedDefinitionOwner2
   letI : Algebra F (GenericTensorFieldComponent m) :=
     genericTensorTowerFinalComponentAlgebra
       (K := K) (F := F) (F' := F') (L := L) m
@@ -313,25 +299,16 @@ noncomputable def genericTensorTowerSecondComponentAlgEquiv
     [FiniteDimensional F F'] (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let m₂ := genericTensorTowerSecondIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : m₂.IsMaximal :=
+    let : m₂.IsMaximal :=
       genericTensorTowerSecondIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     GenericTensorFieldComponent m₂ ≃ₐ[F'] GenericTensorFieldComponent m := by
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let m₂ := genericTensorTowerSecondIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : m₂.IsMaximal :=
-    genericTensorTowerSecondIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
+  intro n sharedDefinitionOwner2 m₂ sharedDefinitionOwner4
   exact Ideal.quotientKerAlgEquivOfSurjective
     (genericTensorTowerSecondComponentMap_surjective
       (K := K) (F := F) (F' := F') (L := L) m)

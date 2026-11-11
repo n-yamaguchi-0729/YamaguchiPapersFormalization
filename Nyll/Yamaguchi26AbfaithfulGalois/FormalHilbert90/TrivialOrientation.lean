@@ -4,12 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
-import Nyll.GaloisCohomology.ProfiniteIntegers.CyclicCharacterLifting
-import Nyll.ProCGroups.Abelian.PrimaryTorsion
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
+public import Nyll.GaloisCohomology.ProfiniteIntegers.CyclicCharacterLifting
+public import Nyll.ProCGroups.Abelian.PrimaryTorsion
+public import Mathlib.Algebra.Group.Commute.Hom
+public import Mathlib.Algebra.Group.Monoid
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-! # Fixed-group comparison for the trivial orientation -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 
@@ -201,13 +210,12 @@ theorem primaryAbelianization_isMulTorsionFree_of_h1_trivial
     (hH : ∀ n : ℕ, ∀ hn : 1 ≤ n, HasH1ReductionSurjective (1 : Orientation ℓ G) H n hn) :
     IsMulTorsionFree (PrimaryAbelianization ℓ H) := by
   constructor
-  intro n hn x y hxy
+  intro n hn x y hcomm hxy
   by_contra hne
   obtain ⟨f, hf⟩ := exists_padic_character_detecting_primary_of_h1_trivial H hH
     (x * y⁻¹) (fun h => hne (mul_inv_eq_one.mp h))
   have heq : f x = f y := by
-    apply IsMulTorsionFree.pow_left_injective hn
-    change f x ^ n = f y ^ n
+    apply eq_of_pow_eq_pow_of_commute hn (hcomm.map f)
     rw [← map_pow, ← map_pow]
     exact congrArg f hxy
   apply hf

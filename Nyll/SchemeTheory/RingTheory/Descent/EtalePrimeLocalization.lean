@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Etaleness at a point from localization on the base
@@ -16,6 +18,8 @@ The prime-local comparison is extracted from
 It uses the actual iterated-localization isomorphism and requires no
 normality, finiteness, or global geometric hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

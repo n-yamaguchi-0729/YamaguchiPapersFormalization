@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.Hom.Basic
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Mathlib.Algebra.Group.Hom.Basic
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # A prime-power root obstruction in the Kummer quotient
@@ -16,6 +18,8 @@ A primitive `r`-th root cannot be an `r^s`-th power if the field has no
 primitive `r^(s+1)`-th root.  The quotient here is the ordinary power-class
 group used by `absoluteKummerContinuousNthRootsCharacterEquiv`.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

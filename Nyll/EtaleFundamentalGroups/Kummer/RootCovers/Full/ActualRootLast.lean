@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.ConditionalRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCover.Core
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Algebra.Hom
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.ConditionalRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCover.Core
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Algebra.Hom
 
 /-!
 # Putting the actual boundary root last in the full local root cover
@@ -20,6 +22,8 @@ then commutes that root adjunction past the selected-branch root adjunction.
 The result presents the same full cover with the actual boundary root as the
 last one-root extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -72,7 +76,9 @@ private theorem exists_iteratedRadicalSingleRoot_oneLastStep
     (iteratedRadicalRoot R (Fin.init n) (Fin.init a) k)
     (AdjoinRoot.root g) heInit
 
-private theorem exists_iteratedRadicalSingleRootAlgEquiv
+/-- An iterated root algebra with one nontrivial exponent is equivalent to the corresponding
+single-root algebra. -/
+theorem exists_iteratedRadicalSingleRootAlgEquiv
     {R : Type u} [CommRing R] :
     {s : ℕ} → (n : Fin (s + 1) → ℕ) → (a : Fin (s + 1) → R) →
       (k : Fin (s + 1)) → (hother : ∀ l, l ≠ k → n l = 1) →
@@ -101,7 +107,7 @@ private theorem exists_iteratedRadicalSingleRootAlgEquiv
       change ∃ e : AdjoinRoot f ≃ₐ[R] AdjoinRoot g,
         e (AdjoinRoot.root f) = AdjoinRoot.root g
       refine ⟨e, ?_⟩
-      simp [e]
+      exact AdjoinRoot.map_root ePrefix.toRingHom f g (Associated.of_eq hfg).symm.dvd
   | s + 1, n, a, k, hother => by
       let nInit : Fin (s + 1) → ℕ := Fin.init n
       let aInit : Fin (s + 1) → R := Fin.init a
@@ -128,7 +134,7 @@ private theorem exists_iteratedRadicalSingleRootAlgEquiv
         change ∃ e : AdjoinRoot f ≃ₐ[R] AdjoinRoot g,
           e (AdjoinRoot.root f) = AdjoinRoot.root g
         refine ⟨e, ?_⟩
-        simp [e]
+        exact AdjoinRoot.map_root ePrefix.toRingHom f g (Associated.of_eq hfg).symm.dvd
       · intro hother
         have hlast : n (Fin.last (s + 1)) = 1 := by
           exact hother _ (Fin.castSucc_ne_last kInit).symm
@@ -163,7 +169,9 @@ theorem iteratedRadicalSingleRootAlgEquiv_apply_root
   Classical.choose_spec
     (exists_iteratedRadicalSingleRootAlgEquiv n a k hother)
 
-private theorem exists_twoRootSwapAlgEquiv
+/-- The two possible orders of adjoining two roots give equivalent algebras, preserving both
+roots. -/
+theorem exists_twoRootSwapAlgEquiv
     {R : Type u} [CommRing R] (m n : ℕ) (x y : R) :
     let px : R[X] := X ^ m - C x
     let py : R[X] := X ^ n - C y
@@ -382,7 +390,9 @@ theorem heightTwoConditionalOtherExponent_eq_one_of_ne_actual
     apply Fin.succAbove_right_injective
     exact hlEq.trans hkEq.symm
 
-private theorem exists_fullRootCoverActualRootLastAlgEquiv
+/-- The root-cover equivalence can place the chosen nontrivial root last while preserving the
+specified generators. -/
+theorem exists_fullRootCoverActualRootLastAlgEquiv
     {R : Type u} [CommRing R]
     {s : ℕ} (n : Fin (s + 1) → ℕ) (a : Fin (s + 1) → R)
     (k : Fin (s + 1)) (hother : ∀ l, l ≠ k → n l = 1)

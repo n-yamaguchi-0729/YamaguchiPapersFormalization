@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceSeparation
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceSeparation
 
 /-!
 # Ambient ideals from a punctured hypersurface separation
@@ -14,6 +16,8 @@ hypersurface can be pulled back through the quotient map.  This gives two
 proper ideals of the ambient local ring whose intersection is the radical of
 the principal ideal and whose sum is primary to the maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

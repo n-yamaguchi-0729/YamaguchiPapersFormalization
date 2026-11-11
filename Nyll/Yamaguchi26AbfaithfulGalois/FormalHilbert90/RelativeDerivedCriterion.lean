@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.OrientedInvariants
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeFixedPoints
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.OrientedInvariants
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeFixedPoints
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Nyll.ProCGroups.GroupTheory.RelativeQuotientCentralizers
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Relative center-freeness criterion
@@ -18,6 +23,8 @@ The quotient is the actual `G/[D,D]`, with closed commutator subgroup.
 The orientation hypothesis ranges only over primes with nontrivial
 primary abelianization of `D`.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

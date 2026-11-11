@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.RamificationInertia.Galois
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
+module
+
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Matrix
 
 /-!
 # Trivial inertia gives unramifiedness in every characteristic
@@ -15,6 +17,8 @@ The fundamental degree identity and orbit-stabilizer count show that trivial
 inertia forces both ramification index one and separability of the residue
 extension. No perfectness hypothesis on the residue field is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,9 +38,9 @@ ramification index one, without a residue-characteristic assumption. -/
 theorem residue_isGalois_and_ramificationIdx_eq_one_of_inertia_eq_bot
     (p : Ideal R) [p.IsPrime] (q : Ideal S) [q.IsPrime] [q.LiesOver p]
     (hI : q.inertia G = ⊥) :
-    letI := Localization.AtPrime.algebraOfLiesOver p q
+    let := Localization.AtPrime.algebraOfLiesOver p q
     IsGalois p.ResidueField q.ResidueField ∧ q.ramificationIdx R = 1 := by
-  let := Localization.AtPrime.algebraOfLiesOver p q
+  intro sharedOwner1
   have heq : (algebraMap (S ⧸ q) q.ResidueField).comp (algebraMap (R ⧸ p) (S ⧸ q)) =
       (algebraMap p.ResidueField q.ResidueField).comp (algebraMap (R ⧸ p) p.ResidueField) := by
     ext x

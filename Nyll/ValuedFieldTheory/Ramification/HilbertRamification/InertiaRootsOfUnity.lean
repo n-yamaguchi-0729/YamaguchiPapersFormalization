@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianRootsOfUnity
-import Mathlib.RingTheory.Valuation.RamificationGroup
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.RootsOfUnity.Basic
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Algebra.Order.GroupWithZero.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianRootsOfUnity
+public import Mathlib.RingTheory.Valuation.RamificationGroup
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.RootsOfUnity.Basic
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
 
 /-!
 # Roots of unity in the actual inertia field
@@ -21,6 +23,8 @@ the injectivity of Henselian root reduction identifies the two roots. This
 gives membership in the actual inertia fixed field without assuming any
 comparison or surjectivity of residue-field maps.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

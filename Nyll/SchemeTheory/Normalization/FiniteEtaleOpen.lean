@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Normalization.IntegralOpen
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Normalization.IntegralOpen
 
 
 /-!
@@ -21,6 +23,8 @@ back to `U`, is canonically isomorphic to `W`.  This comparison does not
 assert that the normalization is etale over all of `X`; that is the separate
 purity step.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,7 +54,8 @@ private theorem compOpenImmersionQuasiSeparated
 attribute [local instance] compOpenImmersionQuasiCompact
   compOpenImmersionQuasiSeparated
 
-private theorem coverCompOpenImmersionIsPullback
+/-- A cover of an open subscheme is the pullback of its composite along the open immersion. -/
+theorem coverCompOpenImmersionIsPullback
     (j : U ⟶ X) [IsOpenImmersion j] (W : FiniteEtale U) :
     IsPullback (𝟙 W.left) W.hom (W.hom ≫ j) j := by
   have hj : Mono j := inferInstance
@@ -83,15 +88,6 @@ local instance finiteEtaleRespectsIso :
     let : IsFinite f := hf.toIsFinite
     let : Etale f := hf.toEtale
     exact @IsFiniteEtale.mk _ _ _ inferInstance inferInstance
-
-private theorem pullbackSndCompOpenImmersionFiniteEtale
-    (j : U ⟶ X) [IsOpenImmersion j] (W : FiniteEtale U) :
-    IsFiniteEtale (pullback.snd (W.hom ≫ j) j) := by
-  apply (MorphismProperty.cancel_left_of_respectsIso
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u}))
-    (coverCompOpenImmersionPullbackIso j W).hom _).mp
-  rw [coverCompOpenImmersionPullbackIso_hom_snd]
-  exact W.prop
 
 /-- The cover over `U` is canonically isomorphic to the pullback to `U` of
 the relative normalization of `X` in the composite cover `W ⟶ X`.

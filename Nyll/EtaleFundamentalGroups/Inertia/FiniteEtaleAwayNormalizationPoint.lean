@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
-import Mathlib.RingTheory.Ideal.Defs
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
+public import Mathlib.RingTheory.Ideal.Defs
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Actual normalization points with the canonical away-cover scalars
@@ -18,6 +21,8 @@ exactly the coefficient structures of the normal-crossings ramification
 theorems. The point's map to the affine base is retained as an equality of
 scheme morphisms.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -83,11 +88,12 @@ private theorem exists_awayPoint_of_algebraEq
           (RingHom.ker φ).inertia Gal(Y.left.functionField/(Spec (.of S)).functionField) ↔
         z ≫ normalizationEndomorphism
           ((show Y.left ⟶ Spec (.of S) from Y.hom) ≫
-            Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.hom.left
+            Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.asIso.hom.left
           (by
             rw [← Category.assoc]
             exact congrArg
-              (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.hom.w) = z := by
+              (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R S)))
+              σ.asIso.hom.w) = z := by
   intro S hDomain hNormal hIntegral hKL a b ha hb
   subst a
   subst b
@@ -163,11 +169,12 @@ theorem exists_finiteEtaleAway_normalizationPoint_inertia_iff
           (RingHom.ker φ).inertia Gal(Y.left.functionField/(Spec (.of S)).functionField) ↔
         z ≫ normalizationEndomorphism
           ((show Y.left ⟶ Spec (.of S) from Y.hom) ≫
-            Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.hom.left
+            Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.asIso.hom.left
           (by
             rw [← Category.assoc]
             exact congrArg
-              (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R S))) σ.hom.w) = z := by
+              (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R S)))
+              σ.asIso.hom.w) = z := by
   intro S hDomain hNormal hIntegral hKL hRK hRL hTower
   exact exists_awayPoint_of_algebraEq R f hf Y z hRK hRL
     (affineMorphismFunctionFieldAlgebra_specMap R S (algebraMap R S)).symm

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.LocalCohomology
-import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
+module
+
+public import Mathlib.Algebra.Homology.LocalCohomology
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.Basic
 
 /-!
 # Local-cohomology vanishing from Ext vanishing
@@ -14,6 +16,8 @@ Local cohomology is defined as a colimit of Ext modules.  This file records
 the categorical passage from pointwise vanishing of the Ext diagram to
 vanishing of the resulting local-cohomology module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

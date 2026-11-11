@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.EtaleDerivative
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
 
 /-!
 # A Kummer radical relative to a faithfully flat prefix
@@ -19,6 +21,8 @@ reflects that unit back to `A`.
 `AdjoinRoot` already supplies the direct `A`-algebra structure and the scalar
 tower through `T`, so no competing local algebra instances are installed.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

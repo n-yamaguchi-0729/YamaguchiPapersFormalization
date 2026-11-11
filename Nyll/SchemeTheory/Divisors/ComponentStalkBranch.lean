@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.StalkLocalization
-import Nyll.SchemeTheory.Divisors.LocalScheme
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+module
+
+public import Nyll.SchemeTheory.Affine.StalkLocalization
+public import Nyll.SchemeTheory.Divisors.LocalScheme
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
 
 /-!
 # Component branches in a specialized stalk
@@ -17,6 +19,8 @@ point on that component.  Pulling the closed prime of the generic stalk back
 along the corresponding generization map gives the canonical branch prime in
 the stalk at the specialized point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

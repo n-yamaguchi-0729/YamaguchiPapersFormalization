@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Regular.ProjectiveDimension
-import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
-import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyExtVanishing
+module
+
+public import Mathlib.RingTheory.Regular.ProjectiveDimension
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedExtLegacyComparison
+public import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyExtVanishing
 
 /-!
 # High-degree local-cohomology vanishing from projective dimension
@@ -20,6 +22,8 @@ dimension one, so all local cohomology in degree at least two vanishes.
 The principal case is the cohomological-dimension input used in the
 complete-local connectedness argument for punctured hypersurfaces.
 -/
+
+@[expose] public section
 
 noncomputable section
 

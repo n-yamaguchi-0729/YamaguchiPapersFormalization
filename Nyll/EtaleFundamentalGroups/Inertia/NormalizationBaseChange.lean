@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
+module
+
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 
 /-!
 # Normalization endomorphisms and smooth base change
@@ -24,6 +26,8 @@ the two points have exactly the same fixing endomorphisms.  This applies to
 geometric points and deck transformations without assuming the compatibility
 of either action.  Localization of a stalk is not asserted to be smooth.
 -/
+
+@[expose] public section
 
 noncomputable section
 

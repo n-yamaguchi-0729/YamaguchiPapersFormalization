@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.OrbitCardinality
 
 /-!
 # Inertia cardinality at a height-one normalization prime
@@ -18,6 +20,8 @@ maps and scalar towers are the canonical producers from
 `FractionFieldLocalization`; the instances below remain local to the
 individual declarations.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -39,7 +43,7 @@ theorem localizedNormalizationResidue_isSeparable
     (P : Ideal A) [P.IsPrime]
     (Q : Ideal (integralClosure A L)) [Q.IsPrime] [Q.LiesOver P]
     [CharZero (A ⧸ P)] :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI :
         (localizedNormalizationPrime (K := K) (L := L) P Q).LiesOver
           (IsLocalRing.maximalIdeal (Localization.AtPrime P)) :=
@@ -49,7 +53,7 @@ theorem localizedNormalizationResidue_isSeparable
         IsLocalRing.maximalIdeal (Localization.AtPrime P))
       (integralClosure (Localization.AtPrime P) L ⧸
         localizedNormalizationPrime (K := K) (L := L) P Q) := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let Qlocal := localizedNormalizationPrime (K := K) (L := L) P Q
   let : Qlocal.LiesOver
       (IsLocalRing.maximalIdeal (Localization.AtPrime P)) :=

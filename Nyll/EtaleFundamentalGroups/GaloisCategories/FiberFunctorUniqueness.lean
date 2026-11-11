@@ -4,21 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.ContinuousActions.FiniteLimitsAndColimits
-import Mathlib.CategoryTheory.Action.Concrete
-import Mathlib.CategoryTheory.CofilteredSystem
-import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
-import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
-import Mathlib.CategoryTheory.Limits.Shapes.SingleObj
-import Mathlib.CategoryTheory.Limits.Types.Equalizers
-import Mathlib.CategoryTheory.Limits.Types.Pullbacks
-import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
+module
+
+public import Nyll.EtaleFundamentalGroups.ContinuousActions.FiniteLimitsAndColimits
+public import Mathlib.CategoryTheory.Action.Concrete
+public import Mathlib.CategoryTheory.CofilteredSystem
+public import Mathlib.CategoryTheory.ConcreteCategory.EpiMono
+public import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
+public import Mathlib.CategoryTheory.Limits.Shapes.SingleObj
+public import Mathlib.CategoryTheory.Limits.Types.Equalizers
+public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
+public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
+public import Nyll.ClassFieldTheory.Definitions.LocalClassFieldTheory.TopologicalProfiniteCompletion
 
 /-!
 # Uniqueness of the fiber functor on finite continuous actions
 
 This file proves Stacks Project, Tag `0BMV`.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -322,8 +327,8 @@ private theorem evaluation_common_refinement
         actionKernelIndex G Y).toOpenNormalSubgroup.toSubgroup q
   change
     ConcreteCategory.hom f.hom.hom
-        (ConcreteCategory.hom (X.obj.ρ g) x) =
-      ConcreteCategory.hom (Y.obj.ρ g)
+        (ConcreteCategory.hom (X.obj.ρ g).asHom x) =
+      ConcreteCategory.hom (Y.obj.ρ g).asHom
         (ConcreteCategory.hom f.hom.hom x)
   exact ConcreteCategory.congr_hom (f.hom.comm g) x
 
@@ -374,20 +379,22 @@ private noncomputable def fiberComparison
 
 private noncomputable def rightEndHomOnG (H : OpenKernel G) :
     G →* End (quotientObject G H) where
-  toFun g :=
+  toFun g := End.of <|
     ObjectProperty.homMk <|
-      Action.FintypeCat.toEndHom
-        H.toOpenNormalSubgroup.toSubgroup g
+      (Action.FintypeCat.toEndHom
+        H.toOpenNormalSubgroup.toSubgroup g).asHom
   map_one' := by
+    apply End.ext
     apply ObjectProperty.hom_ext
-    exact
+    exact congrArg End.asHom
       (Action.FintypeCat.toEndHom
         H.toOpenNormalSubgroup.toSubgroup).map_one
   map_mul' g h := by
+    apply End.ext
     apply ObjectProperty.hom_ext
-    exact
-      (Action.FintypeCat.toEndHom
-        H.toOpenNormalSubgroup.toSubgroup).map_mul g h
+    exact congrArg End.asHom
+      ((Action.FintypeCat.toEndHom
+        H.toOpenNormalSubgroup.toSubgroup).map_mul g h)
 
 private noncomputable def rightEndHom (H : OpenKernel G) :
     G ⧸ H.toOpenNormalSubgroup.toSubgroup →*
@@ -395,13 +402,15 @@ private noncomputable def rightEndHom (H : OpenKernel G) :
   QuotientGroup.lift H.toOpenNormalSubgroup.toSubgroup
     (rightEndHomOnG G H) (by
       intro g hg
+      change rightEndHomOnG G H g = 1
+      apply End.ext
       apply ObjectProperty.hom_ext
-      exact Action.FintypeCat.toEndHom_trivial_of_mem hg)
+      exact congrArg End.asHom (Action.FintypeCat.toEndHom_trivial_of_mem hg))
 
 @[simp]
 private theorem rightEndHom_mk_apply
     (H : OpenKernel G) (g a : G) :
-    ((rightEndHom G H (QuotientGroup.mk g)).hom.hom :
+    ((rightEndHom G H (QuotientGroup.mk g)).asHom.hom.hom :
       G ⧸ H.toOpenNormalSubgroup.toSubgroup →
         G ⧸ H.toOpenNormalSubgroup.toSubgroup)
       (QuotientGroup.mk a) =
@@ -451,7 +460,7 @@ private noncomputable instance preservesRightActionColimitsToType
 private theorem rightEndHom_apply
     (H : OpenKernel G)
     (r q : G ⧸ H.toOpenNormalSubgroup.toSubgroup) :
-    ((rightEndHom G H r).hom.hom :
+    ((rightEndHom G H r).asHom.hom.hom :
       G ⧸ H.toOpenNormalSubgroup.toSubgroup →
         G ⧸ H.toOpenNormalSubgroup.toSubgroup) q =
       q * r⁻¹ := by
@@ -478,7 +487,7 @@ private theorem quotient_right_pretransitive (H : OpenKernel G) :
   change G ⧸ H.toOpenNormalSubgroup.toSubgroup at x y
   refine ⟨y⁻¹ * x, ?_⟩
   change
-    ((rightEndHom G H (y⁻¹ * x)).hom.hom :
+    ((rightEndHom G H (y⁻¹ * x)).asHom.hom.hom :
       G ⧸ H.toOpenNormalSubgroup.toSubgroup →
         G ⧸ H.toOpenNormalSubgroup.toSubgroup) x = y
   rw [rightEndHom_apply]
@@ -536,7 +545,7 @@ private theorem image_right_pretransitive
     let JF := rightActionDiagram G H ⋙ F ⋙ FintypeCat.incl
     MulAction.IsPretransitive R
       (JF.obj (SingleObj.star R)) := by
-  let R := G ⧸ H.toOpenNormalSubgroup.toSubgroup
+  intro R
   let J := rightActionDiagram G H
   let JF := J ⋙ F ⋙ FintypeCat.incl
   have hterminal : IsTerminal (F.obj (colimit J)) :=
@@ -580,11 +589,11 @@ private theorem rightEndHom_fixed_implies_one
         (quotientObject G H))
     (hq :
       (forget₂ (ContAction FintypeCat.{u} G) FintypeCat).map
-        (rightEndHom G H r) q = q) :
+        (rightEndHom G H r).asHom q = q) :
     r = 1 := by
   change G ⧸ H.toOpenNormalSubgroup.toSubgroup at q
   change
-    ((rightEndHom G H r).hom.hom :
+    ((rightEndHom G H r).asHom.hom.hom :
       (G ⧸ H.toOpenNormalSubgroup.toSubgroup) →
         (G ⧸ H.toOpenNormalSubgroup.toSubgroup)) q = q at hq
   rw [rightEndHom_apply] at hq
@@ -598,12 +607,12 @@ private theorem image_right_fixed_implies_one
     (H : OpenKernel G)
     (r : G ⧸ H.toOpenNormalSubgroup.toSubgroup)
     (s : F.obj (quotientObject G H))
-    (hs : F.map (rightEndHom G H r) s = s) :
+    (hs : F.map (rightEndHom G H r).asHom s = s) :
     r = 1 := by
   by_contra hr
   let C := ContAction FintypeCat.{u} G
   let U := forget₂ C FintypeCat
-  let e : End (quotientObject G H) := rightEndHom G H r
+  let e : quotientObject G H ⟶ quotientObject G H := (rightEndHom G H r).asHom
   let E := equalizer e (𝟙 (quotientObject G H))
   have hemptyU : IsEmpty (U.obj E) := by
     constructor
@@ -613,7 +622,7 @@ private theorem image_right_fixed_implies_one
     have hz := z'.property
     apply hr
     apply rightEndHom_fixed_implies_one G H r z'.val
-    simpa [e] using hz
+    simpa only [e, Functor.map_id, FintypeCat.id_apply] using hz
   have hEinitial : IsInitial E := by
     refine IsInitial.ofUniqueHom ?_ ?_
     · intro Y
@@ -638,7 +647,7 @@ private theorem image_right_fixed_implies_one
   exact
     (finiteEqualizerEquiv G F e
       (𝟙 (quotientObject G H))).symm
-        ⟨s, by simpa [e] using hs⟩
+        ⟨s, by simpa only [e, Functor.map_id, FintypeCat.id_apply] using hs⟩
 
 private theorem image_right_transitive
     (F : ContAction FintypeCat.{u} G ⥤ FintypeCat.{u})
@@ -646,7 +655,7 @@ private theorem image_right_transitive
     (H : OpenKernel G)
     (x y : F.obj (quotientObject G H)) :
     ∃ r : G ⧸ H.toOpenNormalSubgroup.toSubgroup,
-      F.map (rightEndHom G H r) x = y := by
+      F.map (rightEndHom G H r).asHom x = y := by
   let R := G ⧸ H.toOpenNormalSubgroup.toSubgroup
   let JF := rightActionDiagram G H ⋙ F ⋙ FintypeCat.incl
   have hpre :
@@ -666,11 +675,11 @@ private theorem fiberComparison_right_equivariant
         (quotientObject G H)) :
     fiberComparisonApp G F (quotientObject G H)
         ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).map
-          (rightEndHom G H r) q) =
-      F.map (rightEndHom G H r)
+          (rightEndHom G H r).asHom q) =
+      F.map (rightEndHom G H r).asHom
         (fiberComparisonApp G F (quotientObject G H) q) := by
   exact ConcreteCategory.congr_hom
-    ((fiberComparison G F).naturality (rightEndHom G H r)) q
+    ((fiberComparison G F).naturality (rightEndHom G H r).asHom) q
 
 private theorem fiberComparison_quotient_bijective
     (F : ContAction FintypeCat.{u} G ⥤ FintypeCat.{u})
@@ -686,19 +695,19 @@ private theorem fiberComparison_quotient_bijective
     obtain ⟨r, hr⟩ :=
       quotient_right_pretransitive G H |>.exists_smul_eq q₁ q₂
     have hr' :
-        U.map (rightEndHom G H r) q₁ = q₂ := hr
+        U.map (rightEndHom G H r).asHom q₁ = q₂ := hr
     have hfixed :
-        F.map (rightEndHom G H r) (t q₁) = t q₁ := by
+        F.map (rightEndHom G H r).asHom (t q₁) = t q₁ := by
       calc
-        F.map (rightEndHom G H r) (t q₁) =
-            t (U.map (rightEndHom G H r) q₁) :=
+        F.map (rightEndHom G H r).asHom (t q₁) =
+            t (U.map (rightEndHom G H r).asHom q₁) :=
           (fiberComparison_right_equivariant G F H r q₁).symm
         _ = t q₂ := congrArg t hr'
         _ = t q₁ := hq.symm
     have hrone :=
       image_right_fixed_implies_one G F H r (t q₁) hfixed
     subst r
-    simpa using hr'
+    simpa only [map_one, End.one_asHom, Functor.map_id, FintypeCat.id_apply] using hr'
   · intro y
     let q₀ :
         (forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj
@@ -706,7 +715,7 @@ private theorem fiberComparison_quotient_bijective
       QuotientGroup.mk 1
     obtain ⟨r, hr⟩ :=
       image_right_transitive G F H (t q₀) y
-    refine ⟨U.map (rightEndHom G H r) q₀, ?_⟩
+    refine ⟨U.map (rightEndHom G H r).asHom q₀, ?_⟩
     exact
       (fiberComparison_right_equivariant G F H r q₀).trans hr
 

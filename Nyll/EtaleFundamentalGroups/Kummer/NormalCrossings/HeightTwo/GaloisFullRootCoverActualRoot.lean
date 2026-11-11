@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootLast
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
-import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootLast
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
+public import Nyll.SchemeTheory.RingTheory.Localization.AtMappedPrimeEquiv
 
 /-!
 # The actual other root in the height-two Galois full root cover
@@ -19,6 +21,8 @@ image in the full cover is prime.  Consequently the height-one prime in the
 corresponding contraction branch is exactly the principal root prime, and
 the reordered cover carries it to the literal final-root prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

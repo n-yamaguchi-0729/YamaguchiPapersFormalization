@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
-import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPowerExact
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPowerExact
 
 /-! # Arithmetic operations on finite oriented cocycles -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois.FiniteCocycle
 

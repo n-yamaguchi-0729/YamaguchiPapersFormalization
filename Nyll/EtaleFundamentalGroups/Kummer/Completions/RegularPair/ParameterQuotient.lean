@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
 
 /-!
 # Parameter quotients of a completed regular pair
@@ -21,6 +23,8 @@ maximal-adic completion map; no Noetherian hypothesis on the completion is
 used.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Kummer
@@ -32,7 +36,7 @@ universe u
 
 /-- Domainhood needed to state the DVR structure on the completed quotient
 by the mapped second-parameter ideal. -/
-private theorem completionQuotientSecondRegularParameter_isDomain
+theorem completionQuotientSecondRegularParameter_isDomain
     {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     {x y : R}
     (hreg : IsRegular R [x, y])

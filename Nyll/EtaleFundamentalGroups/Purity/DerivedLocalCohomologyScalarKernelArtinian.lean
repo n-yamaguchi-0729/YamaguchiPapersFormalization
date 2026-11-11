@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalPowerTorsionArtinian
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalPowerTorsionArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Artinianness from a regular coefficient quotient
@@ -26,6 +28,8 @@ cohomology therefore makes the scalar kernel Artinian.  The actual
 ideal-power torsion of local cohomology then proves Artinianness over a
 complete Noetherian local ring.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

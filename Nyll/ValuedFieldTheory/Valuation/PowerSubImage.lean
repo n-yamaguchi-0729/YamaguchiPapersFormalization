@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Algebra.Order.GroupWithZero.Canonical
+module
+
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Algebra.Order.GroupWithZero.Canonical
 
 /-!
 # Valuation obstructions for powers minus the identity
@@ -15,6 +17,8 @@ If `1 < v (x ^ n - x)` and `n > 1`, the leading term determines its value,
 which must be an `n`-th power. This gives an obstruction using the logarithmic
 exponent of an integer-valued valuation.
 -/
+
+@[expose] public section
 
 namespace Valuation
 universe u v

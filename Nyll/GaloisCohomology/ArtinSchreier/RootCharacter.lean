@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Finite.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.FieldTheory.Finite.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Continuous Artin–Schreier characters from roots
@@ -16,6 +18,8 @@ import Mathlib.Tactic.LinearCombination
 The Frobenius-fixed elements are exactly the prime field. Thus the difference
 between a root and its Galois translate gives a continuous cyclic character.
 -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 open Polynomial
@@ -48,7 +52,8 @@ theorem exists_root [IsSepClosed Ω] (a : Ω) : ∃ β : Ω, β ^ p - β = a := 
 
 variable {K : Type*} [Field K] [Algebra K Ω]
 
-private theorem rootDifference_pow_eq (a : K) (β : Ω)
+/-- The difference of an Artin–Schreier root and its Galois translate is Frobenius fixed. -/
+theorem rootDifference_pow_eq (a : K) (β : Ω)
     (hβ : β ^ p - β = algebraMap K Ω a) (σ : Gal(Ω/K)) :
     (σ β - β) ^ p = σ β - β := by
   rw [sub_pow_char]

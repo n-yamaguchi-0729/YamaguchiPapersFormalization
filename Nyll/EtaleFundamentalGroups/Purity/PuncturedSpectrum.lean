@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Injectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Injectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Finite étale covers of punctured local spectra
@@ -22,6 +25,8 @@ not assumed here under a replacement name: `HasPuncturedPurity R` is exactly
 the standard categorical predicate that every finite-étale cover of the
 punctured spectrum extends, up to isomorphism, over `Spec R`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
-import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
+module
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-! # P-adic characters factor through the maximal pro-p quotient -/
+
+@[expose] public section
 
 namespace ProCGroups.ProC
 

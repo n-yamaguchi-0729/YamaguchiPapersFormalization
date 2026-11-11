@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualUniversalProperty
-import Nyll.ProCGroups.ProC.MaximalQuotients.SubgroupComparison
-import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
-import Nyll.ProCGroups.Profinite.OpenSubgroups
-import Nyll.ProCGroups.Topologies.QuotientMaps
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Mathlib.Algebra.Group.Hom.Basic
+module
+
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualUniversalProperty
+public import Nyll.ProCGroups.ProC.MaximalQuotients.SubgroupComparison
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Profinite.OpenSubgroups
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Mathlib.Algebra.Group.Hom.Basic
 
 /-!
 # Abelianization-faithfulness of the maximal pro-Sigma quotient
@@ -28,6 +30,8 @@ residual quotient of each preimage with the original subgroup and preserves
 conjugation. Thus Sigma-abelianization-faithfulness gives ordinary
 abelianization-faithfulness of the maximal pro-Sigma quotient.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

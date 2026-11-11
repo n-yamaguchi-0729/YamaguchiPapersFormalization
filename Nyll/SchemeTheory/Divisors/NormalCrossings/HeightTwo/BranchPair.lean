@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Regular.Flat
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Regular.Flat
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Two strict-normal-crossings branches at a height-two point
@@ -23,6 +25,8 @@ prime: after quotienting by the first equation, the second is again a member
 of a regular system and hence is prime.  Its height is at least two, so its
 inclusion in the given height-two prime is an equality.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -55,10 +59,10 @@ theorem regular_pair_localizationAtPrime_of_two_splitStrictNormalCrossingsParame
   let ps : List A := List.ofFn t
   let psAfterI : List A := ps.eraseIdx i.1
   let qs : List A := psAfterI.erase (t j)
-  have hiIndex : i.1 < ps.length := by simp [ps]
-  have hjIndex : j.1 < ps.length := by simp [ps]
-  have hgetI : ps[i.1] = t i := by simp [ps]
-  have hgetJ : ps[j.1] = t j := by simp [ps]
+  have hiIndex : i.1 < ps.length := by simp only [List.length_ofFn, Fin.is_lt, ps]
+  have hjIndex : j.1 < ps.length := by simp only [List.length_ofFn, Fin.is_lt, ps]
+  have hgetI : ps[i.1] = t i := by simp only [List.getElem_ofFn, Fin.eta, ps]
+  have hgetJ : ps[j.1] = t j := by simp only [List.getElem_ofFn, Fin.eta, ps]
   have hjAfterI : t j ∈ psAfterI := by
     change t j ∈ ps.eraseIdx i.1
     rw [List.mem_eraseIdx_iff_getElem]

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.TorsionFree
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.TorsionFree
 
 /-!
 # Faithfully flat products over a Dedekind domain
@@ -15,6 +17,8 @@ flat product when the structure maps are injective and their spectra cover
 the base. This applies to finite affine covers of arithmetic schemes: the
 prime over a given base point is pulled back along one product projection.
 -/
+
+@[expose] public section
 
 namespace Module.FaithfullyFlat
 

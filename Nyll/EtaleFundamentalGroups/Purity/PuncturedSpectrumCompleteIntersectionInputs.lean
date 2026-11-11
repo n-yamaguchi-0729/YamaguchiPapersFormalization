@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceDisconnectedReduction
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceDisconnectedReduction
 
 /-!
 # Power data from a disconnected punctured hypersurface
@@ -13,6 +15,8 @@ This file converts the ideal-theoretic separation attached to a disconnected
 punctured hypersurface into the two power containments used by complete-local
 intersection arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

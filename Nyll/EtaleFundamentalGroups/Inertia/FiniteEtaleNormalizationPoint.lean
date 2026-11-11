@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationAction
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationAction
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Geometric normalization points and the intrinsic integral-closure action
@@ -13,6 +16,8 @@ The coordinate homomorphism of a normalization point retains its actual map
 to the base. Its kernel inertia, with the intrinsic Galois action on the
 integral closure, is exactly the geometric fixed-point condition.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,10 +51,10 @@ theorem exists_finiteEtaleMorphism_normalizationPoint_inertia_iff
       ∀ σ : Aut Y,
         finiteEtaleAutFunctionFieldAlgEquiv Y σ ∈
           (RingHom.ker φ).inertia Gal(Y.left.functionField/X.functionField) ↔
-        z ≫ normalizationEndomorphism ((show Y.left ⟶ X from Y.hom) ≫ g) σ.hom.left
+        z ≫ normalizationEndomorphism ((show Y.left ⟶ X from Y.hom) ≫ g) σ.asIso.hom.left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ g) σ.hom.w) = z := by
+            exact congrArg (fun k => k ≫ g) σ.asIso.hom.w) = z := by
   intro hIntegral hKL hRK hRL hTower
   have : IsAffine Y.left := isAffine_of_isAffineHom (show Y.left ⟶ X from Y.hom)
   have : IsNormalIntegral Y.left := isNormalIntegral_left_of_isConnected_finiteEtale Y

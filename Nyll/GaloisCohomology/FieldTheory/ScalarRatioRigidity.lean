@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.Algebra.Field.Subfield.Basic
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Mathlib.Algebra.Field.Subfield.Basic
+public import Mathlib.Tactic.LinearCombination
 
 /-!
 # Rigidity from scalar ratios
@@ -15,6 +17,8 @@ If every nonzero element of a field is carried to a scalar multiple of itself
 by scalars in a fixed proper subfield, a unital ring endomorphism is the identity.
 The proof compares an element outside the subfield with its translate by one.
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 variable {K : Type*} [Field K]

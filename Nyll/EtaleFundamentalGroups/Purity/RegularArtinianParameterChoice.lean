@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ArtinianParameterChoice
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.Regular.IsSMulRegular
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ArtinianParameterChoice
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-!
 # A regular parameter with finite Artinian cokernel
@@ -17,6 +19,8 @@ many associated primes can be included in the primes avoided by an
 Artinian parameter.  The resulting scalar is regular on the finite
 module and has finite-length cokernel on the Artinian module.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

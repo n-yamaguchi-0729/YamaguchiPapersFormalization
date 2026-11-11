@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
 
 /-!
 # Inertia at a localized normalization prime
@@ -14,6 +16,8 @@ localizing the base at a prime ideal.  The construction uses only the
 canonical fraction-field maps and the generic action on an integral closure;
 it has no DVR, height, regularity, finiteness, or Galois-extension hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

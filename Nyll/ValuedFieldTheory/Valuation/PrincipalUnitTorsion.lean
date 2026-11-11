@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Algebra.Ring.GeomSum
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Algebra.Ring.GeomSum
 
 /-!
 # Prime-to-residue torsion in the actual principal-unit group
@@ -15,6 +17,8 @@ powers is n. If n is nonzero in the residue field, this sum is nonzero.
 The geometric-sum identity then makes x^n = 1 imply x = 1. No Henselianity,
 discreteness, completeness, or characteristic assumption on the field is used.
 -/
+
+@[expose] public section
 
 namespace ValuationSubring
 

@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.Discrete.Basic
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
+module
+
+public import Mathlib.RingTheory.Valuation.Discrete.Basic
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
 
 /-!
 # Discrete rank-one valuations under equivalence
 
 Equivalent valuations on a field have the same discrete rank-one property.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

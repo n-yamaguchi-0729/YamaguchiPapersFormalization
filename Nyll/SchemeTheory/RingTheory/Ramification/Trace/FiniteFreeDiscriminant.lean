@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Discriminant
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Smooth.Fiber
-import Mathlib.RingTheory.Unramified.Finite
-import Mathlib.LinearAlgebra.TensorProduct.Basis
-import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Mathlib.RingTheory.Discriminant
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Smooth.Fiber
+public import Mathlib.RingTheory.Unramified.Finite
+public import Mathlib.LinearAlgebra.TensorProduct.Basis
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Trace discriminants of finite free algebras
@@ -20,6 +22,8 @@ For a finite free commutative algebra, the trace pairing is onto the module dual
 the discriminant of a basis is a unit.  The statement works over an arbitrary commutative base
 ring; no domain, locality, or etaleness hypothesis is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,8 +47,8 @@ theorem traceForm_surjective_iff_isUnit_discr
     LinearMap.toMatrix b b.dualBasis (Algebra.traceForm R S)
   have hM : M = Algebra.traceMatrix R b := by
     ext i j
-    simp [M, LinearMap.toMatrix_apply, Algebra.traceMatrix_apply,
-      Algebra.traceForm_apply, mul_comm]
+    simp only [LinearMap.toMatrix_apply, Basis.dualBasis_repr, Algebra.traceForm_apply, mul_comm,
+      Algebra.traceMatrix_apply, M]
   have hsurj :
       Function.Surjective (Algebra.traceForm R S) ↔
         Function.Surjective M.mulVec := by
@@ -94,8 +98,8 @@ theorem traceForm_injective_of_isUnit_discr
     LinearMap.toMatrix b b.dualBasis (Algebra.traceForm R S)
   have hM : M = Algebra.traceMatrix R b := by
     ext i j
-    simp [M, LinearMap.toMatrix_apply, Algebra.traceMatrix_apply,
-      Algebra.traceForm_apply, mul_comm]
+    simp only [LinearMap.toMatrix_apply, Basis.dualBasis_repr, Algebra.traceForm_apply, mul_comm,
+      Algebra.traceMatrix_apply, M]
   have hMunit : IsUnit M := by
     rw [Matrix.isUnit_iff_isUnit_det, hM, ← Algebra.discr_def]
     exact hdisc
@@ -140,29 +144,40 @@ theorem traceForm_surjective_of_formallyUnramified
     | tmul x y =>
         rw [show tensorEnd f (x ⊗ₜ[R] y) = (twist f x).smulRight y by
           ext z
-          simp [tensorEnd, twist]]
+          simp only [LinearMap.coe_comp, Function.comp_apply, TensorProduct.map_tmul,
+            LinearMap.id_coe, id_eq, dualTensorHom_apply, LinearMap.compr₂_apply,
+            AlgHom.toLinearMap_apply, Algebra.lsmul_coe, smul_eq_mul, LinearMap.coe_smulRight,
+            tensorEnd, twist]]
         rw [LinearMap.trace_smulRight]
-        simp [twist]
+        simp only [LinearMap.compr₂_apply, AlgHom.toLinearMap_apply, Algebra.lsmul_coe, smul_eq_mul,
+          Algebra.TensorProduct.lmul'_apply_tmul, twist]
     | add x y hx hy => simp only [map_add, hx, hy]
   have hcontract_right (f : Module.Dual R S) (s : S) (q : S ⊗[R] S) :
       contraction f (((1 : S) ⊗ₜ[R] s) * q) = contraction f q * s := by
     induction q using TensorProduct.inductionOn with
     | tmul x y =>
-        simp [contraction, Algebra.TensorProduct.tmul_mul_tmul, mul_comm]
+        simp only [mul_comm, Algebra.TensorProduct.tmul_mul_tmul, mul_one, TensorProduct.lift.tmul,
+          LinearMap.coe_comp, Function.comp_apply, LinearMap.lsmul_apply, Algebra.mul_smul_comm,
+          contraction]
     | add x y hx hy => simp only [mul_add, map_add, hx, hy, add_mul]
   have hcontract_left (f : Module.Dual R S) (s : S) (q : S ⊗[R] S) :
       contraction f ((s ⊗ₜ[R] (1 : S)) * q) = tensorEnd f q s := by
     induction q using TensorProduct.inductionOn with
     | tmul x y =>
-        simp [contraction, tensorEnd, twist, Algebra.TensorProduct.tmul_mul_tmul,
-          mul_comm]
+        simp only [Algebra.TensorProduct.tmul_mul_tmul, mul_comm, mul_one, TensorProduct.lift.tmul,
+          LinearMap.coe_comp, Function.comp_apply, LinearMap.lsmul_apply, TensorProduct.map_tmul,
+          LinearMap.id_coe, id_eq, dualTensorHom_apply, LinearMap.compr₂_apply,
+          AlgHom.toLinearMap_apply, Algebra.lsmul_coe, smul_eq_mul, contraction, tensorEnd, twist]
     | add x y hx hy => simp only [mul_add, map_add, hx, hy, LinearMap.add_apply]
   have htensorEnd_eq_contraction_twist
       (f : Module.Dual R S) (q : S ⊗[R] S) (s : S) :
       tensorEnd f q s = contraction (twist f s) q := by
     induction q using TensorProduct.inductionOn with
     | tmul x y =>
-        simp [contraction, tensorEnd, twist, mul_comm]
+        simp only [LinearMap.coe_comp, Function.comp_apply, TensorProduct.map_tmul,
+          LinearMap.id_coe, id_eq, dualTensorHom_apply, LinearMap.compr₂_apply,
+          AlgHom.toLinearMap_apply, Algebra.lsmul_coe, smul_eq_mul, mul_comm,
+          TensorProduct.lift.tmul, LinearMap.lsmul_apply, tensorEnd, twist, contraction]
     | add x y hx hy => simp only [map_add, LinearMap.add_apply, hx, hy]
   let t : S ⊗[R] S := Algebra.FormallyUnramified.elem R S
   have hlsmul (f : Module.Dual R S) :
@@ -185,7 +200,8 @@ theorem traceForm_surjective_of_formallyUnramified
     (Algebra.FormallyUnramified.one_tmul_mul_elem (R := R) (S := S) s)
   rw [hcontract_right, hcontract_left, htensorEnd_eq_contraction_twist] at hc
   rw [hc, htrace_contraction]
-  simp [twist]
+  simp only [LinearMap.compr₂_apply, AlgHom.toLinearMap_apply, Algebra.lsmul_coe, smul_eq_mul,
+    mul_one, twist]
 
 /-- Surjectivity of the trace pairing produces the separability element witnessing formal
 unramifiedness.  The element is the Casimir tensor associated to a basis and its trace-dual
@@ -255,7 +271,8 @@ theorem formallyUnramified_of_traceForm_surjective
       rw [Fintype.sum_eq_single j]
       · rw [Basis.repr_self_apply, ite_eq_left rfl, one_smul]
       · intro i hij
-        simp [Basis.repr_self, hij]
+        simp only [Basis.repr_self, ne_eq, hij, not_false_eq_true, Finsupp.single_eq_of_ne',
+          smul_eq_mul, zero_mul]
 
 /-- A finite free commutative algebra is formally unramified exactly when the discriminant of
 one (equivalently, every) basis is a unit. -/

@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-! # Surjectivity of p-adic characters detected modulo p -/
+
+@[expose] public section
 
 namespace PadicInt
 universe u

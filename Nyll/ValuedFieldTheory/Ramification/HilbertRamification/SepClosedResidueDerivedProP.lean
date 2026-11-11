@@ -5,13 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.SepClosedResidueInertia
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.Basic
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.SepClosedResidueInertia
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.Basic
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ProCGroup
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Closed derived terms over a separably closed residue field
@@ -20,6 +23,8 @@ Finite Galois restrictions of each positive closed derived term land in
 finite p-group commutators. The Krull neighborhood basis therefore supplies
 an open-normal p-group basis on the derived term itself.
 -/
+
+@[expose] public section
 
 open scoped Topology
 namespace ValuationTheory.DiscreteValuationField

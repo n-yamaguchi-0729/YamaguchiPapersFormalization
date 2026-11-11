@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # Degree bounds for selected generic tensor components
@@ -14,6 +16,8 @@ base-changed finite-dimensional algebra.  Its degree over `K'` is therefore
 bounded by the original degree of `L / K`.  This supplies one common
 factorial exponent for all completed local components.
 -/
+
+@[expose] public section
 
 noncomputable section
 

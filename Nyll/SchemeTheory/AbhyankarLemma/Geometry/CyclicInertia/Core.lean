@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.RamificationGroup
-import Mathlib.RingTheory.IntegralDomain
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.RamificationGroup
+public import Mathlib.RingTheory.IntegralDomain
 
 /-!
 # Tame-inertia cyclicity core
@@ -15,6 +17,8 @@ field after coprimality kills the wild ramification kernel.  This file
 contains that character argument and the comparison with ideal inertia.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

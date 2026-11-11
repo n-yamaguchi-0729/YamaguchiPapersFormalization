@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicEquivariance
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapEquivariance
-import Mathlib.RepresentationTheory.Basic
-import Mathlib.Algebra.Module.RingHom
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicEquivariance
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapEquivariance
+public import Mathlib.RepresentationTheory.Basic
+public import Mathlib.Algebra.Module.RingHom
 
 /-!
 # The actual p-adic representations of valuation-preserving automorphisms
@@ -15,6 +17,8 @@ import Mathlib.Algebra.Module.RingHom
 The concrete field action restricts to principal units. Its compatibility
 with the constructed p-adic scalars supplies the linear representation laws.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

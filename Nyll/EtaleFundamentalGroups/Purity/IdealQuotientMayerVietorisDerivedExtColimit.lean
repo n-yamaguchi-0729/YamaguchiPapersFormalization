@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtPowers
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
-import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtPowers
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
+public import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 
 /-!
 # Filtered colimits of derived-Ext Mayer--Vietoris sequences
@@ -18,6 +20,8 @@ filtered colimits then give the corresponding exact short complex of
 colimit objects.  The final section applies this construction to the
 derived-Ext Mayer--Vietoris diagram along simultaneous ideal powers.
 -/
+
+@[expose] public section
 
 noncomputable section
 

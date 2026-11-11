@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Refinement.NormalizationLocal
 
 /-!
 # Normalization localization at the original final tensor component
@@ -15,6 +17,8 @@ refinement of those two selected components is literally the original final
 ideal.  This file consumes that equality, so subsequent normalization and
 localization arguments can use the original final ideal directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

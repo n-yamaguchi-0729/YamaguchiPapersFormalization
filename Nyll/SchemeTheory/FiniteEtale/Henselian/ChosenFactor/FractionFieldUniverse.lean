@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.FractionRing
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactorUniverse
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactorUniverse
 
 /-!
 # Fraction fields of a strict-Henselian chosen factor
@@ -16,6 +18,8 @@ fields is therefore the existing scalar map from the fraction field of the
 base to the fraction field of the factor.  This file records that construction
 with all four carriers allowed to live in independent universes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

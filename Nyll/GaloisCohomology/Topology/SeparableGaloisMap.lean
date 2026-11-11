@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
 
 /-!
 # Restriction maps on the separable parts of algebraic closures
@@ -13,6 +16,8 @@ import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 The algebraic-closure embedding used for absolute Galois restriction preserves
 the separable closure. Its restriction intertwines the actual Galois maps.
 -/
+
+@[expose] public section
 
 namespace Field.absoluteGaloisGroup
 
@@ -53,5 +58,27 @@ theorem map_separableClosureLift (f : K →+* L)
       ((map_closureLift f σ (s : AlgebraicClosure K)).trans
         (ValuationTheory.Completion.separableClosureAutEquiv_apply L σ
           (separableClosureLift f s)).symm)
+
+/-- The actual continuous absolute Galois map, expressed on the native
+separable closures by the original restriction equivalences. -/
+noncomputable def separableMap (f : K →+* L) :
+    Gal(SeparableClosure L/L) →ₜ* Gal(SeparableClosure K/K) :=
+  (ContinuousMonoidHom.toContinuousMonoidHom
+    (ValuationTheory.Completion.separableClosureAutContinuousEquiv K)).comp
+      ((map f).comp (ContinuousMonoidHom.toContinuousMonoidHom
+        (ValuationTheory.Completion.separableClosureAutContinuousEquiv L).symm))
+
+/-- The native separable Galois map has exactly the action induced by the
+chosen embedding behind the original algebraic-closure Galois map. -/
+theorem separableMap_commutes (f : K →+* L)
+    (σ : Gal(SeparableClosure L/L)) (s : SeparableClosure K) :
+    separableClosureLift f (separableMap f σ s) = σ (separableClosureLift f s) := by
+  change separableClosureLift f
+      (ValuationTheory.Completion.separableClosureAutEquiv K
+        (map f ((ValuationTheory.Completion.separableClosureAutEquiv L).symm σ)) s) = _
+  have h := map_separableClosureLift f
+    ((ValuationTheory.Completion.separableClosureAutEquiv L).symm σ) s
+  rw [MulEquiv.apply_symm_apply] at h
+  exact h
 
 end Field.absoluteGaloisGroup

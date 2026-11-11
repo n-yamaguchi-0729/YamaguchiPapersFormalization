@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 
 /-!
 # Injectivity of ideal-power torsion in an injective module
@@ -18,6 +20,8 @@ gives a map back whose image remains in the primary component.  This is
 a retraction, so lifting maps into the injective power-torsion module and
 composing with the retraction proves injectivity of the primary component.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

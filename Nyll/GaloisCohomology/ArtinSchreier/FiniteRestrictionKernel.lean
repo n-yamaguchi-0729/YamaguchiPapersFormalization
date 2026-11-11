@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-! # Finite kernels of restriction on Artin–Schreier classes -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 

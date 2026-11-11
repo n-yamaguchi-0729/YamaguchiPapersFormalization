@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Mathlib.FieldTheory.LinearDisjoint
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Mathlib.FieldTheory.LinearDisjoint
 
 /-!
 # Degrees of actual cyclotomic composita
@@ -14,6 +16,8 @@ A common primitive root proves that the upper cyclotomic field is generated
 over the lower cyclotomic field by the other field's image. Coprime degrees
 then give the original prime degree after this base extension.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

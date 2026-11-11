@@ -4,26 +4,28 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalarQuotient
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionZero
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopFinite
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeQuotient
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.RegularArtinianParameterChoice
-import Nyll.EtaleFundamentalGroups.Purity.TorsionQuotientSupportDimension
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.Data.ENat.Basic
-import Mathlib.Data.ENat.Monoid
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalarQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionZero
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopFinite
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.RegularArtinianParameterChoice
+public import Nyll.EtaleFundamentalGroups.Purity.TorsionQuotientSupportDimension
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.Data.ENat.Basic
+public import Mathlib.Data.ENat.Monoid
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Top local-cohomology nonvanishing for finite coefficients
@@ -40,6 +42,8 @@ length.  Vanishing in the top degree would contradict the induction
 hypothesis on the coefficient scalar quotient.  Finite generation in
 the top degree would force that vanishing by Nakayama's lemma.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

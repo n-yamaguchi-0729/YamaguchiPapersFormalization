@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.EtaleFundamentalGroups.Completions.Retained.TensorPrimeContraction
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.TensorPrimeContraction
 
 /-!
 # The retained generic component through a finite-model tower
@@ -20,6 +22,8 @@ fibres.  Thus it does not need a separately supplied map between their
 chosen fraction fields, nor an equality between independently chosen tensor
 components.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,7 +64,7 @@ theorem exists_retainedCompletedComponentTowerAlgHom
     let fT := completedFiniteModelTowerAlgHom
       (R := R) (R' := R') (S₀ := S₀) (S₁ := S₁) g
     let N₀ := N.comap fT.toRingHom
-    letI : N₀.IsPrime := hNPrime.comap fT.toRingHom
+    let : N₀.IsPrime := hNPrime.comap fT.toRingHom
     let hN₀Over : N₀.LiesOver (⊥ : Ideal R') := by
       refine ⟨?_⟩
       ext x
@@ -72,18 +76,18 @@ theorem exists_retainedCompletedComponentTowerAlgHom
         exact fT.commutes x
       rw [hleft]
       exact N.mem_of_liesOver (⊥ : Ideal R') x
-    letI : N₀.LiesOver (⊥ : Ideal R') := hN₀Over
+    let : N₀.LiesOver (⊥ : Ideal R') := hN₀Over
     let m₀ := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S₀) (K := K) (L := L₀)
       (K' := K') N₀
-    letI : m₀.IsMaximal :=
+    let : m₀.IsMaximal :=
       retainedCompletedGenericTensorIdeal_isMaximal
         (R := R) (R' := R') (S := S₀) (K := K) (L := L₀)
         (K' := K') N₀
     let m₁ := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S₁) (K := K) (L := L₁)
       (K' := K') N
-    letI : m₁.IsMaximal :=
+    let : m₁.IsMaximal :=
       retainedCompletedGenericTensorIdeal_isMaximal
         (R := R) (R' := R') (S := S₁) (K := K) (L := L₁)
         (K' := K') N
@@ -91,23 +95,9 @@ theorem exists_retainedCompletedComponentTowerAlgHom
         GenericTensorFieldComponent m₁,
       Function.Injective f := by
   classical
-  dsimp only
   let T₀ := R' ⊗[R] S₀
   let T₁ := R' ⊗[R] S₁
-  let fT := completedFiniteModelTowerAlgHom
-    (R := R) (R' := R') (S₀ := S₀) (S₁ := S₁) g
-  let N₀ := N.comap fT.toRingHom
-  let : N₀.IsPrime := hNPrime.comap fT.toRingHom
-  have hN₀Over : N₀.LiesOver (⊥ : Ideal R') := by
-    refine ⟨?_⟩
-    ext x
-    change x ∈ (⊥ : Ideal R') ↔ fT (algebraMap R' T₀ x) ∈ N
-    have hleft :
-        fT (algebraMap R' T₀ x) = algebraMap R' T₁ x := by
-      exact fT.commutes x
-    rw [hleft]
-    exact N.mem_of_liesOver (⊥ : Ideal R') x
-  let : N₀.LiesOver (⊥ : Ideal R') := hN₀Over
+  intro fT N₀ hN₀Prime hN₀Over hN₀LiesOver
   let G₀ := retainedCompletedFiniteBaseChangeGenericFiber
     (R := R) (R' := R') (S := S₀) (K' := K')
   let G₁ := retainedCompletedFiniteBaseChangeGenericFiber
@@ -157,20 +147,7 @@ theorem exists_retainedCompletedComponentTowerAlgHom
   let e₁ := retainedCompletedGenericFiberEquiv
     (R := R) (R' := R') (S := S₁) (K := K) (L := L₁)
     (K' := K')
-  let m₀ := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S₀) (K := K) (L := L₀)
-    (K' := K') N₀
-  let m₁ := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S₁) (K := K) (L := L₁)
-    (K' := K') N
-  let : m₀.IsMaximal :=
-    retainedCompletedGenericTensorIdeal_isMaximal
-      (R := R) (R' := R') (S := S₀) (K := K) (L := L₀)
-      (K' := K') N₀
-  let : m₁.IsMaximal :=
-    retainedCompletedGenericTensorIdeal_isMaximal
-      (R := R) (R' := R') (S := S₁) (K := K) (L := L₁)
-      (K' := K') N
+  intro m₀ hm₀Max m₁ hm₁Max
   let eComp₀ : (G₀ ⧸ n₀) ≃ₐ[K'] GenericTensorFieldComponent m₀ :=
     Ideal.quotientEquivAlg n₀ m₀ e₀ rfl
   let eComp₁ : (G₁ ⧸ n₁) ≃ₐ[K'] GenericTensorFieldComponent m₁ :=

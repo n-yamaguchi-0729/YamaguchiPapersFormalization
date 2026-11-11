@@ -5,12 +5,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Andrew Yang, Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FlatBaseChangeSections
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.Smooth.IntegralClosure
-import Mathlib.Algebra.Category.Ring.Constructions
+module
+
+public import Nyll.SchemeTheory.Affine.FlatBaseChangeSections
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Mathlib.Algebra.Category.Ring.Constructions
 
 /-!
 # Localization of an affine base commutes with relative normalization
@@ -23,6 +25,8 @@ The proof adapts the smooth base-change argument in Mathlib by Andrew Yang:
 https://github.com/leanprover-community/mathlib4/blob/065356127b1dc0016f66b7283ce0ce2c4055aa55/Mathlib/AlgebraicGeometry/Normalization.lean
 The algebraic input here is localization, not smoothness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

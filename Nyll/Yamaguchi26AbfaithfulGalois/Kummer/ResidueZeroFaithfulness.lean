@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroPrimeIndex
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FiniteFieldExtensions
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroPrimeIndex
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FiniteFieldExtensions
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Ab-faithfulness over residue-zero Henselian valuations
@@ -18,6 +21,8 @@ Ab-faithfulness of the residue Galois group and finite primary root groups
 in its finite field extensions imply ab-faithfulness of the absolute
 Galois group of the Henselian discretely valued field.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosure
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
-import Nyll.ValuedFieldTheory.Valuation.Henselian.RingEquiv
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosure
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.RingEquiv
 
 /-!
 # Separable algebraic closedness in the completion of a Henselian DVF
@@ -17,6 +19,8 @@ The normed model comes from the given discrete valuation. Its unit ball is
 isomorphic to the original Henselian valuation ring, so the normed completion
 theorem applies to the actual valuation completion.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

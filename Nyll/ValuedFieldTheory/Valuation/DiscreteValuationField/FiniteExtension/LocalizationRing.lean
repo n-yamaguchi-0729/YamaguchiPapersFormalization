@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.LocalizationLocalMap
-import Mathlib.Algebra.Algebra.Subalgebra.Tower
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.LocalizationLocalMap
+public import Mathlib.Algebra.Algebra.Subalgebra.Tower
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # The actual localized integral closure inside an extension field
@@ -18,6 +20,8 @@ Choose a prime above the base maximal ideal and realize its localization as
 the image of the injective localization map into the extension field. This
 subalgebra representation uses the canonical inclusion and scalar towers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,7 +44,8 @@ private theorem normalization_faithful (base : DVF.{u, v} K) :
   apply (algebraMap K L).injective
   exact congrArg (fun z : Normalization (L := L) base => (z : L)) hxy
 
-private theorem exists_prime (base : DVF.{u, v} K) :
+/-- The integral closure has a maximal prime above the base maximal ideal. -/
+theorem exists_prime (base : DVF.{u, v} K) :
     ∃ P : PrimeSpectrum (Normalization (L := L) base),
       P.asIdeal.IsMaximal ∧ P.asIdeal.LiesOver base.maximalIdeal := by
   have : FaithfulSMul base.valuationSubring (Normalization (L := L) base) :=
@@ -69,7 +74,8 @@ theorem prime_ne_bot (base : DVF.{u, v} K) : (prime (L := L) base).asIdeal ≠ �
   exact Ideal.ne_bot_of_mem_primesOver base.maximalIdeal_ne_bot
     ⟨(prime (L := L) base).isPrime, prime_liesOver base⟩
 
-private theorem primeCompl_maps_to_units (base : DVF.{u, v} K)
+/-- Elements outside the chosen prime map to units in the extension field. -/
+theorem primeCompl_maps_to_units (base : DVF.{u, v} K)
     (y : (prime (L := L) base).asIdeal.primeCompl) :
     IsUnit (algebraMap (Normalization (L := L) base) L y) := by
   apply isUnit_iff_ne_zero.mpr
@@ -79,7 +85,8 @@ private theorem primeCompl_maps_to_units (base : DVF.{u, v} K)
   exact nonZeroDivisors.ne_zero
     ((prime (L := L) base).asIdeal.primeCompl_le_nonZeroDivisors y.property)
 
-private def localizationEmbedding (base : DVF.{u, v} K) :
+/-- The canonical embedding of the localization into the extension field. -/
+def localizationEmbedding (base : DVF.{u, v} K) :
     Localization.AtPrime (prime (L := L) base).asIdeal →ₐ[Normalization (L := L) base] L where
   toRingHom := IsLocalization.lift (primeCompl_maps_to_units (L := L) base)
   commutes' x := IsLocalization.lift_eq (primeCompl_maps_to_units (L := L) base) x

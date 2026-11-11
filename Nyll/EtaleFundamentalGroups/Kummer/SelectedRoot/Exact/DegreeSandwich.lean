@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.FractionFieldUniverse
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.FixedTensor.IntrinsicCoordinates
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenFactor.FractionFieldUniverse
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Defectless
 
 /-!
 # The degree sandwich for an exact ramification-index root
@@ -27,6 +29,8 @@ In particular, specializing after an earlier root extension still requires a
 separate source theorem identifying that new local ramification index; no such
 comparison is accepted as an input here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

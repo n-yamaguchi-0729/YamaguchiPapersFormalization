@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
-import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
-import Mathlib.RingTheory.IsTensorProduct
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.FiniteSubalgebraLocalization
+public import Nyll.SchemeTheory.RingTheory.Descent.IntegralClosureLocalizationAway
+public import Mathlib.RingTheory.IsTensorProduct
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
 
 /-!
 # A finite model of a normalization near one base prime
@@ -17,6 +19,8 @@ recovers that algebra after inverting `d`, and agrees with the integral
 closure at the selected prime. Its generators come from the two actual
 localizations, rather than from a finiteness assumption on the normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

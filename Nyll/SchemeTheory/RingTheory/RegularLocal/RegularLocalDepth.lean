@@ -15,22 +15,33 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.PowerSeries.Ideal
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.PowerSeries.Inverse
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.CrossRefAttribute
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.SimpRw
-import Mathlib.Tactic.TermCongr
-import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.QuotientRegular
+public import Nyll.SchemeTheory.RingTheory.Dimension.LocalRingPrincipalQuotient
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Algebra.Module.SpanRankOperations
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.PID
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.PowerSeries.Ideal
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.CrossRefAttribute
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.SimpRw
+public import Mathlib.Tactic.TermCongr
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 # Depth of a regular local ring
@@ -38,6 +49,8 @@ import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 The depth of a regular local ring equals its Krull dimension. Regular sequences and
 quotients by regular parameters supply the supporting induction and lifting arguments.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -184,7 +197,8 @@ lemma Module.depth_le_krullDim_support [Nontrivial M] [Module.Finite R M] :
     replace IH := IH m (Nat.lt_of_succ_le this) (QuotSMulTop x M)
       (by rwa [Module.support_eq_zeroLocus, ← ringKrullDim_quotient])
     replace IH := WithTop.coe_le_coe.mp
-      ((Module.length_le_depth _ _ l hl.2 (by simp_all)).trans IH)
+      ((Module.length_le_depth _ _ l hl.2
+        (fun r hr => hl' r (List.mem_cons_of_mem x hr))).trans IH)
     · simp only [List.length_cons, ge_iff_le]
       linarith
 
@@ -206,7 +220,10 @@ lemma isSMulRegular_iff_of_free {R M : Type*} [CommRing R] [AddCommGroup M] [Mod
   constructor
   · intro H m n h
     have i : I := Nonempty.some inferInstance
-    have := @H (m • b i) (n • b i) (by simp_all [← mul_smul])
+    have := @H (m • b i) (n • b i) (by
+      change r • (m • b i) = r • (n • b i)
+      rw [← mul_smul, ← mul_smul]
+      exact congrArg (fun a : R => a • b i) h)
     simpa using congr(b.repr $this i)
   · intro H m n h
     apply b.repr.injective
@@ -225,25 +242,11 @@ open scoped Pointwise TensorProduct in
 lemma RingTheory.Sequence.isWeaklyRegular_of_free_aux
     {R : Type u} {M : Type max u v} [CommRing R] [AddCommGroup M] [Module R M]
     [Module.Free R M] [Nontrivial M] {s : List R} :
-      Sequence.IsWeaklyRegular M s ↔ Sequence.IsWeaklyRegular R s := by
-  generalize hn : s.length = n
-  induction n generalizing R M with
-  | zero => simp_all
-  | succ n IH =>
-    cases s with
-    | nil => exact (Nat.succ_ne_zero n hn.symm).elim
-    | cons x xs =>
-    let e : QuotSMulTop x R ≃ₗ[R] R ⧸ Ideal.span {x} := Submodule.quotEquivOfEq _ _
-      (by rw [← Submodule.ideal_span_singleton_smul, Ideal.smul_eq_mul, Ideal.mul_top])
-    let e' := QuotSMulTop.equivQuotTensor x M
-    rw [Sequence.isWeaklyRegular_cons_iff, Sequence.isWeaklyRegular_cons_iff,
-      e.isWeaklyRegular_congr, e'.isWeaklyRegular_congr,
-      ← isWeaklyRegular_map_algebraMap_iff (R ⧸ Ideal.span {x}),
-      ← isWeaklyRegular_map_algebraMap_iff (R := R) (R ⧸ Ideal.span {x})]
-    refine and_congr isSMulRegular_iff_of_free ?_
-    cases subsingleton_or_nontrivial (R ⧸ Ideal.span {x})
-    · simp [RingTheory.Sequence.isWeaklyRegular_of_subsingleton]
-    exact IH (by simp_all)
+      Sequence.IsWeaklyRegular M s ↔ Sequence.IsWeaklyRegular R s :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.RingTheory.Sequence renaming
+    isWeaklyRegular_of_free_aux → sharedProof in
+  sharedProof (R := R) (M := M) (s := s)
 
 lemma RingTheory.Sequence.isWeaklyRegular_of_free
     {R M : Type*} [CommRing R] [AddCommGroup M] [Module R M]
@@ -262,37 +265,11 @@ lemma Module.depth_le_of_free [Module.Free R M] : Module.depth R R ≤ Module.de
 
 lemma Module.faithfulSMul_of_depth_eq_ringKrullDim [IsDomain R] [Nontrivial M] [Module.Finite R M]
     (H : ringKrullDim R < ⊤) (H' : .some (Module.depth R M) = ringKrullDim R) :
-    FaithfulSMul R M := by
-  have : Nontrivial (R ⧸ annihilator R M) := Ideal.Quotient.nontrivial_iff.2
-    (by rw [ne_eq, ← Submodule.annihilator_top, Submodule.annihilator_eq_top_iff]
-        exact top_ne_bot)
-  rw [← Module.annihilator_eq_bot]
-  by_contra H''
-  apply (le_refl ((.some (Module.depth R M)) : WithBot ℕ∞)).not_gt
-  calc
-    _ ≤ ringKrullDim (R ⧸ annihilator R M) := Module.depth_le_dim_annihilator _ _
-    _ < ringKrullDim R := by
-      simp only [ringKrullDim, Order.krullDim_eq_iSup_length,
-        WithBot.coe_lt_coe]
-      rw [← ENat.add_one_le_iff, ENat.iSup_add, iSup_le_iff]
-      · intro l
-        let l' : LTSeries (PrimeSpectrum R) := (l.map
-          (PrimeSpectrum.comap (Ideal.Quotient.mk _)) ?_).cons ⊥ ?_
-        · refine le_trans ?_ (le_iSup _ l')
-          change _ ≤ ((0 + l.length + 1 : ℕ) : ℕ∞)
-          simp only [Nat.zero_add, Nat.cast_add, Nat.cast_one, le_refl]
-        · intros I J
-          change I < J → I.asIdeal.comap _ < J.asIdeal.comap _
-          simp [lt_iff_le_not_ge, ← Ideal.map_le_iff_le_comap,
-            Ideal.map_comap_of_surjective _ Ideal.Quotient.mk_surjective]
-        · refine (bot_lt_iff_ne_bot.mpr H'').trans_le ?_
-          conv_lhs => rw [← Ideal.mk_ker (I := annihilator R M), RingHom.ker]
-          exact Ideal.comap_mono bot_le
-      · rw [← lt_top_iff_ne_top]
-        apply WithBot.coe_lt_coe.mp
-        rw [← Order.krullDim_eq_iSup_length, ← ringKrullDim]
-        refine (ringKrullDim_quotient_le _).trans_lt H
-    _ = .some (Module.depth R M) := H'.symm
+    FaithfulSMul R M :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    faithfulSMul_of_depth_eq_ringKrullDim → sharedProof in
+  sharedProof R M H H'
 
 end
 
@@ -406,23 +383,11 @@ lemma le_depth_of_isWeaklyRegular {s : List R} (hs : Sequence.IsWeaklyRegular R 
       exact C_mem_maximalIdeal (hs' a ha)
 
 lemma natCast_succ_le_depth {d : ℕ} (hd : (d : ℕ∞) ≤ Module.depth R R) :
-    ((d + 1 : ℕ) : ℕ∞) ≤ Module.depth R⟦X⟧ R⟦X⟧ := by
-  obtain ⟨s, hs, hs', hlen⟩ : ∃ s : List R, Sequence.IsWeaklyRegular R s ∧
-      (∀ r ∈ s, r ∈ maximalIdeal R) ∧ d ≤ s.length := by
-    rcases Nat.eq_zero_or_pos d with rfl | hd0
-    · exact ⟨[], (Sequence.isWeaklyRegular_iff_Fin _ _).mpr (fun i ↦ i.elim0),
-        (by intro r hr; cases hr), Nat.zero_le _⟩
-    · have hlt : ((d - 1 : ℕ) : ℕ∞) < Module.depth R R :=
-        lt_of_lt_of_le (Nat.cast_lt.mpr (Nat.sub_lt hd0 one_pos)) hd
-      rw [Module.depth, lt_sSup_iff] at hlt
-      obtain ⟨b, ⟨s, hs, hs', rfl⟩, hb⟩ := hlt
-      refine ⟨s, hs, hs', ?_⟩
-      have hlen' : (d - 1 : ℕ) < s.length := Nat.cast_lt.mp hb
-      omega
-  refine le_trans ?_ (le_depth_of_isWeaklyRegular R hs hs')
-  have key : ((d + 1 : ℕ) : ℕ∞) ≤ ((s.length + 1 : ℕ) : ℕ∞) :=
-    Nat.cast_le.mpr (Nat.succ_le_succ hlen)
-  simpa [Nat.cast_add] using key
+    ((d + 1 : ℕ) : ℕ∞) ≤ Module.depth R⟦X⟧ R⟦X⟧ :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.PowerSeries renaming
+    natCast_succ_le_depth → sharedProof in
+  sharedProof R hd
 
 end Depth
 
@@ -491,26 +456,11 @@ lemma of_field (K : Type*) [Field K] : IsCohenMacaulayOfDim K 0 := by
   exact_mod_cast h
 
 lemma of_isDiscreteValuationRing (𝓞 : Type*) [CommRing 𝓞] [IsDomain 𝓞]
-    [IsDiscreteValuationRing 𝓞] : IsCohenMacaulayOfDim 𝓞 1 := by
-  have hdim : ringKrullDim 𝓞 = 1 :=
-    IsPrincipalIdealRing.ringKrullDim_eq_one 𝓞 (IsDiscreteValuationRing.not_isField 𝓞)
-  refine ⟨by exact_mod_cast hdim, le_antisymm ?_ ?_⟩
-  · have h := Module.depth_le_dim 𝓞 𝓞
-    rw [hdim] at h
-    exact_mod_cast h
-  · obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible 𝓞
-    have hreg : Sequence.IsWeaklyRegular 𝓞 [π] := by
-      rw [show [π] = π :: ([] : List 𝓞) from rfl, Sequence.isWeaklyRegular_cons_iff]
-      refine ⟨fun a b h ↦ mul_left_cancel₀ hπ.ne_zero ?_,
-        (Sequence.isWeaklyRegular_iff_Fin _ _).mpr (fun i ↦ i.elim0)⟩
-      simpa only [smul_eq_mul] using h
-    have hmem : ∀ r ∈ [π], r ∈ maximalIdeal 𝓞 := by
-      intro r hr
-      rw [List.mem_singleton] at hr
-      subst hr
-      rw [hπ.maximalIdeal_eq]
-      exact Ideal.subset_span rfl
-    simpa using Module.length_le_depth 𝓞 𝓞 [π] hreg hmem
+    [IsDiscreteValuationRing 𝓞] : IsCohenMacaulayOfDim 𝓞 1 :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.IsLocalRing.IsCohenMacaulayOfDim renaming
+    of_isDiscreteValuationRing → sharedProof in
+  sharedProof 𝓞
 
 end IsCohenMacaulayOfDim
 
@@ -608,53 +558,11 @@ theorem IsLocalRing.exists_isSMulRegular_and_isSMulRegular_of_notMem_associatedP
     (hM : maximalIdeal R ∉ associatedPrimes R M)
     (hbot : maximalIdeal R ≠ ⊥) :
     ∃ x ∈ maximalIdeal R,
-      x ∉ (maximalIdeal R) ^ 2 ∧ IsSMulRegular R x ∧ IsSMulRegular M x := by
-  classical
-  have hfin : (insert ((maximalIdeal R) ^ 2)
-      (associatedPrimes R R ∪ associatedPrimes R M)).Finite :=
-    Set.Finite.insert _ ((associatedPrimes.finite R R).union (associatedPrimes.finite R M))
-  have hnotle : ¬ ∃ I ∈ hfin.toFinset, maximalIdeal R ≤ I := by
-    rintro ⟨I, hIs, hle⟩
-    rw [Set.Finite.mem_toFinset, Set.mem_insert_iff, Set.mem_union] at hIs
-    rcases hIs with rfl | hI | hI
-    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R)
-        (maximalIdeal R) (IsNoetherian.noetherian _) ?_
-        (IsLocalRing.maximalIdeal_le_jacobson _))
-      rwa [Ideal.smul_eq_mul, ← pow_two]
-    · have heq : I = maximalIdeal R :=
-        (IsLocalRing.le_maximalIdeal (AssociatedPrimes.mem_iff.mp hI).isPrime.ne_top).antisymm
-          hle
-      exact hR (heq ▸ hI)
-    · have heq : I = maximalIdeal R :=
-        (IsLocalRing.le_maximalIdeal (AssociatedPrimes.mem_iff.mp hI).isPrime.ne_top).antisymm
-          hle
-      exact hM (heq ▸ hI)
-  have havoid : ¬ ((maximalIdeal R : Set R) ⊆
-      ⋃ I ∈ (hfin.toFinset : Set (Ideal R)), (I : Set R)) := by
-    intro hsub
-    refine hnotle ((Ideal.subset_union_prime (s := hfin.toFinset) (f := fun I => I)
-      ((maximalIdeal R) ^ 2) ((maximalIdeal R) ^ 2) ?_).mp hsub)
-    intro I hIs hI₁ _
-    rw [Set.Finite.mem_toFinset, Set.mem_insert_iff, Set.mem_union] at hIs
-    rcases hIs with rfl | hI | hI
-    · exact absurd rfl hI₁
-    · exact (AssociatedPrimes.mem_iff.mp hI).isPrime
-    · exact (AssociatedPrimes.mem_iff.mp hI).isPrime
-  rw [hfin.coe_toFinset] at havoid
-  obtain ⟨x, hxm, hxout⟩ := Set.not_subset.mp havoid
-  refine ⟨x, hxm, ?_, ?_, ?_⟩
-  · intro hx2
-    exact hxout (Set.mem_biUnion (Set.mem_insert _ _) hx2)
-  · have hxnot : x ∉ ⋃ p ∈ associatedPrimes R R, (p : Set R) := fun hx =>
-      hxout (Set.biUnion_subset_biUnion_left (fun p hp =>
-        Set.mem_insert_of_mem _ (Set.mem_union_left _ hp)) hx)
-    rw [biUnion_associatedPrimes_eq_compl_regular R R] at hxnot
-    simpa only [Set.mem_compl_iff, Set.mem_ofPred_eq, not_not] using hxnot
-  · have hxnot : x ∉ ⋃ p ∈ associatedPrimes R M, (p : Set R) := fun hx =>
-      hxout (Set.biUnion_subset_biUnion_left (fun p hp =>
-        Set.mem_insert_of_mem _ (Set.mem_union_right _ hp)) hx)
-    rw [biUnion_associatedPrimes_eq_compl_regular R M] at hxnot
-    simpa only [Set.mem_compl_iff, Set.mem_ofPred_eq, not_not] using hxnot
+      x ∉ (maximalIdeal R) ^ 2 ∧ IsSMulRegular R x ∧ IsSMulRegular M x :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.IsLocalRing renaming
+    exists_isSMulRegular_and_isSMulRegular_of_notMem_associatedPrimes → sharedProof in
+  sharedProof R M hR hM hbot
 
 end PrimeAvoidance
 
@@ -744,21 +652,11 @@ lemma depth_eq_of_linearEquiv (e : M ≃ₗ[R] N) : Module.depth R M = Module.de
 lemma exists_isWeaklyRegular_of_le_depth (M : Type*) [AddCommGroup M] [Module R M]
     (n : ℕ) (hn : (n : ℕ∞) ≤ Module.depth R M) :
     ∃ s : List R, Sequence.IsWeaklyRegular M s ∧ (∀ r ∈ s, r ∈ maximalIdeal R) ∧
-      s.length = n := by
-  rcases Nat.eq_zero_or_pos n with rfl | hpos
-  · exact ⟨[], Sequence.IsWeaklyRegular.nil R M, (by intro r hr; cases hr), rfl⟩
-  · have hlt : ((n - 1 : ℕ) : ℕ∞) < Module.depth R M :=
-      lt_of_lt_of_le (Nat.cast_lt.mpr (by omega)) hn
-    rw [Module.depth, lt_sSup_iff] at hlt
-    obtain ⟨b, ⟨s, hs, hs', rfl⟩, hb⟩ := hlt
-    have hlen : n ≤ s.length := by
-      have := Nat.cast_lt.mp hb
-      omega
-    refine ⟨s.take n, ?_, ?_, ?_⟩
-    · exact ((Sequence.isWeaklyRegular_append_iff M (s.take n) (s.drop n)).mp
-        (by rwa [List.take_append_drop])).1
-    · exact fun r hr => hs' r (List.take_subset n s hr)
-    · rw [List.length_take]; omega
+      s.length = n :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    exists_isWeaklyRegular_of_le_depth → sharedProof in
+  sharedProof M n hn
 
 variable (M) in
 lemma depth_lt_top [IsNoetherianRing R] [Module.Finite R M] [Nontrivial M] :
@@ -794,35 +692,11 @@ variable {M : Type*} [AddCommGroup M] [Module R M]
 lemma eq_zero_of_maximalIdeal_smul_eq_zero {x y₁ y₂ : R} (hxreg : IsSMulRegular M x)
     (hy : Sequence.IsWeaklyRegular M [y₁, y₂])
     (hy₁ : y₁ ∈ maximalIdeal R) (hy₂ : y₂ ∈ maximalIdeal R)
-    (m₀ : QuotSMulTop x M) (hm₀ : ∀ a ∈ maximalIdeal R, a • m₀ = 0) : m₀ = 0 := by
-  rw [Sequence.isWeaklyRegular_cons_iff, Sequence.isWeaklyRegular_singleton_iff] at hy
-  obtain ⟨hy₁reg, hy₂reg⟩ := hy
-  obtain ⟨m, rfl⟩ := Submodule.Quotient.mk_surjective _ m₀
-  rw [Submodule.Quotient.mk_eq_zero]
-  have key : ∀ a ∈ maximalIdeal R, ∃ m' : M, x • m' = a • m := by
-    intro a ha
-    have h := hm₀ a ha
-    rw [← Submodule.Quotient.mk_smul, Submodule.Quotient.mk_eq_zero] at h
-    exact ((Submodule.mem_smul_pointwise_iff_exists _ _ _).mp h).imp fun m' hm' => hm'.2
-  obtain ⟨a, ha⟩ := key y₁ hy₁
-  obtain ⟨b, hb⟩ := key y₂ hy₂
-  have hab : y₂ • a = y₁ • b := by
-    apply hxreg
-    change x • y₂ • a = x • y₁ • b
-    rw [smul_comm x y₂ a, ha, smul_comm y₂ y₁ m, ← hb, smul_comm y₁ x b]
-  have ha0 : (Submodule.Quotient.mk a : QuotSMulTop y₁ M) = 0 := by
-    apply hy₂reg
-    change y₂ • (Submodule.Quotient.mk a : QuotSMulTop y₁ M) = y₂ • (0 : QuotSMulTop y₁ M)
-    rw [smul_zero, ← Submodule.Quotient.mk_smul, hab, Submodule.Quotient.mk_eq_zero]
-    exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).mpr ⟨b, Submodule.mem_top, rfl⟩
-  rw [Submodule.Quotient.mk_eq_zero] at ha0
-  obtain ⟨c, -, hc⟩ := (Submodule.mem_smul_pointwise_iff_exists _ _ _).mp ha0
-  have hm : m = x • c := by
-    apply hy₁reg
-    change y₁ • m = y₁ • (x • c)
-    rw [← ha, ← hc, smul_comm x y₁ c]
-  rw [hm]
-  exact (Submodule.mem_smul_pointwise_iff_exists _ _ _).mpr ⟨c, Submodule.mem_top, rfl⟩
+    (m₀ : QuotSMulTop x M) (hm₀ : ∀ a ∈ maximalIdeal R, a • m₀ = 0) : m₀ = 0 :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    eq_zero_of_maximalIdeal_smul_eq_zero → sharedProof in
+  sharedProof hxreg hy hy₁ hy₂ m₀ hm₀
 
 end Elementary
 
@@ -853,66 +727,22 @@ lemma not_isAssociatedPrime_maximalIdeal_of_isSMulRegular {x : R}
 variable (M) in
 lemma not_isAssociatedPrime_maximalIdeal_quotSMulTop {x : R} (hxreg : IsSMulRegular M x)
     (hdepth : (2 : ℕ∞) ≤ Module.depth R M) :
-    ¬ IsAssociatedPrime (maximalIdeal R) (QuotSMulTop x M) := by
-  obtain ⟨pr, hpr, hpr', hprlen⟩ :=
-    exists_isWeaklyRegular_of_le_depth M 2 (by exact_mod_cast hdepth)
-  obtain ⟨y₁, y₂, rfl⟩ : ∃ y₁ y₂, pr = [y₁, y₂] := by
-    rcases pr with _ | ⟨y₁, _ | ⟨y₂, _ | ⟨y₃, t⟩⟩⟩ <;>
-      first
-        | exact ⟨_, _, rfl⟩
-        | (exfalso; simp only [List.length_nil, List.length_cons] at hprlen; omega)
-  intro h
-  obtain ⟨hp, y, hyy⟩ := isAssociatedPrime_iff.mp h
-  have hy0 : y ≠ 0 := by
-    rintro rfl
-    apply hp.ne_top
-    rw [hyy, eq_top_iff]
-    intro r _
-    rw [Submodule.mem_colon_singleton, smul_zero]
-    exact Submodule.zero_mem ⊥
-  apply hy0
-  apply eq_zero_of_maximalIdeal_smul_eq_zero hxreg hpr
-    (hpr' y₁ List.mem_cons_self) (hpr' y₂ (List.mem_cons_of_mem y₁ List.mem_cons_self))
-  intro a ha
-  have hay : a ∈ (⊥ : Submodule R (QuotSMulTop x M)).colon {y} := hyy ▸ ha
-  rwa [Submodule.mem_colon_singleton, Submodule.mem_bot] at hay
+    ¬ IsAssociatedPrime (maximalIdeal R) (QuotSMulTop x M) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    not_isAssociatedPrime_maximalIdeal_quotSMulTop → sharedProof in
+  sharedProof M hxreg hdepth
 
 lemma exists_mem_maximalIdeal_isSMulRegular_isSMulRegular
     (N₁ N₂ : Type*) [AddCommGroup N₁] [Module R N₁] [Module.Finite R N₁]
     [AddCommGroup N₂] [Module R N₂] [Module.Finite R N₂]
     (h₁ : ¬ IsAssociatedPrime (maximalIdeal R) N₁)
     (h₂ : ¬ IsAssociatedPrime (maximalIdeal R) N₂) :
-    ∃ z ∈ maximalIdeal R, IsSMulRegular N₁ z ∧ IsSMulRegular N₂ z := by
-  by_contra hcon
-  have hsub : (maximalIdeal R : Set R) ⊆
-      ⋃ p ∈ (associatedPrimes R N₁ ∪ associatedPrimes R N₂ : Set (Ideal R)), (p : Set R) := by
-    intro z hz
-    rw [Set.biUnion_union]
-    by_cases hreg : IsSMulRegular N₁ z
-    · refine Set.mem_union_right _ ?_
-      rw [biUnion_associatedPrimes_eq_compl_regular R N₂]
-      exact fun hreg2 => hcon ⟨z, hz, hreg, hreg2⟩
-    · refine Set.mem_union_left _ ?_
-      rw [biUnion_associatedPrimes_eq_compl_regular R N₁]
-      exact hreg
-  have hfin : (associatedPrimes R N₁ ∪ associatedPrimes R N₂).Finite :=
-    (associatedPrimes.finite R N₁).union (associatedPrimes.finite R N₂)
-  have hprime : ∀ p ∈ (associatedPrimes R N₁ ∪ associatedPrimes R N₂),
-      p ≠ (⊥ : Ideal R) → p ≠ (⊥ : Ideal R) → (id p).IsPrime := by
-    rintro p (hp | hp) - -
-    · exact hp.isPrime
-    · exact hp.isPrime
-  obtain ⟨p, hpmem, hple⟩ := (Ideal.subset_union_prime_finite hfin (f := id)
-    (I := maximalIdeal R) ⊥ ⊥ hprime).mp (by simpa using hsub)
-  have hpprime : p.IsPrime := by
-    rcases hpmem with hp | hp
-    · exact hp.isPrime
-    · exact hp.isPrime
-  have hpeq : p = maximalIdeal R := le_antisymm (le_maximalIdeal hpprime.ne_top) hple
-  rw [hpeq] at hpmem
-  rcases hpmem with hp | hp
-  · exact h₁ hp
-  · exact h₂ hp
+    ∃ z ∈ maximalIdeal R, IsSMulRegular N₁ z ∧ IsSMulRegular N₂ z :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    exists_mem_maximalIdeal_isSMulRegular_isSMulRegular → sharedProof in
+  sharedProof N₁ N₂ h₁ h₂
 
 end AssociatedPrimes
 
@@ -922,142 +752,30 @@ variable [IsNoetherianRing R]
 
 lemma depth_quotSMulTop_succ_le (M : Type*) [AddCommGroup M] [Module R M] [Module.Finite R M]
     {x : R} (hx : x ∈ maximalIdeal R) (hxreg : IsSMulRegular M x) :
-    Module.depth R (QuotSMulTop x M) + 1 ≤ Module.depth R M := by
-  rcases subsingleton_or_nontrivial M with hM | hM
-  · rw [Module.depth_of_subsingleton R (QuotSMulTop x M), Module.depth_of_subsingleton R M,
-      top_add]
-  · have hQ : Nontrivial (QuotSMulTop x M) := nontrivial_quotSMulTop_of_mem_maximalIdeal M hx
-    have hlt : Module.depth R (QuotSMulTop x M) < ⊤ := depth_lt_top (QuotSMulTop x M)
-    cases hd : Module.depth R (QuotSMulTop x M) with
-    | top => exact absurd hd hlt.ne
-    | coe n =>
-      obtain ⟨s, hs, hs', hlen⟩ :=
-        exists_isWeaklyRegular_of_le_depth (QuotSMulTop x M) n (le_of_eq hd.symm)
-      have hcons : Sequence.IsWeaklyRegular M (x :: s) :=
-        (Sequence.isWeaklyRegular_cons_iff M x s).mpr ⟨hxreg, hs⟩
-      have hmem : ∀ r ∈ x :: s, r ∈ maximalIdeal R := by
-        intro r hr
-        rcases List.mem_cons.mp hr with rfl | hr
-        · exact hx
-        · exact hs' r hr
-      have hle := Module.length_le_depth R M (x :: s) hcons hmem
-      rw [List.length_cons, hlen] at hle
-      exact_mod_cast hle
+    Module.depth R (QuotSMulTop x M) + 1 ≤ Module.depth R M :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    depth_quotSMulTop_succ_le → sharedProof in
+  sharedProof M hx hxreg
 
 lemma le_depth_quotSMulTop_of_succ_le_depth
     (M : Type u) [AddCommGroup M] [Module R M] [Module.Finite R M]
     {x : R} (hx : x ∈ maximalIdeal R) (n : ℕ) (hxreg : IsSMulRegular M x)
     (hd : ((n + 1 : ℕ) : ℕ∞) ≤ Module.depth R M) :
     (n : ℕ∞) ≤ Module.depth R (QuotSMulTop x M) := by
-  induction n generalizing M with
-  | zero => exact zero_le
-  | succ n IH =>
-    rcases subsingleton_or_nontrivial M with hM | hM
-    · rw [Module.depth_of_subsingleton R (QuotSMulTop x M)]
-      exact le_top
-    · have hAssQ : ¬ IsAssociatedPrime (maximalIdeal R) (QuotSMulTop x M) :=
-        not_isAssociatedPrime_maximalIdeal_quotSMulTop M hxreg
-          (le_trans (by exact_mod_cast Nat.cast_le.mpr (by omega : 2 ≤ n + 1 + 1)) hd)
-      obtain ⟨s, hs, hs', hlen⟩ := exists_isWeaklyRegular_of_le_depth M (n + 1 + 1) hd
-      have hsne : s ≠ [] := by
-        intro h
-        rw [h, List.length_nil] at hlen
-        omega
-      obtain ⟨s', w, rfl, hs'len⟩ : ∃ s' w, s = s' ++ [w] ∧ s'.length = n + 1 := by
-        refine ⟨s.dropLast, s.getLast hsne, (List.dropLast_append_getLast hsne).symm, ?_⟩
-        rw [List.length_dropLast, hlen]
-        omega
-      have hsplit := (Sequence.isWeaklyRegular_append_iff M s' [w]).mp hs
-      have hwreg : IsSMulRegular (M ⧸ (Ideal.ofList s' • ⊤ : Submodule R M)) w :=
-        (Sequence.isWeaklyRegular_singleton_iff _ w).mp hsplit.2
-      have hwm : w ∈ maximalIdeal R :=
-        hs' w (List.mem_append_right s' (List.mem_singleton_self w))
-      have hAssN : ¬ IsAssociatedPrime (maximalIdeal R)
-          (M ⧸ (Ideal.ofList s' • ⊤ : Submodule R M)) :=
-        not_isAssociatedPrime_maximalIdeal_of_isSMulRegular hwm hwreg
-      obtain ⟨z, hz, hzregQ, hzregN⟩ := exists_mem_maximalIdeal_isSMulRegular_isSMulRegular
-        (QuotSMulTop x M) (M ⧸ (Ideal.ofList s' • ⊤ : Submodule R M)) hAssQ hAssN
-      have hs'z : Sequence.IsWeaklyRegular M (s' ++ [z]) :=
-        (Sequence.isWeaklyRegular_append_iff M s' [z]).mpr
-          ⟨hsplit.1, (Sequence.isWeaklyRegular_singleton_iff _ z).mpr hzregN⟩
-      have hs'mem : ∀ r ∈ s', r ∈ maximalIdeal R :=
-        fun r hr => hs' r (List.mem_append_left _ hr)
-      have hzs' : Sequence.IsWeaklyRegular M (z :: s') := by
-        apply IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal hs'z
-          (List.perm_append_singleton z s')
-        intro r hr
-        rcases List.mem_append.mp hr with hr | hr
-        · exact hs'mem r hr
-        · rw [List.mem_singleton] at hr
-          subst hr
-          exact hz
-      have hs'Mz : Sequence.IsWeaklyRegular (QuotSMulTop z M) s' :=
-        ((Sequence.isWeaklyRegular_cons_iff M z s').mp hzs').2
-      have hdMz : ((n + 1 : ℕ) : ℕ∞) ≤ Module.depth R (QuotSMulTop z M) := by
-        have hle := Module.length_le_depth R (QuotSMulTop z M) s' hs'Mz hs'mem
-        rwa [hs'len] at hle
-      have hxz : Sequence.IsWeaklyRegular M [x, z] :=
-        (Sequence.isWeaklyRegular_cons_iff M x [z]).mpr
-          ⟨hxreg, (Sequence.isWeaklyRegular_singleton_iff _ z).mpr hzregQ⟩
-      have hzx : Sequence.IsWeaklyRegular M [z, x] := by
-        apply IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal hxz
-          (List.Perm.swap z x [])
-        intro r hr
-        simp only [List.mem_cons, List.not_mem_nil, or_false] at hr
-        rcases hr with rfl | rfl
-        · exact hx
-        · exact hz
-      have hxregMz : IsSMulRegular (QuotSMulTop z M) x :=
-        (Sequence.isWeaklyRegular_singleton_iff _ x).mp
-          ((Sequence.isWeaklyRegular_cons_iff M z [x]).mp hzx).2
-      have hIH : (n : ℕ∞) ≤ Module.depth R (QuotSMulTop x (QuotSMulTop z M)) :=
-        IH (QuotSMulTop z M) hxregMz hdMz
-      rw [depth_eq_of_linearEquiv (quotSMulTopQuotSMulTopComm M x z)] at hIH
-      obtain ⟨t, ht, ht', htlen⟩ :=
-        exists_isWeaklyRegular_of_le_depth (QuotSMulTop z (QuotSMulTop x M)) n hIH
-      have hfinal : Sequence.IsWeaklyRegular (QuotSMulTop x M) (z :: t) :=
-        (Sequence.isWeaklyRegular_cons_iff _ z t).mpr ⟨hzregQ, ht⟩
-      have hmemzt : ∀ r ∈ z :: t, r ∈ maximalIdeal R := by
-        intro r hr
-        rcases List.mem_cons.mp hr with rfl | hr
-        · exact hz
-        · exact ht' r hr
-      have hle := Module.length_le_depth R (QuotSMulTop x M) (z :: t) hfinal hmemzt
-      rw [List.length_cons, htlen] at hle
-      exact_mod_cast hle
+  rw [← _root_.Module.depth_quotSMulTop_succ_eq M hx hxreg,
+    Nat.cast_add, Nat.cast_one] at hd
+  exact (ENat.add_le_add_iff_right ENat.one_ne_top).mp hd
 
 variable (M : Type*) [AddCommGroup M] [Module R M] [Module.Finite R M]
 
 theorem depth_quotSMulTop_succ_eq {x : R} (hx : x ∈ maximalIdeal R)
     (hxreg : IsSMulRegular M x) :
-    Module.depth R (QuotSMulTop x M) + 1 = Module.depth R M := by
-  rcases subsingleton_or_nontrivial M with hM | hM
-  · rw [Module.depth_of_subsingleton R (QuotSMulTop x M), Module.depth_of_subsingleton R M,
-      top_add]
-  · refine le_antisymm (depth_quotSMulTop_succ_le M hx hxreg) ?_
-    have hMlt : Module.depth R M < ⊤ := depth_lt_top M
-    cases hdM : Module.depth R M with
-    | top => exact absurd hdM hMlt.ne
-    | coe d =>
-      have hxmem : ∀ r ∈ [x], r ∈ maximalIdeal R := by
-        intro r hr
-        rw [List.mem_singleton] at hr
-        subst hr
-        exact hx
-      have hd1 : 1 ≤ d := by
-        have hle := Module.length_le_depth R M [x]
-          ((Sequence.isWeaklyRegular_singleton_iff M x).mpr hxreg) hxmem
-        rw [hdM] at hle
-        exact_mod_cast hle
-      have hd2 : ((d - 1 + 1 : ℕ) : ℕ∞) ≤ Module.depth R M := by
-        rw [hdM]
-        exact Nat.cast_le.mpr (by omega : d - 1 + 1 ≤ d)
-      have hhard := le_depth_quotSMulTop_of_succ_le_depth M hx (d - 1) hxreg hd2
-      calc ((d : ℕ) : ℕ∞) = ((d - 1 : ℕ) : ℕ∞) + 1 := by
-            rw [show ((d - 1 : ℕ) : ℕ∞) + 1 = ((d - 1 + 1 : ℕ) : ℕ∞) by push_cast; ring]
-            congr 1
-            omega
-        _ ≤ Module.depth R (QuotSMulTop x M) + 1 := add_le_add hhard le_rfl
+    Module.depth R (QuotSMulTop x M) + 1 = Module.depth R M :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    depth_quotSMulTop_succ_eq → sharedProof in
+  sharedProof M hx hxreg
 
 theorem depth_quotSMulTop_eq_sub_one {x : R} (hx : x ∈ maximalIdeal R)
     (hxreg : IsSMulRegular M x) :
@@ -1079,52 +797,15 @@ lemma exists_mem_maximalIdeal_mk_eq {I : Ideal R} [IsLocalRing (R ⧸ I)]
 
 theorem depth_quotient_eq_depth (I : Ideal R) [IsLocalRing (R ⧸ I)]
     (N : Type*) [AddCommGroup N] [Module R N] [Module (R ⧸ I) N] [IsScalarTower R (R ⧸ I) N] :
-    Module.depth (R ⧸ I) N = Module.depth R N := by
-  have hloc : IsLocalHom (Ideal.Quotient.mk I) :=
-    IsLocalHom.of_surjective _ Ideal.Quotient.mk_surjective
-  have hcomp : (algebraMap R (R ⧸ I)) ∘
-      (Function.surjInv (Ideal.Quotient.mk_surjective (I := I))) = id := by
-    funext a
-    rw [Function.comp_apply, Ideal.Quotient.algebraMap_eq,
-      Function.surjInv_eq Ideal.Quotient.mk_surjective a, id_eq]
-  apply le_antisymm
-  · refine sSup_le_sSup ?_
-    rintro b ⟨t, ht, ht', rfl⟩
-    refine ⟨t.map (Function.surjInv Ideal.Quotient.mk_surjective), ?_, ?_, by
-      rw [List.length_map]⟩
-    · have hmap : (t.map (Function.surjInv Ideal.Quotient.mk_surjective)).map
-          (algebraMap R (R ⧸ I)) = t := by
-        rw [List.map_map, hcomp, List.map_id]
-      rw [← Sequence.isWeaklyRegular_map_algebraMap_iff (R ⧸ I) N, hmap]
-      exact ht
-    · intro r hr
-      rw [List.mem_map] at hr
-      obtain ⟨a, ha, rfl⟩ := hr
-      intro hu
-      apply ht' a ha
-      rw [← Function.surjInv_eq Ideal.Quotient.mk_surjective a]
-      exact hu.map (Ideal.Quotient.mk I)
-  · refine sSup_le_sSup ?_
-    rintro b ⟨s, hs, hs', rfl⟩
-    refine ⟨s.map (Ideal.Quotient.mk I), ?_, ?_, by rw [List.length_map]⟩
-    · have hmk : s.map (Ideal.Quotient.mk I) = s.map (algebraMap R (R ⧸ I)) := by
-        rw [Ideal.Quotient.algebraMap_eq]
-      rw [hmk, Sequence.isWeaklyRegular_map_algebraMap_iff (R ⧸ I) N]
-      exact hs
-    · intro r hr
-      rw [List.mem_map] at hr
-      obtain ⟨a, ha, rfl⟩ := hr
-      intro hu
-      exact hs' a ha (hloc.map_nonunit a hu)
+    Module.depth (R ⧸ I) N = Module.depth R N :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    depth_quotient_eq_depth → sharedProof in
+  sharedProof I N
 
 lemma isLocalRing_quotient_span_singleton {x : R} (hx : x ∈ maximalIdeal R) :
-    IsLocalRing (R ⧸ Ideal.span {x}) := by
-  have hne : Ideal.span {x} ≠ ⊤ := by
-    intro h
-    rw [Ideal.span_singleton_eq_top] at h
-    exact hx h
-  have : Nontrivial (R ⧸ Ideal.span {x}) := Ideal.Quotient.nontrivial_iff.mpr hne
-  exact IsLocalRing.of_surjective' (Ideal.Quotient.mk _) Ideal.Quotient.mk_surjective
+    IsLocalRing (R ⧸ Ideal.span {x}) :=
+  RegularQuotientEngine.isLocalRing_quotient_span_singleton R hx
 
 variable [IsNoetherianRing R]
 variable (M : Type*) [AddCommGroup M] [Module R M] [Module.Finite R M]
@@ -1388,47 +1069,11 @@ variable {M : Type*} [AddCommGroup M] [Module R M]
 lemma IsAssociatedPrime.exists_forall_smul_eq_zero_notMem_smul_top
     [Module.Finite R M] {p : Ideal R} (hp : IsAssociatedPrime p M)
     {x : R} (hx : x ∈ maximalIdeal R) (hxreg : IsSMulRegular M x) :
-    ∃ k : M, (∀ a ∈ p, a • k = 0) ∧ k ∉ x • (⊤ : Submodule R M) := by
-  obtain ⟨hp_prime, z, hz⟩ := isAssociatedPrime_iff.mp hp
-  have hz0 : z ≠ 0 := by
-    rintro rfl
-    refine hp_prime.ne_top ?_
-    rw [hz, Submodule.colon_singleton_zero]
-  have hzann : ∀ a ∈ p, a • z = 0 := by
-    intro a ha
-    have haz : a ∈ (⊥ : Submodule R M).colon {z} := hz ▸ ha
-    rwa [Submodule.mem_colon_singleton, Submodule.mem_bot] at haz
-  by_contra hcon
-  have hcon' : ∀ k : M, (∀ a ∈ p, a • k = 0) → k ∈ x • (⊤ : Submodule R M) := by
-    intro k hk
-    by_contra hknot
-    exact hcon ⟨k, hk, hknot⟩
-  have hKle : pTorsion p M ≤ x • (⊤ : Submodule R M) := by
-    intro k hk
-    have hk' : ∀ a ∈ p, a • k = 0 := hk
-    exact hcon' k hk'
-  have hKxK : pTorsion p M ≤ Ideal.span {x} • pTorsion p M := by
-    rw [Submodule.ideal_span_singleton_smul]
-    intro k hk
-    have hk' : ∀ a ∈ p, a • k = 0 := hk
-    obtain ⟨m, -, hm⟩ := (Submodule.mem_smul_pointwise_iff_exists k x ⊤).mp (hKle hk)
-    have hmK : ∀ a ∈ p, a • m = 0 := by
-      intro a ha
-      apply hxreg
-      change x • a • m = x • (0 : M)
-      rw [smul_zero, smul_comm x a m, hm]
-      exact hk' a ha
-    have hmK' : m ∈ pTorsion p M := hmK
-    exact (Submodule.mem_smul_pointwise_iff_exists k x (pTorsion p M)).mpr ⟨m, hmK', hm⟩
-  have hKbot : pTorsion p M = ⊥ := by
-    refine Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (Ideal.span {x}) (pTorsion p M)
-      (IsNoetherian.noetherian (pTorsion p M)) hKxK ?_
-    refine le_trans ?_ (IsLocalRing.maximalIdeal_le_jacobson ⊥)
-    rw [Ideal.span_le, Set.singleton_subset_iff]
-    exact hx
-  have hzK : z ∈ pTorsion p M := hzann
-  rw [hKbot, Submodule.mem_bot] at hzK
-  exact hz0 hzK
+    ∃ k : M, (∀ a ∈ p, a • k = 0) ∧ k ∉ x • (⊤ : Submodule R M) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.IsAssociatedPrime renaming
+    exists_forall_smul_eq_zero_notMem_smul_top → sharedProof in
+  sharedProof hp hx hxreg
 
 lemma IsAssociatedPrime.exists_isAssociatedPrime_quotSMulTop_le
     [Module.Finite R M] {p : Ideal R} (hp : IsAssociatedPrime p M)
@@ -1461,40 +1106,11 @@ variable {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 private lemma depth_le_ringKrullDim_quotient_aux (n : ℕ) :
     ∀ (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M] (p : Ideal R),
       IsAssociatedPrime p M → (n : ℕ∞) ≤ Module.depth R M →
-      ((n : ℕ) : WithBot ℕ∞) ≤ ringKrullDim (R ⧸ p) := by
-  induction n with
-  | zero =>
-    intro M _ _ _ p hp _
-    have hprime : p.IsPrime := hp.isPrime
-    have hnt : Nontrivial (R ⧸ p) := Ideal.Quotient.nontrivial_iff.mpr hprime.ne_top
-    simpa using ringKrullDim_nonneg_of_nontrivial (R := R ⧸ p)
-  | succ n IH =>
-    intro M _ _ _ p hp hn
-    have hprime : p.IsPrime := hp.isPrime
-    have hpos : 0 < Module.depth R M := by
-      refine lt_of_lt_of_le ?_ hn
-      exact_mod_cast Nat.succ_pos n
-    obtain ⟨x, hx, hxreg⟩ := Module.exists_isSMulRegular_of_depth_pos R M hpos
-    have hpSet : p ∈ associatedPrimes R M := hp
-    have hxp : x ∉ p := by
-      intro hxpmem
-      have hmem : x ∈ ⋃ q ∈ associatedPrimes R M, (q : Set R) :=
-        Set.mem_biUnion hpSet hxpmem
-      rw [biUnion_associatedPrimes_eq_compl_regular R M] at hmem
-      exact hmem hxreg
-    obtain ⟨q, hq, hpq, hxq⟩ :=
-      (Ws14Port.IsAssociatedPrime.exists_isAssociatedPrime_quotSMulTop_le hp) hx hxreg
-    have hdrop : (n : ℕ∞) ≤ Module.depth R (QuotSMulTop x M) :=
-      Module.le_depth_quotSMulTop_of_succ_le_depth M hx n hxreg (by exact_mod_cast hn)
-    have hIH : ((n : ℕ) : WithBot ℕ∞) ≤ ringKrullDim (R ⧸ q) :=
-      IH (QuotSMulTop x M) q hq hdrop
-    have hlt : p < q := lt_of_le_of_ne hpq (by rintro rfl; exact hxp hxq)
-    have hdim : ringKrullDim (R ⧸ q) + 1 ≤ ringKrullDim (R ⧸ p) :=
-      ringKrullDim_quotient_succ_le_of_lt hlt
-    push_cast
-    calc ((n : ℕ) : WithBot ℕ∞) + 1
-        ≤ ringKrullDim (R ⧸ q) + 1 := add_le_add hIH le_rfl
-      _ ≤ ringKrullDim (R ⧸ p) := hdim
+      ((n : ℕ) : WithBot ℕ∞) ≤ ringKrullDim (R ⧸ p) :=
+  open AlgebraicCurves.Foundations.Algebra.Proofs in
+  open Module_depth_quotSMulTop_succ_eq.Ws14Port.Module renaming
+    natCast_le_ringKrullDim_quotient_of_le_depth → sharedProof in
+  fun M _ _ _ p hp hn => sharedProof n M (p := p) hp hn
 
 lemma Module.natCast_le_ringKrullDim_quotient_of_le_depth (n : ℕ)
     (M : Type v) [AddCommGroup M] [Module R M] [Module.Finite R M]
@@ -1822,13 +1438,8 @@ section QuotientInfrastructure
 variable {R : Type u} [CommRing R]
 
 private theorem isLocalRing_quotient_span_singleton [IsLocalRing R] {x : R}
-    (hx : x ∈ maximalIdeal R) : IsLocalRing (R ⧸ Ideal.span {x}) := by
-  have hne : Ideal.span {x} ≠ ⊤ := by
-    intro h
-    exact (maximalIdeal.isMaximal R).ne_top
-      (top_le_iff.mp (h ▸ Ideal.span_le.mpr (Set.singleton_subset_iff.mpr hx)))
-  let _ : Nontrivial (R ⧸ Ideal.span {x}) := Ideal.Quotient.nontrivial_iff.mpr hne
-  exact IsLocalRing.of_surjective' (Ideal.Quotient.mk _) Ideal.Quotient.mk_surjective
+    (hx : x ∈ maximalIdeal R) : IsLocalRing (R ⧸ Ideal.span {x}) :=
+  RegularQuotientEngine.isLocalRing_quotient_span_singleton R hx
 
 theorem isScalarTower_quotient_span_singleton {M : Type v} [AddCommGroup M] [Module R M]
     (x : R) : IsScalarTower R (R ⧸ Ideal.span {x}) (QuotSMulTop x M) :=
@@ -1853,15 +1464,8 @@ theorem nontrivial_quotSMulTop_of_mem_maximalIdeal [IsLocalRing R] {M : Type v}
   exact hx
 
 theorem exists_ringKrullDim_eq_natCast (R : Type u) [CommRing R] [IsNoetherianRing R]
-    [IsLocalRing R] : ∃ d : ℕ, ringKrullDim R = (d : WithBot ℕ∞) := by
-  have h1 : ringKrullDim R ≠ ⊤ := ringKrullDim_ne_top
-  have h2 : ringKrullDim R ≠ ⊥ := ringKrullDim_ne_bot
-  cases hd : ringKrullDim R with
-  | bot => exact absurd hd h2
-  | coe d =>
-    cases d with
-    | top => exact absurd hd (by simpa using h1)
-    | coe d => exact ⟨d, rfl⟩
+    [IsLocalRing R] : ∃ d : ℕ, ringKrullDim R = (d : WithBot ℕ∞) :=
+  RegularQuotientEngine.exists_ringKrullDim_eq_natCast R
 
 end QuotientInfrastructure
 
@@ -1897,65 +1501,8 @@ variable (R : Type u) [CommRing R]
 theorem exists_finite_span_eq_maximalIdeal_mem [IsLocalRing R] [IsNoetherianRing R]
     {x : R} (hx : x ∈ maximalIdeal R) (hx2 : x ∉ maximalIdeal R ^ 2) :
     ∃ S : Set R, x ∈ S ∧ S.Finite ∧ S.ncard ≤ (maximalIdeal R).spanFinrank ∧
-      Ideal.span S = maximalIdeal R := by
-  classical
-  set ξ : CotangentSpace R := (maximalIdeal R).toCotangent ⟨x, hx⟩ with hξdef
-  have hξ0 : ξ ≠ 0 := by
-    rw [hξdef, ne_eq, Ideal.toCotangent_eq_zero]
-    exact hx2
-  have hli : LinearIndepOn (ResidueField R) id ({ξ} : Set (CotangentSpace R)) := by
-    refine LinearIndepOn.singleton' ?_
-    intro r hr
-    rcases smul_eq_zero.mp hr with h | h
-    · exact h
-    · exact absurd h hξ0
-  obtain ⟨B, hξB, hBfin, hBcard, hBspan⟩ :
-      ∃ B : Set (CotangentSpace R), ξ ∈ B ∧ B.Finite ∧
-        B.ncard = (maximalIdeal R).spanFinrank ∧
-        Submodule.span (ResidueField R) B = ⊤ := by
-    refine ⟨hli.extend (Set.subset_univ _),
-      hli.subset_extend _ (Set.mem_singleton ξ), ?_, ?_, ?_⟩
-    · let _ : Finite (hli.extend (Set.subset_univ ({ξ} : Set (CotangentSpace R)))) :=
-        Module.Finite.finite_basis (Module.Basis.extend hli)
-      exact Set.toFinite _
-    · let _ : Finite (hli.extend (Set.subset_univ ({ξ} : Set (CotangentSpace R)))) :=
-        Module.Finite.finite_basis (Module.Basis.extend hli)
-      let _ : Fintype (hli.extend (Set.subset_univ ({ξ} : Set (CotangentSpace R)))) :=
-        Fintype.ofFinite _
-      rw [IsLocalRing.spanFinrank_maximalIdeal_eq_finrank_cotangentSpace R,
-        Module.finrank_eq_card_basis (Module.Basis.extend hli),
-        ← Nat.card_eq_fintype_card, Nat.card_coe_set_eq]
-    · have h1 := (Module.Basis.extend hli).span_eq
-      rwa [Module.Basis.range_extend] at h1
-  choose lift hlift using (maximalIdeal R).toCotangent_surjective
-  set S₀ : Set ↥(maximalIdeal R) := insert ⟨x, hx⟩ (lift '' (B \ {ξ})) with hS₀def
-  have himg : (maximalIdeal R).toCotangent '' S₀ = B := by
-    rw [hS₀def, Set.image_insert_eq, ← hξdef, ← Set.image_comp]
-    have hcomp : ((maximalIdeal R).toCotangent ∘ lift) '' (B \ {ξ}) = B \ {ξ} := by
-      have : ∀ v ∈ B \ {ξ}, ((maximalIdeal R).toCotangent ∘ lift) v = id v :=
-        fun v _ => hlift v
-      rw [Set.image_congr this, Set.image_id]
-    rw [hcomp, Set.insert_sdiff_singleton, Set.insert_eq_self.mpr hξB]
-  have hspanR : Submodule.span R S₀ = ⊤ := by
-    apply IsLocalRing.CotangentSpace.span_image_eq_top_iff.mp
-    rw [himg, hBspan]
-  have hspan : Ideal.span ((↑) '' S₀ : Set R) = maximalIdeal R := by
-    have hmap := congrArg (Submodule.map (maximalIdeal R).subtype) hspanR
-    rwa [Submodule.map_span, Submodule.map_top, Submodule.range_subtype] at hmap
-  refine ⟨(↑) '' S₀, ⟨⟨x, hx⟩, by rw [hS₀def]; exact Set.mem_insert _ _, rfl⟩, ?_, ?_, hspan⟩
-  · rw [hS₀def]
-    exact (((hBfin.sdiff).image _).insert _).image _
-  · have hfin₁ : (lift '' (B \ {ξ})).Finite := (hBfin.sdiff).image _
-    have h1 : ((↑) '' S₀ : Set R).ncard ≤ S₀.ncard := by
-      apply Set.ncard_image_le
-      rw [hS₀def]; exact hfin₁.insert _
-    have h2 : S₀.ncard ≤ (lift '' (B \ {ξ})).ncard + 1 := by
-      rw [hS₀def]; exact Set.ncard_insert_le _ _
-    have h3 : (lift '' (B \ {ξ})).ncard ≤ (B \ {ξ}).ncard :=
-      Set.ncard_image_le hBfin.sdiff
-    have h4 : (B \ {ξ}).ncard + 1 = B.ncard :=
-      Set.ncard_sdiff_singleton_add_one hξB hBfin
-    omega
+      Ideal.span S = maximalIdeal R :=
+  RegularQuotientEngine.exists_span_eq_maximalIdeal_ncard_le R hx hx2
 
 variable [IsRegularLocalRing R]
 
@@ -2220,42 +1767,10 @@ theorem maximalIdeal_notMem_minimalPrimes_of_ringKrullDim_pos
 theorem exists_parameter_notMem_minimalPrimes
     (R : Type u) [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     (hdim : 0 < ringKrullDim R) :
-    ∃ x ∈ maximalIdeal R, x ∉ (maximalIdeal R) ^ 2 ∧ ∀ p ∈ minimalPrimes R, x ∉ p := by
-  classical
-  have hbot : maximalIdeal R ≠ ⊥ :=
-    IsLocalRing.maximalIdeal_ne_bot_of_ringKrullDim_pos R hdim
-  have hfin : (insert ((maximalIdeal R) ^ 2) (minimalPrimes R)).Finite :=
-    Set.Finite.insert _ (minimalPrimes.finite_of_isNoetherianRing R)
-  have hnotle : ¬ ∃ I ∈ hfin.toFinset, maximalIdeal R ≤ I := by
-    rintro ⟨I, hIs, hle⟩
-    rw [Set.Finite.mem_toFinset, Set.mem_insert_iff] at hIs
-    rcases hIs with rfl | hI
-    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R)
-        (maximalIdeal R) (IsNoetherian.noetherian _) ?_
-        (IsLocalRing.maximalIdeal_le_jacobson _))
-      rwa [Ideal.smul_eq_mul, ← pow_two]
-    · have hp_prime : I.IsPrime := Ideal.IsMinimalPrime.isPrime hI
-      have heq : I = maximalIdeal R :=
-        (IsLocalRing.le_maximalIdeal hp_prime.ne_top).antisymm hle
-      rw [heq] at hI
-      exact maximalIdeal_notMem_minimalPrimes_of_ringKrullDim_pos R hdim hI
-  have havoid : ¬ ((maximalIdeal R : Set R) ⊆
-      ⋃ I ∈ (hfin.toFinset : Set (Ideal R)), (I : Set R)) := by
-    intro hsub
-    refine hnotle ((Ideal.subset_union_prime (s := hfin.toFinset) (f := fun I => I)
-      ((maximalIdeal R) ^ 2) ((maximalIdeal R) ^ 2) ?_).mp hsub)
-    intro I hIs hI₁ _
-    rw [Set.Finite.mem_toFinset, Set.mem_insert_iff] at hIs
-    rcases hIs with rfl | hI
-    · exact absurd rfl hI₁
-    · exact Ideal.IsMinimalPrime.isPrime hI
-  rw [hfin.coe_toFinset] at havoid
-  obtain ⟨x, hxm, hxout⟩ := Set.not_subset.mp havoid
-  refine ⟨x, hxm, ?_, ?_⟩
-  · intro hx2
-    exact hxout (Set.mem_biUnion (Set.mem_insert _ _) hx2)
-  · intro p hp hxp
-    exact hxout (Set.mem_biUnion (Set.mem_insert_of_mem _ hp) hxp)
+    ∃ x ∈ maximalIdeal R, x ∉ (maximalIdeal R) ^ 2 ∧ ∀ p ∈ minimalPrimes R, x ∉ p :=
+  open IsRegularLocalRing_isDomain.W2RLR.No4PatchingCore renaming
+    exists_parameter_notMem_minimalPrimes → sharedProof in
+  sharedProof R hdim
 
 end PrimeAvoidance
 
@@ -2263,30 +1778,19 @@ section DimensionDrop
 
 variable {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 
-theorem annihilator_self_eq_bot (R : Type u) [CommRing R] : Module.annihilator R R = ⊥ := by
-  rw [eq_bot_iff]
-  intro r hr
-  simpa using Module.mem_annihilator.mp hr 1
+theorem annihilator_self_eq_bot (R : Type u) [CommRing R] : Module.annihilator R R = ⊥ :=
+  Module.annihilator_eq_bot.mpr (inferInstance : FaithfulSMul R R)
 
 theorem ringKrullDim_quotSMulTop_succ_eq_of_forall_notMem_minimalPrimes
     {x : R} (hx : x ∈ maximalIdeal R) (hxmin : ∀ p ∈ minimalPrimes R, x ∉ p) :
-    ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R := by
-  rw [← Module.supportDim_quotient_eq_ringKrullDim, ← Module.supportDim_self_eq_ringKrullDim]
-  refine Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal
-    ?_ hx
-  intro p hp
-  refine hxmin p ?_
-  rwa [annihilator_self_eq_bot] at hp
+    ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R :=
+  IsLocalRing.ringKrullDim_quotSMulTop_add_one_of_forall_minimalPrimes_notMem hx hxmin
 
 theorem ringKrullDim_quotient_span_singleton_succ_eq_of_forall_notMem_minimalPrimes
     {x : R} (hx : x ∈ maximalIdeal R) (hxmin : ∀ p ∈ minimalPrimes R, x ∉ p) :
-    ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R := by
-  have hkey : ringKrullDim (QuotSMulTop x R) + 1 = ringKrullDim R :=
-    ringKrullDim_quotSMulTop_succ_eq_of_forall_notMem_minimalPrimes hx hxmin
-  have hspan : Ideal.span {x} = x • (⊤ : Ideal R) := by
-    simp [← Submodule.ideal_span_singleton_smul]
-  rw [ringKrullDim_eq_of_ringEquiv (Ideal.quotientEquivAlgOfEq R hspan).toRingEquiv]
-  exact hkey
+    ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R :=
+  IsLocalRing.ringKrullDim_quotient_span_singleton_add_one_of_forall_minimalPrimes_notMem
+    hx hxmin
 
 end DimensionDrop
 
@@ -2299,75 +1803,11 @@ theorem isRegularLocalRing_quotient_span_singleton_of_forall_notMem_minimalPrime
     (hxmin : ∀ p ∈ minimalPrimes R, x ∉ p) [IsLocalRing (R ⧸ Ideal.span {x})] :
     IsRegularLocalRing (R ⧸ Ideal.span {x}) ∧
       (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 =
-        (maximalIdeal R).spanFinrank := by
-  obtain ⟨S, hxS, hSfin, hScard, hSspan⟩ :=
-    exists_finite_span_eq_maximalIdeal_mem R hx hx2
-  have hmax' : (maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {x})) =
-      maximalIdeal (R ⧸ Ideal.span {x}) :=
-    IsLocalRing.map_maximalIdeal_of_surjective _ Ideal.Quotient.mk_surjective
-  have hmkx : (Ideal.Quotient.mk (Ideal.span {x})) x = 0 := by
-    rw [Ideal.Quotient.eq_zero_iff_mem]
-    exact Ideal.subset_span rfl
-  have hmap : (maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {x})) =
-      Ideal.span ((Ideal.Quotient.mk (Ideal.span {x})) '' (S \ {x})) := by
-    rw [← hSspan, Ideal.map_span]
-    apply le_antisymm
-    · rw [Ideal.span_le]
-      rintro _ ⟨y, hy, rfl⟩
-      by_cases hyx : y = x
-      · subst hyx
-        rw [SetLike.mem_coe, hmkx]
-        exact Submodule.zero_mem _
-      · exact Ideal.subset_span ⟨y, ⟨hy, hyx⟩, rfl⟩
-    · exact Ideal.span_mono (Set.image_mono Set.sdiff_subset)
-  have hsf_le : (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 ≤
-      (maximalIdeal R).spanFinrank := by
-    have h1 : (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank ≤ (S \ {x}).ncard := by
-      rw [← hmax', hmap]
-      exact le_trans
-        (Submodule.spanFinrank_span_le_ncard_of_finite ((hSfin.sdiff).image _))
-        (Set.ncard_image_le hSfin.sdiff)
-    have h2 : (S \ {x}).ncard + 1 = S.ncard :=
-      Set.ncard_sdiff_singleton_add_one hxS hSfin
-    omega
-  have hkrull : ringKrullDim (R ⧸ Ideal.span {x}) ≤
-      ((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank : WithBot ℕ∞) :=
-    ringKrullDim_le_spanFinrank_maximalIdeal _
-  have hdrop : ringKrullDim (R ⧸ Ideal.span {x}) + 1 = ringKrullDim R :=
-    ringKrullDim_quotient_span_singleton_succ_eq_of_forall_notMem_minimalPrimes hx hxmin
-  have hregR : ((maximalIdeal R).spanFinrank : WithBot ℕ∞) = ringKrullDim R :=
-    IsRegularLocalRing.spanFinrank_maximalIdeal (R := R)
-  have hsqueeze : (maximalIdeal R).spanFinrank ≤
-      (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 := by
-    have hcalc : ((maximalIdeal R).spanFinrank : WithBot ℕ∞) ≤
-        (((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 : ℕ) : WithBot ℕ∞) := by
-      rw [hregR, ← hdrop]
-      calc ringKrullDim (R ⧸ Ideal.span {x}) + 1
-          ≤ ((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank : WithBot ℕ∞) + 1 :=
-            add_le_add hkrull le_rfl
-        _ = (((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 : ℕ) : WithBot ℕ∞) := by
-            push_cast
-            ring
-    exact_mod_cast hcalc
-  have hkey : (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 =
-      (maximalIdeal R).spanFinrank := by omega
-  obtain ⟨d, hd⟩ := exists_ringKrullDim_eq_natCast (R ⧸ Ideal.span {x})
-  have hd1 : (d : ℕ) + 1 = (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 := by
-    have hcast : ((d + 1 : ℕ) : WithBot ℕ∞) =
-        (((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 : ℕ) : WithBot ℕ∞) := by
-      have h5 : ringKrullDim (R ⧸ Ideal.span {x}) + 1 =
-          (((maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank + 1 : ℕ) : WithBot ℕ∞) := by
-        rw [hdrop, ← hregR]
-        exact_mod_cast congrArg (Nat.cast : ℕ → WithBot ℕ∞) hkey.symm
-      rw [hd] at h5
-      rw [← h5]
-      push_cast
-      ring
-    exact_mod_cast hcast
-  refine ⟨IsRegularLocalRing.of_spanFinrank_maximalIdeal_le _ ?_, hkey⟩
-  rw [hd]
-  have : (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank = d := by omega
-  exact_mod_cast this.le
+        (maximalIdeal R).spanFinrank :=
+  open IsRegularLocalRing_isDomain.W2RLR.No4PatchingCore renaming
+    isRegularLocalRing_quotient_span_singleton_of_forall_notMem_minimalPrimes →
+      quotientRegularity in
+  quotientRegularity R hx hx2 hxmin
 
 end QuotientRegularity
 
@@ -2375,57 +1815,8 @@ section MatsumuraDomain
 
 theorem isDomain_of_isRegularLocalRing_aux :
     ∀ (n : ℕ) (R : Type u) [CommRing R] [IsRegularLocalRing R],
-      (maximalIdeal R).spanFinrank = n → IsDomain R := by
-  intro n
-  induction n with
-  | zero =>
-    intro R _ _ hn
-    have hbot : maximalIdeal R = ⊥ :=
-      (Submodule.spanFinrank_eq_zero_iff_eq_bot
-        ((maximalIdeal R).fg_of_isNoetherianRing)).mp hn
-    let _ : (⊥ : Ideal R).IsPrime := hbot ▸ (maximalIdeal.isMaximal R).isPrime
-    exact IsDomain.of_bot_isPrime R
-  | succ n IH =>
-    intro R _ _ hn
-    have hdim : ringKrullDim R = ((n + 1 : ℕ) : WithBot ℕ∞) := by
-      rw [← IsRegularLocalRing.spanFinrank_maximalIdeal (R := R), hn]
-    have hdim_pos : 0 < ringKrullDim R := by
-      rw [hdim]
-      exact_mod_cast Nat.succ_pos n
-    obtain ⟨x, hx_mem, hx_sq, hx_min⟩ := exists_parameter_notMem_minimalPrimes R hdim_pos
-    let _ : IsLocalRing (R ⧸ Ideal.span {x}) :=
-      isLocalRing_quotient_span_singleton hx_mem
-    obtain ⟨hreg', hsf'⟩ :=
-      isRegularLocalRing_quotient_span_singleton_of_forall_notMem_minimalPrimes R
-        hx_mem hx_sq hx_min
-    let _ := hreg'
-    have hsf'n : (maximalIdeal (R ⧸ Ideal.span {x})).spanFinrank = n := by
-      rw [hn] at hsf'
-      omega
-    have hdom' : IsDomain (R ⧸ Ideal.span {x}) := IH (R ⧸ Ideal.span {x}) hsf'n
-    have hprime : (Ideal.span {x}).IsPrime := by
-      rw [← Ideal.Quotient.isDomain_iff_prime]
-      exact hdom'
-    let _ := hprime
-    obtain ⟨p, hp_min, hp_le⟩ :=
-      Ideal.exists_minimalPrimes_le (I := (⊥ : Ideal R)) (J := Ideal.span {x}) bot_le
-    have hp_prime : p.IsPrime := Ideal.IsMinimalPrime.isPrime hp_min
-    have hxp : x ∉ p := hx_min p hp_min
-    have hple : p ≤ (maximalIdeal R) • p := by
-      intro a ha
-      obtain ⟨r, hrx⟩ := Ideal.mem_span_singleton'.mp (hp_le ha)
-      have hrp : r ∈ p := by
-        have hmem : r * x ∈ p := by rw [hrx]; exact ha
-        rcases hp_prime.mem_or_mem hmem with h | h
-        · exact h
-        · exact absurd h hxp
-      rw [Ideal.smul_eq_mul, ← hrx, mul_comm r x]
-      exact Ideal.mul_mem_mul hx_mem hrp
-    have hp_bot : p = ⊥ :=
-      Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R) p
-        (IsNoetherian.noetherian p) hple (IsLocalRing.maximalIdeal_le_jacobson _)
-    let _ : (⊥ : Ideal R).IsPrime := hp_bot ▸ hp_prime
-    exact IsDomain.of_bot_isPrime R
+      (maximalIdeal R).spanFinrank = n → IsDomain R :=
+  fun _ R _ _ _ => _root_.IsRegularLocalRing.isDomain R
 
 theorem isDomain_of_isRegularLocalRing (R : Type u) [CommRing R] [IsRegularLocalRing R] :
     IsDomain R :=

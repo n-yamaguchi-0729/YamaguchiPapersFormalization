@@ -10,10 +10,12 @@ The bottom-topology point and arbitrary-field generalization are by
 Naganori Yamaguchi (assisted by OpenAI Codex).
 -/
 
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.Sites.AffineEtale
-import Mathlib.CategoryTheory.Functor.TypeValuedFlat
-import Mathlib.CategoryTheory.Sites.Point.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
+public import Mathlib.CategoryTheory.Functor.TypeValuedFlat
+public import Mathlib.CategoryTheory.Sites.Point.Basic
 
 /-!
 # Pointed étale neighborhoods over an arbitrary field
@@ -24,6 +26,8 @@ the existing `Point.presheafFiber` colimit API applies. No assertion that an
 arbitrary field lifts étale covers is made. When `Ω` is separably closed, its
 fiber functor is literally that of `Scheme.pointSmallEtale`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

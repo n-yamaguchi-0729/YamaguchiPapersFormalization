@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Algebra.CharZero.Defs
+module
+
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.CharZero.Defs
 
 /-!
 # Unit descent from a boundary complement
@@ -17,6 +19,8 @@ parameter `t`.  This file proves the descent step needed afterwards: an
 element not divisible by the prime element `t` was already a unit before the
 localization if its image is a unit after inverting `t`.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

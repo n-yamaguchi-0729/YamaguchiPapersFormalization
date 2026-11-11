@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ConnectedComplement
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
+module
+
+public import Nyll.SchemeTheory.Divisors.ConnectedComplement
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # Finite étale reduced components
@@ -15,6 +17,8 @@ Domain stalks make irreducible components open on a locally Noetherian scheme.
 For a reduced scheme, the reduced closed component then coincides with that open
 subscheme. In particular its inclusion is both finite and étale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

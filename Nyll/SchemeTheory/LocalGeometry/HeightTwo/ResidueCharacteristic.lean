@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Residue characteristic at a prime localization
@@ -15,6 +17,8 @@ residue field.  For a prime integer this determines the residue
 characteristic.  We also record the canonical map from a localized branch
 quotient to that residue field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

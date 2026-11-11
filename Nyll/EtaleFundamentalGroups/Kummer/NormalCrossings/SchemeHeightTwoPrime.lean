@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
-import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
 
 /-!
 # Height-two arithmetic specializations of normal-crossings branches
@@ -17,6 +19,8 @@ that branch then produces a height-two prime containing the branch.  This
 is the intrinsic codimension-two reduction used by local ramification
 arguments; the height-two prime is a conclusion, not input data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

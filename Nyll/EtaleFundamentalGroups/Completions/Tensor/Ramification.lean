@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Nyll.SchemeTheory.RingTheory.Ramification.BaseChange.Flat
+module
+
+public import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Nyll.SchemeTheory.RingTheory.Ramification.BaseChange.Flat
 
 /-!
 # Chosen primes after completion base change
@@ -20,6 +22,8 @@ required closed-fibre facts are provided by the completion API.  Combining
 this prime producer with flat-base-change invariance transports the original
 ramification index to the completed chosen tensor factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,10 +52,9 @@ theorem tensorProduct_map_maximalIdeal_isMaximal_of_residueFieldMap_bijective
     (hres : Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap R R'))) :
     let T := R' ⊗[R] S
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     ((IsLocalRing.maximalIdeal S).map (algebraMap S T)).IsMaximal := by
-  let T := R' ⊗[R] S
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro T sharedOwner2
   let : IsScalarTower R S T :=
     Algebra.TensorProduct.right_isScalarTower
   let : Module.FaithfullyFlat S T :=
@@ -168,11 +171,10 @@ theorem tensorProduct_map_maximalIdeal_liesOver_of_residueFieldMap_bijective
     (hres : Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap R R'))) :
     let T := R' ⊗[R] S
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     let q' := (IsLocalRing.maximalIdeal S).map (algebraMap S T)
     q'.IsMaximal ∧ q'.LiesOver (IsLocalRing.maximalIdeal R') := by
-  let T := R' ⊗[R] S
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro T sharedOwner2
   let : IsScalarTower R S T :=
     Algebra.TensorProduct.right_isScalarTower
   let : Algebra R' T := Algebra.TensorProduct.leftAlgebra
@@ -217,11 +219,10 @@ theorem tensorProduct_map_maximalIdeal_ramificationIdx_eq
     (hres : Function.Bijective
       (IsLocalRing.ResidueField.map (algebraMap R R'))) :
     let T := R' ⊗[R] S
-    letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra S T := Algebra.TensorProduct.rightAlgebra
     ((IsLocalRing.maximalIdeal S).map (algebraMap S T)).ramificationIdx R' =
       (IsLocalRing.maximalIdeal S).ramificationIdx R := by
-  let T := R' ⊗[R] S
-  let : Algebra S T := Algebra.TensorProduct.rightAlgebra
+  intro T sharedOwner2
   let : IsScalarTower R S T :=
     Algebra.TensorProduct.right_isScalarTower
   let : Algebra R' T := Algebra.TensorProduct.leftAlgebra
@@ -264,7 +265,7 @@ theorem adicCompletion_tensorProduct_maximalIdeal_ramificationIdx_eq
     letI : Algebra S T := Algebra.TensorProduct.rightAlgebra
     ((IsLocalRing.maximalIdeal S).map (algebraMap S T)).ramificationIdx R' =
       (IsLocalRing.maximalIdeal S).ramificationIdx R := by
-  let R' := AdicCompletion (IsLocalRing.maximalIdeal R) R
+  intro R'
   let : Module.FaithfullyFlat R R' :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
   let : Module.Flat R S := inferInstance

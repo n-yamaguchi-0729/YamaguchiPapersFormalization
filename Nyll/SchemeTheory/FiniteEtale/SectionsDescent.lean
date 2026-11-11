@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.RingTheory.Finiteness.Descent
+module
+
+public import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.Finiteness.Descent
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
 
 /-!
 # Descending finite étale global sections
@@ -17,6 +20,8 @@ The algebra of global sections descends as an actual finite étale algebra
 when it is finite étale after faithfully flat affine base change. The
 comparison is the pushout of the four actual maps on sections.
 -/
+
+@[expose] public section
 
 noncomputable section
 

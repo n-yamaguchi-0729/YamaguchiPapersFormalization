@@ -10,8 +10,10 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 
 /-!
 # Descent of geometric integrality across field base change
@@ -20,6 +22,8 @@ Geometric integrality is recovered from a pullback over a field extension. The a
 combines faithful flat descent of reducedness with the geometric irreducibility
 comparison.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

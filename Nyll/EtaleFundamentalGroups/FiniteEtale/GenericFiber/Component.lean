@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Localization.Away.Lemmas
-import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
+module
+
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Localization.Away.Lemmas
+public import Nyll.SchemeTheory.Normalization.GenericFiber.SmoothIntegralClosure
 
 /-!
 # A specified generic component of a finite etale algebra
@@ -17,6 +19,8 @@ idempotent of that specified component through smooth integral-closure base
 change.  The selected component normalization is thereby an actual
 idempotent factor of the original finite etale algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -57,7 +61,7 @@ theorem quotient_artinianSelectedComponentIdempotent_eq_zero
         (artinianSelectedComponentIdempotent m) M :=
       (IsArtinianRing.equivPi_apply _ _ _).symm
     _ = v M := congrFun hev M
-    _ = _ := by simp [v, M₀, hM]
+    _ = _ := by simp only [ne_eq, hM, not_false_eq_true, Pi.single_eq_of_ne, v, M₀]
 
 @[simp]
 theorem quotient_artinianSelectedComponentIdempotent
@@ -77,7 +81,7 @@ theorem quotient_artinianSelectedComponentIdempotent
           (⟨m, inferInstance⟩ : MaximalSpectrum G) :=
       (IsArtinianRing.equivPi_apply _ _ _).symm
     _ = v M₀ := congrFun hev M₀
-    _ = _ := by simp [v, M₀]
+    _ = _ := by simp only [Pi.single_eq_same, M₀, v]
 
 theorem artinianSelectedComponentIdempotent_isIdempotentElem
     (m : Ideal G) [m.IsMaximal] :
@@ -124,7 +128,7 @@ theorem exists_integral_artinianElement_supported_at_component
   let e : G := artinianSelectedComponentIdempotent m
   let y : G := e * z
   have hym : Ideal.Quotient.mk m y = x := by
-    simp [y, e, hz]
+    simp only [map_mul, quotient_artinianSelectedComponentIdempotent, hz, one_mul, y, e]
   obtain ⟨p, hpMonic, hpx⟩ := hx
   have hyIntegral : IsIntegral R y := by
     let q : R[X] := X * p
@@ -152,9 +156,9 @@ theorem exists_integral_artinianElement_supported_at_component
       change aeval x p = 0 at hpx
       rw [hpx, mul_zero]
     · rw [show Ideal.Quotient.mk M.asIdeal y = 0 by
-        simp [y, e,
-          quotient_artinianSelectedComponentIdempotent_eq_zero m M hM]]
-      simp [q]
+        simp only [map_mul, quotient_artinianSelectedComponentIdempotent_eq_zero m M hM, zero_mul,
+          y, e]]
+      simp only [map_mul, aeval_X, zero_mul, q]
   exact ⟨y, hyIntegral, hym⟩
 
 end ArtinianComponent

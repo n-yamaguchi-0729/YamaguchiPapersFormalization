@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Basic
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.IntegerValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
-import Mathlib.Algebra.Group.Subgroup.Lattice
-import Mathlib.Algebra.Ring.Defs
-import Mathlib.Data.Int.LeastGreatest
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.Norm.Basic
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.IntegerValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+public import Mathlib.Algebra.Group.Subgroup.Lattice
+public import Mathlib.Algebra.Ring.Defs
+public import Mathlib.Order.Int.LeastGreatest
 
 /-!
 # The principal-unit logarithm image has no nonzero p-divisible subgroup
@@ -24,6 +26,8 @@ Only the actual logarithm image is an input; its valuation bound is generated
 from the mixed-characteristic logarithm theorem. No closedness, finite
 generation, finite residue field, or additional scalar structure is needed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

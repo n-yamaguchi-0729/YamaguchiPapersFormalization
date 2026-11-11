@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaAllPrimes
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaMaximalQuotient
-import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaAllPrimes
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaMaximalQuotient
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 
 /-!
 # Remark 1.3: properties of `Σ`-ab-faithfulness
@@ -16,6 +18,8 @@ Source: [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1), Rem
 The first conjunct also
 records the all-primes identification stated with the definition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

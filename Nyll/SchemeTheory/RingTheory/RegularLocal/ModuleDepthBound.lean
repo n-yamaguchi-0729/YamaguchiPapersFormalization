@@ -15,12 +15,14 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
-import Mathlib.RingTheory.Support
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
+public import Mathlib.RingTheory.Support
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Bounding module depth by Krull dimension
@@ -28,6 +30,8 @@ import Mathlib.RingTheory.Ideal.Quotient.Operations
 The depth of a nontrivial finite module over a Noetherian local ring is bounded by the
 Krull dimension of its support and hence by the Krull dimension of the ring.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

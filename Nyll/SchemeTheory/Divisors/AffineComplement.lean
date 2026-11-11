@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Basic
+module
+
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Morphisms.Basic
 
 /-!
 # Principal affine charts of a divisor complement
@@ -15,6 +17,8 @@ The generator of the ideal on an affine chart identifies the actual inverse
 image of the support complement with a principal open. The resulting map
 from the principal localization forms a pullback square with that complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -52,7 +56,8 @@ theorem fromSpec_preimage_supportComplement_of_ideal_eq_span :
   ext p
   exact not_congr (fromSpec_mem_support_iff_of_ideal_eq_span I hU d hd p)
 
-private theorem affineAway_range_subset_supportComplement :
+/-- The principal affine localization maps into the original divisor complement. -/
+theorem affineAway_range_subset_supportComplement :
     Set.range (Spec.map (CommRingCat.ofHom
         (algebraMap Γ(X, U) (Localization.Away d))) ≫ hU.fromSpec) ⊆
       Set.range I.supportComplement.ι := by

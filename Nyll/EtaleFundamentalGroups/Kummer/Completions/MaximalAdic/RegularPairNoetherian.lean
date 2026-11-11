@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.AdicCompletion.Topology
-import Mathlib.RingTheory.PowerSeries.Evaluation
-import Mathlib.RingTheory.PowerSeries.Ideal
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularPair.ParameterQuotient
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.AdicCompletion.Topology
+public import Mathlib.RingTheory.PowerSeries.Evaluation
+public import Mathlib.RingTheory.PowerSeries.Ideal
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularPair.ParameterQuotient
 
 /-!
 # Noetherianity of the maximal-adic completion of a regular pair
@@ -30,6 +32,8 @@ surjectivity first across `x` and then across `y`.
 This supplies an actual Noetherian source and does not add Noetherianity of
 the completion as a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

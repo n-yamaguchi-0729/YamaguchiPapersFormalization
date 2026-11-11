@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.ContinuousFieldUnitLog
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WithZeroCompleteSpace
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.ContinuousFieldUnitLog
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WithZeroCompleteSpace
 
 /-!
 # The principal-unit logarithm in mixed characteristic
@@ -16,6 +18,8 @@ valuation field, including fields with infinite residue field. Its scale and
 the completeness of the actual valuation topology are supplied by the
 valuation, rather than requested as comparison hypotheses.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

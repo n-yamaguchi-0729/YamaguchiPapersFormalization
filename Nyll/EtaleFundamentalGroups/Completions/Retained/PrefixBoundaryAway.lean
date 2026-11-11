@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.IntegralClosureBaseChange
-import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.IntegralClosureBaseChange
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularPair.IntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
 
 /-!
 # Boundary Away for a retained prefix component after completion
@@ -22,6 +24,8 @@ of the completed regular pair, and all fraction-field towers are constructed
 inside the theorem.  No completed comparison or completed Away hypothesis is
 exposed to the caller.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -57,10 +61,10 @@ theorem retainedCompletedPrefix_normalization_boundaryAway
     let hCFinite : Module.Finite B C :=
       SpecialLocalPurity.integralClosure_finite_of_isRegularLocalRing_dimension_two
         (K := K) hdim
-    letI : Module.Finite B C := hCFinite
+    let : Module.Finite B C := hCFinite
     let hCFraction : IsFractionRing C M :=
       IsIntegralClosure.isFractionRing_of_finite_extension B K M C
-    letI : IsFractionRing C M := hCFraction
+    let : IsFractionRing C M := hCFraction
     let hCFaithful : FaithfulSMul B C :=
       (faithfulSMul_iff_algebraMap_injective B C).mpr fun x w hxw ↦ by
         apply (IsFractionRing.injective B K)
@@ -73,15 +77,15 @@ theorem retainedCompletedPrefix_normalization_boundaryAway
           _ = algebraMap B M w := hxM
           _ = algebraMap K M (algebraMap B K w) :=
             IsScalarTower.algebraMap_apply B K M w
-    letI : FaithfulSMul B C := hCFaithful
+    let : FaithfulSMul B C := hCFaithful
     let Bhat := AdicCompletion (IsLocalRing.maximalIdeal B) B
     let hgeometry :=
       Kummer.maximalAdicCompletion_regularPair_geometry hreg hgen
     let hBhatDomain : IsDomain Bhat := hgeometry.1
-    letI : IsDomain Bhat := hBhatDomain
+    let : IsDomain Bhat := hBhatDomain
     let hBhatNoetherian : IsNoetherianRing Bhat :=
       Kummer.maximalAdicCompletion_isNoetherianRing_of_regularPair hreg hgen
-    letI : IsNoetherianRing Bhat := hBhatNoetherian
+    let : IsNoetherianRing Bhat := hBhatNoetherian
     let yhat := algebraMap B Bhat y
     let zhat := algebraMap B Bhat z
     let hregHat : IsRegular Bhat [yhat, zhat] := by
@@ -92,17 +96,17 @@ theorem retainedCompletedPrefix_normalization_boundaryAway
     let hBhatNormal : IsIntegrallyClosed Bhat :=
       SpecialLocalPurity.isIntegrallyClosed_of_isRegular_pair_of_span_eq_maximalIdeal
         Bhat yhat zhat hregHat hgenHat
-    letI : IsIntegrallyClosed Bhat := hBhatNormal
+    let : IsIntegrallyClosed Bhat := hBhatNormal
     let Khat := FractionRing Bhat
     let hBhatFaithfullyFlat : Module.FaithfullyFlat B Bhat :=
       Module.FaithfullyFlat.of_flat_of_isLocalHom
-    letI : Module.FaithfullyFlat B Bhat := hBhatFaithfullyFlat
-    letI : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
-    letI : Algebra K Khat :=
+    let : Module.FaithfullyFlat B Bhat := hBhatFaithfullyFlat
+    let : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
+    let : Algebra K Khat :=
       (IsFractionRing.lift
         (A := B) (K := K) (L := Khat)
         (FaithfulSMul.algebraMap_injective B Khat)).toAlgebra
-    letI : IsScalarTower B K Khat :=
+    let : IsScalarTower B K Khat :=
       IsScalarTower.of_algebraMap_smul fun b x ↦ by
         rw [Algebra.smul_def, Algebra.smul_def]
         change
@@ -115,84 +119,26 @@ theorem retainedCompletedPrefix_normalization_boundaryAway
     let m := retainedCompletedGenericTensorIdeal
       (R := B) (R' := Bhat) (S := C) (K := K) (L := M)
       (K' := Khat) N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := B) (R' := Bhat) (S := C) (K := K) (L := M)
       (K' := Khat) N
     let Omega := GenericTensorFieldComponent m
-    letI : Algebra Bhat Omega :=
+    let : Algebra Bhat Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) m
-    letI : SMul Bhat Omega :=
+    let : SMul Bhat Omega :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) m).toSMul
-    letI : IsScalarTower Bhat Khat Omega :=
+    let : IsScalarTower Bhat Khat Omega :=
       IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
     (Localization.awayMap
       (algebraMap Bhat (integralClosure Bhat Omega)) yhat).Etale := by
   classical
-  dsimp only
-  let C := integralClosure B M
-  let : Module.Finite B C :=
-    SpecialLocalPurity.integralClosure_finite_of_isRegularLocalRing_dimension_two
-      (K := K) hdim
-  let : IsFractionRing C M :=
-    IsIntegralClosure.isFractionRing_of_finite_extension B K M C
-  let : FaithfulSMul B C :=
-    (faithfulSMul_iff_algebraMap_injective B C).mpr fun x w hxw ↦ by
-      apply (IsFractionRing.injective B K)
-      apply (algebraMap K M).injective
-      have hxM := congrArg (fun c : C ↦ (c : M)) hxw
-      change algebraMap B M x = algebraMap B M w at hxM
-      calc
-        algebraMap K M (algebraMap B K x) = algebraMap B M x :=
-          (IsScalarTower.algebraMap_apply B K M x).symm
-        _ = algebraMap B M w := hxM
-        _ = algebraMap K M (algebraMap B K w) :=
-          IsScalarTower.algebraMap_apply B K M w
-  let Bhat := AdicCompletion (IsLocalRing.maximalIdeal B) B
-  have hgeometry :=
-    Kummer.maximalAdicCompletion_regularPair_geometry hreg hgen
-  let : IsDomain Bhat := hgeometry.1
-  let : IsNoetherianRing Bhat :=
-    Kummer.maximalAdicCompletion_isNoetherianRing_of_regularPair hreg hgen
-  let yhat : Bhat := algebraMap B Bhat y
-  let zhat : Bhat := algebraMap B Bhat z
-  have hregHat : IsRegular Bhat [yhat, zhat] := by
-    simpa only [Bhat, yhat, zhat] using hgeometry.2.1
-  have hgenHat : Ideal.ofList [yhat, zhat] =
-      IsLocalRing.maximalIdeal Bhat := by
-    simpa only [Bhat, yhat, zhat] using hgeometry.2.2.1
+  intro C sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6 Bhat
+    hgeometry sharedOwner7 sharedOwner8 sharedOwner9 sharedOwner10 yhat zhat hregHat hgenHat
+    sharedOwner15 sharedOwner16 Khat sharedOwner17 sharedOwner18 sharedOwner19 sharedOwner20
+    sharedOwner21 m sharedOwner22 Omega omegaAlgebra sharedOwner23 sharedOwner24
   let : IsIntegrallyClosed Bhat :=
-    SpecialLocalPurity.isIntegrallyClosed_of_isRegular_pair_of_span_eq_maximalIdeal
-      Bhat yhat zhat hregHat hgenHat
-  let Khat := FractionRing Bhat
-  let : Module.FaithfullyFlat B Bhat :=
-    Module.FaithfullyFlat.of_flat_of_isLocalHom
-  let : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
-  let : Algebra K Khat :=
-    (IsFractionRing.lift
-      (A := B) (K := K) (L := Khat)
-      (FaithfulSMul.algebraMap_injective B Khat)).toAlgebra
-  let : IsScalarTower B K Khat :=
-    IsScalarTower.of_algebraMap_smul fun b x ↦ by
-      rw [Algebra.smul_def, Algebra.smul_def]
-      change
-        (IsFractionRing.lift
-          (A := B) (K := K) (L := Khat)
-          (FaithfulSMul.algebraMap_injective B Khat))
-            (algebraMap B K b) * x =
-          algebraMap B Khat b * x
-      rw [IsFractionRing.lift_algebraMap]
-  let m := retainedCompletedGenericTensorIdeal
-    (R := B) (R' := Bhat) (S := C) (K := K) (L := M)
-    (K' := Khat) N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := B) (R' := Bhat) (S := C) (K := K) (L := M)
-    (K' := Khat) N
-  let Omega := GenericTensorFieldComponent m
-  let omegaAlgebra : Algebra Bhat Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) m
-  let : SMul Bhat Omega := omegaAlgebra.toSMul
-  let : IsScalarTower Bhat Khat Omega :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+    sharedOwner16
+  let : SMul Bhat Omega := sharedOwner23
   have hyne : y ≠ 0 :=
     (Kummer.prime_of_mem_regularSystem hreg hgen (List.mem_cons_self)).ne_zero
   simpa only [Omega, yhat] using

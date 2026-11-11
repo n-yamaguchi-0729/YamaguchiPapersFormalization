@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveHullFiniteLengthDual
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveHullFiniteLengthDual
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Scalar endomorphisms on finite truncations of a residue-field hull
@@ -19,6 +21,8 @@ quotient.  Finite biduality supplies the scalar as a class in that
 quotient.  Separation by the injective hull proves that its residue
 class is unique.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

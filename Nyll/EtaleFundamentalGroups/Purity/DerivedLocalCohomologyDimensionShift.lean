@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Exact.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Exact.Basic
 
 /-!
 # Dimension shifting for derived local cohomology
@@ -17,6 +19,8 @@ injective, and bijective when its source cohomology degree is positive.
 These are consequences of the actual coefficient long exact sequence and
 vanishing of positive Ext groups for injective modules.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

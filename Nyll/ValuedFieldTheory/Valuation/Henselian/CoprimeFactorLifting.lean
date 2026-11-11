@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.EtaleLifting
-import Mathlib.RingTheory.Polynomial.UniversalFactorizationRing
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.EtaleLifting
+public import Mathlib.RingTheory.Polynomial.UniversalFactorizationRing
 
 /-!
 # Coprime factor lifting from the simple-root Hensel property
@@ -15,6 +17,8 @@ universal coprime factorization algebra. This algebra is etale, so its residue
 point lifts over a Henselian pair. The universal factors give the requested
 factorization, with their degrees and prescribed reductions.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

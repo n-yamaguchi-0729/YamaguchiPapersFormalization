@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerEvaluation
-import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerEvaluation
+public import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
 
 /-!
 # Naturality of absolute Kummer characters
@@ -16,13 +18,15 @@ Galois automorphism, is the transformed original character value. When the
 base automorphism fixes the roots of unity, the coefficient value is unchanged.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
-variable (K : Type*) [Field K] [CharZero K]
+variable (K : Type*) [Field K] [PerfectField K]
 
 /-- Absolute Kummer characters commute pointwise with the chosen extension
 of a base-field automorphism and its conjugation on the Galois group. -/

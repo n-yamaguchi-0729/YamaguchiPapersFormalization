@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Algebra
-import Mathlib.RingTheory.DedekindDomain.Factorization
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.QuasiFinite.Basic
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Algebra
+public import Mathlib.RingTheory.DedekindDomain.Factorization
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.QuasiFinite.Basic
 
 /-!
 # Adic completion at a finite product of coprime ideals
@@ -17,6 +19,8 @@ a product of pairwise coprime ideals.  This file proves that these finite-level
 decompositions are compatible with the transition maps, and hence split the
 adic completion itself as the product of the individual completions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -31,7 +35,7 @@ variable {ι : Type uI} [Fintype ι]
 
 /-- The finite-level Chinese-remainder equivalence for powers of a product of
 pairwise coprime ideals. -/
-private noncomputable def quotientProdPowEquiv
+noncomputable def quotientProdPowEquiv
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) (n : ℕ) :
     R ⧸ (∏ i, J i) ^ n ≃+* ∀ i, R ⧸ J i ^ n := by
   classical
@@ -103,14 +107,16 @@ private theorem factorPow_evalₐ
         (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
-private noncomputable def quotientProjectionRingHom
+/-- Project the product-adic completion to one component at a finite ideal-power level. -/
+noncomputable def quotientProjectionRingHom
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) (i : ι) (n : ℕ) :
     AdicCompletion (∏ j, J j) R →+* R ⧸ J i ^ n :=
   (Pi.evalRingHom (fun i => R ⧸ J i ^ n) i).comp
     ((quotientProdPowEquiv J hJ n).toRingHom.comp
       (AdicCompletion.evalₐ (∏ j, J j) n).toRingHom)
 
-private theorem quotientProjectionRingHom_compatible
+/-- The component quotient projections commute with the ideal-power transitions. -/
+theorem quotientProjectionRingHom_compatible
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) (i : ι) :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow (J i) hmn).comp
@@ -128,7 +134,7 @@ private theorem quotientProjectionRingHom_compatible
 
 /-- Projection from the completion at the product to one of the individual
 adic completions. -/
-private noncomputable def adicCompletionToComponent
+noncomputable def adicCompletionToComponent
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) (i : ι) :
     AdicCompletion (∏ j, J j) R →+* AdicCompletion (J i) R :=
   AdicCompletion.liftRingHom (J i)
@@ -146,7 +152,8 @@ private theorem evalₐ_adicCompletionToComponent
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private noncomputable def quotientAssemblyRingHom
+/-- Assemble component completion values using the finite-level Chinese remainder equivalence. -/
+noncomputable def quotientAssemblyRingHom
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) (n : ℕ) :
     (∀ i, AdicCompletion (J i) R) →+* R ⧸ (∏ i, J i) ^ n :=
   (quotientProdPowEquiv J hJ n).symm.toRingHom.comp
@@ -154,7 +161,8 @@ private noncomputable def quotientAssemblyRingHom
       (AdicCompletion.evalₐ (J i) n).toRingHom.comp
         (Pi.evalRingHom (fun i => AdicCompletion (J i) R) i))
 
-private theorem quotientAssemblyRingHom_compatible
+/-- The finite-level assembly maps commute with the ideal-power transitions. -/
+theorem quotientAssemblyRingHom_compatible
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow (∏ i, J i) hmn).comp
@@ -174,7 +182,7 @@ private theorem quotientAssemblyRingHom_compatible
 
 /-- Reassemble a tuple of individual adic completions using the inverse
 finite-level Chinese-remainder maps. -/
-private noncomputable def adicCompletionFromPi
+noncomputable def adicCompletionFromPi
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) :
     (∀ i, AdicCompletion (J i) R) →+* AdicCompletion (∏ i, J i) R :=
   AdicCompletion.liftRingHom (∏ i, J i)
@@ -192,12 +200,14 @@ private theorem evalₐ_adicCompletionFromPi
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private noncomputable def adicCompletionToPi
+/-- Project the completion at the product ideal to all component completions. -/
+noncomputable def adicCompletionToPi
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) :
     AdicCompletion (∏ i, J i) R →+* ∀ i, AdicCompletion (J i) R :=
   RingHom.pi fun i => adicCompletionToComponent J hJ i
 
-private theorem adicCompletionToPi_comp_fromPi
+/-- Projection after assembly is the identity on the product of completions. -/
+theorem adicCompletionToPi_comp_fromPi
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) :
     (adicCompletionToPi J hJ).comp (adicCompletionFromPi J hJ) =
       RingHom.id (∀ i, AdicCompletion (J i) R) := by
@@ -209,7 +219,8 @@ private theorem adicCompletionToPi_comp_fromPi
   intro n
   simp [adicCompletionToPi]
 
-private theorem adicCompletionFromPi_comp_toPi
+/-- Assembly after projection is the identity on the product-ideal completion. -/
+theorem adicCompletionFromPi_comp_toPi
     (J : ι → Ideal R) (hJ : Pairwise (IsCoprime on J)) :
     (adicCompletionFromPi J hJ).comp (adicCompletionToPi J hJ) =
       RingHom.id (AdicCompletion (∏ i, J i) R) := by
@@ -272,8 +283,9 @@ theorem adicCompletionIdealCongr_of
   subst J
   rfl
 
+/-- The finite type of primes above an ideal in a finite integral extension. -/
 @[reducible]
-private noncomputable def integralExtensionPrimesOverFintype
+noncomputable def integralExtensionPrimesOverFintype
     {A : Type*} [CommRing A] [IsDomain A]
     {B : Type*} [CommRing B] [IsDedekindDomain B]
     [Algebra A B] [Algebra.IsIntegral A B] [Module.Finite A B]
@@ -299,7 +311,8 @@ theorem integralExtensionPrimePowerFamily_apply
       Q.1 ^ Q.1.ramificationIdx A :=
   rfl
 
-private theorem integralExtensionPrimePowerFamily_pairwise
+/-- The prime-power factors above a maximal ideal are pairwise coprime. -/
+theorem integralExtensionPrimePowerFamily_pairwise
     {A : Type*} [CommRing A] [IsDomain A]
     {B : Type*} [CommRing B] [IsDedekindDomain B]
     [Algebra A B] [Algebra.IsIntegral A B]
@@ -312,18 +325,18 @@ private theorem integralExtensionPrimePowerFamily_pairwise
       (Ideal.primesOver.isMaximal Q')
       (Subtype.coe_injective.ne hQQ'))).pow
 
-private theorem integralExtension_map_eq_prod_primePowerFamily
+/-- An extended nonzero maximal ideal is the product of its ramified prime-power factors. -/
+theorem integralExtension_map_eq_prod_primePowerFamily
     {A : Type*} [CommRing A] [IsDomain A]
     {B : Type*} [CommRing B] [IsDedekindDomain B]
     [Algebra A B] [Algebra.IsIntegral A B] [Module.IsTorsionFree A B]
     [Module.Finite A B]
     (p : Ideal A) [p.IsMaximal] (hp : p ≠ ⊥) :
-    letI : Fintype (p.primesOver B) :=
+    let : Fintype (p.primesOver B) :=
       integralExtensionPrimesOverFintype p
     p.map (algebraMap A B) =
       ∏ Q, integralExtensionPrimePowerFamily (B := B) p Q := by
-  let : Fintype (p.primesOver B) :=
-    integralExtensionPrimesOverFintype p
+  intro sharedOwner1
   rw [Ideal.map_algebraMap_eq_finsetProd_pow hp]
   simpa [integralExtensionPrimePowerFamily] using
     (Finset.prod_set_coe (s := p.primesOver B)

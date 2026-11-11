@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.AssociatedPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.AssociatedPrime
 
 /-!
 # Minimal non-etale points on the base
@@ -16,6 +18,8 @@ point upstairs.  Every target prime contracting strictly below that base
 point is etale.  This is the local input needed before applying punctured
 purity at a minimal branch point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

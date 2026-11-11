@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationPrimeToResidueTorsion
-import Mathlib.Algebra.Group.Subgroup.Finite
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.GroupTheory.PGroup
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationPrimeToResidueTorsion
+public import Mathlib.Algebra.Group.Subgroup.Finite
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.GroupTheory.PGroup
 
 /-!
 # Finite ramification groups in positive and zero residue characteristic
@@ -25,6 +27,8 @@ no normality, Henselianity, discreteness, perfectness, or finite residue field
 is required.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

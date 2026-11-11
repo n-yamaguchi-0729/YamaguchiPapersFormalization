@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadical
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
 
 /-!
 # The actual field factor after a higher uniformizer radical
@@ -18,6 +21,8 @@ factor.  The first two constructions record the canonical generic-fibre
 coordinates needed on both the pure-root and the finite-etale unit-factor
 sides.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -160,7 +165,7 @@ def targetCompositumOverLowerRadical
     (e N : ℕ) (beta : Omega) :
     let F := lowerRadicalField (K := K) e N beta
     IntermediateField F Omega := by
-  let F := lowerRadicalField (K := K) e N beta
+  intro F
   let Limage : IntermediateField K Omega :=
     (IsScalarTower.toAlgHom K L Omega).fieldRange
   exact (Limage ⊔ F).toSubfield.toIntermediateField
@@ -173,7 +178,7 @@ def higherRadicalFieldOverLower
     [Algebra K Omega] (e N : ℕ) (beta : Omega) :
     let F := lowerRadicalField (K := K) e N beta
     IntermediateField F Omega := by
-  let F := lowerRadicalField (K := K) e N beta
+  intro F
   let Kₙ : IntermediateField K Omega :=
     IntermediateField.adjoin K ({beta} : Set Omega)
   have hF : F.toSubfield ≤ Kₙ.toSubfield := by
@@ -293,7 +298,8 @@ theorem higherRoot_genericMaps_comp_eq
       (fE (AdjoinRoot.root (X ^ e - C a)))
       (N / e) beta hNroot (hEroot.trans halpha.symm)
 
-private theorem unitFactor_genericMaps_comp_eq
+/-- Generic maps agree when they agree on the coefficient ring and the chosen radical. -/
+theorem unitFactor_genericMaps_comp_eq
     {A : Type u} {W F E Omega : Type v}
     [CommRing A] [CommRing W] [CommRing F] [CommRing E] [CommRing Omega]
     {e : ℕ} (a : A) (pi : W) (q : W[X])
@@ -392,7 +398,7 @@ private theorem finiteDimensional_targetCompositumOverLowerRadical
     let E := targetCompositumOverLowerRadical
       (K := K) (L := L) e N beta
     FiniteDimensional F E := by
-  let F := lowerRadicalField (K := K) e N beta
+  intro F
   let Limage : IntermediateField K Omega :=
     (IsScalarTower.toAlgHom K L Omega).fieldRange
   let E := targetCompositumOverLowerRadical
@@ -563,7 +569,7 @@ noncomputable def lowerUnitFactorGenericFiberAlgEquiv
     letI : Algebra Rₑ Cq :=
       factor.radicalToUnitFactor.toRingHom.toAlgebra
     (F ⊗[Rₑ] Cq) ≃ₐ[F] E := by
-  let V := base.valuationSubring
+  intro V
   let W := target.valuationSubring
   let e := ramificationIndex base target
   let alpha : AlgebraicClosure L := beta ^ (N / e)

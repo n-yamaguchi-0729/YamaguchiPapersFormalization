@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisAbelianModPower
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.RingTheory.Valuation.Basic
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Nyll.ProCGroups.Abelian.AbelianModPower
-import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.FieldTheory.Galois.Profinite
-import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
-import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
-import Nyll.ValuedFieldTheory.Valuation.Completion.ArtinSchreierClasses
-import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisAbelianModPower
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.RingTheory.Valuation.Basic
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicCompletionApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
+public import Nyll.ValuedFieldTheory.Valuation.Completion.ArtinSchreierClasses
+public import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
 
 /-!
 # Weak approximation for characters
@@ -31,6 +33,8 @@ Galois-group map attached to the canonical embedding into a completion.
 The product map on maximal exponent-`q` abelian quotients is formed from
 mathlib's absolute Galois-group maps and topological abelianization maps.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

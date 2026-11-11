@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.LocalCohomology
-import Mathlib.RingTheory.Regular.Category
-import Mathlib.RingTheory.QuotSMulTop
+module
+
+public import Mathlib.Algebra.Homology.LocalCohomology
+public import Mathlib.RingTheory.Regular.Category
+public import Mathlib.RingTheory.QuotSMulTop
 
 /-!
 # Principal ideal-power quotients
@@ -16,6 +18,8 @@ canonically the quotient by the submodule `x ^ n R`.  This file records that
 identification and its compatibility with the standard transition maps between
 power quotients.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.Data.ZMod.Units
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.GroupTheory.OrderOfElement
+module
+
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Data.ZMod.Units
+public import Mathlib.Data.Nat.Prime.Basic
+public import Mathlib.GroupTheory.OrderOfElement
 
 /-!
 # Reduction of the action on primitive roots
@@ -16,6 +18,8 @@ The exponent of an automorphism on a primitive `p`-power root reduces to its
 exponent on any primitive `p`-th root in the same field. The two roots need
 not be chosen compatibly.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

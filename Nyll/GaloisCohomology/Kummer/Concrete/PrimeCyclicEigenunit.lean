@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclicExtension
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclicExtension
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Primitive eigenunits in prime-degree Galois extensions
@@ -17,6 +19,8 @@ eigenunit with primitive eigenvalue when the base field contains the
 corresponding roots of unity. The unit is produced by the cyclic Kummer
 radical generator theorem.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 
@@ -63,7 +67,7 @@ theorem exists_primitive_eigenunit_of_prime_degree
       exact IntermediateField.mem_top
     change σ x = x
     refine IntermediateField.adjoin_induction K
-      (p := fun y _hy => σ y = y) ?_ ?_ ?_ ?_ ?_ hx
+      (motive := fun y _hy => σ y = y) ?_ ?_ ?_ ?_ ?_ hx
     · intro y hy
       have hya : y = a := Set.mem_singleton_iff.1 hy
       rw [hya]

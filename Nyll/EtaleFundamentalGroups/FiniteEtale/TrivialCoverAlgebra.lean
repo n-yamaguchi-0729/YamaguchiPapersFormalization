@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.CategoryTheory.Limits.Shapes.Products
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.TrivialComposite
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 
 /-!
@@ -17,6 +19,8 @@ import Mathlib.CategoryTheory.Limits.Shapes.Products
 The finite terminal-coproduct decomposition supplied by the Galois category
 is transported to the actual spectrum of a finite product of the base ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

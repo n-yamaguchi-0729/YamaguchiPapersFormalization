@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Fin.SuccPred
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.ConditionalRootCover
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchPair
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchSupport
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.Parameters
+module
+
+public import Mathlib.Data.Fin.SuccPred
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.ConditionalRootCover
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchPair
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchSupport
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.Parameters
 
 /-!
 # Conditional root covers at height-two strict-normal-crossings points
@@ -23,6 +25,8 @@ whole root cover is therefore the all-one cover.  Otherwise the unique second
 branch is moved to the first coordinate; it is the only possibly nontrivial
 stage and the existing one-root geometry applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

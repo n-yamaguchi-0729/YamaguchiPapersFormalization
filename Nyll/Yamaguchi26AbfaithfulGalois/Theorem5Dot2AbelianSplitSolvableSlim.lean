@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem5Dot1FaithfulAbelianExtension
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
-import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.BasisAtOne
-import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
-import Mathlib.Topology.Algebra.Group.Quotient
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem5Dot1FaithfulAbelianExtension
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
+public import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.BasisAtOne
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Mathlib.Topology.Algebra.Group.Quotient
 
 /-!
 # Proposition 5.2: finite split abelian embedding problems imply finite-step slimness
@@ -23,6 +25,8 @@ For an open subgroup of `G^m`, choose a smaller open normal subgroup avoiding a
 nonidentity centralizing element. Lemma 5.1 supplies the finite split problem.
 Its proper solution factors through `G^m`, and faithfulness gives the contradiction.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerAdjoinRoot
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.EisensteinResidue
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerAdjoinRoot
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.EisensteinResidue
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 
 /-!
 # A cyclic Kummer extension with unchanged residue field
@@ -23,6 +25,8 @@ The comparison uses only the canonical coefficient-ring algebra belonging
 to that valuation tower. No residue characteristic or residue separability
 condition is imposed.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousHilbert90
-import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
-import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
-import Mathlib.FieldTheory.IsSepClosed
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousHilbert90
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
+public import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
+public import Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # Lifting continuous cocycles through power maps
@@ -17,6 +19,8 @@ multiplicative cocycle as a coboundary. Taking a root of that actual coboundary
 parameter lifts the cocycle, preserving local constancy and the root-of-unity
 coefficient bound.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open groupCohomology

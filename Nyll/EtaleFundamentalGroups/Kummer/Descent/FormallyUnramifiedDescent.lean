@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Kaehler
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+module
+
+public import Mathlib.RingTheory.Etale.Kaehler
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 
 /-!
 # Faithfully flat descent of formal unramifiedness
@@ -15,6 +17,8 @@ faithfully flat final map.  The proof identifies the base change of the
 Kaehler differentials with the differentials of the composite and then uses
 faithful flatness to reflect triviality.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

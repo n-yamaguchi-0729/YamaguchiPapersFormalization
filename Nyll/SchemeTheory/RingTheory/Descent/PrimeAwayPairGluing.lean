@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
-import Mathlib.LinearAlgebra.TensorProduct.Prod
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
+public import Mathlib.LinearAlgebra.TensorProduct.Prod
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Gluing across two principal opens after flat base change
@@ -17,6 +19,8 @@ equalizer. This supplies the scalar extension step on completion overlaps;
 neither normality nor Noetherianity of the tensor product is required.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

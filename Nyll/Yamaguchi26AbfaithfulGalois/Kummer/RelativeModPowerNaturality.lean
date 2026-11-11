@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
 
 /-!
 # Naturality of relative actions on abelianization modulo powers
@@ -16,11 +18,14 @@ An embedding intertwining two relative automorphisms intertwines their actions
 on the actual absolute Galois abelianizations, independently of closure lifts.
 -/
 
+@[expose] public section
+
 namespace Yamaguchi26AbfaithfulGalois
 open KummerTheory ProCGroups.Abelian
 open Field.absoluteGaloisGroup
-universe u
-variable {K L F E : Type u} [Field K] [Field L] [Field F] [Field E]
+universe u v w x
+variable {K : Type u} {L : Type v} {F : Type w} {E : Type x}
+  [Field K] [Field L] [Field F] [Field E]
   [Algebra K L] [Algebra F E]
 
 /-- Intertwined relative field automorphisms induce intertwined maps on the

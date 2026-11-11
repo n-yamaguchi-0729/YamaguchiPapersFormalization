@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
-import Nyll.SchemeTheory.Divisors.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+public import Nyll.SchemeTheory.Divisors.Basic
 
 /-!
 # Reduced ideal sheaves and their closed subschemes
@@ -14,6 +16,8 @@ An ideal sheaf is radical exactly when its associated closed subscheme is
 reduced.  This is checked on the canonical affine cover by the quotients
 `Spec (Γ(X, U) / I(U))`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

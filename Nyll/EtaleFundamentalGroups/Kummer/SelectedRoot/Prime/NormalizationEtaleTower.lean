@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
-import Nyll.EtaleFundamentalGroups.GenericTensor.ComponentRestrictBase
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtaleDescent
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericTensorComponent
+public import Nyll.EtaleFundamentalGroups.GenericTensor.ComponentRestrictBase
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtaleDescent
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # Etale normalization in a component after a selected root and a further base change
@@ -18,6 +22,8 @@ then applies a further normal base change, selecting an arbitrary component of
 the resulting generic tensor product.  In particular, the second component is
 not replaced by an abstract comparison field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

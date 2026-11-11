@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtColimit
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtColimit
 
 /-!
 # Exactness in the coefficients of derived local cohomology
@@ -16,6 +18,8 @@ to the quotients by all powers of an ideal gives an objectwise exact diagram.
 Exactness of filtered colimits then gives exactness of every adjacent
 three-term window after passing to derived local cohomology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

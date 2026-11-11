@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.GaloisStability
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+module
+
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.GaloisStability
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Local chart data at an arithmetic boundary component
@@ -17,6 +19,8 @@ file packages those inputs at the canonical component generic point: ambient
 regularity, dominance over the arithmetic base, geometric integrality of the
 generic fibre, and an affine principal Cartier chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.CategoryTheory.Galois.Decomposition
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+module
+
+public import Mathlib.CategoryTheory.Galois.Decomposition
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
 
 /-!
 # Reducing essential surjectivity to connected finite-etale covers
@@ -16,6 +18,8 @@ cover is therefore enough to extend an arbitrary (possibly disconnected)
 cover.  This file records that categorical reduction for the actual
 finite-etale categories of schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

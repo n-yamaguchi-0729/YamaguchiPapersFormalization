@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Mathlib.CategoryTheory.Galois.Decomposition
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Topology.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Mathlib.CategoryTheory.Galois.Decomposition
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.Topology.Basic
 
 /-!
 # A normalized geometric point lies in an actual cover component
@@ -22,6 +24,8 @@ is closed, so it covers the normalization. The open-immersion lifting
 property then factors an actual geometric-point morphism through one of
 these normalized components.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -126,8 +130,8 @@ theorem exists_galoisNormalizationComponent_geometricPoint
     intro a c
     obtain ⟨sigma, hsigma⟩ := evaluation_aut_surjective_of_isGalois F Z'
       (F.map e.inv a) (F.map e.inv c)
-    refine ⟨e.symm ≪≫ sigma ≪≫ e, ?_⟩
-    change F.map ((e.inv ≫ sigma.hom) ≫ e.hom) a = c
+    refine ⟨Aut.of (e.symm ≪≫ sigma.asIso ≪≫ e), ?_⟩
+    change F.map ((e.inv ≫ sigma.asIso.hom) ≫ e.hom) a = c
     simp only [Functor.map_comp, FintypeCat.comp_apply]
     exact (congrArg (fun v : F.obj Z' => F.map e.hom v) hsigma).trans
       (FintypeCat.inv_hom_id_apply (F.mapIso e) c)

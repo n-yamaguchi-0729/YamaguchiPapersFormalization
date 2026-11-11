@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.CharacterClasses
-import Mathlib.Tactic.Choose
-import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.CharacterClasses
+public import Mathlib.Tactic.Choose
+public import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
 
 /-!
 # Prescribing Artin–Schreier characters along field embeddings
@@ -14,6 +16,8 @@ import Nyll.GaloisCohomology.Topology.SeparableGaloisMap
 Root differences commute with the actual absolute Galois restriction maps.
 Simultaneous approximation of additive classes therefore prescribes characters.
 -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 open Field.absoluteGaloisGroup ValuationTheory.Completion

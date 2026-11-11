@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Mathlib.GroupTheory.ArchimedeanDensely
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Topology.Algebra.UniformRing
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Mathlib.GroupTheory.ArchimedeanDensely
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Topology.Algebra.UniformRing
 
 /-!
 # Completion of an isomorphism preserving discrete valuations
@@ -17,6 +19,8 @@ A field isomorphism which carries one valuation to an equivalent valuation
 induces an isomorphism of the actual valued completions. The construction
 preserves the original embedding of the field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

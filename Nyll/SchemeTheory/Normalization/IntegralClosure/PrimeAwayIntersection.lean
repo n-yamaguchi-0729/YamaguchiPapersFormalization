@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Prime.Lemmas
-import Mathlib.RingTheory.Localization.AsSubring
+module
+
+public import Mathlib.Algebra.Prime.Lemmas
+public import Mathlib.RingTheory.Localization.AsSubring
 
 /-!
 # Intersecting two principal localizations
@@ -19,6 +21,8 @@ normalization argument.  In particular, it avoids installing a global UFD
 instance on `A`.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

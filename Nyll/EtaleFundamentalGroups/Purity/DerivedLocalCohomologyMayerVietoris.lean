@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtMiddle
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtMiddle
 
 /-!
 # Mayer--Vietoris vanishing for derived local cohomology
@@ -14,6 +16,8 @@ ideal-quotient derived-Ext sequence has support terms `I ⊓ J`, `I ⊔ J`, and
 the biproduct of the `I`- and `J`-support terms.  Thus vanishing of the two
 outer objects forces vanishing for the supremum support.
 -/
+
+@[expose] public section
 
 noncomputable section
 

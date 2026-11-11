@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialIdealPowerTorsion
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialIdealPowerTorsion
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Power torsion in an essential extension of the residue field
@@ -18,6 +20,8 @@ preservation of ideal-power torsion under essential extensions therefore
 makes every vector in an essential extension of that image power torsion.
 No injectivity assumption on the ambient module is required.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

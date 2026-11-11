@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalArtinianDualFinite
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionNonvanishing
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Group.Action.Basic
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalArtinianDualFinite
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionNonvanishing
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Group.Action.Basic
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # The dual of top local cohomology over a complete local domain
@@ -31,6 +33,8 @@ containing the residue field also make this dual nonzero. Artinianness
 and maximal-ideal-power torsion make the dual into the residue-field
 injective hull finitely generated.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.CohomologyVanishing
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.CohomologyVanishing
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Mathlib.FieldTheory.Galois.Infinite
 
 /-! # Vanishing of prime-field H² on open Galois subgroups -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 universe u v

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
 
 /-!
 # Residue fields of the standard DVR completion
@@ -15,6 +17,8 @@ proved directly from density: every integral completed element is congruent
 modulo the completed maximal ideal to an integral element of the original
 fraction field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,21 +38,15 @@ theorem standardDVFCompletion_residueFieldMap_bijective
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let base := standardDVFOfDVR V K
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra K (standardDVFCompletionField V K) :=
+    let : Algebra K (standardDVFCompletionField V K) :=
       standardDVFCompletionAlgebra V K
-    letI : base.valuation.HasExtension target.valuation :=
+    let : base.valuation.HasExtension target.valuation :=
       standardDVFCompletion_hasExtension V K
     Function.Bijective
       (IsLocalRing.ResidueField.map
         (algebraMap base.valuationSubring target.valuationSubring)) := by
-  dsimp only
+  intro base target sharedOwner1 sharedOwner2
   let v := (IsDiscreteValuationRing.maximalIdeal V).valuation K
-  let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra K (standardDVFCompletionField V K) :=
-    standardDVFCompletionAlgebra V K
-  let : base.valuation.HasExtension target.valuation :=
-    standardDVFCompletion_hasExtension V K
   constructor
   · exact RingHom.injective _
   · intro z

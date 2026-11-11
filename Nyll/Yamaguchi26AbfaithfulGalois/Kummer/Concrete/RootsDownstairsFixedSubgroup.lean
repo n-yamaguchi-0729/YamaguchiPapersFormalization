@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Roots downstairs detect actual quotient conjugation
@@ -18,6 +20,8 @@ Inside any algebraic closure, the quotient by the fixing subgroup of a
 prime-degree Galois intermediate field acts faithfully on that subgroup's
 topological abelianization under the roots-downstairs hypotheses.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedRange
-import Mathlib.Algebra.Algebra.Subalgebra.Basic
-import Mathlib.FieldTheory.IntermediateField.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedRange
+public import Mathlib.Algebra.Algebra.Subalgebra.Basic
+public import Mathlib.FieldTheory.IntermediateField.Basic
 
 /-!
 # Restriction to an embedded separable closure
@@ -16,6 +18,8 @@ separable extension. Restricting both the automorphism and its inverse gives
 an automorphism of that extension, compatible with the original embedding.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ValuationTheory.Completion
@@ -23,14 +27,15 @@ namespace ValuationTheory.Completion
 variable {K S E : Type*} [Field K] [Field S] [Field E]
   [Algebra K S] [Algebra K E] [IsSepClosed S] [Algebra.IsSeparable K S]
 
-private def restrictionHom (i : S →ₐ[K] E) (σ : E ≃ₐ[K] E) : S →ₐ[K] S :=
+/-- Restrict an automorphism to the embedded separably closed algebraic extension. -/
+def restrictionHom (i : S →ₐ[K] E) (σ : E ≃ₐ[K] E) : S →ₐ[K] S :=
   i.equivFieldRange.symm.toAlgHom.comp
     ((σ.toAlgHom.comp i).codRestrict i.fieldRange.toSubalgebra fun s =>
       mem_fieldRange_of_isSeparable_of_isSepClosed i
         ((Algebra.IsSeparable.isSeparable K s).map
           (σ.toAlgHom.comp i) (σ.toAlgHom.comp i).injective))
 
-private theorem restrictionHom_apply
+theorem restrictionHom_apply
     (i : S →ₐ[K] E) (σ : E ≃ₐ[K] E) (s : S) :
     i (restrictionHom i σ s) = σ (i s) := by
   let y : i.fieldRange :=

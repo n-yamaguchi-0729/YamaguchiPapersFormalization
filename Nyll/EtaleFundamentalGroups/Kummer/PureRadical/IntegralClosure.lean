@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntermediateCoordinates
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntermediateCoordinates
 
 /-!
 # The integral closure of a pure radical intermediate field
@@ -17,6 +19,8 @@ For a domain `A` with fraction field `K`, let `F = K(β)` and suppose that
 closure of `A` in `F`.  The theorem below produces the resulting canonical
 algebra equivalence and records the image of the radical root.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,7 +40,8 @@ def pureRadicalAdjoinRootToField
     (hβpow : β ^ m = algebraMap K F (algebraMap A K t)) :
     AdjoinRoot (X ^ m - C t) →ₐ[A] F := by
   apply AdjoinRoot.liftAlgHom (X ^ m - C t) (Algebra.ofId A F) β
-  simp [hβpow, IsScalarTower.algebraMap_apply A K F]
+  simp only [Algebra.toRingHom_ofId, eval₂_sub, eval₂_X_pow, hβpow, eval₂_C,
+    IsScalarTower.algebraMap_apply A K F, sub_self]
 
 @[simp]
 theorem pureRadicalAdjoinRootToField_root
@@ -47,7 +52,7 @@ theorem pureRadicalAdjoinRootToField_root
     (hβpow : β ^ m = algebraMap K F (algebraMap A K t)) :
     pureRadicalAdjoinRootToField t β hβpow
       (AdjoinRoot.root (X ^ m - C t)) = β := by
-  simp [pureRadicalAdjoinRootToField]
+  simp only [pureRadicalAdjoinRootToField, AdjoinRoot.liftAlgHom_root]
 
 /-- The canonical pure-radical root map makes the generated field its
 fraction field.
@@ -84,14 +89,16 @@ theorem isFractionRing_adjoinRoot_of_pureRadical
       _ = m := hdegree
   have hpMapRoot :
       Polynomial.aeval β (p.map (algebraMap A K)) = 0 := by
-    simp [p, hβpow]
+    simp only [Polynomial.map_sub, Polynomial.map_pow, map_X, map_C, aeval_sub, map_pow, aeval_X,
+      hβpow, aeval_C, sub_self, p]
   have hminDvd : minpoly K β ∣ p.map (algebraMap A K) :=
     minpoly.dvd K β hpMapRoot
   have hpMapEq : p.map (algebraMap A K) = minpoly K β := by
     apply Polynomial.eq_of_monic_of_dvd_of_natDegree_le
       (minpoly.monic hβintK) (hpMonic.map (algebraMap A K)) hminDvd
     have hpMapDegree : (p.map (algebraMap A K)).natDegree = m := by
-      simp [p]
+      simp only [Polynomial.map_sub, Polynomial.map_pow, map_X, map_C, natDegree_sub_C,
+        natDegree_pow, natDegree_X, mul_one, p]
     rw [hpMapDegree, hminDegree]
   let φ : R →ₐ[A] F :=
     pureRadicalAdjoinRootToField t β hβpow
@@ -168,7 +175,8 @@ theorem isFractionRing_adjoinRoot_of_pureRadical
       inv_mem' := by
         rintro z ⟨a, b, hb, rfl⟩
         by_cases ha : a = 0
-        · exact ⟨0, 1, one_ne_zero, by simp [ha]⟩
+        · exact ⟨0, 1, one_ne_zero, by simp only [ha, map_zero, zero_div, inv_zero, map_one,
+          div_one]⟩
         · refine ⟨b, a, ha, ?_⟩
           rw [inv_div]
           }

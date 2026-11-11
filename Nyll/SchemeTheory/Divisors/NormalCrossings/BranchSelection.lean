@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Selecting a branch from a height-one prime
@@ -14,6 +16,8 @@ A height-one prime containing a split normal-crossings equation is exactly
 one of the labelled branch ideals.  This identifies a geometric divisorial
 prime with the branch index required by the local Kummer theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

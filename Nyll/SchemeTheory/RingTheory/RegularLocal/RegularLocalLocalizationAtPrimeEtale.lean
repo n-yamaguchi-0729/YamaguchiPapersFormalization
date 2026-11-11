@@ -10,15 +10,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Smooth.Flat
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # is Regular Local Ring localization at Prime of etale of comap
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

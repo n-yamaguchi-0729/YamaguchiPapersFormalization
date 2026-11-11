@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.Algebra.Module.SpanRank
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.Algebra.Module.SpanRank
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Lifting regularity through a nonzerodivisor quotient
@@ -21,6 +24,8 @@ original maximal ideal. The dimension formula gives the required bound.
 This proves the one-element assertion of Stacks Project, Lemma 10.106.7
 (tag `00NU`), used for a regular Cartier divisor in Lemma 58.31.3 (`0EYE`).
 -/
+
+@[expose] public section
 
 noncomputable section
 

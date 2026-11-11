@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.PullbackCarrier
-import Mathlib.RingTheory.Artinian.Module
+module
+
+public import Mathlib.AlgebraicGeometry.PullbackCarrier
+public import Mathlib.RingTheory.Artinian.Module
 
 /-!
 # Residue fields of Artinian pullback tensors
@@ -16,6 +18,8 @@ residue field of the point.  When that tensor product is Artinian, this map
 is surjective: the prime selected by the point is maximal, so its canonical
 residue map is already a quotient map.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,21 +37,16 @@ namespace Triplet
 /-- The categorical pushout used in the pullback-carrier description is
 canonically the ordinary tensor product of the two residue fields. -/
 noncomputable def tensorIsoTensorProduct (T : Triplet f g) :
-    letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
+    let : Algebra (S.residueField T.s) (X.residueField T.x) :=
       (((S.residueFieldCongr T.hx).inv ≫
         f.residueFieldMap T.x).hom).toAlgebra
-    letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
+    let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
       (((S.residueFieldCongr T.hy).inv ≫
         g.residueFieldMap T.y).hom).toAlgebra
     T.tensor ≅ CommRingCat.of
       (X.residueField T.x ⊗[S.residueField T.s]
         Y.residueField T.y) := by
-  letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
-    (((S.residueFieldCongr T.hx).inv ≫
-      f.residueFieldMap T.x).hom).toAlgebra
-  letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
-    (((S.residueFieldCongr T.hy).inv ≫
-      g.residueFieldMap T.y).hom).toAlgebra
+  intro leftResidueAlgebra rightResidueAlgebra
   exact (IsPushout.of_hasPushout _ _).isoIsPushout _ _
     (CommRingCat.isPushout_tensorProduct
       (S.residueField T.s) (X.residueField T.x)
@@ -55,22 +54,17 @@ noncomputable def tensorIsoTensorProduct (T : Triplet f g) :
 
 @[reassoc (attr := simp)]
 theorem tensorInl_tensorIsoTensorProduct_hom (T : Triplet f g) :
-    letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
+    let : Algebra (S.residueField T.s) (X.residueField T.x) :=
       (((S.residueFieldCongr T.hx).inv ≫
         f.residueFieldMap T.x).hom).toAlgebra
-    letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
+    let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
       (((S.residueFieldCongr T.hy).inv ≫
         g.residueFieldMap T.y).hom).toAlgebra
     T.tensorInl ≫ (tensorIsoTensorProduct T).hom =
       CommRingCat.ofHom (Algebra.TensorProduct.includeLeftRingHom
         (R := S.residueField T.s) (A := X.residueField T.x)
         (B := Y.residueField T.y)) := by
-  let : Algebra (S.residueField T.s) (X.residueField T.x) :=
-    (((S.residueFieldCongr T.hx).inv ≫
-      f.residueFieldMap T.x).hom).toAlgebra
-  let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
-    (((S.residueFieldCongr T.hy).inv ≫
-      g.residueFieldMap T.y).hom).toAlgebra
+  intro leftResidueAlgebra rightResidueAlgebra
   exact IsPushout.inl_isoIsPushout_hom
     (X.residueField T.x) (Y.residueField T.y)
     (IsPushout.of_hasPushout _ _)
@@ -80,22 +74,17 @@ theorem tensorInl_tensorIsoTensorProduct_hom (T : Triplet f g) :
 
 @[reassoc (attr := simp)]
 theorem tensorInr_tensorIsoTensorProduct_hom (T : Triplet f g) :
-    letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
+    let : Algebra (S.residueField T.s) (X.residueField T.x) :=
       (((S.residueFieldCongr T.hx).inv ≫
         f.residueFieldMap T.x).hom).toAlgebra
-    letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
+    let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
       (((S.residueFieldCongr T.hy).inv ≫
         g.residueFieldMap T.y).hom).toAlgebra
     T.tensorInr ≫ (tensorIsoTensorProduct T).hom =
       CommRingCat.ofHom ((Algebra.TensorProduct.includeRight
         (R := S.residueField T.s) (A := X.residueField T.x)
         (B := Y.residueField T.y)).toRingHom) := by
-  let : Algebra (S.residueField T.s) (X.residueField T.x) :=
-    (((S.residueFieldCongr T.hx).inv ≫
-      f.residueFieldMap T.x).hom).toAlgebra
-  let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
-    (((S.residueFieldCongr T.hy).inv ≫
-      g.residueFieldMap T.y).hom).toAlgebra
+  intro leftResidueAlgebra rightResidueAlgebra
   exact IsPushout.inr_isoIsPushout_hom
     (X.residueField T.x) (Y.residueField T.y)
     (IsPushout.of_hasPushout _ _)

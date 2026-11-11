@@ -4,20 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.EtaleFundamentalGroups.Inertia.CartierStalkNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Inertia.GaloisNormalizationPointLift
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ComponentGenericResidue
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
-import Nyll.SchemeTheory.FunctionFields.PlainIntegerBase
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.RingTheory.Ideal.Over
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierStalkNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.GaloisNormalizationPointLift
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ComponentGenericResidue
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.DVRCyclotomicInversion
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+public import Nyll.SchemeTheory.FunctionFields.IntegerBase
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.RingTheory.Ideal.Over
 
 /-!
 # Cyclotomic inversion for the actual boundary normalization stabilizer
@@ -29,16 +32,22 @@ Local cyclotomic inversion then descends through the actual component quotient
 to the original deck transformation.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory TopologicalSpace
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 open EtaleFundamentalGroups EtaleFundamentalGroups.Inertia
 
+attribute [local instance] uliftIntegerBaseIsDomain
+
 namespace Yamaguchi26SolvableCoverings
 
 private theorem integralClosurePoint_liesOver
-    {R L Ω : Type} [CommRing R] [Field L] [Field Ω] [Algebra R L]
+    {R L Ω : Type u} [CommRing R] [Field L] [Field Ω] [Algebra R L]
     (φ : integralClosure R L →+* Ω) (y : Spec (.of Ω) ⟶ Spec (.of R))
     (hy : Spec.map (CommRingCat.ofHom φ) ≫ Spec.map (CommRingCat.ofHom
       (algebraMap R (integralClosure R L))) = y) :
@@ -51,7 +60,7 @@ private theorem integralClosurePoint_liesOver
   rw [IsLocalRing.maximalIdeal_eq_bot]
   rfl
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- Each element fixing a geometric normalization point above a horizontal
 component with geometrically integral generic fibre is conjugate to its inverse
@@ -75,7 +84,7 @@ theorem finiteCoverInertia_isConj_inv
   let x := componentPoint D E
   have hx_eq : D.1.componentGenericPoint E.val E.property = x :=
     D.1.componentGenericPoint_eq E.val E.property
-  let R : Type := X.presheaf.stalk x
+  let R : Type u := X.presheaf.stalk x
   have hLocal : ∃ hDomain : IsDomain R,
       let : IsDomain R := hDomain
       IsDiscreteValuationRing R := by
@@ -130,7 +139,8 @@ theorem finiteCoverInertia_isConj_inv
       integralClosurePoint_liesOver (R := R) (L := L) (Ω := Ω)
         φ y (hφbase.trans (hqZ.trans hqA))
     exact Eq.mp (congrArg (fun P : Ideal R => Q.LiesOver P) hyideal) h
-  let k : Type := (Spec (.of ℤ)).residueField (genericPoint (Spec (.of ℤ)))
+  let k : Type u := (Spec (.of (ULift.{u} ℤ))).residueField
+    (genericPoint (Spec (.of (ULift.{u} ℤ))))
   have hres : ∃ hAlg : Algebra k (X.residueField x),
       let : Algebra k (X.residueField x) := hAlg
       GeometricallyIntegral (Spec.map (CommRingCat.ofHom
@@ -144,9 +154,9 @@ theorem finiteCoverInertia_isConj_inv
   obtain ⟨hAlg, hfield⟩ := hres
   let : Algebra k (IsLocalRing.ResidueField R) := hAlg
   have hσfixed : z ≫ normalizationEndomorphism (W.hom ≫ D.1.supportComplement.ι)
-      σ.val.hom.left (by
+      σ.val.asIso.hom.left (by
         rw [← Category.assoc]
-        exact congrArg (fun t => t ≫ D.1.supportComplement.ι) σ.val.hom.w) = z := σ.property
+        exact congrArg (fun t => t ≫ D.1.supportComplement.ι) σ.val.asIso.hom.w) = z := σ.property
   obtain ⟨τ, hτimage, hτfixed⟩ := hlift σ.val ((hfixA σ.val).mpr hσfixed)
   have hτmem : finiteEtaleAutFunctionFieldAlgEquiv Z τ ∈ Q.inertia Gal(L/K) :=
     (hφfix τ).mpr hτfixed
@@ -170,7 +180,7 @@ theorem finiteCoverInertia_isConj_inv
   have hconj :=
     (open _root_.TameAbhyankar.SGA1 in
       idealInertia_isConj_inv_of_geometricallyIntegral_dvrNormalizationResidue_of_ratEquiv
-        k specZGenericResidueFieldEquivQ (A := R) (K := K) (L := L) Q hfield
+        k specULiftZGenericResidueFieldEquivQ (A := R) (K := K) (L := L) Q hfield
           ⟨finiteEtaleAutFunctionFieldAlgEquiv Z τ, hτmemLocal⟩)
   let e : (Aut Z)ᵐᵒᵖ ≃* Gal(L/K) := finiteEtaleAutOpFunctionFieldMulEquiv Z hZ
   let μ : Gal(L/K) →* (Aut W)ᵐᵒᵖ :=

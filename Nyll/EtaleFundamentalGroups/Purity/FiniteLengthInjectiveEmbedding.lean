@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveHullFiniteLengthDual
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.LinearAlgebra.Pi
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Finiteness.Defs
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveHullFiniteLengthDual
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResidueFieldCogenerator
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.LinearAlgebra.Pi
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Embedding finite-length modules into finite products of a residue-field hull
@@ -25,6 +27,8 @@ embedding into a finite product of injective hulls.  An embedding of an
 essential submodule extends injectively to the ambient module.  If the
 hull is Artinian, the ambient module is Artinian as well.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

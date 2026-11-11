@@ -20,6 +20,7 @@ module
 public import Mathlib.RingTheory.TensorProduct.Maps
 public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Equalizer
 public import Nyll.SchemeTheory.Descent.EqualizerScalars
+public import Nyll.SchemeTheory.Pi1.Descent.EqualizerScalars
 
 /-!
 # Flat base change of algebra equalizers
@@ -77,7 +78,7 @@ def _root_.AlgHom.equalizerCancelBaseChange (f g : A →ₐ[R] B) (T : Type u) [
 lemma _root_.AlgHom.equalizerCancelBaseChange_algebraMap (f g : A →ₐ[R] B) (T : Type u) [CommRing T]
     [Algebra R T] (x : T ⊗[R] S) :
     AlgHom.equalizerCancelBaseChange S f g T (algebraMap _ _ x) = algebraMap _ _ x := by
-  simp [AlgHom.equalizerCancelBaseChange]
+  simp only [AlgHom.equalizerCancelBaseChange, AlgEquiv.coe_restrictScalars, AlgEquiv.commutes]
 
 lemma _root_.AlgHom.equalizerCongr_symm_apply {R A A' B B' : Type*} [CommSemiring R]
     [Semiring A] [Semiring A'] [Semiring B] [Semiring B']
@@ -105,10 +106,13 @@ lemma _root_.AlgHom.equalizerCongr_apply {R A A' B B' : Type*} [CommSemiring R]
 lemma _root_.AlgHom.equalizerCancelBaseChange_tmul (f g : A →ₐ[R] B) (T : Type u) [CommRing T]
     [Algebra R T] (x : A) (hx : x ∈ AlgHom.equalizer f g) :
     ((AlgHom.equalizerCancelBaseChange S f g T)
-      ⟨1 ⊗ₜ[T] (1 ⊗ₜ[R] x), by simp [show f x = g x from hx]⟩) =
-        ⟨1 ⊗ₜ x, by simp [show f x = g x from hx]⟩ := by
+      ⟨1 ⊗ₜ[T] (1 ⊗ₜ[R] x), by simp only [AlgHom.mem_equalizer, TensorProduct.map_tmul,
+        AlgHom.coe_id, id_eq, show f x = g x from hx]⟩) =
+        ⟨1 ⊗ₜ x, by simp only [AlgHom.mem_equalizer, TensorProduct.map_tmul, AlgHom.coe_id,
+          id_eq, show f x = g x from hx]⟩ := by
   ext : 1
-  simp [AlgHom.equalizerCancelBaseChange, AlgHom.equalizerCongr_apply]
+  simp only [AlgHom.equalizerCancelBaseChange, AlgEquiv.coe_restrictScalars,
+    AlgHom.equalizerCongr_apply, TensorProduct.cancelBaseChange_tmul, one_smul]
 
 lemma _root_.AlgHom.tensorEqualizerEquiv_symm_apply
     {R : Type*} (S : Type*) [CommRing R]
@@ -117,13 +121,31 @@ lemma _root_.AlgHom.tensorEqualizerEquiv_symm_apply
     {A B : Type*} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (f g : A →ₐ[R] B) [Module.Flat R T]
     (x : A) (hx : x ∈ AlgHom.equalizer f g) :
-    (f.tensorEqualizerEquiv S T g).symm ⟨1 ⊗ₜ x, by simp [show f x = g x from hx]⟩ =
+    (f.tensorEqualizerEquiv S T g).symm ⟨1 ⊗ₜ x, by simp only [AlgHom.mem_equalizer,
+      TensorProduct.map_tmul, AlgHom.coe_id, id_eq, show f x = g x from hx]⟩ =
       1 ⊗ₜ ⟨x, hx⟩ := by
   apply (f.tensorEqualizerEquiv S T g).injective
   ext : 1
   simp only [AlgEquiv.apply_symm_apply, AlgHom.tensorEqualizerEquiv_apply,
     AlgHom.coe_tensorEqualizer, Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
     Subalgebra.coe_val]
+
+/-- Reassociation intertwines base change of the same algebra homomorphism. -/
+theorem tensorMap_assoc_symm (h : A →ₐ[R] B) (T : Type u) [CommRing T]
+    [Algebra R T] :
+    (TensorProduct.assoc R R T T S B).symm.toAlgHom.comp
+        (TensorProduct.map (.id T T)
+          ((TensorProduct.map (.id S S) h).restrictScalars R)) =
+      ((TensorProduct.map (.id (T ⊗[R] S) (T ⊗[R] S)) h).restrictScalars T).comp
+        (TensorProduct.assoc R R T T S A).symm.toAlgHom := by
+  ext
+  · simp only [AlgHom.coe_comp, AlgHom.coe_restrictScalars', AlgEquiv.coe_toAlgHom,
+      Function.comp_apply, TensorProduct.includeLeft_apply,
+      TensorProduct.includeRight_apply, TensorProduct.map_tmul, AlgHom.coe_id,
+      id_eq, map_one, TensorProduct.assoc_symm_tmul]
+  · simp only [AlgHom.coe_comp, AlgHom.coe_restrictScalars', AlgEquiv.coe_toAlgHom,
+      Function.comp_apply, TensorProduct.includeRight_apply, TensorProduct.map_tmul,
+      AlgHom.coe_id, id_eq, TensorProduct.assoc_symm_tmul]
 
 /-- For flat `T`, identifies the base change of the equalizer of the `S`-base-changed maps
 with the equalizer of the further base-changed maps over `T ⊗[R] S`. -/
@@ -149,7 +171,8 @@ noncomputable def auxEquivRHS (f g : A →ₐ[R] B) (T : Type u) [CommRing T] [A
       (AlgHom.equalizerCongr
         (TensorProduct.assoc R R T T S A).symm
         (TensorProduct.assoc R R T T S B).symm
-        (by ext <;> simp [fS]) (by ext <;> simp [gS]))
+        (tensorMap_assoc_symm (S := S) f T)
+        (tensorMap_assoc_symm (S := S) g T))
       (AlgHom.equalizerRestrictScalars T _ _)
   (TensorProduct.congr .refl eBase).trans <|
     (fS.restrictScalars R).tensorEqualizerEquiv T T
@@ -181,8 +204,10 @@ lemma auxEquivRHS_symm_tmul (f g : A →ₐ[R] B) (T : Type u) [CommRing T] [Alg
 
 lemma auxEquivRHS_symm_tmul' (f g : A →ₐ[R] B) (T : Type u) [CommRing T] [Algebra R T]
     [Module.Flat R T] (x : AlgHom.equalizer f g) :
-    (auxEquivRHS (S := S) f g T).symm ⟨1 ⊗ₜ (1 ⊗ₜ x), by simp [show f x = g x from x.2]⟩ =
-      1 ⊗ₜ ⟨1 ⊗ₜ x, by simp [show f x = g x from x.2]⟩ := by
+    (auxEquivRHS (S := S) f g T).symm ⟨1 ⊗ₜ (1 ⊗ₜ x), by simp only [AlgHom.mem_equalizer,
+      TensorProduct.map_tmul, AlgHom.coe_id, id_eq, show f x = g x from x.2]⟩ =
+      1 ⊗ₜ ⟨1 ⊗ₜ x, by simp only [AlgHom.mem_equalizer, TensorProduct.map_tmul,
+        AlgHom.coe_id, id_eq, show f x = g x from x.2]⟩ := by
   apply (auxEquivRHS (S := S) f g T).injective
   rw [AlgEquiv.apply_symm_apply]
   apply (f.equalizerCancelBaseChange S g T).injective
@@ -221,7 +246,8 @@ lemma auxEquivLHS_one_tmul_one (f g : A →ₐ[R] B) (T : Type u) [CommRing T] [
 lemma auxEquivLHS_one_one_tmul (f g : A →ₐ[R] B) (T : Type u) [CommRing T] [Algebra R T]
     [Module.Flat R T] (x : AlgHom.equalizer f g) :
     (auxEquivLHS (S := S) f g T) (1 ⊗ₜ[R] (1 ⊗ₜ[R] x)) =
-      1 ⊗ₜ ⟨1 ⊗ₜ x, by simp [show f x.1 = g x.1 from x.2]⟩ :=
+      1 ⊗ₜ ⟨1 ⊗ₜ x, by simp only [AlgHom.mem_equalizer, TensorProduct.map_tmul,
+        AlgHom.coe_id, id_eq, show f x.1 = g x.1 from x.2]⟩ :=
   rfl
 
 lemma _root_.AlgHom.tensorEqualizer_tmul_one (f g : A →ₐ[R] B) (x : S) :
@@ -233,7 +259,8 @@ lemma _root_.AlgHom.tensorEqualizer_one_tmul {R : Type*} (S : Type*) [CommRing R
       [Algebra R T] [Algebra S T] [IsScalarTower R S T]
       {A B : Type*} [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
       (f g : A →ₐ[R] B) (x : AlgHom.equalizer f g) :
-    f.tensorEqualizer S T g (1 ⊗ₜ x) = ⟨1 ⊗ₜ x, by simp [show f x.1 = g x.1 from x.2]⟩ :=
+    f.tensorEqualizer S T g (1 ⊗ₜ x) = ⟨1 ⊗ₜ x, by simp only [AlgHom.mem_equalizer,
+      TensorProduct.map_tmul, AlgHom.coe_id, id_eq, show f x.1 = g x.1 from x.2]⟩ :=
   rfl
 
 lemma _root_.AlgHom.tensorEqualizer_tmul_one' {R : Type*} (S : Type*) [CommRing R]
@@ -314,7 +341,8 @@ lemma TensorProduct.map_tensorEqualizer_bijective_iff_tensorEqualizer_map_biject
       rw [AlgHom.tensorEqualizer_one_tmul, AlgHom.tensorEqualizer_one_tmul]
       calc
         _ = (auxEquivRHS (S := S) f g T).symm
-            ⟨1 ⊗ₜ[T] (1 ⊗ₜ[R] x), by simp [show f x = g x from x.2]⟩ :=
+            ⟨1 ⊗ₜ[T] (1 ⊗ₜ[R] x), by simp only [AlgHom.mem_equalizer, map_tmul,
+              AlgHom.coe_id, id_eq, show f x = g x from x.2]⟩ :=
           (auxEquivRHS_symm_tmul' (S := S) f g T x).symm
         _ = _ := by
           dsimp [eRHS, eRestrict, fTS, gTS]

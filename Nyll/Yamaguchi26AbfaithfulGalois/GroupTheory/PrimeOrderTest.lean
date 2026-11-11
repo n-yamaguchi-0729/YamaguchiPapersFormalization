@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Perm.Cycle.Type
-import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
+module
+
+public import Mathlib.GroupTheory.Perm.Cycle.Type
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # The prime-order test for ab-faithfulness
@@ -18,6 +20,8 @@ A nonfaithful finite quotient action has a prime-order subgroup in its kernel.
 Pulling that subgroup back gives an open layer with prime-order quotient and
 trivial action on the topological abelianization of its kernel.
 -/
+
+@[expose] public section
 
 open scoped Topology
 

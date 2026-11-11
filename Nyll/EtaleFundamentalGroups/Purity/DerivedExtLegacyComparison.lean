@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.CategoryTheory.Abelian.Ext
-import Mathlib.CategoryTheory.Abelian.Projective.Ext
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Ext.HasExt
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.CategoryTheory.Abelian.Ext
+public import Mathlib.CategoryTheory.Abelian.Projective.Ext
 
 /-!
 # Comparison of the two Ext implementations used by local cohomology and depth
@@ -16,6 +18,8 @@ import Mathlib.CategoryTheory.Abelian.Projective.Ext
 `_root_.Ext`, whereas the depth API uses `CategoryTheory.Abelian.Ext`.  This file
 records the vanishing comparison needed to pass from the latter to the former.
 -/
+
+@[expose] public section
 
 noncomputable section
 

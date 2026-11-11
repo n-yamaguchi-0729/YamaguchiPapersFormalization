@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Invariants
+module
+
+public import Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Inverse-character twists and their actual invariant submodules
@@ -13,6 +15,8 @@ Character eigenvectors are fixed points of the representation twisted by
 the inverse character. The same construction is shared by averaging and
 by restriction to invariant submodules.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

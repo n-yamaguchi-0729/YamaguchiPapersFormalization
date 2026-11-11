@@ -5,13 +5,16 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
-import Nyll.ValuedFieldTheory.Valuation.ResidueAlgebraicClosedness
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Topology.Algebra.Group.Neighborhood
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
+public import Nyll.ValuedFieldTheory.Valuation.ResidueAlgebraicClosedness
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Topology.Algebra.Group.Neighborhood
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
 
 /-!
 # Full residue Galois action over a Henselian valued field
@@ -21,6 +24,8 @@ the base field, identifying the scalars needed for residue surjectivity.
 Finite residue bases lift to finitely many algebraic field elements, proving
 Krull continuity. Reduction is an open quotient with the actual inertia kernel.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.Unit
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.Unit
 
 /-!
 # Unit descent from a multi-boundary complement
@@ -13,6 +15,8 @@ This file extends unit descent from one prime boundary parameter to a finite
 product of prime parameters.  A divisor of a power of the boundary product
 which is divisible by none of its prime factors must be a unit.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

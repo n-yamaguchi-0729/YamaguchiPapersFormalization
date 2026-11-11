@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
 
 /-!
 # Iterated Kummer exponents on a full boundary complement
@@ -15,6 +17,8 @@ finite boundary makes every exponent a unit on that complement.  Prime
 multi-boundary unit descent then reflects all of those units to the original
 domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Galois objects representing discrete characters
@@ -16,6 +18,8 @@ through a pointed Galois object. The induced homomorphism from the opposite
 deck group is injective: the object is constructed from the actual kernel of
 the character, so its deck group identifies with the character's image.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.Regular.PairPrimeDichotomy
 
 /-!
 # Retaining a regular height-one branch under maximal-adic completion
@@ -17,6 +19,8 @@ completed base with the literal mapped parameter prime.  Thus downstream
 ramification base-change results do not need a separate comparison
 hypothesis for the completed height-one branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Mathlib.Algebra.Algebra.Equiv
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Mathlib.Algebra.Algebra.Equiv
 
 /-!
 # Semilinear conjugation under a change of extension field
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Algebra.Equiv
 An actual base-linear equivalence transports a semilinear automorphism and
 intertwines its conjugation on the two relative Galois groups.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

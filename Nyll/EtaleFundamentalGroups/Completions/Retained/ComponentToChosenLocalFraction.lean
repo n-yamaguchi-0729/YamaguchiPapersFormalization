@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.Component.LocalizationFractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.Component.LocalizationFractionRing
 
 /-!
 # A retained completed component as the chosen local fraction field
@@ -19,6 +21,8 @@ The construction uses only the retained prime pair.  In particular, no
 kernel equality, component comparison, or bijectivity hypothesis is exposed
 to callers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,25 +60,16 @@ noncomputable def retainedCompletedComponentToChosenLocalFractionAlgEquiv
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Omega := GenericTensorFieldComponent m
-    letI : Algebra R' Omega :=
+    let : Algebra R' Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     Omega ≃ₐ[R'] FractionRing (Localization.AtPrime P) := by
   classical
-  dsimp only
   let T := R' ⊗[R] S
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-      (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let Omega := GenericTensorFieldComponent m
-  let r'OmegaAlgebra : Algebra R' Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
+  intro m sharedOwner2 Omega r'OmegaAlgebra
   letI : Algebra R' Omega := r'OmegaAlgebra
   letI : SMul R' Omega := r'OmegaAlgebra.toSMul
   letI : IsScalarTower R' K' Omega :=
@@ -121,26 +116,17 @@ theorem retainedCompletedComponentToChosenLocalFractionAlgHom_injective
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Omega := GenericTensorFieldComponent m
-    letI : Algebra R' Omega :=
+    let : Algebra R' Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     Function.Injective
       (retainedCompletedComponentToChosenLocalFractionAlgEquiv
         (R := R) (R' := R') (S := S) (K := K) (L := L)
         (K' := K') N P hNP).toAlgHom := by
-  dsimp only
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let Omega := GenericTensorFieldComponent m
-  let r'OmegaAlgebra : Algebra R' Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
+  intro m sharedOwner1 Omega r'OmegaAlgebra
   let : Algebra R' Omega := r'OmegaAlgebra
   exact
     (retainedCompletedComponentToChosenLocalFractionAlgEquiv

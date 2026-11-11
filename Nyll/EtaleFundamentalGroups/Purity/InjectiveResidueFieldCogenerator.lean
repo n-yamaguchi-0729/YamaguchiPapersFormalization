@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.LinearAlgebra.BilinearMap
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.LinearAlgebra.BilinearMap
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # Separation by an injective module containing the residue field
@@ -21,6 +23,8 @@ followed by the given embedding, extends to the entire module by
 injectivity.  Thus maps to the injective module separate elements, and
 the associated evaluation map into the double dual is injective.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

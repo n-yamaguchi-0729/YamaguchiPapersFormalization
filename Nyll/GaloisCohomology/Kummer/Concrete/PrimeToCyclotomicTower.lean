@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.FieldTheory.Normal.Defs
-import Mathlib.FieldTheory.SeparableDegree
-import Mathlib.NumberTheory.Cyclotomic.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.Data.Nat.Prime.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.FieldTheory.Normal.Defs
+public import Mathlib.FieldTheory.SeparableDegree
+public import Mathlib.NumberTheory.Cyclotomic.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.Data.Nat.Prime.Basic
 
 /-!
 # A prime-to-p cyclotomic tower and its actual restriction kernel
@@ -29,6 +31,8 @@ The cyclotomic field can be supplied by the existing
 the `F/M/E` scalar tower are fixed by the caller once. No extra field,
 valuation, finiteness, or comparison input is needed in this boundary.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
 
 /-!
 # Function field of a punctured local spectrum
@@ -13,6 +15,8 @@ The canonical open immersion identifies the function field of a
 positive-dimensional local domain with that of its punctured spectrum.  In
 particular, the latter is a fraction field of the original local domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -24,7 +28,8 @@ universe u
 
 variable (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R]
 
-private theorem puncturedSpectrum_nonempty_of_positiveDimension
+/-- The punctured spectrum of a positive-dimensional local domain is nonempty. -/
+theorem puncturedSpectrum_nonempty_of_positiveDimension
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R) :
     Nonempty (Scheme.puncturedSpectrum R) :=
   Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
@@ -36,25 +41,15 @@ noncomputable def puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       puncturedSpectrum_nonempty_of_positiveDimension R hpos
-    letI : IsIntegral X := inferInstance
-    letI : IsOpenImmersion j := by
+    let : IsIntegral X := inferInstance
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
     X.functionField ≃+* U.functionField := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  letI : Nonempty U :=
-    puncturedSpectrum_nonempty_of_positiveDimension R hpos
-  letI : IsIntegral X := inferInstance
-  letI : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U := isIntegral_of_isOpenImmersion j
+  intro X U j sharedOwner6 sharedOwner7 sharedOwner8 sharedOwner9
   let h : j (genericPoint U) = genericPoint X :=
     genericPoint_eq_of_isOpenImmersion j
   let e : X.functionField ≅ U.functionField :=
@@ -69,28 +64,17 @@ from the local domain through the canonical open immersion. -/
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R) :
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       puncturedSpectrum_nonempty_of_positiveDimension R hpos
-    letI : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
+    let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U :=
+    let : IsIntegral U :=
       isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
     Algebra R U.functionField := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  letI : Nonempty U :=
-    puncturedSpectrum_nonempty_of_positiveDimension R hpos
-  letI : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
-    dsimp only [Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U :=
-    isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-  letI : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
+  intro X U sharedOwner6 sharedOwner7 sharedOwner8 sharedOwner9
   exact
     ((puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension R hpos).toRingHom.comp
       (algebraMap R X.functionField)).toAlgebra
@@ -100,32 +84,19 @@ private noncomputable def
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R) :
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       puncturedSpectrum_nonempty_of_positiveDimension R hpos
-    letI : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
+    let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U :=
+    let : IsIntegral U :=
       isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-    letI : Algebra R U.functionField :=
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
     X.functionField ≃ₐ[R] U.functionField := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  letI : Nonempty U :=
-    puncturedSpectrum_nonempty_of_positiveDimension R hpos
-  letI : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
-    dsimp only [Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  letI : IsIntegral U :=
-    isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-  letI : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  letI : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
+  intro X U sharedOwner6 sharedOwner7 sharedOwner8 sharedOwner9 sharedOwner10
   exact
     { puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension R hpos with
       commutes' := fun _ ↦ rfl }
@@ -136,32 +107,19 @@ theorem puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R) :
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       puncturedSpectrum_nonempty_of_positiveDimension R hpos
-    letI : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
+    let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U :=
+    let : IsIntegral U :=
       isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-    letI : Algebra R U.functionField :=
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
     IsFractionRing R U.functionField := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let : Nonempty U :=
-    puncturedSpectrum_nonempty_of_positiveDimension R hpos
-  let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
-    dsimp only [Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U :=
-    isIntegral_of_isOpenImmersion (Scheme.puncturedSpectrumInclusion R)
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  let : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
+  intro X U sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5
   let : IsFractionRing R X.functionField :=
     AlgebraicGeometry.functionField_isFractionRing_of_affine (.of R)
   exact IsFractionRing.of_algEquiv

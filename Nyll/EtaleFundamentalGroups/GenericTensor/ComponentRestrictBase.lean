@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # Restricting the base of a selected generic tensor component
@@ -19,6 +21,8 @@ the same quotient field as the component cut out by the kernel of the
 composite quotient map on the left.  This keeps completed chosen components
 fixed while passing to the earlier field used for a common degree bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

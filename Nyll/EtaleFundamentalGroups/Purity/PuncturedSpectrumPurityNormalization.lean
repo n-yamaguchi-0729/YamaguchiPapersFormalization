@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.OpenImmersion
-import Nyll.EtaleFundamentalGroups.Purity.ConnectedNormalizationExtension
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+module
+
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
+public import Nyll.EtaleFundamentalGroups.Purity.ConnectedNormalizationExtension
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Canonical normalization under punctured purity
@@ -18,6 +21,8 @@ connected punctured cover with an arbitrary finite-etale extension of that
 cover.  Consequently, categorical punctured purity makes the canonical
 normalization itself finite etale.
 -/
+
+@[expose] public section
 
 noncomputable section
 

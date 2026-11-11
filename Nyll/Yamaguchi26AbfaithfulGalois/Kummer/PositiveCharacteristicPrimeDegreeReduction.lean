@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.Galois.Infinite
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+module
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEquivalence
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedExtensions
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.Algebra.CharP.Algebra
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupSeparableAbsoluteAction
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEquivalence
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedExtensions
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # From prime-degree field detection to Sigma-ab-faithfulness
@@ -26,6 +28,8 @@ Fixed fields in a separable closure give finite extensions even over imperfect
 fields. The actual comparison with the algebraic-closure absolute action
 transports prime-degree detection to every open Galois layer.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

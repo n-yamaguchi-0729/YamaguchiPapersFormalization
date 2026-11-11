@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Valuation extension from a local map into a discrete valuation ring
@@ -16,6 +18,8 @@ A local map of valuation rings with the given fraction-field map determines
 an extension of valuations. Applied to an actual local DVR over the base
 valuation ring, this supplies the extension property of its normalized valuation.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

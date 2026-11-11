@@ -5,8 +5,10 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Lifting and finiteness of primary roots
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 Hensel lifting supplies primitive roots, while injectivity of torsion reduction
 transfers finiteness of each primary component in residue characteristic zero.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

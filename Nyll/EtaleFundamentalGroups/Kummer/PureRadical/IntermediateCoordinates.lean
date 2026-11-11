@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.HenselianClassification
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.HenselianClassification
 
 /-!
 # Coordinates on intermediate fields of a pure radical extension
@@ -14,6 +16,8 @@ generator needed by the one-divisor normalization argument.  If
 `e = [L : K]`, `d = [L : F]`, and `m = [F : K]`, then the generator is
 `β = α ^ d`, it satisfies `β ^ m = π`, and `m * d = e`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

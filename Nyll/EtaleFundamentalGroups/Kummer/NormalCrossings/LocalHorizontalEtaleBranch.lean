@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.EtaleBranchCharacteristicZero
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.EtaleBranchCharacteristicZero
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 
 /-!
 # Locally horizontal component branches on etale charts
@@ -15,6 +17,8 @@ base in order to obtain characteristic zero along all branches at that point.
 The canonical height-one prime of any specified incident component lifts to
 the strict etale chart, with its contraction recorded explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

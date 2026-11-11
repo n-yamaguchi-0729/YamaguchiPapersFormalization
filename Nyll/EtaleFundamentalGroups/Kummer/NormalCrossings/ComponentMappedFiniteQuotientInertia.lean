@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.LocalHorizontalEtaleBranch
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.GaloisComponentInertiaImage
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.LocalHorizontalEtaleBranch
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.GaloisComponentInertiaImage
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Component-specific mapped finite-quotient inertia
@@ -18,6 +22,8 @@ The local inertia order is supplied by the arithmetic normal-crossings theorem,
 and the pointed pullback-component map injects this group into the deck group
 of each original Galois cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,17 +62,17 @@ def HasMappedQuotientIdealInertiaCoprime
         (_hlocalizedCharZero : ∀ j : Fin 2, j.1 < r →
           CharZero (V ⧸ Ideal.span {t j}))
         (_hpV : CharP (V ⧸ maximalIdeal V) p),
-          letI : IsDomain V := hVdomain
-          letI : IsRegularRing V := hVregular
-          letI : IsIntegrallyClosed V := hVnormal
+          let : IsDomain V := hVdomain
+          let : IsRegularRing V := hVregular
+          let : IsIntegrallyClosed V := hVnormal
           let boundary := boundaryProduct t r
           let hboundary_ne :=
             EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
               hLocalNC
           let Away := Localization.Away boundary
-          letI : IsDomain Away :=
+          let : IsDomain Away :=
             IsLocalization.Away.isDomain Away hboundary_ne
-          letI : IsIntegrallyClosed Away :=
+          let : IsIntegrallyClosed Away :=
             isIntegrallyClosed_of_isLocalization Away
               (Submonoid.powers boundary)
               (Submonoid.powers_le.mpr
@@ -92,35 +98,35 @@ def HasMappedQuotientIdealInertiaCoprime
                   (FiniteEtale.pullback c)
                   (FiniteEtale.pullbackFiberIso c xi) W w)
               (hZ : IsGalois Z) (hi : Mono i),
-                letI : IsGalois Z := hZ
-                letI : IsIntegral Z.left :=
+                let : IsGalois Z := hZ
+                let : IsIntegral Z.left :=
                   isIntegral_left_of_isConnected_finiteEtale Z
                 let K := (Spec (.of Away)).functionField
                 let L := Z.left.functionField
-                letI : Algebra K L := finiteEtaleFunctionFieldAlgebra Z
-                letI : Algebra V K :=
+                let : Algebra K L := finiteEtaleFunctionFieldAlgebra Z
+                let : Algebra V K :=
                   localizationAwaySpecFunctionFieldAlgebra
                     boundary hboundary_ne
-                letI : Algebra V L :=
+                let : Algebra V L :=
                   finiteEtaleAwayFunctionFieldAlgebra
                     boundary hboundary_ne Z
-                letI : IsScalarTower V K L :=
+                let : IsScalarTower V K L :=
                   finiteEtaleAway_functionField_isScalarTower
                     boundary hboundary_ne Z
-                letI : IsFractionRing V K :=
+                let : IsFractionRing V K :=
                   localizationAwaySpecFunctionField_isFractionRing
                     boundary hboundary_ne
-                letI : FiniteDimensional K L :=
+                let : FiniteDimensional K L :=
                   finiteDimensional_functionField_of_finiteEtale_isConnected Z
-                letI : _root_.IsGalois K L :=
+                let : _root_.IsGalois K L :=
                   isGalois_functionField_of_isGalois_finiteEtale Z hZ
                 let B := integralClosure V L
-                letI : IsFractionRing B L :=
+                let : IsFractionRing B L :=
                   IsIntegralClosure.isFractionRing_of_finite_extension
                     V K L B
-                letI : MulSemiringAction Gal(L/K) B :=
+                let : MulSemiringAction Gal(L/K) B :=
                   IsIntegralClosure.MulSemiringAction V K L B
-                letI : MulSemiringAction (Aut Z)ᵐᵒᵖ B :=
+                let : MulSemiringAction (Aut Z)ᵐᵒᵖ B :=
                   EtaleFundamentalGroups.Kummer.finiteEtaleGaloisCoverNormalizationAction
                     Z hZ V B
                 ∀ (Q : Ideal B) (_hQPrime : Q.IsPrime),
@@ -152,17 +158,17 @@ private def LocalChartMappedQuotientInertiaCoprime
       (boundaryProduct t r) t r)
     (qV : Ideal (Localization.AtPrime P.asIdeal)) (p : ℕ) : Prop :=
   let V := Localization.AtPrime P.asIdeal
-  letI : IsDomain V := hVdomain
-  letI : IsRegularRing V := hVregular
-  letI : IsIntegrallyClosed V := hVnormal
+  let : IsDomain V := hVdomain
+  let : IsRegularRing V := hVregular
+  let : IsIntegrallyClosed V := hVnormal
   let boundary := boundaryProduct t r
   let hboundary_ne :=
     EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
       hLocalNC
   let Away := Localization.Away boundary
-  letI : IsDomain Away :=
+  let : IsDomain Away :=
     IsLocalization.Away.isDomain Away hboundary_ne
-  letI : IsIntegrallyClosed Away :=
+  let : IsIntegrallyClosed Away :=
     isIntegrallyClosed_of_isLocalization Away
       (Submonoid.powers boundary)
       (Submonoid.powers_le.mpr
@@ -240,9 +246,9 @@ private def PullbackComponentMappedQuotientInertiaCoprime
     EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
       hNC
   let Away := Localization.Away boundary
-  letI : IsDomain Away :=
+  let : IsDomain Away :=
     IsLocalization.Away.isDomain Away hboundary_ne
-  letI : IsIntegrallyClosed Away :=
+  let : IsIntegrallyClosed Away :=
     isIntegrallyClosed_of_isLocalization Away
       (Submonoid.powers boundary)
       (Submonoid.powers_le.mpr
@@ -305,19 +311,8 @@ private theorem exists_pullbackComponentMappedQuotientInertiaCoprime
     (w : (FiniteEtale.fiber (xi ≫ c)).obj W)
     (hLocal : PointedGaloisQuotientInertiaCoprime hNC qV p) :
     PullbackComponentMappedQuotientInertiaCoprime hNC qV p c xi W hW w := by
-  dsimp only [PullbackComponentMappedQuotientInertiaCoprime]
-  let boundary := boundaryProduct t r
-  have hboundary_ne : boundary ≠ 0 :=
-    EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hNC
-  let Away := Localization.Away boundary
-  let : IsDomain Away :=
-    IsLocalization.Away.isDomain Away hboundary_ne
-  let : IsIntegrallyClosed Away :=
-    isIntegrallyClosed_of_isLocalization Away
-      (Submonoid.powers boundary)
-      (Submonoid.powers_le.mpr
-        (mem_nonZeroDivisors_iff_ne_zero.mpr hboundary_ne))
+  delta PullbackComponentMappedQuotientInertiaCoprime
+  intro boundary hboundary_ne Away domainAway normalAway
   obtain ⟨Z, i, z, hiz, hZ, hi⟩ :=
     FiniteEtale.exists_galoisComponent_pullback c xi W hW w
   refine ⟨Z, i, z, hiz, hZ, hi, ?_⟩
@@ -348,36 +343,9 @@ private theorem localChartMappedQuotientInertiaCoprime_of_pointed
       PointedGaloisQuotientInertiaCoprime hLocalNC qV p) :
     LocalChartMappedQuotientInertiaCoprime I f u P r t hVdomain
       hVregular hVnormal hboundary hLocalNC qV p := by
-  dsimp only [LocalChartMappedQuotientInertiaCoprime]
-  let V := Localization.AtPrime P.asIdeal
-  let : IsDomain V := hVdomain
-  let : IsRegularRing V := hVregular
-  let : IsIntegrallyClosed V := hVnormal
-  let boundary := boundaryProduct t r
-  have hboundary_ne : boundary ≠ 0 :=
-    EtaleFundamentalGroups.Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hLocalNC
-  let Away := Localization.Away boundary
-  let : IsDomain Away :=
-    IsLocalization.Away.isDomain Away hboundary_ne
-  let : IsIntegrallyClosed Away :=
-    isIntegrallyClosed_of_isLocalization Away
-      (Submonoid.powers boundary)
-      (Submonoid.powers_le.mpr
-        (mem_nonZeroDivisors_iff_ne_zero.mpr hboundary_ne))
-  let c := IdealSheafData.boundaryAwayToSupportComplement
-    I f u P t hboundary
-  intro W hW
-  let s := genericPoint (Spec (.of Away))
-  let Omega := AlgebraicClosure ((Spec (.of Away)).residueField s)
-  let xi : Spec (.of Omega) ⟶ Spec (.of Away) :=
-    Spec.map (CommRingCat.ofHom
-      (algebraMap ((Spec (.of Away)).residueField s) Omega)) ≫
-      (Spec (.of Away)).fromSpecResidueField s
-  let : IsGalois W := hW
-  let w : (FiniteEtale.fiber (xi ≫ c)).obj W :=
-    Classical.choice
-      (nonempty_fiber_of_isConnected (FiniteEtale.fiber (xi ≫ c)) W)
+  delta LocalChartMappedQuotientInertiaCoprime
+  intro V domainV regularV normalV boundary hboundary_ne Away domainAway normalAway c
+    W hW s Omega xi w
   exact exists_pullbackComponentMappedQuotientInertiaCoprime
     hLocalNC qV p c xi W hW w hLocal
 

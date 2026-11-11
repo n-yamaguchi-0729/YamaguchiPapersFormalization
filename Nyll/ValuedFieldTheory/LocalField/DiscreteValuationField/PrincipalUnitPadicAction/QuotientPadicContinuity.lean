@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientPadicModule
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientTransition
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientPadicModule
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PadicReductionContinuous
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientTransition
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
 
 /-!
 # Continuity and compatibility of the principal-unit quotient actions
@@ -15,6 +17,8 @@ import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfCon
 Reduction of scalars to `ZMod (p^n)` makes each coordinate action continuous.
 Density of natural scalars then proves compatibility with quotient reduction.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
 namespace DiscretePrincipalUnitQuotient

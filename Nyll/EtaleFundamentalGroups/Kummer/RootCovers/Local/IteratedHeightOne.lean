@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.OrderOfVanishing.Basic
-import Mathlib.RingTheory.RamificationInertia.Ramification
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.OrderOfVanishing.Basic
+public import Mathlib.RingTheory.RamificationInertia.Ramification
 
 /-!
 # Height-one primes of an iterated local root cover
@@ -21,6 +23,8 @@ of ramification indices directly from the length definition of
 
 No primality or uniformizer hypothesis is imposed on an adjoined root.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.ZMod.Units
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.Henselian
+module
+
+public import Mathlib.Data.ZMod.Units
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.Henselian
 
 /-!
 # Prime-to-p torsion is determined by reduction modulo p
@@ -15,6 +17,8 @@ Two units modulo a positive power of `p` annihilated by the same exponent
 coprime to `p` are equal if their reductions modulo `p` agree. The proof
 uses uniqueness of a simple polynomial root in a local ring.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

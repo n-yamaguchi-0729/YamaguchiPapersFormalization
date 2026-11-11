@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Comparing conjugation with the canonical absolute Galois action
@@ -20,6 +22,8 @@ Changing the algebraic closure intertwines concrete semilinear conjugation
 with the canonical action on topological abelianization. Both the closure
 equivalence and the comparison are constructed from the given field data.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

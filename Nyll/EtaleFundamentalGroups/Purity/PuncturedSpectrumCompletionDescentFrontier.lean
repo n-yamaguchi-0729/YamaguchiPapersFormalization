@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Punctured spectra under maximal-adic completion
@@ -20,6 +24,8 @@ every cover from the original puncture after completion.  Descending that
 completed extension is a separate algebraization problem; it is not assumed
 here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

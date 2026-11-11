@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaRestriction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaCentrality
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
-import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
-import Nyll.ProCGroups.GroupTheory.FinitePGroupLifts
-import Nyll.ProCGroups.Profinite.CentralLifts
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaRestriction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaCentrality
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
+public import Nyll.ValuedFieldTheory.Valuation.ComapResidueCharacteristic
+public import Nyll.ProCGroups.GroupTheory.FinitePGroupLifts
+public import Nyll.ProCGroups.Profinite.CentralLifts
 
 /-!
 # Central Galois elements from finite inertia
@@ -19,6 +21,8 @@ Over a Henselian base of residue characteristic zero containing all p-power
 roots, finite p-group inertia yields central restrictions at larger finite
 layers and a nonidentity central element of the absolute Galois group.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

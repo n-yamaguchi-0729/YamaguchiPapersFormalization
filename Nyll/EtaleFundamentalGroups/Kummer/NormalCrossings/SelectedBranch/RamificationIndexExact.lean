@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponentTarget
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponentTarget
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
 
 /-!
 # Exact ramification index on a selected Galois branch
@@ -15,6 +17,8 @@ used by the selected-root theorem.  It also records the formal passage of an
 exact ideal-theoretic ramification index to the complete valued target chosen
 from the corresponding completed generic component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,27 +46,27 @@ theorem
     (j : Fin d) (hj : j.1 < r)
     (P : Ideal A) [P.IsPrime] (htjP : t j ∈ P) :
     let p₀ := Ideal.span ({t j} : Set A)
-    letI : p₀.IsPrime :=
+    let : p₀.IsPrime :=
       Ideal.isPrime_span_singleton_of_prime (hNC.2.2.2.1 j hj)
     let R := Localization.AtPrime P
-    letI : Algebra R K :=
+    let : Algebra R K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI : Algebra R L :=
+    let : Algebra R L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower R K L :=
+    let : IsScalarTower R K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) P
-    letI : IsFractionRing R K :=
+    let : IsFractionRing R K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) P
     let pR := p₀.map (algebraMap A R)
-    letI : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P
+    let : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P
       (P.span_singleton_le_iff_mem.mpr htjP)
     let V := Localization.AtPrime pR
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) pR
-    letI : Algebra V L :=
+    let : Algebra V L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) pR
-    letI : IsScalarTower V K L :=
+    let : IsScalarTower V K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) pR
     let C := integralClosure V L
@@ -70,32 +74,8 @@ theorem
       Q.1.ramificationIdx V =
         splitStrictNormalCrossingsGaloisRamificationIndex
           (K := K) (L := L) t hNC j := by
-  dsimp only
-  let p₀ := Ideal.span ({t j} : Set A)
-  let : p₀.IsPrime :=
-    Ideal.isPrime_span_singleton_of_prime (hNC.2.2.2.1 j hj)
-  let R := Localization.AtPrime P
-  let : Algebra R K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra R L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower R K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-  let : IsFractionRing R K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
-  let pR := p₀.map (algebraMap A R)
-  let : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P
-    (P.span_singleton_le_iff_mem.mpr htjP)
-  let V := Localization.AtPrime pR
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) pR
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) pR
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) pR
-  let C := integralClosure V L
+  intro p₀ sharedOwner1 R sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 pR sharedOwner6 V
+    sharedOwner7 sharedOwner8 sharedOwner9 C
   have hp₀ : p₀.height = 1 :=
     Ideal.height_span_singleton_eq_one_of_mem_nonZeroDivisors
       (mem_nonZeroDivisors_iff_ne_zero.mpr

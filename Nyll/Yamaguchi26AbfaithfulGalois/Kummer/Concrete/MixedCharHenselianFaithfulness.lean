@@ -4,16 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharOpenSubgroupFaithfulness
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianAbsoluteGalois
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.GroupTheory.Index
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharOpenSubgroupFaithfulness
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianAbsoluteGalois
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Algebra.CharP.Algebra
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
 
 /-!
 # Henselian mixed-characteristic faithfulness
@@ -23,6 +26,8 @@ an open normal subgroup of the same index. Completion preserves the residue
 characteristic, and transport of residual conjugation returns faithfulness
 to the original Henselian field.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

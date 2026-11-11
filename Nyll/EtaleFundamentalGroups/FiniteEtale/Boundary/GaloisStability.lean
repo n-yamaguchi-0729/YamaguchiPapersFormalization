@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.CartierEtale
-import Nyll.SchemeTheory.Divisors.HorizontalEtale
-import Nyll.SchemeTheory.Divisors.ReducedEtale
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.GaloisPullbackConclusions
+module
+
+public import Nyll.SchemeTheory.Divisors.CartierEtale
+public import Nyll.SchemeTheory.Divisors.HorizontalEtale
+public import Nyll.SchemeTheory.Divisors.ReducedEtale
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.GaloisPullbackConclusions
 
 /-!
 # Finite-etale stability of arithmetic boundary data
@@ -17,6 +19,8 @@ Cartier divisor and records all conclusions for a fixed connected finite
 etale Galois cover.  The hypotheses use local Noetherianity; there is no
 finite-type or Nagata assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 

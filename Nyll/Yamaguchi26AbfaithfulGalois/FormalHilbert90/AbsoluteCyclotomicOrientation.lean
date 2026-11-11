@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicOrientation
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.Equivalence
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicOrientation
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.Equivalence
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
 
 /-!
 # Cyclotomic formal Hilbert 90 in every field characteristic
@@ -16,6 +18,8 @@ import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
 Restriction to the separable closure supplies the orientation on the actual
 algebraic-closure Galois group, including imperfect base fields.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

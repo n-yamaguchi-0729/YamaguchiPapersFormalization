@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RepresentationTheory.Invariants
+module
+
+public import Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Divisibility of the augmentation part of a finite-group action
@@ -13,6 +15,8 @@ If every action difference is divisible by a scalar, averaging and then
 projecting away from the invariants makes the augmentation part divisible
 by the same scalar. No finite generation or topology is required.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

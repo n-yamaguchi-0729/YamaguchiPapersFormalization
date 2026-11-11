@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompletionFormalComparison
-import Nyll.SchemeTheory.FiniteEtale.Algebra.NilpotentBaseChange
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientBaseChange
-import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompletionFormalComparison
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.NilpotentBaseChange
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleQuotientBaseChange
+public import Nyll.EtaleFundamentalGroups.Purity.Local.IdealAdicComplete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Finite-etale base change from an adically complete ring
@@ -20,6 +22,8 @@ faithfulness for finite-etale algebras.  For the maximal ideal of a complete
 Noetherian local ring, the existing lifting theorem also gives essential
 surjectivity, and therefore an equivalence of finite-etale categories.
 -/
+
+@[expose] public section
 
 noncomputable section
 

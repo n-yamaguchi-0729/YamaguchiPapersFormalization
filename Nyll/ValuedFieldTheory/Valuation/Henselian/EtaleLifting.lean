@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.StandardEtaleLifting
-import Mathlib.RingTheory.Unramified.LocalStructure
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.StandardEtaleLifting
+public import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Lifting residue points of etale algebras
@@ -14,6 +16,8 @@ At the kernel of a residue point, an etale algebra has a standard etale
 localization. The Henselian root lift on that localization restricts to
 the requested lift on the original algebra.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

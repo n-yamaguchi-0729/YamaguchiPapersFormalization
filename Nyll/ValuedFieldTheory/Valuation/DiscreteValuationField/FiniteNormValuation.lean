@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.FiniteNormExtension
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.RingTheory.Valuation.Discrete.Basic
-import Mathlib.Data.Int.WithZero
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Mathlib.RingTheory.Norm.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.FiniteNormExtension
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.RingTheory.Valuation.Discrete.Basic
+public import Mathlib.Data.Int.WithZero
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Mathlib.RingTheory.Norm.Basic
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.AbsoluteValues
 
 /-!
 # The field norm as a valuation on a finite extension
@@ -18,6 +21,8 @@ For a complete rank-one valued field, the field norm gives a valuation on
 any finite field extension. The strong triangle inequality follows from the
 actual spectral absolute-value extension. Separability is not needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

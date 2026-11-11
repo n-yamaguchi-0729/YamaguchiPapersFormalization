@@ -4,19 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFaithfulness
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFiniteRoots
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.GroupTheory.Torsion
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFaithfulness
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ResidueZeroFiniteRoots
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.GroupTheory.Torsion
 
 /-!
 # Ab-faithfulness in residue characteristic zero
 
 Source: [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1), Lemma 4.1.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

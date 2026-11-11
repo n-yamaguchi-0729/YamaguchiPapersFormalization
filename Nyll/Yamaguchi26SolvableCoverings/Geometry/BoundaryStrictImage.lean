@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictLocalModel
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.EtaleFundamentalGroups.Inertia.GeometricStalkNormalizationImage
-import Mathlib.Algebra.Group.Subgroup.MulOpposite
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StrictLocalModel
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.Inertia.GeometricStalkNormalizationImage
+public import Mathlib.Algebra.Group.Subgroup.MulOpposite
 
 /-!
 # The strict-Henselian finite image lies in actual boundary inertia
@@ -18,7 +20,11 @@ point of the original normalization over that very geometric point, fixed by
 the entire finite image of the strict generic fundamental group.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.PreGaloisCategory
 open EtaleFundamentalGroups EtaleFundamentalGroups.Inertia
@@ -26,7 +32,7 @@ open EtaleFundamentalGroups.StrictHenselian
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- The actual strict-Henselian generic finite image is contained in the
 stabilizer of a geometric point over the original component geometric point.
@@ -34,7 +40,7 @@ The point and the fixed action are constructed from the pointed cover. -/
 theorem exists_componentNormalizationPoint_strictImage_le_inertia
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement] (E : Component D)
-    {Ξ : Type} [Field Ξ] [IsSepClosed Ξ]
+    {Ξ : Type u} [Field Ξ] [IsSepClosed Ξ]
     (xi : Spec (.of Ξ) ⟶ Spec (.of (boundaryStrictFractionField D E)))
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
     (w : (FiniteEtale.fiber (xi ≫ boundaryStrictGenericMorphism D hreg E)).obj W) :

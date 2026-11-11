@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Ideal.CotangentBaseChange
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.LocalRing.Length
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Mathlib.Algebra.Module.SpanRankOperations
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Ideal.CotangentBaseChange
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.LocalRing.Length
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # Regularity under etale morphisms
@@ -20,6 +23,8 @@ This file proves that regularity of local rings ascends along the local ring
 maps induced by etale morphisms.  Consequently, regularity along the support
 of an ideal sheaf is preserved after etale pullback.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open TensorProduct
@@ -111,7 +116,16 @@ lemma isRegularLocalRing_of_flat_of_formallyUnramified_of_essFiniteType_of_targe
     have hcomp : qS ∘ₗ G = H := by
       ext x
       obtain ⟨x, rfl⟩ := mR.toCotangent_surjective x
-      simp [qR, qS, G, gR, H, e, e₁, e₂, Algebra.smul_def]
+      simp only [AlgebraTensorModule.curry_apply, LinearMap.restrictScalars_comp, curry_apply,
+        LinearMap.coe_comp, LinearMap.coe_restrictScalars, Function.comp_apply,
+        LinearMap.liftBaseChange_tmul, Ideal.mapCotangent_toCotangent, Algebra.ofId_apply, one_smul,
+        Ideal.toCotangent_to_quotient_square, Submodule.mkQ_apply, Ideal.Quotient.mk_eq_mk,
+        Ideal.Quotient.mk_algebraMap, AlgEquiv.trans_toLinearMap, LinearEquiv.comp_coe,
+        AlgEquiv.toLinearEquiv_symm, AlgebraTensorModule.restrictScalars_lTensor,
+        LinearEquiv.coe_coe, LinearMap.lTensor_tmul, LinearEquiv.trans_apply,
+        AlgEquiv.coe_symm_toLinearEquiv,
+        Algebra.TensorProduct.quotIdealMapEquivTensorQuot_symm_tmul, Algebra.smul_def, mul_one,
+        AlgEquiv.toLinearEquiv_apply, qS, G, gR, H, e, e₁, e₂, qR]
       simpa [IsScalarTower.algebraMap_apply] using
         (e₂.commutes (algebraMap R S x)).symm
     suffices h : Function.Injective (qS ∘ₗ G) from .of_comp h
@@ -131,7 +145,8 @@ lemma isRegularLocalRing_of_flat_of_formallyUnramified_of_essFiniteType_of_targe
       · intro x hx hxS
         obtain ⟨x, hx, rfl⟩ := hx
         refine ⟨1 ⊗ₜ[R] mR.toCotangent ⟨x, hx⟩, ?_⟩
-        simp [G, gR]
+        simp only [LinearMap.liftBaseChange_tmul, Ideal.mapCotangent_toCotangent,
+          Algebra.ofId_apply, one_smul, G, gR]
       · intro hzero
         refine ⟨0, ?_⟩
         have hz0 : (⟨0, hzero⟩ : mS) = 0 := Subtype.ext rfl

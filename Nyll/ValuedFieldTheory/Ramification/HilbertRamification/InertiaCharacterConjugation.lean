@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
 
 /-!
 # Conjugation of inertia characters
@@ -15,6 +17,8 @@ Relate the residue-unit inertia character to decomposition and residue
 actions. Finite inertia characters are injective in residue characteristic
 zero.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

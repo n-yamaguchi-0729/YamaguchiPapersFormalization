@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Mathlib.RingTheory.Etale.Field
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Mathlib.RingTheory.Etale.Field
 
 /-!
 # Normalization of all generic tensor components
@@ -17,6 +19,8 @@ maximal ideals.  This file keeps those literal quotient fields as the
 components and aggregates componentwise etaleness of their integral closures
 to etaleness of the normalization in their product.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -63,9 +67,7 @@ noncomputable def genericTensorProductEquivFieldComponents
     letI : ∀ M, Algebra R (A M) := fun M =>
       genericTensorFieldComponentLeftScalarAlgebra (R := R) M.asIdeal
     G ≃ₐ[R] ∀ M, A M := by
-  let G := F ⊗[K] L
-  let A := fun M : MaximalSpectrum G =>
-    GenericTensorFieldComponent M.asIdeal
+  intro G A
   letI : Algebra.Etale K L :=
     { formallyEtale := Algebra.FormallyEtale.of_isSeparable K L
       finitePresentation :=
@@ -106,9 +108,7 @@ theorem integralClosure_genericTensorFieldComponents_etale
     letI : ∀ M, Algebra R (A M) := fun M =>
       genericTensorFieldComponentLeftScalarAlgebra (R := R) M.asIdeal
     Algebra.Etale R (integralClosure R (∀ M, A M)) := by
-  let G := F ⊗[K] L
-  let A := fun M : MaximalSpectrum G =>
-    GenericTensorFieldComponent M.asIdeal
+  intro G A
   let : Algebra.Etale K L :=
     { formallyEtale := Algebra.FormallyEtale.of_isSeparable K L
       finitePresentation :=
@@ -135,16 +135,11 @@ noncomputable def integralClosureGenericTensorProductEquivComponents
     let G := F ⊗[K] L
     let A := fun M : MaximalSpectrum G =>
       GenericTensorFieldComponent M.asIdeal
-    letI : Algebra R G := genericTensorProductLeftScalarAlgebra
-    letI : ∀ M, Algebra R (A M) := fun M =>
+    let : Algebra R G := genericTensorProductLeftScalarAlgebra
+    let : ∀ M, Algebra R (A M) := fun M =>
       genericTensorFieldComponentLeftScalarAlgebra (R := R) M.asIdeal
     integralClosure R G ≃ₐ[R] integralClosure R (∀ M, A M) := by
-  let G := F ⊗[K] L
-  let A := fun M : MaximalSpectrum G =>
-    GenericTensorFieldComponent M.asIdeal
-  letI : Algebra R G := genericTensorProductLeftScalarAlgebra
-  letI : ∀ M, Algebra R (A M) := fun M =>
-    genericTensorFieldComponentLeftScalarAlgebra (R := R) M.asIdeal
+  intro G A sharedDefinitionOwner3 sharedDefinitionOwner4
   exact (genericTensorProductEquivFieldComponents
     (R := R) (K := K) (F := F) (L := L)).mapIntegralClosure
 
@@ -165,7 +160,7 @@ theorem integralClosure_genericTensorProduct_etale
     let G := F ⊗[K] L
     letI : Algebra R G := genericTensorProductLeftScalarAlgebra
     Algebra.Etale R (integralClosure R G) := by
-  let G := F ⊗[K] L
+  intro G
   let A := fun M : MaximalSpectrum G =>
     GenericTensorFieldComponent M.asIdeal
   let : Algebra R G := genericTensorProductLeftScalarAlgebra

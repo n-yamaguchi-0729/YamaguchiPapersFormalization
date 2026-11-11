@@ -4,11 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
-import Nyll.GaloisCohomology.Topology.ContinuousH1Lifting
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
+public import Nyll.GaloisCohomology.Topology.ContinuousH1Lifting
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.GaloisCohomology.Topology.ContinuousCrossedHom
 
 /-! # Concrete finite cocycles and the actual continuous H¹ reduction -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

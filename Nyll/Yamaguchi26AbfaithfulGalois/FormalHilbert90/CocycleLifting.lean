@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCohomology
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCocycleOperations
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCohomology
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCocycleOperations
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPowerExact
 
 /-!
 # Lifting cocycles for one fixed group
@@ -15,6 +18,8 @@ These are the cocycle lifting assertions used in the earlier manuscript. The
 hypothesis concerns this `H` alone; no lifting on its open subgroups is
 assumed. Compatible successive lifts give a continuous p-adic cocycle.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

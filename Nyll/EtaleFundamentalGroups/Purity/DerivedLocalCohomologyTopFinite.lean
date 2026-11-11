@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Data.ENat.Basic
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Nakayama
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Data.ENat.Basic
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Nakayama
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Finite top cohomology and a regular scalar
@@ -25,6 +27,8 @@ finite coefficients. The top cohomology of its quotient vanishes, so the
 scalar acts surjectively on top cohomology. If that cohomology were finite,
 Nakayama's lemma would force it to be zero.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

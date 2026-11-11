@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ArtinianSecondaryDecomposition
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Prime
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ArtinianSecondaryDecomposition
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Prime
 
 /-!
 # Prime annihilators of secondary modules
@@ -18,6 +20,8 @@ cancelling a surjective scalar power, a product that kills the module
 forces the other scalar power to kill it.  These prime ideals are the
 finite avoidance conditions in the Artinian parameter-choice argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

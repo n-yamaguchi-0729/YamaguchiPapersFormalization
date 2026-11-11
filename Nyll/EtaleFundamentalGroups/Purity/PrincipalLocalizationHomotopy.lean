@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleLocalization
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Mathlib.Algebra.Homology.Homotopy
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.Algebra.Homology.ShortComplex.LeftHomology
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Homology.ShortComplex.QuasiIso
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Homology.Single
-import Mathlib.CategoryTheory.Preadditive.Injective.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleLocalization
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+public import Mathlib.Algebra.Homology.Homotopy
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.Algebra.Homology.ShortComplex.LeftHomology
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Homology.ShortComplex.QuasiIso
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.Algebra.Homology.Single
+public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 
 /-!
 # The principal localization complex of an injective module
@@ -28,6 +30,8 @@ quasi-isomorphism between complexes of injectives, hence a homotopy
 equivalence.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Purity
@@ -38,7 +42,8 @@ open CategoryTheory Limits
 
 variable {R : Type u} [CommRing R]
 
-private theorem primaryComponent_localization_comp_eq_zero
+/-- Localization kills the primary component for the same principal ideal. -/
+theorem primaryComponent_localization_comp_eq_zero
     (x : R) (M : ModuleCat.{u} R) :
     (LocalizedModule.mkLinearMap (Submonoid.powers x) M).comp
       (Ideal.primaryComponent M (Ideal.span {x})).subtype = 0 := by
@@ -145,7 +150,7 @@ theorem principalLocalizationInclusion_quasiIso
 
 /-- The principal localization complex of an injective module is
 homotopy equivalent to its primary component in degree zero. -/
-private def principalLocalizationHomotopyData
+def principalLocalizationHomotopyData
     [IsNoetherianRing R] (x : R) (M : ModuleCat.{u} R) [Module.Injective R M] :
     {e : HomotopyEquiv
       ((CochainComplex.single₀ (ModuleCat.{u} R)).obj

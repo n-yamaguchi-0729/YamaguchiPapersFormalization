@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
-import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
-import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PowerClassCharacterApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.PowerClasses
+public import Nyll.ValuedFieldTheory.Valuation.Completion.EquivariantMap
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Simultaneous completion characters on prolongations
@@ -18,6 +20,8 @@ global character over a finite family of prolongations. Equivalent
 prolongations are grouped together before weak approximation of power
 classes, and completion equivalences transport the resulting character.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

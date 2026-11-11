@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.ProCGroups.Abelian.AbelianModPower
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.FieldTheory.Galois.Profinite
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+module
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicPrimeDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeReduction
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.FiniteGaloisPrimeDegreeReduction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicPrimeDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PrimeDegreeReduction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.FiniteGaloisPrimeDegreeReduction
 
 /-!
 # Mixed-characteristic discrete valuations
@@ -23,6 +25,8 @@ Theorem 3.6 of [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v
 Its first assertion is stated on the actual
 quotient `G_Lᵃᵇ/p`.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalNormality
-import Mathlib.RingTheory.Localization.Finiteness
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Smooth.IntegralClosure
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleLocalNormality
+public import Mathlib.RingTheory.Localization.Finiteness
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Smooth.IntegralClosure
 
 /-!
 # Identifying a normalization on an etale neighborhood of a finite model
@@ -18,6 +20,8 @@ original base along the boundary then makes the model's boundary local rings
 normal. Integral closure across that boundary identifies the model with the
 actual relative normalization, proving both finiteness and etaleness there.
 -/
+
+@[expose] public section
 
 noncomputable section
 

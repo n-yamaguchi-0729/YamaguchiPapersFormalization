@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.BoundedCyclotomicExponent
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntCastValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.BoundedCyclotomicExponent
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntCastValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
 
 /-!
 # Strict growth from a bounded cyclotomic coefficient
@@ -16,6 +18,8 @@ coefficient `(1-a)/p^(s+1)` of value strictly greater than one. The numerator
 has smaller p-adic order than the denominator. No completeness, discreteness,
 or finite residue-field hypothesis is used.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

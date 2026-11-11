@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalFiniteFreeResolution
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.FractionFieldSubalgebraTrace
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.LinearAlgebra.Trace
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalFiniteFreeResolution
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.FractionFieldSubalgebraTrace
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.LinearAlgebra.Trace
 
 /-!
 # Traces over regular local rings
@@ -19,6 +21,8 @@ alternating sum of traces of finite free modules. We use only the finite free
 resolution theorem for a regular local ring from the imported source; the
 stronger hypothesis of its unique factorization theorem is not used.
 -/
+
+@[expose] public section
 
 open scoped TensorProduct nonZeroDivisors
 
@@ -104,14 +108,14 @@ private theorem trace_baseChange_mem_range_of_hasFFR
       rfl
     obtain ⟨r, hr⟩ := ih (LinearMap.ker p) hn a
     have hiK : Function.Injective ((LinearMap.ker p).subtype.baseChange K) := by
-      rw [LinearMap.baseChange_eq_ltensor]
+      rw [LinearMap.baseChange_eq_lTensor]
       exact Module.Flat.lTensor_preserves_injective_linearMap _
         (Submodule.injective_subtype (LinearMap.ker p))
     have hpK : Function.Surjective (p.baseChange K) := by
-      rw [LinearMap.baseChange_eq_ltensor]
+      rw [LinearMap.baseChange_eq_lTensor]
       exact LinearMap.lTensor_surjective K hp
     have hexK : Function.Exact ((LinearMap.ker p).subtype.baseChange K) (p.baseChange K) := by
-      simp only [LinearMap.baseChange_eq_ltensor]
+      simp only [LinearMap.baseChange_eq_lTensor]
       exact Module.Flat.lTensor_exact K (LinearMap.exact_subtype_ker_map p)
     have hbiK : (b.baseChange K).comp ((LinearMap.ker p).subtype.baseChange K) =
         ((LinearMap.ker p).subtype.baseChange K).comp (a.baseChange K) := by

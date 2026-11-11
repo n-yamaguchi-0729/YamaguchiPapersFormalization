@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootLast
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.ConditionalLocalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCoverHeightOne
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.AtUnit
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOneBaseChange
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosure.PrimeAtPrimeEquiv
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootLast
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.ConditionalLocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCoverHeightOne
 
 /-!
 # The selected complement of a conditional Galois root cover
@@ -31,6 +33,8 @@ after presenting the whole conditional cover as its one-root algebra, or is
 on the original boundary complement.  The zero prime is included directly
 in the latter case.
 -/
+
+@[expose] public section
 
 noncomputable section
 

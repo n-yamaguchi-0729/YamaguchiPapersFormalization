@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictInertia
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryUnramifiedExtension
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierStrictNormalizationEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StrictInertia
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.UnramifiedExtension
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierStrictNormalizationEtale
 
 /-!
 # Extending covers killed by strict local inertia
@@ -19,7 +21,11 @@ The finite Galois quotient criterion identifies the closed normal inertia
 subgroup with the kernel of the inclusion-induced fundamental-group map.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -27,14 +33,14 @@ open EtaleFundamentalGroups.StrictHenselian
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- A Galois cover killed by all actual strict inertia generators extends
 across the regular Cartier boundary. -/
 theorem exists_finiteEtale_extension_of_strictGenerators_subset_kernel
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement)
     (W : FiniteEtale D.1.supportComplement) [IsGalois W]
     (w : (fiber point).obj W)
@@ -62,7 +68,7 @@ theorem kernel_le_boundaryStrictInertiaClosure
     [ConnectedSpace X]
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker ≤
       boundaryStrictInertiaClosure D hreg point := by

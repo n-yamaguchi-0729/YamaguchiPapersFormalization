@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.Functoriality
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-!
 # Function fields of dense open subschemes
@@ -14,6 +16,8 @@ An open immersion between integral schemes identifies their function fields.
 The equivalence below is the literal function-field map induced by the open
 immersion, so it can be used in scalar-tower comparisons.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -25,7 +29,8 @@ universe u
 
 variable {X U : Scheme.{u}}
 
-private theorem denseRange_of_isOpenImmersion
+/-- An open immersion between integral schemes has dense image. -/
+theorem denseRange_of_isOpenImmersion
     [IsIntegral X] [IsIntegral U]
     (j : U ⟶ X) [IsOpenImmersion j] :
     DenseRange j :=
@@ -76,11 +81,10 @@ noncomputable def functionFieldAlgEquivOfIsOpenImmersionSpec
     (R : CommRingCat.{u}) [IsDomain R]
     {U : Scheme.{u}} [IsIntegral U]
     (j : U ⟶ Spec R) [IsOpenImmersion j] :
-    letI : Algebra R U.functionField :=
+    let : Algebra R U.functionField :=
       j.functionFieldAlgebraOfIsOpenImmersionSpec R
     (Spec R).functionField ≃ₐ[R] U.functionField := by
-  letI : Algebra R U.functionField :=
-    j.functionFieldAlgebraOfIsOpenImmersionSpec R
+  intro functionFieldAlgebra
   exact
     { j.functionFieldRingEquivOfIsOpenImmersion with
       commutes' := fun _ ↦ rfl }
@@ -91,11 +95,10 @@ theorem functionField_isFractionRing_of_isOpenImmersionSpec
     (R : CommRingCat.{u}) [IsDomain R]
     {U : Scheme.{u}} [IsIntegral U]
     (j : U ⟶ Spec R) [IsOpenImmersion j] :
-    letI : Algebra R U.functionField :=
+    let : Algebra R U.functionField :=
       j.functionFieldAlgebraOfIsOpenImmersionSpec R
     IsFractionRing R U.functionField := by
-  let : Algebra R U.functionField :=
-    j.functionFieldAlgebraOfIsOpenImmersionSpec R
+  intro functionFieldAlgebra
   let : IsFractionRing R (Spec R).functionField :=
     AlgebraicGeometry.functionField_isFractionRing_of_affine R
   exact IsFractionRing.of_algEquiv

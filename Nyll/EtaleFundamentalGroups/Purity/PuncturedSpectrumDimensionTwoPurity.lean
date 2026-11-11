@@ -4,10 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalization
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumFunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedReduction
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalization
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ConnectedReduction
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Purity for two-dimensional regular local punctures
@@ -18,6 +25,8 @@ is finite etale by the two-dimensional integral-closure theorem, and its
 restriction is identified with the original connected cover.  Finite
 coproduct decomposition then handles arbitrary covers.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,52 +39,30 @@ universe u
 
 variable (R : Type u) [CommRing R] [IsDomain R] [IsRegularLocalRing R]
 
-private theorem puncturedSpectrum_nonempty_dimension_two'
-    (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
-    Nonempty (Scheme.puncturedSpectrum R) := by
-  apply Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R
-  rw [hdim]
-  norm_num
-
 /-- The function-field equivalence induced by the punctured open immersion
 intertwines germs of global sections. -/
-private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ
+theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R)
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-    letI : Nonempty (⊤ : U.Opens) :=
+    let : Nonempty (⊤ : U.Opens) :=
       ⟨⟨genericPoint U, by trivial⟩⟩
     puncturedSpectrumFunctionFieldRingEquivOfPositiveDimension R hpos
         (X.germToFunctionField ⊤ r) =
       U.germToFunctionField ⊤ (j.appTop r) := by
-  dsimp only
-  let X := Spec (.of R)
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
-  let : Nonempty (⊤ : U.Opens) :=
-    ⟨⟨genericPoint U, by trivial⟩⟩
+  intro X U j sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6
   let hgen : j (genericPoint U) = genericPoint X :=
     genericPoint_eq_of_isOpenImmersion j
   change j.stalkMap (genericPoint U)
@@ -100,21 +87,16 @@ private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ
 omit [IsRegularLocalRing R] in
 /-- The literal fraction-field algebra on an affine spectrum is the germ of
 global sections, after the standard global-sections equivalence. -/
-private theorem specFunctionField_algebraMap_ΓSpecIso_hom
+theorem specFunctionField_algebraMap_ΓSpecIso_hom
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
-    letI : Algebra R X.functionField :=
+    let : Algebra R X.functionField :=
       AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
     algebraMap R X.functionField ((Scheme.ΓSpecIso (.of R)).hom r) =
       X.germToFunctionField ⊤ r := by
-  dsimp only
-  let X := Spec (.of R)
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
-  let : Algebra R X.functionField :=
-    AlgebraicGeometry.instAlgebraCarrierFunctionFieldSpec (.of R)
+  intro X sharedOwner1 sharedOwner2
   change X.presheaf.germ ⊤ (genericPoint X) (by trivial)
       ((Scheme.ΓSpecIso (.of R)).inv
         ((Scheme.ΓSpecIso (.of R)).hom r)) =

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutExtension
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedAutRestriction
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableAutExtension
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosedAutRestriction
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 
 /-!
 # Automorphism groups of separable closures across completion
@@ -15,6 +17,8 @@ Tensor extension and restriction through the chosen embedding are inverse.
 The resulting group isomorphism retains the action on each embedded element.
 No continuity or comparison theorem is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

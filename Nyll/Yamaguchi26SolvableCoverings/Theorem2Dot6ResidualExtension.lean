@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
-import Nyll.Yamaguchi26SolvableCoverings.Representations.AdicPerfect
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
-import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
-import Mathlib.Topology.Instances.Matrix
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Quotient
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot5PerfectKernel
+public import Nyll.Yamaguchi26SolvableCoverings.Representations.AdicPerfect
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
+public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
+public import Mathlib.Topology.Instances.Matrix
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Corollary 2.6: extending representations from their reductions
@@ -32,7 +34,11 @@ congruence filtration, followed by the universal property of a surjective homomo
 Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Corollary 2.6.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u v
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale
@@ -43,12 +49,12 @@ namespace Yamaguchi26SolvableCoverings
 `X` の基本群を経由することと、その剰余表現が連続的に経由することは同値であり、
 元の表現の延長は存在すれば一意である。 -/
 theorem residual_extension_2_6
-    {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+    {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
     (D : X.EffectiveCartierDivisor) (hhor : IsHorizontal D)
     (hD : BoundaryCondition D)
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement)
-    (A : Type) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
+    (A : Type v) [CommRing A] [IsLocalRing A] [IsNoetherianRing A]
     [IsAdicComplete (IsLocalRing.maximalIdeal A) A]
     [TopologicalSpace A] (hAdic : IsAdic (IsLocalRing.maximalIdeal A))
     [IsTopologicalRing A]
@@ -56,7 +62,7 @@ theorem residual_extension_2_6
     (p : ℕ) (_hp : p.Prime) [CharP (IsLocalRing.ResidueField A) p]
     (n : ℕ) (_hn : 1 ≤ n)
     (ρ : π₁ᵉᵗ(point) →ₜ* Matrix.GeneralLinearGroup (Fin n) A) :
-    letI : TopologicalSpace (IsLocalRing.ResidueField A) := ⊥
+    let : TopologicalSpace (IsLocalRing.ResidueField A) := ⊥
     let f := fundamentalGroupHom D.1.supportComplement.ι point
     let ρbar : π₁ᵉᵗ(point) →* Matrix.GeneralLinearGroup (Fin n)
         (IsLocalRing.ResidueField A) :=
@@ -74,20 +80,7 @@ theorem residual_extension_2_6
           Matrix.GeneralLinearGroup (Fin n) A,
           τ.comp f = ρ) := by
   classical
-  let : TopologicalSpace (IsLocalRing.ResidueField A) := ⊥
-  let f := fundamentalGroupHom D.1.supportComplement.ι point
-  let ρbar : π₁ᵉᵗ(point) →* Matrix.GeneralLinearGroup (Fin n)
-      (IsLocalRing.ResidueField A) :=
-    (Matrix.GeneralLinearGroup.map (IsLocalRing.residue A)).comp ρ.toMonoidHom
-  change ((∃ τ : π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) →ₜ*
-        Matrix.GeneralLinearGroup (Fin n) A, τ.comp f = ρ) ↔
-      (∃ τbar : π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) →ₜ*
-        Matrix.GeneralLinearGroup (Fin n) (IsLocalRing.ResidueField A),
-        τbar.toMonoidHom.comp f.toMonoidHom = ρbar)) ∧
-    ((∃ τ : π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) →ₜ*
-        Matrix.GeneralLinearGroup (Fin n) A, τ.comp f = ρ) →
-      ∃! τ : π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) →ₜ*
-        Matrix.GeneralLinearGroup (Fin n) A, τ.comp f = ρ)
+  intro sharedOwner1 f ρbar
   have hsurj : Function.Surjective f := by
     rcases boundary_quotient_1_1 D hD.1 with ⟨hU, hf⟩
     let : ConnectedSpace D.1.supportComplement := hU

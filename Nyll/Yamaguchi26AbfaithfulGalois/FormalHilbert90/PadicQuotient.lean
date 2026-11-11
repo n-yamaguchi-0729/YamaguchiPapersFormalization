@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicCharacterSurjectivity
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicCharacterSurjectivity
 
 /-! # A p-adic quotient from trivial-orientation formal Hilbert 90 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySimultaneousPowers
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtColimit
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySimultaneousPowers
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtColimit
 
 /-!
 # Support terms in the derived local-cohomology Mayer--Vietoris sequence
@@ -15,6 +17,8 @@ simultaneous-intersection support, and the following term in degree `n₁` is
 the simultaneous-supremum support.  Cofinality identifies their filtered
 colimits with derived local cohomology at `I ⊓ J` and `I ⊔ J`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

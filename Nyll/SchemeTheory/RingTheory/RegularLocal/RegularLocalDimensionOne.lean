@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.Data.ENat.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.Data.ENat.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # One-dimensional regular local rings are DVRs
@@ -19,6 +21,8 @@ the cotangent space with Krull dimension. The one-dimensional local-domain
 criterion then produces the discrete valuation ring structure. No domain
 or normality hypothesis is added to regularity.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 

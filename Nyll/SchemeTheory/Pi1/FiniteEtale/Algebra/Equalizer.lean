@@ -17,11 +17,15 @@ Nyll/EtaleFundamentalGroups/Pi1/UPSTREAM.json and ATTRIBUTION.md.
 
 module
 
+public import Mathlib.Algebra.GroupWithZero.Action.Pi
+public import Mathlib.Algebra.Notation.Pi.Basic
 public import Mathlib.Algebra.Group.Basic
 public import Mathlib.Algebra.Group.Idempotent
 public import Mathlib.Logic.Function.Coequalizer
 public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Flat.Equalizer
 public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Descent
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Algebra.Basic
 
 /-!
 # Equalizers of finite split algebras
@@ -227,7 +231,7 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
     replace hc (y : E) : f (Pi.single y 1) x = 0 := by
       obtain (h|h) := hor x y
       · assumption
-      · simp [hc] at h
+      · exact (hc y h).elim
     have : 1 = ∑ y : E, f (Pi.single y 1) x := by
       rw [← Fintype.sum_apply]
       rw [← map_sum, Finset.univ_sum_single, ← Pi.one_def, map_one, Pi.one_apply]
@@ -247,9 +251,10 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
   ext x i
   induction x using Pi.single_induction with
   | zero => simp only [map_zero, Pi.zero_apply, AlgHom.compRight_apply]
-  | add x y hx hy => simp [hx, hy]
+  | add x y hx hy => simp only [map_add, Pi.add_apply, hx, hy]
   | single j r =>
-      have : Pi.single j r = r • (Pi.single j 1 : E → R) := by simp [← Pi.single_smul]
+      have : Pi.single j r = r • (Pi.single j 1 : E → R) := by
+        simpa only [smul_eq_mul, mul_one] using (Pi.single_smul' j r (1 : R))
       rw [this]
       simp only [map_smul, Pi.smul_apply, smul_eq_mul, AlgHom.compRight_apply]
       congr
@@ -257,11 +262,13 @@ lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem {R E F : Type*} [_ro
       · have : j ≠ σ i := by
           intro hj
           subst hj
-          simp [hσ] at h
-        simp [this, h]
+          exact zero_ne_one (h.symm.trans (hσ i))
+        exact h.trans
+          (Pi.single_eq_of_ne (M := fun _ : E => R) this.symm (1 : R)).symm
       · have := hun i j h
         subst this
-        simp [hσ]
+        exact (hσ i).trans
+          (Pi.single_eq_same (M := fun _ : E => R) (σ i) (1 : R)).symm
 
 lemma AlgHom.eq_compRight_of_no_nontrivial_isIdempotentElem' {R E F : Type*} [_root_.Finite E]
     [CommRing R] [Nontrivial R] (H : ∀ e : R, IsIdempotentElem e → e = 0 ∨ e = 1)
@@ -322,7 +329,7 @@ lemma AlgHom.exists_cover_eq_compRight'' {R : Type*} {E F : Type u}
       (F → Localization.AtPrime p) (.compRight R R σ)
   have : fₚ = gₚ := by
     rw [hσ]
-    apply AlgHom.coe_ringHom_injective
+    apply AlgHom.toRingHom_injective
     apply IsLocalization.ringHom_ext (Algebra.algebraMapSubmonoid (E → R) p.primeCompl)
     ext x i
     simp only [AlgHom.toRingHom_eq_coe, RingHom.coe_comp, RingHom.coe_coe, Function.comp_apply,
@@ -355,11 +362,11 @@ lemma AlgHom.exists_cover_eq_compRight''₂ {R : Type*} {E F : Type u}
   have : IsScalarTower R (Away r) (Localization.Away (r * r')) := by
     apply IsScalarTower.of_algebraMap_eq
     intro x
-    simp [RingHom.algebraMap_toAlgebra]
+    simp only [RingHom.algebraMap_toAlgebra, IsLocalization.Away.lift_eq]
   have : IsScalarTower R (Away r') (Localization.Away (r * r')) := by
     apply IsScalarTower.of_algebraMap_eq
     intro x
-    simp [RingHom.algebraMap_toAlgebra]
+    simp only [RingHom.algebraMap_toAlgebra, IsLocalization.Away.lift_eq]
   let eE : Localization.Away (r * r') ⊗[R] (E → R) ≃ₐ[Localization.Away (r * r')]
       Localization.Away (r * r') ⊗[Away r] (Localization.Away r ⊗[R] (E → R)) :=
     (Algebra.TensorProduct.cancelBaseChange _ _ _ _ _).symm
@@ -429,7 +436,15 @@ lemma Algebra.FiniteEtale.equalizer_of_isFiniteSplit {R S T : Type u} [CommRing 
   have : Algebra.FiniteEtale R (AlgHom.equalizer f' g') :=
     Algebra.FiniteEtale.equalizer_fun f' g'
   let cong : AlgHom.equalizer f g ≃ₐ[R] AlgHom.equalizer f' g' :=
-    AlgHom.equalizerCongr eS eT (by ext; simp [f']) (by ext; simp [g'])
+    AlgHom.equalizerCongr eS eT
+      (by
+        apply AlgHom.ext
+        intro x
+        exact (congrArg (fun y => eT (f y)) (eS.symm_apply_apply x)).symm)
+      (by
+        apply AlgHom.ext
+        intro x
+        exact (congrArg (fun y => eT (g y)) (eS.symm_apply_apply x)).symm)
   exact Algebra.FiniteEtale.of_equiv cong.symm
 
 lemma Algebra.FiniteEtale.equalizer_of_rankAtStalk_eq {R S T : Type u} [CommRing R] [CommRing S]

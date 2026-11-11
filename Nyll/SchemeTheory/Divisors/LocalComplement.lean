@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.LocalScheme
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.Data.Finset.Lattice.Fold
+module
+
+public import Nyll.SchemeTheory.Divisors.LocalScheme
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.Data.Finset.Lattice.Fold
 
 /-!
 # Local descriptions of support complements
@@ -17,6 +19,8 @@ scheme point.  If the stalk ideal becomes principal after localizing at a
 prime, the resulting open subscheme is canonically the spectrum of the
 localization away from that principal generator.
 -/
+
+@[expose] public section
 
 noncomputable section
 

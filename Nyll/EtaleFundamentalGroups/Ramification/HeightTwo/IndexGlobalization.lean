@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.UnitGlobalization
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.UnitGlobalization
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Globalizing a ramification-index unit from height two
@@ -16,6 +18,8 @@ its ramification index.  Combining this with height-two detection of
 nonunits globalizes the local ramification-index unit statement to the
 generic point of the divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -50,7 +54,7 @@ theorem ramificationIdx_isUnit_mod_prime_of_heightTwo_localizations
     IsUnit
       ((Q.ramificationIdx A : ℕ) : A ⧸ Ideal.span {t}) := by
   apply isUnit_natCast_mod_prime_of_heightTwo_localizations
-    t ht (Q.ramificationIdx A) (Ideal.ramificationIdx_pos Q A)
+    t ht (Q.ramificationIdx A) (Ideal.ramificationIdx_pos A Q)
   intro P hP hstrict hheight
   let : P.IsPrime := hP
   let : Algebra (Localization.AtPrime P) L :=

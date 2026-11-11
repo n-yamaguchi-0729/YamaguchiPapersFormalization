@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.LocalizationRing
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.DVRLocalExtension
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.LocalizationRing
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.DVRLocalExtension
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 
 /-!
 # Discrete valuations from localized finite integral closures
@@ -18,6 +20,8 @@ The actual localization constructed in `LocalizationRing` is a DVR in a
 finite separable extension. Its canonical fraction-field valuation extends
 the given base valuation, without completeness or Henselian assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

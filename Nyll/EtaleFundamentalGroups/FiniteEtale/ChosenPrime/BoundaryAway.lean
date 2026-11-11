@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
-import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.ChosenPrime.LocalFactor
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.IntegralBase.ChosenLocalization.Core
 
 /-!
 # The primitive boundary Away map on the Tag 00UJ local factor
@@ -17,6 +19,8 @@ to the tensor product, then to the finite idempotent factor, and finally to
 the chosen prime-local factor.  This construction never uses a root cover or
 a generic field component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

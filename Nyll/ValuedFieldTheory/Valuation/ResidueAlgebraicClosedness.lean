@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Valuation.LocalSubring
+module
+
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Valuation.LocalSubring
 
 /-!
 # Algebraic closedness of a valuation residue field
@@ -20,6 +22,8 @@ field, and use integral closedness to realize that same root in the valuation
 ring before reducing it. No hypothesis on the valuation rank or residue
 characteristic is needed.
 -/
+
+@[expose] public section
 
 namespace ValuationSubring
 

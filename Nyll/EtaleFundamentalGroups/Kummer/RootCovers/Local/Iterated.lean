@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
 
 /-!
 # Locality of finite iterated Kummer root covers
@@ -17,6 +19,8 @@ the image of the original maximal ideal remains inside the maximal ideal at ever
 The resulting `IsLocalRing` proofs are theorems, not global recursive instances.  Consumers install
 one proof locally when needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

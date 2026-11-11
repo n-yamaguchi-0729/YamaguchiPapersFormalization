@@ -4,10 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumNormalizationFinite
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.StalkFunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumNormalizationFinite
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # Connected normalizations across a punctured spectrum
@@ -17,6 +25,8 @@ a finite-etale cover of a punctured two-dimensional regular local spectrum.
 The cover supplies a finite separable function-field extension, and its
 stalks supply the codimension-one etaleness input for local purity.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -29,19 +39,13 @@ universe u
 
 variable (R : Type u) [CommRing R] [IsDomain R] [IsRegularLocalRing R]
 
-private theorem puncturedSpectrum_nonempty
-    (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
-    Nonempty (Scheme.puncturedSpectrum R) := by
-  apply Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R
-  rw [hdim]
-  norm_num
-
-private noncomputable def puncturedSpectrumFunctionFieldRingEquiv
+/-- The punctured spectrum has the function field of the original two-dimensional local spectrum. -/
+noncomputable def puncturedSpectrumFunctionFieldRingEquiv
     (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
   let X := Spec (.of R)
   let U := Scheme.puncturedSpectrum R
   let j : U ⟶ X := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U := puncturedSpectrum_nonempty R hdim
+  let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
   let : IsIntegral X := inferInstance
   let : IsOpenImmersion j := by
     dsimp only [j, Scheme.puncturedSpectrumInclusion]
@@ -61,7 +65,7 @@ spectrum induced from the full local spectrum. -/
 @[reducible] noncomputable def puncturedSpectrumFunctionFieldAlgebra
     (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
     let U := Scheme.puncturedSpectrum R
-    let : Nonempty U := puncturedSpectrum_nonempty R hdim
+    let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
     let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
@@ -77,7 +81,7 @@ spectrum induced from the full local spectrum. -/
 private noncomputable def puncturedSpectrumFunctionFieldAlgEquiv
     (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
     let U := Scheme.puncturedSpectrum R
-    let : Nonempty U := puncturedSpectrum_nonempty R hdim
+    let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
     let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
@@ -96,7 +100,7 @@ private noncomputable def puncturedSpectrumFunctionFieldAlgEquiv
 theorem puncturedSpectrumFunctionField_isFractionRing
     (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
     let U := Scheme.puncturedSpectrum R
-    let : Nonempty U := puncturedSpectrum_nonempty R hdim
+    let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
     let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
@@ -122,7 +126,7 @@ theorem connectedPuncturedCover_localIntegralClosure_etale
     let : IsIntegrallyClosed R :=
       (open _root_.EtaleFundamentalGroups.SpecialLocalPurity in
         isIntegrallyClosed_of_isRegularLocalRing_dimension_two hdim)
-    let : Nonempty U := puncturedSpectrum_nonempty R hdim
+    let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
     let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
@@ -310,7 +314,7 @@ theorem connectedPuncturedCover_integralClosure_etale
     let : IsIntegrallyClosed R :=
       (open _root_.EtaleFundamentalGroups.SpecialLocalPurity in
         isIntegrallyClosed_of_isRegularLocalRing_dimension_two hdim)
-    let : Nonempty U := puncturedSpectrum_nonempty R hdim
+    let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
     let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
       dsimp only [Scheme.puncturedSpectrumInclusion]
       infer_instance
@@ -360,7 +364,7 @@ noncomputable def connectedPuncturedCoverIntegralClosureExtension
   let : IsIntegrallyClosed R :=
     EtaleFundamentalGroups.SpecialLocalPurity.isIntegrallyClosed_of_isRegularLocalRing_dimension_two
       hdim
-  let : Nonempty U := puncturedSpectrum_nonempty R hdim
+  let : Nonempty U := puncturedSpectrum_nonempty_dimension_two R hdim
   let : IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
     dsimp only [Scheme.puncturedSpectrumInclusion]
     infer_instance

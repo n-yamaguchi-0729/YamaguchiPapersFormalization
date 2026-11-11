@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
-import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
+public import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Roots downstairs in arbitrary characteristic prime to the degree
@@ -21,6 +23,8 @@ The separable Kummer equivalence and its actual absolute conjugation formula
 produce the last-root-level detecting character. Prime-degree Galois theory
 then gives faithful H¹ action, without a characteristic-zero assumption.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

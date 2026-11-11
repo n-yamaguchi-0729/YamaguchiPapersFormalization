@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCoverHeightOne
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.ConditionalRootCoverHeightOne
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
 
 /-!
 # Height-one contractions from the full height-two root cover
@@ -23,6 +25,8 @@ Height preservation is produced internally.  The conditional cover is
 integrally closed because it is a two-dimensional regular local domain, and
 the final monic root extension is both integral and faithfully flat.
 -/
+
+@[expose] public section
 
 noncomputable section
 

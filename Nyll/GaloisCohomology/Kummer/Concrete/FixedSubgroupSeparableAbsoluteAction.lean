@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Mathlib.FieldTheory.IntermediateField.Algebraic
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableGaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
 
 /-!
 # The fixing-subgroup action through a separable closure
@@ -20,6 +22,8 @@ quotient conjugation action
 on its fixing subgroup agrees with the canonical absolute Galois action after
 a constructed continuous comparison of the abelianizations.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

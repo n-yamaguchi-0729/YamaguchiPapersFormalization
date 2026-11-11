@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.ResidueCharPrincipalUnitModule
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.ResidueCharPrincipalUnitModule
 
 /-!
 # P-adic powers of actual principal units
@@ -14,6 +16,8 @@ The residue characteristic of the raw valuation supplies the characteristic
 of its bundled complete-DVF residue field. Scalar multiplication is then
 read multiplicatively as a p-adic power.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

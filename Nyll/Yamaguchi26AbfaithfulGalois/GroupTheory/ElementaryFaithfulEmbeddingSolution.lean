@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.RegularWreathKernel
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
-import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
-import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
-import Nyll.ProCGroups.WreathProducts
-import Mathlib.GroupTheory.SemidirectProduct
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.RegularWreathKernel
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+public import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
+public import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
+public import Nyll.ProCGroups.WreathProducts
+public import Mathlib.GroupTheory.SemidirectProduct
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Faithful prime-kernel solutions from elementary split solvability
@@ -20,6 +22,8 @@ regular wreath product with cyclic coefficient group of order `q`. Its
 right projection and canonical section give the split problem, while its
 actual kernel has the faithful conjugation action constructed previously.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

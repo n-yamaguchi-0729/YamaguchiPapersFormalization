@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkBaseLocalization
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.LocalEtaleDVR
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.EssentialFiniteness
-import Mathlib.RingTheory.Localization.Algebra
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkBaseLocalization
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.LocalEtaleDVR
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.EssentialFiniteness
+public import Mathlib.RingTheory.Localization.Algebra
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.Tactic.Ring
 
 /-!
 # DVR geometric stalks from the ordinary local ring
@@ -23,6 +25,8 @@ chosen point is a DVR, pointed affine neighborhoods have local rings
 unramified over that actual DVR. Their unit-power factorizations pass to
 the actual geometric stalk through the compatible localized germ maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

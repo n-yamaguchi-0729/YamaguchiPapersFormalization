@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicAutToPowRestriction
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerCharacter
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicAutToPowRestriction
 
 /-!
 # Restriction compatibility of finite cyclotomic Teichmüller characters
@@ -15,6 +17,8 @@ along the actual restriction homomorphism. Normality of the lower
 cyclotomic extension supplies the restriction; no bijectivity or
 compatibility of chosen primitive roots is assumed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

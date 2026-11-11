@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCohomology
-import Nyll.GaloisCohomology.Topology.ContinuousH1CocycleSurjectivity
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteCohomology
+public import Nyll.GaloisCohomology.Topology.ContinuousH1CocycleSurjectivity
+public import Nyll.GaloisCohomology.Topology.ContinuousCrossedHom
 
 /-! # Recovering actual H¹ surjectivity from finite cocycle lifts -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

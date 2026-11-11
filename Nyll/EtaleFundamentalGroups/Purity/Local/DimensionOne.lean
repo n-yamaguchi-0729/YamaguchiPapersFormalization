@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Smooth.Fiber
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Smooth.Fiber
 
 /-!
 # Dimension-one local purity over a DVR
@@ -22,6 +24,8 @@ below its closed point, so the whole finite algebra is etale.
 This is the dimension-one input to the higher-dimensional local-purity step;
 it does not assume flatness or etaleness separately.
 -/
+
+@[expose] public section
 
 noncomputable section
 

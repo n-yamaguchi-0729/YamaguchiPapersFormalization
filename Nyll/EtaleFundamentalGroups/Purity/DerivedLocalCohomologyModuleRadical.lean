@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyInjectiveComplex
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionComplexZero
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
-import Mathlib.RingTheory.Finiteness.Ideal
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyInjectiveComplex
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionComplexZero
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+public import Mathlib.RingTheory.Finiteness.Ideal
 
 /-!
 # Linear radical invariance of local cohomology
@@ -18,6 +20,8 @@ Ideals with the same radical define the same torsion submodule. Comparing
 these submodules before applying a common injective resolution gives an
 isomorphism on homology that retains its scalar action.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -58,7 +62,8 @@ theorem primaryComponent_eq_of_sameRadical
   exact le_antisymm (primaryComponent_le_of_pow_le M hk)
     (primaryComponent_le_of_pow_le M hl)
 
-private def submoduleEqualityIso (M : ModuleCat.{u} R)
+/-- Equal submodules are identified by their inclusion maps. -/
+def submoduleEqualityIso (M : ModuleCat.{u} R)
     (N P : Submodule R M) (h : N = P) : ModuleCat.of R N ≅ ModuleCat.of R P where
   hom := ModuleCat.ofHom (Submodule.inclusion h.le)
   inv := ModuleCat.ofHom (Submodule.inclusion h.ge)
@@ -69,14 +74,16 @@ private def submoduleEqualityIso (M : ModuleCat.{u} R)
     ext z
     rfl
 
-private def primaryComponentIsoOfSameRadical
+/-- Ideals with the same radical have canonically isomorphic power-torsion modules. -/
+def primaryComponentIsoOfSameRadical
     (M : ModuleCat.{u} R) {I J : Ideal R} (hIJ : I.radical = J.radical) :
     ModuleCat.of R (Ideal.primaryComponent M I) ≅
       ModuleCat.of R (Ideal.primaryComponent M J) :=
   submoduleEqualityIso M _ _ (primaryComponent_eq_of_sameRadical M hIJ)
 
 omit [IsNoetherianRing R] in
-private theorem submoduleEqualityIso_naturality
+/-- The inclusion comparison commutes with a linear map preserving the submodules. -/
+theorem submoduleEqualityIso_naturality
     (M N : ModuleCat.{u} R) (A B : Submodule R M) (C D : Submodule R N)
     (hAB : A = B) (hCD : C = D) (f : M →ₗ[R] N)
     (hAC : ∀ z : A, f z ∈ C) (hBD : ∀ z : B, f z ∈ D) :

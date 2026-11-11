@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.Topology.Instances.ZMod
 
 /-! # Continuous p-adic functions from compatible finite reductions -/
+
+@[expose] public section
 
 namespace PadicInt
 

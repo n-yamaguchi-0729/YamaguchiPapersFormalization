@@ -10,14 +10,16 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
-import Mathlib.AlgebraicGeometry.Fiber
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.RingTheory.Jacobson.Ring
-import Mathlib.RingTheory.TensorProduct.Nontrivial
-import Mathlib.RingTheory.TensorProduct.Free
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Finiteness
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
+public import Mathlib.AlgebraicGeometry.Fiber
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Jacobson.Ring
+public import Mathlib.RingTheory.TensorProduct.Nontrivial
+public import Mathlib.RingTheory.TensorProduct.Free
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Finiteness
 
 /-!
 # Geometric irreducibility over an algebraically closed field
@@ -26,6 +28,8 @@ An irreducible scheme over an algebraically closed field remains irreducible
 after extension of the base field. Affine algebra arguments and local affine
 charts supply the comparison.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -105,7 +109,7 @@ theorem isDomain_tensorProduct_of_finiteType [IsAlgClosed K] (A : Type v) (B : T
           Finsupp.smul_apply, Finsupp.mapRange_apply, smul_eq_mul, map_mul, AlgHom.commutes]
         rw [← Algebra.smul_def, map_smul, Finsupp.smul_apply, smul_eq_mul, Algebra.algebraMap_self,
           RingHom.id_apply]
-      | add z w hz hw => simp [map_add, hz, hw]
+      | add z w hz hw => simp only [map_add, Finsupp.add_apply, hz, hw]
     have hker : ∀ z : A ⊗[K] B, ψ z = 0 → I z ≤ m := by
       intro z hz
       rw [Ideal.span_le]

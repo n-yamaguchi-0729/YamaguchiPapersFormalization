@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
-import Mathlib.FieldTheory.Galois.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Mathlib.FieldTheory.Galois.Basic
 
 /-!
 # Field components of a generic tensor product
@@ -21,6 +23,8 @@ maximal ideal: the quotient map itself is the product map of the two canonical
 embeddings.  A later integral-localization argument can therefore supply a
 specific maximal ideal and retain its chosen-prime compatibility.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -82,11 +86,10 @@ theorem genericTensorFieldComponentRight_eq_algebraMap
 one obtained through the canonical copy of the right tensor factor. -/
 theorem genericTensorFieldComponent_right_isScalarTower
     (m : Ideal (K' ⊗[K] L)) [m.IsMaximal] :
-    letI : Algebra L (GenericTensorFieldComponent m) :=
+    let : Algebra L (GenericTensorFieldComponent m) :=
       genericTensorFieldComponentRightAlgebra m
     IsScalarTower K L (GenericTensorFieldComponent m) := by
-  let : Algebra L (GenericTensorFieldComponent m) :=
-    genericTensorFieldComponentRightAlgebra m
+  intro sharedOwner1
   apply IsScalarTower.of_algebraMap_eq
   intro x
   change Ideal.Quotient.mk m
@@ -323,11 +326,10 @@ algebra structure on the quotient component. -/
 theorem genericTensorFieldComponentFiniteDimensionalOverRight
     (m : Ideal (K' ⊗[K] L)) [m.IsMaximal]
     [FiniteDimensional K K'] :
-    letI : Algebra L (GenericTensorFieldComponent m) :=
+    let : Algebra L (GenericTensorFieldComponent m) :=
       genericTensorFieldComponentRightAlgebra m
     FiniteDimensional L (GenericTensorFieldComponent m) := by
-  let : Algebra L (GenericTensorFieldComponent m) :=
-    genericTensorFieldComponentRightAlgebra m
+  intro sharedOwner1
   let T := K' ⊗[K] L
   let : Algebra L T := Algebra.TensorProduct.rightAlgebra
   let e : (L ⊗[K] K') ≃ₐ[L] T :=

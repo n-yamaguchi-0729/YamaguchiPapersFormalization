@@ -65,9 +65,9 @@
           ]
         },
         "local_change_description": "Nyll completions of upstream Point.lean placeholders and dependent fiber-action/fundamental-group repairs; existing IsSepClosed and IsSepClosure assumptions preserved.",
-        "sha256": "b2c6e646f8d478794bd1a2cb67d1b460c09b74d7709ee1938f99f4ec14a77e47",
-        "byte_count": 24452,
-        "canonical_record_sha256": "97521a296c26a3dd7e69f434d39108cc0538b15ee4aa44ad7c2be1d34998423a",
+        "sha256": "8226efdce8406d6e56bbecfcf50aec3fb9e5801b8b4b880f39653c9af044ccf9",
+        "byte_count": 24942,
+        "canonical_record_sha256": "8226efdce8406d6e56bbecfcf50aec3fb9e5801b8b4b880f39653c9af044ccf9",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },
@@ -124,9 +124,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "b8c14d12e871c7582fb2a23f070a2b59f707b60221b8a2fbd1b4984cdcec05b6",
-        "byte_count": 1582,
-        "canonical_record_sha256": "b8c14d12e871c7582fb2a23f070a2b59f707b60221b8a2fbd1b4984cdcec05b6",
+        "sha256": "a1d3ada7ad77391a25a17031cd425c427058135eb88df3a8aadbc72e18d78579",
+        "byte_count": 1790,
+        "canonical_record_sha256": "a1d3ada7ad77391a25a17031cd425c427058135eb88df3a8aadbc72e18d78579",
         "header": "Released under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\nThe cited pi1 file has no copyright or Authors header. Its copyright holder\nrequires review. The Authors line above is retained from the previous NYLL\nintegration and is not a verbatim attribution from the cited upstream file.",
         "source_urls": []
       },
@@ -156,9 +156,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "17a0c622efd514e3475517b6336146ad0504fca1142c9266f12eb34dc1fc7084",
-        "byte_count": 11521,
-        "canonical_record_sha256": "da44218698e54697ae23137144b0db089152cd34995169fb73e44a49dba91fb9",
+        "sha256": "e061cb02e190caf2b219f3cc6ac7e4f2c41d7c8675945d5c7892b724aabc2d00",
+        "byte_count": 12349,
+        "canonical_record_sha256": "e061cb02e190caf2b219f3cc6ac7e4f2c41d7c8675945d5c7892b724aabc2d00",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },
@@ -304,7 +304,7 @@
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
         "sha256": "0abc986523d8625f2b8a48599252dad7ded2c5be301ed62f84fc109a4dc2e459",
         "byte_count": 48440,
-        "canonical_record_sha256": "8c667218bcb1a8f43736fcce160e0af3e545ec4dff80754ec793510ef9bec93a",
+        "canonical_record_sha256": "0abc986523d8625f2b8a48599252dad7ded2c5be301ed62f84fc109a4dc2e459",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },
@@ -371,9 +371,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "d446a1898630ed6789f351f3ac0f6b9b584705f99c3cdb6d96e6be45c3fcda7a",
-        "byte_count": 15548,
-        "canonical_record_sha256": "59c499154a8d67aa29dd1f6acc495b5090f0b7f53b449f5e6f76e2e465c4aa8f",
+        "sha256": "eb6f94fe772349254f05c37958d5f06e9638bdf764a075ed6221ccee9b58c437",
+        "byte_count": 17412,
+        "canonical_record_sha256": "eb6f94fe772349254f05c37958d5f06e9638bdf764a075ed6221ccee9b58c437",
         "header": "Copyright (c) 2024 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\n\nAdapted from the pinned pi1 source:\nhttps://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Flat/Equalizer.lean\nOriginal mathlib source:\nhttps://github.com/leanprover-community/mathlib4/blob/53f8a93a7739dd4eb33926f645811ebb6cee21bf/Mathlib/RingTheory/Flat/Equalizer.lean",
         "source_urls": [
           "https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/Flat/Equalizer.lean",
@@ -407,9 +407,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "607f48cff001a7d46849befba378de13c88a2e0aece214e0adc979052218ab99",
-        "byte_count": 4097,
-        "canonical_record_sha256": "607f48cff001a7d46849befba378de13c88a2e0aece214e0adc979052218ab99",
+        "sha256": "bc7e53258775231d2ccb623b5bc05eae018047fbdef0204e1f6cf7cb4e559955",
+        "byte_count": 4187,
+        "canonical_record_sha256": "bc7e53258775231d2ccb623b5bc05eae018047fbdef0204e1f6cf7cb4e559955",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\n\nAdapted from the pinned pi1 source:\nhttps://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/RingHom/Etale.lean\nOriginal mathlib source:\nhttps://github.com/leanprover-community/mathlib4/blob/53f8a93a7739dd4eb33926f645811ebb6cee21bf/Mathlib/RingTheory/RingHom/Etale.lean",
         "source_urls": [
           "https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/Mathlib/RingTheory/RingHom/Etale.lean",
@@ -437,9 +437,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "44ad693e0285ba3c5481fd64cd4d415f955221602f66f5dbf761e1392de19056",
-        "byte_count": 6322,
-        "canonical_record_sha256": "44ad693e0285ba3c5481fd64cd4d415f955221602f66f5dbf761e1392de19056",
+        "sha256": "3f49019c613a413c0b265f7494e91d39d0b2a20bf4088a95a761d7b497cb277d",
+        "byte_count": 7057,
+        "canonical_record_sha256": "3f49019c613a413c0b265f7494e91d39d0b2a20bf4088a95a761d7b497cb277d",
         "header": "Released under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\nThe cited pi1 file has no copyright notice; its holder requires review.\n\nAdapted from the pinned pi1 source:\nhttps://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Basic.lean",
         "source_urls": [
           "https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Basic.lean"
@@ -495,9 +495,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated. Removed IsIdempotentElem.eq_one_of_isUnit proof; two uses now call canonical iff .mp directly. Zero branch uses canonical sub_eq_self.mp.",
-        "sha256": "6694dc6075b931a334ca485fb9228fed5434fa6972df03156e5bc1ab34a6b381",
-        "byte_count": 24420,
-        "canonical_record_sha256": "61239f40c83416f753d2005c533dcd06026d44ce5f5df9efe907477e4ab9e0db",
+        "sha256": "9da54bfb03026f2cd6175811b39255976027e6910a3d822f1b3e11ad3d51f96a",
+        "byte_count": 25176,
+        "canonical_record_sha256": "9da54bfb03026f2cd6175811b39255976027e6910a3d822f1b3e11ad3d51f96a",
         "header": "Released under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\nThe cited pi1 file has no copyright notice; its holder requires review.\n\nAdapted from the pinned pi1 source:\nhttps://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Equalizer.lean",
         "source_urls": [
           "https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/FiniteEtale/Equalizer.lean"
@@ -524,9 +524,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "14a335a0455a2d4b2bff50c091c458c26a9482fa5ab48394b5e935e75e21479f",
-        "byte_count": 27143,
-        "canonical_record_sha256": "8fb8537ce4fc1c1a29e35d025f3720b2648223b85f84941225de95b070986952",
+        "sha256": "f5bdfb783f65b3b82dd39a64f94eaa983724e02f485a9f20d240b2c7bc0fc7fd",
+        "byte_count": 27479,
+        "canonical_record_sha256": "f5bdfb783f65b3b82dd39a64f94eaa983724e02f485a9f20d240b2c7bc0fc7fd",
         "header": "Released under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten\nThe cited pi1 file has no copyright notice; its holder requires review.\n\nAdapted from the pinned pi1 source:\nhttps://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/KerTensor.lean",
         "source_urls": [
           "https://github.com/chrisflav/pi1/blob/5c5c0171efc863ce9990171bdf46d7cb5fd582fb/Pi1/RingTheory/KerTensor.lean"
@@ -566,9 +566,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "148ea80d21c6139a710fe496d215be2f73330b0fdb1e00c40126aa9d81501e3d",
-        "byte_count": 15883,
-        "canonical_record_sha256": "148ea80d21c6139a710fe496d215be2f73330b0fdb1e00c40126aa9d81501e3d",
+        "sha256": "f075a49bcfdc78a02d47ce049b68bdac83faf87bef97b0e3200faf11c514a909",
+        "byte_count": 16063,
+        "canonical_record_sha256": "f075a49bcfdc78a02d47ce049b68bdac83faf87bef97b0e3200faf11c514a909",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },
@@ -606,9 +606,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "01a63484662d455b4e33aa871af4a9f9e094d2c38f6d2ed74d2a682a195e0247",
-        "byte_count": 34847,
-        "canonical_record_sha256": "01a63484662d455b4e33aa871af4a9f9e094d2c38f6d2ed74d2a682a195e0247",
+        "sha256": "af7630e2535c0b233b7ed2e3a555458e4931a98be9cbd44cac1c231c0a4bc114",
+        "byte_count": 34559,
+        "canonical_record_sha256": "af7630e2535c0b233b7ed2e3a555458e4931a98be9cbd44cac1c231c0a4bc114",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },
@@ -706,9 +706,9 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated. Removed Smooth.ofLocalizationSpan wrapper; canonical PropertyIsLocal owner imported directly.",
-        "sha256": "f1c8bb7bf172f7abc47d9b610bf70a0b58d960c0e43ca12826d186a61331a64e",
-        "byte_count": 1917,
-        "canonical_record_sha256": "10d78f06164c1aa9fa2c6dab578f50645ec27bdffb64ac935ab0203d24b9e612",
+        "sha256": "e9900dab28ae2ac6fb87540b5d2d7c8b8e113d1291e1ecae00a10bc6a368d198",
+        "byte_count": 1962,
+        "canonical_record_sha256": "e9900dab28ae2ac6fb87540b5d2d7c8b8e113d1291e1ecae00a10bc6a368d198",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
       },

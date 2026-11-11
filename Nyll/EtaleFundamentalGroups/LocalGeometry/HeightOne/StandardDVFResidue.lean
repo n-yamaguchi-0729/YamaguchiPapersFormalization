@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.CharP.Algebra
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
+module
+
+public import Mathlib.Algebra.CharP.Algebra
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
 
 /-!
 # Residue characteristic of the standard DVR valuation
@@ -16,6 +18,8 @@ equivalence to the closed-point quotients.  In particular, characteristic
 zero of the original DVR residue ring supplies characteristic zero of the
 `DVF` residue field required by the higher-radical factor construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

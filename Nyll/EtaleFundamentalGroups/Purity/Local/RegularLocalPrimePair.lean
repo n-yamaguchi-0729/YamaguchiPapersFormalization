@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalParameters
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-!
 # A pair of prime parameters
@@ -14,6 +16,8 @@ A regular local ring of dimension at least two supplies two parameters for
 the prime-away intersection argument. The nondivisibility is derived from
 regularity in the quotient by the first parameter.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

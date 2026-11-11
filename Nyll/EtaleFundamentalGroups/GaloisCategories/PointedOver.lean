@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
-import Mathlib.CategoryTheory.Comma.Over.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
+public import Mathlib.CategoryTheory.Comma.Over.Basic
 
 /-!
 # Fiber functors on pointed over-categories
@@ -14,6 +16,8 @@ For a finite fiber functor `F`, an object `X`, and a point `x` of its fiber,
 we compare the automorphisms of `F` fixing `x` with the automorphisms of the
 fiber-over-`x` functor on `Over X`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -75,7 +79,8 @@ def productOver : C ⥤ Over X where
     change prod.map (f ≫ g) (𝟙 X) = prod.map f (𝟙 X) ≫ prod.map g (𝟙 X)
     exact prod.map_comp_id f g
 
-private def productFiberEquiv (Y : C) :
+/-- The fiber over the chosen point in a product is the original first fiber. -/
+def productFiberEquiv (Y : C) :
     F.obj Y ≃ (fiberOver F x).obj ((productOver (X := X)).obj Y) where
   toFun y :=
     ⟨(fiberBinaryProductEquiv F Y X).symm (y, x),
@@ -144,7 +149,8 @@ private theorem productPoint_naturality {Y Z : C} (f : Y ⟶ Z) (y : F.obj Y) :
         rw [prod.map_snd, Category.comp_id]
       _ = x := fiberBinaryProductEquiv_symm_snd_apply F y x
 
-private theorem productFiberEquiv_naturality {Y Z : C} (f : Y ⟶ Z) (y : F.obj Y) :
+/-- The product-fiber equivalence is natural in the first factor. -/
+theorem productFiberEquiv_naturality {Y Z : C} (f : Y ⟶ Z) (y : F.obj Y) :
     (fiberOver F x).map ((productOver (X := X)).map f) (productFiberEquiv F x Y y) =
       productFiberEquiv F x Z (F.map f y) := by
   apply Subtype.ext
@@ -185,17 +191,17 @@ theorem productFiberEquivComparison_symm_apply
 
 private theorem extendFiberOverAut_hom_app_apply
     (a : Aut (fiberOver F x)) (Y : C) (y : F.obj Y) :
-    (extendFiberOverAut F x a).hom.app Y y =
+    (extendFiberOverAut F x a).asIso.hom.app Y y =
       (productFiberEquiv F x Y).symm
-        (a.hom.app ((productOver (X := X)).obj Y) (productFiberEquiv F x Y y)) := by
+        (a.asIso.hom.app ((productOver (X := X)).obj Y) (productFiberEquiv F x Y y)) := by
   rfl
 
 /-- Evaluation formula for the extension of a fiber-over automorphism. -/
 theorem extendFiberOverAut_hom_app_apply_eq
     (a : Aut (fiberOver F x)) (Y : C) (y : F.obj Y) :
-    (extendFiberOverAut F x a).hom.app Y y =
+    (extendFiberOverAut F x a).asIso.hom.app Y y =
       (productFiberEquivComparison F x Y).symm
-        (a.hom.app ((productOver (X := X)).obj Y)
+        (a.asIso.hom.app ((productOver (X := X)).obj Y)
           (productFiberEquivComparison F x Y y)) :=
   extendFiberOverAut_hom_app_apply F x a Y y
 
@@ -229,50 +235,52 @@ private theorem fiberOver_map_graphToProduct
     (fiberBinaryProductEquiv F U.left X).symm (y.1, x)
   exact graphPoint_eq_productPoint F x U y.1 y.2
 
-private theorem extendFiberOverAut_fixes_point (a : Aut (fiberOver F x)) :
+/-- Extending an automorphism of the pointed fiber fixes its base point. -/
+theorem extendFiberOverAut_fixes_point (a : Aut (fiberOver F x)) :
     extendFiberOverAut F x a • x = x := by
   let U : Over X := Over.mk (𝟙 X)
   let y : (fiberOver F x).obj U := ⟨x, by
     change F.map (𝟙 X) x = x
     rw [F.map_id]
     rfl⟩
-  have hay : a.hom.app U y = y := by
+  have hay : a.asIso.hom.app U y = y := by
     apply Subtype.ext
-    have ha := (a.hom.app U y).2
-    change F.map (𝟙 X) (a.hom.app U y).1 = x at ha
+    have ha := (a.asIso.hom.app U y).2
+    change F.map (𝟙 X) (a.asIso.hom.app U y).1 = x at ha
     rw [F.map_id] at ha
     exact ha
   have hnat :
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           ((fiberOver F x).map (graphToProduct (X := X) U) y) =
-        (fiberOver F x).map (graphToProduct (X := X) U) (a.hom.app U y) := by
+        (fiberOver F x).map (graphToProduct (X := X) U) (a.asIso.hom.app U y) := by
     simpa only [FintypeCat.comp_apply] using
       ConcreteCategory.congr_hom
-        (a.hom.naturality (graphToProduct (X := X) U)) y
+        (a.asIso.hom.naturality (graphToProduct (X := X) U)) y
   have hfixProductU :
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           (productFiberEquiv F x U.left y.1) =
         productFiberEquiv F x U.left y.1 := by
     calc
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           (productFiberEquiv F x U.left y.1) =
-          a.hom.app ((productOver (X := X)).obj U.left)
+          a.asIso.hom.app ((productOver (X := X)).obj U.left)
             ((fiberOver F x).map (graphToProduct (X := X) U) y) := by
               rw [fiberOver_map_graphToProduct]
-      _ = (fiberOver F x).map (graphToProduct (X := X) U) (a.hom.app U y) := hnat
+      _ = (fiberOver F x).map (graphToProduct (X := X) U) (a.asIso.hom.app U y) := hnat
       _ = (fiberOver F x).map (graphToProduct (X := X) U) y :=
         congrArg ((fiberOver F x).map (graphToProduct (X := X) U)) hay
       _ = productFiberEquiv F x U.left y.1 := fiberOver_map_graphToProduct F x U y
   have hfixProduct :
-      a.hom.app ((productOver (X := X)).obj X) (productFiberEquiv F x X x) =
+      a.asIso.hom.app ((productOver (X := X)).obj X) (productFiberEquiv F x X x) =
         productFiberEquiv F x X x := by
     dsimp [U, y, Over.mk] at hfixProductU
     exact hfixProductU
-  change (extendFiberOverAut F x a).hom.app X x = x
+  change (extendFiberOverAut F x a).asIso.hom.app X x = x
   rw [extendFiberOverAut_hom_app_apply, hfixProduct]
   exact (productFiberEquiv F x X).symm_apply_apply x
 
-private def restrictAutToFiberOverObj
+/-- A stabilizing automorphism restricts to each fiber over the chosen point. -/
+def restrictAutToFiberOverObj
     (a : MulAction.stabilizer (Aut F) x) (U : Over X) :
     (fiberOver F x).obj U ≅ (fiberOver F x).obj U :=
   FintypeCat.equivEquivIso
@@ -299,7 +307,7 @@ private def restrictAutToFiberOverObj
 /-- Restrict an automorphism of `F` fixing `x` to the fibers over `x`. -/
 def restrictAutToFiberOver :
     MulAction.stabilizer (Aut F) x →* Aut (fiberOver F x) where
-  toFun a := NatIso.ofComponents (restrictAutToFiberOverObj F x a) (fun f ↦ by
+  toFun a := Aut.of <| NatIso.ofComponents (restrictAutToFiberOverObj F x a) (fun f ↦ by
     apply FintypeCat.hom_ext
     intro y
     apply Subtype.ext
@@ -312,7 +320,8 @@ def restrictAutToFiberOver :
     ext U y
     rfl
 
-private theorem extendFiberOverAut_restrictAutToFiberOver
+/-- Extension recovers the original stabilizing automorphism. -/
+theorem extendFiberOverAut_restrictAutToFiberOver
     (a : MulAction.stabilizer (Aut F) x) :
     extendFiberOverAut F x (restrictAutToFiberOver F x a) = a.1 := by
   apply Aut.ext
@@ -331,37 +340,38 @@ private theorem extendFiberOverAut_restrictAutToFiberOver
     _ = a.1 • y := congrArg (a.1 • ·)
       (fiberBinaryProductEquiv_symm_fst_apply F y x)
 
-private theorem restrictAutToFiberOver_extendFiberOverAut
+/-- Restriction recovers an automorphism of the pointed fiber. -/
+theorem restrictAutToFiberOver_extendFiberOverAut
     (a : Aut (fiberOver F x)) :
     restrictAutToFiberOver F x
         ⟨extendFiberOverAut F x a, extendFiberOverAut_fixes_point F x a⟩ = a := by
   apply Aut.ext
   ext U y
   apply Subtype.ext
-  change (extendFiberOverAut F x a).hom.app U.left y.1 = (a.hom.app U y).1
+  change (extendFiberOverAut F x a).asIso.hom.app U.left y.1 = (a.asIso.hom.app U y).1
   rw [extendFiberOverAut_hom_app_apply]
   have hnat :
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           ((fiberOver F x).map (graphToProduct (X := X) U) y) =
-        (fiberOver F x).map (graphToProduct (X := X) U) (a.hom.app U y) := by
+        (fiberOver F x).map (graphToProduct (X := X) U) (a.asIso.hom.app U y) := by
     simpa only [FintypeCat.comp_apply] using
       ConcreteCategory.congr_hom
-        (a.hom.naturality (graphToProduct (X := X) U)) y
+        (a.asIso.hom.naturality (graphToProduct (X := X) U)) y
   have hproduct :
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           (productFiberEquiv F x U.left y.1) =
-        productFiberEquiv F x U.left (a.hom.app U y).1 := by
+        productFiberEquiv F x U.left (a.asIso.hom.app U y).1 := by
     calc
-      a.hom.app ((productOver (X := X)).obj U.left)
+      a.asIso.hom.app ((productOver (X := X)).obj U.left)
           (productFiberEquiv F x U.left y.1) =
-          a.hom.app ((productOver (X := X)).obj U.left)
+          a.asIso.hom.app ((productOver (X := X)).obj U.left)
             ((fiberOver F x).map (graphToProduct (X := X) U) y) := by
               rw [fiberOver_map_graphToProduct]
-      _ = (fiberOver F x).map (graphToProduct (X := X) U) (a.hom.app U y) := hnat
-      _ = productFiberEquiv F x U.left (a.hom.app U y).1 :=
-        fiberOver_map_graphToProduct F x U (a.hom.app U y)
+      _ = (fiberOver F x).map (graphToProduct (X := X) U) (a.asIso.hom.app U y) := hnat
+      _ = productFiberEquiv F x U.left (a.asIso.hom.app U y).1 :=
+        fiberOver_map_graphToProduct F x U (a.asIso.hom.app U y)
   rw [hproduct]
-  exact (productFiberEquiv F x U.left).symm_apply_apply (a.hom.app U y).1
+  exact (productFiberEquiv F x U.left).symm_apply_apply (a.asIso.hom.app U y).1
 
 /-- Extension identifies the automorphism group of the fiber-over-`x`
 functor with the stabilizer of `x` in `Aut F`. -/

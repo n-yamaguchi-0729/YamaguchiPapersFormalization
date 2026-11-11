@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Existence of regular systems of parameters
@@ -15,6 +17,8 @@ Successively cut a regular local ring by a nonzero cotangent vector.  The
 quotient is again regular local with dimension one smaller.  Lifting its
 regular system of parameters gives a regular system in the original ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

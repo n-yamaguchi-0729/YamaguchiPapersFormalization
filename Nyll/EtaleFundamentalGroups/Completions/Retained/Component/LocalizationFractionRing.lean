@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationPrimeChain
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationPrimeChain
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.MinimalLocalizationDomain
 
 /-!
 # The retained tensor localization inside its chosen component field
@@ -21,6 +23,8 @@ localization.  The generic-fibre localization presentation then shows that
 `Omega` is the fraction field of the localized tensor ring.  Neither
 surjectivity nor bijectivity of the finite-model component map is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -91,11 +95,11 @@ theorem retainedCompletedChosenComponentLocalizationAlgebra_algebraMap
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Ω := GenericTensorFieldComponent m
-    letI : Algebra R' Ω :=
+    let : Algebra R' Ω :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     letI := retainedCompletedChosenComponentLocalizationAlgebra
       (R := R) (R' := R') (S := S) (K := K) (L := L)
@@ -105,15 +109,7 @@ theorem retainedCompletedChosenComponentLocalizationAlgebra_algebraMap
       retainedCompletedChosenComponentAlgHom
         (R := R) (R' := R') (S := S) (K := K) (L := L)
         (K' := K') N x := by
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let Ω := GenericTensorFieldComponent m
-  let r'ΩAlgebra : Algebra R' Ω :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
+  intro m sharedOwner2 Ω r'ΩAlgebra
   let : Algebra R' Ω := r'ΩAlgebra
   let j := retainedCompletedChosenComponentAlgHom
     (R := R) (R' := R') (S := S) (K := K) (L := L)
@@ -133,41 +129,26 @@ theorem retainedCompletedChosenComponentLocalization_isScalarTower
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Ω := GenericTensorFieldComponent m
-    letI : Algebra R' Ω :=
+    let : Algebra R' Ω :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     let j := retainedCompletedChosenComponentAlgHom
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : Algebra (R' ⊗[R] S) Ω :=
+    let : Algebra (R' ⊗[R] S) Ω :=
       j.toAlgebra
-    letI := retainedCompletedChosenComponentLocalizationAlgebra
+    let := retainedCompletedChosenComponentLocalizationAlgebra
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N Q hNQ
     IsScalarTower (R' ⊗[R] S) (Localization.AtPrime Q)
       Ω := by
-  dsimp only
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let Ω := GenericTensorFieldComponent m
-  let r'ΩAlgebra : Algebra R' Ω :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
+  intro m sharedOwner1 Ω r'ΩAlgebra j sharedOwner3 sharedOwner4
   let : Algebra R' Ω := r'ΩAlgebra
-  let j := retainedCompletedChosenComponentAlgHom
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
   let : Algebra (R' ⊗[R] S) (GenericTensorFieldComponent m) :=
-    j.toAlgebra
-  let := retainedCompletedChosenComponentLocalizationAlgebra
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N Q hNQ
+    sharedOwner3
   apply IsScalarTower.of_algebraMap_eq'
   rw [RingHom.algebraMap_toAlgebra]
   exact (IsLocalization.lift_comp _).symm
@@ -182,39 +163,29 @@ theorem retainedCompletedChosenComponentLocalization_isFractionRing
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Ω := GenericTensorFieldComponent m
-    letI : Algebra R' Ω :=
+    let : Algebra R' Ω :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
-    letI := retainedCompletedChosenComponentLocalizationAlgebra
+    let := retainedCompletedChosenComponentLocalizationAlgebra
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N Q hNQ
     IsFractionRing (Localization.AtPrime Q) Ω := by
+  intro m sharedOwner1 Ω r'ΩAlgebra sharedOwner4
   let T := R' ⊗[R] S
   let W := Localization.AtPrime Q
   let G₀ := retainedCompletedFiniteBaseChangeGenericFiber
     (R := R) (R' := R') (S := S) (K' := K')
   let e := retainedCompletedGenericFiberEquiv
     (R := R) (R' := R') (S := S) (K := K) (L := L) (K' := K')
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let Ω := GenericTensorFieldComponent m
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N
-  let r'ΩAlgebra : Algebra R' Ω :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
   let : Algebra R' Ω := r'ΩAlgebra
   let j := retainedCompletedChosenComponentAlgHom
     (R := R) (R' := R') (S := S) (K := K) (L := L)
     (K' := K') N
   let : Algebra W Ω :=
-    retainedCompletedChosenComponentLocalizationAlgebra
-      (R := R) (R' := R') (S := S) (K := K) (L := L)
-      (K' := K') N Q hNQ
+    sharedOwner4
   let : Module.Finite R' T := Module.Finite.base_change R R' S
   let : Algebra.IsIntegral R' T := Algebra.IsIntegral.of_finite R' T
   have hNMapBot : N.map (algebraMap T W) = ⊥ :=

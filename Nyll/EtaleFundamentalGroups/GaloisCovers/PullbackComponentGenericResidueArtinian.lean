@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteEtaleGenericResidue
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueArtinian
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteEtaleGenericResidue
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueArtinian
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Artinian generic residue tensors of pullback components
@@ -15,6 +18,8 @@ cover along a dense morphism, the residue tensor at the component's generic
 point is Artinian.  This is the pointwise finiteness input for comparing the
 generic tensor product with the function field of the selected component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,17 +42,14 @@ theorem pullbackComponent_genericPoint_tensor_isArtinian
     (W : FiniteEtale Y) [IsConnected W]
     (Z : FiniteEtale X) [IsConnected Z]
     (i : Z ⟶ (FiniteEtale.pullback f).obj W) [Mono i] :
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : IsIntegral Z.left :=
+    let : IsIntegral Z.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
     IsArtinianRing
       (Scheme.Pullback.Triplet.ofPoint
         (i.left (genericPoint Z.left))).tensor := by
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : IsIntegral Z.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
+  intro sharedOwner1 sharedOwner2
   let g : Z.left ⟶ W.left :=
     i.left ≫ Limits.pullback.fst W.hom f
   let zHom : Z.left ⟶ X := Z.hom

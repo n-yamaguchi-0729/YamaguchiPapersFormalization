@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
-import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitPadicContinuity
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
-import Mathlib.Topology.Algebra.Constructions
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitPadicContinuity
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
+public import Mathlib.Topology.Algebra.Constructions
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
 
 /-!
 # Automorphisms commute with p-adic powers of principal units
@@ -18,6 +20,8 @@ The field automorphism restricts continuously to valuation-ring units and
 principal units. The density theorem for continuous additive maps then
 supplies compatibility with the actual p-adic scalars.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

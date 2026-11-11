@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormal
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormal
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Open normal subgroups across fiber-functor universes
@@ -14,6 +17,8 @@ universe than its finite fibers.  This file removes that presentation-level
 restriction by switching the universe of the fiber functor, applying the
 quotient construction there, and transporting the distinguished point back.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,12 +56,12 @@ theorem exists_galois_object_point_stabilizer_eq_any_universe
   change g • x = x ↔ g ∈ (U : Subgroup (Aut F))
   have htransport : eX ((eF g) • x') = g • eX x' := by
     change (F.obj X).uSwitchEquiv
-        (((eF g).hom.app X) x') =
-      g.hom.app X ((F.obj X).uSwitchEquiv x')
+        (((eF g).asIso.hom.app X) x') =
+      g.asIso.hom.app X ((F.obj X).uSwitchEquiv x')
     change (F.obj X).uSwitchEquiv
-        (FintypeCat.uSwitch.map (g.hom.app X) x') =
-      g.hom.app X ((F.obj X).uSwitchEquiv x')
-    exact (FintypeCat.uSwitchEquiv_naturality (g.hom.app X) x').symm
+        (FintypeCat.uSwitch.map (g.asIso.hom.app X) x') =
+      g.asIso.hom.app X ((F.obj X).uSwitchEquiv x')
+    exact (FintypeCat.uSwitchEquiv_naturality (g.asIso.hom.app X) x').symm
   calc
     g • x = x ↔ (eF g) • x' = x' := by
       change g • eX x' = eX x' ↔ (eF g) • x' = x'

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.RepresentationTheory.Homological.GroupCohomology.Hilbert90
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Noether Hilbert 90 for an infinite Galois extension
@@ -17,6 +19,8 @@ An open normal subgroup in its identity fiber fixes every cocycle value, so the
 finite-stage cocycle takes values in that actual intermediate field. Finite
 Noether Hilbert 90 then produces a coboundary in the original extension.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open scoped Topology

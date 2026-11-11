@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Automorphisms of a Galois cover and of its function field
@@ -13,6 +17,8 @@ The pullback of rational functions is contravariant.  Accordingly, this
 file compares the opposite of the categorical automorphism group of a
 finite-etale Galois cover with the Galois group of its function field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,16 +36,13 @@ noncomputable def finiteEtaleAutOpFunctionFieldMonoidHom
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     (Aut Y)ᵐᵒᵖ →*
       (Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField) := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  letI : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   letI : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   refine
@@ -78,15 +81,12 @@ theorem finiteEtaleAutOpFunctionFieldMonoidHom_injective
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Function.Injective (finiteEtaleAutOpFunctionFieldMonoidHom Y) := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   intro σ τ h
@@ -100,18 +100,14 @@ theorem natCard_finiteEtaleAut_eq_finrank_functionField_of_isGalois
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Nat.card (Aut Y) =
       Module.finrank X.functionField Y.left.functionField := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   let : Algebra.IsSeparable X.functionField Y.left.functionField :=
@@ -139,17 +135,13 @@ theorem finiteEtaleAutOpFunctionFieldMonoidHom_surjective
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Function.Surjective (finiteEtaleAutOpFunctionFieldMonoidHom Y) := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   let : Algebra.IsSeparable X.functionField Y.left.functionField :=
@@ -176,18 +168,14 @@ noncomputable def finiteEtaleAutOpFunctionFieldMulEquiv
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     (Aut Y)ᵐᵒᵖ ≃*
       (Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField) := by
-  letI : IsGalois Y := hY
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  letI : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2 sharedDefinitionOwner3
   exact MulEquiv.ofBijective (finiteEtaleAutOpFunctionFieldMonoidHom Y)
     ⟨finiteEtaleAutOpFunctionFieldMonoidHom_injective Y,
       finiteEtaleAutOpFunctionFieldMonoidHom_surjective Y hY⟩

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
-import Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianIdempotents
+public import Mathlib.RingTheory.Spectrum.Prime.Noetherian
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
 
 /-!
 # Finite domains over Henselian local rings are local
@@ -15,6 +18,8 @@ The special fiber is an Artinian algebra. Two distinct maximal ideals would
 be separated by an idempotent in that fiber. Henselian lifting produces an
 idempotent in the domain, which must be zero or one, a contradiction.
 -/
+
+@[expose] public section
 
 namespace SchemeTheory
 
@@ -58,7 +63,7 @@ theorem isLocalRing_of_finite_domain_henselian
     intro N hN
     by_contra hne
     let : P.IsMaximal := hP
-    obtain ⟨a, haP, ha, haN⟩ := IsArtinianRing.exists_not_mem_forall_mem_of_ne P
+    obtain ⟨a, haP, ha, haN⟩ := IsArtinianRing.exists_notMem_forall_mem_of_ne P
     rcases hidempotent a ha with hzero | hone
     · exact haP (hzero ▸ P.zero_mem)
     · exact hN.ne_top (N.eq_top_of_isUnit_mem (haN N hN.isPrime hne)

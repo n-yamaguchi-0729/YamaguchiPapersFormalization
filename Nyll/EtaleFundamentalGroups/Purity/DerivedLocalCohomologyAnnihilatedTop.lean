@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedGenerators
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
-import Mathlib.Data.List.Basic
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyAnnihilatedGenerators
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+public import Mathlib.Data.List.Basic
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Top local cohomology of an annihilated coefficient module
@@ -23,6 +25,8 @@ generator bound gives vanishing in the top degree.  This is the coefficient
 vanishing input for multiplication on top local cohomology, in every finite
 dimension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

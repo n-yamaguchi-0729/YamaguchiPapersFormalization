@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSaturatedPowers
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSaturatedPowers
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Degree-zero local cohomology of saturated-power quotients
@@ -24,6 +26,8 @@ isomorphism theorem identifies these actual quotients before the
 ideal is specialized to a power. The absence of power torsion then
 makes degree-zero maximal-ideal local cohomology vanish.
 -/
+
+@[expose] public section
 
 noncomputable section
 

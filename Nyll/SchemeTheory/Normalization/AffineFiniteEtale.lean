@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.Affine
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Etale.AffineBaseChangeProperties
-import Mathlib.RingTheory.RingHom.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
+module
+
+public import Nyll.SchemeTheory.Normalization.Affine
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Etale.AffineBaseChangeProperties
+public import Mathlib.RingTheory.RingHom.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 
 /-!
 # The structure map of an affine relative normalization
@@ -17,6 +19,8 @@ The canonical affine normalization isomorphism intertwines the actual
 structure map with the algebra map into the integral closure. This gives
 the ring criterion for finite etaleness of that actual normalization map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedRestriction
 
 /-!
 # Packaging connected normalization extensions
@@ -15,6 +17,8 @@ has a canonical restriction isomorphism.  Thus a proof that this one
 canonical normalization morphism is finite etale packages the desired
 extension object without making any further choice.
 -/
+
+@[expose] public section
 
 noncomputable section
 

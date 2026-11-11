@@ -11,16 +11,20 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsStandardSmoothStandardSmooth
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeMvPolynomial
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeEtale
-import Nyll.SchemeTheory.RingTheory.Smooth.MathlibRingTheorySmoothAlgebraOverFieldRegularStalks
-import Nyll.SchemeTheory.RingTheory.Smooth.StandardSmoothFibreRegularity
+module
+
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Nyll.SchemeTheory.RingTheory.Smooth.AlgebraIsStandardSmoothStandardSmooth
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeMvPolynomial
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeEtale
+public import Nyll.SchemeTheory.RingTheory.Smooth.MathlibRingTheorySmoothAlgebraOverFieldRegularStalks
+public import Nyll.SchemeTheory.RingTheory.Smooth.StandardSmoothFibreRegularity
 
 /-!
 # is Regular Local Ring localization at Prime of is Standard Smooth
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

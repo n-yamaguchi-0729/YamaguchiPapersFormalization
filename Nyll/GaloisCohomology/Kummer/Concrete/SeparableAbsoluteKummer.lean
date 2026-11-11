@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteDualSeparation
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.Algebra.Group.Hom.Basic
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.FieldTheory.AbsoluteGaloisGroup
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteDualSeparation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.Algebra.Group.Hom.Basic
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Absolute constant-coefficient Kummer theory through the separable closure
@@ -20,14 +22,16 @@ to the existing absolute Galois group. The exponent need only be nonzero in
 the base field; no characteristic-zero or perfectness assumption is needed.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
--- Four group carriers and their four topologies; no new data instances.
-private def continuousCharacterDomainCoefficientsEquiv
+/-- Simultaneous transport of the domain and coefficients of continuous characters. -/
+def continuousCharacterDomainCoefficientsEquiv
     {G H A B : Type*} [Group G] [TopologicalSpace G]
     [Group H] [TopologicalSpace H]
     [CommGroup A] [TopologicalSpace A] [IsTopologicalGroup A]

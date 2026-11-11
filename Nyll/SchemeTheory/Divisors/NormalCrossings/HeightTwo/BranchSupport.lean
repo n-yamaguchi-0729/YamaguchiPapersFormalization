@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.List.Perm.Subperm
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Regular.Flat
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+module
+
+public import Mathlib.Data.List.Perm.Subperm
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.Regular.Flat
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Branch support at a height-two strict-normal-crossings point
@@ -23,6 +25,8 @@ The proof does not use ramification data.  Three distinct parameters in the
 prime would remain a three-term regular sequence after localization, whereas
 the localized ring has Krull dimension two.
 -/
+
+@[expose] public section
 
 noncomputable section
 

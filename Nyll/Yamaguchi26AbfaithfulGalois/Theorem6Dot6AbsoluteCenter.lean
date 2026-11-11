@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot5GroupCriterion
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclicExtensionOrientation
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicExtension
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot5GroupCriterion
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclicExtensionOrientation
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicExtension
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Center-freeness and slimness for absolute Galois groups
@@ -18,6 +20,8 @@ import Mathlib.FieldTheory.Galois.Profinite
 Cyclotomic and trivial orientations supply formal Hilbert 90; no
 orientation or cohomology hypothesis is added to the field statement.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

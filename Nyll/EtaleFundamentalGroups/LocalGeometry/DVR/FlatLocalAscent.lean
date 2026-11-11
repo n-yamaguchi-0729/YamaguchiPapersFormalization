@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Regular.Flat
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Regular.Flat
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-!
 # DVR ascent along a flat local map
@@ -18,6 +20,8 @@ source uniformizer is therefore a one-element regular system of parameters
 on the target.  For a Noetherian local target this produces its domain and
 discrete-valuation-ring structures without assuming either one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

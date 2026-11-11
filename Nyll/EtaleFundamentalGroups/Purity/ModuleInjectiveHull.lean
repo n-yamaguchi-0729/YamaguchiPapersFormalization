@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleEnvelope
-import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.Algebra.Module.Submodule.Range
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveModuleEnvelope
+public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.Algebra.Module.Submodule.Range
 
 /-!
 # Existence of injective hulls for modules
@@ -18,6 +20,8 @@ The resulting embedding has essential image and the same universe as the
 original module.  The proof constructs the hull from the preceding maximal
 essential-extension argument; no hull existence is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

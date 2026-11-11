@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingDown
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
-import Nyll.EtaleFundamentalGroups.Completions.Tensor.Ramification
-import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.GoingDown
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
+public import Nyll.EtaleFundamentalGroups.Completions.Tensor.Ramification
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.BaseChange.GenericFiber
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # A completed generic component selected by a closed prime
@@ -26,6 +28,8 @@ inverting the nonzero elements of `R'`, it becomes a maximal ideal of the
 completed generic fibre.  The resulting field component is therefore fixed
 once from `Q`, rather than being replaced by an unrelated tensor component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -78,11 +82,10 @@ omit [IsDomain R] [IsDiscreteValuationRing R] [IsDomain R']
 theorem completedBaseChangeChosenPrime_comap_right
     (Q : Ideal C) :
     let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
-    letI : Algebra C U := Algebra.TensorProduct.rightAlgebra
+    let : Algebra C U := Algebra.TensorProduct.rightAlgebra
     (completedBaseChangeChosenPrime (R := R) (R' := R') Q).comap
         (algebraMap C U) = Q := by
-  let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
-  let : Algebra C U := Algebra.TensorProduct.rightAlgebra
+  intro U sharedOwner2
   let : Module.FaithfullyFlat C U :=
     Module.FaithfullyFlat.of_linearEquiv
       (R := C) (M := C ⊗[R] R')
@@ -133,8 +136,7 @@ theorem exists_completedBaseChangeChosenGenericPrime
     let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
     let P := completedBaseChangeChosenPrime (R := R) (R' := R') Q
     ∃ N : Ideal U, N ≤ P ∧ N.IsPrime ∧ N.LiesOver (⊥ : Ideal R') := by
-  let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
-  let P := completedBaseChangeChosenPrime (R := R) (R' := R') Q
+  intro U P
   let : Module.Flat R C := inferInstance
   let : Module.Flat R' U := Module.Flat.baseChange R R' C
   have hgeom := completedBaseChangeChosenPrime_isMaximal_liesOver
@@ -213,7 +215,7 @@ private theorem completedBaseChangeChosenGenericPrime_disjoint
       (Algebra.algebraMapSubmonoid U (nonZeroDivisors R') : Set U)
       (completedBaseChangeChosenGenericPrime
         (R := R) (R' := R') hmax hres Q : Set U) := by
-  let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
+  intro U
   let N := completedBaseChangeChosenGenericPrime
     (R := R) (R' := R') hmax hres Q
   have hN := completedBaseChangeChosenGenericPrime_spec
@@ -284,18 +286,15 @@ theorem completedBaseChangeChosenGenericIdeal_comap
     let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
     let G := completedFiniteBaseChangeGenericFiber
       (R := R) (R' := R') (C := C) (K' := K')
-    letI : Algebra U G := Algebra.TensorProduct.rightAlgebra
+    let : Algebra U G := Algebra.TensorProduct.rightAlgebra
     (completedBaseChangeChosenGenericIdeal
         (R := R) (R' := R') (K' := K') hmax hres Q).comap
         (algebraMap U G) =
       completedBaseChangeChosenGenericPrime
         (R := R) (R' := R') hmax hres Q := by
-  let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
-  let G := completedFiniteBaseChangeGenericFiber
-    (R := R) (R' := R') (C := C) (K' := K')
+  intro U G algebraUG
   let N := completedBaseChangeChosenGenericPrime
     (R := R) (R' := R') hmax hres Q
-  let : Algebra U G := Algebra.TensorProduct.rightAlgebra
   let : IsLocalization
       (Algebra.algebraMapSubmonoid U (nonZeroDivisors R')) G :=
     IsLocalization.tensorRight (R := R') (S := U) (A := K')
@@ -387,13 +386,9 @@ theorem completedGenericTensorChosenIdeal_comap
     (completedGenericTensorChosenIdeal
         (R := R) (R' := R') (K := K) (L := L) (K' := K')
         hmax hres Q).comap e.toRingEquiv.toRingHom = m := by
-  dsimp only [completedGenericTensorChosenIdeal]
-  exact Ideal.comap_map_of_bijective
-    (f := (completedGenericFiberEquiv
-      (R := R) (R' := R') (C := C) (K := K) (L := L)
-      (K' := K')).toRingEquiv.toRingHom)
-    (completedGenericFiberEquiv
-      (R := R) (R' := R') (C := C) (K := K) (L := L) (K' := K')).bijective
+  intro e m
+  change (m.map e.toRingEquiv.toRingHom).comap e.toRingEquiv.toRingHom = m
+  exact Ideal.comap_map_of_bijective (f := e.toRingEquiv.toRingHom) e.bijective
 
 end OriginalGenericTensor
 

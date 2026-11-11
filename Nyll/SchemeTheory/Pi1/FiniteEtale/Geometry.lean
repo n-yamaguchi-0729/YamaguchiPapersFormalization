@@ -213,13 +213,6 @@ def inventForgetIso : inventScheme Ω ⋙ forgetScheme Ω ≅ 𝟭 FintypeCat :=
       right_inv x := e₀.right_inv x }
     exact FintypeCat.equivEquivIso e
 
-instance (X : Scheme.{u}) (R : CommRingCat.{u}) [X.Over (Spec R)] (U : X.Opens) :
-    Algebra R Γ(X, U) :=
-  ((((X ↘ Spec R)).appLE ⊤ U (by
-      rw [Scheme.Hom.preimage_top]
-      exact le_top)).hom.comp
-    (Scheme.ΓSpecIso R).commRingCatIsoToRingEquiv.symm.toRingHom).toAlgebra
-
 instance (X : Scheme.{u}) (R : Type u) [CommRing R] [X.Over (Spec (.of R))] (U : X.Opens) :
     Algebra R Γ(X, U) :=
   ((((X ↘ Spec (.of R))).appLE ⊤ U (by

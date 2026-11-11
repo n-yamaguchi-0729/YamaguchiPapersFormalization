@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.LinearAlgebra.Dimension.Finite
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finite
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Descent of invariant absolute Galois characters
@@ -24,6 +26,8 @@ actual fixing subgroup. The established comparison of conjugation actions
 preserves invariance. Transfer divided by the extension degree then extends
 the character whenever that degree is coprime to its coefficient modulus.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

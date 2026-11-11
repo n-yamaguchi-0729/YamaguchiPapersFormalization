@@ -5,16 +5,18 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Mathlib.Algebra.Polynomial.Eval.Degree
-import Mathlib.Algebra.Order.GroupWithZero.Canonical
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Convert
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Algebra.CharP.Frobenius
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Mathlib.Algebra.Polynomial.Eval.Degree
+public import Mathlib.Algebra.Order.GroupWithZero.Canonical
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Convert
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Algebra.CharP.Frobenius
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Infinite additive quotients from a discrete valuation
@@ -27,6 +29,8 @@ divisible by the degree then give infinitely many distinct additive classes.
 No characteristic or completeness assumption is needed for that argument.
 The final theorem applies it to the Artin--Schreier polynomial.
 -/
+
+@[expose] public section
 
 open Polynomial
 namespace ValuationTheory.DiscreteValuationField

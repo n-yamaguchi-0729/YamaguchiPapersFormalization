@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The topology of a finite intermediate field's fixing subgroup
@@ -19,6 +22,8 @@ Galois group is a homeomorphism for the Krull topologies. Finiteness of the
 intermediate field suffices; no normality or algebraicity of the ambient
 extension is needed.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

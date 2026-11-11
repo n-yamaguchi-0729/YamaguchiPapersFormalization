@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalPullbackModel
-import Nyll.SchemeTheory.Divisors.LocalComplement
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalPullbackModel
+public import Nyll.SchemeTheory.Divisors.LocalComplement
 
 /-!
 # Open-normal pullback models over open immersions
@@ -16,6 +18,8 @@ scheme, the pullback of a connected finite-etale cover is connected.  Hence
 the connected component occurring in an open-normal pullback model is the
 whole pullback.
 -/
+
+@[expose] public section
 
 noncomputable section
 

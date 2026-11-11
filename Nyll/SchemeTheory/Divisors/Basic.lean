@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.Data.List.Forall2
-import Mathlib.Data.List.OfFn
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.Data.List.Forall2
+public import Mathlib.Data.List.OfFn
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Effective Cartier divisors and normal crossings
@@ -24,6 +26,8 @@ of this actual ideal-sheaf data.
 The closed support and radical of an ideal sheaf are already provided by
 `Scheme.IdealSheafData.support` and `Scheme.IdealSheafData.radical`.
 -/
+
+@[expose] public section
 
 open CategoryTheory
 open scoped BigOperators

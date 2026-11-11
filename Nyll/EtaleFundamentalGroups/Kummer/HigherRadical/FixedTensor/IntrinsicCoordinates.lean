@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
 
 /-!
 # Intrinsic coordinates for a fixed higher-radical tensor component
@@ -15,6 +17,8 @@ the fixed higher root.  All three are intrinsic consequences of the valued
 extension and tensor-component data; this file exposes them so no consumer
 has to accept them as hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -80,33 +84,24 @@ theorem fixedTensorComponentEmbeddedRoot_pow
     [IsScalarTower base.valuationSubring K F]
     (m : Ideal (F ⊗[K] L)) [m.IsMaximal] :
     let P := GenericTensorFieldComponent m
-    letI : Algebra L P := genericTensorFieldComponentRightAlgebra m
+    let : Algebra L P := genericTensorFieldComponentRightAlgebra m
     let rootP := pureRadicalFractionFieldGenericTensorComponentRoot
       (N := N) varpi m
     let j := pureRadicalFractionFieldGenericTensorComponentEmbedding
       hN varpi hvarpiPrime m
     let beta : AlgebraicClosure L := j rootP
     beta ^ N = algebraMap K (AlgebraicClosure L) (varpi : K) := by
-  dsimp only
+  intro P sharedOwner1 rootP j beta
   let V := base.valuationSubring
-  let P := GenericTensorFieldComponent m
   let : IsDiscreteValuationRing V :=
     base.valuationSubring_isDiscreteValuationRing
   let : IsFractionRing V K := base.valuationSubring_isFractionRing
   let : FiniteDimensional K F :=
     pureRadicalFractionField_finiteDimensional hN varpi hvarpiPrime
-  let : Algebra L P := genericTensorFieldComponentRightAlgebra m
   let : IsScalarTower K L P :=
     genericTensorFieldComponent_right_isScalarTower m
   let : FiniteDimensional L P :=
     genericTensorFieldComponentFiniteDimensionalOverRight m
-  let rootP : P :=
-    pureRadicalFractionFieldGenericTensorComponentRoot
-      (N := N) varpi m
-  let j : P →ₐ[L] AlgebraicClosure L :=
-    pureRadicalFractionFieldGenericTensorComponentEmbedding
-      hN varpi hvarpiPrime m
-  let beta : AlgebraicClosure L := j rootP
   let : SMul V P :=
     (pureRadicalFractionFieldGenericTensorComponentBaseAlgebra
       (N := N) varpi m).toSMul
@@ -144,7 +139,7 @@ theorem fixedTensorComponentEmbeddedRoot_lowerPow
     [IsScalarTower base.valuationSubring K F]
     (m : Ideal (F ⊗[K] L)) [m.IsMaximal] :
     let P := GenericTensorFieldComponent m
-    letI : Algebra L P := genericTensorFieldComponentRightAlgebra m
+    let : Algebra L P := genericTensorFieldComponentRightAlgebra m
     let rootP := pureRadicalFractionFieldGenericTensorComponentRoot
       (N := N) varpi m
     let j := pureRadicalFractionFieldGenericTensorComponentEmbedding
@@ -153,26 +148,17 @@ theorem fixedTensorComponentEmbeddedRoot_lowerPow
     (beta ^ (N / ramificationIndex base target)) ^
         ramificationIndex base target =
       algebraMap K (AlgebraicClosure L) (varpi : K) := by
-  dsimp only
+  intro P sharedOwner1 rootP j beta
   let V := base.valuationSubring
-  let P := GenericTensorFieldComponent m
   let : IsDiscreteValuationRing V :=
     base.valuationSubring_isDiscreteValuationRing
   let : IsFractionRing V K := base.valuationSubring_isFractionRing
   let : FiniteDimensional K F :=
     pureRadicalFractionField_finiteDimensional hN varpi hvarpiPrime
-  let : Algebra L P := genericTensorFieldComponentRightAlgebra m
   let : IsScalarTower K L P :=
     genericTensorFieldComponent_right_isScalarTower m
   let : FiniteDimensional L P :=
     genericTensorFieldComponentFiniteDimensionalOverRight m
-  let rootP : P :=
-    pureRadicalFractionFieldGenericTensorComponentRoot
-      (N := N) varpi m
-  let j : P →ₐ[L] AlgebraicClosure L :=
-    pureRadicalFractionFieldGenericTensorComponentEmbedding
-      hN varpi hvarpiPrime m
-  let beta : AlgebraicClosure L := j rootP
   let : SMul V P :=
     (pureRadicalFractionFieldGenericTensorComponentBaseAlgebra
       (N := N) varpi m).toSMul

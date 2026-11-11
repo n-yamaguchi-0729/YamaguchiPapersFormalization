@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
-import Mathlib.FieldTheory.Galois.Infinite
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.Inertia.IdealLocalization
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Dedekind.Basic
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
 
 /-!
 # Residue fields under localization at a normalization prime
@@ -17,6 +19,8 @@ prime of a normalization with the corresponding objects for the localized
 valuation subring.  The comparison is canonical and retains the base-prime
 residue field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -148,7 +152,7 @@ private theorem globalDecomposition_maps_localization :
   simp only [map_mul, map_inv₀,
     algebraMap_normalization_smul (A := A)]
 
-private theorem globalDecomposition_maps_localization_iff :
+theorem globalDecomposition_maps_localization_iff :
     letI := IsIntegralClosure.MulSemiringAction A K L B
     ∀ (sigma : HilbertRamification.Dedekind.decompositionGroup P Gal(L/K))
       (x : L),

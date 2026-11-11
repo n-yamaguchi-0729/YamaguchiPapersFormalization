@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Nyll.SchemeTheory.Divisors.CartierEtale
-import Nyll.SchemeTheory.Divisors.EtaleRegularity
-import Nyll.SchemeTheory.Divisors.HorizontalEtale
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Nyll.SchemeTheory.Divisors.CartierEtale
+public import Nyll.SchemeTheory.Divisors.EtaleRegularity
+public import Nyll.SchemeTheory.Divisors.HorizontalEtale
+public import Mathlib.AlgebraicGeometry.Limits
 
 /-!
 # Lemma 2.4: stability under finite etale covers
@@ -25,14 +28,18 @@ base change. The generic-fiber condition follows by composing finite etale cover
 Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Lemma 2.4.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 omit [ConnectedSpace X] [IsLocallyNoetherian X] in
 /-- 補題 2.4：連結有限 étale 被覆への引き戻しは、
@@ -44,7 +51,7 @@ theorem finite_etale_stability_2_4
   obtain ⟨hregular, hcrossing, hgeneric⟩ := hD
   refine ⟨?_, ?_, ?_, ?_⟩
   · have hbase : Y.hom ≫ toIntegers X = toIntegers Y.left :=
-      specZIsTerminal.comp_from Y.hom
+      specULiftZIsTerminal.comp_from Y.hom
     change (D.comapFiniteEtale Y).IsHorizontalOver (toIntegers Y.left)
     rw [← hbase]
     exact D.comap_components_denseRange_of_isHorizontalOver

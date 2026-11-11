@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.Completions.Adic.IntegralExtensionLocalFactors
-import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.IntegralExtensionLocalFactors
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.MappedIdeal
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.CompletionAdic
 
 /-!
 # Completed local factors of a finite DVR extension
@@ -20,6 +22,8 @@ rings at the primes of `C` above the closed point.  Each local completion is
 then identified with the valuation subring in the actual valued-field
 completion of the fraction field of `C` for that prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -140,7 +144,7 @@ noncomputable def completedDVRIntegralExtensionLocalFactorsRingEquiv :
     (baseHat.valuationSubring ⊗[V] C) ≃+*
       ∀ Q : p.primesOver C,
         completedPrimeValuationSubring (L := L) Q := by
-  let p := IsLocalRing.maximalIdeal V
+  intro p
   have hp : p ≠ ⊥ := by
     simpa [p, ne_eq, ← IsLocalRing.isField_iff_maximalIdeal_eq] using
       (IsDiscreteValuationRing.not_isField V)
@@ -198,7 +202,7 @@ theorem completedDVRIntegralExtensionLocalFactorsRingEquiv_includeRight_apply
   dsimp only [completedDVRIntegralExtensionLocalFactorsRingEquiv,
     completedPrimeMap, completedPrimeAdicEquivValuationSubring]
   simp only [RingEquiv.trans_apply, RingEquiv.piCongrRight_apply,
-    AlgEquiv.coe_ringEquiv, Algebra.TensorProduct.congr_apply,
+    AlgEquiv.coe_toRingEquiv, Algebra.TensorProduct.congr_apply,
     Algebra.TensorProduct.includeRight_apply, Algebra.TensorProduct.map_tmul,
     map_one,
     adicCompletionIntegralExtensionLocalFactorsRingEquiv_apply]

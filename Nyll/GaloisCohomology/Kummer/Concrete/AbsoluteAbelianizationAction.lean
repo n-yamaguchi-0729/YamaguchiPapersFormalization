@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Ring.Aut
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+module
+
+public import Mathlib.Algebra.Ring.Aut
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
 
 /-!
 # The canonical action on the abelianized absolute Galois group
@@ -18,6 +20,8 @@ result is independent of the chosen lift to the algebraic closure and gives a
 covariant action of base-field automorphisms. A changed continuous abelian
 character detects a nontrivial element of this action.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

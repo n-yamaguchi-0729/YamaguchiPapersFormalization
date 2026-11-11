@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableGeneratorDescent
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
-import Mathlib.RingTheory.PowerBasis
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableGeneratorDescent
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.RingTheory.PowerBasis
 
 /-!
 # Generators of finite extensions over a dense subfield
@@ -16,6 +18,8 @@ Embed a finite separable extension into an algebraic closure of its base.
 The generator descended there belongs to the image of the extension, so it
 pulls back to a generator of the original field with the same degree.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

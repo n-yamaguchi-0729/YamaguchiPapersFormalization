@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.DedekindDomain.Dvr
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.DedekindDomain.Dvr
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Height-one localizations of Noetherian normal domains
@@ -17,6 +19,8 @@ one-dimensional normal Noetherian local domain, hence a DVR.  This is the
 form needed for height-one primes in finite normalizations; no regularity of
 the unlocalized normalization is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

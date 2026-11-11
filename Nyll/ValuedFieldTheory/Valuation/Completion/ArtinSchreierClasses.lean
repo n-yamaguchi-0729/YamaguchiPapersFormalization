@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.WeakApproximation
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ArtinSchreier
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WeakApproximation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ArtinSchreier
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Simultaneous Artin–Schreier classes in valued completions
@@ -16,6 +18,8 @@ In characteristic p, the local Artin–Schreier images are open. The diagonal
 density from weak approximation therefore realizes any finite collection
 of local additive Artin–Schreier classes by a global field element.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

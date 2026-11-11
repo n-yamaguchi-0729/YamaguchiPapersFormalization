@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.BoundaryAwayPullback
-import Nyll.EtaleFundamentalGroups.Inertia.EtaleChartNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.BoundaryAwayPullback
+public import Nyll.EtaleFundamentalGroups.Inertia.EtaleChartNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # A normalization point on the actual local finite-etale cover
@@ -16,6 +19,8 @@ successive pullbacks through the etale chart and its localized stalk. This
 source isomorphism intertwines all pulled-back deck transformations. Extending
 it to normalization transports the specified point and preserves its stabilizer.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -69,15 +74,15 @@ theorem exists_boundaryAway_normalizationPoint
     ∃ q : T ⟶ g.normalization,
       q ≫ g.fromNormalization = y ∧
       ∀ σ : Aut W,
-        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.hom).left
+        q ≫ normalizationEndomorphism g ((FiniteEtale.pullback c).map σ.asIso.hom).left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)) = q ↔
+            exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.asIso.hom).w)) = q ↔
         z ≫ normalizationEndomorphism
           ((show W.left ⟶ I.supportComplement.toScheme from W.hom) ≫ I.supportComplement.ι)
-          σ.hom.left (by
+          σ.asIso.hom.left (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.hom.w) = z := by
+            exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.asIso.hom.w) = z := by
   intro hP r t hb W z y hzy c A a g
   let h : Spec (.of (Localization.AtPrime P.asIdeal)) ⟶ U :=
     Scheme.localizationAtPrimeTo U u P.asIdeal
@@ -108,27 +113,27 @@ theorem exists_boundaryAway_normalizationPoint
       ((congrArg (fun k : F₂.normalization ⟶ Spec (.of (Localization.AtPrime P.asIdeal)) =>
         q₀ ≫ k) (normalizationSourceIso_hom_fromNormalization F₂ g e he)).trans hq₀)
   · intro σ
-    have hσ : σ.hom.left ≫ F = F := by
+    have hσ : σ.asIso.hom.left ≫ F = F := by
       dsimp only [F]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.hom.w
-    let τ₁ := pullbackEndomorphism F f σ.hom.left hσ
-    have hτ₁ : τ₁ ≫ F₁ = F₁ := pullbackEndomorphism_snd F f σ.hom.left hσ
+      exact congrArg (fun k => k ≫ I.supportComplement.ι) σ.asIso.hom.w
+    let τ₁ := pullbackEndomorphism F f σ.asIso.hom.left hσ
+    have hτ₁ : τ₁ ≫ F₁ = F₁ := pullbackEndomorphism_snd F f σ.asIso.hom.left hσ
     let τ₂ := pullbackEndomorphism F₁ h τ₁ hτ₁
     have hτ₂ : τ₂ ≫ F₂ = F₂ := pullbackEndomorphism_snd F₁ h τ₁ hτ₁
-    let τ := ((FiniteEtale.pullback c).map σ.hom).left
+    let τ := ((FiniteEtale.pullback c).map σ.asIso.hom).left
     have hτ : τ ≫ g = g := by
       dsimp only [g]
       rw [← Category.assoc]
-      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.hom).w)
+      exact congrArg (fun k => k ≫ a) (((FiniteEtale.pullback c).map σ.asIso.hom).w)
     have hτfst : τ ≫
         pullback.fst (show W.left ⟶ I.supportComplement.toScheme from W.hom) c =
         pullback.fst (show W.left ⟶ I.supportComplement.toScheme from W.hom) c ≫
-          σ.hom.left := by
+          σ.asIso.hom.left := by
       change pullback.lift _ _ _ ≫ pullback.fst _ _ = _
       exact pullback.lift_fst _ _ _
     have hτ₂fst : τ₂ ≫ (pullback.fst F₁ h ≫ pullback.fst F f) =
-        (pullback.fst F₁ h ≫ pullback.fst F f) ≫ σ.hom.left := by
+        (pullback.fst F₁ h ≫ pullback.fst F f) ≫ σ.asIso.hom.left := by
       calc
         τ₂ ≫ (pullback.fst F₁ h ≫ pullback.fst F f) =
             (τ₂ ≫ pullback.fst F₁ h) ≫ pullback.fst F f :=
@@ -137,14 +142,14 @@ theorem exists_boundaryAway_normalizationPoint
           congrArg (fun k => k ≫ pullback.fst F f)
             (pullbackEndomorphism_fst F₁ h τ₁ hτ₁)
         _ = pullback.fst F₁ h ≫ (τ₁ ≫ pullback.fst F f) := Category.assoc _ _ _
-        _ = pullback.fst F₁ h ≫ (pullback.fst F f ≫ σ.hom.left) :=
+        _ = pullback.fst F₁ h ≫ (pullback.fst F f ≫ σ.asIso.hom.left) :=
           congrArg (fun k => pullback.fst F₁ h ≫ k)
-            (pullbackEndomorphism_fst F f σ.hom.left hσ)
-        _ = (pullback.fst F₁ h ≫ pullback.fst F f) ≫ σ.hom.left :=
-          (Category.assoc (pullback.fst F₁ h) (pullback.fst F f) σ.hom.left).symm
+            (pullbackEndomorphism_fst F f σ.asIso.hom.left hσ)
+        _ = (pullback.fst F₁ h ≫ pullback.fst F f) ≫ σ.asIso.hom.left :=
+          (Category.assoc (pullback.fst F₁ h) (pullback.fst F f) σ.asIso.hom.left).symm
     have hcommute : τ₂ ≫ e.hom = e.hom ≫ τ :=
-      pullbackSquare_iso_intertwines Htwo Hcover τ₂ τ σ.hom.left hτ₂fst hτ₂ hτfst hτ
+      pullbackSquare_iso_intertwines Htwo Hcover τ₂ τ σ.asIso.hom.left hτ₂fst hτ₂ hτfst hτ
     exact (normalizationSourceIso_fixes_iff F₂ g e he q₀ τ₂ hτ₂ τ hτ hcommute).trans
-      (hfix₀ σ.hom.left hσ)
+      (hfix₀ σ.asIso.hom.left hσ)
 
 end EtaleFundamentalGroups.Inertia

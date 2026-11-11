@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.RingTheory.LocalRing.Quotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Hypersurface and quotient maps between punctured spectra
@@ -17,6 +20,8 @@ spectrum.  Hence the quotient morphism restricts canonically to the two
 punctured spectra.  This is the geometric restriction map used in induction
 on the dimension of a regular local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,7 +46,8 @@ local instance finiteEtaleStableUnderBaseChangeAlongPuncturedSpectrumQuotient
 
 variable (R : Type u) [CommRing R] [IsLocalRing R]
 
-private theorem quotientIdeal_ne_top
+/-- An ideal contained in the maximal ideal is proper. -/
+theorem quotientIdeal_ne_top
     (I : Ideal R) (hI : I ≤ maximalIdeal R) : I ≠ ⊤ :=
   ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI
 
@@ -49,19 +55,15 @@ private theorem quotientIdeal_ne_top
 exactly the puncture of the quotient. -/
 theorem preimage_puncturedSpectrumOpen_quotient
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) ⁻¹ᵁ
         puncturedSpectrumOpen R =
       puncturedSpectrumOpen (R ⧸ I) := by
-  let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   let : IsLocalHom (Ideal.Quotient.mk I) :=
     IsLocalHom.of_surjective (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
@@ -103,17 +105,13 @@ theorem preimage_puncturedSpectrumOpen_quotient
 punctured spectra, for an ideal contained in the maximal ideal. -/
 noncomputable def puncturedSpectrumQuotientMorphism
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     puncturedSpectrum (R ⧸ I) ⟶ puncturedSpectrum R := by
-  letI : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-  letI : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   letI : IsLocalHom (Ideal.Quotient.mk I) :=
     IsLocalHom.of_surjective (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
@@ -153,20 +151,16 @@ into the full affine spectra. -/
 @[reassoc (attr := simp)]
 theorem puncturedSpectrumQuotientMorphism_comp_inclusion
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     puncturedSpectrumQuotientMorphism R I hI ≫
         puncturedSpectrumInclusion R =
       puncturedSpectrumInclusion (R ⧸ I) ≫
         Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I)) := by
-  let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   let : IsOpenImmersion (puncturedSpectrumInclusion R) := by
     dsimp only [puncturedSpectrumInclusion]
     infer_instance
@@ -177,9 +171,9 @@ theorem puncturedSpectrumQuotientMorphism_comp_inclusion
 spectrum inclusions is cartesian. -/
 theorem puncturedSpectrumQuotientMorphism_isPullback
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     IsPullback
@@ -187,11 +181,7 @@ theorem puncturedSpectrumQuotientMorphism_isPullback
       (puncturedSpectrumInclusion (R ⧸ I))
       (puncturedSpectrumInclusion R)
       (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) := by
-  let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   let : IsLocalHom (Ideal.Quotient.mk I) :=
     IsLocalHom.of_surjective (Ideal.Quotient.mk I)
       Ideal.Quotient.mk_surjective
@@ -211,9 +201,9 @@ to the quotient puncture agrees, naturally, with first taking the quotient
 base change and then removing its closed point. -/
 noncomputable def puncturedSpectrumQuotientPullbackIso
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     AlgebraicGeometry.FiniteEtale.pullback
@@ -224,11 +214,7 @@ noncomputable def puncturedSpectrumQuotientPullbackIso
           (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) ⋙
         AlgebraicGeometry.FiniteEtale.pullback
           (puncturedSpectrumInclusion (R ⧸ I)) := by
-  letI : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr (quotientIdeal_ne_top R I hI)
-  letI : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   exact
     (MorphismProperty.Over.pullbackComp
       (P := @IsFiniteEtale) (Q := ⊤)

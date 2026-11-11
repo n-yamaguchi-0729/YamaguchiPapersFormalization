@@ -3,13 +3,17 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
-import Nyll.GaloisCohomology.FieldTheory.FiniteConstants
-import Mathlib.FieldTheory.Finite.Basic
+module
+
+public import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
+public import Nyll.GaloisCohomology.FieldTheory.FiniteConstants
+public import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # Constants in finitely generated fields of positive characteristic
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 

@@ -7,7 +7,6 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.Yamaguchi26SolvableCoverings.Geometry.All
 import Nyll.Yamaguchi26SolvableCoverings.GroupTheory.All
 import Nyll.Yamaguchi26SolvableCoverings.Representations.All
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
 import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
 import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot3BoundaryInvariance
 import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot4FundamentalGroupIntegers

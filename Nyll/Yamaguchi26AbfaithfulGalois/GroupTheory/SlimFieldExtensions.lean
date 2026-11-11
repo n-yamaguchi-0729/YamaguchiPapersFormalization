@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
-import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SlimnessAndTorsion
+public import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
 
 /-!
 # Slimness and centers under finite field extension
@@ -14,6 +17,8 @@ Slimness is preserved by continuous group isomorphisms. A finite extension
 of a field with slim absolute Galois group has center-free absolute Galois
 group.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Injectivity
-import Mathlib.CategoryTheory.Adjunction.Limits
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Injectivity
+public import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-!
 # Fundamental groups under an equivalence of finite étale covers
@@ -16,6 +18,8 @@ groups bijective. Its inverse is continuous because these automorphism
 groups are compact Hausdorff. This gives the fundamental-group conclusion
 of Stacks Project, Tag `0BQA`, for connected schemes.
 -/
+
+@[expose] public section
 
 section
 

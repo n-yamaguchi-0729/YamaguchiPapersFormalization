@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Abelian
-import Mathlib.Algebra.Category.ModuleCat.Colimits
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.Algebra.Category.ModuleCat.Limits
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.Opposite
-import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.CategoryTheory.Abelian.Injective.Basic
-import Mathlib.CategoryTheory.Linear.Yoneda
-import Mathlib.CategoryTheory.Limits.Preserves.Finite
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Abelian
+public import Mathlib.Algebra.Category.ModuleCat.Colimits
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.Algebra.Category.ModuleCat.Limits
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.Opposite
+public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
+public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+public import Mathlib.CategoryTheory.Abelian.Injective.Basic
+public import Mathlib.CategoryTheory.Linear.Yoneda
+public import Mathlib.CategoryTheory.Limits.Preserves.Finite
 
 /-!
 # Linear duals with injective values and homology
@@ -25,6 +27,8 @@ functor, which reflects finite limits and colimits. Applying the exact
 functor to an opposite complex identifies its homology with the linear
 dual of the original homology, without changing the scalar ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

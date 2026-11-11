@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.Topology.Connected.Basic
-import Mathlib.Topology.NoetherianSpace
-import Mathlib.Topology.Sober
+module
+
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.Topology.Connected.Basic
+public import Mathlib.Topology.NoetherianSpace
+public import Mathlib.Topology.Sober
 
 /-!
 # Density and connectedness of divisor complements
@@ -31,6 +33,8 @@ The algebraic implication from `IsRegularLocalRing` to `IsDomain` is not
 assumed or axiomatized here. These lemmas do not by themselves complete the
 regular-boundary case until that implication is available.
 -/
+
+@[expose] public section
 
 noncomputable section
 

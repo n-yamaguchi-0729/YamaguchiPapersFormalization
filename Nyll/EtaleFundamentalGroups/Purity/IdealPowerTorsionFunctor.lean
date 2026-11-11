@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
+module
+
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Preadditive.Injective.Resolution
 
 /-!
 # The ideal-power torsion functor and its injective-resolution complex
@@ -19,6 +21,8 @@ the identity functor is natural and it is additive.  Applying it termwise to
 an injective resolution gives the concrete complex used to compute derived
 ideal-power torsion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

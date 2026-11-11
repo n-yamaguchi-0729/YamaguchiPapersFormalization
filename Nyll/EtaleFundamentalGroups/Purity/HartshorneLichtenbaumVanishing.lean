@@ -4,30 +4,32 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalCohomologyDualSupportDimension
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSaturatedPowers
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalTopCohomologyDual
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyFiniteTorsionFreeDescent
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleRadical
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeTopMultiplication
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveChainLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
-import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
-import Nyll.EtaleFundamentalGroups.Purity.SaturatedPowerDegreeZeroLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.TensorDualComplexTorsionLifting
-import Nyll.EtaleFundamentalGroups.Purity.TensorLinearDualComplex
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Module.Equiv.Basic
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.RingTheory.Finiteness.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalCohomologyDualSupportDimension
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalSaturatedPowers
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalTopCohomologyDual
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyFiniteTorsionFreeDescent
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleRadical
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeTopMultiplication
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveChainLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
+public import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
+public import Nyll.EtaleFundamentalGroups.Purity.SaturatedPowerDegreeZeroLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.TensorDualComplexTorsionLifting
+public import Nyll.EtaleFundamentalGroups.Purity.TensorLinearDualComplex
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Module.Equiv.Basic
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.RingTheory.Finiteness.Basic
 
 /-!
 # Hartshorne--Lichtenbaum vanishing over a complete local domain
@@ -43,6 +45,8 @@ the top cycle module. That module is finite, nonzero, and torsion-free.
 Surjectivity of nonzero scalar multiplication on its top local cohomology
 then forces vanishing, which descends from the cycle module to the ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

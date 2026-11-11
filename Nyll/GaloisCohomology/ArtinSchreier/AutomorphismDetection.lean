@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
-import Mathlib.FieldTheory.Galois.Infinite
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.FieldMapApproximation
+public import Mathlib.FieldTheory.Galois.Infinite
 
 /-!
 # Detecting a field automorphism by an Artin--Schreier character
@@ -14,6 +16,8 @@ A moved additive class gives a moved continuous absolute Galois character.
 The construction uses the separable closure and therefore does not require
 that the field be perfect.
 -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 

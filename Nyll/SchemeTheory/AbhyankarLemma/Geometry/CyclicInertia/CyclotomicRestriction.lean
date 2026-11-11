@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicInversion
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.CyclotomicInversion
 
 /-!
 # Restricting cyclotomic inversion to normal extensions
@@ -14,6 +16,8 @@ to every normal separable subextension.  The subextension is first embedded
 in the separable closure and the restricted automorphism is then transported
 back across that embedding.
 -/
+
+@[expose] public section
 
 noncomputable section
 

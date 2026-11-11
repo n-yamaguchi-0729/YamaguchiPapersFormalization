@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Localizing a ring equivalence at a prime
@@ -14,6 +16,8 @@ complement of its image.  Hence it induces an algebra equivalence between
 the corresponding local rings.  The explicit formula on elements from the
 base ring is retained for later transport of distinguished root parameters.
 -/
+
+@[expose] public section
 
 noncomputable section
 

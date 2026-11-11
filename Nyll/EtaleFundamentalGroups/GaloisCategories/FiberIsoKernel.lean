@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
 
 /-!
 # Kernels and fixed fibers under a change of fiber functor
@@ -13,6 +15,8 @@ A natural isomorphism transports the kernel of restriction to another fiber
 functor. It also transports fixed points of the induced automorphisms. These
 are the two compatibility statements needed to use arbitrary geometric paths.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,13 +37,14 @@ theorem autHomOfCompIso_conj_eq_one_of_eq_one
     (a : Aut F) (ha : autHomOfCompIso H s a = 1) :
     autHomOfCompIso H r (continuousConjAut t a) = 1 := by
   let P := (Functor.whiskeringLeft C C' FintypeCat.{w}).obj H
-  have hp : P.mapIso a = (1 : Aut (H ⋙ F)) := by
+  have hp : P.mapAut F a = (1 : Aut (H ⋙ F)) := by
     apply s.conjAut.injective
     exact ha.trans (map_one s.conjAut).symm
-  change r.conjAut (P.mapIso (t.conjAut a)) = 1
-  have hconj : P.mapIso (t.conjAut a) =
-      (Functor.isoWhiskerLeft H t).conjAut (P.mapIso a) :=
-    Functor.map_conjAut P t a
+  change r.conjAut (P.mapAut G (t.conjAut a)) = 1
+  have hconj : P.mapAut G (t.conjAut a) =
+      (Functor.isoWhiskerLeft H t).conjAut (P.mapAut F a) := by
+    apply Aut.ext
+    exact Functor.map_conjAut P t a
   exact (congrArg r.conjAut hconj).trans
     ((congrArg (fun b : Aut (H ⋙ F) =>
       r.conjAut ((Functor.isoWhiskerLeft H t).conjAut b)) hp).trans
@@ -54,9 +59,9 @@ theorem fiber_fixed_of_conj_fixed
     ∀ w : F.obj W, a • w = w := by
   intro w
   have h := ha ((t.app W).hom w)
-  change t.hom.app W (a.hom.app W (t.inv.app W (t.hom.app W w))) =
+  change t.hom.app W (a.asIso.hom.app W (t.inv.app W (t.hom.app W w))) =
     t.hom.app W w at h
-  have hfixed : t.hom.app W (a.hom.app W w) = t.hom.app W w := by
+  have hfixed : t.hom.app W (a.asIso.hom.app W w) = t.hom.app W w := by
     simpa only [← Iso.app_hom, ← Iso.app_inv, FintypeCat.hom_inv_id_apply] using h
   exact (ConcreteCategory.bijective_of_isIso (t.hom.app W)).injective hfixed
 

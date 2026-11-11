@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.RegularPair
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.Core
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoIntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.RegularPair
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.Core
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoIntegralClosure
 
 /-!
 # Finite normalizations over a height-two regular local base
@@ -18,6 +20,8 @@ ideal; trace-dual saturation then transports that pair to the finite
 normalization.  Thus a finite normalization in a finite separable extension
 is free, and hence flat, over the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

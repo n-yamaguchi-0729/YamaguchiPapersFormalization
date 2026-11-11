@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorExactness
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorUniqueness
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorExactness
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorUniqueness
 
 /-!
 # Comparison of exact functors on a Galois category
@@ -14,6 +16,8 @@ An exact functor from a Galois category to finite sets is isomorphic to any
 chosen fiber functor.  As a consequence, exact functors between Galois
 categories commute with fiber functors up to isomorphism.
 -/
+
+@[expose] public section
 
 universe u₁ u₂ v₁ v₂ w
 

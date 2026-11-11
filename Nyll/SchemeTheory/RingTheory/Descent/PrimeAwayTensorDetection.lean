@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
-import Mathlib.Algebra.Module.LocalizedModule.Basic
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.PrimeAwayPairGluing
+public import Mathlib.Algebra.Module.LocalizedModule.Basic
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # Detecting an isomorphism on two principal opens
@@ -20,6 +22,8 @@ at two prime-away localizations and the first parameter acts injectively
 on the target. The source's flat Hartogs equalizer constructs preimages.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

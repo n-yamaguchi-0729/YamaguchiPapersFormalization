@@ -10,13 +10,17 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+module
 
-import Nyll.SchemeTheory.RingTheory.Smooth.MathlibRingTheorySmoothAlgebraOverFieldRegularStalks
+public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.MathlibRingTheorySmoothAlgebraOverFieldRegularStalks
 
 /-!
 # Mathlib Ring Theory Smooth Field Fiber Regular Stalks Standard Smooth Reduction
 -/
+
+@[expose] public section
 
 universe u
 

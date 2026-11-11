@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
-import Nyll.ProCGroups.Abelian.PrimeQuotients
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.RingTheory.RootsOfUnity.Basic
-import Mathlib.Data.Nat.Totient
+module
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Nyll.ProCGroups.Abelian.PrimeQuotients
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.RingTheory.RootsOfUnity.Basic
+public import Mathlib.Data.Nat.Totient
 
 /-!
 # Cyclic quotients detected by infinite p-adic unit characters
@@ -17,6 +19,8 @@ If every finite reduction had order prime to p, each reduction would have
 exponent dividing p - 1. Separation by reductions would then place the entire
 image in the finite group of (p - 1)-st roots of unity.
 -/
+
+@[expose] public section
 
 namespace PadicInt
 variable {p : ℕ} [Fact p.Prime]

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.ActualCompositumComponent
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.IntegralClosureBaseChange
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationClosedPrime
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.ActualCompositumComponent
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.IntegralClosureBaseChange
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationClosedPrime
 
 /-!
 # The prefix compositum inside a chosen final localization
@@ -25,6 +27,8 @@ selected by the two embeddings in that same fraction ring.  No comparison
 between independently chosen factors, right-coordinate bijectivity, or
 degree equality is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -154,63 +158,46 @@ noncomputable def
       Ideal (integralClosure B M)) [p.IsPrime] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
     let M := GenericTensorFieldComponent m
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-    letI : SMul A M₀ :=
+    let : SMul A M₀ :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := A) n).toSMul
-    letI : Algebra A M :=
+    let : Algebra A M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-    letI : SMul A M :=
+    let : SMul A M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI : SMul B M :=
+    let : SMul B M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
     let E := integralClosure B M
     let D := Localization.AtPrime p
     let bDAlgebra : Algebra B D :=
       ((algebraMap E D).comp (algebraMap B E)).toAlgebra
-    letI : Algebra B D := bDAlgebra
-    letI : SMul B D := bDAlgebra.toSMul
+    let : Algebra B D := bDAlgebra
+    let : SMul B D := bDAlgebra.toSMul
     let aDAlgebra : Algebra A D :=
       ((algebraMap B D).comp (algebraMap A B)).toAlgebra
-    letI : Algebra A D := aDAlgebra
-    letI : SMul A D := aDAlgebra.toSMul
+    let : Algebra A D := aDAlgebra
+    let : SMul A D := aDAlgebra.toSMul
     let P := FractionRing D
     let bPAlgebra : Algebra B P :=
       ((algebraMap D P).comp (algebraMap B D)).toAlgebra
-    letI : Algebra B P := bPAlgebra
-    letI : SMul B P := bPAlgebra.toSMul
+    let : Algebra B P := bPAlgebra
+    let : SMul B P := bPAlgebra.toSMul
     let aPAlgebra : Algebra A P :=
       ((algebraMap B P).comp (algebraMap A B)).toAlgebra
-    letI : Algebra A P := aPAlgebra
-    letI : SMul A P := aPAlgebra.toSMul
+    let : Algebra A P := aPAlgebra
+    let : SMul A P := aPAlgebra.toSMul
     M₀ →ₐ[A] P := by
-  dsimp only at p ⊢
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let M := GenericTensorFieldComponent m
-  letI : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-  letI : SMul A M₀ :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := A) n).toSMul
-  letI : Algebra A M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-  letI : SMul A M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-  letI : SMul B M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
+  dsimp only at p
+  intro n sharedOwner1 M₀ M sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6
+    sharedOwner7
   letI : SMul F' M := (inferInstance : Algebra F' M).toSMul
   letI : IsScalarTower B F' M :=
     @IsScalarTower.of_algebraMap_eq B F' M _ _ _ _ _ _ fun _ ↦ rfl
@@ -222,30 +209,15 @@ noncomputable def
         genericTensorFieldComponentLeft m
           (algebraMap B F' (algebraMap A B x))
     rw [IsScalarTower.algebraMap_apply A B F']
-  let E := integralClosure B M
-  let D := Localization.AtPrime p
-  let bDAlgebra : Algebra B D :=
-    ((algebraMap E D).comp (algebraMap B E)).toAlgebra
-  letI : Algebra B D := bDAlgebra
-  letI : SMul B D := bDAlgebra.toSMul
+  intro E D bDAlgebra sharedOwner8 sharedOwner9
   letI : SMul E D := (inferInstance : Algebra E D).toSMul
   letI : IsScalarTower B E D := IsScalarTower.of_algebraMap_eq' rfl
-  let aDAlgebra : Algebra A D :=
-    ((algebraMap B D).comp (algebraMap A B)).toAlgebra
-  letI : Algebra A D := aDAlgebra
-  letI : SMul A D := aDAlgebra.toSMul
+  intro aDAlgebra sharedOwner10 sharedOwner11
   letI : IsScalarTower A B D := IsScalarTower.of_algebraMap_eq' rfl
-  let P := FractionRing D
-  let bPAlgebra : Algebra B P :=
-    ((algebraMap D P).comp (algebraMap B D)).toAlgebra
-  letI : Algebra B P := bPAlgebra
-  letI : SMul B P := bPAlgebra.toSMul
+  intro P bPAlgebra sharedOwner12 sharedOwner13
   letI : SMul D P := (inferInstance : Algebra D P).toSMul
   letI : IsScalarTower B D P := IsScalarTower.of_algebraMap_eq' rfl
-  let aPAlgebra : Algebra A P :=
-    ((algebraMap B P).comp (algebraMap A B)).toAlgebra
-  letI : Algebra A P := aPAlgebra
-  letI : SMul A P := aPAlgebra.toSMul
+  intro aPAlgebra sharedOwner14 sharedOwner15
   letI : IsScalarTower A B P := IsScalarTower.of_algebraMap_eq' rfl
   letI : IsFractionRing E M :=
     IsIntegralClosure.isFractionRing_of_finite_extension B F' M E
@@ -332,47 +304,47 @@ noncomputable def
       Ideal (integralClosure B M)) [p.IsPrime] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
     let M := GenericTensorFieldComponent m
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-    letI : SMul A M₀ :=
+    let : SMul A M₀ :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := A) n).toSMul
-    letI : Algebra A M :=
+    let : Algebra A M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-    letI : SMul A M :=
+    let : SMul A M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI : SMul B M :=
+    let : SMul B M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
     let E := integralClosure B M
     let D := Localization.AtPrime p
     let bDAlgebra : Algebra B D :=
       ((algebraMap E D).comp (algebraMap B E)).toAlgebra
-    letI : Algebra B D := bDAlgebra
-    letI : SMul B D := bDAlgebra.toSMul
+    let : Algebra B D := bDAlgebra
+    let : SMul B D := bDAlgebra.toSMul
     let aDAlgebra : Algebra A D :=
       ((algebraMap B D).comp (algebraMap A B)).toAlgebra
-    letI : Algebra A D := aDAlgebra
-    letI : SMul A D := aDAlgebra.toSMul
+    let : Algebra A D := aDAlgebra
+    let : SMul A D := aDAlgebra.toSMul
     let P := FractionRing D
     let bPAlgebra : Algebra B P :=
       ((algebraMap D P).comp (algebraMap B D)).toAlgebra
-    letI : Algebra B P := bPAlgebra
-    letI : SMul B P := bPAlgebra.toSMul
+    let : Algebra B P := bPAlgebra
+    let : SMul B P := bPAlgebra.toSMul
     let aPAlgebra : Algebra A P :=
       ((algebraMap B P).comp (algebraMap A B)).toAlgebra
-    letI : Algebra A P := aPAlgebra
-    letI : SMul A P := aPAlgebra.toSMul
+    let : Algebra A P := aPAlgebra
+    let : SMul A P := aPAlgebra.toSMul
     let fA : M₀ →ₐ[A] P :=
       genericTensorTowerIntermediateComponentToChosenLocalizationAlgHom
         (A := A) (B := B) (K := K) (F := F) (F' := F') (L := L)
         m p
-    letI : FaithfulSMul A P :=
+    let : FaithfulSMul A P :=
       (faithfulSMul_iff_algebraMap_injective A P).mpr <| by
         intro x y hxy
         apply FaithfulSMul.algebraMap_injective A F
@@ -383,74 +355,21 @@ noncomputable def
     let fPAlgebra : Algebra F P :=
       (IsFractionRing.lift
         (FaithfulSMul.algebraMap_injective A P)).toAlgebra
-    letI : Algebra F P := fPAlgebra
-    letI : SMul F P := fPAlgebra.toSMul
-    letI : IsScalarTower A F P := IsScalarTower.of_algebraMap_eq fun x ↦
+    let : Algebra F P := fPAlgebra
+    let : SMul F P := fPAlgebra.toSMul
+    let : IsScalarTower A F P := IsScalarTower.of_algebraMap_eq fun x ↦
       (IsFractionRing.lift_algebraMap
         (FaithfulSMul.algebraMap_injective A P) x).symm
     M₀ →ₐ[F] P := by
-  dsimp only at p ⊢
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let M := GenericTensorFieldComponent m
-  letI : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-  letI : SMul A M₀ :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := A) n).toSMul
+  dsimp only at p
+  intro n sharedOwner1 M₀ M sharedOwner2 sharedOwner3
   letI : SMul F M₀ := (inferInstance : Algebra F M₀).toSMul
-  letI : Algebra A M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-  letI : SMul A M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-  letI : SMul B M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
+  intro sharedOwner4 sharedOwner5 sharedOwner6 sharedOwner7
   letI : IsScalarTower A F M₀ :=
     @IsScalarTower.of_algebraMap_eq A F M₀ _ _ _ _ _ _ fun _ ↦ rfl
-  let E := integralClosure B M
-  let D := Localization.AtPrime p
-  let bDAlgebra : Algebra B D :=
-    ((algebraMap E D).comp (algebraMap B E)).toAlgebra
-  letI : Algebra B D := bDAlgebra
-  letI : SMul B D := bDAlgebra.toSMul
-  let aDAlgebra : Algebra A D :=
-    ((algebraMap B D).comp (algebraMap A B)).toAlgebra
-  letI : Algebra A D := aDAlgebra
-  letI : SMul A D := aDAlgebra.toSMul
-  let P := FractionRing D
-  let bPAlgebra : Algebra B P :=
-    ((algebraMap D P).comp (algebraMap B D)).toAlgebra
-  letI : Algebra B P := bPAlgebra
-  letI : SMul B P := bPAlgebra.toSMul
-  let aPAlgebra : Algebra A P :=
-    ((algebraMap B P).comp (algebraMap A B)).toAlgebra
-  letI : Algebra A P := aPAlgebra
-  letI : SMul A P := aPAlgebra.toSMul
-  let fA : M₀ →ₐ[A] P :=
-    genericTensorTowerIntermediateComponentToChosenLocalizationAlgHom
-      (A := A) (B := B) (K := K) (F := F) (F' := F') (L := L)
-      m p
-  letI : FaithfulSMul A P :=
-    (faithfulSMul_iff_algebraMap_injective A P).mpr <| by
-      intro x y hxy
-      apply FaithfulSMul.algebraMap_injective A F
-      apply (genericTensorFieldComponentLeft n).injective
-      apply fA.injective
-      change fA (algebraMap A M₀ x) = fA (algebraMap A M₀ y)
-      rw [fA.commutes x, fA.commutes y, hxy]
-  let fPAlgebra : Algebra F P :=
-    (IsFractionRing.lift
-      (FaithfulSMul.algebraMap_injective A P)).toAlgebra
-  letI : Algebra F P := fPAlgebra
-  letI : SMul F P := fPAlgebra.toSMul
-  letI : IsScalarTower A F P := IsScalarTower.of_algebraMap_eq fun x ↦
-    (IsFractionRing.lift_algebraMap
-      (FaithfulSMul.algebraMap_injective A P) x).symm
+  intro E D bDAlgebra sharedOwner8 sharedOwner9 aDAlgebra sharedOwner10 sharedOwner11 P bPAlgebra
+    sharedOwner12 sharedOwner13 aPAlgebra sharedOwner14 sharedOwner15 fA sharedOwner16 fPAlgebra
+    sharedOwner17 sharedOwner18 sharedOwner19
   exact fractionFieldBaseAlgHomOfRestrictScalars fA
 
 omit [Algebra.IsIntegral A B] in

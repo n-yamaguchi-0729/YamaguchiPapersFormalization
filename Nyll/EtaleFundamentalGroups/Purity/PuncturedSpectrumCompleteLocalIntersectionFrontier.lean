@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalDomainAlgebra
-import Mathlib.RingTheory.Ideal.UFD
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalDomainAlgebra
+public import Mathlib.RingTheory.Ideal.UFD
 
 /-!
 # The complete-local intersection frontier
@@ -20,6 +22,8 @@ principal, in particular for a UFD.  For a general complete local domain, the
 remaining input is precisely the connectedness/intersection theorem that
 replaces this principality step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.RamificationUnitGlobalization
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.ExponentUnitCompletion
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Coprimality
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.RamificationUnitGlobalization
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SelectedBranch.ExponentUnitCompletion
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Coprimality
 
 /-!
 # Main one-point inertia statement
@@ -18,6 +20,8 @@ globalization and the normalization-inertia cardinality comparison then
 produce the final coprimality statement; no local unit, ramification index, or
 inertia comparison is a hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

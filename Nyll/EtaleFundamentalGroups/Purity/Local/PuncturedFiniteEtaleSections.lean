@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
-import Nyll.SchemeTheory.Affine.PrimePairHartogs
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RingHom.Flat
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalPrimePair
+public import Nyll.SchemeTheory.Affine.PrimePairHartogs
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.RingTheory.RingHom.Flat
 
 /-!
 # Global sections of punctured finite étale covers
@@ -19,6 +21,8 @@ two, restriction to the inverse image of the puncture preserves all global
 sections. The proof uses the actual flat algebra of global sections and
 the prime parameters supplied by regularity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

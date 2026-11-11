@@ -4,15 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormValuation
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.FiniteNormExtension
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completeness
-import Nyll.ValuedFieldTheory.Valuation.DiscreteEquivalence
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Analysis.Normed.Field.Lemmas
-import Mathlib.RingTheory.AdicCompletion.Topology
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormValuation
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.FiniteNormExtension
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Completeness
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteEquivalence
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Analysis.Normed.Field.Lemmas
+public import Mathlib.RingTheory.AdicCompletion.Topology
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.AbsoluteValues
 
 /-!
 # Complete valuations on arbitrary finite extensions
@@ -21,6 +24,8 @@ The field norm constructs a discrete extension with the original value group.
 The complete absolute-value extension supplies adic completeness through its
 actual norm formula. Separability and residue-field perfection are not required.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace ValuationTheory.DiscreteValuationField.ValuedExtension

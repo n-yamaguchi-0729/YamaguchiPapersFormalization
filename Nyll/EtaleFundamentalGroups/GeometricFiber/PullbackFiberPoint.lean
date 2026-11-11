@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
 
 /-!
 # Points in pullback fibers
@@ -13,6 +16,8 @@ import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 The canonical comparison between a pullback fiber and a composite geometric
 fiber is compatible with the first projection of the scheme pullback.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,18 +53,18 @@ theorem pullbackFiberIso_hom_fundamentalGroupHom_apply
     (f : X ⟶ Y) (xi : Spec (.of Omega) ⟶ X) (a : π₁ᵉᵗ(xi))
     (A : FiniteEtale Y) (y : (fiber xi).obj ((pullback f).obj A)) :
     (pullbackFiberIso f xi).hom.app A
-        (a.hom.app ((pullback f).obj A) y) =
-      (fundamentalGroupHom f xi a).hom.app A
+        (a.asIso.hom.app ((pullback f).obj A) y) =
+      (fundamentalGroupHom f xi a).asIso.hom.app A
         ((pullbackFiberIso f xi).hom.app A y) := by
   have h :
-      a.hom.app ((pullback f).obj A) ≫ (pullbackFiberIso f xi).hom.app A =
+      a.asIso.hom.app ((pullback f).obj A) ≫ (pullbackFiberIso f xi).hom.app A =
         (pullbackFiberIso f xi).hom.app A ≫
-          (fundamentalGroupHom f xi a).hom.app A := by
+          (fundamentalGroupHom f xi a).asIso.hom.app A := by
     simp only [fundamentalGroupHom,
       CategoryTheory.PreGaloisCategory.autHomOfCompIso_apply,
-      Iso.conjAut_hom, Iso.conj_apply, NatTrans.comp_app]
+      Iso.conjAut_hom, Iso.conj_apply_asHom, NatTrans.comp_app]
     exact (((pullbackFiberIso f xi).app A).hom_inv_id_assoc
-      (a.hom.app ((pullback f).obj A) ≫ (pullbackFiberIso f xi).hom.app A)).symm
+      (a.asIso.hom.app ((pullback f).obj A) ≫ (pullbackFiberIso f xi).hom.app A)).symm
   exact ConcreteCategory.congr_hom h y
 
 variable [IsSepClosed Omega]

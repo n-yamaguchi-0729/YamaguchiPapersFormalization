@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.FinitePresentation
-import Mathlib.Algebra.MvPolynomial.Basic
-import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
-import Mathlib.CategoryTheory.Presentable.Basic
-import Mathlib.RingTheory.FiniteStability
-import Mathlib.RingTheory.FinitePresentation
-import Mathlib.Data.Fintype.EquivFin
-import Mathlib.RingTheory.TensorProduct.Maps
-import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
+module
+
+public import Mathlib.Algebra.Category.Ring.FinitePresentation
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected
+public import Mathlib.CategoryTheory.Presentable.Basic
+public import Mathlib.RingTheory.FiniteStability
+public import Mathlib.RingTheory.FinitePresentation
+public import Mathlib.Data.Fintype.EquivFin
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FilteredColimit.CoconeLeg
 
 
 /-!
@@ -29,6 +31,8 @@ This is the finite-data descent needed after a strict-Henselian splitting.  It
 does not assume or construct a strict henselization: the input is an arbitrary
 filtered colimit of pointed base algebras.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -280,18 +284,7 @@ private theorem stage_comp_identity_at_colimit
       AlgHom.liftEquiv R B B (B ⊗[R] F.obj k) idB
     (filteredBaseChangeCoconeLegAlgHom c k (A := B)).comp compBB =
       (filteredBaseChangeCoconeLegAlgHom c k (A := B)).comp idBB := by
-  let compB : B →ₐ[R] (B ⊗[R] F.obj k) :=
-    (Algebra.TensorProduct.comm R (F.obj k) B).toAlgHom.comp
-      (((ψₖ.comp φₖ).restrictScalars R).comp
-        Algebra.TensorProduct.includeRight)
-  let idB : B →ₐ[R] (B ⊗[R] F.obj k) :=
-    Algebra.TensorProduct.includeLeft
-  let compBB : (B ⊗[R] B) →ₐ[B] (B ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R B B (B ⊗[R] F.obj k) compB
-  let idBB : (B ⊗[R] B) →ₐ[B] (B ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R B B (B ⊗[R] F.obj k) idB
-  change (filteredBaseChangeCoconeLegAlgHom c k (A := B)).comp compBB =
-    (filteredBaseChangeCoconeLegAlgHom c k (A := B)).comp idBB
+  intro compB idB compBB idBB
   apply Algebra.TensorProduct.ext_ring
   ext b
   simp only [AlgHom.comp_apply, AlgHom.restrictScalars_apply,
@@ -463,34 +456,8 @@ private theorem exists_common_stage_for_inverse_equations
           (Algebra.TensorProduct.map
             (CommRingCat.toAlgHom (F.map hkm')) (AlgHom.id R D)) =
         filteredTensorToColimitAlgHom c k := by
+  intro R₀ B₀ D₀ tB tD FB FD compB idB compBB idBB compD idD compDD idDD
   classical
-  let R₀ : CommRingCat.{u} := CommRingCat.of R
-  let B₀ : CommRingCat.{u} := CommRingCat.of B
-  let D₀ : CommRingCat.{u} := CommRingCat.of D
-  let tB : Under R₀ ⥤ Under B₀ := CommRingCat.tensorProd R₀ B₀
-  let tD : Under R₀ ⥤ Under D₀ := CommRingCat.tensorProd R₀ D₀
-  let FB : J ⥤ Under B₀ := F ⋙ tB
-  let FD : J ⥤ Under D₀ := F ⋙ tD
-  let compB : B →ₐ[R] (B ⊗[R] F.obj k) :=
-    (Algebra.TensorProduct.comm R (F.obj k) B).toAlgHom.comp
-      (((ψₖ.comp φₖ).restrictScalars R).comp
-        Algebra.TensorProduct.includeRight)
-  let idB : B →ₐ[R] (B ⊗[R] F.obj k) :=
-    Algebra.TensorProduct.includeLeft
-  let compBB : (B ⊗[R] B) →ₐ[B] (B ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R B B (B ⊗[R] F.obj k) compB
-  let idBB : (B ⊗[R] B) →ₐ[B] (B ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R B B (B ⊗[R] F.obj k) idB
-  let compD : D →ₐ[R] (D ⊗[R] F.obj k) :=
-    (Algebra.TensorProduct.comm R (F.obj k) D).toAlgHom.comp
-      (((φₖ.comp ψₖ).restrictScalars R).comp
-        Algebra.TensorProduct.includeRight)
-  let idD : D →ₐ[R] (D ⊗[R] F.obj k) :=
-    Algebra.TensorProduct.includeLeft
-  let compDD : (D ⊗[R] D) →ₐ[D] (D ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R D D (D ⊗[R] F.obj k) compD
-  let idDD : (D ⊗[R] D) →ₐ[D] (D ⊗[R] F.obj k) :=
-    AlgHom.liftEquiv R D D (D ⊗[R] F.obj k) idD
   obtain ⟨lB, hklB, hB⟩ :=
     exists_stage_comp_identity F c hc k e φₖ ψₖ hφₖ hψₖ
   obtain ⟨lD, hklD, hD⟩ :=
@@ -525,7 +492,11 @@ private theorem exists_common_stage_for_inverse_equations
         CommRingCat.toAlgHom (c.ι.app k) x ⊗ₜ[R] (1 : B)
       rw [hclegApply]
     · ext b
-      simp [filteredTensorToColimitAlgHom]
+      change filteredTensorToColimitAlgHom c m
+          (Algebra.TensorProduct.map fkm (AlgHom.id R B) (1 ⊗ₜ[R] b)) =
+        filteredTensorToColimitAlgHom c k (1 ⊗ₜ[R] b)
+      simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
+        filteredTensorToColimitAlgHom_tmul, map_one]
   have hcTensorD :
       (filteredTensorToColimitAlgHom c m (A := D)).comp
           (Algebra.TensorProduct.map fkm (AlgHom.id R D)) =
@@ -536,7 +507,11 @@ private theorem exists_common_stage_for_inverse_equations
         CommRingCat.toAlgHom (c.ι.app k) x ⊗ₜ[R] (1 : D)
       rw [hclegApply]
     · ext d
-      simp [filteredTensorToColimitAlgHom]
+      change filteredTensorToColimitAlgHom c m
+          (Algebra.TensorProduct.map fkm (AlgHom.id R D) (1 ⊗ₜ[R] d)) =
+        filteredTensorToColimitAlgHom c k (1 ⊗ₜ[R] d)
+      simp only [Algebra.TensorProduct.map_tmul, AlgHom.id_apply,
+        filteredTensorToColimitAlgHom_tmul, map_one]
   have hB_m :
       compBB.toUnder ≫ FB.map hkm' = idBB.toUnder ≫ FB.map hkm' := by
     have hpath : hkm' = hklB ≫ (hlBl ≫ hlm) := by
@@ -644,9 +619,17 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
           (φₖ.restrictScalars R) := by
     apply Algebra.TensorProduct.ext
     · ext x
-      simp [φₘ, φₖ, Algebra.smul_def]
+      exact (φₘ.commutes (fkm x)).trans
+        (congrArg (Algebra.TensorProduct.map fkm (AlgHom.id R D))
+          (φₖ.commutes x)).symm
     · ext b
-      simp [φₘ, φₖ, fₘ]
+      change φₘ (fkm 1 ⊗ₜ[R] b) =
+        (Algebra.TensorProduct.map fkm (AlgHom.id R D))
+          (φₖ (1 ⊗ₜ[R] b))
+      rw [map_one]
+      exact (one_smul (F.obj m) (fₘ b)).trans
+        (congrArg (Algebra.TensorProduct.map fkm (AlgHom.id R D))
+          (one_smul (F.obj k) (fₖ b))).symm
   have hψBaseChange :
       (ψₘ.restrictScalars R).comp
           (Algebra.TensorProduct.map fkm (AlgHom.id R D)) =
@@ -654,9 +637,17 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
           (ψₖ.restrictScalars R) := by
     apply Algebra.TensorProduct.ext
     · ext x
-      simp [ψₘ, ψₖ, Algebra.smul_def]
+      exact (ψₘ.commutes (fkm x)).trans
+        (congrArg (Algebra.TensorProduct.map fkm (AlgHom.id R B))
+          (ψₖ.commutes x)).symm
     · ext d
-      simp [ψₘ, ψₖ, gₘ]
+      change ψₘ (fkm 1 ⊗ₜ[R] d) =
+        (Algebra.TensorProduct.map fkm (AlgHom.id R B))
+          (ψₖ (1 ⊗ₜ[R] d))
+      rw [map_one]
+      exact (one_smul (F.obj m) (gₘ d)).trans
+        (congrArg (Algebra.TensorProduct.map fkm (AlgHom.id R B))
+          (one_smul (F.obj k) (gₖ d))).symm
   have hleft : ψₘ.comp φₘ = AlgHom.id (F.obj m) _ := by
     apply Algebra.TensorProduct.ext_ring
     ext b
@@ -790,10 +781,9 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
   refine ⟨m, eₘ, ?_, ?_⟩
   · apply Algebra.TensorProduct.ext
     · ext x
-      convert (e.commutes
-        (CommRingCat.toAlgHom (c.ι.app m) x)).symm using 1 <;>
-        simp [eₘ, φₘ, filteredTensorToColimitAlgHom,
-          Algebra.TensorProduct.algebraMap_apply, Algebra.smul_def]
+      exact (congrArg (filteredTensorToColimitAlgHom c m (A := D))
+        (eₘ.commutes x)).trans
+          (e.commutes (CommRingCat.toAlgHom (c.ι.app m) x)).symm
     · ext b
       have hnat := congrArg (fun h ↦ h (fₖ b)) hcTensorD
       have hφ := congrArg (fun h ↦ h (1 ⊗ₜ[R] b)) hφₖ
@@ -803,19 +793,19 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
             filteredTensorToColimitAlgHom c k (fₖ b) := by
               simpa [eₘ, φₘ, fₘ] using hnat
         _ = filteredTensorToColimitAlgHom c k
-              (φₖ (1 ⊗ₜ[R] b)) := by simp [φₖ]
+              (φₖ (1 ⊗ₜ[R] b)) := by
+                simp only [φₖ, AlgHom.liftEquiv_tmul, one_smul]
         _ = e (filteredTensorToColimitAlgHom c k
               (1 ⊗ₜ[R] b)) := by
                 convert hφ using 1 <;> rfl
         _ = e (filteredTensorToColimitAlgHom c m
               (1 ⊗ₜ[R] b)) := by
-                simp [filteredTensorToColimitAlgHom]
+                simp only [filteredTensorToColimitAlgHom_tmul, map_one]
   · apply Algebra.TensorProduct.ext
     · ext x
-      convert (e.symm.commutes
-        (CommRingCat.toAlgHom (c.ι.app m) x)).symm using 1 <;>
-        simp [eₘ, ψₘ, filteredTensorToColimitAlgHom,
-          Algebra.TensorProduct.algebraMap_apply, Algebra.smul_def]
+      exact (congrArg (filteredTensorToColimitAlgHom c m (A := B))
+        (eₘ.symm.commutes x)).trans
+          (e.symm.commutes (CommRingCat.toAlgHom (c.ι.app m) x)).symm
     · ext d
       have hnat := congrArg (fun h ↦ h (gₖ d)) hcTensorB
       have hψ := congrArg (fun h ↦ h (1 ⊗ₜ[R] d)) hψₖ
@@ -825,13 +815,14 @@ theorem exists_tensorProduct_algEquiv_stage_of_filteredColimit
             filteredTensorToColimitAlgHom c k (gₖ d) := by
               simpa [eₘ, ψₘ, gₘ] using hnat
         _ = filteredTensorToColimitAlgHom c k
-              (ψₖ (1 ⊗ₜ[R] d)) := by simp [ψₖ]
+              (ψₖ (1 ⊗ₜ[R] d)) := by
+                simp only [ψₖ, AlgHom.liftEquiv_tmul, one_smul]
         _ = e.symm (filteredTensorToColimitAlgHom c k
               (1 ⊗ₜ[R] d)) := by
                 convert hψ using 1 <;> rfl
         _ = e.symm (filteredTensorToColimitAlgHom c m
               (1 ⊗ₜ[R] d)) := by
-                simp [filteredTensorToColimitAlgHom]
+                simp only [filteredTensorToColimitAlgHom_tmul, map_one]
 
 /-- A finite family of equalities after tensor passage to the filtered
 colimit holds after one common stage transition. The auxiliary source is a

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.RingHom.Etale
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.RingHom.Etale
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.MultiAwayUnitDescent
 
 /-!
 # Exponent units from a complete-local chosen factor
@@ -18,6 +20,8 @@ formal unramifiedness on the boundary complement.  It is the algebraic
 consumer needed after the absolute Abhyankar construction has made the
 chosen factor finite etale over the full iterated root cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

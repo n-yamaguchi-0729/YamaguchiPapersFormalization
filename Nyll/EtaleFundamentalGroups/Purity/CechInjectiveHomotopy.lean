@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechTensorCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionSum
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationHomotopy
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationTensorCoefficients
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.BifunctorHomotopy
-import Mathlib.Algebra.Homology.Homotopy
-import Mathlib.Algebra.Homology.QuasiIso
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechTensorCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionSum
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjective
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationHomotopy
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationTensorCoefficients
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.BifunctorHomotopy
+public import Mathlib.Algebra.Homology.Homotopy
+public import Mathlib.Algebra.Homology.QuasiIso
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Contraction of the Čech complex on injectives
@@ -22,6 +24,8 @@ The actual principal localization contraction is tensored with the
 remaining factors. Iteration identifies the Čech complex of an injective
 module with its ideal-power torsion, concentrated in degree zero.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -80,7 +84,8 @@ theorem cechNilHomotopyEquiv_inv_f_zero (M N : ModuleCat.{u} R) (e : M ≅ N) :
     (M ◁ 𝟙 (𝟙_ (ModuleCat.{u} R))) = _
   rw [whiskerLeft_id, Category.id_comp, Category.comp_id]
 
-private def fullSubmoduleIso (M : ModuleCat.{u} R)
+/-- A submodule equal to the whole module has its canonical subtype isomorphism. -/
+def fullSubmoduleIso (M : ModuleCat.{u} R)
     (N : Submodule R M) (hN : N = ⊤) : M ≅ ModuleCat.of R N :=
   (LinearEquiv.ofBijective N.subtype
     ⟨N.subtype_injective, fun m => ⟨⟨m, hN.symm ▸ Submodule.mem_top⟩, rfl⟩⟩).symm.toModuleIso

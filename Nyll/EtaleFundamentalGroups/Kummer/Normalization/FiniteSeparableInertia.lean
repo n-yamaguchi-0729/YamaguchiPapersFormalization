@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Main
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Main
 
 /-!
 # Finite-separable normalization inertia
@@ -14,6 +16,8 @@ extension of its fraction field is finite.  This supplies the finiteness input
 needed by the split normal-crossings inertia theorem without a Nagata or an
 arithmetic finite-type hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

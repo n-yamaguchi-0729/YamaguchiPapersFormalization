@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisExt
-import Mathlib.RingTheory.Ideal.Operations
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisExt
+public import Mathlib.RingTheory.Ideal.Operations
 
 /-!
 # Power-compatible Mayer--Vietoris complexes of ideal quotients
@@ -16,6 +18,8 @@ the powers of two fixed ideals form a diagram indexed by `ℕᵒᵖ`. This is th
 source-level compatibility needed before applying contravariant Ext and
 filtered colimits in a local-cohomology Mayer--Vietoris construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedCover
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackFiberPoint
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
-import Nyll.ProCGroups.Topologies.Conjugation
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PointedCover
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackFiberPoint
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
+public import Nyll.ProCGroups.Topologies.Conjugation
+public import Nyll.ProCGroups.Profinite.OpenSubgroups
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-!
 # Fundamental-group squares from pointed pullback components
@@ -21,6 +25,8 @@ The unavoidable comparison between two factorizations is an inner
 automorphism.  Normality of the target stabilizer absorbs this conjugation and
 produces a strictly commuting square of topological groups.
 -/
+
+@[expose] public section
 
 noncomputable section
 

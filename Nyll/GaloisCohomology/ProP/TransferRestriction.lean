@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.Transfer
-import Mathlib.GroupTheory.GroupAction.ConjAct
-import Mathlib.GroupTheory.GroupAction.Quotient
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.GroupTheory.Index
+module
+
+public import Mathlib.GroupTheory.Transfer
+public import Mathlib.GroupTheory.GroupAction.ConjAct
+public import Mathlib.GroupTheory.GroupAction.Quotient
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.GroupTheory.Index
 
 /-!
 # Restricting transfer of a conjugation-invariant character
@@ -18,6 +20,8 @@ transfer of an element of the subgroup is therefore a conjugate of that
 element. Conjugation invariance of the character makes the product its
 value raised to the subgroup index.
 -/
+
+@[expose] public section
 
 open scoped Pointwise
 

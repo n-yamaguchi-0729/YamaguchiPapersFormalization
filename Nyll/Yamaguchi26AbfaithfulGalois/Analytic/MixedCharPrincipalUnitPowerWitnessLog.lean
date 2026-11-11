@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.PrimePowerRoots
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
-import Mathlib.Algebra.Group.TypeTags.Basic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismEquiv
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.PrimePowerRoots
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.ValuationSubringUnits.ValuationSubringUnitMap
+public import Mathlib.Algebra.Group.TypeTags.Basic
 
 /-!
 # Logarithms of actual prime-power witnesses
@@ -18,6 +20,8 @@ A field-unit witness for the ratio of an automorphic principal unit and an
 ordinary power is itself a principal unit. Its logarithm is determined by
 the same field automorphism and power relation.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

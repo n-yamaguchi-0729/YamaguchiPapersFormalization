@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.RingTheory.Trace.Basic
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.RingTheory.Trace.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Tactic.Ring
 
 /-!
 # Additive Hilbert 90 for continuous Galois cocycles
@@ -17,6 +19,8 @@ In a finite Galois extension, an element of trace one gives an explicit
 coboundary. A locally constant cocycle on an infinite Galois group descends
 to a finite Galois field, so the same construction applies.
 -/
+
+@[expose] public section
 
 namespace GaloisCohomology
 open scoped Topology

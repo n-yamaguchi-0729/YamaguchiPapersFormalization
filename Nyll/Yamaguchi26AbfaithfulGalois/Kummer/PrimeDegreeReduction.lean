@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Perfect
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Perfect
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
 
 /-!
 # From prime-degree field detection to Sigma-ab-faithfulness
@@ -23,6 +25,8 @@ Fixed-field comparison transports the actual mod-prime action to conjugation
 on the residual abelianization. Discrete prolongations supply the hypothesis
 on each open layer without completeness or Henselianity assumptions.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Descent of geometric integrality
@@ -15,6 +17,8 @@ field.  The morphism used for descent need not be flat: quasicompact
 scheme-theoretic dominance is enough, since it remains scheme-theoretically
 dominant after every field extension of the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

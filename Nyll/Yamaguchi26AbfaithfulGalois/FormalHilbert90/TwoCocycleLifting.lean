@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
-import Nyll.GaloisCohomology.Topology.FiniteCocycleLifting
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
+public import Nyll.GaloisCohomology.Topology.FiniteCocycleLifting
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
 
 /-! # Formal Hilbert 90 from prime-field H² vanishing -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

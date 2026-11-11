@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.PNat.Defs
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Mathlib.Data.PNat.Defs
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # Moving a root of unity outside the base field
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 If not all roots of a given order lie in the base field of a finite Galois
 extension, a primitive root is moved by an actual Galois automorphism.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

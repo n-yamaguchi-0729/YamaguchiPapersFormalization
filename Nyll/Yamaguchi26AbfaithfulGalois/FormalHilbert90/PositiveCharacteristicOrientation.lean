@@ -4,13 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicQuotient
-import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrincipalUnitPowers
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicQuotient
+public import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrincipalUnitPowers
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-! # Infinite orientations from Artin–Schreier obstructions -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

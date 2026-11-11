@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteSeparableInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteSeparableInertia
 
 /-!
 # Inertia from a finite-etale Galois cover of a normal-crossings complement
@@ -17,6 +19,8 @@ theorem.  In particular, neither a separately postulated Galois extension nor
 a separately postulated etale normalization is present in the source-facing
 statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

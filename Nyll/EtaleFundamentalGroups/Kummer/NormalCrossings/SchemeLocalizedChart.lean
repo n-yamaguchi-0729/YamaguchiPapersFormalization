@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Scheme
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Transport
 
 /-!
 # Localized strict-normal-crossings charts
@@ -16,6 +18,8 @@ localized boundary ideal and the product of the active parameters; later
 arithmetic arguments need that equality for every branch, not only for one
 preselected branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,7 +38,7 @@ theorem IsStrictNormalCrossings.exists_localSplitChart_with_boundaryIdeal
     (P : AlgebraicGeometry.Spec (X.presheaf.stalk x))
     (hPheight : P.asIdeal.height = 2)
     (hIP : I.stalkIdeal x ≤ P.asIdeal) :
-    letI : P.asIdeal.IsPrime := P.isPrime
+    let : P.asIdeal.IsPrime := P.isPrime
     let A := X.presheaf.stalk x
     let V := Localization.AtPrime P.asIdeal
     ∃ (r : ℕ) (t : Fin 2 → V),
@@ -42,7 +46,7 @@ theorem IsStrictNormalCrossings.exists_localSplitChart_with_boundaryIdeal
         (I.stalkIdeal x).map (algebraMap A V) =
           Ideal.span {boundaryProduct t r} ∧
         IsSplitStrictNormalCrossingsAt (boundaryProduct t r) t r := by
-  let : P.asIdeal.IsPrime := P.isPrime
+  intro sharedOwner1
   dsimp only
   let A := X.presheaf.stalk x
   let V := Localization.AtPrime P.asIdeal

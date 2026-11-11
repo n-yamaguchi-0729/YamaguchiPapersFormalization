@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # Extracting a local factor from a product by localization
@@ -17,6 +19,8 @@ of the product at this ideal canonically recovers `A i`.
 The construction does not require the index type to be finite; in particular,
 it applies to the finite products arising from Chinese-remainder decompositions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,7 +64,8 @@ theorem productCoordinate_algebraMap_apply (x : ∀ j, A j) :
     algebraMap (∀ j, A j) (A i) x = x i :=
   rfl
 
-private noncomputable def productAtPrimeToFactorAtPrimeRingEquiv
+/-- Localizing a product at a coordinate prime gives the corresponding localized factor. -/
+noncomputable def productAtPrimeToFactorAtPrimeRingEquiv
     [∀ j, IsLocalRing (A j)] :
     Localization.AtPrime (productCoordinatePrime A i) ≃+*
       Localization.AtPrime (IsLocalRing.maximalIdeal (A i)) :=
@@ -69,10 +74,14 @@ private noncomputable def productAtPrimeToFactorAtPrimeRingEquiv
     (Localization.AtPrime.mapPiEvalRingHom_bijective
       (IsLocalRing.maximalIdeal (A i)))
 
-private noncomputable def factorAtMaximalAlgEquiv [∀ j, IsLocalRing (A j)] :
+/-- A local ring is canonically isomorphic to its localization at its maximal ideal. -/
+noncomputable def factorAtMaximalAlgEquiv [∀ j, IsLocalRing (A j)] :
     A i ≃ₐ[A i] Localization.AtPrime (IsLocalRing.maximalIdeal (A i)) :=
   IsLocalization.atUnits (A i) (IsLocalRing.maximalIdeal (A i)).primeCompl
-    (fun x ↦ by simpa using! fun a ↦ a)
+    (by
+      intro x hx
+      change IsUnit x
+      exact IsLocalRing.notMem_maximalIdeal.mp hx)
 
 /-- Localization at the maximal ideal selected by coordinate `i` canonically
 recovers that local-ring factor. -/
@@ -157,13 +166,11 @@ noncomputable def ringEquivProductCoordinateBaseAlgebra
 
 theorem ringEquivProductCoordinate_isScalarTower
     (e : U ≃+* (∀ j, A j)) :
-    letI : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
-    letI : Algebra R (A i) :=
+    let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
+    let : Algebra R (A i) :=
       ringEquivProductCoordinateBaseAlgebra (R := R) A i e
     IsScalarTower R U (A i) := by
-  let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
-  let : Algebra R (A i) :=
-    ringEquivProductCoordinateBaseAlgebra (R := R) A i e
+  intro coordinateAlgebra baseCoordinateAlgebra
   exact IsScalarTower.of_algebraMap_eq fun _ => rfl
 
 private theorem map_symm_primeCompl_eq
@@ -186,9 +193,9 @@ private theorem map_symm_primeCompl_eq
 pulling the product presentation back along a ring equivalence. -/
 theorem ringEquivProductCoordinate_isLocalization
     [∀ j, IsLocalRing (A j)] (e : U ≃+* (∀ j, A j)) :
-    letI : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
+    let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
     IsLocalization (ringEquivProductCoordinatePrime A i e).primeCompl (A i) := by
-  let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
+  intro coordinateAlgebra
   have hloc : IsLocalization
       (Submonoid.map e.symm.toMonoidHom
         (productCoordinatePrime A i).primeCompl) (A i) := by
@@ -209,10 +216,10 @@ theorem ringEquivProductCoordinate_isLocalization
 @[simp]
 theorem ringEquivProductCoordinatePrime_map
     [∀ j, IsLocalRing (A j)] (e : U ≃+* (∀ j, A j)) :
-    letI : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
+    let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
     (ringEquivProductCoordinatePrime A i e).map
         (algebraMap U (A i)) = IsLocalRing.maximalIdeal (A i) := by
-  let : Algebra U (A i) := ringEquivProductCoordinateAlgebra A i e
+  intro coordinateAlgebra
   change Ideal.map ((Pi.evalRingHom A i).comp e.toRingHom)
       (Ideal.comap e.toRingHom
         (Ideal.comap (Pi.evalRingHom A i)

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
-import Mathlib.Algebra.GroupWithZero.Range
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Topology.Algebra.Valued.ValuedField
-import Mathlib.Topology.Algebra.Valued.WithVal
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Mathlib.Algebra.GroupWithZero.Range
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Topology.Algebra.Valued.ValuedField
+public import Mathlib.Topology.Algebra.Valued.WithVal
 
 /-!
 # Complete discrete valuations on the actual valued completion
@@ -21,6 +23,8 @@ For any discretely valued field, the native completeness of the valued completio
 therefore supplies a complete discrete valuation. The canonical field map
 preserves valuation values and hence the residue characteristic.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.Valuation
 

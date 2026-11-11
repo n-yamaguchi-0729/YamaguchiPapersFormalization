@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
 
 /-!
 # Hilbert ramification theory: conjugating valuation subrings
@@ -15,6 +17,8 @@ valuation subring conjugates the decomposition group.  The inertia and
 ramification parts require the residue/principal-unit transport and are handled
 separately.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory
 
@@ -64,8 +68,11 @@ def unitGroupConjEquiv
     (unitGroupConjEquiv (K := K) A τ u : Lˣ) =
       Units.mapEquiv τ.toMulEquiv (u : Lˣ) := by
   ext
-  simp [unitGroupConjEquiv,
-    valuationSubringConjRingEquiv]
+  simp only [unitGroupConjEquiv, valuationSubringConjRingEquiv, AlgEquiv.coe_inv,
+    RingEquiv.toMulEquiv_eq_coe, MulEquiv.trans_apply,
+    ValuationSubring.coe_unitGroupMulEquiv_symm_apply, Units.coe_mapEquiv, RingEquiv.coe_toMulEquiv,
+    RingEquiv.coe_mk, Equiv.coe_fn_mk, ValuationSubring.coe_unitGroupMulEquiv_apply,
+    MulEquiv.coe_mk, AlgEquiv.toEquiv_eq_coe, EquivLike.coe_coe]
 
 /-- The conjugation law:
 conjugation by an automorphism sends the decomposition group of `A` into the
@@ -83,7 +90,8 @@ def decompositionGroupConj
     rw [mul_one, mul_inv_cancel]
   map_mul' σ ρ := by
     ext x
-    simp [mul_assoc]
+    simp only [Subgroup.coe_mul, mul_assoc, AlgEquiv.mul_apply, AlgEquiv.coe_inv,
+      MulMemClass.mk_mul_mk, inv_mul_cancel_left]
 
 /-- States the theorem `decompositionGroupConj_apply`. -/
 @[simp] theorem decompositionGroupConj_apply
@@ -111,7 +119,8 @@ def decompositionGroupConjInv
     rw [mul_one, inv_mul_cancel]
   map_mul' σ ρ := by
     ext x
-    simp [mul_assoc]
+    simp only [Subgroup.coe_mul, mul_assoc, AlgEquiv.mul_apply, AlgEquiv.coe_inv,
+      MulMemClass.mk_mul_mk, mul_inv_cancel_left]
 
 /-- The conjugation law:
 the decomposition groups of conjugate valuation subrings are canonically
@@ -123,15 +132,16 @@ def decompositionGroupConjEquiv
   invFun := decompositionGroupConjInv (K := K) A τ
   left_inv σ := by
     ext x
-    simp [decompositionGroupConj,
-      decompositionGroupConjInv, mul_assoc]
+    simp only [decompositionGroupConjInv, mul_assoc, decompositionGroupConj, MonoidHom.coe_mk,
+      OneHom.coe_mk, inv_mul_cancel, mul_one, inv_mul_cancel_left, Subtype.coe_eta]
   right_inv σ := by
     ext x
-    simp [decompositionGroupConj,
-      decompositionGroupConjInv, mul_assoc]
+    simp only [decompositionGroupConj, mul_assoc, decompositionGroupConjInv, MonoidHom.coe_mk,
+      OneHom.coe_mk, mul_inv_cancel, mul_one, mul_inv_cancel_left, Subtype.coe_eta]
   map_mul' σ ρ := by
     ext x
-    simp [decompositionGroupConj, mul_assoc]
+    simp only [decompositionGroupConj, mul_assoc, MonoidHom.coe_mk, OneHom.coe_mk, Subgroup.coe_mul,
+      AlgEquiv.mul_apply, AlgEquiv.coe_inv, MulMemClass.mk_mul_mk, inv_mul_cancel_left]
 
 /-- States the theorem `decompositionGroupConjEquiv_apply`. -/
 @[simp] theorem decompositionGroupConjEquiv_apply

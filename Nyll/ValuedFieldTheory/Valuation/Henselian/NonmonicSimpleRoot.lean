@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.SimpleRootFactorization
-import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
-import Mathlib.Algebra.Polynomial.Degree.SmallDegree
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.SimpleRootFactorization
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.Core
+public import Mathlib.Algebra.Polynomial.Degree.SmallDegree
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Simple roots of nonmonic polynomials over Henselian valuation rings
@@ -16,6 +18,8 @@ A simple residual root gives a coprime linear factor. Primitive factor
 lifting produces an actual factor of degree one. Its leading coefficient
 reduces to one, so it is a unit and its linear root belongs to the valuation ring.
 -/
+
+@[expose] public section
 
 namespace DiscreteValuationField
 

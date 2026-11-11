@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.PrimeChain
 
 /-!
 # Contracting a retained completed prime chain through a finite-model tower
@@ -18,6 +20,8 @@ old finite models and to the new base are proved for the literal tensor map.
 No generic component, independently selected prime, or comparison
 equivalence occurs in the statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

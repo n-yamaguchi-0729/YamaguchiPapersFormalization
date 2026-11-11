@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.FieldSimp
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
+public import Mathlib.Algebra.Polynomial.Div
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Roots of principal units sufficiently close to one
@@ -20,6 +22,8 @@ In a Henselian valued field, every element closer to one than the square of
 the value of a nonzero integer n is an nth power. Rescaling the binomial
 polynomial gives a simple residual root, even when n is not a residue unit.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Iterated
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Iterated
 
 /-!
 # Residue fields of local Kummer root covers
@@ -18,6 +20,8 @@ represented by its constant coefficient.
 The algebra and local-hom instances are installed only inside proofs.  In particular this file does
 not register root-cover local structures globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

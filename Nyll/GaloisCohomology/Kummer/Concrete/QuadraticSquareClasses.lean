@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Basic
-import Mathlib.SetTheory.Cardinal.Finite
-import Mathlib.Algebra.Ring.Parity
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.FieldSimp
+module
+
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.SetTheory.Cardinal.Finite
+public import Mathlib.Algebra.Ring.Parity
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.FieldSimp
 
 /-!
 # Square classes in quadratic Galois extensions
@@ -17,6 +19,8 @@ The nontrivial automorphism has exactly the base field as its fixed field.
 An anti-invariant generator gives the two base-field square classes which
 become squares in the extension.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

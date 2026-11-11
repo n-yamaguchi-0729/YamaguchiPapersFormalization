@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.FinitelyGeneratedPositiveCharacteristicDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicPrimeDegreeReduction
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.FinitelyGeneratedPositiveCharacteristicDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicPrimeDegreeReduction
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
 
 /-!
 # Positive-characteristic finitely generated fields are ab-faithful
@@ -15,6 +17,8 @@ import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
 Finite Galois automorphisms move discrete valuations, so local Artin--Schreier
 characters detect the action on abelianization modulo the characteristic.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ProCGroups.FiniteStepSolvableQuotients

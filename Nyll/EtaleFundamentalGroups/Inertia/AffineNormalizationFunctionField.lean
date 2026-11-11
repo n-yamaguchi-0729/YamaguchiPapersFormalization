@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationLocalization
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-!
 # Comparing an affine normalization with normalization in the function field
@@ -25,6 +27,8 @@ with the field-theoretic integral closure used by local inertia theorems.
 This is a local normal-domain result and does not require the original
 ambient scheme of the manuscript to be normal or integral everywhere.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.CategoryTheory.Abelian.Injective.Ext
-import Mathlib.CategoryTheory.Linear.Yoneda
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.CategoryTheory.Abelian.Injective.Ext
+public import Mathlib.CategoryTheory.Linear.Yoneda
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Defs
 
 /-!
 # Linear cocycle quotients for Ext from an injective resolution
@@ -21,6 +23,8 @@ The cocycle constructor for derived-category Ext is linear. Its surjectivity
 and its explicit coboundary criterion identify the quotient of cocycles by
 coboundaries with positive-degree Ext over the original scalar ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

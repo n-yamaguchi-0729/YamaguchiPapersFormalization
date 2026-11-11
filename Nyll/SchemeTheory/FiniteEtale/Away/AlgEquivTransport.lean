@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Away.TensorBaseChange
 
 /-!
 # Transport of a literal Away map along an algebra equivalence
@@ -17,6 +19,8 @@ No etaleness of either unlocalized carrier is used.  The proof regards an
 algebra equivalence as the right edge of a pushout and applies the literal
 Away base-change theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

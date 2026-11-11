@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FiniteTypeDiscreteValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FiniteTypeDiscreteValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
 
 /-!
 # Mixed-characteristic valuations on extensions and subfields
@@ -17,6 +19,8 @@ The existence of a mixed-characteristic discrete valuation is preserved
 under essentially finite-type field extensions and restriction along
 field embeddings.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ValuationTheory.DiscreteValuationField

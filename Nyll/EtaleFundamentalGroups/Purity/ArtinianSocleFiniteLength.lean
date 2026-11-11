@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finite length of an Artinian socle
@@ -19,6 +21,8 @@ The submodule killed by the maximal ideal has its canonical residue-field
 module structure.  An Artinian module over this field is finitely generated;
 restriction of scalars then makes it finite over the original Noetherian ring.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

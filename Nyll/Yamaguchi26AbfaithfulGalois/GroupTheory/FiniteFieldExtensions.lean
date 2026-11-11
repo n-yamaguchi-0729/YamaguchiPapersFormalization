@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
 
 /-!
 # Ab-faithfulness under finite field extension
@@ -14,6 +16,8 @@ import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
 Ab-faithfulness of the absolute Galois group passes to finite field
 extensions, including inseparable extensions.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

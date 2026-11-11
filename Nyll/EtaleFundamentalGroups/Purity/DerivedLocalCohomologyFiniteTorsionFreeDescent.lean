@@ -4,25 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
-import Nyll.EtaleFundamentalGroups.Purity.FiniteTorsionFreeNonzeroFunctional
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Homology.ShortComplex.Exact
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.Algebra.Order.Monoid.WithTop
-import Mathlib.Data.ENat.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
-import Mathlib.RingTheory.LocalRing.Defs
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionVanishing
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteTorsionFreeNonzeroFunctional
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.Exact
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.Algebra.Order.Monoid.WithTop
+public import Mathlib.Data.ENat.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.KrullDimension.NonZeroDivisors
+public import Mathlib.RingTheory.LocalRing.Defs
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Detecting top local cohomology with a finite torsion-free module
@@ -32,6 +34,8 @@ as its image. The kernel has dimension at most that of the ring, whereas
 the quotient by the image has strictly smaller dimension. The two actual
 short exact sequences therefore transfer top-degree vanishing to the ring.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

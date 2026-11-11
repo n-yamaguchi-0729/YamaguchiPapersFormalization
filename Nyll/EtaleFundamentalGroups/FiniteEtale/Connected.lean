@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+module
+
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Connected finite etale covers
@@ -18,6 +21,8 @@ Mathlib provides the abstract Galois-category notion `IsConnected` and the
 topological class `ConnectedSpace`, but currently has no finite-etale scheme
 bridge between them.
 -/
+
+@[expose] public section
 
 noncomputable section
 

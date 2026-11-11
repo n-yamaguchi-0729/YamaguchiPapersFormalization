@@ -15,23 +15,27 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.LocalRing.Module
-import Mathlib.RingTheory.PowerSeries.Ideal
-import Lean.Elab.Command
-import Batteries.Tactic.Alias
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.KrullDimension.Field
-import Mathlib.RingTheory.KrullDimension.PID
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.PowerSeries.Inverse
-import Mathlib.Tactic.Conv
-import Mathlib.Tactic.CrossRefAttribute
-import Mathlib.Tactic.Ext
-import Mathlib.Tactic.Linarith.Frontend
-import Mathlib.Tactic.Ring.RingNF
-import Mathlib.Tactic.TermCongr
-import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+module
+
+public import Mathlib.RingTheory.LocalRing.Module
+public import Mathlib.RingTheory.PowerSeries.Ideal
+public import Lean.Elab.Command
+public import Batteries.Tactic.Alias
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.PID
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.Tactic.Conv
+public import Mathlib.Tactic.CrossRefAttribute
+public import Mathlib.Tactic.Ext
+public import Mathlib.Tactic.Linarith.Frontend
+public import Mathlib.Tactic.Ring.RingNF
+public import Mathlib.Tactic.TermCongr
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.CohenMacaulay
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 # Depth after quotienting by a regular scalar
@@ -40,6 +44,8 @@ For a finite module over a Noetherian local ring, quotienting by a scalar in the
 ideal that is regular on the module lowers its depth by one. The supporting arguments
 compare regular sequences, associated primes, and power-series quotients.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -176,7 +182,8 @@ lemma Module.depth_le_krullDim_support [Nontrivial M] [Module.Finite R M] :
     replace IH := IH m (Nat.lt_of_succ_le this) (QuotSMulTop x M)
       (by rwa [Module.support_eq_zeroLocus, ← ringKrullDim_quotient])
     replace IH := WithTop.coe_le_coe.mp
-      ((Module.length_le_depth _ _ l hl.2 (by simp_all)).trans IH)
+      ((Module.length_le_depth _ _ l hl.2
+        (fun r hr => hl' r (List.mem_cons_of_mem x hr))).trans IH)
     · simp only [List.length_cons, ge_iff_le]
       linarith
 
@@ -198,7 +205,10 @@ lemma isSMulRegular_iff_of_free {R M : Type*} [CommRing R] [AddCommGroup M] [Mod
   constructor
   · intro H m n h
     have i : I := Nonempty.some inferInstance
-    have := @H (m • b i) (n • b i) (by simp_all [← mul_smul])
+    have := @H (m • b i) (n • b i) (by
+      change r • (m • b i) = r • (n • b i)
+      rw [← mul_smul, ← mul_smul]
+      exact congrArg (fun a : R => a • b i) h)
     simpa using congr(b.repr $this i)
   · intro H m n h
     apply b.repr.injective
@@ -221,7 +231,10 @@ lemma RingTheory.Sequence.isWeaklyRegular_of_free_aux
       Sequence.IsWeaklyRegular M s ↔ Sequence.IsWeaklyRegular R s := by
   generalize hn : s.length = n
   induction n generalizing R M with
-  | zero => simp_all
+  | zero =>
+      obtain rfl : s = [] := List.length_eq_zero_iff.mp hn
+      exact ⟨fun _ => _root_.RingTheory.Sequence.IsWeaklyRegular.nil R R,
+        fun _ => _root_.RingTheory.Sequence.IsWeaklyRegular.nil R M⟩
   | succ n IH =>
     cases s with
     | nil => exact (Nat.succ_ne_zero n hn.symm).elim

@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtendedQuotientKernel
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.ExtendedQuotientKernel
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ClosedCommutator
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-!
 # Finite-abelian kernel tests on open-normal local models
@@ -15,6 +19,8 @@ source and target groups.  Consequently, actual finite-etale extensions on a
 family of geometric local models provide the kernel condition over every open
 normal subgroup.
 -/
+
+@[expose] public section
 
 noncomputable section
 

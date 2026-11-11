@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Mathlib.RingTheory.Localization.Algebra
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Mathlib.RingTheory.Localization.Algebra
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # The local rings of a closed subscheme
@@ -20,6 +22,8 @@ The comparison is obtained by localizing the surjective map on sections
 over an affine neighbourhood. In particular, the equivalence below is
 induced by the actual stalk map of the closed immersion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

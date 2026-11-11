@@ -10,12 +10,14 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.FieldTheory.LinearDisjoint
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.FieldTheory.PurelyInseparable.Tower
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Mathlib.FieldTheory.AlgebraicClosure
-import Mathlib.RingTheory.Adjoin.PowerBasis
+module
+
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.FieldTheory.PurelyInseparable.Tower
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Mathlib.FieldTheory.AlgebraicClosure
+public import Mathlib.RingTheory.Adjoin.PowerBasis
 
 /-!
 # Tensor fields when separable constants lie in the base
@@ -24,6 +26,8 @@ If every element separable over the base in one field lies in the base image, th
 is linearly disjoint from a separable extension. Their tensor product is therefore a
 field.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

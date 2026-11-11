@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.FlatModuleInjectiveDual
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.CategoryTheory.Linear.Yoneda
-import Mathlib.LinearAlgebra.TensorProduct.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.FlatModuleInjectiveDual
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveLinearDualHomology
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.CategoryTheory.Linear.Yoneda
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
 
 /-!
 # Tensor coefficients and linear-dual complexes
@@ -20,6 +22,8 @@ the dual complex agrees with dualizing the complex after tensoring with
 that coefficient module. If the original terms are flat and the dual
 values are injective, the dual terms are injective.
 -/
+
+@[expose] public section
 
 noncomputable section
 

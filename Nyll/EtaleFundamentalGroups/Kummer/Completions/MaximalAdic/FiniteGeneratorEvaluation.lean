@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.AdicCompletion.LocalRing
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.AdicCompletion.Topology
-import Mathlib.RingTheory.MvPowerSeries.Evaluation
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.AdicCompletion.LocalRing
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.AdicCompletion.Topology
+public import Mathlib.RingTheory.MvPowerSeries.Evaluation
 
 /-!
 # Finite-generator presentations of maximal-adic completions
@@ -23,6 +25,8 @@ multivariate formal-power-series Hilbert basis theorem for a finite variable
 type.  Mathlib currently supplies that theorem only for the univariate
 `PowerSeries` specialization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

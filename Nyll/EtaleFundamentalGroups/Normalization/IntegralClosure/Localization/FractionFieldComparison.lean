@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Integral
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+module
+
+public import Mathlib.RingTheory.Localization.Integral
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
 
 /-!
 # The fraction field of a chosen normalization localization
@@ -21,6 +23,8 @@ that application `M` is the already selected quotient of the original
 fraction-field tensor product.  No embedding into an unrelated full-root
 field and no right-coordinate bijectivity hypothesis is introduced.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,19 +47,13 @@ noncomputable def
     [IsScalarTower B K M] [FiniteDimensional K M]
     (q : Ideal (integralClosure B M)) [q.IsPrime] :
     let C := integralClosure B M
-    letI : IsFractionRing C M :=
+    let : IsFractionRing C M :=
       IsIntegralClosure.isFractionRing_of_finite_extension B K M C
     let D := Localization.AtPrime q
-    letI : Algebra D M :=
+    let : Algebra D M :=
       localizationAtPrimeToFractionFieldAlgebra (K := M) q
     FractionRing D ≃ₐ[D] M := by
-  dsimp only
-  let C := integralClosure B M
-  letI : IsFractionRing C M :=
-    IsIntegralClosure.isFractionRing_of_finite_extension B K M C
-  let D := Localization.AtPrime q
-  letI : Algebra D M :=
-    localizationAtPrimeToFractionFieldAlgebra (K := M) q
+  intro C sharedOwner3 D sharedOwner4
   letI : IsFractionRing D M :=
     localizationAtPrimeToFractionField_isFractionRing (K := M) q
   exact FractionRing.algEquiv D M
@@ -70,22 +68,16 @@ theorem integralClosureLocalizationFractionRingAlgEquiv_algebraMap
     (q : Ideal (integralClosure B M)) [q.IsPrime]
     (x : Localization.AtPrime q) :
     let C := integralClosure B M
-    letI : IsFractionRing C M :=
+    let : IsFractionRing C M :=
       IsIntegralClosure.isFractionRing_of_finite_extension B K M C
     let D := Localization.AtPrime q
-    letI : Algebra D M :=
+    let : Algebra D M :=
       localizationAtPrimeToFractionFieldAlgebra (K := M) q
     integralClosureLocalizationFractionRingAlgEquiv
         (B := B) (K := K) (M := M) q
         (algebraMap D (FractionRing D) x) =
       algebraMap D M x := by
-  dsimp only
-  let C := integralClosure B M
-  let : IsFractionRing C M :=
-    IsIntegralClosure.isFractionRing_of_finite_extension B K M C
-  let D := Localization.AtPrime q
-  let : Algebra D M :=
-    localizationAtPrimeToFractionFieldAlgebra (K := M) q
+  intro C sharedOwner1 D sharedOwner2
   exact
     (integralClosureLocalizationFractionRingAlgEquiv
       (B := B) (K := K) (M := M) q).commutes x

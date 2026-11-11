@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
-import Mathlib.AlgebraicGeometry.Normalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+public import Mathlib.AlgebraicGeometry.Normalization
 
 /-!
 # Relative normalization under an isomorphism of source schemes
@@ -15,6 +17,8 @@ Its compatibility with endomorphisms follows from the same universal
 property. It can therefore transport an actual cover to its affine spectrum
 without replacing geometric-point equality by topological-point equality.
 -/
+
+@[expose] public section
 
 noncomputable section
 

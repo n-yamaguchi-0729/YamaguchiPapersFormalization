@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.SigmaCentralizers
+import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-! # Lemma 6.3: centralizers modulo the maximal abelian pro-Σ kernel
 

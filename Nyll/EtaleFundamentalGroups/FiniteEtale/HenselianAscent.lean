@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Functoriality
-import Mathlib.RingTheory.LocalRing.Etale
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Functoriality
+public import Mathlib.RingTheory.LocalRing.Etale
+public import Mathlib.RingTheory.Smooth.Flat
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AdicPower
 
 /-!
 # Henselian ascent for finite étale local algebras over a complete base
@@ -20,6 +24,8 @@ identifies the extended base maximal ideal with the target maximal ideal.
 This is intentionally a theorem, not a global instance: consumers install the
 result only for the chosen local factor in scope.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -56,7 +62,8 @@ theorem isAdicComplete_of_moduleFinite_of_moduleFree
       calc
         (AdicCompletion.piEquivFin I n (e x)) i =
             AdicCompletion.ofLinearEquiv I R (x i) := by
-          simp [e]
+          exact congrFun ((AdicCompletion.piEquivFin I n).apply_symm_apply
+            (fun j => AdicCompletion.ofLinearEquiv I R (x j))) i
         _ = AdicCompletion.of I R (x i) := rfl
         _ = (AdicCompletion.piEquivFin I n
             (AdicCompletion.of I (Fin n → R) x)) i := by

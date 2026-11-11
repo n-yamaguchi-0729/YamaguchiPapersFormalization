@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FieldMapNaturality
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FieldMapNaturality
 
 /-!
 # Prescribing characters from power classes
@@ -14,6 +16,8 @@ prescription of multiplicative power classes gives simultaneous prescription
 of continuous cyclic characters along arbitrary field embeddings. The proof
 uses the naturality of the actual absolute Galois restriction maps.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

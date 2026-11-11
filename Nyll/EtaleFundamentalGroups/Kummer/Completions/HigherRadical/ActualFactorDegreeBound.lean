@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualFactor
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualFactor
 
 /-!
 # A common factorial exponent for complete higher-radical factors
@@ -15,6 +17,8 @@ common upper bound for the local field degrees is known: every ramification
 index is positive and bounded by its local degree, hence divides the
 factorial of the common bound.
 -/
+
+@[expose] public section
 
 noncomputable section
 

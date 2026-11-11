@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianNormalizationImage
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.StrictHenselianNormalizationImage
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.CategoryTheory.Endomorphism
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # The actual geometric-stalk image fixes a normalization point
@@ -19,6 +22,8 @@ evaluation into the originally specified algebraically closed field. These
 suppliers instantiate the strict-local image theorem without any further
 point or action-comparison assumption.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,10 +56,10 @@ theorem exists_normalizationPoint_fixed_by_geometricStalk_finiteImage
         Spec.map (CommRingCat.ofHom φ) ≫ X.fromSpecStalk x ∧
       ∀ σ : (Aut W)ᵐᵒᵖ,
         σ ∈ (finiteEtaleGaloisCoverQuotientOfMorphism j xi W hW w).range →
-        z ≫ normalizationEndomorphism (W.hom ≫ D.1.supportComplement.ι) σ.unop.hom.left
+        z ≫ normalizationEndomorphism (W.hom ≫ D.1.supportComplement.ι) σ.unop.asIso.hom.left
           (by
             rw [← Category.assoc]
-            exact congrArg (fun k => k ≫ D.1.supportComplement.ι) σ.unop.hom.w) = z := by
+            exact congrArg (fun k => k ≫ D.1.supportComplement.ι) σ.unop.asIso.hom.w) = z := by
   intro S j xi W hW w
   let b : Spec (.of S) ⟶ X :=
     Spec.map (CommRingCat.ofHom (geometricStalkStructureMap φ)) ≫ X.fromSpecStalk x

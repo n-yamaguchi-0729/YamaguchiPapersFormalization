@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantKummerTrace
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
-import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicCompositumDegree
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.Ring.CharZero
-import Mathlib.FieldTheory.Perfect
-import Mathlib.Data.Fintype.Card
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInvariantKummerTrace
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeCyclicEigenunit
+public import Nyll.GaloisCohomology.Kummer.Concrete.LastPrimePowerRoot
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicCompositumDegree
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.Ring.CharZero
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.Data.Fintype.Card
 
 /-!
 # Constructing an invariant moved Kummer trace at the last root level
@@ -24,6 +26,8 @@ primitive eigenvalue, and the last positive root level are chosen internally.
 If the roots at that level descend, their actual Kummer trace is invariant
 under the cyclotomic group and moved by the chosen automorphism.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

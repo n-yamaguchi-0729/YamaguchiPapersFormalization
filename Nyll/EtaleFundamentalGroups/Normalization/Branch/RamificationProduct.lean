@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.AtPrime.Extension
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+module
+
+public import Mathlib.RingTheory.Localization.AtPrime.Extension
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Products of the actual ramification indices above a boundary branch
@@ -20,14 +22,17 @@ Unlike a factorial of the total field degree, this product contains no
 unramified residue-degree factors.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups
 
 universe uR uS uA uK uL
 
+/-- A finite enumeration of the primes above an ideal in a quasi-finite algebra. -/
 @[reducible]
-private noncomputable def finitePrimesOverFintype
+noncomputable def finitePrimesOverFintype
     {R : Type uR} {S : Type uS}
     [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.QuasiFinite R S] (p : Ideal R) :
@@ -66,7 +71,9 @@ theorem branchRamificationProduct_pos
   classical
   let : Fintype (p.primesOver S) := finitePrimesOverFintype p
   change 0 < ∏ q : p.primesOver S, q.1.ramificationIdx R
-  exact Finset.prod_pos fun q _ ↦ Ideal.ramificationIdx_pos q.1 R
+  refine Finset.prod_pos fun q _ ↦ ?_
+  have : q.1.IsPrime := q.2.1
+  exact Ideal.ramificationIdx_pos (R := R) (q := q.1)
 
 /-- The branch product for a height-one prime of a regular model, computed
 in the canonical DVR localization and its normalization in `L`. -/

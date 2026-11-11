@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
-import Nyll.SchemeTheory.Normalization.CompositumEmbedding
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
+public import Nyll.SchemeTheory.Normalization.CompositumEmbedding
 
 /-!
 # A normalization prime selected by the completed generic component
@@ -20,6 +22,8 @@ closed prime.  Consequently the integral map to the normalization admits a
 maximal ideal above that same closed prime.  Thus neither the field component
 nor the normalization prime is replaced by an unrelated branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -95,7 +99,7 @@ theorem completedChosenComponentAlgHom_ker
     let m := completedGenericTensorChosenIdeal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
-    letI : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
+    let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
     RingHom.ker
@@ -104,12 +108,7 @@ theorem completedChosenComponentAlgHom_ker
         (K' := K') m).toRingHom =
       completedBaseChangeChosenGenericPrime
         (R := R) (R' := R') hmax hres Q := by
-  let m := completedGenericTensorChosenIdeal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
-  let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
+  intro m sharedOwner2
   let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
   let G := completedFiniteBaseChangeGenericFiber
     (R := R) (R' := R') (C := C) (K' := K')
@@ -141,7 +140,7 @@ theorem completedChosenNormalizationAlgHom_ker
     let m := completedGenericTensorChosenIdeal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
-    letI : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
+    let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
     RingHom.ker
@@ -150,16 +149,10 @@ theorem completedChosenNormalizationAlgHom_ker
         (K' := K') m).toRingHom =
       completedBaseChangeChosenGenericPrime
         (R := R) (R' := R') hmax hres Q := by
-  let m := completedGenericTensorChosenIdeal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
-  let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
+  intro m sharedOwner2
   let j := completedChosenNormalizationAlgHom
     (R := R) (R' := R') (C := C) (K := K) (L := L)
     (K' := K') m
-  dsimp only
   change RingHom.ker j.toRingHom =
     completedBaseChangeChosenGenericPrime
       (R := R) (R' := R') hmax hres Q
@@ -192,30 +185,19 @@ theorem exists_completedChosenNormalizationPrime
     let m := completedGenericTensorChosenIdeal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
-    letI : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
+    let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
       (R := R) (R' := R') (K := K) (L := L) (K' := K')
       hmax hres Q
     let j := completedChosenNormalizationAlgHom
       (R := R) (R' := R') (C := C) (K := K) (L := L)
       (K' := K') m
-    letI : Algebra U
+    let : Algebra U
         (integralClosure R' (GenericTensorFieldComponent m)) :=
       j.toAlgebra
     ∃ q : Ideal (integralClosure R' (GenericTensorFieldComponent m)),
       q.IsMaximal ∧ q.LiesOver P := by
-  let U := completedFiniteBaseChange (R := R) (R' := R') (C := C)
-  let P := completedBaseChangeChosenPrime (R := R) (R' := R') Q
-  let m := completedGenericTensorChosenIdeal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
-  let : m.IsMaximal := completedGenericTensorChosenIdeal_isMaximal
-    (R := R) (R' := R') (K := K) (L := L) (K' := K')
-    hmax hres Q
+  intro U P m sharedOwner4 j normalizationAlgebra
   let IC := integralClosure R' (GenericTensorFieldComponent m)
-  let j := completedChosenNormalizationAlgHom
-    (R := R) (R' := R') (C := C) (K := K) (L := L)
-    (K' := K') m
-  let : Algebra U IC := j.toAlgebra
   let : IsScalarTower R' U IC :=
     IsScalarTower.of_algebraMap_eq fun x => j.commutes x |>.symm
   let : Algebra.IsIntegral R' IC :=

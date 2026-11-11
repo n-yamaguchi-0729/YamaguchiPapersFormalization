@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.LinearAlgebra.Isomorphisms
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.LinearAlgebra.Isomorphisms
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # Scalar quotients of injective-valued duals
@@ -18,6 +20,8 @@ map embeds the scalar quotient of the dual into the dual of the source.
 A functional vanishing on the kernel factors through the scalar image;
 injectivity of the values extends it from that image to the whole module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

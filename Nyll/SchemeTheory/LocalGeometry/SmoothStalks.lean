@@ -23,10 +23,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeIsStandardSmooth
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Nyll.SchemeTheory.RingTheory.Descent.SmoothAtPrimeNormality
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalLocalizationAtPrimeIsStandardSmooth
 
 /-!
 # Integral closure of source stalks under smooth morphisms
@@ -35,6 +37,8 @@ For a smooth morphism to an affine scheme whose global section ring is a domain 
 integrally closed, every source stalk has these properties. The proof uses the smooth
 algebra on an affine source chart and its prime localization.
 -/
+
+@[expose] public section
 
 section SmoothStalkNormality
 

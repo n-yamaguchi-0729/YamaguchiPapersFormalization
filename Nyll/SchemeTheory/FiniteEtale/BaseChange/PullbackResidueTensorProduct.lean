@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidue
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidue
 
 /-!
 # The explicit residue-field tensor map of a pullback point
@@ -13,6 +15,8 @@ This file replaces the categorical pushout in the pullback-carrier API by
 the ordinary tensor product and records the two factor maps.  The resulting
 map is surjective as soon as the categorical residue tensor is Artinian.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -29,21 +33,15 @@ variable {X Y S : Scheme.{u}} {f : X ⟶ S} {g : Y ⟶ S}
 residue fields to the residue field of a pullback point. -/
 noncomputable def tensorProductToResidueField (t : ↑(pullback f g)) :
     let T := Triplet.ofPoint t
-    letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
+    let : Algebra (S.residueField T.s) (X.residueField T.x) :=
       (((S.residueFieldCongr T.hx).inv ≫
         f.residueFieldMap T.x).hom).toAlgebra
-    letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
+    let : Algebra (S.residueField T.s) (Y.residueField T.y) :=
       (((S.residueFieldCongr T.hy).inv ≫
         g.residueFieldMap T.y).hom).toAlgebra
     CommRingCat.of (X.residueField T.x ⊗[S.residueField T.s]
       Y.residueField T.y) ⟶ (pullback f g).residueField t := by
-  let T := Triplet.ofPoint t
-  letI : Algebra (S.residueField T.s) (X.residueField T.x) :=
-    (((S.residueFieldCongr T.hx).inv ≫
-      f.residueFieldMap T.x).hom).toAlgebra
-  letI : Algebra (S.residueField T.s) (Y.residueField T.y) :=
-    (((S.residueFieldCongr T.hy).inv ≫
-      g.residueFieldMap T.y).hom).toAlgebra
+  intro T leftResidueAlgebra rightResidueAlgebra
   exact (T.tensorIsoTensorProduct).inv ≫ ofPointTensor t
 
 /-- The inverse tensor-product comparison sends the explicit left inclusion

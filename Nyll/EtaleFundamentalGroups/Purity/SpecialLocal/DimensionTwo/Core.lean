@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Ramification.Trace.FiniteFreeDiscriminant
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Localization.NormTrace
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.Smooth.Fiber
+module
+
+public import Nyll.SchemeTheory.RingTheory.Ramification.Trace.FiniteFreeDiscriminant
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Localization.NormTrace
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.Smooth.Fiber
 
 /-!
 # Dimension-two purity for finite free algebras
@@ -24,6 +26,8 @@ the discriminant cannot vanish.  Consequently, if every height-one
 localization of a finite free algebra is etale, its global discriminant is a
 unit and the algebra is etale over the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -90,7 +94,7 @@ theorem exists_height_one_prime_of_regular_pair
     ((isRegular_cons_iff A x [y]).mp hregular).1
   have hx : x ≠ 0 := by
     intro hx
-    exact one_ne_zero (hxRegular.right_eq_zero_of_smul (by simp [hx]))
+    exact one_ne_zero (hxRegular.right_eq_zero_of_smul (by rw [hx, zero_smul]))
   have hxMem : x ∈ maximalIdeal A := by
     rw [← hspan]
     exact Ideal.subset_span List.mem_cons_self

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
 
 /-!
 # Uniformizer decomposition without completeness
@@ -14,6 +16,8 @@ only the DVR structure of the two valuation rings and compatibility of their
 valuations.  This file records the resulting stronger DVF statement and
 chooses both uniformizers from the primitive DVF data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictExtension
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StrictExtension
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
 
 /-!
 # 補題 1.1：境界の惰性群による基本群の核の記述
@@ -41,14 +43,18 @@ strict henselization の分数体の基本群の像を、幾何学的な経路�
 幾何点の固定部分群が自明な被覆による、同じ核の別の表示である。
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- 正規化上の有限惰性群が自明な被覆による、補題 1.1 の核の別表示。
 境界上で正則なら、その補集合は連結であり、基本群の写像は全射となる。
@@ -57,7 +63,7 @@ theorem boundary_quotient_finite_cover
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport) :
     ∃ hU : ConnectedSpace D.1.supportComplement,
       letI : ConnectedSpace D.1.supportComplement := hU
-      ∀ (Ω : Type) [Field Ω] [IsSepClosed Ω]
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
         (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement),
         Function.Surjective (fundamentalGroupHom D.1.supportComplement.ι point) ∧
           (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker =
@@ -78,7 +84,7 @@ theorem boundary_quotient_1_1
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport) :
     ∃ hU : ConnectedSpace D.1.supportComplement,
       letI : ConnectedSpace D.1.supportComplement := hU
-      ∀ (Ω : Type) [Field Ω] [IsSepClosed Ω]
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
         (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement),
         Function.Surjective (fundamentalGroupHom D.1.supportComplement.ι point) ∧
           (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker =

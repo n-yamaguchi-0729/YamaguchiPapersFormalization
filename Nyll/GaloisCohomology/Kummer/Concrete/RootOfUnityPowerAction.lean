@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.PNat.Defs
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Mathlib.Data.PNat.Defs
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # The bounded power describing an automorphism of roots of unity
@@ -13,6 +15,8 @@ import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 The image of a primitive root is primitive. Its bounded exponent is therefore
 coprime to the order and describes the action on every root at that order.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

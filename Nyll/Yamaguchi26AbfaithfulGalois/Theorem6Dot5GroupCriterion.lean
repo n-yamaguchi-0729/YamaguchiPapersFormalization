@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeDerivedCriterion
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
-import Nyll.ProCGroups.Topologies.OpenSubgroup
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeDerivedCriterion
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Nyll.ProCGroups.Topologies.OpenSubgroup
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
 
 /-!
 # Finite-step solvable quotients of an ab-faithful group
@@ -16,6 +19,8 @@ import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1), Corollary 6.5.
 Each orientation satisfies formal Hilbert 90 on every open subgroup.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceAmbientIdeals
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceAmbientIdeals
 
 /-!
 # Algebraic data from a disconnected punctured hypersurface
@@ -14,6 +16,8 @@ separation.  Because the puncture is itself an ambient open subset, both
 sides lift to ambient open sets.  The component reduction then produces the
 two proper ideals required by the complete-local intersection theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

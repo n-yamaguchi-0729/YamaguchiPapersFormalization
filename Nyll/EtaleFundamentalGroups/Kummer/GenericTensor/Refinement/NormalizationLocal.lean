@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtale
 
 /-!
 # Chosen-prime normalization under generic tensor component refinement
@@ -19,6 +21,8 @@ and then to localizations at a specified prime.  The target prime is the
 literal image of the source prime, so no comparison equivalence or prime
 equality is an input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,28 +52,17 @@ noncomputable def
     [q.IsMaximal] :
     let n := genericTensorRefineChosenComponentIdeal
       (K₀ := K₀) (K₁ := K₁) (F := F) (L := L) m q
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorRefineChosenComponentIdeal_isMaximal
         (K₀ := K₀) (K₁ := K₁) (F := F) (L := L) m q
     let Pn := GenericTensorFieldComponent n
     let Pq := GenericTensorFieldComponent q
-    letI : Algebra B Pn :=
+    let : Algebra B Pn :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) n
-    letI : Algebra B Pq :=
+    let : Algebra B Pq :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) q
     integralClosure B Pn ≃ₐ[B] integralClosure B Pq := by
-  dsimp only
-  let n := genericTensorRefineChosenComponentIdeal
-    (K₀ := K₀) (K₁ := K₁) (F := F) (L := L) m q
-  letI : n.IsMaximal :=
-    genericTensorRefineChosenComponentIdeal_isMaximal
-      (K₀ := K₀) (K₁ := K₁) (F := F) (L := L) m q
-  let Pn := GenericTensorFieldComponent n
-  let Pq := GenericTensorFieldComponent q
-  letI : Algebra B Pn :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) n
-  letI : Algebra B Pq :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) q
+  intro n sharedOwner1 Pn Pq sharedOwner2 sharedOwner3
   let eF : Pn ≃ₐ[F] Pq :=
     genericTensorRefineChosenComponentAlgEquiv
       (K₀ := K₀) (K₁ := K₁) (F := F) (L := L) m q

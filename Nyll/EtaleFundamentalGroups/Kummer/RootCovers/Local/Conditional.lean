@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
 
 /-!
 # Iterated local root covers with trivial stages
@@ -19,6 +21,8 @@ residue field without requiring its radicand to lie in the maximal ideal.
 The local-ring and faithful-flat structures below remain theorem-produced and
 are installed only in proof scope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

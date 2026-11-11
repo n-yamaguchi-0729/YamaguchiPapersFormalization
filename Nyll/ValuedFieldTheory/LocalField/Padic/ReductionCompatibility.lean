@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.Data.ZMod.Units
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.Data.ZMod.Units
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.ZMod
 
 /-!
 # Compatibility of reduction modulo prime powers and modulo the prime
@@ -14,6 +17,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 Reduction from the p-adic integers through a positive prime-power quotient
 agrees with their residue map to `ZMod p`.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

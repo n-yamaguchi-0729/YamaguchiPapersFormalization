@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.Noetherian
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Mathlib.RingTheory.AdicCompletion.Noetherian
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Descending ideals in complete local rings
@@ -14,6 +16,8 @@ Chevalley's lemma compares a descending sequence of ideals with zero
 intersection to the powers of the maximal ideal.  The proof uses stable
 images modulo these powers and lifts compatible representatives directly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

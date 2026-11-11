@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicField
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.ResidueRoots
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicField
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.ResidueRoots
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Teichmüller representatives in the p-adic units
@@ -16,6 +18,8 @@ Hensel lifting in the concrete complete discrete valuation field `ℚ_[p]`
 gives a multiplicative section of reduction to `(ZMod p)ˣ`. Its values are
 `(p - 1)`-st roots of unity, including when `p = 2`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,10 +32,12 @@ variable (p : ℕ) [Fact p.Prime]
 -- The only additional instance is the existing finiteness proof for Qp's residue field.
 attribute [local instance] padicCompleteDVF_residueField_finite
 
-private def teichmullerIntegerEquiv : ℤ_[p] ≃+* (padicCompleteDVF p).valuationSubring :=
+/-- The p-adic integer ring identified with the chosen valuation subring. -/
+def teichmullerIntegerEquiv : ℤ_[p] ≃+* (padicCompleteDVF p).valuationSubring :=
   padicIntEquivValuationSubring p
 
-private def teichmullerResidueEquiv : (padicCompleteDVF p).residueField ≃+* ZMod p :=
+/-- The residue field of the chosen p-adic valuation identified with `ZMod p`. -/
+def teichmullerResidueEquiv : (padicCompleteDVF p).residueField ≃+* ZMod p :=
   (IsLocalRing.ResidueField.mapEquiv (teichmullerIntegerEquiv p)).symm.trans
     PadicInt.residueField
 
@@ -51,7 +57,8 @@ private theorem toZMod_valuationSubring_symm
       ((teichmullerIntegerEquiv p).symm : (padicCompleteDVF p).valuationSubring →+* ℤ_[p])
       x).symm
 
-private def teichmullerRoots :
+/-- Residue units lifted to the prime-to-p roots of unity in the valuation ring. -/
+def teichmullerRoots :
     (ZMod p)ˣ →* residueRootsOfUnityGroup (padicCompleteDVF p) :=
   (residueRootsOfUnityEquivResidueFieldUnits (padicCompleteDVF p)).symm.toMonoidHom.comp
     (Units.map (teichmullerResidueEquiv p).symm.toMonoidHom)

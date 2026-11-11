@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedMovingValuation
-import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedExtensions
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedMovingValuation
+public import Nyll.GaloisCohomology.ArtinSchreier.ValuationCharacters
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedExtensions
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection
 
 /-!
 # Detecting Galois automorphisms over finitely generated fields of positive characteristic
@@ -17,6 +19,8 @@ Nontrivial finite-order automorphisms move discrete valuations. A local
 Artin--Schreier character and weak approximation detect their action modulo
 the characteristic, including over imperfect fields.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ValuationTheory.DiscreteValuationField ProCGroups.Abelian

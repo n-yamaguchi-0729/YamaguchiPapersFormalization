@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Closure conjugation evaluated by continuous characters
@@ -15,6 +17,8 @@ import Mathlib.Topology.Algebra.ContinuousMonoidHom
 The comparison on topological abelianization identifies the values of a
 continuous abelian character after actual and chosen semilinear conjugation.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

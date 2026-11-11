@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
-import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Surjectivity
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Detecting the fundamental-group kernel by covers that extend
@@ -19,7 +21,11 @@ which are actually pullbacks from the target. The descent condition is an
 existence of an actual cover and an isomorphism; no extension theorem is assumed.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -41,15 +47,15 @@ private theorem isGalois_obj_of_connected
     ((t.app Z).hom x) ((t.app Z).hom y)
   refine ⟨H.mapAut Z σ, ?_⟩
   apply (ConcreteCategory.bijective_of_isIso (t.app Z).hom).injective
-  have hn := ConcreteCategory.congr_hom (t.hom.naturality σ.hom) x
+  have hn := ConcreteCategory.congr_hom (t.hom.naturality σ.asIso.hom) x
   change (t.app Z).hom ((H.mapAut Z σ) • x) = σ • ((t.app Z).hom x) at hn
   exact hn.trans hσ
 
 /-- The kernel is detected by the pointed finite Galois covers which are
 isomorphic to actual pullbacks from the target scheme. -/
 theorem fundamentalGroupHom_ker_eq_iInf_extendableGalois
-    {U X : Scheme.{0}} [ConnectedSpace U] [ConnectedSpace X]
-    (j : U ⟶ X) {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {U X : Scheme.{u}} [ConnectedSpace U] [ConnectedSpace X]
+    (j : U ⟶ X) {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (ξ : Spec (.of Ω) ⟶ U)
     (hsurj : Function.Surjective (fundamentalGroupHom j ξ)) :
     (fundamentalGroupHom j ξ).toMonoidHom.ker =
@@ -89,6 +95,7 @@ theorem fundamentalGroupHom_ker_eq_iInf_extendableGalois
     exact (mulAction_naturality F' g e.inv w).symm.trans hz
   · intro g hg
     apply MonoidHom.mem_ker.mpr
+    apply Aut.ext
     apply Iso.ext
     apply natTrans_ext_of_isGalois F
     intro Z hZ

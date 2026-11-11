@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Unramified.LocalStructure
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Unramified.LocalStructure
 
 /-!
 # Pointed etale neighborhoods of Henselian local rings
@@ -19,6 +21,8 @@ The file also compares the residue-field map attached to a prime ideal with
 the local residue-field map after localization.  This is the form needed for
 the residue-field bijection produced by Tag 00UJ.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,7 +52,10 @@ noncomputable def localizationAtMaximalIdealAlgEquiv
     (R : Type u) [CommRing R] [IsLocalRing R] :
     R ≃ₐ[R] Localization.AtPrime (IsLocalRing.maximalIdeal R) :=
   IsLocalization.atUnits R (IsLocalRing.maximalIdeal R).primeCompl
-    (fun x ↦ by simpa using! fun a ↦ a)
+    (by
+      intro x hx
+      change IsUnit x
+      exact IsLocalRing.notMem_maximalIdeal.mp hx)
 
 /-- A bijection between the ideal-theoretic residue fields at `m_R` and `P`
 induces a bijection on the residue fields of the local map `R → S_P`.

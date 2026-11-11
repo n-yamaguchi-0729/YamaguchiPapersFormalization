@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRepresentation
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogReduced
-import Nyll.ValuedFieldTheory.LocalField.Analytic.AugmentationDivisibility
-import Nyll.ValuedFieldTheory.LocalField.Analytic.PrimeOrderDivisibility
-import Mathlib.Algebra.Module.Submodule.Ker
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRepresentation
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogReduced
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.AugmentationDivisibility
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrimeOrderDivisibility
+public import Mathlib.Algebra.Module.Submodule.Ker
 
 /-!
 # Rigidity of finite-order actions on character logarithms
@@ -21,6 +23,8 @@ no finite generation or closedness of the logarithm image is needed.
 For odd prime order, binomial divisibility supplies the corresponding
 argument without averaging.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 
@@ -105,7 +109,7 @@ private theorem addMonoidEnd_eq_self_of_log_image_of_primeOrder
     (hT : T ^ p = 1) (hdiv : ∀ x : M, ∃ y : M, T x - x = p • y) :
     ∀ x : M, T x = x := by
   let : IsAddTorsionFree M := {
-    nsmul_right_injective n hn x y hxy := by
+    eq_of_nsmul_eq_nsmul_of_addCommute {n} hn {x} {y} _ hxy := by
       apply hι
       apply mul_left_cancel₀ (Nat.cast_ne_zero.mpr hn : (n : K) ≠ 0)
       simpa only [map_nsmul, nsmul_eq_mul] using congrArg ι hxy }

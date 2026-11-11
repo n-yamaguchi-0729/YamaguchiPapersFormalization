@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
-import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousRootCocycleLifting
-import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
+public import Nyll.GaloisCohomology.Kummer.Concrete.ContinuousRootCocycleLifting
+public import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 
 /-!
 # Lifting finite cyclotomic cocycles
@@ -14,6 +16,8 @@ import Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 Hilbert 90 and compatible primitive-root coordinates lift actual locally
 constant cocycles from modulo p to modulo every positive power of p.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open groupCohomology
@@ -36,7 +40,7 @@ theorem exists_cyclotomic_cocycle_lift
         ZMod.castHom (pow_dvd_pow p (by omega : 1 ≤ k + 1))
           (ZMod (p ^ 1)) (d σ) = c σ := by
   classical
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω (p ^ (k + 1))
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω (p ^ (k + 1))
   let z : Ωˣ := hζ.isUnit (NeZero.ne (p ^ (k + 1))) |>.unit'
   have hz : IsPrimitiveRoot z (p ^ (k + 1)) := hζ.isUnit_unit' (NeZero.ne _)
   have hN : p ^ (k + 1) = p ^ 1 * p ^ k := by

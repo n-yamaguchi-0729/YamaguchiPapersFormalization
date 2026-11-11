@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualProGroupFaithfulness
-import Nyll.ProCGroups.ProC.Subgroups.Closed
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualProGroupFaithfulness
+public import Nyll.ProCGroups.ProC.Subgroups.Closed
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Sigma-faithfulness for pro-Sigma groups
@@ -18,6 +20,8 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 Every closed subgroup of a pro-Sigma group is pro-Sigma. Its actual
 residual quotient therefore retains the ordinary abelianization action.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

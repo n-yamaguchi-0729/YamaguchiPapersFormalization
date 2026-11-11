@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Mathlib.Algebra.Group.Subgroup.Map
-import Mathlib.Topology.Homeomorph.Defs
-import Mathlib.Topology.Compactness.Compact
+module
+
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Mathlib.Algebra.Group.Subgroup.Map
+public import Mathlib.Topology.Homeomorph.Defs
+public import Mathlib.Topology.Compactness.Compact
 
 /-!
 # Open subgroups preserve Sigma-abelianization-faithfulness
@@ -21,6 +23,8 @@ The subgroup of an open subgroup is mapped into the ambient group by the
 actual subtype inclusion. Residual conjugation is transported by the resulting
 continuous group equivalence.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

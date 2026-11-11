@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Pullbacks
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Pullbacks
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
 
 /-!
 # Ring properties of actual affine base changes
@@ -17,6 +19,8 @@ map, so properties of the scheme pullback give properties of the tensor
 algebra with its canonical scalar action. Prime localization then gives
 etaleness at every point over the chosen base prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
-import Mathlib.Algebra.Group.Subgroup.Basic
-import Mathlib.Topology.Algebra.Group.Subgroup
+module
+
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalUniverse
+public import Mathlib.Algebra.Group.Subgroup.Basic
+public import Mathlib.Topology.Algebra.Group.Subgroup
 
 /-!
 # 閉正規生成部分群と、それを殺す有限商
@@ -21,6 +23,8 @@ profinite 群の部分集合 `s` が生成する閉正規部分群は、`s` を�
 ただし、この群論だけで strict henselization の基本群の像を正規化の固定部分群と
 同一視できるわけではなく、その幾何学的比較は別途必要である。
 -/
+
+@[expose] public section
 
 open CategoryTheory CategoryTheory.PreGaloisCategory
 

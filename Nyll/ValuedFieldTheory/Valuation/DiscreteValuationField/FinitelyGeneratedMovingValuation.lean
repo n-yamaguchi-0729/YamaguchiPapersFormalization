@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedValuationDetection
-import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedPositiveChar
-import Nyll.GaloisCohomology.FieldTheory.ScalarRatioRigidity
-import Nyll.ValuedFieldTheory.Valuation.FiniteOrderAutomorphism
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedValuationDetection
+public import Nyll.GaloisCohomology.FieldTheory.FinitelyGeneratedPositiveChar
+public import Nyll.GaloisCohomology.FieldTheory.ScalarRatioRigidity
+public import Nyll.ValuedFieldTheory.Valuation.FiniteOrderAutomorphism
 
 /-!
 # Discrete valuations moved by finite-order automorphisms
@@ -16,6 +18,8 @@ import Nyll.ValuedFieldTheory.Valuation.FiniteOrderAutomorphism
 A nontrivial finite-order automorphism of an infinite finitely generated
 field of positive characteristic moves a discrete valuation class.
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 open ValuationTheory.DiscreteValuationField

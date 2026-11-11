@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.NormalBasisSubgroupCharacterVector
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogScaling
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapExtension
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.NormalBasisSubgroupCharacterVector
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogScaling
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapExtension
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Restricted-character vectors in the actual logarithm image
@@ -22,6 +24,8 @@ the actual valued-extension map. The base residue characteristic is
 deduced from the extension. No normality of the subgroup, group-order
 condition, or valuation-preservation assumption is used.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

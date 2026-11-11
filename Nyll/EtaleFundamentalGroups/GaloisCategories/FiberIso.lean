@@ -41,16 +41,17 @@ def continuousConjAut (t : F ≅ G) : Aut F ≃ₜ* Aut G where
 /-- Changing the natural isomorphism changes the group isomorphism by conjugation. -/
 theorem continuousConjAut_eq_conj (t₁ t₂ : F ≅ G) (a : Aut F) :
     continuousConjAut t₂ a =
-      MulAut.conj (G := Aut G) (t₁.symm ≪≫ t₂) (continuousConjAut t₁ a) := by
+      MulAut.conj (G := Aut G) (Aut.of (t₁.symm ≪≫ t₂)) (continuousConjAut t₁ a) := by
   have ht : t₁ ≪≫ (t₁.symm ≪≫ t₂) = t₂ := by
     rw [← Iso.trans_assoc, Iso.self_symm_id, Iso.refl_trans]
   have hconj : t₂.conjAut a = (t₁.symm ≪≫ t₂).conjAut (t₁.conjAut a) :=
     (congrArg (fun t : F ≅ G ↦ t.conjAut a) ht.symm).trans
       (Iso.trans_conjAut t₁ (t₁.symm ≪≫ t₂) a)
-  have hinner (b c : Aut G) : b.conjAut c = MulAut.conj (G := Aut G) b c := by
+  have hinner (b c : Aut G) : b.asIso.conjAut c = MulAut.conj (G := Aut G) b c := by
     apply Aut.ext
+    apply Iso.ext
     rfl
-  exact hconj.trans (hinner (t₁.symm ≪≫ t₂) (t₁.conjAut a))
+  exact hconj.trans (hinner (Aut.of (t₁.symm ≪≫ t₂)) (t₁.conjAut a))
 
 variable [GaloisCategory C] [FiberFunctor F] [FiberFunctor G]
 
@@ -62,10 +63,11 @@ def functorToContActionFiberIso (t : F ≅ G) :
   NatIso.ofComponents
     (fun X ↦ ObjectProperty.isoMk _
       (Action.mkIso (t.app X) (fun a ↦ by
-        change a.hom.app X ≫ t.hom.app X =
-          t.hom.app X ≫ (t.conjAut a).hom.app X
-        simp only [Iso.conjAut_hom, Iso.conj_apply, NatTrans.comp_app]
-        simp only [← Category.assoc, t.hom_inv_id_app, Category.id_comp])))
+        change a.asIso.hom.app X ≫ t.hom.app X =
+          t.hom.app X ≫ (t.conjAut a).asIso.hom.app X
+        simp only [Iso.conjAut_hom, Iso.conj_apply_asHom, NatTrans.comp_app]
+        simp only [← Category.assoc, t.hom_inv_id_app, Category.id_comp]
+        rfl)))
     (fun {X Y} f ↦ by
       ext : 2
       exact t.hom.naturality f)

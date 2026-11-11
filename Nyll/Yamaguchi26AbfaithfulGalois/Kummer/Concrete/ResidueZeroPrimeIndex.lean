@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroInertiaDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroUnramifiedFaithfulness
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueRestriction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
-import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroInertiaDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.ResidueZeroUnramifiedFaithfulness
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueRestriction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
 
 /-!
 # Prime-index faithfulness in residue characteristic zero
@@ -19,6 +21,8 @@ For a residue-zero Henselian discrete valuation, ab-faithfulness of the
 residue Galois group and finite primary root groups imply faithfulness of
 the conjugation action associated with a prime-index open normal subgroup.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimensionTwoDVR
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.RegularLocalDimensionTwoDVR
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
 
 /-!
 # Completion base change for a height-one radical cover
@@ -20,6 +22,8 @@ rings is faithfully flat.
 These constructions are the completion interface needed at the selected and
 actual-other boundary primes of the full strict-normal-crossings root cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -135,21 +139,22 @@ noncomputable def standardDVRRootCompletionAlgEquiv
     [Field K] [Algebra V K] [IsFractionRing V K]
     (N : ℕ) (pi : V) :
     let Vhat := standardDVFCompletionValuationSubring V K
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
     Vhat ⊗[V] AdjoinRoot (X ^ N - C pi) ≃ₐ[Vhat]
       AdjoinRoot
         (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)) := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
-  letI : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro Vhat sharedOwner5
   let p : V[X] := X ^ N - C pi
   let pHat : Vhat[X] :=
     X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)
+  have hpi : algebraMap V Vhat pi = standardDVRCompletionValuationSubringElement V K pi := rfl
+  have hp : p.map (algebraMap V Vhat) = pHat := by
+    change (X ^ N - C pi : V[X]).map (algebraMap V Vhat) =
+      X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)
+    rw [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_C, hpi]
   exact (adjoinRootBaseChangeAlgEquiv p).trans
-    (AdjoinRoot.algEquivOfEq Vhat _ _ (by
-      simp [p, standardDVRCompletionValuationSubringElement]))
+    (AdjoinRoot.algEquivOfEq Vhat _ _ hp)
 
 @[simp]
 theorem standardDVRRootCompletionAlgEquiv_tmul_root
@@ -158,16 +163,13 @@ theorem standardDVRRootCompletionAlgEquiv_tmul_root
     [Field K] [Algebra V K] [IsFractionRing V K]
     (N : ℕ) (pi : V) :
     let Vhat := standardDVFCompletionValuationSubring V K
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
     standardDVRRootCompletionAlgEquiv V K N pi
         (1 ⊗ₜ[V] AdjoinRoot.root (X ^ N - C pi)) =
       AdjoinRoot.root
         (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)) := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro Vhat sharedOwner1
   let p : V[X] := X ^ N - C pi
   let pHat : Vhat[X] :=
     X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)
@@ -186,18 +188,16 @@ noncomputable def standardDVRRootCompletionAlgebra
     [Field K] [Algebra V K] [IsFractionRing V K]
     (N : ℕ) (pi : V) :
     let Vhat := standardDVFCompletionValuationSubring V K
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
     Algebra (AdjoinRoot (X ^ N - C pi))
       (AdjoinRoot
         (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))) := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
+  intro Vhat
   let Rn := AdjoinRoot (X ^ N - C pi)
   let Rhat := AdjoinRoot
     (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-  letI : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro sharedOwner8
   exact
     ((standardDVRRootCompletionAlgEquiv V K N pi).toRingHom.comp
       (Algebra.TensorProduct.includeRight : Rn →ₐ[V] Vhat ⊗[V] Rn).toRingHom).toAlgebra
@@ -213,24 +213,14 @@ noncomputable def standardDVRRootCompletionAlgEquivOverRoot
     let Rn := AdjoinRoot (X ^ N - C pi)
     let Rhat := AdjoinRoot
       (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : Algebra Rn (Vhat ⊗[V] Rn) :=
+    let : Algebra Rn (Vhat ⊗[V] Rn) :=
       Algebra.TensorProduct.rightAlgebra
-    letI : Algebra Rn Rhat :=
+    let : Algebra Rn Rhat :=
       standardDVRRootCompletionAlgebra V K N pi
     (Vhat ⊗[V] Rn) ≃ₐ[Rn] Rhat := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
-  let Rn := AdjoinRoot (X ^ N - C pi)
-  let Rhat := AdjoinRoot
-    (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-  letI : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  letI : Algebra Rn (Vhat ⊗[V] Rn) :=
-    Algebra.TensorProduct.rightAlgebra
-  letI : Algebra Rn Rhat :=
-    standardDVRRootCompletionAlgebra V K N pi
+  intro Vhat Rn Rhat sharedOwner5 sharedOwner6 sharedOwner7
   exact AlgEquiv.ofRingEquiv (R := Rn)
     (f := (standardDVRRootCompletionAlgEquiv V K N pi).toRingEquiv)
     (fun _ ↦ rfl)
@@ -245,22 +235,14 @@ theorem standardDVRRootCompletionAlgebra_map_root
     let Rn := AdjoinRoot (X ^ N - C pi)
     let Rhat := AdjoinRoot
       (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : Algebra Rn Rhat :=
+    let : Algebra Rn Rhat :=
       standardDVRRootCompletionAlgebra V K N pi
     algebraMap Rn Rhat (AdjoinRoot.root (X ^ N - C pi)) =
       AdjoinRoot.root
         (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi)) := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
-  let Rn := AdjoinRoot (X ^ N - C pi)
-  let Rhat := AdjoinRoot
-    (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  let : Algebra Rn Rhat :=
-    standardDVRRootCompletionAlgebra V K N pi
+  intro Vhat Rn Rhat sharedOwner1 sharedOwner2
   change standardDVRRootCompletionAlgEquiv V K N pi
       (1 ⊗ₜ[V] AdjoinRoot.root (X ^ N - C pi)) = _
   exact standardDVRRootCompletionAlgEquiv_tmul_root V K N pi
@@ -276,26 +258,18 @@ theorem standardDVRRootCompletion_faithfullyFlat
     let Rn := AdjoinRoot (X ^ N - C pi)
     let Rhat := AdjoinRoot
       (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : Algebra Rn Rhat :=
+    let : Algebra Rn Rhat :=
       standardDVRRootCompletionAlgebra V K N pi
     Module.FaithfullyFlat Rn Rhat := by
-  dsimp only
-  let Vhat := standardDVFCompletionValuationSubring V K
-  let Rn := AdjoinRoot (X ^ N - C pi)
-  let Rhat := AdjoinRoot
-    (X ^ N - C (standardDVRCompletionValuationSubringElement V K pi))
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro Vhat Rn Rhat sharedOwner3 sharedOwner4
   let T := Vhat ⊗[V] Rn
   let T' := Rn ⊗[V] Vhat
   let : Module.FaithfullyFlat V Vhat :=
     standardDVRCompletionValuationSubring_faithfullyFlat
       (V := V) (K := K)
   let : Algebra Rn T := Algebra.TensorProduct.rightAlgebra
-  let : Algebra Rn Rhat :=
-    standardDVRRootCompletionAlgebra V K N pi
   let : Module.FaithfullyFlat Rn T' := inferInstance
   let eComm : T ≃ₐ[Rn] T' :=
     AlgEquiv.ofRingEquiv (R := Rn)

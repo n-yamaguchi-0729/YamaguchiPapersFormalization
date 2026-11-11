@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.BigOperators.Associated
-import Mathlib.RingTheory.Ideal.Height
+module
+
+public import Mathlib.Algebra.BigOperators.Associated
+public import Mathlib.RingTheory.Ideal.Height
 
 /-!
 # Height-one primes relative to one- and two-branch boundary equations
@@ -19,6 +21,8 @@ These statements use only the principal-prime geometry of a domain.  In
 particular, they do not require a Noetherian hypothesis or any root-cover
 presentation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
 
 /-!
 # A pure-radical generator in a selected tensor component
@@ -19,6 +21,8 @@ The comparison `F ≃ K(root)` and the generation theorem are produced from
 the two natural generic-fibre equivalences and the quotient component's two
 field ranges; neither is an input comparison with an abstract compositum.
 -/
+
+@[expose] public section
 
 noncomputable section
 

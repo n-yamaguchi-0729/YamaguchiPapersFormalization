@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.CharP.Reduced
-import Mathlib.Algebra.Order.GroupWithZero.Canonical
-import Mathlib.RingTheory.Valuation.ValuationSubring
+module
+
+public import Mathlib.Algebra.CharP.Reduced
+public import Mathlib.Algebra.Order.GroupWithZero.Canonical
+public import Mathlib.RingTheory.Valuation.ValuationSubring
 
 /-!
 # Prime-power roots of principal units
@@ -16,6 +18,8 @@ principal unit, so is the element. This uses neither discreteness nor
 completeness of the valuation, and does not require the residue field
 to be perfect.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

@@ -4,19 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharHenselianFaithfulness
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionResidualAction
-import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Mathlib.Algebra.Ring.Aut
-import Mathlib.Algebra.Ring.Action.End
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Algebra.Group.Hom.Basic
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharHenselianFaithfulness
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionResidualAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.NormalRestrictionKernelFinite
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteResidualAbelianizationAction
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Mathlib.Algebra.Ring.Aut
+public import Mathlib.Algebra.Ring.Action.End
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Algebra.Group.Hom.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Faithful pro-p action for every prime extension degree
@@ -26,6 +28,8 @@ the relative Galois group acts faithfully on the abelianization of the actual
 maximal pro-p quotient of the absolute Galois group of M. The proof uses the
 canonical tower K → M → AlgebraicClosure M and its actual restriction kernel.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

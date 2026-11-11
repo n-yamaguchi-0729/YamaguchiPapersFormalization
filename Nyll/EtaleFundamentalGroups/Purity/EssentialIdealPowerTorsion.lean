@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.LinearAlgebra.Span.Defs
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Colon
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.Noetherian.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.LinearAlgebra.Span.Defs
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Colon
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.Noetherian.Defs
 
 /-!
 # Ideal-power torsion in essential extensions
@@ -27,6 +29,8 @@ Minimal primes over each element annihilator are themselves element
 annihilators.  Their intersection contains the ideal, and finite
 generation converts this radical containment into an annihilating power.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

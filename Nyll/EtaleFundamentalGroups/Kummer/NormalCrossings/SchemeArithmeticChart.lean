@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeHeightTwoPrime
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeLocalizedChart
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
-import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeHeightTwoPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeLocalizedChart
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.BranchSelection
 
 /-!
 # Arithmetic height-two charts for normal-crossings branches
@@ -18,6 +20,8 @@ chart used by the finite-quotient Abhyankar argument.  In particular the
 height-two prime, localized branch, and residue-characteristic target are
 outputs rather than extra inputs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.LiesOverFractionRingExtension
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtaleTower
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.Parameters
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.LiesOverFractionRingExtension
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightTwo.PrimeRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.NormalizationEtaleTower
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.Parameters
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # A fixed component at an active Galois root prime
@@ -21,6 +25,8 @@ residue characteristic-zero facts, and fraction-field towers are produced
 from the original Galois normalization and the finite extension.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped TensorProduct
@@ -31,23 +37,11 @@ open Polynomial
 
 universe uA uK uL uD
 
-private theorem prime_algebraMap_localizationAtPrime_of_mem_active
-    {A : Type uA} [CommRing A] [IsDomain A]
-    (P : Ideal A) [P.IsPrime] {t : A} (ht : Prime t) (htP : t ∈ P) :
-    Prime (algebraMap A (Localization.AtPrime P) t) := by
-  rcases prime_or_isUnit_algebraMap_localizationAtPrime P ht with
-    hprime | hunit
-  · exact hprime
-  · have htCompl : t ∈ P.primeCompl :=
-      (IsLocalization.AtPrime.isUnit_to_map_iff
-        (Localization.AtPrime P) P t).mp hunit
-    exact (htCompl htP).elim
-
 /-- A chosen fraction field `K` of `V` acts canonically on any field `F`
 containing `V`, by transporting the literal fraction-ring lift across the
 canonical fraction-field equivalence. -/
 @[reducible]
-private noncomputable def chosenFractionFieldToExtensionAlgebra
+noncomputable def chosenFractionFieldToExtensionAlgebra
     {V : Type uA} {K : Type uK} {F : Type uD}
     [CommRing V] [IsDomain V]
     [Field K] [Algebra V K] [IsFractionRing V K]
@@ -56,16 +50,16 @@ private noncomputable def chosenFractionFieldToExtensionAlgebra
   exact ((algebraMap (FractionRing V) F).comp
     (FractionRing.algEquiv V K).symm.toRingHom).toAlgebra
 
-private theorem chosenFractionFieldToExtension_isScalarTower
+/-- The chosen fraction-field action extends the original action of the base ring. -/
+theorem chosenFractionFieldToExtension_isScalarTower
     {V : Type uA} {K : Type uK} {F : Type uD}
     [CommRing V] [IsDomain V]
     [Field K] [Algebra V K] [IsFractionRing V K]
     [Field F] [Algebra V F] [FaithfulSMul V F] :
-    letI : Algebra K F :=
+    let : Algebra K F :=
       chosenFractionFieldToExtensionAlgebra (V := V) (K := K) (F := F)
     IsScalarTower V K F := by
-  let : Algebra K F :=
-    chosenFractionFieldToExtensionAlgebra (V := V) (K := K) (F := F)
+  intro sharedOwner1
   let : Algebra (FractionRing V) F := FractionRing.liftAlgebra V F
   apply IsScalarTower.of_algebraMap_eq
   intro x
@@ -129,7 +123,7 @@ theorem splitStrictNormalCrossings_heightTwo_galoisSingleRootCover_geometry
   let R := Localization.AtPrime P
   let p : R := algebraMap A R (t j)
   have hp : Prime p :=
-    prime_algebraMap_localizationAtPrime_of_mem_active P
+    prime_algebraMap_localizationAtPrime_of_mem P
       (hNC.2.2.2.1 j hj) htjP
   have hdimR : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞) := by
     calc
@@ -177,60 +171,62 @@ theorem
     let hgeometryS :=
       splitStrictNormalCrossings_heightTwo_galoisSingleRootCover_geometry
         (K := K) (L := L) hNC j hj P hP htjP
-    letI : IsRegularLocalRing S := hgeometryS.1
-    letI : IsDomain S := hgeometryS.2.1
-    letI : IsIntegrallyClosed S :=
+    let : IsRegularLocalRing S := hgeometryS.1
+    let : IsDomain S := hgeometryS.2.1
+    let : IsIntegrallyClosed S :=
       SpecialLocalPurity.isIntegrallyClosed_of_isRegularLocalRing_dimension_two
         hgeometryS.2.2.1
-    letI : qS.IsPrime :=
+    let : qS.IsPrime :=
       Ideal.isPrime_span_singleton_of_prime hgeometryS.2.2.2.1
     let pR := Ideal.span ({p} : Set R)
     let hp : Prime p :=
-      prime_algebraMap_localizationAtPrime_of_mem_active P
+      prime_algebraMap_localizationAtPrime_of_mem P
         (hNC.2.2.2.1 j hj) htjP
-    letI : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : qS.LiesOver pR :=
+    let : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let : qS.LiesOver pR :=
       span_root_liesOver_span_radicand
         (splitStrictNormalCrossingsGaloisRamificationIndex_pos
           (K := K) (L := L) t hNC j) hp
     let V := Localization.AtPrime pR
     let W := Localization.AtPrime qS
-    letI : Algebra V W := Localization.AtPrime.algebraOfLiesOver pR qS
-    letI : Module.Free R S :=
+    let : Algebra V W := Localization.AtPrime.algebraOfLiesOver pR qS
+    let : Module.Free R S :=
       (Polynomial.monic_X_pow_sub_C p
         (splitStrictNormalCrossingsGaloisRamificationIndex_pos
           (K := K) (L := L) t hNC j).ne').free_adjoinRoot
-    letI : FaithfulSMul R S := inferInstance
-    letI : Algebra R K :=
+    let : FaithfulSMul R S := inferInstance
+    let : Algebra R K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI : IsFractionRing R K :=
+    let : IsFractionRing R K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) P
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) pR
-    letI : IsFractionRing V K :=
+    let : IsFractionRing V K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) pR
     ∀ {D : Type uD} [CommRing D] [IsDomain D] [IsIntegrallyClosed D]
       [Algebra R D] [Algebra S D] [IsScalarTower R S D]
       [FaithfulSMul S D] [Module.Finite S D]
       (qD : Ideal D) [qD.IsPrime] [qD.LiesOver qS],
       let F := FractionRing D
-      letI : FaithfulSMul R D := FaithfulSMul.trans R S D
-      letI : FaithfulSMul R F := FaithfulSMul.trans R D F
-      letI : Algebra K F :=
+      let : FaithfulSMul R D := FaithfulSMul.trans R S D
+      let : FaithfulSMul R F := FaithfulSMul.trans R D F
+      let : Algebra K F :=
         chosenFractionFieldToExtensionAlgebra (V := R) (K := K) (F := F)
-      letI : IsScalarTower R K F :=
+      let : IsScalarTower R K F :=
         chosenFractionFieldToExtension_isScalarTower
           (V := R) (K := K) (F := F)
       ∀ (m : Ideal (F ⊗[K] L)) (hm : m.IsMaximal),
-        letI : m.IsMaximal := hm
+        let : m.IsMaximal := hm
         let B := Localization.AtPrime qD
         let M := GenericTensorFieldComponent m
-        letI : Algebra B M :=
+        let : Algebra B M :=
           genericTensorFieldComponentLeftScalarAlgebra (R := B) m
         Algebra.Etale B (integralClosure B M) := by
-  dsimp only
   classical
-  let R := Localization.AtPrime P
+  intro R p N g S qS hgeometryS suppliedRegularS suppliedDomainS suppliedIntegrallyClosedS
+    suppliedPrimeQS pR hp suppliedPrimePR suppliedLiesOver V W suppliedLocalizationAlgebra
+    suppliedFreeRS suppliedFaithfulRS suppliedAlgebraRK suppliedFractionRK suppliedAlgebraVK
+    suppliedFractionVK
   let : IsRegularLocalRing R := inferInstance
   have hdimR : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞) := by
     calc
@@ -240,39 +236,13 @@ theorem
         congrArg (fun n : ℕ∞ ↦ (n : WithBot ℕ∞)) hP
   let : IsRegularRing R :=
     EtaleFundamentalGroups.isRegularRing_of_isRegularLocalRing_dimension_two hdimR
-  let p : R := algebraMap A R (t j)
-  have hp : Prime p :=
-    prime_algebraMap_localizationAtPrime_of_mem_active P
-      (hNC.2.2.2.1 j hj) htjP
   let : Fact (Prime p) := ⟨hp⟩
-  let N := splitStrictNormalCrossingsGaloisRamificationIndex
-    (K := K) (L := L) t hNC j
   have hN : 0 < N :=
     splitStrictNormalCrossingsGaloisRamificationIndex_pos
       (K := K) (L := L) t hNC j
-  let g : R[X] := X ^ N - C p
-  let S := AdjoinRoot g
-  let qS := Ideal.span ({AdjoinRoot.root g} : Set S)
-  have hgeometryS :=
-    splitStrictNormalCrossings_heightTwo_galoisSingleRootCover_geometry
-      (K := K) (L := L) hNC j hj P hP htjP
-  let : IsRegularLocalRing S := hgeometryS.1
-  let : IsDomain S := hgeometryS.2.1
-  let : IsIntegrallyClosed S :=
-    SpecialLocalPurity.isIntegrallyClosed_of_isRegularLocalRing_dimension_two
-      hgeometryS.2.2.1
-  let : qS.IsPrime :=
-    Ideal.isPrime_span_singleton_of_prime hgeometryS.2.2.2.1
-  let pR := Ideal.span ({p} : Set R)
-  let : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  let : qS.LiesOver pR :=
-    span_root_liesOver_span_radicand hN hp
-  let V := Localization.AtPrime pR
-  let W := Localization.AtPrime qS
   let : IsDiscreteValuationRing V :=
     EtaleFundamentalGroups.isDiscreteValuationRing_localizationAtSpan_of_prime
       R p hp
-  let : Algebra V W := Localization.AtPrime.algebraOfLiesOver pR qS
   let : IsDomain W :=
     adjoinRootLocalizationAtRootPrime_isDomain hN hp
   let pV : V := algebraMap R V p
@@ -289,24 +259,16 @@ theorem
   let : Algebra K₀ Kroot := FractionRing.liftAlgebra V Kroot
   let : IsScalarTower V K₀ Kroot :=
     FractionRing.isScalarTower_liftAlgebra V Kroot
-  let : Algebra R K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
   let : Algebra R L :=
     localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
   let : IsScalarTower R K L :=
     localizationAtPrimeToFractionFieldToExtension_isScalarTower
       (K := K) (L := L) P
-  let : IsFractionRing R K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) pR
   let : Algebra V L :=
     localizationAtPrimeToExtensionAlgebra (K := K) (L := L) pR
   let : IsScalarTower V K L :=
     localizationAtPrimeToFractionFieldToExtension_isScalarTower
       (K := K) (L := L) pR
-  let : IsFractionRing V K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) pR
   let Cnorm := integralClosure V L
   let : IsFractionRing Cnorm L :=
     IsIntegralClosure.isFractionRing_of_finite_extension V K L Cnorm
@@ -363,18 +325,8 @@ theorem
     simpa only [R, p, pR, V] using
       (charZero_twiceLocalized_splitStrictNormalCrossingsBranchResidue
         hNC j hj P htjP hCharZero)
-  intro D _ _ _ _ _ _ _ _ qD _ _
-  let F := FractionRing D
-  let : Module.Free R S :=
-    (Polynomial.monic_X_pow_sub_C p hN.ne').free_adjoinRoot
-  let : FaithfulSMul R S := inferInstance
-  let : FaithfulSMul R D := FaithfulSMul.trans R S D
-  let : FaithfulSMul R F := FaithfulSMul.trans R D F
-  let : Algebra K F :=
-    chosenFractionFieldToExtensionAlgebra (V := R) (K := K) (F := F)
-  let : IsScalarTower R K F :=
-    chosenFractionFieldToExtension_isScalarTower
-      (V := R) (K := K) (F := F)
+  intro D _ _ _ _ _ _ _ _ qD _ _ F suppliedFaithfulRD suppliedFaithfulRF suppliedAlgebraKF
+    suppliedTowerRKF
   let : Algebra V F :=
     localizationAtPrimeToExtensionAlgebra
       (A := R) (K := K) (L := F) pR
@@ -453,7 +405,7 @@ theorem
   let : FiniteDimensional Kroot F :=
     finiteExtensionAtPrime_fractionRing_finiteDimensional
       (S := S) (D := D) qS
-  let B := Localization.AtPrime qD
+  intro m hm suppliedMaximal B M suppliedBoundaryAlgebra
   let : IsIntegrallyClosed B :=
     isIntegrallyClosed_of_isLocalization B qD.primeCompl
       qD.primeCompl_le_nonZeroDivisors
@@ -464,7 +416,6 @@ theorem
     localizationAtPrimeToFractionField_isFractionRing (K := F) qD
   let : IsScalarTower W B F :=
     finiteLiesOverLocalization_fractionRingTower qS qD
-  intro m hm
   exact
     integralClosure_selectedRootPrime_genericTensorTowerComponent_etale_of_ramification_dvd
       (R := R) (N := N) (p := p) hdimR hN

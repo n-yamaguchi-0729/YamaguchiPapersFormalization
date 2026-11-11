@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.ValuationRing
-import Nyll.EtaleFundamentalGroups.Completions.Retained.Component.LocalizationFractionRing
-import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FiniteToStandardDVF
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationRing
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.Component.LocalizationFractionRing
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FiniteToStandardDVF
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
 
 /-!
 # Ramification in the normalization of a retained completed component
@@ -27,6 +29,8 @@ the map rules out the inverse-only case.  Thus the normalization step has
 vertical ramification index one, and the ramification index over the
 completed base is unchanged.
 -/
+
+@[expose] public section
 
 noncomputable section
 

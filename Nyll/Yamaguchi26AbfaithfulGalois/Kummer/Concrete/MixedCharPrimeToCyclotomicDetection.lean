@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogAction
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRigidity
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharSubgroupCharacterLogVector
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.FieldTheory.SeparableDegree
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.SetTheory.Cardinal.NatCard
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogAction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRigidity
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharSubgroupCharacterLogVector
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormalCyclotomicTower
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.FieldTheory.SeparableDegree
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.SetTheory.Cardinal.NatCard
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 
 /-!
 # Detection for prime degrees outside the dyadic quadratic case
@@ -23,6 +27,8 @@ kernel. Trivial lower mod-p cohomology would make all action differences
 p-divisible. Averaging, or odd-prime binomial divisibility, and the log bound force the
 same vector to be invariant, a contradiction.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

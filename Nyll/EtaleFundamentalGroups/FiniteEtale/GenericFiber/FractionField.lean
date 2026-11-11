@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
 
 /-!
 # Fraction fields of finite-etale domains
@@ -18,6 +20,8 @@ The last assertion does not assume that `T` is normal.  It follows by
 selecting the field component `L` of the generic fibre and using the
 finite-etale normalization theorem for that component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

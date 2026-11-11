@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
-import Mathlib.AlgebraicGeometry.AffineScheme
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
+public import Mathlib.AlgebraicGeometry.AffineScheme
 
 /-!
 # The actual affine coordinate action of a normalized cover
@@ -16,6 +18,8 @@ sections. The deck automorphism of those sections is obtained from the
 actual scheme automorphism. Naturality of isoSpec then compares its
 normalization action with the geometric normalization action.
 -/
+
+@[expose] public section
 
 noncomputable section
 

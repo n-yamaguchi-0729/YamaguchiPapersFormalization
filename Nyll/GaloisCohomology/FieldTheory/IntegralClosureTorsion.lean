@@ -3,12 +3,16 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.GroupTheory.Torsion
+module
+
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.GroupTheory.Torsion
 
 /-!
 # Torsion units and integral closure
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 

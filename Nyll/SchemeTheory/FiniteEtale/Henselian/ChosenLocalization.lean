@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.QuasiFinite
-import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
+module
+
+public import Mathlib.RingTheory.Etale.QuasiFinite
+public import Mathlib.RingTheory.Unramified.LocalRing
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.PointedEtale
 
 /-!
 # Chosen local factors over Henselian local rings
@@ -14,6 +17,8 @@ A prime-local factor of an etale algebra over a Henselian local ring is finite o
 The proof uses the finite idempotent factor furnished by Tag 00UJ and trivializes its pointed
 etale neighbourhood by Hensel's lemma.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -84,9 +89,9 @@ theorem moduleFinite_localizationAtPrime_of_henselian_of_etale
     Algebra.TensorProduct.map (Algebra.ofId C Cₚ) (AlgHom.id R S)
   let : Algebra B BS := φ.toAlgebra
   let : IsScalarTower C B BS := IsScalarTower.of_algebraMap_eq' φ.comp_algebraMap.symm
-  let : IsScalarTower R B BS := IsScalarTower.of_algebraMap_eq' (by
-    ext r
-    simp [RingHom.algebraMap_toAlgebra, φ])
+  let : IsScalarTower R B BS :=
+    IsScalarTower.of_algebraMap_eq'
+      (φ.restrictScalars R).comp_algebraMap.symm
   let hBS : IsLocalization (Algebra.algebraMapSubmonoid B P.primeCompl) BS := by
     exact IsLocalization.tensorProduct_tensorProduct R S P.primeCompl Cₚ (by
       ext

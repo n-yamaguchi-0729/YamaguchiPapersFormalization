@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerEisenstein
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Eval.Coeff
-import Mathlib.FieldTheory.KummerExtension
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.PowerBasis
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerEisenstein
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
+public import Mathlib.FieldTheory.KummerExtension
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic.Basic
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.PowerBasis
 
 /-!
 # A cyclic Kummer extension from an Eisenstein parameter
@@ -22,6 +24,8 @@ basis; a primitive root of unity supplies the splitting field and Galois
 property. Its integral minimal polynomial is identified before any
 valuation is chosen, so the basis is ready for `EisensteinResidue`.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

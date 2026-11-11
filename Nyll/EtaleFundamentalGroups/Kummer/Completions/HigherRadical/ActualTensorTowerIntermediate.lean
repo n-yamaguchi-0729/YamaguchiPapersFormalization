@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.TowerPrescribedExponent
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.TowerPrescribedExponent
 
 /-!
 # Prescribed-root tensor towers with an identified intermediate component
@@ -14,6 +16,8 @@ component.  The post-root tensor tower instead starts from a final component
 and contracts it.  This file accepts the equality between those two ideals
 and transports the complete target across it internally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

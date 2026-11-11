@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueAlgebraicExtensions
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ChevalleyExtension
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.MonicFactorization
 
 /-!
 # Henselianity of algebraic extension valuation rings
@@ -14,6 +18,8 @@ Chevalley's theorem supplies an extension over every further algebraic field.
 Uniqueness over the original Henselian base makes this extension unique.
 The valuation-ring criterion then supplies Henselianity upstairs.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

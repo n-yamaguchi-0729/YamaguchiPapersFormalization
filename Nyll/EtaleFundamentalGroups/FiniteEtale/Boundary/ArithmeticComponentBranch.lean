@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentResidue
-import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
-import Nyll.SchemeTheory.FunctionFields.IntegerBase
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentResidue
+public import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
+public import Nyll.SchemeTheory.FunctionFields.IntegerBase
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Height-one branches at arithmetic component specializations
@@ -15,6 +18,8 @@ Every component of an arithmetic Galois pullback contains a residue-
 characteristic-two normal-crossings point.  The component generic point
 determines a canonical height-one prime in the ambient stalk at that point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -39,10 +44,10 @@ theorem
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y)
     (Z : Set (D.1.comap Y.hom).subscheme)
     (hZ : Z ∈ irreducibleComponents (D.1.comap Y.hom).subscheme) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
     let I : Y.left.IdealSheafData := D.1.comap Y.hom
     ∃ (z : I.subscheme) (hz : z ∈ Z),
@@ -53,12 +58,7 @@ theorem
           I.IsNormalCrossingsAt x₀ ∧
             branch.height = 1 ∧ I.stalkIdeal x₀ ≤ branch ∧
               branch ≤ IsLocalRing.maximalIdeal (Y.left.presheaf.stalk x₀) := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
+  intro sharedOwner1 sharedOwner2 sharedOwner3 I
   let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
   let hfiniteEtale : IsFiniteEtale Y.hom := Y.prop
   obtain ⟨z, hz, hzChar, hzNC⟩ :=
@@ -83,10 +83,10 @@ theorem galoisPullback_component_exists_residueCharacteristicTwoBranch
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y)
     (Z : Set (D.1.comap Y.hom).subscheme)
     (hZ : Z ∈ irreducibleComponents (D.1.comap Y.hom).subscheme) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
     let I : Y.left.IdealSheafData := D.1.comap Y.hom
     ∃ (z : I.subscheme) (hz : z ∈ Z),
@@ -97,12 +97,7 @@ theorem galoisPullback_component_exists_residueCharacteristicTwoBranch
           I.IsNormalCrossingsAt x₀ ∧
             q.height = 1 ∧ I.stalkIdeal x₀ ≤ q ∧
               q ≤ IsLocalRing.maximalIdeal (Y.left.presheaf.stalk x₀) := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
+  intro sharedOwner1 sharedOwner2 sharedOwner3 I
   exact D.galoisPullback_component_exists_residueCharacteristicBranch_of_normalCrossingPoints
     2 hD.2.2.2.1 Y hY Z hZ
 
@@ -119,16 +114,13 @@ theorem galoisPullback_componentBranchQuotient_charZero_of_ratEquiv
     (Z : Set (D.1.comap Y.hom).subscheme)
     (hZ : Z ∈ irreducibleComponents (D.1.comap Y.hom).subscheme)
     (z : (D.1.comap Y.hom).subscheme) (hz : z ∈ Z) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
     let I : Y.left.IdealSheafData := D.1.comap Y.hom
     let q := (I.componentBranchPrimeAt Z hZ z hz).asIdeal
     CharZero (Y.left.presheaf.stalk (I.subschemeι z) ⧸ q) := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
+  intro sharedOwner1 sharedOwner2 I
   let x := I.componentGenericPoint Z hZ
   let k := S.residueField (genericPoint S)
   have hdata :=
@@ -179,10 +171,10 @@ theorem
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y)
     (Z : Set (D.1.comap Y.hom).subscheme)
     (hZ : Z ∈ irreducibleComponents (D.1.comap Y.hom).subscheme) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
     let I : Y.left.IdealSheafData := D.1.comap Y.hom
     ∃ (z : I.subscheme) (hz : z ∈ Z),
@@ -194,12 +186,7 @@ theorem
             q.height = 1 ∧ I.stalkIdeal x₀ ≤ q ∧
               q ≤ IsLocalRing.maximalIdeal (Y.left.presheaf.stalk x₀) ∧
                 CharZero (Y.left.presheaf.stalk x₀ ⧸ q) := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
+  intro sharedOwner1 sharedOwner2 sharedOwner3 I
   have hbranch :=
     D.galoisPullback_component_exists_residueCharacteristicTwoBranch
       (specULiftZIsTerminal.from X) hD Y hY Z hZ

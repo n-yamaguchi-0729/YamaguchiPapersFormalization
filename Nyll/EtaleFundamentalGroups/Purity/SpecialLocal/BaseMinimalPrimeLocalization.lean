@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
-import Mathlib.RingTheory.Localization.Finiteness
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
+public import Mathlib.RingTheory.Localization.Finiteness
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Localizing at a minimal non-etale base point
@@ -16,6 +18,8 @@ a finite algebra `S` over `R`.  After localizing both rings at the complement
 of `p`, every target prime away from the fibre over the closed point is
 etale over `R_p`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

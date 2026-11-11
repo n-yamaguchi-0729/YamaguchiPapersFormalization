@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialCoverAlgebra
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectFixedFiber
-import Mathlib.AlgebraicGeometry.Pullbacks
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.TrivialCoverAlgebra
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectFixedFiber
+public import Mathlib.AlgebraicGeometry.Pullbacks
 
 
 /-!
@@ -17,6 +19,8 @@ The tensor spectrum is identified with the literal finite-etale pullback.
 The fiber comparison then turns triviality of the induced fundamental-group
 action into a splitting of the actual tensor algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

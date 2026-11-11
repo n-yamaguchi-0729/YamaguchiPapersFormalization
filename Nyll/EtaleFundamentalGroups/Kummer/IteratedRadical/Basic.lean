@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.Data.Fin.Tuple.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Relative
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.RelativeRadical
+module
+
+public import Mathlib.Algebra.Category.CommAlgCat.Basic
+public import Mathlib.Data.Fin.Tuple.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Relative
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.RelativeRadical
 
 /-!
 # Finite iterated Kummer radicals
@@ -22,6 +24,8 @@ Their algebra structures and all scalar towers are the canonical structures
 provided by `CommAlgCat` and `AdjoinRoot`.  No recursive instances are
 installed globally.
 -/
+
+@[expose] public section
 
 noncomputable section
 

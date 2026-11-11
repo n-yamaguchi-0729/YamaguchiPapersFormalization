@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Height
-import Nyll.SchemeTheory.Normalization.Normal
+module
+
+public import Mathlib.RingTheory.Ideal.Height
+public import Nyll.SchemeTheory.Normalization.Normal
 
 /-!
 # The punctured spectrum of a local ring
@@ -13,6 +15,8 @@ import Nyll.SchemeTheory.Normalization.Normal
 This module supplies the canonical open complement of the closed point and
 its basic nonemptiness criterion.
 -/
+
+@[expose] public section
 
 noncomputable section
 

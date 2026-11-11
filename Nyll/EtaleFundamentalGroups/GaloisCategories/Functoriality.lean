@@ -58,6 +58,7 @@ lemma continuous_conjAut
     rw [this]
     fun_prop
   funext a
+  apply Aut.ext
   apply Iso.ext
   rfl
 
@@ -103,8 +104,8 @@ theorem stabilizer_transportedPointOfCompIso
   dsimp only [transportedPointOfCompIso]
   ext a
   simp only [MulAction.mem_stabilizer_iff, Subgroup.mem_comap]
-  change a.hom.app (H.obj X) ((t.app X).inv x) = (t.app X).inv x ↔
-    (t.app X).hom (a.hom.app (H.obj X) ((t.app X).inv x)) = x
+  change a.asIso.hom.app (H.obj X) ((t.app X).inv x) = (t.app X).inv x ↔
+    (t.app X).hom (a.asIso.hom.app (H.obj X) ((t.app X).inv x)) = x
   constructor
   · intro ha
     simpa only [Functor.comp_obj, FintypeCat.inv_hom_id_apply] using
@@ -127,17 +128,18 @@ theorem autHomOfCompIso_eq_conj
     (H : C ⥤ C') {F : C ⥤ FintypeCat.{w}}
     {F' : C' ⥤ FintypeCat.{w}} (t₁ t₂ : H ⋙ F' ≅ F) (σ : Aut F') :
     autHomOfCompIso H t₂ σ =
-      MulAut.conj (G := Aut F) (t₁.symm ≪≫ t₂ : Aut F)
+      MulAut.conj (G := Aut F) (Aut.of (t₁.symm ≪≫ t₂))
         (autHomOfCompIso H t₁ σ) := by
   change t₂.conjAut
       (((whiskeringLeft C C' FintypeCat.{w}).obj H).mapAut F' σ) =
-    MulAut.conj (G := Aut F) (t₁.symm ≪≫ t₂ : Aut F)
+    MulAut.conj (G := Aut F) (Aut.of (t₁.symm ≪≫ t₂))
       (t₁.conjAut
         (((whiskeringLeft C C' FintypeCat.{w}).obj H).mapAut F' σ))
   let τ := ((whiskeringLeft C C' FintypeCat.{w}).obj H).mapAut F' σ
   have conj_eq (a b : Aut F) :
-      MulAut.conj (G := Aut F) a b = a.conjAut b := by
+      MulAut.conj (G := Aut F) a b = a.asIso.conjAut b := by
     apply Aut.ext
+    apply Iso.ext
     rfl
   have htrans :
       t₂.conjAut τ =
@@ -148,7 +150,7 @@ theorem autHomOfCompIso_eq_conj
       (congrArg (fun t : H ⋙ F' ≅ F ↦ t.conjAut τ) hcomp.symm).trans
         (Iso.trans_conjAut t₁ (t₁.symm ≪≫ t₂) τ)
   exact htrans.trans
-    (conj_eq (t₁.symm ≪≫ t₂) (t₁.conjAut τ)).symm
+    (conj_eq (Aut.of (t₁.symm ≪≫ t₂)) (t₁.conjAut τ)).symm
 
 /--
 The canonical comparison square between the finite continuous-action functors
@@ -166,13 +168,13 @@ def functorToContActionCompIso
   NatIso.ofComponents
     (fun X ↦ ObjectProperty.isoMk _
       (Action.mkIso (t.app X) (fun a ↦ by
-        change a.hom.app (H.obj X) ≫ (t.app X).hom =
-          (t.app X).hom ≫ (autHomOfCompIso H t a).hom.app X
+        change a.asIso.hom.app (H.obj X) ≫ (t.app X).hom =
+          (t.app X).hom ≫ (autHomOfCompIso H t a).asIso.hom.app X
         simp only [autHomOfCompIso_apply, Iso.conjAut_hom,
-          Iso.conj_apply, NatTrans.comp_app, Iso.app_hom]
-        change a.hom.app (H.obj X) ≫ t.hom.app X =
+          Iso.conj_apply_asHom, NatTrans.comp_app, Iso.app_hom]
+        change a.asIso.hom.app (H.obj X) ≫ t.hom.app X =
           t.hom.app X ≫ t.inv.app X ≫
-            a.hom.app (H.obj X) ≫ t.hom.app X
+            a.asIso.hom.app (H.obj X) ≫ t.hom.app X
         simp only [← Category.assoc, Iso.hom_inv_id_app, Category.id_comp])))
     (fun {X Y} f ↦ by
       ext : 2

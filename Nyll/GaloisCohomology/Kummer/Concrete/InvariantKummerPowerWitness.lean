@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
-import Mathlib.GroupTheory.QuotientGroup.Defs
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRootPowerAction
+public import Mathlib.GroupTheory.QuotientGroup.Defs
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Actual power witnesses from invariant Kummer characters
@@ -17,6 +19,8 @@ the power prescribed by the action on roots. Injectivity of the Kummer
 equivalence gives a witness in the original field unit group. This direction
 does not require the power exponent to be coprime to the coefficient modulus.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

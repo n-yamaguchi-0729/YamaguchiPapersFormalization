@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Conjugation
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Ideal
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.Conjugation
 
 /-!
 # Conjugation on tame inertia over a discrete valuation ring
@@ -15,6 +17,8 @@ character under the decomposition group.  In residue characteristic zero the
 character is faithful, so an element whose residue action inverts the
 character values conjugates inertia to its inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -60,8 +64,9 @@ def inertiaConjugate
     change g * 1 * g⁻¹ = 1
     rw [mul_one, mul_inv_cancel]
   map_mul' sigma tau := by
-    ext
-    simp [mul_assoc]
+    apply Subtype.ext
+    exact (MulAut.conj g).map_mul
+      (sigma : decompositionGroup K V) (tau : decompositionGroup K V)
 
 /-- The finite-level inertia character is equivariant for conjugation: the
 decomposition element acts on the residue-unit value, while its inverse acts

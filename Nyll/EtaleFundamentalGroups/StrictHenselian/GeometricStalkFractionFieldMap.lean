@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Mathlib.RingTheory.Localization.FractionRing
 
 
 /-!
@@ -17,6 +19,8 @@ injective. Localizing this injection constructs the map between the actual
 fraction fields and its compatibility with the original structure map. Neither
 a DVR nor a generic tensor comparison is required.
 -/
+
+@[expose] public section
 
 noncomputable section
 

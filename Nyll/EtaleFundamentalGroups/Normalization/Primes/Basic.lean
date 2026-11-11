@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Mathlib.RingTheory.Localization.AtPrime.Extension
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.Basic
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Mathlib.RingTheory.Localization.AtPrime.Extension
 
 /-!
 # Primes in a localized normalization
@@ -17,6 +19,8 @@ canonical normalization inclusion from `NormalizationLocalization` and the
 general prime-localization API; it does not require the original
 normalization to be a Dedekind domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

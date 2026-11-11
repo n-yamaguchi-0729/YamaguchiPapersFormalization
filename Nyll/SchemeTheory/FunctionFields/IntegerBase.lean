@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Field.ULift
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Mathlib.Algebra.Field.ULift
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The generic residue field of the integer base
@@ -19,6 +22,8 @@ to the definitions below; importing this file does not install a new global
 algebra instance.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory TopologicalSpace
@@ -27,7 +32,19 @@ namespace AlgebraicGeometry
 
 universe u
 
-private theorem uliftIntegerBaseIsDomain : IsDomain (ULift.{u} ℤ) :=
+/-- In universe zero the lifted integer base is the original integer spectrum through
+its actual ring equivalence. -/
+def specULiftZIsoOriginal :
+    Spec (CommRingCat.of (ULift.{0} ℤ)) ≅ Spec (CommRingCat.of ℤ) :=
+  Scheme.Spec.mapIso (ULift.ringEquiv : ULift.{0} ℤ ≃+* ℤ).symm.toCommRingCatIso.op
+
+/-- The canonical arithmetic map agrees with its original universe-zero map after this iso. -/
+theorem specULiftZ_from_comp_isoOriginal (X : Scheme.{0}) :
+    specULiftZIsTerminal.from X ≫ specULiftZIsoOriginal.hom = specZIsTerminal.from X :=
+  specZIsTerminal.hom_ext _ _
+
+/-- The lifted integer ring is a domain. -/
+theorem uliftIntegerBaseIsDomain : IsDomain (ULift.{u} ℤ) :=
   (ULift.ringEquiv : ULift.{u} ℤ ≃+* ℤ).toMulEquiv.isDomain ℤ
 
 attribute [local instance] uliftIntegerBaseIsDomain

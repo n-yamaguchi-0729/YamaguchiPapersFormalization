@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # A fixed normalization point on a localized etale chart
@@ -16,6 +18,8 @@ localization of its stalk. The canonical normalization comparisons are actual
 isomorphisms at both steps. The resulting point has exactly the original
 fixing endomorphisms, simultaneously for all endomorphisms over the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

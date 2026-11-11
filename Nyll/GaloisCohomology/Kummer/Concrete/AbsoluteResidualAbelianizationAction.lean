@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Algebra.Ring.Aut
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Algebra.Ring.Aut
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # The absolute action on an abelianized residual quotient
@@ -27,6 +29,8 @@ base field. No restriction on the characteristic is needed: compactness of
 the absolute Galois group is supplied by its actual comparison with the
 separable-closure Galois group.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 
@@ -41,7 +45,8 @@ local notation "G" => Gal(AlgebraicClosure K/K)
 local notation "R" => proCResidualCore C G
 local notation "Q" => G ⧸ R
 
-private noncomputable def residualAbelianizationEquiv (τ : RingAut K) :
+/-- A base automorphism induces a continuous equivalence on the abelianized residual quotient. -/
+noncomputable def residualAbelianizationEquiv (τ : RingAut K) :
     TopologicalAbelianization Q ≃ₜ* TopologicalAbelianization Q := by
   have : CompactSpace G :=
     (ValuationTheory.Completion.separableClosureAutContinuousEquiv K).symm.toHomeomorph.compactSpace
@@ -58,7 +63,8 @@ private theorem residualAbelianizationEquiv_apply_mk
     ← absoluteGaloisConjugateContinuousEquiv_apply]
   rfl
 
-private theorem residualAbelianizationEquiv_one :
+/-- The identity base automorphism induces the identity on residual abelianization. -/
+theorem residualAbelianizationEquiv_one :
     (residualAbelianizationEquiv hC (1 : RingAut K)).toMulEquiv = 1 := by
   apply MulEquiv.ext
   intro x
@@ -81,7 +87,8 @@ private theorem residualAbelianizationEquiv_one :
       (RingEquiv.refl K)), semilinearGaloisConjugate_refl]
   rfl
 
-private theorem residualAbelianizationEquiv_mul (τ υ : RingAut K) :
+/-- Residual abelianization respects composition of base automorphisms. -/
+theorem residualAbelianizationEquiv_mul (τ υ : RingAut K) :
     (residualAbelianizationEquiv hC (τ * υ)).toMulEquiv =
       (residualAbelianizationEquiv hC τ).toMulEquiv *
         (residualAbelianizationEquiv hC υ).toMulEquiv := by

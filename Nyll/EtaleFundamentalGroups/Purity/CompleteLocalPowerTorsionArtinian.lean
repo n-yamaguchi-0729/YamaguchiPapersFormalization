@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.ArtinianSocleFiniteLength
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalResidueFieldHullArtinian
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.FiniteLengthInjectiveEmbedding
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerTorsionSocle
-import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Module.Injective
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.ArtinianSocleFiniteLength
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalResidueFieldHullArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteLengthInjectiveEmbedding
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerTorsionSocle
+public import Nyll.EtaleFundamentalGroups.Purity.ModuleInjectiveHull
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
 /-!
 # Artinianness from the socle over a complete local ring
@@ -28,6 +30,8 @@ maximal-ideal-power torsion module the socle is essential, so it suffices
 that the socle be Artinian.  In particular an Artinian scalar kernel for
 a member of the maximal ideal suffices.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -75,17 +75,17 @@ theorem autHomOfCompIso_comparisonIsoOfContinuousHom
   change
     (ConcreteCategory.hom e.hom.hom.hom)
         ((ConcreteCategory.hom
-          (a.hom.app ((functorToContAction F').asEquivalence.inverse.obj Y)))
+          (a.asIso.hom.app ((functorToContAction F').asEquivalence.inverse.obj Y)))
             ((ConcreteCategory.hom e.inv.hom.hom) x)) =
-      (ConcreteCategory.hom ((h a).hom.app X)) x
+      (ConcreteCategory.hom ((h a).asIso.hom.app X)) x
   have hc := ConcreteCategory.congr_hom (e.hom.hom.comm a)
     (ConcreteCategory.hom e.inv.hom.hom x)
   change
     (ConcreteCategory.hom e.hom.hom.hom)
         ((ConcreteCategory.hom
-          (a.hom.app ((functorToContAction F').asEquivalence.inverse.obj Y)))
+          (a.asIso.hom.app ((functorToContAction F').asEquivalence.inverse.obj Y)))
             ((ConcreteCategory.hom e.inv.hom.hom) x)) =
-      (ConcreteCategory.hom ((h a).hom.app X))
+      (ConcreteCategory.hom ((h a).asIso.hom.app X))
         ((ConcreteCategory.hom e.hom.hom.hom)
           ((ConcreteCategory.hom e.inv.hom.hom) x)) at hc
   have heq :
@@ -97,6 +97,6 @@ theorem autHomOfCompIso_comparisonIsoOfContinuousHom
       e.inv_hom_id
     exact ConcreteCategory.congr_hom he x
   exact hc.trans
-    (congrArg (ConcreteCategory.hom ((h a).hom.app X)) heq)
+    (congrArg (ConcreteCategory.hom ((h a).asIso.hom.app X)) heq)
 
 end CategoryTheory.PreGaloisCategory

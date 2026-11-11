@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGeneration
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FiniteGeneration
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
 
 /-!
 # Power actions on roots in the algebraic closure
@@ -14,6 +16,8 @@ When a base automorphism acts by a specified power on the roots of unity,
 its chosen lift acts by that power on the same roots in the algebraic closure.
 The roots are descended using an actual primitive root in the base field.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

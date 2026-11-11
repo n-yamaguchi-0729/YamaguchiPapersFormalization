@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
 
 /-!
 # A full root cover presented with an actual branch root first
@@ -15,6 +17,8 @@ roots instead presents the same full cover as a finite free extension of the
 simple actual-root cover.  This file records that equivalence, its two root
 coordinates, and the exact contraction of the actual root prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -130,19 +134,13 @@ theorem fullRootCoverActualRootFirstAlgebra_map_root
     let F : B[X] := X ^ N - C (algebraMap R B y)
     let px : R[X] := X ^ n k - C (a k)
     let Xroot := AdjoinRoot px
-    letI : Algebra Xroot (AdjoinRoot F) :=
+    let : Algebra Xroot (AdjoinRoot F) :=
       fullRootCoverActualRootFirstAlgebra n a k hother N y
     algebraMap Xroot (AdjoinRoot F) (AdjoinRoot.root px) =
       algebraMap B (AdjoinRoot F) (iteratedRadicalRoot R n a k) := by
-  dsimp only
-  let B := iteratedRadical R (s + 1) n a
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let px : R[X] := X ^ n k - C (a k)
-  let Xroot := AdjoinRoot px
+  intro B F px Xroot sharedOwner1
   let fy : Xroot[X] := X ^ N - C (algebraMap R Xroot y)
   let e := fullRootCoverActualRootFirstAlgEquiv n a k hother N y
-  let : Algebra Xroot (AdjoinRoot F) :=
-    fullRootCoverActualRootFirstAlgebra n a k hother N y
   apply e.injective
   change e (e.symm (algebraMap Xroot (AdjoinRoot fy)
       (AdjoinRoot.root px))) =
@@ -165,15 +163,10 @@ theorem fullRootCoverActualRootFirst_under_eq_span_root
     let qx := Ideal.span ({AdjoinRoot.root px} : Set Xroot)
     let qD := Ideal.span
       ({algebraMap B D (iteratedRadicalRoot R n a k)} : Set D)
-    letI : Algebra Xroot D :=
+    let : Algebra Xroot D :=
       fullRootCoverActualRootFirstAlgebra n a k hother N y
     qD.under Xroot = qx := by
-  dsimp only
-  let B := iteratedRadical R (s + 1) n a
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let D := AdjoinRoot F
-  let px : R[X] := X ^ n k - C (a k)
-  let Xroot := AdjoinRoot px
+  intro B F D px Xroot qx qD sharedOwner3
   let fy : Xroot[X] := X ^ N - C (algebraMap R Xroot y)
   let Dxy := AdjoinRoot fy
   let : Module.FaithfullyFlat R Xroot :=
@@ -183,7 +176,7 @@ theorem fullRootCoverActualRootFirst_under_eq_span_root
   let : Nontrivial Xroot :=
     (FaithfulSMul.algebraMap_injective R Xroot).nontrivial
   let : Algebra Xroot D :=
-    fullRootCoverActualRootFirstAlgebra n a k hother N y
+    sharedOwner3
   let : Module.FaithfullyFlat Xroot Dxy :=
     faithfullyFlat_adjoinRoot_X_pow_sub_C hN (algebraMap R Xroot y)
   let eRing := fullRootCoverActualRootFirstAlgEquiv n a k hother N y
@@ -194,11 +187,8 @@ theorem fullRootCoverActualRootFirst_under_eq_span_root
       exact eRing.apply_symm_apply _)
   let : Module.FaithfullyFlat Xroot D :=
     Module.FaithfullyFlat.of_linearEquiv Xroot Dxy e.toLinearEquiv
-  let qx := Ideal.span ({AdjoinRoot.root px} : Set Xroot)
-  have hmap : qx.map (algebraMap Xroot D) =
-      Ideal.span
-        ({algebraMap B D (iteratedRadicalRoot R n a k)} : Set D) := by
-    simp only [qx, Ideal.map_span, Set.image_singleton]
+  have hmap : qx.map (algebraMap Xroot D) = qD := by
+    simp only [qx, qD, Ideal.map_span, Set.image_singleton]
     rw [fullRootCoverActualRootFirstAlgebra_map_root]
   rw [← hmap]
   exact Ideal.comap_map_eq_self_of_faithfullyFlat (B := D) qx

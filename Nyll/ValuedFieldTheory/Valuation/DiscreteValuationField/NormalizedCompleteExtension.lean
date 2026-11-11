@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Uniqueness
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteIntegralClosure
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Uniqueness
 
 /-!
 # Integer-valued complete extensions
@@ -15,6 +17,8 @@ The integral closure supplies a complete extension valuation, and its
 localization supplies an integer-valued discrete extension valuation.
 Uniqueness identifies their valuation subrings and transports completeness.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.ValuedExtension
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
-import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitPadicContinuity
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitPadicContinuity
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous
 
 /-!
 # P-adic linearity of the actual principal-unit logarithm
@@ -17,6 +19,8 @@ Both scalar actions and their continuity are supplied by the preceding
 constructions. Density of natural exponents upgrades additivity of the
 logarithm to linearity over the p-adic integers.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

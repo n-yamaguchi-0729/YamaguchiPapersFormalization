@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
 import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualSigmaPower
 import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Abelian normal subgroups obstruct Sigma-faithfulness

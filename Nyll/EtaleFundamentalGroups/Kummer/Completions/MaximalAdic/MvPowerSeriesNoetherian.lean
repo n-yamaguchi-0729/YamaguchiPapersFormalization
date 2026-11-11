@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.MvPowerSeries.Rename
-import Mathlib.RingTheory.PowerSeries.Ideal
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.FiniteGeneratorEvaluation
+module
+
+public import Mathlib.RingTheory.MvPowerSeries.Rename
+public import Mathlib.RingTheory.PowerSeries.Ideal
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.FiniteGeneratorEvaluation
 
 /-!
 # Noetherian finite-variable power-series rings
@@ -17,6 +19,8 @@ an iterated univariate power-series ring.  This gives the finite-variable
 Hilbert basis theorem for formal power series and, as an application, the
 Noetherianity of maximal-adic completions of Noetherian local rings.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,7 +37,7 @@ variable {R : Type u} {σ : Type v}
 
 /-- Split an exponent on `Unit ⊕ σ` into the exponent of the distinguished
 variable and the exponent vector on the remaining variables. -/
-private noncomputable def splitIndex :
+noncomputable def splitIndex :
     (Unit ⊕ σ →₀ ℕ) ≃ ℕ × (σ →₀ ℕ) :=
   Finsupp.sumFinsuppEquivProdFinsupp.trans
     (Equiv.prodCongr (Finsupp.uniqueEquiv ()) (Equiv.refl _))
@@ -51,13 +55,13 @@ private lemma splitIndex_apply_sumElim (n : ℕ) (d : σ →₀ ℕ) :
 
 /-- Curry the coefficient function of a power series in `Unit ⊕ σ` into a
 univariate power series whose coefficients are power series in `σ`. -/
-private def curryFun [Semiring R] :
+def curryFun [Semiring R] :
     MvPowerSeries (Unit ⊕ σ) R → PowerSeries (MvPowerSeries σ R) :=
   fun p ↦ PowerSeries.mk fun n ↦
     (fun d ↦ p ((splitIndex (σ := σ)).symm (n, d)) : MvPowerSeries σ R)
 
 /-- Undo `curryFun` by joining the two exponent vectors. -/
-private def uncurryFun [Semiring R] :
+def uncurryFun [Semiring R] :
     PowerSeries (MvPowerSeries σ R) → MvPowerSeries (Unit ⊕ σ) R :=
   fun p d ↦
     PowerSeries.coeff ((splitIndex (σ := σ) d).1) p
@@ -90,7 +94,8 @@ private lemma coeff_uncurryFun [Semiring R]
   rw [MvPowerSeries.coeff_apply, MvPowerSeries.coeff_apply]
   rfl
 
-private lemma curryFun_mul [CommSemiring R]
+/-- Currying the coefficient function preserves multiplication. -/
+lemma curryFun_mul [CommSemiring R]
     (p q : MvPowerSeries (Unit ⊕ σ) R) :
     curryFun (p * q) = curryFun p * curryFun q := by
   classical

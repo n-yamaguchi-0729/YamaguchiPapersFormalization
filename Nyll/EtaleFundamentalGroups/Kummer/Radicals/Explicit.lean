@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdjoinRoot
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 /-!
 # The explicit one-component Kummer algebra
@@ -20,6 +22,8 @@ No etaleness or derivative-unit conclusion is assumed here.  The remaining
 geometric input is a producer that turns etaleness of the explicit Kummer
 algebra into the derivative-unit side of the final equivalence.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

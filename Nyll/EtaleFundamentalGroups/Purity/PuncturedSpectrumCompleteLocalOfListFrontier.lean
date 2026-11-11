@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalIntersectionFrontier
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteIntersectionInputs
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalIntersectionFrontier
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteIntersectionInputs
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # The finite-generator complete-local connectedness frontier
@@ -20,6 +22,8 @@ component of the quotient spectrum meets its puncture.
 
 The resulting reduction is independent of any regularity of the generators.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -443,10 +447,10 @@ theorem exists_radical_nonmaximal_componentIntersectionIdeals_of_not_connectedSp
     (xs : List C) (hxs : I = Ideal.ofList xs)
     (hdim :
       ((((xs.length + 2 : ℕ) : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim C)) :
-    letI : Nontrivial (C ⧸ I) :=
+    let : Nontrivial (C ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr <|
         ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-    letI : IsLocalRing (C ⧸ I) :=
+    let : IsLocalRing (C ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     ¬ ConnectedSpace (Scheme.puncturedSpectrum (C ⧸ I)) →
@@ -457,12 +461,7 @@ theorem exists_radical_nonmaximal_componentIntersectionIdeals_of_not_connectedSp
         a.IsRadical ∧ b.IsRadical ∧
         a ⊓ b = nilradical (C ⧸ I) ∧
         (a ⊔ b).radical = maximalIdeal (C ⧸ I) := by
-  let : Nontrivial (C ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr <|
-      ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-  let : IsLocalRing (C ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   apply
     exists_radical_nonmaximal_componentIntersectionIdeals_of_not_connectedSpace_of_components_meet
   intro Z hZ
@@ -580,10 +579,10 @@ theorem exists_radical_completeIntersectionPowerData_of_not_connectedSpace_quoti
     (xs : List C) (hxs : I = Ideal.ofList xs)
     (hdim :
       ((((xs.length + 2 : ℕ) : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim C)) :
-    letI : Nontrivial (C ⧸ I) :=
+    let : Nontrivial (C ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr <|
         ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-    letI : IsLocalRing (C ⧸ I) :=
+    let : IsLocalRing (C ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     ¬ ConnectedSpace (Scheme.puncturedSpectrum (C ⧸ I)) →
@@ -596,13 +595,7 @@ theorem exists_radical_completeIntersectionPowerData_of_not_connectedSpace_quoti
         (a ⊔ b).radical = maximalIdeal C ∧
         (maximalIdeal C) ^ n ≤ a ⊔ b ∧
         (a * b) ^ k ≤ I := by
-  let : Nontrivial (C ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr <|
-      ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-  let : IsLocalRing (C ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
-  intro hnot
+  intro sharedOwner1 sharedOwner2 hnot
   obtain ⟨a, b, hIa, hIb, ha, hb, haMax, hbMax,
       haRadical, hbRadical, hinf, hsup⟩ :=
     (
@@ -629,10 +622,10 @@ theorem exists_bounded_minimalPrime_pair_of_not_connectedSpace_quotient_ofList
     (xs : List C) (hxs : I = Ideal.ofList xs)
     (hdim :
       ((((xs.length + 2 : ℕ) : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim C)) :
-    letI : Nontrivial (C ⧸ I) :=
+    let : Nontrivial (C ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr <|
         ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-    letI : IsLocalRing (C ⧸ I) :=
+    let : IsLocalRing (C ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     ¬ ConnectedSpace (Scheme.puncturedSpectrum (C ⧸ I)) →
@@ -644,13 +637,7 @@ theorem exists_bounded_minimalPrime_pair_of_not_connectedSpace_quotient_ofList
         (P ⊔ Q).radical = maximalIdeal C ∧
         (((P ⊔ Q).height : ℕ∞) : WithBot ℕ∞) = ringKrullDim C ∧
         ((xs.length + 2 : ℕ) : ℕ∞) ≤ (P ⊔ Q).height := by
-  let : Nontrivial (C ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr <|
-      ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hI
-  let : IsLocalRing (C ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
-  intro hnot
+  intro sharedOwner1 sharedOwner2 hnot
   obtain ⟨a, b, _hIa, _hIb, _ha, _hb, haMax, hbMax,
       haRadical, hbRadical, hinf, hsup⟩ :=
     (

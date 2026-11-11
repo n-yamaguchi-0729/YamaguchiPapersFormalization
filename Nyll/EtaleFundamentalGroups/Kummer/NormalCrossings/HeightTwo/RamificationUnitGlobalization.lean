@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Ramification.HeightTwo.IndexGlobalization
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.RamificationUnitTransport
+module
+
+public import Nyll.EtaleFundamentalGroups.Ramification.HeightTwo.IndexGlobalization
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.RamificationUnitTransport
 
 /-!
 # Globalizing exact-root units on a strict-normal-crossings branch
@@ -16,6 +18,8 @@ every height-two localization above the chosen branch, the ramification
 index of every normalization prime over that branch is a unit in the branch
 residue ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

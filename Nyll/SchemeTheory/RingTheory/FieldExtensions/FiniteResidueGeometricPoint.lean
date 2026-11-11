@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Ideal.Over
-import Mathlib.RingTheory.Finiteness.Quotient
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Ideal.Over
+public import Mathlib.RingTheory.Finiteness.Quotient
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Geometric points of finite algebras over a local ring
@@ -16,6 +18,8 @@ Every maximal ideal of a finite algebra above the closed point can be
 represented over the same chosen algebraic closure of the base residue field.
 The resulting ring map has the given kernel and the canonical base map.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.RingTheory.IsTensorProduct
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.RingTheory.IsTensorProduct
 
 
 /-!
@@ -18,6 +20,8 @@ Mathlib's pushout cancellation identifies `(K ⊗[R] S) ⊗[K] B` with
 of `K ⊗[R] S`. A supplied splitting then gives an actual splitting into
 copies of `S ⊗[R] K`, with explicit formulas for both directions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.FieldTheory.AdditiveH2Finite
-import Nyll.GaloisCohomology.Topology.GaloisFiniteStageFunctions
-import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Tactic.LinearCombination
+module
+
+public import Nyll.GaloisCohomology.FieldTheory.AdditiveH2Finite
+public import Nyll.GaloisCohomology.Topology.GaloisFiniteStageFunctions
+public import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Tactic.LinearCombination
+public import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
+public import Nyll.GaloisCohomology.Topology.AlgebraicGaloisOrbits
 
 /-!
 # Continuous Artin–Schreier two-cocycles
@@ -16,6 +20,8 @@ import Mathlib.Tactic.LinearCombination
 Trace averaging and the Artin–Schreier exact sequence give explicit locally
 constant primitives for two-cocycles with values in the prime field.
 -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 universe u v

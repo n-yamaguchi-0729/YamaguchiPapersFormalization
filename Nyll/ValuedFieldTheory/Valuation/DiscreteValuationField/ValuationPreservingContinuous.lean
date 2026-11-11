@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Int.WithZero
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Mathlib.Data.Int.WithZero
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Continuity of valuation-preserving field automorphisms
@@ -15,6 +17,8 @@ A valuation-preserving automorphism preserves every basic neighbourhood of
 zero for the actual topology induced by the valuation. No completeness or
 discreteness hypothesis is required.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.Valuation
 

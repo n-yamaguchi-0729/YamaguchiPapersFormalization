@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristicOrientation
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.GroupTheory.SpecificGroups.Cyclic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristicOrientation
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.GroupTheory.SpecificGroups.Cyclic
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-!
 # Infinite orientations from cyclic extensions
@@ -14,6 +17,8 @@ import Mathlib.GroupTheory.SpecificGroups.Cyclic
 A cyclic extension of prime degree in positive characteristic supplies
 an orientation satisfying formal Hilbert 90 with infinite image.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u

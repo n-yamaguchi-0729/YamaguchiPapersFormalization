@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
+module
+
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.IdealCyclotomicBaseResidue
 
 /-!
 # Cyclotomic inversion from a divisorial residue field
@@ -15,6 +17,8 @@ intrinsic decomposition residue field of a prime in a finite Galois
 normalization, and feeds geometric integrality of the divisorial residue
 field into finite-level cyclotomic inversion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -34,13 +38,12 @@ private theorem geometricallyIntegral_specMap_transport_dvrResidueEquiv
     (h : AlgebraicGeometry.GeometricallyIntegral
       (AlgebraicGeometry.Spec.map
         (CommRingCat.ofHom (algebraMap k R)))) :
-    letI : Algebra k S :=
+    let : Algebra k S :=
       (e.toRingHom.comp (algebraMap k R)).toAlgebra
     AlgebraicGeometry.GeometricallyIntegral
       (AlgebraicGeometry.Spec.map
         (CommRingCat.ofHom (algebraMap k S))) := by
-  let : Algebra k S :=
-    (e.toRingHom.comp (algebraMap k R)).toAlgebra
+  intro residueAlgebra
   let i : AlgebraicGeometry.Spec (CommRingCat.of S) ≅
       AlgebraicGeometry.Spec (CommRingCat.of R) :=
     AlgebraicGeometry.Scheme.Spec.mapIso e.toCommRingCatIso.op

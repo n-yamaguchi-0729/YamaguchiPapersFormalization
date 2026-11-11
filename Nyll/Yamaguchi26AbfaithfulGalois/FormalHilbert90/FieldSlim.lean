@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot5GroupCriterion
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristicOrientation
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.IntermediateField.Algebraic
-import Mathlib.Algebra.CharP.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot5GroupCriterion
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.AbsoluteCyclotomicOrientation
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PositiveCharacteristicOrientation
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Mathlib.Algebra.CharP.Basic
 
 /-!
 # A field criterion for slim finite-step solvable quotients
@@ -21,6 +23,8 @@ chosen algebraic closure and each prime distinct from the characteristic.
 The positive-characteristic condition states that the Artin--Schreier
 map is not surjective.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

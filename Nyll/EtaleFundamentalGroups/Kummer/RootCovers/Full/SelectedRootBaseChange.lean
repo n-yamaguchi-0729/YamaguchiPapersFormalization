@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.Support
 
 /-!
 # The selected one-root cover inside a full radical cover
@@ -18,6 +20,8 @@ the contraction of the selected height-one root prime.  The contraction is
 the input needed to compare the fixed generic tensor component over the
 simple selected-root DVR with the same component over the full cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -67,17 +71,11 @@ theorem fullRootCoverSelectedRootAlgebra_map_root
     let S := AdjoinRoot g
     let F : B[X] := X ^ N - C (algebraMap R B y)
     let D := AdjoinRoot F
-    letI : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
+    let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
     algebraMap S D (AdjoinRoot.root g) = AdjoinRoot.root F := by
-  dsimp only
-  let B := iteratedRadical R d n a
-  let g : R[X] := X ^ N - C y
-  let S := AdjoinRoot g
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let D := AdjoinRoot F
+  intro B g S F D sharedOwner1
   have hg : g.map (algebraMap R B) = F := by
     simp [g, F]
-  let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
   change ((adjoinRootBaseChangeAlgEquiv g).trans
       (AdjoinRoot.algEquivOfEq B _ _ hg))
         ((1 : B) ⊗ₜ[R] AdjoinRoot.root g) = AdjoinRoot.root F
@@ -94,14 +92,9 @@ theorem fullRootCoverSelectedRoot_moduleFinite
     let S := AdjoinRoot g
     let F : B[X] := X ^ N - C (algebraMap R B y)
     let D := AdjoinRoot F
-    letI : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
+    let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
     Module.Finite S D := by
-  dsimp only
-  let B := iteratedRadical R d n a
-  let g : R[X] := X ^ N - C y
-  let S := AdjoinRoot g
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let D := AdjoinRoot F
+  intro B g S F D sharedOwner1
   have hg : g.map (algebraMap R B) = F := by
     simp [g, F]
   let : Module.Finite R B := finite_iteratedRadical n a hn
@@ -113,7 +106,6 @@ theorem fullRootCoverSelectedRoot_moduleFinite
       (AdjoinRoot.algEquivOfEq B _ _ hg)
   let eRing : T ≃+* D :=
     (Algebra.TensorProduct.comm R S B).toRingEquiv.trans eBase.toRingEquiv
-  let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
   let e : T ≃ₐ[S] D := AlgEquiv.ofRingEquiv (R := S) (f := eRing) (fun x ↦ by
     change eBase ((1 : B) ⊗ₜ[R] x) = algebraMap S D x
     rfl)
@@ -129,14 +121,9 @@ theorem fullRootCoverSelectedRoot_faithfullyFlat
     let S := AdjoinRoot g
     let F : B[X] := X ^ N - C (algebraMap R B y)
     let D := AdjoinRoot F
-    letI : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
+    let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
     Module.FaithfullyFlat S D := by
-  dsimp only
-  let B := iteratedRadical R d n a
-  let g : R[X] := X ^ N - C y
-  let S := AdjoinRoot g
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let D := AdjoinRoot F
+  intro B g S F D sharedOwner1
   have hg : g.map (algebraMap R B) = F := by
     simp [g, F]
   let : Module.FaithfullyFlat R B :=
@@ -149,7 +136,6 @@ theorem fullRootCoverSelectedRoot_faithfullyFlat
       (AdjoinRoot.algEquivOfEq B _ _ hg)
   let eRing : T ≃+* D :=
     (Algebra.TensorProduct.comm R S B).toRingEquiv.trans eBase.toRingEquiv
-  let : Algebra S D := fullRootCoverSelectedRootAlgebra n a N y
   let e : T ≃ₐ[S] D := AlgEquiv.ofRingEquiv (R := S) (f := eRing) (fun x ↦ by
     change eBase ((1 : B) ⊗ₜ[R] x) = algebraMap S D x
     rfl)

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Normal.Basic
-import Mathlib.FieldTheory.PurelyInseparable.Basic
+module
+
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Normal.Basic
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
 
 /-!
 # Restriction from an algebraic closure to its separable closure
@@ -16,6 +18,8 @@ The algebraic closure is purely inseparable over the separable closure, so an
 automorphism is uniquely determined by its restriction. Normality supplies
 extensions of automorphisms, and restriction is continuous for the Krull topology.
 -/
+
+@[expose] public section
 
 noncomputable section
 

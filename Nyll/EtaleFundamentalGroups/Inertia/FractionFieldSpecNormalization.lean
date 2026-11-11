@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
+public import Mathlib.RingTheory.Localization.FractionRing
 
 /-!
 # The actual function field over a fraction-field spectrum
@@ -15,6 +17,8 @@ composite of the two canonical fraction-field maps. This comparison is made
 before installing the scalar tower, so the resulting fraction-ring structure
 uses precisely the algebra of normalization geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 

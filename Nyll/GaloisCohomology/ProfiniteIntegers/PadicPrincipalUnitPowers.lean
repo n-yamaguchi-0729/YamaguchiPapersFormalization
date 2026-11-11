@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.Data.Nat.Totient
+module
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicInverseLimit
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.Data.Nat.Totient
 
 /-!
 # Continuous principal-unit powers
@@ -15,6 +17,8 @@ Euler's theorem gives compatible finite powers of `(p + 1) ^ (p - 1)`.
 Their inverse limit is a continuous character of the additive p-adic integers,
 with infinite image and trivial reduction modulo p.
 -/
+
+@[expose] public section
 
 namespace PadicInt
 variable (p : ℕ) [Fact p.Prime]

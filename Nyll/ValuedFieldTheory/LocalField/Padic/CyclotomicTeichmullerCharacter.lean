@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Padic.TeichmullerReduction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicAutToPowReduction
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Padic.TeichmullerReduction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicAutToPowReduction
 
 /-!
 # The p-adic character of a finite p-th cyclotomic extension
@@ -15,6 +17,8 @@ The action on the p-th roots of unity lifts by Teichmüller representatives
 to p-adic units. It recovers the action on every p-power root present in
 the extension, without assuming that all p-power roots are present.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

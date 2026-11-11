@@ -4,13 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalOfListFrontier
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationComplete
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHartshorneLichtenbaumGeometry
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumVanishing
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionNonvanishing
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalOfListFrontier
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationComplete
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHartshorneLichtenbaumGeometry
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumVanishing
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologySupportDimensionNonvanishing
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyMayerVietoris
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
 
 /-!
 # Connected finite-generator quotients in complete local domains
@@ -20,6 +25,8 @@ induction from Hartshorne--Lichtenbaum vanishing and top local-cohomology
 nonvanishing. The Mayer--Vietoris argument applies to every finite list of
 generators, with no regularity assumption on that list.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,20 +51,15 @@ theorem connectedSpace_puncturedSpectrum_quotient_ofList_of_topLocalCohomology
         (ModuleCat.of C C) d))
     (hTop : ¬ IsZero (EtaleFundamentalGroups.derivedLocalCohomology
       (maximalIdeal C) (ModuleCat.of C C) d)) :
-    letI : Nontrivial (C ⧸ Ideal.ofList xs) :=
+    let : Nontrivial (C ⧸ Ideal.ofList xs) :=
       Ideal.Quotient.nontrivial_iff.mpr <|
         ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hxs
-    letI : IsLocalRing (C ⧸ Ideal.ofList xs) :=
+    let : IsLocalRing (C ⧸ Ideal.ofList xs) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk (Ideal.ofList xs))
         Ideal.Quotient.mk_surjective
     ConnectedSpace
       (Scheme.puncturedSpectrum (C ⧸ Ideal.ofList xs)) := by
-  let : Nontrivial (C ⧸ Ideal.ofList xs) :=
-    Ideal.Quotient.nontrivial_iff.mpr <|
-      ne_top_of_le_ne_top (maximalIdeal.isMaximal C).ne_top hxs
-  let : IsLocalRing (C ⧸ Ideal.ofList xs) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk (Ideal.ofList xs))
-      Ideal.Quotient.mk_surjective
+  intro sharedOwner1 sharedOwner2
   have hdimBound :
       ((((xs.length + 2 : ℕ) : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim C) := by
     rw [hdim]

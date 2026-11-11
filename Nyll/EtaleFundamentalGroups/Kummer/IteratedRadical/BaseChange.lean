@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdjoinRoot
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
+module
+
+public import Mathlib.RingTheory.AdjoinRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.Basic
 
 /-!
 # Base change of finite iterated radicals
@@ -14,6 +16,8 @@ The diagonal iterated radical construction commutes with arbitrary base
 change.  The proof follows the recursive presentation and uses mathlib's
 canonical base-change equivalence for `AdjoinRoot` at each step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

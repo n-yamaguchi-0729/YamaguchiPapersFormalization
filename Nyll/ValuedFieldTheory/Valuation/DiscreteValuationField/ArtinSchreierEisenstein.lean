@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.Divisibility
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.Algebra.Polynomial.Coeff
-import Mathlib.Algebra.Polynomial.Degree.Operations
-import Mathlib.Algebra.Ring.Divisibility.Basic
-import Mathlib.RingTheory.Ideal.Maximal
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
-import Mathlib.RingTheory.Polynomial.GaussLemma
-import Mathlib.Tactic.Ring
+module
+
+public import Mathlib.Algebra.GroupWithZero.Divisibility
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Ring.Divisibility.Basic
+public import Mathlib.RingTheory.Ideal.Maximal
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Span
+public import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
+public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import Mathlib.Tactic.Ring
 
 /-!
 # The reciprocal Eisenstein polynomial for an Artin--Schreier extension
@@ -29,6 +31,8 @@ intended DVR application, an irreducible uniformizer supplies the prime
 parameter, and `n` is the residue characteristic. Galois and ramification
 claims are not assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # A regular system under one local Kummer root
@@ -17,6 +19,8 @@ that member by the new root.  The resulting list is again a regular system
 generating the maximal ideal.  Consequently the root cover is a domain and
 every member of the replacement system is prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

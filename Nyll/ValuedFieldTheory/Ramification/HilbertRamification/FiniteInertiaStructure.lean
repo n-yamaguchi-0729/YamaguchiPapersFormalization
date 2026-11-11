@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
-import Mathlib.Algebra.CharP.Reduced
-import Mathlib.GroupTheory.Sylow
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteRamificationPrimary
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+public import Mathlib.Algebra.CharP.Reduced
+public import Mathlib.GroupTheory.Sylow
 
 /-!
 # Structure of finite inertia
@@ -18,6 +20,8 @@ values, so this character is defined on all inertia. In residue characteristic
 zero its kernel is trivial and inertia is commutative. In residue characteristic
 p every p-subgroup lies in the ramification kernel, which is itself a p-group.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

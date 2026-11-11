@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.Topology.Algebra.Valued.WithVal
-import Mathlib.Topology.Algebra.Valued.NormedValued
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.Topology.Algebra.Valued.WithVal
+public import Mathlib.Topology.Algebra.Valued.NormedValued
 
 /-!
 # The normed model of a discrete valuation
@@ -16,6 +18,8 @@ Use the existing `WithVal` field with the rank-one embedding of base `2`.
 The resulting norm has exactly the original valuation ring, transported by
 `WithVal.equiv`. The normed structures below are local to this file.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,7 +42,7 @@ local instance :
 local instance : NontriviallyNormedField (WithVal base.valuation) :=
   Valued.toNontriviallyNormedField (WithVal base.valuation) base.ValueGroup
 
-private theorem normedWithVal_mem_valuationSubring_iff (x : WithVal base.valuation) :
+theorem normedWithVal_mem_valuationSubring_iff (x : WithVal base.valuation) :
     x ∈ (NormedField.valuation (K := WithVal base.valuation)).valuationSubring ↔
       WithVal.equiv base.valuation x ∈ base.valuation.valuationSubring := by
   rw [_root_.Valuation.mem_valuationSubring_iff,

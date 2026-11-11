@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.CharacterAveraging
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharAutomorphismRepresentations
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.CharacterAveraging
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharAutomorphismRepresentations
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
 
 /-!
 # Character eigenvectors in the logarithm image lift to principal units
@@ -16,6 +18,8 @@ The actual logarithm intertwines the constructed p-adic representations.
 The group order is a unit because it is prime to the residue characteristic,
 so character averaging produces an eigenvector preimage.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

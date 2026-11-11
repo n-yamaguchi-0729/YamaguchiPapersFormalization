@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Henselian.HenselianFiniteDomainLocal
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Closed geometric points of finite domains over strictly Henselian rings
@@ -16,6 +18,8 @@ field is separably closed, its finite residue extension is purely inseparable.
 Thus every automorphism of the finite algebra fixes every closed geometric
 point. The locality and the residue action are both proved here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

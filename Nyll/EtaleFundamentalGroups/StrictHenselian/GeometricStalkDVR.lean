@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVRAtPrime
-import Mathlib.Algebra.Group.Irreducible.Lemmas
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVRAtPrime
+public import Mathlib.Algebra.Group.Irreducible.Lemmas
 
 /-!
 # The actual geometric étale stalk of a DVR is a DVR
@@ -14,6 +16,8 @@ These are the local-base corollaries of the ordinary-local-ring result.
 The factorization and maximal-ideal proofs are shared with arbitrary
 affine bases rather than repeated here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

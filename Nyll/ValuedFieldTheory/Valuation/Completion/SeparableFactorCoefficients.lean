@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.Algebra.Polynomial.Splits
+module
+
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.Algebra.Polynomial.Splits
 
 /-!
 # Separable coefficients of monic factors
@@ -15,6 +17,8 @@ The roots of a factor of a separable ground-field polynomial belong to the
 relative separable closure. A monic factor therefore has its coefficients
 in that closure, even when the ambient field extension is not algebraic.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

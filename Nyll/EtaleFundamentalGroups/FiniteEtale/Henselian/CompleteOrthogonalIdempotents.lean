@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Idempotents
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+module
+
+public import Mathlib.RingTheory.Idempotents
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
 
 /-!
 # Lifting complete orthogonal idempotents over Henselian quotients
@@ -16,6 +18,8 @@ lift by Hensel's lemma.  Their lifts are automatically orthogonal because an
 idempotent in the Jacobson radical is zero; the same argument makes their sum
 equal to one.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.DVRGeometricInertiaEtale
-import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.DVRGeometricInertiaEtale
+public import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # Extending a Galois cover of a DVR fraction field
@@ -17,6 +20,8 @@ closed geometric-point deck stabilizers are trivial. Its function field,
 scalar tower, Galois extension, and normalization comparison are constructed
 from the cover and its canonical structure morphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,10 +50,10 @@ theorem etale_fractionCover_normalization_of_geometricInertia_trivial
       ∀ τ : Aut Y,
         z ≫ normalizationEndomorphism
           ((show Y.left ⟶ Spec (.of K) from Y.hom) ≫
-            Spec.map (CommRingCat.ofHom (algebraMap R K))) τ.hom.left
+            Spec.map (CommRingCat.ofHom (algebraMap R K))) τ.asIso.hom.left
           (by
-            have hw : τ.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
-                (show Y.left ⟶ Spec (.of K) from Y.hom) := τ.hom.w
+            have hw : τ.asIso.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
+                (show Y.left ⟶ Spec (.of K) from Y.hom) := τ.asIso.hom.w
             exact (Category.assoc _ _ _).symm.trans
               (congrArg (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R K))) hw)) = z →
           τ = 1) :
@@ -86,14 +91,15 @@ theorem etale_fractionCover_normalization_of_geometricInertia_trivial
     obtain ⟨τ, hτ⟩ := eGal.surjective σ
     have hτσ : finiteEtaleAutFunctionFieldAlgEquiv Y τ.unop = σ :=
       (finiteEtaleAutOpFunctionFieldMulEquiv_apply Y hY τ).symm.trans hτ
-    have hτf : τ.unop.hom.left ≫ f = f := by
-      have hw : τ.unop.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
-          (show Y.left ⟶ Spec (.of K) from Y.hom) := τ.unop.hom.w
+    have hτf : τ.unop.asIso.hom.left ≫ f = f := by
+      have hw : τ.unop.asIso.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
+          (show Y.left ⟶ Spec (.of K) from Y.hom) := τ.unop.asIso.hom.w
       exact (Category.assoc _ _ _).symm.trans (congrArg (fun k => k ≫ g) hw)
-    have hτfix : ζ ≫ normalizationEndomorphism f τ.unop.hom.left hτf = ζ := by
+    have hτfix : ζ ≫ normalizationEndomorphism f τ.unop.asIso.hom.left hτf = ζ := by
       apply (affineMorphismFunctionFieldNormalizationIso_fixes_iff R f
         (show Y.left ≅ Y.left from
-          (FiniteEtale.forget (Spec (.of K)) ⋙ Over.forget (Spec (.of K))).mapIso τ.unop)
+          (FiniteEtale.forget (Spec (.of K)) ⋙ Over.forget (Spec (.of K))).mapIso
+            τ.unop.asIso)
         hτf ζ).mp
       rw [finiteEtaleMorphismFunctionFieldAlgEquiv_eq R g Y τ.unop, hτσ]
       have h := congrArg (fun k => k ≫ (specNormalizationIso R L).hom) hσ

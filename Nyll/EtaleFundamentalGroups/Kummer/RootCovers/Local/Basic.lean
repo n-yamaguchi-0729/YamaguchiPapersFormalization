@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.LocalRing.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-!
 # Local Kummer root covers
@@ -16,6 +18,8 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 This file identifies the closed point of the one-step root cover
 `R[X] / (X ^ n - a)` when `R` is local and `a` lies in its maximal ideal.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

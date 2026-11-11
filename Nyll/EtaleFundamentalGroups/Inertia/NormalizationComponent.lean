@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
-import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.Forget.FiniteCoproducts
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.BinaryProducts
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Normalizing a finite-etale component inclusion
@@ -26,6 +28,8 @@ whole normalized component back into itself: its connected image meets the
 clopen component. This establishes the geometric component-preservation
 step without assuming equivariance or a lift of the deck transformation.
 -/
+
+@[expose] public section
 
 noncomputable section
 

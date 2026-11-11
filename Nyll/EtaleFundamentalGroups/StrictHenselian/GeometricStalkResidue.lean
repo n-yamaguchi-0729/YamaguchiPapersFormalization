@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 
 /-!
@@ -27,6 +29,8 @@ Thus the constructed ring is strictly local: it is Henselian with separably
 closed residue field. This does not yet identify it with a separately chosen
 strict henselization, or establish the manuscript's inertia comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 

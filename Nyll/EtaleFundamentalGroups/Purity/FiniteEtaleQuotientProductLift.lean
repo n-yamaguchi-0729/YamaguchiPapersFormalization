@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.CompleteOrthogonalIdempotents
-import Mathlib.RingTheory.Etale.Field
-import Mathlib.RingTheory.Localization.Away.Lemmas
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Henselian.CompleteOrthogonalIdempotents
+public import Mathlib.RingTheory.Etale.Field
+public import Mathlib.RingTheory.Localization.Away.Lemmas
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.IntegralClosure
 
 /-!
 # Local factors of finite étale algebras over complete local rings
@@ -19,6 +21,8 @@ and split the algebra into finite étale local factors.  This file establishes
 that source decomposition; the later quotient-lifting assembly can use its
 factors one at a time.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -184,9 +188,8 @@ theorem exists_closedFiber_fieldFactors_and_idempotents_lift
       CompleteOrthogonalIdempotents e ∧
         (Algebra.TensorProduct.includeRight : D →ₐ[B] F) ∘ e =
           E.symm ∘ fun i ↦ Pi.single i 1 := by
+  intro k F
   classical
-  let k := ResidueField B
-  let F := k ⊗[B] D
   let q : D →+* F :=
     (Algebra.TensorProduct.includeRight : D →ₐ[B] F)
   let : Module.Finite k F := inferInstance
@@ -251,9 +254,8 @@ theorem exists_closedFiber_fieldFactors_with_finiteEtale_localFactors
         Module.Finite B (D ⧸ Ideal.span {1 - e i}) ∧
         Algebra.Etale B (D ⧸ Ideal.span {1 - e i}) ∧
         IsLocalRing (D ⧸ Ideal.span {1 - e i}) := by
+  intro k F
   classical
-  let k := ResidueField B
-  let F := k ⊗[B] D
   obtain ⟨I, hIfin, hIdec, A, hAfield, hAalg, E, e, he, hmap⟩ :=
     exists_closedFiber_fieldFactors_and_idempotents_lift
       (B := B) (D := D)

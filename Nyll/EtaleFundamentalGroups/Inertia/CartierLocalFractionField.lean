@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Nyll.SchemeTheory.Divisors.RegularCartier
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Nyll.SchemeTheory.Divisors.RegularCartier
 
 /-!
 # The local fraction field as a point of the Cartier complement
@@ -25,6 +27,8 @@ paper's regularity-along-the-boundary assumption. This map allows actual
 finite etale covers of the complement to be pulled back to the local
 fraction field; it is not additional comparison data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

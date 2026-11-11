@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
-import Mathlib.Data.Int.WithZero
-import Nyll.ValuedFieldTheory.Valuation.PowerSubImage
-import Mathlib.Tactic.NormNum
-import Mathlib.Tactic.Ring
-import Mathlib.Tactic.Linarith
-import Lean.Elab.Tactic.Omega
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Normalized
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
+public import Mathlib.Data.Int.WithZero
+public import Nyll.ValuedFieldTheory.Valuation.PowerSubImage
+public import Mathlib.Tactic.NormNum
+public import Mathlib.Tactic.Ring
+public import Mathlib.Tactic.Linarith
+public import Lean.Elab.Tactic.Omega
 
 /-!
 # Detecting automorphisms on power-minus-identity classes
@@ -23,6 +25,8 @@ divisible by the chosen exponent. It therefore cannot be a power minus itself.
 Completeness is used for the norm valuation. No separability or residue-field
 hypothesis is needed.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

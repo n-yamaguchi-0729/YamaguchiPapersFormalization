@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharAutomorphismRepresentations
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogLinearity
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
-import Mathlib.RepresentationTheory.Intertwining
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharAutomorphismRepresentations
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogLinearity
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogEquivariance
+public import Mathlib.RepresentationTheory.Intertwining
 
 /-!
 # The actual principal-unit logarithm as an intertwining map
@@ -16,6 +18,8 @@ The logarithm is linear for the canonical p-adic module structures and
 intertwines the actual valuation-preserving automorphisms. This supplies
 its image as a subrepresentation without any image-stability hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

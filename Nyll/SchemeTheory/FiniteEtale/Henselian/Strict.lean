@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.LocalRing.Etale
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.LocalRing.Etale
 
 /-!
 # Finite étale local algebras over a strictly Henselian local ring
@@ -21,6 +23,8 @@ has a residue already defined over the base residue field.  Hensel lifting
 produces a base-ring root with the same residue, and uniqueness of a simple
 root in a local ring identifies the generator with its image from the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

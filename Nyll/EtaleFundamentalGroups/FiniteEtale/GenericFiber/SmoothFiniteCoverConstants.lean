@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsFiniteDominance
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothArithmeticConstants
-import Nyll.SchemeTheory.RingTheory.Idempotents.FiniteProductFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
-import Mathlib.RingTheory.Smooth.Pi
-import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.ArithmeticConstantsFiniteDominance
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.SmoothArithmeticConstants
+public import Nyll.SchemeTheory.RingTheory.Idempotents.FiniteProductFaithfullyFlat
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.TensorProductPrime
+public import Mathlib.RingTheory.Smooth.Pi
+public import Mathlib.RingTheory.Finiteness.FinitePresentationLocal
 
 /-!
 # Constants of smooth finite arithmetic covers
@@ -20,7 +22,11 @@ The resulting smooth arithmetic algebra forces that field to have degree
 one. All maps to the integer ring are constructed from normality.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe uι uB uA uF uK uL
 
 open scoped TensorProduct NumberField
 
@@ -30,12 +36,12 @@ namespace EtaleFundamentalGroups
 one. The base charts cover `Spec ℤ`, while their common function field is
 geometrically disjoint from the constant number field. -/
 theorem numberField_finrank_eq_one_of_smooth_finite_arithmetic_cover
-    {ι : Type} [Finite ι] (B A : ι → Type)
+    {ι : Type uι} [Finite ι] (B : ι → Type uB) (A : ι → Type uA)
     [∀ i, CommRing (B i)] [∀ i, CommRing (A i)] [∀ i, IsDomain (A i)]
     [∀ i, IsIntegrallyClosed (A i)] [∀ i, Algebra (B i) (A i)]
     [∀ i, FaithfulSMul (B i) (A i)] [∀ i, Module.Finite (B i) (A i)]
     [∀ i, Algebra.Smooth ℤ (A i)]
-    (F K L : Type) [Field F] [CharZero F] [Field K] [NumberField K]
+    (F : Type uF) (K : Type uK) (L : Type uL) [Field F] [CharZero F] [Field K] [NumberField K]
     [Field L] [CharZero L]
     [∀ i, Algebra (B i) F] [∀ i, IsFractionRing (B i) F]
     [∀ i, Algebra (A i) L] [∀ i, IsFractionRing (A i) L]

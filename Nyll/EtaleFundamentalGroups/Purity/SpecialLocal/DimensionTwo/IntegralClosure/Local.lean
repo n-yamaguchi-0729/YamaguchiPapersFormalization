@@ -4,7 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightTwo.RegularPair
 
 /-!
 # Purity for a normalization over a two-dimensional regular local ring
@@ -18,6 +21,8 @@ height-one primes; purity is applied to the full cover.  Finiteness,
 freeness, and a regular parameter pair are constructed from the local base,
 so the only geometric input is etaleness at every height-one localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

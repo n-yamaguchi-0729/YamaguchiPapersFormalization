@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.AwayPairIntersection
-import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.TraceDual
-import Mathlib.RingTheory.Regular.IsSMulRegular
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.AwayPairIntersection
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.TraceDual
+public import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-!
 # A relatively-prime pair stays regular on a normalization
@@ -21,6 +23,8 @@ it with `c / y`, which is integral over `A[1/y]`.  The two-localization
 intersection theorem then puts the quotient back in the normalization.  No
 global UFD instance is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -53,10 +57,10 @@ theorem exists_integralClosure_factor_of_mul_eq_mul
     rw [IsScalarTower.algebraMap_apply A K L] at hazero
     have hazeroK : algebraMap A K a = 0 := by
       apply (algebraMap K L).injective
-      simpa using hazero
+      simpa only [map_zero] using hazero
     apply ha
     apply IsFractionRing.injective A K
-    simpa using hazeroK
+    simpa only [map_zero] using hazeroK
   have hxL : algebraMap A L x ≠ 0 := hmap_ne_zero hx
   have hyL : algebraMap A L y ≠ 0 := hmap_ne_zero hy
   have hnotdvd : ¬ x ∣ y := by
@@ -95,7 +99,7 @@ theorem exists_integralClosure_factor_of_mul_eq_mul
       have hzx : z = algebraMap Aₓ L xinv * (b : L) := by
         rw [hxinvL]
         dsimp [z]
-        simp [div_eq_mul_inv, mul_comm]
+        rw [div_eq_mul_inv, mul_comm]
       rw [hzx]
       exact hlocal
     · let Aᵧ := Localization.subalgebra.ofField K (Submonoid.powers y)
@@ -129,12 +133,12 @@ theorem exists_integralClosure_factor_of_mul_eq_mul
         dsimp [z]
         rw [show (algebraMap A L y)⁻¹ * (c : L) =
           (c : L) / algebraMap A L y by
-            simp [div_eq_mul_inv, mul_comm]]
+            rw [div_eq_mul_inv, mul_comm]]
         have hbcL : algebraMap A L y * (b : L) =
             algebraMap A L x * (c : L) := by
           exact congrArg Subtype.val hbc
         apply (div_eq_div_iff hxL hyL).2
-        simpa [mul_comm] using hbcL
+        simpa only [mul_comm] using hbcL
       rw [hzy]
       exact hlocal
   let d : integralClosure A L := ⟨z, hz⟩

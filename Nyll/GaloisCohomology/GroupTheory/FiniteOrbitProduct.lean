@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Group.End
-import Mathlib.Algebra.Group.Commute.Defs
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.Data.Fintype.Card
+module
+
+public import Mathlib.Algebra.Group.End
+public import Mathlib.Algebra.Group.Commute.Defs
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.Data.Fintype.Card
 
 /-!
 # Products over finite automorphism orbits
@@ -16,6 +18,8 @@ The product of all translates is fixed by the acting finite group. If a
 commuting automorphism changes the original element by a fixed factor, it
 changes the orbit product by that factor raised to the group's cardinality.
 -/
+
+@[expose] public section
 
 namespace GroupTheory
 

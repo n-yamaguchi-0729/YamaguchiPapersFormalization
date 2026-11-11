@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Jacobson.Ideal
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Jacobson.Ideal
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
 
 /-!
 # Transporting the Henselian property along a ring equivalence
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.LocalRing.RingHom.Basic
 Coefficient pullback and the induced quotient equivalence transport simple
 roots. The Jacobson-radical condition transports along the same ring map.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

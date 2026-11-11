@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Degree
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorComponent
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Degree
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensorComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # Complete higher-radical factors in a fixed tensor component
@@ -23,6 +25,8 @@ Thus the degree bound is imposed only on the pre-root extension `L / K₀`.
 No abstract field-component comparison or post-root degree hypothesis is an
 input.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -52,23 +56,23 @@ theorem integralClosure_completeDVFFactorialRoot_fixedTensorComponent_etale
     (hvarpi : base.valuation.IsUniformizer (varpi : K))
     (D : ℕ) (hdegree : Module.finrank K₀ L ≤ D) :
     let V := base.valuationSubring
-    letI : IsFractionRing V K :=
+    let : IsFractionRing V K :=
       base.toDVF.valuationSubring_isFractionRing
-    letI : IsIntegrallyClosed V :=
+    let : IsIntegrallyClosed V :=
       base.toDVF.valuationSubring_isIntegrallyClosed
     let N := D.factorial
     let Rn := AdjoinRoot (X ^ N - C varpi)
-    letI : IsDomain Rn :=
+    let : IsDomain Rn :=
       completeDVFFactorialRootRing_isDomain base varpi hvarpi D
     let F := FractionRing Rn
-    letI : Algebra K F :=
+    let : Algebra K F :=
       completeDVFFactorialRootFractionFieldAlgebra base varpi hvarpi D
-    letI : IsScalarTower V K F :=
+    let : IsScalarTower V K F :=
       completeDVFFactorialRootFractionField_isScalarTower
         base varpi hvarpi D
-    letI : Algebra K₀ F :=
+    let : Algebra K₀ F :=
       ((algebraMap K F).comp (algebraMap K₀ K)).toAlgebra
-    letI : IsScalarTower K₀ K F :=
+    let : IsScalarTower K₀ K F :=
       IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
     ∀ (m : Ideal (F ⊗[K₀] L)) (hm : m.IsMaximal),
       letI : m.IsMaximal := hm
@@ -76,26 +80,8 @@ theorem integralClosure_completeDVFFactorialRoot_fixedTensorComponent_etale
       letI : Algebra Rn P :=
         genericTensorFieldComponentLeftScalarAlgebra (R := Rn) m
       Algebra.Etale Rn (integralClosure Rn P) := by
-  dsimp only
-  let V := base.valuationSubring
-  let N := D.factorial
-  let Rn := AdjoinRoot (X ^ N - C varpi)
-  let : IsFractionRing V K :=
-    base.toDVF.valuationSubring_isFractionRing
-  let : IsIntegrallyClosed V :=
-    base.toDVF.valuationSubring_isIntegrallyClosed
-  let : IsDomain Rn :=
-    completeDVFFactorialRootRing_isDomain base varpi hvarpi D
-  let F := FractionRing Rn
-  let : Algebra K F :=
-    completeDVFFactorialRootFractionFieldAlgebra base varpi hvarpi D
-  let : IsScalarTower V K F :=
-    completeDVFFactorialRootFractionField_isScalarTower
-      base varpi hvarpi D
-  let : Algebra K₀ F :=
-    ((algebraMap K F).comp (algebraMap K₀ K)).toAlgebra
-  let : IsScalarTower K₀ K F :=
-    IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
+  intro V sharedOwner1 sharedOwner2 N Rn sharedOwner5 F sharedOwner6 sharedOwner7 sharedOwner8
+    sharedOwner9
   let : FiniteDimensional K F :=
     pureRadicalFractionField_finiteDimensional
       (Nat.factorial_pos D) varpi

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.RingTheory.RingHom.EssFiniteType
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.RingTheory.RingHom.EssFiniteType
 
 /-!
 # Prime localizations of etale scheme stalks
@@ -16,6 +18,8 @@ arbitrary prime.  The resulting map need not be etale: prime localization is
 not finite presentation in general.  A separate theorem records the exact
 finite-presentation hypothesis which upgrades the map to an etale algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

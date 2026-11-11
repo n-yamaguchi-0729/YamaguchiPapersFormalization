@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientAnnihilator
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientAnnihilator
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 
 /-!
 # Local cohomology along an injective chain
@@ -24,6 +26,8 @@ The cycle--boundary and boundary--homology short exact sequences are
 constructed directly from the differentials. Their coefficient sequences
 allow scalar annihilators to be propagated up the chain.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -64,7 +68,8 @@ theorem linearChainBoundaryHomologySequence_shortExact
     (linearChainBoundaries K n).subtype_injective
     (linearChainBoundaries K n).mkQ_surjective
 
-private theorem next_chain_nat (n : ℕ) :
+/-- The next index for a nonnegative chain complex is subtraction by one. -/
+theorem next_chain_nat (n : ℕ) :
     (ComplexShape.down ℕ).next n = n - 1 := by
   cases n with
   | zero => exact ChainComplex.next_nat_zero
@@ -93,7 +98,8 @@ def linearChainTopHomologyIso
   exact linearChainHomologyIso K n ≪≫
     (Submodule.quotEquivOfEqBot (linearChainBoundaries K n) hB).toModuleIso
 
-private theorem linearChainCycleBoundary_comp_eq_zero
+/-- The differential vanishes on cycles before restriction to its boundary image. -/
+theorem linearChainCycleBoundary_comp_eq_zero
     (K : ChainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     (linearChainToCycles K n).rangeRestrict.comp (linearChainCycles K (n + 1)).subtype = 0 := by
   apply LinearMap.ext

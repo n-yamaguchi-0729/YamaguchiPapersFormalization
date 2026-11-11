@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicIntegralClosure
-import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.UniqueValuationSubring
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicIntegralClosure
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.UniqueValuationSubring
 
 /-!
 # Uniqueness over an algebraic extension of a Henselian valued field
@@ -13,6 +15,8 @@ import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.AlgebraicExtension.UniqueV
 The integral closure is an actual valuation ring. Every extension valuation
 has this ring of integers, so any two extension valuations are equivalent.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

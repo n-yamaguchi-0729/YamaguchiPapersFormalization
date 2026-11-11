@@ -4,16 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeDerivedCriterion
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicFaithfulness
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicOrientation
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.SepClosedResidueDerivedProP
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.PrimePowerRoots
-import Nyll.ProCGroups.ProC.PrimeSeparation
-import Nyll.ProCGroups.ProC.Subgroups.Closed
-import Nyll.ProCGroups.Topologies.OpenSubgroup
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.RelativeDerivedCriterion
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicFaithfulness
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.CyclotomicOrientation
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicInfiniteImage
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.SepClosedResidueDerivedProP
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.PrimePowerRoots
+public import Nyll.ProCGroups.ProC.PrimeSeparation
+public import Nyll.ProCGroups.ProC.Subgroups.Closed
+public import Nyll.ProCGroups.Topologies.OpenSubgroup
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Slimness with separably closed residue field
@@ -21,6 +27,8 @@ import Mathlib.FieldTheory.Galois.Profinite
 The separably-closed-residue corollary retained from the earlier manuscript.
 The residue field is required only to be separably closed.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,20 +4,22 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
-import Mathlib.Data.Finset.Insert
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.Algebra.Category.Ring.Constructions
-import Mathlib.RingTheory.Regular.Flat
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.Divisors.EtaleRegularity
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
+module
+
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+public import Mathlib.Data.Finset.Insert
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.Algebra.Category.Ring.Constructions
+public import Mathlib.RingTheory.Regular.Flat
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.Divisors.EtaleRegularity
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Geometry
 
 /-!
 # Arithmetic boundaries under finite etale morphisms
@@ -29,6 +31,8 @@ component.  Applied to the finite-etale morphism between a pulled-back
 boundary and the original boundary, this supplies points on each component
 of the pullback without adding a component-dominance hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

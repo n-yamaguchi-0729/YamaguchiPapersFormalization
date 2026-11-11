@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.CharP.Reduced
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Mathlib.RingTheory.Polynomial.Cyclotomic.Eval
-import Mathlib.RingTheory.RootsOfUnity.CyclotomicUnits
+module
+
+public import Mathlib.Algebra.CharP.Reduced
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Mathlib.RingTheory.Polynomial.Cyclotomic.Eval
+public import Mathlib.RingTheory.RootsOfUnity.CyclotomicUnits
 
 /-!
 # Cyclotomic valuation bounds in discrete valuation rings
@@ -17,6 +19,8 @@ Evaluating the prime-power cyclotomic polynomial at one gives the valuation form
 In residue characteristic `p`, a `p`-power root reduces to one, giving the positive
 valuation needed to bound the cyclotomic degree.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

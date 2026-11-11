@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicInvariant
-import Nyll.GaloisCohomology.Kummer.Concrete.InvariantKummerPowerWitness
-import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Mathlib.Algebra.CharP.IntermediateField
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicInvariant
+public import Nyll.GaloisCohomology.Kummer.Concrete.InvariantKummerPowerWitness
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootOfUnityPowerAction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Mathlib.Algebra.CharP.IntermediateField
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # Cyclotomic power witnesses from trivial lower H¹ action
@@ -22,6 +24,8 @@ the lower H¹ action make that character invariant under a compatible lift.
 Its action on a primitive root determines a bounded exponent, and Kummer
 naturality constructs the resulting power witness in the field itself.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogImage
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
-import Mathlib.Data.Int.LeastGreatest
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogImage
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
+public import Mathlib.Order.Int.LeastGreatest
 
 /-!
 # Minimal valuation in a character part of an overfield's logarithm image
@@ -16,6 +18,8 @@ images are principal-unit logarithms is nonempty by a scaled normal basis.
 The uniform logarithmic bound and integer-valued valuation give a minimum
 in this actual intersection.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

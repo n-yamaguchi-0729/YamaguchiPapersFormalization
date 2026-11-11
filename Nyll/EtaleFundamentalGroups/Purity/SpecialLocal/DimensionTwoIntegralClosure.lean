@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.Basic
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoFlatness
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.RegularPair.Basic
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoFlatness
 
 /-!
 # Freeness of a finite normalization over a two-parameter local ring
@@ -17,6 +19,8 @@ two-parameter freeness criterion then makes the normalization a free, hence
 flat, module over the base.  No factoriality, normality of the base, or
 primality hypothesis on a chosen parameter is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,15 +44,15 @@ theorem regular_pair_nonzero_and_isRelPrime
     ((isRegular_cons_iff (QuotSMulTop x A) y []).mp hpair.2).1
   have hx : x ≠ 0 := by
     intro hx
-    exact one_ne_zero (hpair.1.right_eq_zero_of_smul (by simp [hx]))
+    exact one_ne_zero (hpair.1.right_eq_zero_of_smul (by rw [hx, zero_smul]))
   have hy : y ≠ 0 := by
     intro hy
     let : Nontrivial (QuotSMulTop x A) := hpair.2.nontrivial
     apply not_subsingleton (QuotSMulTop x A)
     constructor
     intro a b
-    have ha : a = 0 := hyRegular.right_eq_zero_of_smul (by simp [hy])
-    have hb : b = 0 := hyRegular.right_eq_zero_of_smul (by simp [hy])
+    have ha : a = 0 := hyRegular.right_eq_zero_of_smul (by rw [hy, zero_smul])
+    have hb : b = 0 := hyRegular.right_eq_zero_of_smul (by rw [hy, zero_smul])
     exact ha.trans hb.symm
   refine ⟨hx, hy, ?_⟩
   intro d hdx hdy

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
-import Nyll.EtaleFundamentalGroups.Inertia.Residue.Coprimality
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.Normalization.Localization
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Cardinality
+public import Nyll.EtaleFundamentalGroups.Inertia.Residue.Coprimality
 
 /-!
 # Coprimality of normalization inertia from a ramification-index unit
@@ -16,6 +18,8 @@ ideal-theoretic inertia subgroup equals the ramification index.  A unit
 ramification index therefore remains prime to every prime residue
 characteristic reached from that divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 

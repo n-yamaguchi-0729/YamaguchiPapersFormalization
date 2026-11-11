@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Mathlib.FieldTheory.IntermediateField.Algebraic
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Mathlib.FieldTheory.IntermediateField.Algebraic
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.Topology.Homeomorph.Lemmas
 
 /-!
 # Open Galois subgroups from finite field extensions
@@ -15,6 +19,8 @@ import Mathlib.Topology.Homeomorph.Lemmas
 Scalar restriction is continuous and identifies the upper Galois group
 with the open subgroup fixing the embedded finite extension field.
 -/
+
+@[expose] public section
 
 namespace GaloisCohomology
 
@@ -67,6 +73,37 @@ theorem galoisRestrictScalars_range :
         commutes' := fun y =>
           (IntermediateField.mem_fixingSubgroup_iff _ _).mp hσ _ ⟨y, rfl⟩ }
     exact ⟨τ, AlgEquiv.ext fun _ => rfl⟩
+
+/-- Equal scalar-restriction images determine a unique isomorphism of the
+embedded fields. The isomorphism preserves their actual embeddings into the
+common Galois extension, not just the degrees of the fields. -/
+theorem exists_unique_algEquiv_of_galoisRestrictScalars_range_eq
+    (E' : Type*) [Field E'] [Algebra K E'] [Algebra E' Ω]
+    [IsScalarTower K E' Ω] [IsGalois K Ω]
+    (h : (AlgEquiv.restrictScalarsHom K : Gal(Ω/E) →* Gal(Ω/K)).range =
+      (AlgEquiv.restrictScalarsHom K : Gal(Ω/E') →* Gal(Ω/K)).range) :
+    ∃! e : E ≃ₐ[K] E', ∀ x, algebraMap E' Ω (e x) = algebraMap E Ω x := by
+  let f : E →ₐ[K] Ω := IsScalarTower.toAlgHom K E Ω
+  let f' : E' →ₐ[K] Ω := IsScalarTower.toAlgHom K E' Ω
+  have hfix : f.fieldRange.fixingSubgroup = f'.fieldRange.fixingSubgroup := by
+    simpa only [galoisRestrictScalars_range] using h
+  have hrange : f.fieldRange = f'.fieldRange := by
+    rw [← InfiniteGalois.fixedField_fixingSubgroup f.fieldRange,
+      ← InfiniteGalois.fixedField_fixingSubgroup f'.fieldRange, hfix]
+  let e : E ≃ₐ[K] E' :=
+    (f.equivFieldRange.trans (IntermediateField.equivOfEq hrange)).trans
+      f'.equivFieldRange.symm
+  have he (x : E) : algebraMap E' Ω (e x) = algebraMap E Ω x := by
+    have hval := congrArg (fun z : f'.fieldRange => (z : Ω))
+      (f'.equivFieldRange.apply_symm_apply
+        (IntermediateField.equivOfEq hrange (f.equivFieldRange x)))
+    simpa only [e, AlgEquiv.trans_apply, AlgHom.equivFieldRange_apply_coe,
+      IntermediateField.equivOfEq_apply, f, f', IsScalarTower.toAlgHom_apply] using hval
+  refine ⟨e, he, ?_⟩
+  intro e' he'
+  apply AlgEquiv.ext
+  intro x
+  exact (algebraMap E' Ω).injective ((he' x).trans (he x).symm)
 
 variable [FiniteDimensional K E]
 

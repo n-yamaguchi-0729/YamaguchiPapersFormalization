@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadical
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.PureRadical
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Finite-etale unit absorption after a higher radical base change
@@ -16,6 +18,8 @@ power of the second.  This is the integral map needed to base change the
 finite-etale unit factor supplied by the DVR Abhyankar calculation from the
 ramification-index root to a prescribed larger root cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

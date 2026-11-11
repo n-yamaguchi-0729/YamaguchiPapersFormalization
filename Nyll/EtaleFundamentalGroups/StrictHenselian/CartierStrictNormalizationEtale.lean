@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericNormalizationEtale
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierStrictFractionMap
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.StrictGenericNormalizationEtale
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierStrictFractionMap
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
 
 /-!
 # Strict generic triviality and the original normalization at a Cartier point
@@ -17,36 +19,40 @@ the local fraction field. Etaleness of its normalization is then transported
 through the actual Cartier square and the normalization-stalk comparison.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.FiniteEtale EtaleFundamentalGroups.Inertia
 
 namespace EtaleFundamentalGroups.StrictHenselian
 
-local instance (X : Scheme.{0}) :
-    Category (MorphismProperty.Over (@IsFiniteEtale : MorphismProperty Scheme.{0}) ⊤ X) :=
+local instance (X : Scheme.{u}) :
+    Category (MorphismProperty.Over (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) :=
   AlgebraicGeometry.FiniteEtale.instCategory X
 
-local instance {X Y : Scheme.{0}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong (@IsFiniteEtale : MorphismProperty Scheme.{0}) f :=
+local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    MorphismProperty.HasPullbacksAlong (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
   ⟨fun _ _ ↦ inferInstance⟩
 
-local instance {X Y : Scheme.{0}} (f : X ⟶ Y) :
+local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
     MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{0}) f :=
+      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
   ⟨fun h hf ↦ MorphismProperty.of_isPullback (P := @IsFiniteEtale) h hf⟩
 
 /-- Triviality of the actual strict generic action at a boundary DVR makes
 the base change of the original cover's normalization etale at that stalk. -/
 theorem normalization_stalk_etale_of_strictGeneric_image_fixed
-    {X : Scheme.{0}} [IsLocallyNoetherian X]
+    {X : Scheme.{u}} [IsLocallyNoetherian X]
     (D : X.EffectiveCartierDivisor) (x : X) (hx : x ∈ D.1.support)
     [IsDomain (X.presheaf.stalk x)] [IsDiscreteValuationRing (X.presheaf.stalk x)]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (φ : X.presheaf.stalk x →+* Ω) [IsLocalHom φ]
     (W : FiniteEtale D.1.supportComplement)
-    {Ω' : Type} [Field Ω'] [IsSepClosed Ω']
+    {Ω' : Type u} [Field Ω'] [IsSepClosed Ω']
     (point : Spec (.of Ω') ⟶ Spec (.of
       (FractionRing (geometricStalk (Spec.map (CommRingCat.ofHom φ))))))
     (hfixed : ∀ (g : Aut (fiber point))

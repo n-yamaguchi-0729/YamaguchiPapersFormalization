@@ -5,7 +5,9 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
 
 /-!
 # The kernel of a Galois quotient fixes its entire fiber
@@ -16,6 +18,8 @@ transformations act transitively and commute with the fundamental group.
 The proof below was extracted unchanged from
 `EtaleFundamentalGroups.FiniteEtale.TrivialBaseChangeAlgebra`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,11 +40,11 @@ theorem fiber_fixed_of_galoisObjectQuotient_eq_one
     rw [galoisObjectQuotientMonoidHom_ker] at hm
     exact hm
   let σ : Aut W := (evaluationEquivOfIsGalois F W w₀).symm w
-  have hσ : F.map σ.hom w₀ = w := evaluationEquivOfIsGalois_symm_fiber F W w₀ w
+  have hσ : F.map σ.asIso.hom w₀ = w := evaluationEquivOfIsGalois_symm_fiber F W w₀ w
   calc
-    g • w = g • F.map σ.hom w₀ := congrArg (fun x => g • x) hσ.symm
-    _ = F.map σ.hom (g • w₀) := mulAction_naturality F g σ.hom w₀
-    _ = F.map σ.hom w₀ := congrArg (F.map σ.hom) hg₀
+    g • w = g • F.map σ.asIso.hom w₀ := congrArg (fun x => g • x) hσ.symm
+    _ = F.map σ.asIso.hom (g • w₀) := mulAction_naturality F g σ.asIso.hom w₀
+    _ = F.map σ.asIso.hom w₀ := congrArg (F.map σ.asIso.hom) hg₀
     _ = w := hσ
 
 end CategoryTheory.PreGaloisCategory

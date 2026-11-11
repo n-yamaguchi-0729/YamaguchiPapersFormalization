@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Nyll.SchemeTheory.Divisors.SubschemeStalk
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Properties
-import Mathlib.RingTheory.Flat.Basic
-import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Nyll.SchemeTheory.Divisors.SubschemeStalk
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalQuotientLift
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Properties
+public import Mathlib.RingTheory.Flat.Basic
+public import Mathlib.RingTheory.Flat.Localization
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Ambient regularity along a regular Cartier divisor
@@ -28,6 +30,8 @@ The stalk-generator lemma was moved here from
 `EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR`
 with its statement, proof, and authorship preserved.
 -/
+
+@[expose] public section
 
 noncomputable section
 

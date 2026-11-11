@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ResidueLift
-import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedCompletion
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ResidueLift
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.HenselianAscent
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedCompletion
 
 /-!
 # Trivializing a chosen finite étale local factor after a finite residue lift
@@ -22,6 +24,8 @@ generator to a root in `D`; residue generation and Nakayama make the resulting
 tensor-product map surjective, and equality of the finite free ranks makes it
 an isomorphism.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,11 +69,10 @@ theorem isLocalHom_of_unique_prime_over_maximal
     [q.LiesOver (IsLocalRing.maximalIdeal R)]
     (hunique : ∀ Q : Ideal S, Q.IsPrime →
       Q.LiesOver (IsLocalRing.maximalIdeal R) → Q = q) :
-    letI : IsLocalRing S :=
+    let : IsLocalRing S :=
       isLocalRing_of_unique_prime_over_maximal q hunique
     IsLocalHom (algebraMap R S) := by
-  let : IsLocalRing S :=
-    isLocalRing_of_unique_prime_over_maximal q hunique
+  intro sharedOwner1
   let : Algebra.IsIntegral R S := Algebra.IsIntegral.of_finite R S
   have hq_maximal : q.IsMaximal :=
     Ideal.isMaximal_of_isIntegral_of_isMaximal_under (R := R) q <| by
@@ -93,11 +96,10 @@ theorem faithfullyFlat_of_unique_prime_over_maximal
     [q.LiesOver (IsLocalRing.maximalIdeal R)]
     (hunique : ∀ Q : Ideal S, Q.IsPrime →
       Q.LiesOver (IsLocalRing.maximalIdeal R) → Q = q) :
-    letI : IsLocalRing S :=
+    let : IsLocalRing S :=
       isLocalRing_of_unique_prime_over_maximal q hunique
     Module.FaithfullyFlat R S := by
-  let : IsLocalRing S :=
-    isLocalRing_of_unique_prime_over_maximal q hunique
+  intro sharedOwner1
   let : IsLocalHom (algebraMap R S) :=
     isLocalHom_of_unique_prime_over_maximal q hunique
   exact Module.FaithfullyFlat.of_flat_of_isLocalHom

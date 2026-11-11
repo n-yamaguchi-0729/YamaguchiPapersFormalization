@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.StandardEtale
-import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
+module
+
+public import Mathlib.RingTheory.Etale.StandardEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.Radicals.Explicit
 
 /-!
 # Formal etaleness of an explicit adjoined root
@@ -15,6 +17,8 @@ etale.  Choosing the derivative itself as the denominator in a standard
 etale presentation makes the Bezout condition tautological; localization at
 that denominator then disappears because it is already a unit.
 -/
+
+@[expose] public section
 
 noncomputable section
 

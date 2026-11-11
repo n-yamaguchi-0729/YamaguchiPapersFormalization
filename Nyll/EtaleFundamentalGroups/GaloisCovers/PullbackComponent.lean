@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
 
 /-!
 # Galois components of pulled-back covers
@@ -17,6 +19,8 @@ the connected component containing the pullback of a chosen geometric-fiber
 point is again Galois.  This is the componentwise form that is valid for an
 arbitrary morphism of connected base schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,7 +34,8 @@ universe u u₁ u₂ w
 variable {X Y : Scheme.{u}} [ConnectedSpace X] [ConnectedSpace Y]
 variable {Omega : Type u} [Field Omega] [IsSepClosed Omega]
 
-private theorem isGalois_of_stabilizer_normal
+/-- A connected object whose original point stabilizer is normal is Galois. -/
+theorem isGalois_of_stabilizer_normal
     {C : Type u₁} [Category.{u₂} C] [GaloisCategory C]
     (F : C ⥤ FintypeCat.{w}) [FiberFunctor F]
     (A : C) [IsConnected A] (a : F.obj A)
@@ -79,7 +84,7 @@ private theorem isGalois_of_stabilizer_normal
           (e z' * QuotientGroup.mk' N (g⁻¹ * h))
       exact mul_assoc _ _ _)
   let phi : A ≅ A := (functorToAction F).preimageIso s
-  refine ⟨phi, ?_⟩
+  refine ⟨Aut.of phi, ?_⟩
   have hmap : (functorToAction F).map phi.hom = s.hom :=
     (functorToAction F).map_preimage s.hom
   have happ : F.map phi.hom x = s.hom.hom x :=

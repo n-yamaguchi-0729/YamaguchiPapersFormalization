@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
-import Nyll.SchemeTheory.Divisors.Reduced
-import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralDescent
+module
+
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundaryEtale
+public import Nyll.SchemeTheory.Divisors.Reduced
+public import Nyll.SchemeTheory.Morphisms.GeometricallyIntegralDescent
 
 /-!
 # Morphisms between reduced irreducible components
@@ -15,6 +17,8 @@ This file constructs the induced morphism between the reduced closed
 subschemes carried by irreducible components.  It also supplies the reverse
 component-lifting statement for surjective closed generalizing maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

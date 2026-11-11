@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorComparison
-import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberFunctorComparison
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.FiberIso
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
 
 /-!
 # Base points and functoriality of the étale fundamental group
@@ -19,6 +21,8 @@ Pullback of finite étale schemes agrees with restriction of finite continuous
 actions along the canonical fundamental-group homomorphism.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,7 +55,7 @@ an explicit inner automorphism of the target fundamental group. -/
 theorem fundamentalGroupIsoOfFiberIso_eq_conj
     (t₁ t₂ : fiber ξ ≅ fiber ξ') (a : π₁ᵉᵗ(ξ)) :
     fundamentalGroupIsoOfFiberIso ξ ξ' t₂ a =
-      MulAut.conj (G := π₁ᵉᵗ(ξ')) (t₁.symm ≪≫ t₂)
+      MulAut.conj (G := π₁ᵉᵗ(ξ')) (Aut.of (t₁.symm ≪≫ t₂))
         (fundamentalGroupIsoOfFiberIso ξ ξ' t₁ a) :=
   continuousConjAut_eq_conj t₁ t₂ a
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.StalkLocalization
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
-import Mathlib.FieldTheory.IsAlgClosed.Basic
+module
+
+public import Nyll.SchemeTheory.Affine.StalkLocalization
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.AlgebraicGeometry.Morphisms.FormallyUnramified
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Geometric points of localized étale charts
@@ -19,6 +21,8 @@ on stalks of localization morphisms, so the resulting triangle commutes as
 scheme morphisms.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

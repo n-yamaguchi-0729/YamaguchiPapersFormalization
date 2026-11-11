@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicDetection
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.MixedCharCompleteExtension
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.Perfect
-import Mathlib.NumberTheory.Cyclotomic.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicDetection
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.MixedCharCompleteExtension
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.NumberTheory.Cyclotomic.Basic
 
 /-!
 # Faithful prime-power H¹ action over a complete mixed-characteristic base
@@ -22,6 +24,8 @@ A complete integer-valued extension valuation and its residue characteristic
 are generated from the base. The two-branch detection then gives a nontrivial
 action, which is faithful because the original Galois group has prime order.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

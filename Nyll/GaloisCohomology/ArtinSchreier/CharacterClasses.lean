@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
-import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.RootCharacter
+public import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-!
 # Artin–Schreier classes and all continuous cyclic characters
@@ -16,6 +18,8 @@ import Mathlib.Tactic.Ring
 Additive Hilbert 90 realizes every character by a root. Changing the field
 element by an Artin–Schreier coboundary leaves its character unchanged.
 -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 section Surjectivity

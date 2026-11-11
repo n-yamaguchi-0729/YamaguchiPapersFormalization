@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.Eval.Subring
-import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.RingTheory.Polynomial.Tower
-import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
+module
+
+public import Mathlib.Algebra.Polynomial.Eval.Subring
+public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Mathlib.RingTheory.Polynomial.Tower
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.PrimeAwayIntersection
 
 /-!
 # Integrality detected by two principal localizations
@@ -22,6 +24,8 @@ over `A`.
 The proof descends every coefficient of the minimal polynomial through the
 intersection `A[1/x] ∩ A[1/y] = A`.  It uses no UFD structure on `A`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

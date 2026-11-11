@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.LocalRing.ResidueField.Basic
-import Nyll.SchemeTheory.Divisors.RegularCartier
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkDVR
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkNormalDomain
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import Nyll.SchemeTheory.Divisors.RegularCartier
 
 
 /-!
@@ -27,6 +29,8 @@ through the open complement. At a regular boundary component the DVR input is
 obtained from the component's actual local ring.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open AlgebraicGeometry CategoryTheory
@@ -35,7 +39,8 @@ namespace EtaleFundamentalGroups.StrictHenselian
 
 universe u
 
-private theorem fieldFromStalk_mem_complement
+/-- An injective field-valued stalk map lands in the Cartier complement. -/
+theorem fieldFromStalk_mem_complement
     {X : Scheme.{u}} (D : X.EffectiveCartierDivisor) (x : X)
     {F : Type u} [Field F] (a : X.presheaf.stalk x →+* F)
     (ha : Function.Injective a) (y : Spec (.of F)) :

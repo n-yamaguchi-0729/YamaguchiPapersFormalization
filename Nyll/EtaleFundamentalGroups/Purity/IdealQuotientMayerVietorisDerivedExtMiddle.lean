@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtSupports
-import Mathlib.Algebra.Category.ModuleCat.Biproducts
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
-import Mathlib.CategoryTheory.Limits.FunctorCategory.BinaryBiproducts
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtSupports
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
+public import Mathlib.CategoryTheory.Limits.FunctorCategory.BinaryBiproducts
 
 /-!
 # The middle term of the derived Mayer--Vietoris sequence
@@ -18,6 +20,8 @@ diagram with the pointwise biproduct of the two ideal-power diagrams.  Since
 filtered colimits in abelian groups are additive, the middle colimit is the
 biproduct of the two derived local-cohomology objects.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
-import Nyll.ValuedFieldTheory.Valuation.UniqueRing
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Valuation.Extension
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
+public import Nyll.ValuedFieldTheory.Valuation.UniqueRing
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Valuation.Extension
 
 /-!
 # Actual residue scalars in the Henselian decomposition sequence
@@ -18,6 +20,8 @@ an intermediate field have the same image in the selected residue field.
 The comparison is proved on integer representatives. It does not assume
 an identification of residue fields or separability of residue extensions.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingImage
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
-import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.FiniteGroups.Classes
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingImage
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+public import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.FiniteGroups.Classes
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Proper finite embedding solutions with faithful abelian Sigma kernels
@@ -21,6 +23,8 @@ be chosen separately. A proper solution is surjective. Its image of the
 original kernel lies in the Sigma kernel, so the actual residual quotient
 and its abelianization detect the finite faithful action.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

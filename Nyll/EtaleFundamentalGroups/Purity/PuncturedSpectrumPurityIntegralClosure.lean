@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFiberComparison
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityNormalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFiberComparison
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityNormalization
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Literal integral closures under punctured purity
@@ -15,6 +19,8 @@ finite etale.  The normalization comparison with the spectrum of the literal
 integral closure then transports this scheme-level conclusion back to the
 underlying algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,48 +42,28 @@ theorem connectedPuncturedCover_integralClosure_etale_of_hasPuncturedPurity
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
     let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-    letI : Nonempty U :=
+    let : Nonempty U :=
       Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-    letI : IsOpenImmersion j := by
+    let : IsOpenImmersion j := by
       dsimp only [j, Scheme.puncturedSpectrumInclusion]
       infer_instance
-    letI : IsIntegral U := isIntegral_of_isOpenImmersion j
-    letI : Algebra R U.functionField :=
+    let : IsIntegral U := isIntegral_of_isOpenImmersion j
+    let : Algebra R U.functionField :=
       puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-    letI : IsFractionRing R U.functionField :=
+    let : IsFractionRing R U.functionField :=
       puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : Algebra U.functionField W.left.functionField :=
+    let : Algebra U.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra R W.left.functionField :=
+    let : Algebra R W.left.functionField :=
       ((algebraMap U.functionField W.left.functionField).comp
         (algebraMap R U.functionField)).toAlgebra
-    letI : IsScalarTower R U.functionField W.left.functionField :=
+    let : IsScalarTower R U.functionField W.left.functionField :=
       IsScalarTower.of_algebraMap_eq' rfl
     Algebra.Etale R (integralClosure R W.left.functionField) := by
-  dsimp only
-  let U := Scheme.puncturedSpectrum R
-  let j : U ⟶ Spec (.of R) := Scheme.puncturedSpectrumInclusion R
-  let : Nonempty U :=
-    Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R hpos
-  let : IsOpenImmersion j := by
-    dsimp only [j, Scheme.puncturedSpectrumInclusion]
-    infer_instance
-  let : IsIntegral U := isIntegral_of_isOpenImmersion j
-  let : Algebra R U.functionField :=
-    puncturedSpectrumFunctionFieldAlgebraOfPositiveDimension R hpos
-  let : IsFractionRing R U.functionField :=
-    puncturedSpectrumFunctionField_isFractionRing_of_positiveDimension R hpos
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : Algebra U.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra R W.left.functionField :=
-    ((algebraMap U.functionField W.left.functionField).comp
-      (algebraMap R U.functionField)).toAlgebra
-  let : IsScalarTower R U.functionField W.left.functionField :=
-    IsScalarTower.of_algebraMap_eq' rfl
+  intro U j sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6
+    sharedOwner7 sharedOwner8 sharedOwner9
   let C := integralClosure R W.left.functionField
   let g : Spec (.of W.left.functionField) ⟶ Spec (.of R) :=
     connectedCoverGenericComposite W ≫ j

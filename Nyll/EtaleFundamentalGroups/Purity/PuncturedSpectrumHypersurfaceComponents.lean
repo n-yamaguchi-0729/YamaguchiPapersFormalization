@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Components of a punctured principal hypersurface
@@ -16,6 +18,8 @@ Equivalently, every irreducible component of the quotient spectrum meets its
 puncture.  This is the component-theoretic input preceding the complete-local
 intersection theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 

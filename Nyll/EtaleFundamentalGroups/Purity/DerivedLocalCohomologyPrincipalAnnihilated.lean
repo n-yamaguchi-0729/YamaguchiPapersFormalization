@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
-import Mathlib.Algebra.Category.ModuleCat.Projective
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalPowerQuotient
-import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
+module
+
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.EnoughProjectives
+public import Mathlib.Algebra.Category.ModuleCat.Projective
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalPowerQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.HartshorneLichtenbaumReduction
 
 /-!
 # Principal support on an annihilated coefficient module
@@ -25,6 +27,8 @@ of the latter ideal is `x` times an element of `(x)^n`, and `xM = 0`.
 Naturality of extension classes therefore says that the transition from the
 `n`-th to the `(n+1)`-st power kills every class.
 -/
+
+@[expose] public section
 
 noncomputable section
 

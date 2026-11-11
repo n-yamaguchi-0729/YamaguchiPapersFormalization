@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceComponents
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceComponents
 
 /-!
 # Ideal-theoretic reduction for punctured hypersurface connectedness
@@ -16,6 +18,8 @@ radical of the sum of the two component intersections is the maximal ideal.
 This is the exact ideal-theoretic configuration to which the missing
 complete-local intersection inequality applies.
 -/
+
+@[expose] public section
 
 noncomputable section
 

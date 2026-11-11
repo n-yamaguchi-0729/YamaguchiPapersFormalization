@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
 
 /-!
 # Galois branch indices after localization at a larger prime
@@ -15,6 +17,8 @@ Localizing first at a prime containing a height-one branch, and then at the
 image of that branch, does not change the common ramification index of a
 finite Galois normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,23 +39,23 @@ theorem localNormalizationPrime_ramificationIdx_eq_galoisBranchIndex_at_largerPr
     (p P : Ideal A) [p.IsPrime] [P.IsPrime]
     (hp : p.height = 1) (hpP : p ≤ P) :
     let R := Localization.AtPrime P
-    letI : Algebra R K :=
+    let : Algebra R K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI : Algebra R L :=
+    let : Algebra R L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower R K L :=
+    let : IsScalarTower R K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) P
-    letI : IsFractionRing R K :=
+    let : IsFractionRing R K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) P
     let pR := p.map (algebraMap A R)
-    letI : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P hpP
+    let : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P hpP
     let V := Localization.AtPrime pR
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) pR
-    letI : Algebra V L :=
+    let : Algebra V L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) pR
-    letI : IsScalarTower V K L :=
+    let : IsScalarTower V K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) pR
     let C := integralClosure V L
@@ -59,34 +63,15 @@ theorem localNormalizationPrime_ramificationIdx_eq_galoisBranchIndex_at_largerPr
       q.1.ramificationIdx V =
         normalizationGaloisBranchRamificationIndex
           (K := K) (L := L) p := by
-  dsimp only
-  let R := Localization.AtPrime P
-  let : Algebra R K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra R L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower R K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-  let : IsFractionRing R K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
+  intro R sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 pR sharedOwner5 V sharedOwner6
+    sharedOwner7 sharedOwner8 C
   let : IsScalarTower A R L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let := integralClosureLocalizationAlgebra (L := L) P
-  let pR := p.map (algebraMap A R)
-  let : pR.IsPrime := Ideal.isPrime_map_of_isLocalizationAtPrime P hpP
-  let V := Localization.AtPrime pR
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) pR
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) pR
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) pR
   let : IsFractionRing V K :=
     localizationAtPrimeToFractionField_isFractionRing (K := K) pR
   intro q
-  let qV : Ideal (integralClosure V L) := q.1
+  let qV : Ideal C := q.1
   let : qV.IsPrime := by
     dsimp only [qV]
     infer_instance
@@ -131,11 +116,11 @@ theorem localNormalizationPrime_ramificationIdx_eq_galoisBranchIndex_at_largerPr
       (K := K) (L := L) P qR inferInstance
   have hqAOver : qA.LiesOver p := ⟨hqAUnder.symm⟩
   let : qA.LiesOver p := hqAOver
-  change Ideal.ramificationIdx (S := integralClosure V L) qV
+  change Ideal.ramificationIdx (S := C) qV
       (Localization.AtPrime pR) =
     normalizationGaloisBranchRamificationIndex (K := K) (L := L) p
   calc
-    Ideal.ramificationIdx (S := integralClosure V L) qV
+    Ideal.ramificationIdx (S := C) qV
         (Localization.AtPrime pR) =
         (normalizationPrimeFromLocalization
           (K := K) (L := L) pR qV).ramificationIdx R :=

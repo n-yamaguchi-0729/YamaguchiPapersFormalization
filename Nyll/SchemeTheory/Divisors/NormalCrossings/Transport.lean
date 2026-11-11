@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Operations
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-!
 # Transport of split normal-crossings charts
@@ -15,6 +17,8 @@ The explicit local chart is invariant under a change of ring model by an
 isomorphism.  This is used to pass between a scheme stalk and the canonical
 prime-localization model of the same local ring.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

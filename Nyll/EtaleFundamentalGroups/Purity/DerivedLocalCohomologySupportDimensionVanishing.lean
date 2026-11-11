@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
-import Mathlib.Algebra.Category.Grp.EpiMono
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Order.Monoid.WithTop
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Regular.Category
-import Mathlib.RingTheory.Regular.IsSMulRegular
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPowerTorsionAcyclic
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
+public import Mathlib.Algebra.Category.Grp.EpiMono
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Order.Monoid.WithTop
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Regular.Category
+public import Mathlib.RingTheory.Regular.IsSMulRegular
 
 /-!
 # Vanishing above the support dimension
@@ -31,6 +33,8 @@ scalar lowers support dimension.  Vanishing in the preceding degree makes
 the scalar injective on local cohomology, and power torsion then forces
 that local cohomology to vanish.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

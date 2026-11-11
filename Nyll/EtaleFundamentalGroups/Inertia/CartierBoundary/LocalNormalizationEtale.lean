@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalEtale
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.LocalEtale
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationEtaleOfGaloisComponents
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionFieldPullback
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
 
 /-!
 # Étaleness of the actual normalization over a generic boundary stalk
@@ -19,7 +21,11 @@ normalization-localization isomorphisms then identify this with the base
 change of the original cover's relative normalization to the DVR stalk.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open CategoryTheory.PreGaloisCategory AlgebraicGeometry.FiniteEtale
@@ -27,7 +33,7 @@ open EtaleFundamentalGroups.Inertia
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
   (D : X.EffectiveCartierDivisor) (E : Component D)
   [IsDomain (X.presheaf.stalk (componentPoint D E))]
   [IsDiscreteValuationRing (X.presheaf.stalk (componentPoint D E))]

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicCompleteDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicPrimeDegreeReduction
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEquivalence
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.HigherLocalField.Basic
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicCompleteDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.PositiveCharacteristicPrimeDegreeReduction
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEquivalence
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-!
 # Positive-characteristic ab-faithfulness of higher local fields
@@ -19,6 +21,8 @@ Galois layer, prime-degree detection follows from Artin--Schreier classes over
 the complete discrete valuation at the first level. No embedding-problem
 solvability result is used.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

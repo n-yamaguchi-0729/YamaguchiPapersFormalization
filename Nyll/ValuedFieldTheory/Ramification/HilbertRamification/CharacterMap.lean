@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.RamificationGroup
 
 /-!
 # Hilbert ramification theory: character-map source
@@ -20,6 +22,8 @@ independent of the unit and base-unit choices used to represent a value class,
 and we identify the ramification group as the subgroup on which all these
 classes are trivial.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory
 

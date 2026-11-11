@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.Data.Finset.Max
+module
+
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.Data.Finset.Max
 
 /-!
 # Residue fields of finite valued extensions
@@ -16,6 +18,8 @@ independent family upstairs: divide a proposed relation by a coefficient of
 maximal valuation and reduce. This proves finite residue degree without
 separability, completeness, or discreteness assumptions.
 -/
+
+@[expose] public section
 
 noncomputable section
 namespace Valuation

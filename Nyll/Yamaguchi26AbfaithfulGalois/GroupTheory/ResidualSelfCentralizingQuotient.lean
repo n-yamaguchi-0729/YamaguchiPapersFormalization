@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualFiniteInvariantQuotient
-import Nyll.ProCGroups.Abelian.FiniteInvariantQuotients
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.FiniteGroups.Classes
-import Mathlib.Algebra.Group.Hom.Basic
-import Mathlib.GroupTheory.QuotientGroup.Basic
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualFiniteInvariantQuotient
+public import Nyll.ProCGroups.Abelian.FiniteInvariantQuotients
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.FiniteGroups.Classes
+public import Mathlib.Algebra.Group.Hom.Basic
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Self-centralizing quotients with residual image in the formation
@@ -21,6 +23,8 @@ self-centralizing. The first isomorphism theorem identifies that actual
 image with the constructed finite quotient, so the image belongs to the
 formation without imposing a condition on the entire ambient quotient.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

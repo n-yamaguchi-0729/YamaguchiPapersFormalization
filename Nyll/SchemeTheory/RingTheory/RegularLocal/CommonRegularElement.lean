@@ -10,10 +10,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
-import Mathlib.RingTheory.Regular.IsSMulRegular
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Ideal.Prime
+module
+
+public import Mathlib.RingTheory.Ideal.AssociatedPrime.Finiteness
+public import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Ideal.Prime
 
 /-!
 # A common regular element for two finite modules
@@ -22,6 +24,8 @@ If the maximal ideal of a noetherian local ring is not an associated prime of ei
 finite module, it contains an element whose scalar multiplication is injective on both
 modules.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

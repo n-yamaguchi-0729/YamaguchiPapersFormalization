@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.RingTheory.AdicCompletion.RingHom
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.RingTheory.AdicCompletion.RingHom
 
 /-!
 # The map from p-adic integers to a complete valuation ring
@@ -16,13 +18,16 @@ Adic completeness lifts these compatible maps to the actual valuation ring.
 Neither characteristic zero nor finiteness of the residue field is required.
 -/
 
+@[expose] public section
+
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 
 universe u
 
 variable {K : Type u} [Field K]
 
-private noncomputable def zmodToMaximalIdealQuotient
+/-- Reduction modulo `p^n` maps to the quotient by the `n`th maximal-ideal power. -/
+noncomputable def zmodToMaximalIdealQuotient
     (v : _root_.Valuation K (WithZero (Multiplicative ℤ)))
     (p : ℕ) [CharP (IsLocalRing.ResidueField v.valuationSubring) p]
     (n : ℕ) :
@@ -39,14 +44,16 @@ private noncomputable def zmodToMaximalIdealQuotient
   exact ZMod.castHom (ringChar.dvd hpn)
     (v.valuationSubring ⧸ (IsLocalRing.maximalIdeal v.valuationSubring) ^ n)
 
-private noncomputable def padicIntQuotientMap
+/-- The p-adic integer map to a maximal-ideal-power quotient. -/
+noncomputable def padicIntQuotientMap
     (v : _root_.Valuation K (WithZero (Multiplicative ℤ)))
     (p : ℕ) [Fact p.Prime] [CharP (IsLocalRing.ResidueField v.valuationSubring) p]
     (n : ℕ) :
     ℤ_[p] →+* v.valuationSubring ⧸ (IsLocalRing.maximalIdeal v.valuationSubring) ^ n :=
   (zmodToMaximalIdealQuotient v p n).comp (PadicInt.toZModPow n)
 
-private theorem padicIntQuotientMap_compatible
+/-- The p-adic quotient maps commute with reduction between ideal powers. -/
+theorem padicIntQuotientMap_compatible
     (v : _root_.Valuation K (WithZero (Multiplicative ℤ)))
     (p : ℕ) [Fact p.Prime] [CharP (IsLocalRing.ResidueField v.valuationSubring) p]
     {m n : ℕ} (h : m ≤ n) :

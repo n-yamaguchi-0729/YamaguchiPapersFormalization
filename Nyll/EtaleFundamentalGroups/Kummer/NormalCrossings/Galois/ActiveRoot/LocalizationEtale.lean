@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRootFixedComponentEtale
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
-import Mathlib.Algebra.Algebra.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRootFixedComponentEtale
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+public import Mathlib.Algebra.Algebra.Defs
 
 /-!
 # Literal localized normalization for an active Galois root
@@ -16,6 +18,8 @@ localized normalization used by special local purity.  Keeping the bridge in
 its own compiled module avoids re-elaborating the completed chosen-component
 construction inside every branch of a full-cover trichotomy.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,11 +49,10 @@ theorem chosenFractionFieldToFaithfulField_isScalarTower
     [CommRing R] [IsDomain R]
     [Field K] [Algebra R K] [IsFractionRing R K]
     [Field F] [Algebra R F] [FaithfulSMul R F] :
-    letI : Algebra K F :=
+    let : Algebra K F :=
       chosenFractionFieldToFaithfulFieldAlgebra (R := R) (K := K) (F := F)
     IsScalarTower R K F := by
-  let : Algebra K F :=
-    chosenFractionFieldToFaithfulFieldAlgebra (R := R) (K := K) (F := F)
+  intro sharedOwner1
   let : Algebra (FractionRing R) F := FractionRing.liftAlgebra R F
   apply IsScalarTower.of_algebraMap_eq
   intro x

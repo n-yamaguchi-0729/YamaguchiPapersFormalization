@@ -4,7 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # One-dimensional regular local domains are regular rings
@@ -14,6 +18,8 @@ one-dimensional regular local domain is regular at all of its primes without
 using the missing general theorem that arbitrary regular local rings are
 regular rings.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,7 +71,10 @@ theorem isRegularRing_of_isRegularLocalRing_dimension_one
         Localization.AtPrime (IsLocalRing.maximalIdeal R) :=
       IsLocalization.atUnits R
         (IsLocalRing.maximalIdeal R).primeCompl
-        (fun x ↦ by simpa using! fun a ↦ a)
+        (by
+          intro x hx
+          change IsUnit x
+          exact IsLocalRing.notMem_maximalIdeal.mp hx)
     exact IsRegularLocalRing.of_ringEquiv e.toRingEquiv
 
 end EtaleFundamentalGroups

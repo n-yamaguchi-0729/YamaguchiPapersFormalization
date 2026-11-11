@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryHeightOneEtale
-import Nyll.SchemeTheory.Divisors.StalkAwayComplement
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.HeightOneEtale
+public import Nyll.SchemeTheory.Divisors.StalkAwayComplement
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationComponent
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationSourceIso
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationStalkLocalization
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Pasting
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 
 /-!
 # Height-one étaleness of actual normalized stalk components
@@ -21,7 +23,11 @@ component inclusions are open immersions. These comparisons transport the
 height-one étaleness of the global normalization to each chosen component.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -30,7 +36,7 @@ open EtaleFundamentalGroups.Inertia
 namespace Yamaguchi26SolvableCoverings
 
 private theorem etale_pullback_snd_source_comp
-    {J N X T : Scheme.{0}} (g : N ⟶ X) (b : T ⟶ X) (j : J ⟶ N)
+    {J N X T : Scheme.{u}} (g : N ⟶ X) (b : T ⟶ X) (j : J ⟶ N)
     [Etale (pullback.snd g b)] [Etale j] :
     Etale (pullback.snd (j ≫ g) b) := by
   let e := pullbackRightPullbackFstIso g b j
@@ -39,14 +45,14 @@ private theorem etale_pullback_snd_source_comp
   exact (pullbackRightPullbackFstIso_inv_snd_snd g b j) ▸ ht
 
 private theorem etale_iterated_pullback_snd
-    {N X S T : Scheme.{0}} (g : N ⟶ X) (b : S ⟶ X) (a : T ⟶ S)
+    {N X S T : Scheme.{u}} (g : N ⟶ X) (b : S ⟶ X) (a : T ⟶ S)
     [Etale (pullback.snd g (a ≫ b))] :
     Etale (pullback.snd (pullback.snd g b) a) := by
   let e := pullbackLeftPullbackSndIso g b a
   have ht : Etale (e.hom ≫ pullback.snd g (a ≫ b)) := inferInstance
   exact (pullbackLeftPullbackSndIso_hom_snd g b a) ▸ ht
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- Every actual finite-etale component of the principal stalk pullback has
 étale normalization after base change to a height-one boundary prime. The

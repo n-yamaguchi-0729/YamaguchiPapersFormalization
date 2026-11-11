@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
-import Mathlib.CategoryTheory.Comma.Over.Basic
-import Mathlib.CategoryTheory.Filtered.FinallySmall
-import Mathlib.CategoryTheory.Limits.Final
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkStructure
+public import Mathlib.CategoryTheory.Comma.Over.Basic
+public import Mathlib.CategoryTheory.Filtered.FinallySmall
+public import Mathlib.CategoryTheory.Limits.Final
 
 /-!
 # The actual geometric stalk as a filtered colimit of base algebras
@@ -19,6 +21,8 @@ model supplies a small filtered diagram whose colimit is the same actual stalk,
 with its actual structure homomorphism. This is the input for finite-data
 algebra descent, rather than an assumed presentation of strict henselization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

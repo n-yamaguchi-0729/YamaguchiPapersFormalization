@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # An explicit affine strict-normal-crossings chart
@@ -21,6 +23,8 @@ labelled local branches are irreducible.  The boundary equation is associated
 to their product, as in the usual definition of a strict normal-crossings
 divisor.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

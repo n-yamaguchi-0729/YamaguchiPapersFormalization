@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
-import Mathlib.Algebra.BigOperators.Field
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
+public import Mathlib.Algebra.BigOperators.Field
 
 /-!
 # Prime-to-residue torsion in the actual ramification group
@@ -20,6 +22,8 @@ The argument uses the existing ramification subgroup and its principal-unit
 condition. It requires no discreteness, Henselianity, or finite extension.
 -/
 
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

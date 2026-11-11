@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
 
 /-!
 # Essential socles of ideal-power torsion modules
@@ -23,6 +25,8 @@ Taking the ideal to be the maximal ideal proves essentialness of the
 socle of a maximal-ideal-power torsion module.  No finite generation
 hypothesis or auxiliary scalar structure is needed.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

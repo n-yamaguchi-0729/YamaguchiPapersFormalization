@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOne
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Away.GenericTensor.HeightOne
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
 
 /-!
 # Away height-one points after changing the base ring
@@ -20,6 +22,8 @@ the localized-normalization form consumed by height-two purity.
 This avoids introducing a generally nonexistent literal finite-etale
 algebra over the whole full root cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

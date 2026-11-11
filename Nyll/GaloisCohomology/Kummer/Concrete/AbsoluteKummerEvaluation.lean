@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteKummerH1
 
 /-!
 # Evaluating absolute Kummer characters
@@ -13,13 +15,15 @@ The absolute Kummer character of a power class evaluates as the Galois
 quotient of any root with the prescribed power.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 
 open KummerTheory
 
-variable (K : Type*) [Field K] [CharZero K]
+variable (K : Type*) [Field K] [PerfectField K]
 
 /-- The absolute Kummer character of a unit class is computed from any
 `n`-th root of that unit in the algebraic closure. -/
@@ -34,6 +38,9 @@ theorem absoluteKummerContinuousNthRootsCharacterEquiv_apply_of_pow_eq
       DiscreteNthRootsSubgroup (AlgebraicClosure K) (n : ℕ)) :
         (AlgebraicClosure K)ˣ) =
       rootQuotient (K := K) (L := AlgebraicClosure K) β σ := by
+  let : IsGalois K (AlgebraicClosure K) :=
+    { to_isSeparable := inferInstance
+      to_normal := inferInstance }
   let D := chosenFiniteKummerRadicalDatum (K := K) (L := AlgebraicClosure K) n
   let δ : D.carrier := unitsEquivAbsoluteRadicalCarrier K n a
   let hbase :=

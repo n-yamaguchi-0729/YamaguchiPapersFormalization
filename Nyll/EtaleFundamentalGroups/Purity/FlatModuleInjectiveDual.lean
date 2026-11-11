@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.Injective
-import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Mathlib.LinearAlgebra.TensorProduct.Map
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Map
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Injective-valued duals of flat modules
@@ -17,6 +19,8 @@ an injective module along that tensor map can therefore be curried into
 an extension with values in the linear dual. This supplies the injective
 terms when a flat local-cohomology complex is dualized.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

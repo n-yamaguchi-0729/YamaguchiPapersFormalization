@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+module
+
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
 
 /-!
 # Continuity of semilinear Galois conjugation
@@ -18,6 +20,8 @@ intermediate field. Its fixing subgroup maps into the original fixing subgroup
 under semilinear conjugation. This proves continuity for the Krull topology
 without putting a topology on the extension field.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

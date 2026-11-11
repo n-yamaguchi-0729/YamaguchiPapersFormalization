@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharInvariantKummerTrace
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharMovingRootDetection
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
-import Mathlib.Algebra.CharP.IntermediateField
-import Mathlib.Algebra.Group.End
-import Mathlib.Topology.Algebra.Group.Basic
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharInvariantKummerTrace
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharMovingRootDetection
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
+public import Mathlib.Algebra.CharP.IntermediateField
+public import Mathlib.Algebra.Group.End
+public import Mathlib.Topology.Algebra.Group.Basic
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Nontrivial H¹ action from both cyclotomic branches
@@ -23,6 +25,8 @@ of the lower action would fix that same trace, contradicting its construction.
 The other branch uses the logarithmic minimum argument. The common last
 root level and the branch split are generated internally.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

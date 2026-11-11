@@ -4,10 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationLocal
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalConnectedness
-import Mathlib.RingTheory.Ideal.GoingUp
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalConnectedness
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.BaseRingEquiv
 
 /-!
 # Comparing a connected normalization fibre with an affine puncture
@@ -17,6 +22,8 @@ scheme-theoretically by two pullbacks.  This file compares those pullbacks
 with the punctured spectrum of the corresponding quotient of the literal
 integral-closure algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -137,7 +144,8 @@ variable (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R]
   [IsNoetherianRing R] [IsIntegrallyClosed R]
 
 omit [IsNoetherianRing R] [IsIntegrallyClosed R] in
-private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ_source_forFiber
+/-- The punctured function-field comparison preserves the original global germ. -/
+theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ_source_forFiber
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R)
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
@@ -181,7 +189,8 @@ private theorem puncturedSpectrumFunctionFieldRingEquiv_apply_germ_source_forFib
     (by trivial) r
 
 omit [IsLocalRing R] [IsNoetherianRing R] [IsIntegrallyClosed R] in
-private theorem specFunctionField_algebraMap_ΓSpecIso_hom_source_forFiber
+/-- The affine function-field algebra map agrees with the original global germ. -/
+theorem specFunctionField_algebraMap_ΓSpecIso_hom_source_forFiber
     (r : Γ(Spec (.of R), ⊤)) :
     let X := Spec (.of R)
     let : Nonempty (⊤ : X.Opens) :=
@@ -199,7 +208,8 @@ private theorem specFunctionField_algebraMap_ΓSpecIso_hom_source_forFiber
     X.presheaf.germ ⊤ (genericPoint X) (by trivial) s)
       (Iso.hom_inv_id_apply (Scheme.ΓSpecIso (.of R)) r)
 
-private noncomputable def connectedPuncturedCoverGenericNormalizationSectionsComparisonData
+/-- The normalization section comparison together with its base-ring equation. -/
+noncomputable def connectedPuncturedCoverGenericNormalizationSectionsComparisonData
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R)
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
@@ -375,7 +385,8 @@ theorem connectedPuncturedCoverGenericNormalizationSectionsRingEquiv_appTop
   (connectedPuncturedCoverGenericNormalizationSectionsComparisonData
     R hpos W).2
 
-private noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosureData
+/-- The normalization spectrum comparison together with its structural equation. -/
+noncomputable def connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosureData
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R)
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W] :
     let U := Scheme.puncturedSpectrum R
@@ -531,7 +542,7 @@ theorem connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure_hom_fr
 
 /-- Pulling back two isomorphic schemes over a fixed base preserves the
 pullback.  This local copy is used to keep the comparison data explicit. -/
-private noncomputable def pullbackIsoOfIsoOverForNormalizationFiber
+noncomputable def pullbackIsoOfIsoOverForNormalizationFiber
     {A B X Y : Scheme.{u}} (e : A ≅ B)
     (f : A ⟶ X) (h : B ⟶ X) (g : Y ⟶ X)
     (w : e.hom ≫ h = f) :
@@ -540,7 +551,8 @@ private noncomputable def pullbackIsoOfIsoOverForNormalizationFiber
     (by simpa only [Category.comp_id] using w.symm)
     (by rw [Category.comp_id, Category.id_comp])
 
-private noncomputable def affineQuotientPullbackIsoData
+/-- An affine base change by a quotient, with its structural-map equation. -/
+noncomputable def affineQuotientPullbackIsoData
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]
     (I : Ideal A) (Z : Scheme.{u}) (z : Z ⟶ Spec (.of A))
     (eZ : Z ≅ Spec (.of B))
@@ -599,7 +611,8 @@ private noncomputable def affineQuotientPullbackIsoData
     Limits.pullback.snd z q
   rw [Category.assoc, heAffine, heFiber]
 
-private noncomputable def
+/-- The normalization closed-fibre comparison with its quotient-ring structure map. -/
+noncomputable def
     connectedPuncturedCoverNormalizationClosedFiberIsoSpecQuotientData
     (hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R)
     (W : FiniteEtale (Scheme.puncturedSpectrum R)) [IsConnected W]

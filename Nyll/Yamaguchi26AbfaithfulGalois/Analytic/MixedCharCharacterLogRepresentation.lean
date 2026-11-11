@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation
-import Nyll.ValuedFieldTheory.LocalField.Analytic.RepresentationCharacterTwist
-import Mathlib.RepresentationTheory.Intertwining
-import Mathlib.RepresentationTheory.Subrepresentation
-import Mathlib.RepresentationTheory.Invariants
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.RepresentationCharacterTwist
+public import Mathlib.RepresentationTheory.Intertwining
+public import Mathlib.RepresentationTheory.Subrepresentation
+public import Mathlib.RepresentationTheory.Invariants
 
 /-!
 # The character subspace of the actual principal-unit logarithm image
@@ -19,6 +21,8 @@ subspace. Normality supplies stability under the full group action; it is
 not needed for the field inclusion, eigenvector criterion, or saturation.
 No p-adic module structure is registered on the ambient field.
 -/
+
+@[expose] public section
 
 noncomputable section
 

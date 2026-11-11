@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCyclotomicDetection
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.MixedCharCompleteExtension
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.CharP.Algebra
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.FieldTheory.Perfect
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCyclotomicDetection
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicIntermediateField
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.MixedCharCompleteExtension
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.CharP.Algebra
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.FieldTheory.Perfect
 
 /-!
 # Faithful mod-p action outside the dyadic quadratic case
@@ -20,6 +22,8 @@ The cyclotomic field and its complete discrete valuation are constructed
 from the base field. The logarithmic detection theorem then applies with
 no auxiliary field or representation data in the public statement.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

@@ -10,16 +10,21 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.DualNumber
-import Mathlib.RingTheory.LocalProperties.Reduced
-import Mathlib.RingTheory.RegularLocalRing.Defs
-import Mathlib.RingTheory.Unramified.Field
+module
+
+public import Mathlib.RingTheory.DualNumber
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.LocalProperties.Reduced
+public import Mathlib.RingTheory.RegularLocalRing.Defs
+public import Mathlib.RingTheory.Unramified.Field
 
 /-!
 # Regular stalks for unramified algebras over fields
 
 The dual-number counterexample records why a smoothness hypothesis is needed.
 -/
+
+@[expose] public section
 
 universe u
 

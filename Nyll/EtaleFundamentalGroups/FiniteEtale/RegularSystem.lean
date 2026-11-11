@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.LocalRing.Etale
-import Mathlib.RingTheory.Regular.Flat
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Mathlib.RingTheory.LocalRing.Etale
+public import Mathlib.RingTheory.Regular.Flat
+public import Mathlib.RingTheory.Smooth.Flat
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
 
 /-!
 # Regular systems under a finite étale local extension
@@ -20,6 +23,8 @@ For a module-finite extension of a Noetherian base, the target is Noetherian.
 The regular-system geometry developed in `Kummer.RegularSystemDomain` then
 supplies the domain, regular-local, prime-parameter, and quotient conclusions.
 -/
+
+@[expose] public section
 
 noncomputable section
 

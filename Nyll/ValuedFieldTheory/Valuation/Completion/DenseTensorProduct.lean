@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.TensorProduct.Finite
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Topology.Algebra.Module.FiniteDimension
+module
+
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Topology.Algebra.Module.FiniteDimension
 
 /-!
 # Dense tensor images over a complete field
@@ -15,6 +17,8 @@ The tensor image of a finite extension is finite-dimensional over the
 complete base field, hence closed. If it contains a dense copy of the
 extension field, this image is the entire target ring.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

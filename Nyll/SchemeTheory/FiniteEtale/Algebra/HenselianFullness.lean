@@ -14,6 +14,8 @@ public import Mathlib.RingTheory.Etale.Finite
 public import Mathlib.RingTheory.FinitePresentation
 public import Mathlib.RingTheory.Ideal.IdempotentFG
 public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.FiniteEtale.Algebra.EtaleSection
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.JacobsonIntegral
 
 /-!
 # Lifting maps of finite étale algebras over a Henselian pair

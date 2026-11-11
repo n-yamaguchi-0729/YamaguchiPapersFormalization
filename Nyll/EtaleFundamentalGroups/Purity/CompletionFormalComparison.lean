@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Smooth.AdicCompletion
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Smooth.AdicCompletion
 
 /-!
 # Formally étale maps into adically complete rings
@@ -15,6 +17,8 @@ adically complete target.  Adic separatedness and formal unramifiedness make
 that lift unique.  Thus reduction modulo the ideal is bijective on maps from
 a formally étale algebra.
 -/
+
+@[expose] public section
 
 namespace Algebra.FormallyEtale
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverHeightOne
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverHeightOne
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.GaloisRamificationIndex
 
 /-!
 # The height-two full root cover at the common Galois branch indices
@@ -15,6 +17,8 @@ has the same ramification index.  Using that exact common index on each
 active branch cancels the actual local factor without leaving the residual
 radicals produced by a product of branch indices.
 -/
+
+@[expose] public section
 
 noncomputable section
 

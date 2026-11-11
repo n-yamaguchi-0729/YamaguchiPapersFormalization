@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationAction
-import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationFunctionField
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.SchemeTheory.FunctionFields.Functoriality
-import Nyll.SchemeTheory.Normalization.Normal
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationAction
+public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
+public import Nyll.SchemeTheory.Normalization.Normal
 
 /-!
 # The actual function-field normalization of an affine normal scheme
@@ -19,6 +21,8 @@ algebra on the function field is constructed from the actual structure
 morphism, and the induced action agrees with geometric pullback on rational
 functions. All comparisons use the same section and function-field maps.
 -/
+
+@[expose] public section
 
 noncomputable section
 

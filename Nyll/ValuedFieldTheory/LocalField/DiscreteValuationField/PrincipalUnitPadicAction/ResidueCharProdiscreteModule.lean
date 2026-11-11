@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientPadicContinuity
-import Mathlib.Algebra.Module.MinimalAxioms
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.QuotientPadicContinuity
+public import Mathlib.Algebra.Module.MinimalAxioms
 
 /-!
 # P-adic scalars on the principal-unit prodiscrete limit
@@ -14,6 +16,8 @@ The compatible quotient actions define an action on the actual inverse-limit
 carrier. Its module laws and joint continuity follow coordinate by coordinate,
 without a finiteness assumption on the residue field.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
 namespace PrincipalUnitProdiscreteLimit
@@ -25,7 +29,7 @@ variable (F : ValuationTheory.DiscreteValuationField.CompleteDVF.{u, v} K)
 variable (p : ℕ) [Fact p.Prime] [CharP F.residueField p]
 
 /-- Coordinatewise scalar multiplication is a compatible family. -/
-@[instance_reducible] private noncomputable def padicSMulOfResidueChar :
+@[instance_reducible] noncomputable def padicSMulOfResidueChar :
     SMul ℤ_[p] (PrincipalUnitProdiscreteLimit F) where
   smul a x := ⟨Additive.ofMul ⟨fun n => Additive.toMul
     (((DiscretePrincipalUnitQuotient.padicModule F p n).toSMul.smul

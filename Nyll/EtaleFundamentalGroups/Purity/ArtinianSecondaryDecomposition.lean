@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Module.LinearMap.End
-import Mathlib.Algebra.Module.Submodule.Ker
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Submodule.Map
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Data.Finset.Lattice.Fold
-import Mathlib.Data.Finset.Empty
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Nilpotent.Defs
+module
+
+public import Mathlib.Algebra.Module.LinearMap.End
+public import Mathlib.Algebra.Module.Submodule.Ker
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Submodule.Map
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Data.Finset.Lattice.Fold
+public import Mathlib.Data.Finset.Empty
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Nilpotent.Defs
 
 /-!
 # Secondary decompositions of Artinian modules
@@ -24,6 +26,8 @@ sum for the offending multiplication expresses it as the sum of two
 proper submodules.  Well-founded induction on submodules therefore gives
 a finite secondary decomposition.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.SigmaKernel
-import Mathlib.GroupTheory.Subgroup.Centralizer
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.SigmaKernel
+public import Mathlib.GroupTheory.Subgroup.Centralizer
 
 /-!
 # Fixed primary classes in sigma quotients
@@ -14,6 +16,8 @@ Centralizing classes in sigma-residual quotients project to fixed
 primary classes for primes in sigma. Vanishing of those fixed classes
 forces the centralizing quotient class to be trivial.
 -/
+
+@[expose] public section
 
 open scoped commutatorElement
 namespace Yamaguchi26AbfaithfulGalois

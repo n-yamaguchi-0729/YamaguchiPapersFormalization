@@ -10,13 +10,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepthFreeness
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepth
-import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequence
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthBound
-import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
-import Nyll.SchemeTheory.RingTheory.RegularLocal.CommonRegularElement
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepthFreeness
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDepth
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularSequence
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthBound
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.ModuleDepthRegularQuotient
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.CommonRegularElement
 
 /-!
 # Finite free resolutions over regular local rings
@@ -25,6 +27,8 @@ The depth argument and the resolution construction are extracted from the
 attributed source above, independently of its subsequent localization and
 unique factorization argument. The ring hypothesis here is only regular local.
 -/
+
+@[expose] public section
 
 open IsLocalRing RingTheory.Sequence
 

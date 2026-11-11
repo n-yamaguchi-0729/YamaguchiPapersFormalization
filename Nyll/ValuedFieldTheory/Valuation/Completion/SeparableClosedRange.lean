@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.Algebra.Algebra.Tower
+module
+
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.Algebra.Algebra.Tower
 
 /-!
 # Separable elements lie in an embedded separably closed field
@@ -14,6 +16,8 @@ An embedding from a separably closed field contains every element that is
 separable over the common base, without any algebraicity assumption on the
 ambient extension or on the separably closed field over that base.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Completion
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.IntegralClosure.GoingDown
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.IntegralClosure.GoingDown
 
 /-!
 # The codimension-one support input to special local purity
@@ -22,6 +24,8 @@ the first cotangent homology support) contains no height-one prime.
 The missing step to full purity is precisely the codimension-at-least-two
 support-vanishing theorem; it is not assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

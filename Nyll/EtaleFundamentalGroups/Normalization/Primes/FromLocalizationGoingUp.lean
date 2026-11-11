@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.GoingUp
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.FromLocalization
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.GoingUp
 
 /-!
 # Following a localized normalization branch to a larger global prime
@@ -16,6 +18,8 @@ original normalization, then followed to any prescribed larger prime of the
 base.  The recovered prime relocalizes to the chosen branch and has the same
 ramification index.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,7 +37,7 @@ theorem exists_normalizationPrimes_over_largerPrime_of_localized
     [Algebra A K] [IsFractionRing A K]
     [Algebra K L] [Algebra A L] [IsScalarTower A K L]
     (p P : Ideal A) [p.IsPrime] [P.IsPrime] (hpP : p ≤ P) :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) p
     ∀ q : Ideal (integralClosure (Localization.AtPrime p) L),
       q.IsPrime →
@@ -43,7 +47,7 @@ theorem exists_normalizationPrimes_over_largerPrime_of_localized
         localizedNormalizationPrime (K := K) (L := L) p Q = q ∧
         Q.ramificationIdx A = q.ramificationIdx (Localization.AtPrime p) ∧
         Q ≤ N ∧ N.IsPrime ∧ N.LiesOver P := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime p) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) p
   intro q hq hqOver

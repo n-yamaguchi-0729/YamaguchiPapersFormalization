@@ -4,14 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
 
 
 /-!
 # The strict generic Cartier map through the actual fraction-field map
 -/
+
+@[expose] public section
 
 noncomputable section
 

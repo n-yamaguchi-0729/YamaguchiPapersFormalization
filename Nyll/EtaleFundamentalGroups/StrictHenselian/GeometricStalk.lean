@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Colimits
-import Mathlib.Algebra.Category.Ring.FilteredColimits
-import Nyll.EtaleFundamentalGroups.StrictHenselian.PointedEtaleNeighborhoods
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Restrict
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Filtered.Basic
-import Mathlib.CategoryTheory.Discrete.Basic
-import Mathlib.Geometry.RingedSpace.Basic
-import Mathlib.RingTheory.LocalRing.Basic
+module
+
+public import Mathlib.Algebra.Category.Ring.Colimits
+public import Mathlib.Algebra.Category.Ring.FilteredColimits
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.PointedEtaleNeighborhoods
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.Restrict
+public import Mathlib.CategoryTheory.Sites.Point.Basic
+public import Mathlib.CategoryTheory.Filtered.Basic
+public import Mathlib.CategoryTheory.Discrete.Basic
+public import Mathlib.Geometry.RingedSpace.Basic
+public import Mathlib.RingTheory.LocalRing.Basic
 
 
 /-!
@@ -40,6 +42,8 @@ The Henselian property, the identification of its residue field with the
 separable closure of the original residue field, and the subsequent inertia
 comparison are separate statements, not fields assumed by this construction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

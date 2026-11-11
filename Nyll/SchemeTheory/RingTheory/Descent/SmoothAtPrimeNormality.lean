@@ -10,12 +10,14 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+module
 
-import Mathlib.Util.WithWeakNamespace
-import Mathlib.RingTheory.Polynomial.IsIntegral
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+
+public import Mathlib.Util.WithWeakNamespace
+public import Mathlib.RingTheory.Polynomial.IsIntegral
+public import Mathlib.RingTheory.RingHom.StandardSmooth
+public import Mathlib.RingTheory.Smooth.StandardSmoothOfFree
 
 /-!
 # Normality of smooth algebras localized at primes
@@ -25,12 +27,14 @@ is integrally closed. The proof first treats polynomial algebras and then the et
 local presentation.
 -/
 
+@[expose] public section
+
 section ProofImplementation
 
 namespace AlgebraicCurves.Foundations.CommutativeAlgebra.Proofs
 namespace
   Algebra_Smooth_isDomain_and_isIntegrallyClosed_of_isIntegrallyClosed_of_isLocalization_atPrime
-universe u
+universe u v w
 
 theorem isIntegrallyClosed_mvPolynomial_fin (R : Type u) [CommRing R]
     [IsDomain R] [IsIntegrallyClosed R] :
@@ -46,8 +50,8 @@ open
 with_weak_namespace _root_.Algebra.Smooth
 theorem isDomain_and_isIntegrallyClosed_of_isIntegrallyClosed_of_isLocalization_atPrime
     (R : Type u) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
-    (S : Type u) [CommRing S] [Algebra R S] [Algebra.Smooth R S]
-    (p : Ideal S) [p.IsPrime] (Sₚ : Type u) [CommRing Sₚ]
+    (S : Type v) [CommRing S] [Algebra R S] [Algebra.Smooth R S]
+    (p : Ideal S) [p.IsPrime] (Sₚ : Type w) [CommRing Sₚ]
     [Algebra S Sₚ] [IsLocalization.AtPrime Sₚ p] :
     IsDomain Sₚ ∧ IsIntegrallyClosed Sₚ := by
   classical
@@ -71,7 +75,7 @@ theorem isDomain_and_isIntegrallyClosed_of_isIntegrallyClosed_of_isLocalization_
   have hunit : IsUnit (algebraMap S Sₚ f) := IsLocalization.map_units Sₚ (⟨f, hf⟩ : p.primeCompl)
   let : Algebra Sf Sₚ := (IsLocalization.Away.lift f hunit).toAlgebra
   have : IsScalarTower S Sf Sₚ := IsScalarTower.of_algebraMap_eq fun s => by
-    simp [RingHom.algebraMap_toAlgebra, IsLocalization.Away.lift_eq]
+    exact (IsLocalization.Away.lift_eq f hunit s).symm
   have hle : Submonoid.powers f ≤ p.primeCompl := by
     rintro _ ⟨k, rfl⟩
     exact fun h => hf (hp.mem_of_pow_mem k h)

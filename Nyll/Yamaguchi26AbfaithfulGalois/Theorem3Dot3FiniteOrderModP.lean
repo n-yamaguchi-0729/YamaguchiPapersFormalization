@@ -4,17 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.AugmentationDivisibility
-import Nyll.ValuedFieldTheory.LocalField.Analytic.PrimeOrderDivisibility
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.Algebra.Module.Torsion.Free
-import Mathlib.GroupTheory.OrderOfElement
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.AugmentationDivisibility
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrimeOrderDivisibility
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.Algebra.Module.Torsion.Free
+public import Mathlib.GroupTheory.OrderOfElement
 
 /-! # Lemma 3.3: finite-order automorphisms trivial modulo an odd prime
 
 Source: [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1), Lemma 3.3.
 The separation hypothesis is stated elementwise; no finite generation is assumed.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 
@@ -69,7 +73,7 @@ private theorem prime_order_mod_p_eq_one
   classical
   by_cases hqp : q = p
   · rw [hqp] at horder
-    have : IsAddTorsionFree M := IsAddTorsionFree.of_isTorsionFree ℤ_[p] M
+    have : HasUniqueDiv M := HasUniqueDiv.of_isTorsionFree ℤ_[p] M
     let forget : (M ≃ₗ[ℤ_[p]] M) →* AddMonoid.End M :=
       { toFun := fun e => e.toLinearMap.toAddMonoidHom
         map_one' := rfl

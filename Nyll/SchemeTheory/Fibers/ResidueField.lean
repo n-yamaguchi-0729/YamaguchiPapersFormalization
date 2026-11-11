@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.FunctionField
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.FunctionField
 
 /-!
 # Residue fields in scheme-theoretic fibres
@@ -16,6 +18,8 @@ the generic point of the generic fibre maps to the generic point of the
 source.  Together these facts give the canonical residue-field comparison
 used by divisorial generic-fibre arguments.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.RamificationInertia.Ramification
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.RamificationInertia.Ramification
 
 /-!
 # Ramification indices in a flat base-change square
@@ -16,6 +18,8 @@ ramification index is unchanged across the square.  The proof compares the
 two ramification-index tower formulas; the two vertical indices are one
 because their defining ideals map onto the chosen primes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

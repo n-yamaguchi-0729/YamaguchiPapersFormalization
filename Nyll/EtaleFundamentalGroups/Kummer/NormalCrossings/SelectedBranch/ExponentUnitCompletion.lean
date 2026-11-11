@@ -4,25 +4,27 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
-import Nyll.EtaleFundamentalGroups.Completions.Retained.ComponentToChosenLocalFraction
-import Nyll.EtaleFundamentalGroups.Completions.Retained.ComponentTower
-import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationLocalRamification
-import Nyll.EtaleFundamentalGroups.Completions.Retained.PrefixBoundaryAway
-import Nyll.EtaleFundamentalGroups.Completions.Retained.RegularBranchPrimeChain
-import Nyll.EtaleFundamentalGroups.Completions.Retained.TensorPrimeContraction
-import Nyll.EtaleFundamentalGroups.Ramification.Tensor.FiniteFlat
-import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FlatLocalAscent
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.PrefixEmbedding.ExactPrimeBoundaryAway
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositumAway
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootExponentUnit
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.OneRootFiniteEtaleChosenFactor
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.SelectedComponent.ExactPrimeSource
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationMap
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationPrime
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverResidue
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Defs
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.ComponentToChosenLocalFraction
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.ComponentTower
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.NormalizationLocalRamification
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.PrefixBoundaryAway
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.RegularBranchPrimeChain
+public import Nyll.EtaleFundamentalGroups.Completions.Retained.TensorPrimeContraction
+public import Nyll.EtaleFundamentalGroups.Ramification.Tensor.FiniteFlat
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.DVR.FlatLocalAscent
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.NormalLocalizationDVR
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.PrefixEmbedding.ExactPrimeBoundaryAway
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.GenericTensorTower.ChosenFactorCompositumAway
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootExponentUnit
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.OneRootFiniteEtaleChosenFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.SelectedComponent.ExactPrimeSource
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationMap
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverResidue
 
 /-!
 # The selected exponent from the retained completed component
@@ -42,6 +44,8 @@ single global component returned by the strict-normal-crossings source
 theorem.  In particular, the statement exposes no completed component
 comparison, right-coordinate bijectivity, or ramification-index hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -776,17 +780,17 @@ private def SelectedExponentPrefixPackageBody
   let yhat : Bhat := algebraMap B Bhat yB
   let hgeometryHat :=
     maximalAdicCompletion_regularPair_geometry hregB hgenB
-  letI : IsDomain Bhat := hgeometryHat.1
+  let _ : IsDomain Bhat := hgeometryHat.1
   let Khat := FractionRing Bhat
   let hBhatFaithfullyFlat : Module.FaithfullyFlat B Bhat :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
-  letI : Module.FaithfullyFlat B Bhat := hBhatFaithfullyFlat
-  letI : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
+  let _ : Module.FaithfullyFlat B Bhat := hBhatFaithfullyFlat
+  let _ : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
   let kBKhatAlgebra : Algebra KB Khat :=
     (IsFractionRing.lift
       (A := B) (K := KB) (L := Khat)
       (FaithfulSMul.algebraMap_injective B Khat)).toAlgebra
-  letI : Algebra KB Khat := kBKhatAlgebra
+  let _ : Algebra KB Khat := kBKhatAlgebra
   let kBKhatTower : IsScalarTower B KB Khat :=
     IsScalarTower.of_algebraMap_smul fun b x ↦ by
       rw [Algebra.smul_def, Algebra.smul_def]
@@ -797,28 +801,28 @@ private def SelectedExponentPrefixPackageBody
             (algebraMap B KB b) * x =
           algebraMap B Khat b * x
       rw [IsFractionRing.lift_algebraMap]
-  letI : IsScalarTower B KB Khat := kBKhatTower
+  let _ : IsScalarTower B KB Khat := kBKhatTower
   let E := integralClosure D M
   let C₀ := integralClosure B M₀
   let Tfinal := Bhat ⊗[B] E
-  letI : Algebra Bhat Tfinal := Algebra.TensorProduct.leftAlgebra
-  letI : Algebra E Tfinal := Algebra.TensorProduct.rightAlgebra
+  let _ : Algebra Bhat Tfinal := Algebra.TensorProduct.leftAlgebra
+  let _ : Algebra E Tfinal := Algebra.TensorProduct.rightAlgebra
   let Pfinal := p.map (algebraMap E Tfinal)
   ∃ Nfinal : Ideal Tfinal,
     ∃ hNfinalPrime : Nfinal.IsPrime,
       ∃ hNfinalOver : Nfinal.LiesOver (⊥ : Ideal Bhat),
-      letI : Nfinal.IsPrime := hNfinalPrime
-      letI : Nfinal.LiesOver (⊥ : Ideal Bhat) := hNfinalOver
+      let _ : Nfinal.IsPrime := hNfinalPrime
+      let _ : Nfinal.LiesOver (⊥ : Ideal Bhat) := hNfinalOver
       Nfinal ≤ Pfinal ∧ Pfinal.IsMaximal ∧
       let Tprefix := Bhat ⊗[B] C₀
-      letI : Algebra Bhat Tprefix := Algebra.TensorProduct.leftAlgebra
-      letI : Algebra C₀ Tprefix := Algebra.TensorProduct.rightAlgebra
+      let _ : Algebra Bhat Tprefix := Algebra.TensorProduct.leftAlgebra
+      let _ : Algebra C₀ Tprefix := Algebra.TensorProduct.rightAlgebra
       let fT := completedFiniteModelTowerAlgHom
         (R := B) (R' := Bhat) (S₀ := C₀) (S₁ := E) g
       let Nprefix := Nfinal.comap fT.toRingHom
       let hNprefixPrime : Nprefix.IsPrime :=
         hNfinalPrime.comap fT.toRingHom
-      letI : Nprefix.IsPrime := hNprefixPrime
+      let _ : Nprefix.IsPrime := hNprefixPrime
       let hNprefixOver : Nprefix.LiesOver (⊥ : Ideal Bhat) := by
         refine ⟨?_⟩
         ext x
@@ -826,7 +830,7 @@ private def SelectedExponentPrefixPackageBody
           fT (algebraMap Bhat Tprefix x) ∈ Nfinal
         rw [fT.commutes x]
         exact Nfinal.mem_of_liesOver (⊥ : Ideal Bhat) x
-      letI : Nprefix.LiesOver (⊥ : Ideal Bhat) := hNprefixOver
+      let _ : Nprefix.LiesOver (⊥ : Ideal Bhat) := hNprefixOver
       let mPrefix := retainedCompletedGenericTensorIdeal
         (R := B) (R' := Bhat) (S := C₀) (K := KB) (L := M₀)
         (K' := Khat) Nprefix
@@ -834,25 +838,25 @@ private def SelectedExponentPrefixPackageBody
         retainedCompletedGenericTensorIdeal_isMaximal
           (R := B) (R' := Bhat) (S := C₀) (K := KB) (L := M₀)
           (K' := Khat) Nprefix
-      letI : mPrefix.IsMaximal := hmPrefix
+      let _ : mPrefix.IsMaximal := hmPrefix
       let OmegaPrefix := GenericTensorFieldComponent mPrefix
       let bHatOmegaPrefixAlgebra : Algebra Bhat OmegaPrefix :=
         genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) mPrefix
-      letI : Algebra Bhat OmegaPrefix := bHatOmegaPrefixAlgebra
+      let _ : Algebra Bhat OmegaPrefix := bHatOmegaPrefixAlgebra
       let ICprefix := selectedPrefixNormalizationRing
         (B := B) (KB := KB) (M₀ := M₀)
         yB zB hregB hgenB Nprefix
       let prefixOwner := selectedPrefixNormalizationOwner
         (B := B) (KB := KB) (M₀ := M₀)
         yB zB hregB hgenB Nprefix
-      letI : CommRing ICprefix := prefixOwner.commRingΩ
-      letI : Algebra Bhat ICprefix := prefixOwner.algebra
+      let _ : CommRing ICprefix := prefixOwner.commRingΩ
+      let _ : Algebra Bhat ICprefix := prefixOwner.algebra
       ∃ qhatPrefix : Ideal ICprefix,
         ∃ hqhatPrime : qhatPrefix.IsPrime,
           ∃ hqhatOver : qhatPrefix.LiesOver
               (Ideal.span ({yhat} : Set Bhat)),
-            letI : qhatPrefix.IsPrime := hqhatPrime
-            letI : qhatPrefix.LiesOver
+            let _ : qhatPrefix.IsPrime := hqhatPrime
+            let _ : qhatPrefix.LiesOver
                 (Ideal.span ({yhat} : Set Bhat)) := hqhatOver
             qhatPrefix.ramificationIdx Bhat = N ∧
               (Localization.awayMap
@@ -1159,11 +1163,7 @@ private theorem tensorPushoutEquiv_base_isScalarTower
     @IsScalarTower B D Broot
       (inferInstance : Algebra B D).toSMul
       dBrootAlgebra.toSMul bBrootAlgebra.toSMul := by
-  let dBrootAlgebra : Algebra D Broot :=
-    (e.toRingHom.comp
-      Algebra.TensorProduct.includeRight.toRingHom).toAlgebra
-  let bBrootAlgebra : Algebra B Broot :=
-    ((algebraMap Bhat Broot).comp (algebraMap B Bhat)).toAlgebra
+  intro dBrootAlgebra bBrootAlgebra
   apply IsScalarTower.of_algebraMap_eq
   intro x
   calc
@@ -1197,26 +1197,17 @@ private theorem exists_retainedCompletedComponentToChosenLocalFractionAlgHom
     let m := retainedCompletedGenericTensorIdeal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
-    letI : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
+    let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
       (R := R) (R' := R') (S := S) (K := K) (L := L)
       (K' := K') N
     let Omega := GenericTensorFieldComponent m
-    letI : Algebra R' Omega :=
+    let : Algebra R' Omega :=
       genericTensorFieldComponentLeftScalarAlgebra (R := R') m
     ∃ _f : ∀ [IsDomain (Localization.AtPrime P)],
         Omega →ₐ[R'] FractionRing (Localization.AtPrime P),
       True := by
   classical
-  dsimp only
-  let m := retainedCompletedGenericTensorIdeal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let : m.IsMaximal := retainedCompletedGenericTensorIdeal_isMaximal
-    (R := R) (R' := R') (S := S) (K := K) (L := L)
-    (K' := K') N
-  let Omega := GenericTensorFieldComponent m
-  let r'OmegaAlgebra : Algebra R' Omega :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := R') m
+  intro m sharedOwner1 Omega r'OmegaAlgebra
   let : P.IsPrime := hPMax.isPrime
   refine ⟨?_, True.intro⟩
   intro _hDomain
@@ -1731,22 +1722,21 @@ private theorem selectedExponent_root_ready_from_prefix_package
           (X ^ N - C (algebraMap B (AdicCompletion (maximalIdeal B) B) yB))) :
     SelectedExponentRootReadyPackage (B := B) (D := D) N := by
   classical
-  let C₀ := integralClosure B M₀
-  let E := integralClosure D M
   obtain ⟨hPrefixData⟩ := hPrefixPackage
-  unfold SelectedExponentPrefixPackageBody at hPrefixData
-  dsimp only at hPrefixData
-  obtain
-      ⟨Nfinal, hNfinalPrime, hNfinalOver,
-        hNfinalLePfinal, hPfinalMax,
-        qhatPrefix, hqhatPrefixPrime, hqhatPrefixOverBranch,
-        hqhatPrefixData⟩ :=
-    hPrefixData
-  let Bhat := AdicCompletion (maximalIdeal B) B
-  let yhat : Bhat := algebraMap B Bhat yB
-  have hgeometryHat :=
-    maximalAdicCompletion_regularPair_geometry hregB hgenB
-  let : IsDomain Bhat := hgeometryHat.1
+  delta SelectedExponentPrefixPackageBody at hPrefixData
+  extract_lets -descend -merge Bhat yhat hgeometryHat domainBhat Khat
+    hBhatFaithfullyFlat flatBhat faithfulBKhat kBKhatAlgebra algebraKBKhat
+    kBKhatTower towerBKBKhat E C₀ Tfinal algebraBhatTfinal algebraETfinal Pfinal
+    at hPrefixData
+  obtain ⟨Nfinal, hNfinalPrime, hNfinalOver, hPrefixData⟩ := hPrefixData
+  extract_lets -descend -merge primeNfinal overNfinal at hPrefixData
+  obtain ⟨hNfinalLePfinal, hPfinalMax, hPrefixData⟩ := hPrefixData
+  extract_lets -descend -merge Tprefix algebraBhatTprefix algebraC₀Tprefix fT Nprefix
+    hNprefixPrime primeNprefix hNprefixOver overNprefix mPrefix hmPrefix maximalMPrefix
+    OmegaPrefix bHatOmegaPrefixAlgebra algebraBhatOmegaPrefix ICprefixCore prefixCoreOwner
+    ringICprefix algebraBhatICprefix at hPrefixData
+  obtain ⟨qhatPrefix, hqhatPrefixPrime, hqhatPrefixOverBranch, hqhatPrefixData⟩ := hPrefixData
+  extract_lets -descend -merge primeQhatPrefix overQhatPrefix at hqhatPrefixData
   let : IsNoetherianRing Bhat :=
     maximalAdicCompletion_isNoetherianRing_of_regularPair hregB hgenB
   let zhat : Bhat := algebraMap B Bhat zB
@@ -1784,71 +1774,17 @@ private theorem selectedExponent_root_ready_from_prefix_package
   have eBaseRootHat :
       (Bhat ⊗[B] D) ≃ₐ[Bhat] AdjoinRoot (X ^ N - Polynomial.C yhat) := by
     simpa only [Bhat, yhat] using eBaseRoot
-  let Tfinal := Bhat ⊗[B] E
-  let : Algebra Bhat Tfinal := Algebra.TensorProduct.leftAlgebra
-  let : Algebra E Tfinal := Algebra.TensorProduct.rightAlgebra
   let : IsScalarTower B Bhat Tfinal :=
     TensorProduct.isScalarTower_left
   let : IsScalarTower B E Tfinal :=
     Algebra.TensorProduct.right_isScalarTower
-  let Pfinal := p.map (algebraMap E Tfinal)
-  let Tprefix := Bhat ⊗[B] C₀
-  let : Algebra Bhat Tprefix := Algebra.TensorProduct.leftAlgebra
-  let : Algebra C₀ Tprefix := Algebra.TensorProduct.rightAlgebra
   let : IsScalarTower B Bhat Tprefix :=
     TensorProduct.isScalarTower_left
   let : IsScalarTower B C₀ Tprefix :=
     Algebra.TensorProduct.right_isScalarTower
-  let fT := completedFiniteModelTowerAlgHom
-    (R := B) (R' := Bhat) (S₀ := C₀) (S₁ := E) g
-  let Nprefix := Nfinal.comap fT.toRingHom
-  let : Nprefix.IsPrime := hNfinalPrime.comap fT.toRingHom
-  let : Nprefix.LiesOver (⊥ : Ideal Bhat) := by
-    refine ⟨?_⟩
-    ext x
-    change x ∈ (⊥ : Ideal Bhat) ↔
-      fT (algebraMap Bhat Tprefix x) ∈ Nfinal
-    rw [fT.commutes x]
-    exact Nfinal.mem_of_liesOver (⊥ : Ideal Bhat) x
-  let Khat := FractionRing Bhat
-  let : Module.FaithfullyFlat B Bhat :=
-    Module.FaithfullyFlat.of_flat_of_isLocalHom
-  let : FaithfulSMul B Khat := FaithfulSMul.trans B Bhat Khat
-  let : Algebra KB Khat :=
-    (IsFractionRing.lift
-      (A := B) (K := KB) (L := Khat)
-      (FaithfulSMul.algebraMap_injective B Khat)).toAlgebra
-  let : IsScalarTower B KB Khat :=
-    IsScalarTower.of_algebraMap_smul fun b x ↦ by
-      rw [Algebra.smul_def, Algebra.smul_def]
-      change
-        (IsFractionRing.lift
-          (A := B) (K := KB) (L := Khat)
-          (FaithfulSMul.algebraMap_injective B Khat))
-            (algebraMap B KB b) * x =
-          algebraMap B Khat b * x
-      rw [IsFractionRing.lift_algebraMap]
-  let mPrefix := retainedCompletedGenericTensorIdeal
-    (R := B) (R' := Bhat) (S := C₀) (K := KB) (L := M₀)
-    (K' := Khat) Nprefix
-  let : mPrefix.IsMaximal :=
-    retainedCompletedGenericTensorIdeal_isMaximal
-      (R := B) (R' := Bhat) (S := C₀) (K := KB) (L := M₀)
-      (K' := Khat) Nprefix
-  let OmegaPrefix := GenericTensorFieldComponent mPrefix
-  let bHatOmegaPrefixAlgebra : Algebra Bhat OmegaPrefix :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := Bhat) mPrefix
   let : SMul Bhat OmegaPrefix := bHatOmegaPrefixAlgebra.toSMul
   let : IsScalarTower Bhat Khat OmegaPrefix :=
     IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
-  let ICprefixCore := selectedPrefixNormalizationRing
-    (B := B) (KB := KB) (M₀ := M₀)
-    yB zB hregB hgenB Nprefix
-  let prefixCoreOwner := selectedPrefixNormalizationOwner
-    (B := B) (KB := KB) (M₀ := M₀)
-    yB zB hregB hgenB Nprefix
-  let : CommRing ICprefixCore := prefixCoreOwner.commRingΩ
-  let : Algebra Bhat ICprefixCore := prefixCoreOwner.algebra
   have hqhatPrefixExact : qhatPrefix.ramificationIdx Bhat = N :=
     hqhatPrefixData.1
   have hAwayPrefixHat :
@@ -2380,50 +2316,6 @@ private def SelectedExponentFixedFractionFieldsGoal
       (bEAlgebra := bEAlgebra)
       (_bDETower := bDETower)
       yB N qD
-
-/-- Select the final component and its intermediate contraction over the two
-fixed fraction fields. -/
-private theorem selectedExponent_completion_of_fixed_fraction_fields
-    {K L B D KB KD : Type u}
-    [Field K] [Field L] [Algebra K L]
-    [FiniteDimensional K L] [IsGalois K L]
-    [CommRing B] [IsDomain B] [IsRegularLocalRing B]
-    [CommRing D] [IsDomain D] [IsRegularLocalRing D] [Algebra B D]
-    [Module.Finite B D] [Module.Flat B D] [FaithfulSMul B D]
-    [Field KB] [Algebra B KB] [IsFractionRing B KB]
-    [Field KD] [Algebra D KD] [IsFractionRing D KD]
-    [Algebra K KB] [Algebra K KD]
-    [Algebra B KD] [IsScalarTower B D KD]
-    [Algebra KB KD] [IsScalarTower B KB KD]
-    [IsScalarTower K KB KD] [FiniteDimensional KB KD]
-    (yB zB : B) (N : ℕ) (hN : 0 < N)
-    (hregB : IsRegular B [yB, zB])
-    (hgenB : Ideal.ofList [yB, zB] = maximalIdeal B)
-    (hdimB : ringKrullDim B = ((2 : ℕ∞) : WithBot ℕ∞))
-    (hyBPrime : Prime yB)
-    (hCharB : CharZero (B ⧸ Ideal.span ({yB} : Set B)))
-    (qD : Ideal D)
-    (hqDOverB : qD.LiesOver (Ideal.span ({yB} : Set B)))
-    (eBaseRoot :
-      (AdicCompletion (maximalIdeal B) B ⊗[B] D) ≃ₐ[AdicCompletion (maximalIdeal B) B]
-        AdjoinRoot
-          (X ^ N - C (algebraMap B (AdicCompletion (maximalIdeal B) B) yB))) :
-    SelectedExponentFixedFractionFieldsGoal
-      (K := K) (L := L) (B := B) (D := D) (KB := KB) (KD := KD)
-      yB N qD := by
-  classical
-  unfold SelectedExponentFixedFractionFieldsGoal
-  intro m M dMAlgebra bMAlgebra bDMTower dKDMTower
-    kbMAlgebra bKBMTower bEAlgebra bDETower
-  exact selectedExponent_completion_of_fixed_final_component
-    (K := K) (L := L) (B := B) (D := D) (KB := KB) (KD := KD)
-    (m := m) (M := M) (dMAlgebra := dMAlgebra)
-    (bMAlgebra := bMAlgebra) (bDMTower := bDMTower)
-    (dKDMTower := dKDMTower) (kbMAlgebra := kbMAlgebra)
-    (bKBMTower := bKBMTower)
-    (bEAlgebra := bEAlgebra) (bDETower := bDETower)
-    yB zB N hN hregB hgenB hdimB hyBPrime hCharB
-    qD hqDOverB eBaseRoot
 
 /-- A natural-number unit descends along a finite map of local rings. -/
 private theorem isUnit_natCast_of_finite_local_extension

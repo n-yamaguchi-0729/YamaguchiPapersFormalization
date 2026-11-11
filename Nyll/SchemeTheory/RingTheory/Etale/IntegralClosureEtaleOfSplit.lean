@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralClosureSplitProduct
-import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
-import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
-import Mathlib.RingTheory.Smooth.IntegralClosure
-import Mathlib.RingTheory.Etale.Descent
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.IntegralClosure.IntegralClosureSplitProduct
+public import Nyll.SchemeTheory.RingTheory.Descent.BoundaryNormalIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
+public import Nyll.SchemeTheory.RingTheory.Descent.EtaleAtPrimeNormality
+public import Mathlib.RingTheory.Smooth.IntegralClosure
+public import Mathlib.RingTheory.Etale.Descent
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.FractionRing
 
 
 /-!
@@ -25,6 +27,8 @@ integral closure and the explicit split-product normalization therefore make
 the original integral closure étale after faithfully flat base change. Étale
 descent gives the conclusion over the original normal domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 

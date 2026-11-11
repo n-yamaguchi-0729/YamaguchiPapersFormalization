@@ -34,21 +34,23 @@ lemmas transport this property across algebra equivalences and localizations.
 
 open TensorProduct
 
-universe u
+universe u v w
 
 /-- An `R`-algebra is finite étale when it is étale and finite as an `R`-module. -/
 @[mk_iff]
-class Algebra.FiniteEtale (R S : Type u) [CommRing R] [CommRing S] [Algebra R S] : Prop
+class Algebra.FiniteEtale (R : Type u) (S : Type v)
+    [CommRing R] [CommRing S] [Algebra R S] : Prop
   extends Algebra.Etale R S, Module.Finite R S
 
-lemma Algebra.FiniteEtale.of_equiv {R S S' : Type u} [CommRing R] [CommRing S] [Algebra R S]
+lemma Algebra.FiniteEtale.of_equiv {R : Type u} {S : Type v} {S' : Type w}
+    [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.FiniteEtale R S] [CommRing S'] [Algebra R S'] (e : S ≃ₐ[R] S') :
     Algebra.FiniteEtale R S' := by
   have := Algebra.Etale.of_equiv e
   have := Module.Finite.equiv e.toLinearEquiv
   constructor
 
-instance (R S : Type u) [CommRing R] [CommRing S] [Algebra R S]
+instance (R : Type u) (S : Type v) [CommRing R] [CommRing S] [Algebra R S]
     [Algebra.IsFiniteSplit R S] : Algebra.FiniteEtale R S where
 
 section
@@ -83,7 +85,8 @@ lemma IsUnit.tmul {R S T : Type*} [CommRing R] [CommRing S]
   obtain ⟨t, rfl⟩ := ht
   rw [isUnit_iff_exists_inv]
   use s⁻¹.val ⊗ₜ t⁻¹.val
-  simp [Algebra.TensorProduct.one_def]
+  rw [Algebra.TensorProduct.tmul_mul_tmul, s.mul_inv, t.mul_inv,
+    ← Algebra.TensorProduct.one_def]
 
 lemma RingHom.OfLocalizationSpan.of_exists_of_isPrime'
     {P : ∀ {R S : Type u} [CommRing R] [CommRing S], (R →+* S) → Prop}
@@ -111,8 +114,20 @@ lemma RingHom.OfLocalizationSpan.of_exists_of_isPrime'
       e.toRingHom.comp (algebraMap (Localization.Away r) (Localization.Away r ⊗[R] S)) := by
     apply IsLocalization.ringHom_ext (Submonoid.powers r)
     ext x
-    simp [e, Localization.awayMap, IsLocalization.Away.map, ← IsScalarTower.algebraMap_apply,
-      Algebra.TensorProduct.tmul_one_eq_one_tmul]
+    change Localization.awayMap (algebraMap R S) r
+        (algebraMap R (Localization.Away r) x) =
+      e (algebraMap (Localization.Away r) (Localization.Away r ⊗[R] S)
+        (algebraMap R (Localization.Away r) x))
+    rw [← IsScalarTower.algebraMap_apply R (Localization.Away r)
+      (Localization.Away r ⊗[R] S)]
+    calc
+      _ = algebraMap S (Localization.Away (algebraMap R S r))
+          (algebraMap R S x) := IsLocalization.map_eq _ x
+      _ = algebraMap R (Localization.Away (algebraMap R S r)) x :=
+        (IsScalarTower.algebraMap_apply R S
+          (Localization.Away (algebraMap R S r)) x).symm
+      _ = e (algebraMap R (Localization.Away r ⊗[R] S) x) :=
+        (((Algebra.TensorProduct.comm R _ _).trans e₀).commutes x).symm
   rw [this]
   exact hPi.left _ _ hf
 

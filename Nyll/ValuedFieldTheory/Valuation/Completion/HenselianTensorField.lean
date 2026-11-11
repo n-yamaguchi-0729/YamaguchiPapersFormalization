@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianPolynomialFactors
-import Nyll.ValuedFieldTheory.Valuation.Completion.BaseChangeAdjoinRoot
-import Mathlib.Algebra.Field.Equiv
-import Mathlib.FieldTheory.PrimitiveElement
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianPolynomialFactors
+public import Nyll.ValuedFieldTheory.Valuation.Completion.BaseChangeAdjoinRoot
+public import Mathlib.Algebra.Field.Equiv
+public import Mathlib.FieldTheory.PrimitiveElement
 
 /-!
 # Finite separable extensions after completing a Henselian DVF
@@ -16,6 +18,8 @@ The minimal polynomial of a primitive element remains irreducible over the
 actual valuation completion. The adjoined-root presentation of scalar
 extension therefore makes the tensor product a field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

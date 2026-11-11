@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.IsTensorProduct
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.CompletionBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
+module
+
+public import Mathlib.RingTheory.IsTensorProduct
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.CompletionBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.MaximalAdic.RegularPairNoetherian
 
 /-!
 # A finite etale chosen factor after one-root completion
@@ -34,6 +36,8 @@ point.
 No domain assertion about the whole tensor ring `T`, and no comparison with
 an independently chosen component or normalization prime, is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -78,22 +82,14 @@ noncomputable def maximalAdicCompletionOneRootTensorRingEquiv
     let A := AdicCompletion (maximalIdeal R) R
     let Bhat := iteratedRadical A 1 n
       (fun i ↦ algebraMap R A (a i))
-    letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
+    let : Algebra R E := oneRootFiniteEtaleBaseAlgebra
       (R := R) (N := N) (y := y) (E := E)
-    letI : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
     (Bhat ⊗[B₀] E) ≃+* (A ⊗[R] E) := by
-  dsimp only
-  let n : Fin 1 → ℕ := fun _ ↦ N
-  let a : Fin 1 → R := fun _ ↦ y
-  let B₀ := iteratedRadical R 1 n a
-  let A := AdicCompletion (maximalIdeal R) R
-  let Bhat := iteratedRadical A 1 n
-    (fun i ↦ algebraMap R A (a i))
-  letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
-    (R := R) (N := N) (y := y) (E := E)
+  intro n a B₀ A Bhat sharedOwner7
   letI : IsScalarTower R B₀ E :=
     IsScalarTower.of_algebraMap_eq' rfl
-  letI : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
+  intro sharedOwner8
   let rBhatAlgebra : Algebra R Bhat :=
     ((algebraMap A Bhat).comp (algebraMap R A)).toAlgebra
   letI : Algebra R Bhat := rBhatAlgebra
@@ -135,18 +131,12 @@ noncomputable def maximalAdicCompletionOneRootTensorAlgebra
     let A := AdicCompletion (maximalIdeal R) R
     let Bhat := iteratedRadical A 1 n
       (fun i ↦ algebraMap R A (a i))
-    letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
+    let : Algebra R E := oneRootFiniteEtaleBaseAlgebra
       (R := R) (N := N) (y := y) (E := E)
     Algebra Bhat (A ⊗[R] E) := by
-  dsimp only
-  let n : Fin 1 → ℕ := fun _ ↦ N
-  let a : Fin 1 → R := fun _ ↦ y
+  intro n a
   let B₀ := iteratedRadical R 1 n a
-  let A := AdicCompletion (maximalIdeal R) R
-  let Bhat := iteratedRadical A 1 n
-    (fun i ↦ algebraMap R A (a i))
-  letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
-    (R := R) (N := N) (y := y) (E := E)
+  intro A Bhat sharedOwner7
   letI : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
   let Ehat := Bhat ⊗[B₀] E
   letI : Algebra Bhat Ehat := Algebra.TensorProduct.leftAlgebra
@@ -168,28 +158,17 @@ noncomputable def maximalAdicCompletionOneRootTensorAlgEquiv
     let A := AdicCompletion (maximalIdeal R) R
     let Bhat := iteratedRadical A 1 n
       (fun i ↦ algebraMap R A (a i))
-    letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
+    let : Algebra R E := oneRootFiniteEtaleBaseAlgebra
       (R := R) (N := N) (y := y) (E := E)
-    letI : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
-    letI : Algebra Bhat (A ⊗[R] E) :=
+    let : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
+    let : Algebra Bhat (A ⊗[R] E) :=
       maximalAdicCompletionOneRootTensorAlgebra
         (R := R) (N := N) (y := y) (E := E)
     (Bhat ⊗[B₀] E) ≃ₐ[Bhat] (A ⊗[R] E) := by
-  dsimp only
-  let n : Fin 1 → ℕ := fun _ ↦ N
-  let a : Fin 1 → R := fun _ ↦ y
-  let B₀ := iteratedRadical R 1 n a
-  let A := AdicCompletion (maximalIdeal R) R
-  let Bhat := iteratedRadical A 1 n
-    (fun i ↦ algebraMap R A (a i))
-  letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
-    (R := R) (N := N) (y := y) (E := E)
-  letI : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
+  intro n a B₀ A Bhat sharedOwner7 sharedOwner8
   let Ehat := Bhat ⊗[B₀] E
   letI : Algebra Bhat Ehat := Algebra.TensorProduct.leftAlgebra
-  letI : Algebra Bhat (A ⊗[R] E) :=
-    maximalAdicCompletionOneRootTensorAlgebra
-      (R := R) (N := N) (y := y) (E := E)
+  intro sharedOwner9
   let e : Ehat ≃+* (A ⊗[R] E) :=
     maximalAdicCompletionOneRootTensorRingEquiv
   exact AlgEquiv.ofRingEquiv (f := e) (fun _ ↦ rfl)
@@ -227,15 +206,15 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
     let haHat : ∀ i, aHat i ∈ maximalIdeal A := fun i ↦ by
       rw [AdicCompletion.maximalIdeal_eq_map]
       exact Ideal.mem_map_of_mem (algebraMap R A) (ha i)
-    letI : IsLocalRing B₀ := isLocalRing_iteratedRadical n a
+    let : IsLocalRing B₀ := isLocalRing_iteratedRadical n a
       (fun _ ↦ hN) ha
-    letI : IsLocalRing Bhat := isLocalRing_iteratedRadical n aHat
+    let : IsLocalRing Bhat := isLocalRing_iteratedRadical n aHat
       (fun _ ↦ hN) haHat
-    letI : Algebra R E := oneRootFiniteEtaleBaseAlgebra
+    let : Algebra R E := oneRootFiniteEtaleBaseAlgebra
       (R := R) (N := N) (y := y) (E := E)
     let T := A ⊗[R] E
-    letI : Algebra E T := Algebra.TensorProduct.rightAlgebra
-    letI : Algebra Bhat T :=
+    let : Algebra E T := Algebra.TensorProduct.rightAlgebra
+    let : Algebra Bhat T :=
       maximalAdicCompletionOneRootTensorAlgebra
         (R := R) (N := N) (y := y) (E := E)
     let P := p.map (algebraMap E T)
@@ -251,26 +230,8 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
           (∀ Q : Ideal Dp, Q.IsPrime →
             Q.LiesOver (maximalIdeal Bhat) →
             Q = maximalIdeal Dp) := by
-  dsimp only
-  let n : Fin 1 → ℕ := fun _ ↦ N
-  let a : Fin 1 → R := fun _ ↦ y
-  let B₀ := iteratedRadical R 1 n a
-  let A := AdicCompletion (maximalIdeal R) R
-  let aHat : Fin 1 → A := fun i ↦ algebraMap R A (a i)
-  let Bhat := iteratedRadical A 1 n aHat
-  have hy : y ∈ maximalIdeal R := by
-    rw [← hgen]
-    exact Ideal.subset_span List.mem_cons_self
-  have ha : ∀ i, a i ∈ maximalIdeal R := fun _ ↦ hy
-  have haHat : ∀ i, aHat i ∈ maximalIdeal A := fun i ↦ by
-    rw [AdicCompletion.maximalIdeal_eq_map]
-    exact Ideal.mem_map_of_mem (algebraMap R A) (ha i)
-  let : IsLocalRing B₀ :=
-    isLocalRing_iteratedRadical n a (fun _ ↦ hN) ha
-  let : IsLocalRing Bhat :=
-    isLocalRing_iteratedRadical n aHat (fun _ ↦ hN) haHat
-  let : Algebra R E := oneRootFiniteEtaleBaseAlgebra
-    (R := R) (N := N) (y := y) (E := E)
+  intro n a B₀ A aHat Bhat hy ha haHat sharedOwner1 sharedOwner2 sharedOwner3 T sharedOwner4
+    sharedOwner5 P
   let : IsScalarTower R B₀ E :=
     IsScalarTower.of_algebraMap_eq' rfl
   let : Algebra.IsIntegral B₀ E := Algebra.IsIntegral.of_finite B₀ E
@@ -289,10 +250,7 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
     ⟨(IsLocalRing.eq_maximalIdeal hpUnderMaximal).symm⟩
   let : p.LiesOver (maximalIdeal R) :=
     Ideal.LiesOver.trans p (maximalIdeal B₀) (maximalIdeal R)
-  let T := A ⊗[R] E
   let : Algebra A T := Algebra.TensorProduct.leftAlgebra
-  let : Algebra E T := Algebra.TensorProduct.rightAlgebra
-  let P := p.map (algebraMap E T)
   have hPGeometry :=
     adicCompletion_tensorProduct_map_liesOver_maximalIdeal
       (R := R) (S := E) p
@@ -301,9 +259,6 @@ theorem exists_maximalAdicCompletion_oneRoot_finiteEtaleChosenFactor
   let : P.IsMaximal := hPMax
   let : P.IsPrime := hPMax.isPrime
   let : Algebra B₀ Bhat := iteratedRadicalCompletionAlgebra n a
-  let : Algebra Bhat T :=
-    maximalAdicCompletionOneRootTensorAlgebra
-      (R := R) (N := N) (y := y) (E := E)
   let Ehat := Bhat ⊗[B₀] E
   let : Algebra Bhat Ehat := Algebra.TensorProduct.leftAlgebra
   let eTensor : Ehat ≃ₐ[Bhat] T :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
-import Mathlib.RingTheory.Etale.Field
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.IntegralClosure.Localization.FractionFieldComparison
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
+public import Mathlib.RingTheory.Etale.Field
 
 /-!
 # Generic etaleness of a finite separable normalization
@@ -16,6 +18,8 @@ field.  Identifying that fraction field with the supplied finite separable
 extension transports formal etaleness back to the literal localization used
 by `Algebra.IsEtaleAt`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

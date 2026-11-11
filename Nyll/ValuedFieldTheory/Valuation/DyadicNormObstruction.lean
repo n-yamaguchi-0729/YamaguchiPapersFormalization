@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DyadicSquareRoots
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Algebra.Group.Even
-import Mathlib.Algebra.Ring.Parity
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DyadicSquareRoots
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Algebra.Group.Even
+public import Mathlib.Algebra.Ring.Parity
 
 /-!
 # Quadratic norm obstruction in dyadic Henselian fields
@@ -18,6 +20,8 @@ the two square classes killed by adjoining its square root. The proof
 normalizes the valuation, minimizes within a unit square class, and then
 constructs a norm at the sharp Hensel boundary.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

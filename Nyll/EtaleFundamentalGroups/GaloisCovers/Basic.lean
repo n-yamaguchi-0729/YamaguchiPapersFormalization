@@ -36,7 +36,7 @@ at one point identifies its automorphism group with its fiber.  This is the
 simply-transitive formulation in Stacks Project, Section 58.7. -/
 @[stacks 03SF "four-way characterization by simply transitive fibers"]
 theorem isGalois_iff_evaluation_bijective (X : C) [IsConnected X] (x : F.obj X) :
-    IsGalois X ↔ Function.Bijective (fun σ : Aut X ↦ F.map σ.hom x) := by
+    IsGalois X ↔ Function.Bijective (fun σ : Aut X ↦ F.map σ.asIso.hom x) := by
   constructor
   · intro h
     let : IsGalois X := h
@@ -103,16 +103,17 @@ theorem isGalois_of_mono_to_binaryProduct {X Y Z : C}
     (F.map (i ≫ prod.fst) a) (F.map (i ≫ prod.fst) b)
   obtain ⟨σY, hσY⟩ := MulAction.exists_smul_eq (Aut Y)
     (F.map (i ≫ prod.snd) a) (F.map (i ≫ prod.snd) b)
-  change F.map σX.hom (F.map (i ≫ prod.fst) a) = F.map (i ≫ prod.fst) b at hσX
-  change F.map σY.hom (F.map (i ≫ prod.snd) a) = F.map (i ≫ prod.snd) b at hσY
-  let τ : X ⨯ Y ≅ X ⨯ Y := prod.mapIso σX σY
+  change F.map σX.asIso.hom (F.map (i ≫ prod.fst) a) = F.map (i ≫ prod.fst) b at hσX
+  change F.map σY.asIso.hom (F.map (i ≫ prod.snd) a) = F.map (i ≫ prod.snd) b at hσY
+  let τ : X ⨯ Y ≅ X ⨯ Y := prod.mapIso σX.asIso σY.asIso
   have hfst :
       F.map prod.fst (F.map (i ≫ τ.hom) a) =
         F.map prod.fst (F.map i b) := by
     calc
-      _ = F.map σX.hom (F.map (i ≫ prod.fst) a) := by
+      _ = F.map σX.asIso.hom (F.map (i ≫ prod.fst) a) := by
         simp only [← FintypeCat.comp_apply, ← F.map_comp]
-        exact congrArg (fun f : Z ⟶ X => F.map f a) (by simp [τ, prod.mapIso])
+        exact congrArg (fun f : Z ⟶ X => F.map f a) (by
+          simp only [τ, prod.mapIso, Category.assoc, prod.map_fst])
       _ = F.map (i ≫ prod.fst) b := hσX
       _ = F.map prod.fst (F.map i b) := by
         simp only [F.map_comp, FintypeCat.comp_apply]
@@ -120,15 +121,16 @@ theorem isGalois_of_mono_to_binaryProduct {X Y Z : C}
       F.map prod.snd (F.map (i ≫ τ.hom) a) =
         F.map prod.snd (F.map i b) := by
     calc
-      _ = F.map σY.hom (F.map (i ≫ prod.snd) a) := by
+      _ = F.map σY.asIso.hom (F.map (i ≫ prod.snd) a) := by
         simp only [← FintypeCat.comp_apply, ← F.map_comp]
-        exact congrArg (fun f : Z ⟶ Y => F.map f a) (by simp [τ, prod.mapIso])
+        exact congrArg (fun f : Z ⟶ Y => F.map f a) (by
+          simp only [τ, prod.mapIso, Category.assoc, prod.map_snd])
       _ = F.map (i ≫ prod.snd) b := hσY
       _ = F.map prod.snd (F.map i b) := by
         simp only [F.map_comp, FintypeCat.comp_apply]
   obtain ⟨σ, hσ⟩ := connected_component_unique F a b (i ≫ τ.hom) i
     (fiberBinaryProduct_ext F hfst hsnd)
-  exact ⟨σ, hσ⟩
+  exact ⟨Aut.of σ, hσ⟩
 
 /-- If a connected object is a subobject of a product of two Galois objects,
 the two induced maps on automorphism groups are jointly injective. -/
@@ -148,6 +150,7 @@ theorem autMapHom_prod_injective_of_mono {X Y Z : C}
     change autMap (i ≫ prod.snd) σ = autMap (i ≫ prod.snd) τ at h
     exact h
   apply Aut.ext
+  apply Iso.ext
   rw [← cancel_mono i]
   apply prod.hom_ext
   · simp only [Category.assoc]

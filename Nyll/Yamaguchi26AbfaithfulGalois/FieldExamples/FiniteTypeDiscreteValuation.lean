@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FiniteTypeValuationModel
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
-import Mathlib.RingTheory.Localization.AsSubring
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FiniteTypeValuationModel
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.LocalRingValuationSubringDVRDominates
+public import Mathlib.RingTheory.Localization.AsSubring
 
 /-!
 # Discrete valuation rings preserving nonunits
@@ -15,6 +17,8 @@ A nonzero base-ring element that is a nonunit in a valuation ring remains
 a nonunit in a discrete valuation ring of an essentially finite-type
 extension of the base fraction field.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u v w

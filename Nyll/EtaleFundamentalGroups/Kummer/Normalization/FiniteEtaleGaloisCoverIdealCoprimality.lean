@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverIdealImage
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
 
 /-!
 # Coprimality of divisorial inertia in finite Galois-cover quotients
@@ -15,6 +17,8 @@ ideal inertia in the function-field Galois group.  This file transfers that
 result to the actual finite quotient represented by a pointed finite-etale
 Galois cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

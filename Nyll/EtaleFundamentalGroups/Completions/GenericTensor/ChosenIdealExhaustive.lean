@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
-import Mathlib.RingTheory.Ideal.Lattice
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.TensorProduct.Basic
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Spectrum.Prime.RingHom
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
+module
+
+public import Mathlib.Algebra.GroupWithZero.NonZeroDivisors
+public import Mathlib.RingTheory.Ideal.Lattice
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Spectrum.Prime.RingHom
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
 
 /-!
 # Exhaustion of completed generic tensor components
@@ -27,6 +29,8 @@ generic prime over the completed base DVR, uses the product decomposition to
 identify its coordinate, and then uses uniqueness of the generic prime below
 that coordinate maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

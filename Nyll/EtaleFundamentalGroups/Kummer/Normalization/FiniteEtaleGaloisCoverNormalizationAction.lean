@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Mathlib.RingTheory.Invariant.Galois
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Mathlib.RingTheory.Invariant.Galois
 
 /-!
 # Normalization actions of finite-etale Galois-cover quotients
@@ -18,6 +20,8 @@ scheme, the opposite categorical automorphism group is the Galois group of
 the induced function-field extension.  This file transports the canonical
 normalization-ring action across that equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 

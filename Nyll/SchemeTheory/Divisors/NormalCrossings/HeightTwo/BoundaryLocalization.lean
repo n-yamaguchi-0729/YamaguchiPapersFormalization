@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.BigOperators.Associated
-import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchSupport
+module
+
+public import Mathlib.Algebra.BigOperators.Associated
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.HeightTwo.BranchSupport
 
 /-!
 # Boundary equations at height-two strict-normal-crossings points
@@ -16,6 +18,8 @@ becomes a unit after localization.  Consequently the localized boundary
 equation is associated either to the selected parameter alone or to the
 product of the selected parameter with the unique second branch.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,22 +70,23 @@ theorem splitStrictNormalCrossings_heightTwo_localizedBoundary_associated
         simpa [boundaryIndices] using hk
       by_cases hki : k = i
       · subst k
-        simp [g]
+        simp only [↓reduceIte, Associated.rfl, g]
       · have htkP : t k ∉ P := by
           intro hmem
           exact hki (hone k hklt hmem)
         have hunit : IsUnit (algebraMap A R (t k)) :=
           (IsLocalization.AtPrime.isUnit_to_map_iff R P (t k)).2 htkP
-        rw [show g k = 1 by simp [g, hki]]
+        rw [show g k = 1 by simp only [hki, ↓reduceIte, g]]
         exact associated_one_iff_isUnit.mpr hunit
     have hg :
         (∏ k ∈ boundaryIndices d r, g k) =
           algebraMap A R (t i) := by
-      simp [g, boundaryIndices, hi]
+      simp only [boundaryIndices, Finset.prod_ite_eq', Finset.mem_filter, Finset.mem_univ, hi,
+        and_self, ↓reduceIte, g]
     have hmap :
         algebraMap A R (boundaryProduct t r) =
           ∏ k ∈ boundaryIndices d r, algebraMap A R (t k) := by
-      simp [boundaryProduct]
+      simp only [boundaryProduct, map_prod]
     rw [hmap]
     exact hprod.trans (Associated.of_eq hg)
   · obtain ⟨j, hj, hji, htjP, hsupport⟩ := htwo
@@ -101,10 +106,10 @@ theorem splitStrictNormalCrossings_heightTwo_localizedBoundary_associated
         simpa [boundaryIndices] using hk
       by_cases hki : k = i
       · subst k
-        simp [g]
+        simp only [↓reduceIte, Associated.rfl, g]
       · by_cases hkj : k = j
         · subst k
-          simp [g, hji]
+          simp only [hji, ↓reduceIte, Associated.rfl, g]
         · have htkP : t k ∉ P := by
             intro hmem
             rcases hsupport k hklt hmem with h | h
@@ -112,26 +117,26 @@ theorem splitStrictNormalCrossings_heightTwo_localizedBoundary_associated
             · exact hkj h
           have hunit : IsUnit (algebraMap A R (t k)) :=
             (IsLocalization.AtPrime.isUnit_to_map_iff R P (t k)).2 htkP
-          rw [show g k = 1 by simp [g, hki, hkj]]
+          rw [show g k = 1 by simp only [hki, ↓reduceIte, hkj, g]]
           exact associated_one_iff_isUnit.mpr hunit
     have hg :
         (∏ k ∈ boundaryIndices d r, g k) =
           algebraMap A R (t i) * algebraMap A R (t j) := by
       have hiMem : i ∈ boundaryIndices d r := by
-        simp [boundaryIndices, hi]
+        simp only [boundaryIndices, Finset.mem_filter, Finset.mem_univ, hi, and_self]
       have hjMem : j ∈ boundaryIndices d r := by
-        simp [boundaryIndices, hj]
+        simp only [boundaryIndices, Finset.mem_filter, Finset.mem_univ, hj, and_self]
       have hgPoint (k : Fin d) :
           g k =
             (if k = i then algebraMap A R (t i) else 1) *
               (if k = j then algebraMap A R (t j) else 1) := by
         by_cases hki : k = i
         · subst k
-          simp [g, Ne.symm hji]
+          simp only [↓reduceIte, Ne.symm hji, mul_one, g]
         · by_cases hkj : k = j
           · subst k
-            simp [g, hki]
-          · simp [g, hki, hkj]
+            simp only [hki, ↓reduceIte, one_mul, g]
+          · simp only [hki, ↓reduceIte, hkj, mul_one, g]
       calc
         (∏ k ∈ boundaryIndices d r, g k) =
             (∏ k ∈ boundaryIndices d r,
@@ -145,7 +150,7 @@ theorem splitStrictNormalCrossings_heightTwo_localizedBoundary_associated
     have hmap :
         algebraMap A R (boundaryProduct t r) =
           ∏ k ∈ boundaryIndices d r, algebraMap A R (t k) := by
-      simp [boundaryProduct]
+      simp only [boundaryProduct, map_prod]
     rw [hmap]
     exact hprod.trans (Associated.of_eq hg)
 

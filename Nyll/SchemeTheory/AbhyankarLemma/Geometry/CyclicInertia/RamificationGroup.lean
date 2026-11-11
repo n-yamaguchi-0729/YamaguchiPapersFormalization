@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ResidueField
-import Mathlib.Algebra.CharP.Lemmas
-import Mathlib.Algebra.BigOperators.Field
-import Mathlib.Data.Nat.Factors
-import Mathlib.GroupTheory.PGroup
-import Mathlib.GroupTheory.Perm.Cycle.Type
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ResidueField
+public import Mathlib.Algebra.CharP.Lemmas
+public import Mathlib.Algebra.BigOperators.Field
+public import Mathlib.Data.Nat.Factors
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.GroupTheory.Perm.Cycle.Type
 
 /-!
 # Wild ramification groups
@@ -22,6 +24,8 @@ characteristic zero, and it is a `p`-group in positive residue
 characteristic `p`.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

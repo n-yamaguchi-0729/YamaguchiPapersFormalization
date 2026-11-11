@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationMap
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.Intermediate.NormalizationMap
 
 /-!
 # Prime contraction on an intermediate tensor-component normalization
@@ -13,6 +15,8 @@ The normalization map selected by a literal final tensor component contracts
 a specified final normalization prime.  Primality, maximality, and the exact
 lies-over relation are derived from that same map.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,10 +41,10 @@ without asking typeclass search to reconstruct its induced algebra. -/
 private theorem ringHomLiesOverComap
     {R S : Type*} [CommRing R] [CommRing S]
     (g : R →+* S) (p : Ideal S) :
-    letI : Algebra R S := g.toAlgebra
+    let : Algebra R S := g.toAlgebra
     p.LiesOver (p.comap g) :=
   by
-    let : Algebra R S := g.toAlgebra
+    intro sharedOwner1
     exact ⟨rfl⟩
 
 /-- The canonical normalization map with its scalar structure forgotten.
@@ -52,32 +56,22 @@ from reopening the quotient component's competing scalar-action instances. -/
     (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
     let M := GenericTensorFieldComponent m
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
     integralClosure A M₀ →+* integralClosure B M := by
-  dsimp only
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let M := GenericTensorFieldComponent m
-  letI : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
+  intro n sharedOwner2 M₀ M sharedOwner3
   letI : Algebra A M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := A) m
   letI : SMul A M :=
     (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
+  intro sharedOwner4
   letI : SMul B M :=
     (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
   letI : IsScalarTower A B M :=
@@ -190,25 +184,18 @@ theorem genericTensorTowerIntermediateNormalizationPrime_isMaximal
       Ideal (integralClosure B M)) [p.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
     (genericTensorTowerIntermediateNormalizationPrime
       (A := A) (B := B) (K := K) (F := F) (F' := F') (L := L)
       m p).IsMaximal := by
-  dsimp only at p ⊢
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  let : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
+  intro n suppliedMaximal M₀ suppliedIntermediateAlgebra
+  dsimp only at p
   let M := GenericTensorFieldComponent m
-  let : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
   let : Algebra A M :=
     genericTensorFieldComponentLeftScalarAlgebra (R := A) m
   let : SMul A M :=

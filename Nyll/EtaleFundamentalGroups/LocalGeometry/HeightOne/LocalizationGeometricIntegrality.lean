@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # Geometric integrality under height-one localization
@@ -14,6 +16,8 @@ Localization at a containing prime does not change the residue field of a
 branch, so geometric integrality transports canonically to the localized
 branch used in a height-two chart.
 -/
+
+@[expose] public section
 
 noncomputable section
 

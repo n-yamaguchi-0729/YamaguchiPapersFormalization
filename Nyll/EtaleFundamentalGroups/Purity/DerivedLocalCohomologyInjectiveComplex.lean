@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveResolutionExtLinear
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.CategoryTheory.Limits.Preserves.Filtered
-import Mathlib.LinearAlgebra.Quotient.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveResolutionExtLinear
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullSocle
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
+public import Mathlib.CategoryTheory.Limits.Preserves.Filtered
+public import Mathlib.LinearAlgebra.Quotient.Basic
 
 /-!
 # The Ext-colimit and the torsion complex of an injective resolution
@@ -23,6 +25,8 @@ Ext-colimit. Conversely every torsion cocycle admits such a representative,
 and a torsion boundary becomes an Ext boundary at a sufficiently large
 power of the ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,16 +39,19 @@ universe u
 variable {R : Type u} [CommRing R]
 variable {M : ModuleCat.{u} R}
 
-private abbrev torsionShortComplex
+/-- Three consecutive terms of the torsion subcomplex of an injective resolution. -/
+abbrev torsionShortComplex
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :=
   (derivedLocalCohomologyInjectiveComplex I J).sc' n (n + 1) (n + 2)
 
-private abbrev torsionCocycleQuotient
+/-- Cocycles modulo coboundaries in the torsion subcomplex of an injective resolution. -/
+abbrev torsionCocycleQuotient
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :=
   (LinearMap.ker (torsionShortComplex I J n).g.hom) ⧸
     LinearMap.range (torsionShortComplex I J n).moduleCatToCycles
 
-private def quotientHomToPowerTorsion
+/-- Evaluation at one sends a homomorphism from a power quotient to the primary component. -/
+def quotientHomToPowerTorsion
     (I : Ideal R) (V : ModuleCat.{u} R) (k : ℕ) :
     (ModuleCat.of R (R ⧸ I ^ k) ⟶ V) →ₗ[R] Ideal.primaryComponent V I where
   toFun f := ⟨f (Ideal.Quotient.mk (I ^ k) 1),
@@ -53,7 +60,8 @@ private def quotientHomToPowerTorsion
   map_add' _ _ := Subtype.ext rfl
   map_smul' _ _ := Subtype.ext rfl
 
-private def quotientCyclesToPowerTorsionCycles
+/-- Evaluation at one sends quotient-valued cocycles to torsion cocycles. -/
+def quotientCyclesToPowerTorsionCycles
     (I : Ideal R) (J : InjectiveResolution M) (n k : ℕ) :
     LinearMap.ker (injectiveResolutionLinearCoyonedaShortComplexSucc J
       (ModuleCat.of R (R ⧸ I ^ k)) n).g.hom →ₗ[R]
@@ -64,7 +72,8 @@ private def quotientCyclesToPowerTorsionCycles
   map_add' f g := Subtype.ext (Subtype.ext rfl)
   map_smul' a f := Subtype.ext (Subtype.ext rfl)
 
-private def quotientCocyclesToTorsionCocycleQuotient
+/-- Evaluation at one descends to the quotient of torsion cocycles by coboundaries. -/
+def quotientCocyclesToTorsionCocycleQuotient
     (I : Ideal R) (J : InjectiveResolution M) (n k : ℕ) :
     ((LinearMap.ker (injectiveResolutionLinearCoyonedaShortComplexSucc J
       (ModuleCat.of R (R ⧸ I ^ k)) n).g.hom) ⧸
@@ -76,7 +85,8 @@ private def quotientCocyclesToTorsionCocycleQuotient
     exact ⟨quotientHomToPowerTorsion I (J.cocomplex.X n) k g,
       Subtype.ext (Subtype.ext rfl)⟩)
 
-private def extToTorsionCocycleQuotient
+/-- The Ext class of a power quotient determines a class in the torsion cocycle quotient. -/
+def extToTorsionCocycleQuotient
     (I : Ideal R) (J : InjectiveResolution M) (n k : ℕ) :
     Abelian.Ext.{u} (ModuleCat.of R (R ⧸ I ^ k)) M (n + 1) →ₗ[R]
       torsionCocycleQuotient I J n :=
@@ -97,7 +107,8 @@ private theorem extToTorsionCocycleQuotient_extMk
   rw [injectiveResolutionCocycleQuotientEquivExtSucc_symm_extMk]
   rfl
 
-private def torsionCocycleQuotientCocone
+/-- The Ext-to-torsion comparison is compatible with the power-quotient transition maps. -/
+def torsionCocycleQuotientCocone
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :
     Cocone (derivedLocalCohomologyPowersDiagram I M (n + 1)) where
   pt := AddCommGrpCat.of (torsionCocycleQuotient I J n)
@@ -127,7 +138,8 @@ private def torsionCocycleQuotientCocone
         apply congrArg Submodule.Quotient.mk
         exact Subtype.ext (Subtype.ext rfl) }
 
-private def localCohomologyToTorsionCocycleQuotientAddHom
+/-- The additive comparison from local cohomology to the torsion cocycle quotient. -/
+def localCohomologyToTorsionCocycleQuotientAddHom
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :
     derivedLocalCohomology I M (n + 1) ⟶
       AddCommGrpCat.of (torsionCocycleQuotient I J n) :=
@@ -143,7 +155,8 @@ private theorem localCohomologyToTorsionCocycleQuotientAddHom_ι
   ConcreteCategory.congr_hom
     (colimit.ι_desc (torsionCocycleQuotientCocone I J n) (op (op k))) α
 
-private def localCohomologyToTorsionCocycleQuotient
+/-- The linear comparison from local cohomology to the torsion cocycle quotient. -/
+def localCohomologyToTorsionCocycleQuotient
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :
     derivedLocalCohomologyModule I M (n + 1) →ₗ[R]
       torsionCocycleQuotient I J n where
@@ -167,7 +180,8 @@ private def localCohomologyToTorsionCocycleQuotient
             (congrArg (fun z : torsionCocycleQuotient I J n => a • z)
               (localCohomologyToTorsionCocycleQuotientAddHom_ι I J n k α).symm)))
 
-private theorem localCohomologyToTorsionCocycleQuotient_surjective
+/-- Every torsion cocycle class comes from a local cohomology class. -/
+theorem localCohomologyToTorsionCocycleQuotient_surjective
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :
     Function.Surjective (localCohomologyToTorsionCocycleQuotient I J n) := by
   intro z
@@ -206,7 +220,8 @@ private theorem localCohomologyToTorsionCocycleQuotient_surjective
     (Ideal.Quotient.mk (I ^ k) 1) = (z₀ : J.cocomplex.X (n + 1))
   rw [quotientHomEquivTorsionBySet_symm_apply_mk, one_smul]
 
-private theorem localCohomologyToTorsionCocycleQuotient_injective
+/-- The torsion cocycle comparison detects equality of local cohomology classes. -/
+theorem localCohomologyToTorsionCocycleQuotient_injective
     (I : Ideal R) (J : InjectiveResolution M) (n : ℕ) :
     Function.Injective (localCohomologyToTorsionCocycleQuotient I J n) := by
   let : PreservesFilteredColimitsOfSize.{0, 0} (forget AddCommGrpCat.{u}) :=

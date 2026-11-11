@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumNormalizationExtension
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
-import Nyll.SchemeTheory.Etale.OverField.Decomposition
-import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+module
+
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.FiniteProduct
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumNormalizationExtension
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+public import Nyll.SchemeTheory.Etale.OverField.Decomposition
+public import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoIntegrallyClosed
 
 /-!
 # Finiteness of the normalization across a punctured regular local spectrum
@@ -22,6 +25,8 @@ needed to prove that the relative normalization over the full local spectrum
 is finite.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory Limits TopologicalSpace
@@ -32,18 +37,13 @@ universe u
 
 variable (R : Type u) [CommRing R] [IsDomain R] [IsRegularLocalRing R]
 
-private theorem puncturedSpectrum_nonempty_dimension_two
+/-- The punctured spectrum of a two-dimensional regular local domain is nonempty. -/
+theorem puncturedSpectrum_nonempty_dimension_two
     (hdim : ringKrullDim R = ((2 : ℕ∞) : WithBot ℕ∞)) :
     Nonempty (Scheme.puncturedSpectrum R) := by
   apply Scheme.puncturedSpectrum_nonempty_of_one_le_ringKrullDim R
   rw [hdim]
   norm_num
-
-omit [IsDomain R] in
-private theorem puncturedSpectrumInclusion_isOpenImmersion :
-    IsOpenImmersion (Scheme.puncturedSpectrumInclusion R) := by
-  dsimp only [Scheme.puncturedSpectrumInclusion]
-  infer_instance
 
 /-- The generic point of the full spectrum, lifted canonically through the
 punctured open subscheme. -/
@@ -226,7 +226,7 @@ theorem puncturedSpectrumGenericFiber_sections_decomposition
       (_ : ∀ i, Field (L i)) (_ : ∀ i, Algebra K (L i))
       (_ : C ≃ₐ[K] ∀ i, L i),
       ∀ i, Module.Finite K (L i) ∧ Algebra.IsSeparable K (L i) := by
-  let K : Type u := (Spec (.of R)).functionField
+  intro K
   let G := puncturedSpectrumGenericFiber R hdim W
   let C := Γ(G.left, ⊤)
   let : Algebra K C := puncturedSpectrumGenericFiberAlgebra R hdim W
@@ -238,17 +238,13 @@ omit [IsRegularLocalRing R] in
 private theorem genericExtensionMorphism_appTop_eq_germ :
     let X := Spec (.of R)
     let K : Type u := X.functionField
-    letI : IsIntegral X := inferInstance
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : IsIntegral X := inferInstance
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨genericPoint X, by trivial⟩⟩
     (X.genericExtensionMorphism K).appTop.hom =
       (Scheme.ΓSpecIso (.of K)).inv.hom.comp
         (X.germToFunctionField ⊤).hom := by
-  let X := Spec (.of R)
-  let K : Type u := X.functionField
-  let : IsIntegral X := inferInstance
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨genericPoint X, by trivial⟩⟩
+  intro X K sharedOwner3 sharedOwner4
   ext r
   let e : Γ(Spec (.of K), ⊤) ≃+* K :=
     (Scheme.ΓSpecIso (.of K)).commRingCatIsoToRingEquiv
@@ -279,9 +275,7 @@ theorem puncturedSpectrumGenericFiberToCover_appTop_comp
     q.appTop.hom.comp f.appTop.hom =
       (G.hom.appTop.hom.comp (Scheme.ΓSpecIso (.of K)).inv.hom).comp
         (X.germToFunctionField ⊤).hom := by
-  let X := Spec (.of R)
-  let K : Type u := X.functionField
-  let G := puncturedSpectrumGenericFiber R hdim W
+  intro X K G
   let η := puncturedSpectrumGenericMorphism R hdim
   let q := puncturedSpectrumGenericFiberToCover R hdim W
   let f := puncturedSpectrumCoverToSpec R W

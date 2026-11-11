@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.NumberTheory.Padics.PadicVal.Basic
-import Mathlib.RingTheory.Valuation.Integers
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.RingTheory.Valuation.Integers
 
 /-!
 # Values of natural numbers in a valued field
@@ -18,6 +20,8 @@ and the value of the natural number is determined by its prime-power factor.
 No discreteness, completeness, residue-field finiteness, or characteristic-zero
 hypothesis is needed. The existing discrete-valuation-field API is retained.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

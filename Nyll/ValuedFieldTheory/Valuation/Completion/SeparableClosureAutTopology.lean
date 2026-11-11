@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
-import Mathlib.Algebra.CharP.Reduced
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.Order.Filter.Finite
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
+public import Mathlib.Algebra.CharP.Reduced
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.FieldTheory.PurelyInseparable.Basic
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.Order.Filter.Finite
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
 
 /-!
 # The Krull topology on algebraic and separable closures
@@ -20,6 +22,8 @@ power in the separable closure. Stabilizers of those powers form finite
 intersections of open subgroups. Injectivity of Frobenius then controls the
 action on a finite linear basis, proving continuity of inverse restriction.
 -/
+
+@[expose] public section
 
 noncomputable section
 

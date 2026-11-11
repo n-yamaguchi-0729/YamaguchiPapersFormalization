@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryLocalFixedPoint
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleFractionNormalizationEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.LocalFixedPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleFractionNormalizationEtale
 
 /-!
 # The actual local extension at a generic boundary point
@@ -15,7 +17,11 @@ pointed Galois fraction-stalk component étale over the DVR stalk. All point
 and action comparisons are supplied by the actual cover constructions.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open CategoryTheory.PreGaloisCategory AlgebraicGeometry.FiniteEtale
@@ -23,7 +29,7 @@ open EtaleFundamentalGroups.Inertia
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
   (D : X.EffectiveCartierDivisor) (E : Component D)
   [IsDomain (X.presheaf.stalk (componentPoint D E))]
   [IsDiscreteValuationRing (X.presheaf.stalk (componentPoint D E))]
@@ -38,7 +44,7 @@ local notation "c" =>
 /-- Boundary-unramifiedness supplies an actual étale normalization of each
 Galois component over the fraction field of the boundary DVR stalk. -/
 theorem boundaryUnramified_localComponent_normalization_etale
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (xi : Spec (.of Ω) ⟶ Spec (.of K))
     (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)
     (hU : IsBoundaryUnramified D W)

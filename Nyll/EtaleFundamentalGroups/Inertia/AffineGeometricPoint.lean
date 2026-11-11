@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Ring.Action.Basic
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+module
+
+public import Mathlib.Algebra.Ring.Action.Basic
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 
 /-!
 # Ideal inertia and affine geometric-point stabilizers
@@ -30,6 +32,8 @@ fundamental group of the fraction field of a strict henselization; that
 identification additionally requires the construction and local properties
 of the strict henselization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

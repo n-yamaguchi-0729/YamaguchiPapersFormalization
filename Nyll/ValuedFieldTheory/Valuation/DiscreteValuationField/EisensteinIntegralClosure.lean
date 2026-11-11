@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Tower
-import Mathlib.Algebra.Polynomial.AlgebraMap
-import Mathlib.FieldTheory.Minpoly.Basic
-import Mathlib.RingTheory.Adjoin.Polynomial.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Polynomial.Eisenstein.IsIntegral
-import Mathlib.RingTheory.Polynomial.RationalRoot
-import Mathlib.RingTheory.PowerBasis
+module
+
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.RingTheory.Adjoin.Polynomial.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Polynomial.Eisenstein.IsIntegral
+public import Mathlib.RingTheory.Polynomial.RationalRoot
+public import Mathlib.RingTheory.PowerBasis
 
 /-!
 # Integral elements in an Eisenstein root extension
@@ -25,6 +27,8 @@ multiple in the generated ring; Eisenstein descent removes that power.
 The argument does not require separability or Henselianity, and assumes no
 comparison with a chosen extension valuation ring.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

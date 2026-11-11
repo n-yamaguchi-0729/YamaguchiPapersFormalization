@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FreeModule.Basic
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
-import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
-import Nyll.EtaleFundamentalGroups.Inertia.Galois.RamificationIndexDivisibility
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootRightComparison
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
-import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootFractionDegree
+public import Mathlib.LinearAlgebra.Dimension.Constructions
+public import Mathlib.LinearAlgebra.FreeModule.Basic
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.Finite
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.RegularSystem
+public import Nyll.EtaleFundamentalGroups.Inertia.Galois.RamificationIndexDivisibility
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.ChosenFactor.ExactRootRightComparison
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.RegularLocal.DimensionTwoRegularRing
 
 /-!
 # Exact chosen-factor comparison over a complete regular local base
@@ -32,6 +34,8 @@ maximal-adic completion.  The base valuation in the final comparison may be
 the valuation at the mapped selected height-one parameter; it is deliberately
 not required to be the maximal-adic valuation of `A`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -244,7 +248,8 @@ private theorem finiteDimensional_of_finite_valuationSubrings_regularChosen
     Module.Finite.base_change V K W
   exact Module.Finite.equiv eGeneric.toLinearEquiv
 
-private theorem compositeAlgebra_toSMul_isScalarTower_regular
+/-- The scalar action of the composite algebra map satisfies the scalar-tower law. -/
+theorem compositeAlgebra_toSMul_isScalarTower_regular
     {C K E : Type u}
     [CommRing C] [CommRing K] [CommRing E]
     [Algebra C K] [Algebra K E] :
@@ -367,8 +372,7 @@ theorem
               (residueFieldMap_bijective_iteratedRadical n a
                 (fun _ ↦ hN) (fun _ ↦ hymax))
           letI : Module.Finite k kB :=
-            Module.Finite.of_surjective
-              eResidue.toLinearMap eResidue.surjective
+            Module.Finite.equiv eResidue.toLinearEquiv
           letI : Module.Finite k l := Module.Finite.trans kB l
           letI : Algebra.IsSeparable k kB :=
             AlgEquiv.Algebra.isSeparable eResidue
@@ -410,7 +414,7 @@ theorem
     rw [IsScalarTower.algebraMap_eq A B D]
     infer_instance
   let : Module.Finite k kB :=
-    Module.Finite.of_surjective eResidue.toLinearMap eResidue.surjective
+    Module.Finite.equiv eResidue.toLinearEquiv
   let : Module.Finite k l := Module.Finite.trans kB l
   let : Algebra.IsSeparable k kB := AlgEquiv.Algebra.isSeparable eResidue
   let : Algebra.IsSeparable k l := Algebra.IsSeparable.trans k kB l
@@ -490,8 +494,7 @@ theorem
               (residueFieldMap_bijective_iteratedRadical n a
                 (fun _ ↦ hN) (fun _ ↦ hymax))
           letI : Module.Finite k kB :=
-            Module.Finite.of_surjective
-              eResidue.toLinearMap eResidue.surjective
+            Module.Finite.equiv eResidue.toLinearEquiv
           letI : Module.Finite k l := Module.Finite.trans kB l
           letI : Algebra.IsSeparable k kB :=
             AlgEquiv.Algebra.isSeparable eResidue
@@ -555,7 +558,7 @@ theorem
     rw [IsScalarTower.algebraMap_eq A B D]
     infer_instance
   let : Module.Finite k kB :=
-    Module.Finite.of_surjective eResidue.toLinearMap eResidue.surjective
+    Module.Finite.equiv eResidue.toLinearEquiv
   let : Module.Finite k l := Module.Finite.trans kB l
   let : Algebra.IsSeparable k kB := AlgEquiv.Algebra.isSeparable eResidue
   let : Algebra.IsSeparable k l := Algebra.IsSeparable.trans k kB l
@@ -599,9 +602,9 @@ theorem
   have hi : Function.Injective i := (algebraMap Omega P).injective
   have hOmegaLeP : Module.finrank KC Omega ≤ Module.finrank KC P :=
     i.finrank_le_finrank_of_injective hi
-  have hRamLeOmega : N ≤ Module.finrank KC Omega := by
-    rw [← hExact]
-    exact ramificationIndex_le_finrank_of_moduleFinite base target
+  have hRamLeOmega : N ≤ Module.finrank KC Omega :=
+    hExact.symm.le.trans
+      (ramificationIndex_le_finrank_of_moduleFinite base target)
   have hFinrankEq : Module.finrank KC Omega = Module.finrank KC P := by
     have hP : Module.finrank KC P = N := by
       simpa only [P, KC] using hDegree
@@ -676,8 +679,7 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
               (residueFieldMap_bijective_iteratedRadical n a
                 (fun _ ↦ hN) (fun _ ↦ hymax))
           letI : Module.Finite k kB :=
-            Module.Finite.of_surjective
-              eResidue.toLinearMap eResidue.surjective
+            Module.Finite.equiv eResidue.toLinearEquiv
           letI : Module.Finite k l := Module.Finite.trans kB l
           letI : Algebra.IsSeparable k kB :=
             AlgEquiv.Algebra.isSeparable eResidue
@@ -751,7 +753,7 @@ exists_completeRegularLocalChosenFactor_oneRoot_rightAlgebraMap_bijective_of_exa
     rw [IsScalarTower.algebraMap_eq A B D]
     infer_instance
   let : Module.Finite k kB :=
-    Module.Finite.of_surjective eResidue.toLinearMap eResidue.surjective
+    Module.Finite.equiv eResidue.toLinearEquiv
   let : Module.Finite k l := Module.Finite.trans kB l
   let : Algebra.IsSeparable k kB := AlgEquiv.Algebra.isSeparable eResidue
   let : Algebra.IsSeparable k l := Algebra.IsSeparable.trans k kB l

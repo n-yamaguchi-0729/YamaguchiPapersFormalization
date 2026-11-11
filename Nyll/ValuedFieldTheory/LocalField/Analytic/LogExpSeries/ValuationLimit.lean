@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Data.Int.WithZero
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.Group.Basic
+module
+
+public import Mathlib.Data.Int.WithZero
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.Group.Basic
 
 /-!
 # Non-strict valuation bounds at a limit
@@ -14,6 +16,8 @@ import Mathlib.Topology.Algebra.Group.Basic
 An eventual upper bound on a convergent sequence remains an upper bound
 on its limit. The bound need not be nonzero or occur as a value of the valuation.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

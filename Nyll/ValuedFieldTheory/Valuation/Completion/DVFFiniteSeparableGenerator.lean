@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSeparableGenerator
-import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
-import Mathlib.Analysis.Normed.Algebra.Ultra
-import Mathlib.Analysis.Normed.Module.Completion
-import Mathlib.Topology.Algebra.Valued.NormedValued
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSeparableGenerator
+public import Nyll.ValuedFieldTheory.Valuation.Completion.WithValScalars
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NormedModel
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Module.Completion
+public import Mathlib.Topology.Algebra.Valued.NormedValued
 
 /-!
 # Descending generators from the actual completion of a DVF
@@ -18,6 +20,8 @@ The original valuation supplies a norm with the same uniformity on `WithVal`.
 Its completion is therefore the given valuation completion. Density of the
 canonical ground-field map then descends finite separable generators.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.KrullTopology
-import Mathlib.Topology.LocallyConstant.Basic
+module
+
+public import Mathlib.FieldTheory.KrullTopology
+public import Mathlib.Topology.LocallyConstant.Basic
 
 /-!
 # Locally constant orbit maps in algebraic Galois groups
@@ -13,6 +15,8 @@ import Mathlib.Topology.LocallyConstant.Basic
 A single algebraic element is fixed by an open subgroup. Its orbit map, and
 the induced orbit map on units, are locally constant in the Krull topology.
 -/
+
+@[expose] public section
 
 open scoped Pointwise
 

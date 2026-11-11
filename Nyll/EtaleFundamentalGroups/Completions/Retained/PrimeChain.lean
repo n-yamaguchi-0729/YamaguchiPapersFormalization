@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingDown
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
+module
+
+public import Mathlib.RingTheory.Ideal.GoingDown
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.GenericComponent
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ClosedPrime
 
 /-!
 # Retaining a prime chain under completion base change
@@ -22,6 +24,8 @@ The point of the construction is that neither the height-one branch nor the
 closed factor is reselected after completion.  The resulting chain is the
 finite-model input for selecting one literal completed generic component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -198,7 +202,7 @@ theorem retainedCompletedGenericPrime_disjoint
     Disjoint
       (Algebra.algebraMapSubmonoid T (nonZeroDivisors R') : Set T)
       (N : Set T) := by
-  let T := R' ⊗[R] S
+  intro T
   rw [Set.disjoint_left]
   intro x hxM hxN
   rcases hxM with ⟨r, hr, rfl⟩

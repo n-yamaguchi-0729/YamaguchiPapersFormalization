@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Topology.AdicCompletionInverseLimitRing
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Topology.AdicCompletionInverseLimitRing
 
 /-!
 # Cofinality of power-adic completions
@@ -14,6 +16,8 @@ are cofinal.  This file realizes that cofinality at the finite quotient
 levels and produces the resulting canonical equivalence of adic
 completions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -61,7 +65,7 @@ private theorem factorPow_mk
 
 /-- Reindexing quotient transition maps by `n ↦ e * n` commutes with the
 canonical quotient equivalences. -/
-private theorem powerQuotientEquiv_factorPow
+theorem powerQuotientEquiv_factorPow
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ)
     {m n : ℕ} (hmn : m ≤ n)
     (x : R ⧸ I ^ (e * n)) :
@@ -83,7 +87,7 @@ private theorem powerQuotientEquiv_factorPow
 
 /-- Restrict an `I`-adic compatible family to the cofinal levels
 `e * n`. -/
-private def powerCofinalityRestrict
+def powerCofinalityRestrict
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ) :
     adicQuotientInverseLimit I →+*
       adicQuotientInverseLimit (I ^ e) where
@@ -119,7 +123,7 @@ private def powerCofinalityRestrict
 /-- Extend a compatible family on the cofinal `(I ^ e)`-levels to all
 `I`-adic levels.  At level `n`, reduce its level-`n` value from
 `I ^ (e * n)` to `I ^ n`. -/
-private def powerCofinalityExtend
+def powerCofinalityExtend
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ) (he : 0 < e) :
     adicQuotientInverseLimit (I ^ e) →+*
       adicQuotientInverseLimit I where
@@ -166,7 +170,7 @@ private def powerCofinalityExtend
     rfl
 
 /-- Extending after restriction recovers every `I`-adic compatible family. -/
-private theorem powerCofinalityExtend_restrict
+theorem powerCofinalityExtend_restrict
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ) (he : 0 < e)
     (x : adicQuotientInverseLimit I) :
     powerCofinalityExtend I e he (powerCofinalityRestrict I e x) = x := by
@@ -184,7 +188,7 @@ private theorem powerCofinalityExtend_restrict
 
 /-- Restricting after extension recovers every `(I ^ e)`-adic compatible
 family; this is the finite-level cofinality argument. -/
-private theorem powerCofinalityRestrict_extend
+theorem powerCofinalityRestrict_extend
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ) (he : 0 < e)
     (x : adicQuotientInverseLimit (I ^ e)) :
     powerCofinalityRestrict I e (powerCofinalityExtend I e he x) = x := by
@@ -216,7 +220,7 @@ private theorem powerCofinalityRestrict_extend
 
 /-- The inverse limits of the `I`-adic and `(I ^ e)`-adic quotient systems
 are canonically ring-equivalent for `e > 0`. -/
-private def powerCofinalityInverseLimitEquiv
+def powerCofinalityInverseLimitEquiv
     {R : Type uR} [CommRing R] (I : Ideal R) (e : ℕ) (he : 0 < e) :
     adicQuotientInverseLimit (I ^ e) ≃+*
       adicQuotientInverseLimit I where

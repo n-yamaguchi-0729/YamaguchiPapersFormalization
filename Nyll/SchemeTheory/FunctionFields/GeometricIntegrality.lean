@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Morphisms.EtalePostcomposition
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.RingTheory.Localization.BaseChange
+module
+
+public import Nyll.SchemeTheory.Morphisms.EtalePostcomposition
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.RingTheory.Localization.BaseChange
 
 /-!
 # Geometric integrality of function fields
@@ -16,6 +18,8 @@ This file proves that passing from a geometrically integral domain over a field
 to its fraction field preserves geometric integrality.  It then applies this
 ring-theoretic fact to the function field of an integral scheme.
 -/
+
+@[expose] public section
 
 universe u
 
@@ -41,8 +45,6 @@ theorem isDomain_of_isFractionRing_left
       Algebra (TensorProduct k R L) (TensorProduct k K L) :=
     map.toRingHom.toAlgebra
   let targetAlgebraR : Algebra R (TensorProduct k K L) := inferInstance
-  let : Algebra (TensorProduct k R L) (TensorProduct k K L) :=
-    sourceTargetAlgebra
   let : IsScalarTower R (TensorProduct k R L) (TensorProduct k K L) :=
     @IsScalarTower.of_algebraMap_eq R (TensorProduct k R L)
       (TensorProduct k K L) _ _ _

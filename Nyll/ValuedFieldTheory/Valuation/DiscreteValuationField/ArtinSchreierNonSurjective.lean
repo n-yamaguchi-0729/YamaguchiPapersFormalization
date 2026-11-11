@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
-import Mathlib.Algebra.Polynomial.Div
-import Lean.Elab.Tactic.Omega
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierEisenstein
+public import Mathlib.Algebra.Polynomial.Div
+public import Lean.Elab.Tactic.Omega
+public import Mathlib.Tactic.Ring
 
 /-!
 # Failure of surjectivity for powers minus the identity in a DVF
@@ -17,6 +19,8 @@ The inverse of a prime uniformizer cannot equal `x ^ n - x` for `n > 1`: its
 reciprocal polynomial is Eisenstein and would otherwise have a root in the base
 field. The argument does not require Henselianity or a characteristic assumption.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

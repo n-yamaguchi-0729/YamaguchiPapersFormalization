@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PrimaryTransfer
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PrimaryTransfer
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
 
 /-!
 # Inclusion of fixed primary classes
@@ -13,6 +15,8 @@ import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
 Under relative formal Hilbert 90, globally fixed primary classes inject
 into the primary abelianization of the ambient group.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ProCGroups.Abelian ProCGroups.ProC

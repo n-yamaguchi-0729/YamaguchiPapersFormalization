@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Basic
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.Localization.Away.Basic
-import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
-import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
+module
+
+public import Mathlib.RingTheory.Etale.Basic
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.ChosenLocalization
+public import Nyll.SchemeTheory.Normalization.IntegralClosure.IntegralBase.Equiv
 
 /-!
 # A chosen local factor of one normalization after an integral base change
@@ -26,6 +28,8 @@ chosen factor.  Thus the away hypothesis below is source data from the
 original finite normalization, not an etaleness assumption on the desired
 chosen factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -67,7 +71,7 @@ theorem localization_awayMap_etale_of_finite_formallyEtale_extension
   let : IsScalarTower C T U :=
     IsScalarTower.of_algebraMap_eq fun c ↦ by
       change mapCDU c = mapTU (algebraMap C T c)
-      simp [mapTU]
+      simp only [IsLocalization.Away.lift_eq, mapTU]
   let : IsLocalization
       ((Submonoid.powers fC).map (algebraMap C D)) U := by
     rw [Submonoid.map_powers, show algebraMap C D fC = fD by
@@ -86,13 +90,13 @@ theorem localization_awayMap_etale_of_finite_formallyEtale_extension
           mapTU (algebraMap C T (algebraMap A C a)) := by
         rw [show mapST (algebraMap A S a) =
             algebraMap C T (algebraMap A C a) by
-          simp [mapST, S, T, fC, IsLocalization.Away.map]]
-      _ = mapCDU (algebraMap A C a) := by simp [mapTU]
+          simp only [IsLocalization.Away.map, IsLocalization.map_eq, T, fC, S, mapST]]
+      _ = mapCDU (algebraMap A C a) := by simp only [IsLocalization.Away.lift_eq, mapTU]
       _ = algebraMap D U (algebraMap C D (algebraMap A C a)) := rfl
       _ = algebraMap D U (algebraMap A D a) := by
         rw [IsScalarTower.algebraMap_apply A C D a]
       _ = mapSU (algebraMap A S a) := by
-        simp [mapSU, S, U, fD, IsLocalization.Away.map]
+        simp only [IsLocalization.Away.map, IsLocalization.map_eq, U, fD, S, mapSU]
   let : Algebra S U := mapSU.toAlgebra
   let : IsScalarTower S T U :=
     IsScalarTower.of_algebraMap_eq fun x ↦
@@ -105,7 +109,7 @@ theorem localization_awayMap_etale_of_finite_formallyEtale_extension
       change algebraMap A U a = mapSU (algebraMap A S a)
       rw [show mapSU (algebraMap A S a) =
           algebraMap D U (algebraMap A D a) by
-        simp [mapSU, S, U, fD, IsLocalization.Away.map]]
+        simp only [IsLocalization.Away.map, IsLocalization.map_eq, U, fD, S, mapSU]]
       exact IsScalarTower.algebraMap_apply A D U a
   let : IsLocalization
       ((Submonoid.powers f).map (algebraMap A D)) U := by

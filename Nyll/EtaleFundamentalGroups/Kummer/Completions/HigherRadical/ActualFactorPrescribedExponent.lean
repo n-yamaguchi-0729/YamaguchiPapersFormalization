@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualFactor
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualFactor
 
 /-!
 # Complete higher-radical factors at a prescribed common exponent
@@ -16,6 +18,8 @@ boundary divisor.  This file keeps the exponent and its divisibility proof
 explicit while still constructing the target uniformizer and its unit
 decomposition from the complete-DVF data.
 -/
+
+@[expose] public section
 
 noncomputable section
 

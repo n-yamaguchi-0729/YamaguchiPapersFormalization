@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Flat.TorsionFree
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+module
+
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
 
 /-!
 # The valued-field completion of the standard DVR valuation
@@ -20,6 +22,8 @@ valuation extends the original one, and shows that uniformizers remain
 uniformizers.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups
@@ -30,7 +34,7 @@ open ValuationTheory.Valuations
 universe uV uK uΓ
 
 /-- Passing to `WithVal` preserves a rank-one discrete valuation. -/
-private theorem withValValuation_isRankOneDiscrete
+theorem withValValuation_isRankOneDiscrete
     {K : Type uK} {Γ : Type uΓ}
     [Field K] [LinearOrderedCommGroupWithZero Γ]
     (v : Valuation K Γ) [v.IsRankOneDiscrete] :
@@ -50,12 +54,11 @@ private theorem withValValuation_generator_eq
     {K : Type uK} {Γ : Type uΓ}
     [Field K] [LinearOrderedCommGroupWithZero Γ]
     (v : Valuation K Γ) [v.IsRankOneDiscrete] :
-    letI : (WithVal.valuation v).IsRankOneDiscrete :=
+    let : (WithVal.valuation v).IsRankOneDiscrete :=
       withValValuation_isRankOneDiscrete v
     Valuation.IsRankOneDiscrete.generator (WithVal.valuation v) =
       Valuation.IsRankOneDiscrete.generator v := by
-  let : (WithVal.valuation v).IsRankOneDiscrete :=
-    withValValuation_isRankOneDiscrete v
+  intro sharedOwner1
   apply LinearOrderedCommGroup.Subgroup.genLTOne_unique_of_zpowers_eq
     (Valuation.IsRankOneDiscrete.generator_lt_one (WithVal.valuation v))
     (Valuation.IsRankOneDiscrete.generator_lt_one v)
@@ -117,7 +120,7 @@ private theorem completionValuation_valueGroup_eq
 
 /-- The extended valuation on the actual completion remains rank-one
 discrete. -/
-private theorem completionValuation_isRankOneDiscrete
+theorem completionValuation_isRankOneDiscrete
     {K : Type uK} {Γ : Type uΓ}
     [Field K] [LinearOrderedCommGroupWithZero Γ]
     (v : Valuation K Γ)
@@ -144,13 +147,12 @@ private theorem completionValuation_generator_eq
     [Field K] [LinearOrderedCommGroupWithZero Γ]
     (v : Valuation K Γ)
     [(WithVal.valuation v).IsRankOneDiscrete] :
-    letI : (Valued.v : Valuation v.Completion Γ).IsRankOneDiscrete :=
+    let : (Valued.v : Valuation v.Completion Γ).IsRankOneDiscrete :=
       completionValuation_isRankOneDiscrete v
     Valuation.IsRankOneDiscrete.generator
         (Valued.v : Valuation v.Completion Γ) =
       Valuation.IsRankOneDiscrete.generator (WithVal.valuation v) := by
-  let : (Valued.v : Valuation v.Completion Γ).IsRankOneDiscrete :=
-    completionValuation_isRankOneDiscrete v
+  intro sharedOwner1
   apply LinearOrderedCommGroup.Subgroup.genLTOne_unique_of_zpowers_eq
     (Valuation.IsRankOneDiscrete.generator_lt_one
       (Valued.v : Valuation v.Completion Γ))
@@ -251,15 +253,11 @@ theorem standardDVFCompletion_hasExtension
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let base := standardDVFOfDVR V K
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra K (standardDVFCompletionField V K) :=
+    let : Algebra K (standardDVFCompletionField V K) :=
       standardDVFCompletionAlgebra V K
     base.valuation.HasExtension target.valuation := by
-  dsimp only
-  let base := standardDVFOfDVR V K
+  intro base target sharedOwner4
   let v := (IsDiscreteValuationRing.maximalIdeal V).valuation K
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra K (standardDVFCompletionField V K) :=
-    standardDVFCompletionAlgebra V K
   change v.HasExtension target.valuation
   apply Valuation.HasExtension.ofComapInteger
   ext x
@@ -321,21 +319,15 @@ theorem standardDVFCompletion_maximalIdeal_map_eq
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let base := standardDVFOfDVR V K
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra K (standardDVFCompletionField V K) :=
+    let : Algebra K (standardDVFCompletionField V K) :=
       standardDVFCompletionAlgebra V K
-    letI : base.valuation.HasExtension target.valuation :=
+    let : base.valuation.HasExtension target.valuation :=
       standardDVFCompletion_hasExtension V K
     Ideal.map
         (algebraMap base.valuationSubring target.valuationSubring)
         base.maximalIdeal =
       target.maximalIdeal := by
-  dsimp only
-  let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra K (standardDVFCompletionField V K) :=
-    standardDVFCompletionAlgebra V K
-  let : base.valuation.HasExtension target.valuation :=
-    standardDVFCompletion_hasExtension V K
+  intro base target sharedOwner2 sharedOwner3
   rcases base.exists_uniformizer with ⟨pi, hpi⟩
   let piHat : target.valuationSubring :=
     ValuedExtension.integerMap base target.toDVF pi
@@ -373,19 +365,13 @@ theorem standardDVFCompletion_faithfullyFlat
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let base := standardDVFOfDVR V K
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra K (standardDVFCompletionField V K) :=
+    let : Algebra K (standardDVFCompletionField V K) :=
       standardDVFCompletionAlgebra V K
-    letI : base.valuation.HasExtension target.valuation :=
+    let : base.valuation.HasExtension target.valuation :=
       standardDVFCompletion_hasExtension V K
     Module.FaithfullyFlat
       base.valuationSubring target.valuationSubring := by
-  dsimp only
-  let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra K (standardDVFCompletionField V K) :=
-    standardDVFCompletionAlgebra V K
-  let : base.valuation.HasExtension target.valuation :=
-    standardDVFCompletion_hasExtension V K
+  intro base target sharedOwner2 sharedOwner3
   have hinjective : Function.Injective
       (algebraMap base.valuationSubring target.valuationSubring) :=
     Valuation.HasExtension.algebraMap_injective

@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.RootsOfUnity.Basic
-import Mathlib.Algebra.Order.GroupWithZero.Basic
+module
+
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.RootsOfUnity.Basic
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
 
 /-!
 # Roots of unity in valuation rings
@@ -17,6 +19,8 @@ Reduction on roots of unity of order invertible in the residue field is
 injective and, for a Henselian valuation ring, surjective. Roots of nonzero
 order in the field also belong to the valuation ring.
 -/
+
+@[expose] public section
 
 namespace ValuationSubring
 

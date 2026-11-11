@@ -4,15 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteEtaleGenericResidue
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentGenericResidueArtinian
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackFunctionFieldTensorSurjectivity
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueArtinian
-import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueTensorProduct
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiniteEtaleGenericResidue
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentGenericResidueArtinian
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackFunctionFieldTensorSurjectivity
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueArtinian
+public import Nyll.SchemeTheory.FiniteEtale.BaseChange.PullbackResidueTensorProduct
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Function fields of connected pullback components
@@ -22,6 +26,8 @@ cover to the corresponding component of the tensor product of function
 fields.  In particular, the comparison is selected by the given component
 map; it is not an abstract choice of an isomorphic field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -62,11 +68,7 @@ theorem _root_.AlgebraicGeometry.Scheme.Hom.functionFieldMap_comp_of_denseRange
       exact hf.comp hg f.continuous
     (g.functionFieldMap hg).comp (f.functionFieldMap hf) =
       (g ≫ f).functionFieldMap hgf := by
-  let hgf : DenseRange (g ≫ f) := by
-    change DenseRange (f.base ∘ g.base)
-    exact hf.comp hg f.continuous
-  change (g.functionFieldMap hg).comp (f.functionFieldMap hf) =
-    (g ≫ f).functionFieldMap hgf
+  intro hgf
   let hfgeneric : f (genericPoint S) = genericPoint T :=
     f.map_genericPoint_of_denseRange hf
   let hggeneric : g (genericPoint R) = genericPoint S :=
@@ -175,16 +177,13 @@ theorem pullbackComponentToOriginal_map_genericPoint
     (W : FiniteEtale Y) [IsConnected W]
     (Z : FiniteEtale X) [IsConnected Z]
     (i : Z ⟶ (FiniteEtale.pullback f).obj W) :
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : IsIntegral Z.left :=
+    let : IsIntegral Z.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
     pullbackComponentToOriginal f W Z i (genericPoint Z.left) =
       genericPoint W.left := by
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : IsIntegral Z.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
+  intro sharedOwner1 sharedOwner2
   exact (pullbackComponentToOriginal f W Z i).map_genericPoint_of_denseRange
     (pullbackComponentToOriginal_denseRange f hf W Z i)
 
@@ -197,9 +196,9 @@ theorem pullbackComponent_functionFieldMap_compatibility
     (W : FiniteEtale Y) [IsConnected W]
     (Z : FiniteEtale X) [IsConnected Z]
     (i : Z ⟶ (FiniteEtale.pullback f).obj W) :
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : IsIntegral Z.left :=
+    let : IsIntegral Z.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
     let g := pullbackComponentToOriginal f W Z i
     let hg := pullbackComponentToOriginal_denseRange f hf W Z i
@@ -215,12 +214,7 @@ theorem pullbackComponent_functionFieldMap_compatibility
         (algebraMap Y.functionField W.left.functionField) =
       (algebraMap X.functionField Z.left.functionField).comp
         (algebraMap Y.functionField X.functionField) := by
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : IsIntegral Z.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
-  let g := pullbackComponentToOriginal f W Z i
-  let hg := pullbackComponentToOriginal_denseRange f hf W Z i
+  intro sharedOwner1 sharedOwner2 g hg
   let hW := EtaleFundamentalGroups.finiteEtale_hom_denseRange_of_isConnected W
   let hZ := EtaleFundamentalGroups.finiteEtale_hom_denseRange_of_isConnected Z
   let hWY : IsIntegral ((Functor.fromPUnit Y).obj W.right) := by
@@ -280,26 +274,26 @@ theorem pullbackComponentFunctionFieldProductMap_surjective
     (W : FiniteEtale Y) [IsConnected W]
     (Z : FiniteEtale X) [IsConnected Z]
     (i : Z ⟶ (FiniteEtale.pullback f).obj W) [Mono i] :
-    letI : IsIntegral W.left :=
+    let : IsIntegral W.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-    letI : IsIntegral Z.left :=
+    let : IsIntegral Z.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
     let g := pullbackComponentToOriginal f W Z i
     let hg := pullbackComponentToOriginal_denseRange f hf W Z i
-    letI : Algebra Y.functionField X.functionField :=
+    let : Algebra Y.functionField X.functionField :=
       f.functionFieldAlgebraOfDenseRange hf
-    letI : Algebra Y.functionField W.left.functionField :=
+    let : Algebra Y.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-    letI : Algebra X.functionField Z.left.functionField :=
+    let : Algebra X.functionField Z.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Z
-    letI : Algebra W.left.functionField Z.left.functionField :=
+    let : Algebra W.left.functionField Z.left.functionField :=
       g.functionFieldAlgebraOfDenseRange hg
-    letI : Algebra Y.functionField Z.left.functionField :=
+    let : Algebra Y.functionField Z.left.functionField :=
       ((algebraMap X.functionField Z.left.functionField).comp
         (algebraMap Y.functionField X.functionField)).toAlgebra
-    letI : IsScalarTower Y.functionField X.functionField
+    let : IsScalarTower Y.functionField X.functionField
         Z.left.functionField := IsScalarTower.of_algebraMap_eq' rfl
-    letI : IsScalarTower Y.functionField W.left.functionField
+    let : IsScalarTower Y.functionField W.left.functionField
         Z.left.functionField := IsScalarTower.of_algebraMap_eq'
       (pullbackComponent_functionFieldMap_compatibility f hf W Z i).symm
     Function.Surjective
@@ -308,28 +302,8 @@ theorem pullbackComponentFunctionFieldProductMap_surjective
           Z.left.functionField)
         (IsScalarTower.toAlgHom Y.functionField W.left.functionField
           Z.left.functionField)) := by
-  let : IsIntegral W.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : IsIntegral Z.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Z
-  let g := pullbackComponentToOriginal f W Z i
-  let hg := pullbackComponentToOriginal_denseRange f hf W Z i
-  let : Algebra Y.functionField X.functionField :=
-    f.functionFieldAlgebraOfDenseRange hf
-  let : Algebra Y.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
-  let : Algebra X.functionField Z.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra Z
-  let : Algebra W.left.functionField Z.left.functionField :=
-    g.functionFieldAlgebraOfDenseRange hg
-  let : Algebra Y.functionField Z.left.functionField :=
-    ((algebraMap X.functionField Z.left.functionField).comp
-      (algebraMap Y.functionField X.functionField)).toAlgebra
-  let : IsScalarTower Y.functionField X.functionField
-      Z.left.functionField := IsScalarTower.of_algebraMap_eq' rfl
-  let : IsScalarTower Y.functionField W.left.functionField
-      Z.left.functionField := IsScalarTower.of_algebraMap_eq'
-    (pullbackComponent_functionFieldMap_compatibility f hf W Z i).symm
+  intro sharedOwner1 sharedOwner2 g hg sharedOwner5 sharedOwner6 sharedOwner7 sharedOwner8
+    sharedOwner9 sharedOwner10 sharedOwner11
   obtain ⟨_, hiClosed⟩ :=
     (_root_.AlgebraicGeometry.FiniteEtale.mono_iff X Z
       ((FiniteEtale.pullback f).obj W) i).mp (inferInstance : Mono i)

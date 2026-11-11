@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.GroupTheory.Torsion
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimitiveRootCoordinates
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.GroupTheory.Torsion
 
 /-!
 # Infinite image of the cyclotomic character
@@ -14,6 +16,8 @@ import Mathlib.GroupTheory.Torsion
 A finite cyclotomic image would yield a finite fixed field containing all
 primary roots of unity. The actual primitive roots contradict finiteness.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 universe u v
@@ -24,7 +28,7 @@ theorem infinite_primaryComponent_of_primitive_roots
     (p : ℕ) [Fact p.Prime] [∀ i : ℕ, HasEnoughRootsOfUnity Ω (p ^ i)] :
     Infinite (CommGroup.primaryComponent Ωˣ p) := by
   classical
-  choose ζ hζ using fun n => HasEnoughRootsOfUnity.exists_primitiveRoot Ω (p ^ n)
+  choose ζ hζ using fun n => HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω (p ^ n)
   let z (n : ℕ) : Ωˣ := (hζ n).isUnit (NeZero.ne (p ^ n)) |>.unit'
   have hz (n : ℕ) : IsPrimitiveRoot (z n) (p ^ n) :=
     (hζ n).isUnit_unit' (NeZero.ne (p ^ n))
@@ -44,7 +48,7 @@ theorem primaryUnit_mem_fixedField_cyclotomic_ker
     (z.val : Ω) ∈ IntermediateField.fixedField
       ((cyclotomicCharacter Ω p).comp (MulSemiringAction.toRingAut Gal(Ω/K) Ω)).ker := by
   obtain ⟨n, hn⟩ := z.property
-  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_primitiveRoot Ω (p ^ n)
+  obtain ⟨ζ, hζ⟩ := HasEnoughRootsOfUnity.exists_isPrimitiveRoot Ω (p ^ n)
   let η : Ωˣ := hζ.isUnit (NeZero.ne (p ^ n)) |>.unit'
   have hη : IsPrimitiveRoot η (p ^ n) := hζ.isUnit_unit' (NeZero.ne _)
   obtain ⟨a, ha⟩ := primitiveRootCoordinate_surjective_roots hη z.val hn

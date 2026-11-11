@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.Smooth.Flat
 
 /-!
 # Ramification in an etale square
@@ -19,6 +21,8 @@ This form does not mention a tensor presentation.  It is therefore suited
 to an actual compositum normalization after the relevant connected generic
 component has already been selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

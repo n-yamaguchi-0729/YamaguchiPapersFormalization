@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
 
 /-!
 # Following a chosen normalization prime to a larger base prime
@@ -14,6 +16,8 @@ produces a prime over `P` which still contains the chosen prime.  This keeps
 the same height-one branch factor when it is followed to a codimension-two
 point; no new normalization component is selected.
 -/
+
+@[expose] public section
 
 noncomputable section
 

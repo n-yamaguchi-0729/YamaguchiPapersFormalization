@@ -5,6 +5,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.OrientedInvariants
+import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Lemma 6.2: integral invariants

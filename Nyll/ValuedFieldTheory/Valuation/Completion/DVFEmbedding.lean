@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
-import Mathlib.GroupTheory.ArchimedeanDensely
-import Mathlib.RingTheory.Valuation.Discrete.RankOne
-import Mathlib.RingTheory.Valuation.Extension
-import Mathlib.Topology.Algebra.UniformRing
-import Mathlib.Topology.Algebra.Valued.WithVal
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationTransport
+public import Mathlib.GroupTheory.ArchimedeanDensely
+public import Mathlib.RingTheory.Valuation.Discrete.RankOne
+public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.Topology.Algebra.UniformRing
+public import Mathlib.Topology.Algebra.Valued.WithVal
 
 /-!
 # Completion maps for extensions of discrete valuations
@@ -20,6 +22,8 @@ the target valuation, which is order-isomorphic to the multiplicative
 integers with zero. Thus an extension of discrete valuations induces a
 uniformly continuous field map and an actual map of completions.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

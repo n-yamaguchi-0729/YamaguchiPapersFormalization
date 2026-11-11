@@ -12,10 +12,12 @@ The general coefficient comparison is by Naganori Yamaguchi
 (assisted by OpenAI Codex).
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.Bifunctor
-import Mathlib.Algebra.Homology.Monoidal
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationComplex
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.Bifunctor
+public import Mathlib.Algebra.Homology.Monoidal
 
 /-!
 # Tensor coefficients in the bounded Čech complex
@@ -25,6 +27,8 @@ is naturally identified degreewise with tensoring each original term by
 that coefficient module. The construction uses the unique nonzero
 summand in each degree, and verifies compatibility with the differential.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,16 +40,19 @@ universe u
 
 variable {R : Type u} [CommRing R]
 
-private abbrev coefficientSingle (M : ModuleCat.{u} R) :=
+/-- The coefficient module placed in degree zero. -/
+abbrev coefficientSingle (M : ModuleCat.{u} R) :=
   (HomologicalComplex.single (ModuleCat.{u} R) (ComplexShape.up ℕ) 0).obj M
 
-private def singleTensorInto (M : ModuleCat.{u} R)
+/-- Include the degree-zero coefficient summand in the tensor complex. -/
+def singleTensorInto (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     M ⊗ K.X n ⟶ (HomologicalComplex.tensorObj (coefficientSingle M) K).X n :=
   ((singleObjXSelf (ComplexShape.up ℕ) 0 M).inv ▷ K.X n) ≫
     ιTensorObj (coefficientSingle M) K 0 n n (zero_add n)
 
-private def singleTensorSummandOut (M : ModuleCat.{u} R)
+/-- Project a tensor summand to the coefficient module tensored with its matching degree. -/
+def singleTensorSummandOut (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n i j : ℕ)
     (hij : ComplexShape.π (ComplexShape.up ℕ) (ComplexShape.up ℕ)
       (ComplexShape.up ℕ) (i, j) = n) :
@@ -56,13 +63,15 @@ private def singleTensorSummandOut (M : ModuleCat.{u} R)
       (M ◁ (K.XIsoOfEq (by have h : i + j = n := hij; omega : j = n)).hom)
   else 0
 
-private def singleTensorOut (M : ModuleCat.{u} R)
+/-- Project the tensor complex to its unique nonzero coefficient summand. -/
+def singleTensorOut (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     (HomologicalComplex.tensorObj (coefficientSingle M) K).X n ⟶ M ⊗ K.X n :=
   mapBifunctorDesc (F := curriedTensor (ModuleCat.{u} R))
     (c := ComplexShape.up ℕ) (singleTensorSummandOut M K n)
 
-private theorem singleTensorInto_out (M : ModuleCat.{u} R)
+/-- Projection after inclusion is the identity on the coefficient summand. -/
+theorem singleTensorInto_out (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     singleTensorInto M K n ≫ singleTensorOut M K n = 𝟙 _ := by
   dsimp only [singleTensorInto, singleTensorOut]
@@ -76,7 +85,8 @@ private theorem singleTensorInto_out (M : ModuleCat.{u} R)
     (singleObjXSelf (ComplexShape.up ℕ) 0 M).hom) ▷ K.X n = 𝟙 _
   rw [Iso.inv_hom_id, id_whiskerRight]
 
-private theorem singleTensorOut_into (M : ModuleCat.{u} R)
+/-- Inclusion after projection is the identity on the tensor complex term. -/
+theorem singleTensorOut_into (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     singleTensorOut M K n ≫ singleTensorInto M K n = 𝟙 _ := by
   apply mapBifunctor.hom_ext
@@ -100,7 +110,8 @@ private theorem singleTensorOut_into (M : ModuleCat.{u} R)
   · exact ((tensorRight (K.X j)).map_isZero
       (isZero_single_obj_X (ComplexShape.up ℕ) 0 M i hi)).eq_of_src _ _
 
-private def singleTensorXIso (M : ModuleCat.{u} R)
+/-- Identify each tensor-complex term with tensoring that degree by the coefficient module. -/
+def singleTensorXIso (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (n : ℕ) :
     M ⊗ K.X n ≅ (HomologicalComplex.tensorObj (coefficientSingle M) K).X n where
   hom := singleTensorInto M K n
@@ -120,7 +131,8 @@ private theorem single_tensor_d₁ (M : ModuleCat.{u} R)
     · rw [mapBifunctor.d₁_eq_zero' _ _ _ _ hi _ _ hn]
   · rw [mapBifunctor.d₁_eq_zero _ _ _ _ _ _ _ hi]
 
-private theorem singleTensorInto_comm (M : ModuleCat.{u} R)
+/-- The coefficient-summand inclusions commute with the differential. -/
+theorem singleTensorInto_comm (M : ModuleCat.{u} R)
     (K : CochainComplex (ModuleCat.{u} R) ℕ) (i j : ℕ) :
     singleTensorInto M K i ≫ (HomologicalComplex.tensorObj (coefficientSingle M) K).d i j =
       ((tensorLeft M).mapHomologicalComplex (ComplexShape.up ℕ) |>.obj K).d i j ≫

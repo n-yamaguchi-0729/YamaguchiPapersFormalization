@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
-import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
-import Mathlib.Algebra.Ring.Subring.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Mathlib.RingTheory.Valuation.Discrete.IsDiscreteValuationRing
+public import Mathlib.Algebra.Ring.Subring.Basic
 
 /-!
 # Integer-valued normalization of a discrete valuation
@@ -15,6 +17,8 @@ The maximal ideal of the actual valuation ring supplies an integer-valued
 discrete valuation on its fraction field. Its valuation subring is the
 original subring of that same field, without a Henselianity assumption.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

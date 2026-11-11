@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.Order.KrullDimension
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.Spectrum.Prime.Module
-import Mathlib.RingTheory.Spectrum.Prime.Topology
-import Mathlib.RingTheory.Support
+module
+
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.Order.KrullDimension
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.Spectrum.Prime.Module
+public import Mathlib.RingTheory.Spectrum.Prime.Topology
+public import Mathlib.RingTheory.Support
 
 /-!
 # Support dimension after removing maximal-ideal-power torsion
@@ -26,6 +28,8 @@ The quotient is consequently nonzero, so its support contains the closed
 point too.  The short exact support formula now identifies the entire
 supports, and hence their dimensions.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

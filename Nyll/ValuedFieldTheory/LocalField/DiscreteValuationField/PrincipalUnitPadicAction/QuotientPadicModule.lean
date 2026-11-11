@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PrimePowerExponent
-import Mathlib.Algebra.Module.ZMod
-import Mathlib.NumberTheory.Padics.RingHoms
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.PrimePowerExponent
+public import Mathlib.Algebra.Module.ZMod
+public import Mathlib.NumberTheory.Padics.RingHoms
 
 /-!
 # P-adic scalars on principal-unit quotients with arbitrary residue field
@@ -15,6 +17,8 @@ The exponent `p^n` of the level quotient supplies its `ZMod (p^n)` module.
 Reduction of p-adic integers then supplies the scalar action. These are
 explicit constructions, avoiding competing local-field instances.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
 namespace DiscretePrincipalUnitQuotient

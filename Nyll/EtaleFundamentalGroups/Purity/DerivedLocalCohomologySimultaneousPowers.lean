@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
-import Mathlib.RingTheory.Filtration
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
+public import Mathlib.RingTheory.Filtration
 
 /-!
 # Simultaneous ideal powers and derived local cohomology
@@ -16,6 +18,8 @@ single ideal.  The supremum comparison is elementary.  For intersections,
 Artin--Rees shows that the simultaneous-power filtration is cofinal with
 the powers of `I ⊓ J`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

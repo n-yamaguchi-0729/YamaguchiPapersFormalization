@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+module
+
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimeOrderTest
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
 
 /-!
 # The prime-order test for Sigma-abelianization-faithfulness
@@ -24,6 +26,8 @@ normal subgroup have canonically equivalent residual quotients, and the
 induced equivalence on abelianizations preserves conjugation. The prime
 order of the acting quotient is unrestricted by Sigma.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

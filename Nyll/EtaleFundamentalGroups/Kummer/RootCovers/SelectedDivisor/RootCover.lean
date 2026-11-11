@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularity
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
-import Mathlib.RingTheory.DiscreteValuationRing.TFAE
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.TensorProduct.Quotient
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularity
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.Obstructions.LocalDerivative
+public import Mathlib.RingTheory.DiscreteValuationRing.TFAE
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.TensorProduct.Quotient
 
 /-!
 # A selected divisor under a one-root Kummer cover
@@ -26,6 +29,8 @@ cover quotient is then identified with the corresponding base-changed root
 cover.  Finally, faithful flatness preserves regularity of `y`, and Krull
 intersection upgrades the regular local cover to a domain.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -51,9 +56,7 @@ theorem regular_quotient_parameter_of_regular_pair
     IsRegular S [Ideal.Quotient.mk I x] ∧
       Ideal.ofList [Ideal.Quotient.mk I x] =
         (maximalIdeal R).map (Ideal.Quotient.mk I) := by
-  dsimp only
-  let I : Ideal R := Ideal.span {y}
-  let S := R ⧸ I
+  intro I S
   have hyMem : y ∈ maximalIdeal R := by
     rw [← hgen]
     exact Ideal.subset_span (List.mem_cons_of_mem x List.mem_cons_self)
@@ -116,86 +119,11 @@ theorem regular_quotient_parameter_of_regular_pair
   have hgenS : Ideal.ofList [Ideal.Quotient.mk I x] =
       (maximalIdeal R).map (Ideal.Quotient.mk I) := by
     rw [← hgen, Ideal.map_ofList]
-    simp [I]
+    have hyzero : Ideal.Quotient.mk I y = 0 :=
+      Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.subset_span (Set.mem_singleton y))
+    simp only [List.map_cons, List.map_nil, hyzero, Ideal.ofList_cons, Ideal.ofList_nil,
+      Ideal.span_singleton_zero, sup_bot_eq]
   exact ⟨hregS, hgenS⟩
-
-private theorem isDomain_of_prime_regular_element
-    {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
-    {p : R} (hp : Prime p) (hpreg : IsSMulRegular R p) : IsDomain R := by
-  have hbot : (⊥ : Ideal R).IsPrime := by
-    rw [Ideal.isPrime_iff]
-    refine ⟨bot_ne_top, ?_⟩
-    intro a b hab
-    simp only [Ideal.mem_bot] at hab ⊢
-    by_contra hzero
-    push Not at hzero
-    obtain ⟨k, hak⟩ : ∃ k : ℕ, a ∉ maximalIdeal R ^ k := by
-      by_contra hall
-      push Not at hall
-      have haInf : a ∈ ⨅ k : ℕ, maximalIdeal R ^ k := Ideal.mem_iInf.mpr hall
-      rw [Ideal.iInf_pow_eq_bot_of_isLocalRing
-        (maximalIdeal R) (maximalIdeal.isMaximal R).ne_top] at haInf
-      exact hzero.1 (Ideal.mem_bot.mp haInf)
-    obtain ⟨l, hbl⟩ : ∃ l : ℕ, b ∉ maximalIdeal R ^ l := by
-      by_contra hall
-      push Not at hall
-      have hbInf : b ∈ ⨅ l : ℕ, maximalIdeal R ^ l := Ideal.mem_iInf.mpr hall
-      rw [Ideal.iInf_pow_eq_bot_of_isLocalRing
-        (maximalIdeal R) (maximalIdeal.isMaximal R).ne_top] at hbInf
-      exact hzero.2 (Ideal.mem_bot.mp hbInf)
-    have hpMem : p ∈ maximalIdeal R := by
-      rw [mem_maximalIdeal]
-      exact hp.not_isUnit
-    have hpow : ∀ k l : ℕ, ∀ a b : R, a * b = 0 →
-        p ^ k ∣ a ∨ p ^ l ∣ b := by
-      intro k
-      induction k with
-      | zero =>
-          intro l a b hab
-          exact Or.inl (by rw [pow_zero]; exact one_dvd a)
-      | succ k ihK =>
-          intro l
-          induction l with
-          | zero =>
-              intro a b hab
-              exact Or.inr (by rw [pow_zero]; exact one_dvd b)
-          | succ l ihL =>
-              intro a b hab
-              have hpProd : p ∣ a * b := by rw [hab]; exact dvd_zero p
-              rcases hp.dvd_mul.mp hpProd with hpa | hpb
-              · obtain ⟨a', rfl⟩ := hpa
-                have hab' : a' * b = 0 := by
-                  apply hpreg.right_eq_zero_of_smul
-                  simpa only [smul_eq_mul, mul_assoc] using hab
-                rcases ihK (l + 1) a' b hab' with ha' | hb'
-                · left
-                  obtain ⟨c, hc⟩ := ha'
-                  refine ⟨c, ?_⟩
-                  rw [hc, pow_succ]
-                  ac_rfl
-                · exact Or.inr hb'
-              · obtain ⟨b', rfl⟩ := hpb
-                have hab' : a * b' = 0 := by
-                  apply hpreg.right_eq_zero_of_smul
-                  simpa only [smul_eq_mul, mul_comm, mul_left_comm, mul_assoc] using hab
-                rcases ihL a b' hab' with ha' | hb'
-                · exact Or.inl ha'
-                · right
-                  obtain ⟨c, hc⟩ := hb'
-                  refine ⟨c, ?_⟩
-                  rw [hc, pow_succ]
-                  ac_rfl
-    rcases hpow k l a b hab with ha | hb
-    · apply hak
-      obtain ⟨c, rfl⟩ := ha
-      exact (maximalIdeal R ^ k).mul_mem_right c
-        (Ideal.pow_mem_pow hpMem k)
-    · apply hbl
-      obtain ⟨c, rfl⟩ := hb
-      exact (maximalIdeal R ^ l).mul_mem_right c
-        (Ideal.pow_mem_pow hpMem l)
-  let : (⊥ : Ideal R).IsPrime := hbot
-  exact IsDomain.of_bot_isPrime R
 
 /--
 After adjoining an `n`th root of the first member of a regular parameter pair,
@@ -284,7 +212,7 @@ theorem oneRootCover_selectedDivisor_geometry
     rw [hspanS]
     exact inferInstance
   have hdomainS : IsDomain (R ⧸ I) :=
-    isDomain_of_prime_regular_element hxSPrime
+    isDomain_of_prime_isSMulRegular hxSPrime
       (((isRegular_cons_iff (R ⧸ I)
         (algebraMap R (R ⧸ I) x) []).mp hregS).1)
   let : IsDomain (R ⧸ I) := hdomainS
@@ -326,7 +254,6 @@ theorem oneRootCover_selectedDivisor_geometry
     have hqD : qD = q := by
       dsimp only [qD]
       rw [hcoeff]
-      simp [q, n₁]
       rfl
     let eqv : D ≃ₐ[R ⧸ I] AdjoinRoot q :=
       AdjoinRoot.algEquivOfEq (R ⧸ I) qD q hqD
@@ -342,7 +269,7 @@ theorem oneRootCover_selectedDivisor_geometry
   have hJprime : J.IsPrime :=
     (Ideal.Quotient.isDomain_iff_prime J).mp inferInstance
   have hJspan : J = Ideal.span ({algebraMap R B y} : Set B) := by
-    simp [J, I, Ideal.map_span]
+    simp only [J, I, Ideal.map_span, Set.image_singleton]
   have hregYX : IsRegular R [y, x] :=
     IsLocalRing.isRegular_of_perm hreg (List.Perm.swap x y []).symm
   have hyregR : IsSMulRegular R y :=
@@ -372,7 +299,7 @@ theorem oneRootCover_selectedDivisor_geometry
     apply hyregBR.right_eq_zero_of_smul
     simpa only [Algebra.smul_def, Algebra.algebraMap_self_apply] using hz
   have hdomainB : IsDomain B :=
-    isDomain_of_prime_regular_element (R := B)
+    isDomain_of_prime_isSMulRegular (R := B)
       (p := algebraMap R B y) hyBPrime hyregB
   have hregBJ : IsRegularLocalRing (B ⧸ J) :=
     IsRegularLocalRing.of_ringEquiv e.symm.toRingEquiv

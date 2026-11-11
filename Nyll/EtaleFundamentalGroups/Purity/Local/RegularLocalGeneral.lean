@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Basis.VectorSpace
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.Algebra.Module.SpanRankOperations
+public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regular hypersurface sections of regular local domains
@@ -24,6 +27,8 @@ Nakayama to generate the maximal ideal after quotienting.  The principal
 non-zero-divisor dimension formula then identifies the dimension of the
 quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

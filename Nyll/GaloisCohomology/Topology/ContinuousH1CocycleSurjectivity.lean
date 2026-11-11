@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Topology.ContinuousH1Lifting
+module
+
+public import Nyll.GaloisCohomology.Topology.ContinuousH1Lifting
 
 /-! # Cocycle lifting implies surjectivity on actual continuous H¹ -/
+
+@[expose] public section
 
 open CategoryTheory TopRep ContRepresentation
 

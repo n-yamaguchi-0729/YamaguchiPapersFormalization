@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootRightComparison
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Intermediate.ExponentUnit
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.RegularLocal.ExactRootRightComparison
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Intermediate.ExponentUnit
 
 /-!
 # Domain sources for literal one-root comparisons
@@ -16,6 +18,8 @@ after passing to the explicit finite-etale residue lift.  Chosen-factor and
 generic-fibre consequences are assembled by their dedicated downstream
 leaves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

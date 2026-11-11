@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
 
 /-!
 # Generic residue fields of finite-etale covers
@@ -14,6 +16,8 @@ Finiteness of a dense function-field extension transports to the residue
 fields at the source generic point.  In particular, the generic residue-field
 extension of a connected finite-etale cover is finite-dimensional.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -33,7 +37,7 @@ with generic-point residue fields. -/
 theorem finiteDimensional_genericResidueField_of_functionField
     [IsIntegral S] [IsIntegral T]
     (q : T ⟶ S) (hq : DenseRange q) :
-    letI : Algebra S.functionField T.functionField :=
+    let : Algebra S.functionField T.functionField :=
       q.functionFieldAlgebraOfDenseRange hq
     FiniteDimensional S.functionField T.functionField →
     letI : Algebra (S.residueField (q (genericPoint T)))
@@ -41,9 +45,7 @@ theorem finiteDimensional_genericResidueField_of_functionField
       (q.residueFieldMap (genericPoint T)).hom.toAlgebra
     FiniteDimensional (S.residueField (q (genericPoint T)))
       (T.residueField (genericPoint T)) := by
-  let : Algebra S.functionField T.functionField :=
-    q.functionFieldAlgebraOfDenseRange hq
-  intro hfinite
+  intro sharedOwner1 hfinite
   let : FiniteDimensional S.functionField T.functionField := hfinite
   let : Algebra (S.residueField (q (genericPoint T)))
       (T.residueField (genericPoint T)) :=
@@ -75,15 +77,14 @@ theorem finiteDimensional_genericResidueField_of_finiteEtale_isConnected
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     letI : Algebra (X.residueField (Y.hom (genericPoint Y.left)))
         (Y.left.residueField (genericPoint Y.left)) :=
       (Y.hom.residueFieldMap (genericPoint Y.left)).hom.toAlgebra
     FiniteDimensional (X.residueField (Y.hom (genericPoint Y.left)))
       (Y.left.residueField (genericPoint Y.left)) := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let hY : DenseRange Y.hom :=
     finiteEtale_hom_denseRange_of_isConnected Y
   let : Algebra X.functionField Y.left.functionField :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.SelectedRootBaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.LocalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.SelectedRootBaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.LocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
 
 /-!
 # Selected height-one branch of the exact Galois full cover
@@ -15,6 +17,8 @@ This module supplies the finite faithful map from the selected simple root
 cover to the full cover and applies the active-root localized-normalization
 theorem for one fixed generic tensor component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

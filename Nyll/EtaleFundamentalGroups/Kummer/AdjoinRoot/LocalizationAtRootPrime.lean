@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.HigherRadicalActualFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.Basic
 
 /-!
 # Localizing a Kummer cover at its root divisor
@@ -18,6 +20,8 @@ the root.  The latter root ring is already local, so no further localization
 is present.  This is the local comparison used when a full height-two root
 cover is inspected at its selected boundary divisor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -288,37 +292,24 @@ noncomputable def adjoinRootLocalizationAtRootPrimeAlgEquiv
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
     let V := Localization.AtPrime P
     let Rn := AdjoinRoot (X ^ N - C (algebraMap R V p))
-    letI : Algebra D Rn :=
+    let : Algebra D Rn :=
       adjoinRootLocalizationBaseChangeAlgebra R N p hp
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-    letI : Algebra V (Localization.AtPrime q) :=
+    let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let : Algebra V (Localization.AtPrime q) :=
       Localization.AtPrime.algebraOfLiesOver P q
     Rn ≃ₐ[V] Localization.AtPrime q := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
-  let D := AdjoinRoot (X ^ N - C p)
-  let q := Ideal.span
-    ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-  letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  let V := Localization.AtPrime P
-  let Rn := AdjoinRoot (X ^ N - C (algebraMap R V p))
-  letI : Algebra D Rn :=
-    adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+  intro P D q sharedOwner6 sharedOwner7 V Rn sharedOwner8 sharedOwner9
   letI : IsLocalization q.primeCompl Rn :=
     isLocalization_adjoinRootLocalizationAtRootPrime hN hp
   let Dq := Localization.AtPrime q
   let eRoot : Rn ≃ₐ[D] Dq :=
     IsLocalization.algEquiv q.primeCompl Rn Dq
-  letI : Algebra V Dq :=
-    Localization.AtPrime.algebraOfLiesOver P q
+  intro sharedOwner10
   have hcommutes : eRoot.toRingHom.comp (algebraMap V Rn) =
       algebraMap V Dq := by
     apply IsLocalization.ringHom_ext P.primeCompl
@@ -345,40 +336,28 @@ theorem adjoinRootLocalizationAtRootPrimeAlgEquiv_root
     let D := AdjoinRoot (X ^ N - C p)
     let q := Ideal.span
       ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-    letI : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-    letI : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
+    let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
+    let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
       (prime_adjoinRoot_root_of_prime hN hp)
     let V := Localization.AtPrime P
     let Rn := AdjoinRoot (X ^ N - C (algebraMap R V p))
-    letI : Algebra D Rn :=
+    let : Algebra D Rn :=
       adjoinRootLocalizationBaseChangeAlgebra R N p hp
-    letI : q.LiesOver P := span_root_liesOver_span_radicand hN hp
-    letI : Algebra V (Localization.AtPrime q) :=
+    let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+    let : Algebra V (Localization.AtPrime q) :=
       Localization.AtPrime.algebraOfLiesOver P q
     adjoinRootLocalizationAtRootPrimeAlgEquiv hN hp
         (AdjoinRoot.root (X ^ N - C (algebraMap R V p))) =
       algebraMap D (Localization.AtPrime q)
         (AdjoinRoot.root (X ^ N - C p)) := by
-  dsimp only
-  let P := Ideal.span ({p} : Set R)
-  let D := AdjoinRoot (X ^ N - C p)
-  let q := Ideal.span
-    ({AdjoinRoot.root (X ^ N - C p)} : Set D)
-  let : P.IsPrime := Ideal.isPrime_span_singleton_of_prime hp
-  let : q.IsPrime := Ideal.isPrime_span_singleton_of_prime
-    (prime_adjoinRoot_root_of_prime hN hp)
-  let V := Localization.AtPrime P
-  let Rn := AdjoinRoot (X ^ N - C (algebraMap R V p))
-  let : Algebra D Rn :=
-    adjoinRootLocalizationBaseChangeAlgebra R N p hp
-  let : q.LiesOver P := span_root_liesOver_span_radicand hN hp
+  intro P D q sharedOwner1 sharedOwner2 V Rn sharedOwner3 sharedOwner4 sharedOwner5
   let : IsLocalization q.primeCompl Rn :=
     isLocalization_adjoinRootLocalizationAtRootPrime hN hp
   let Dq := Localization.AtPrime q
   let eRoot : Rn ≃ₐ[D] Dq :=
     IsLocalization.algEquiv q.primeCompl Rn Dq
   let : Algebra V Dq :=
-    Localization.AtPrime.algebraOfLiesOver P q
+    sharedOwner5
   change eRoot (AdjoinRoot.root (X ^ N - C (algebraMap R V p))) =
     algebraMap D Dq (AdjoinRoot.root (X ^ N - C p))
   rw [← adjoinRootLocalizationBaseChangeAlgebra_root N p hp]

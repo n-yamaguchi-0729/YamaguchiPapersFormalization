@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicPowerWitness
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogLinearity
-import Nyll.ValuedFieldTheory.LocalField.Padic.PrimitiveRootTeichmullerCharacter
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicPowerWitness
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogLinearity
+public import Nyll.ValuedFieldTheory.LocalField.Padic.PrimitiveRootTeichmullerCharacter
 
 /-!
 # Logarithmic action differences from trivial mod-p cohomology
@@ -18,6 +20,8 @@ specified primitive-root character, so a p-adic power corrects that
 logarithm to the actual character difference. No p-primary degree
 assumption is made on the lower extension.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

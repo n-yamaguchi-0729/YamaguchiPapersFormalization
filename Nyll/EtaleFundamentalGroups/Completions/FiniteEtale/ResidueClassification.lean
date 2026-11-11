@@ -4,8 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.LocalRing.Etale
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Mathlib.RingTheory.LocalRing.Etale
+public import Mathlib.RingTheory.IsAdjoinRoot
+public import Mathlib.RingTheory.Smooth.Flat
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Finite étale local algebras over a complete local ring
@@ -16,6 +20,8 @@ isomorphic residue extensions are isomorphic over the base.  This is the
 finite-residue replacement for imposing a separably closed residue field in
 the strict-Henselian splitting argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

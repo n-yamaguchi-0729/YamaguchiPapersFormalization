@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFSeparableClosedTensor
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableTensorField
-import Mathlib.Algebra.Algebra.Equiv
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFSeparableClosedTensor
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableTensorField
+public import Mathlib.Algebra.Algebra.Equiv
 
 /-!
 # Comparing separable closures across Henselian completion
@@ -15,6 +17,8 @@ The actual tensor map is injective because its source is a field, and
 surjective by descent of finite separable generators. In particular it
 applies to the usual lift between the two separable closures.
 -/
+
+@[expose] public section
 
 noncomputable section
 

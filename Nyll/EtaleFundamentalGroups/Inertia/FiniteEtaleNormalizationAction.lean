@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.SchemeNormalizationFunctionField
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleFunctionFieldAction
-import Mathlib.Algebra.Algebra.Tower
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.SchemeNormalizationFunctionField
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleFunctionFieldAction
+public import Mathlib.Algebra.Algebra.Tower
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # The canonical Galois action on actual normalization points
@@ -16,6 +19,8 @@ field constructed from its structure morphism factors through the canonical
 function-field embedding of the cover. Consequently the normalization-point
 action is the restriction of the canonical function-field Galois action.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -72,21 +77,21 @@ theorem finiteEtaleMorphismFunctionFieldAlgEquiv_eq
     let : IsScalarTower R X.functionField Y.left.functionField :=
       finiteEtaleMorphism_functionField_isScalarTower R g Y
     affineMorphismFunctionFieldAlgEquiv R ((show Y.left ⟶ X from Y.hom) ≫ g)
-        (show Y.left ≅ Y.left from (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma)
+        (show Y.left ≅ Y.left from (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma.asIso)
         (by
-          change sigma.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
-          have hw : sigma.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
-              (show Y.left ⟶ X from Y.hom) := sigma.hom.w
+          change sigma.asIso.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
+          have hw : sigma.asIso.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
+              (show Y.left ⟶ X from Y.hom) := sigma.asIso.hom.w
           rw [← Category.assoc, hw]) =
       (finiteEtaleAutFunctionFieldAlgEquiv Y sigma).restrictScalars R := by
   intro hIntegral hAffine hKL hRK hRL hTower
   have h := (affineMorphismFunctionFieldAlgEquiv_eq_functionFieldMap R
     ((show Y.left ⟶ X from Y.hom) ≫ g)
-    (show Y.left ≅ Y.left from (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma)
+    (show Y.left ≅ Y.left from (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma.asIso)
     (by
-          change sigma.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
-          have hw : sigma.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
-              (show Y.left ⟶ X from Y.hom) := sigma.hom.w
+          change sigma.asIso.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
+          have hw : sigma.asIso.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
+              (show Y.left ⟶ X from Y.hom) := sigma.asIso.hom.w
           rw [← Category.assoc, hw])).trans
       (finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap Y sigma).symm
   apply AlgEquiv.ext
@@ -121,21 +126,21 @@ theorem exists_finiteEtaleMorphism_point_inertia_iff
         ∀ sigma : Aut Y,
           finiteEtaleAutFunctionFieldAlgEquiv Y sigma ∈
               (RingHom.ker φ).inertia Gal(Y.left.functionField/X.functionField) ↔
-            z ≫ normalizationEndomorphism ((show Y.left ⟶ X from Y.hom) ≫ g) sigma.hom.left
+            z ≫ normalizationEndomorphism ((show Y.left ⟶ X from Y.hom) ≫ g) sigma.asIso.hom.left
               (by
-                have hw : sigma.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
-                    (show Y.left ⟶ X from Y.hom) := sigma.hom.w
+                have hw : sigma.asIso.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
+                    (show Y.left ⟶ X from Y.hom) := sigma.asIso.hom.w
                 rw [← Category.assoc, hw]) = z := by
   intro hIntegral hAffine hNormal hKL hRK hRL hTower hAction
   obtain ⟨φ, hφ, hfix⟩ :=
     exists_affineMorphismFunctionField_point_inertia_iff R ((show Y.left ⟶ X from Y.hom) ≫ g) z
   refine ⟨φ, hφ, ?_⟩
   intro sigma
-  let e : Y.left ≅ Y.left := (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma
+  let e : Y.left ≅ Y.left := (FiniteEtale.forget X ⋙ Over.forget X).mapIso sigma.asIso
   have he : e.hom ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = (show Y.left ⟶ X from Y.hom) ≫ g := by
-    change sigma.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
-    have hw : sigma.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
-        (show Y.left ⟶ X from Y.hom) := sigma.hom.w
+    change sigma.asIso.hom.left ≫ ((show Y.left ⟶ X from Y.hom) ≫ g) = _
+    have hw : sigma.asIso.hom.left ≫ (show Y.left ⟶ X from Y.hom) =
+        (show Y.left ⟶ X from Y.hom) := sigma.asIso.hom.w
     rw [← Category.assoc, hw]
   have h := hfix e he
   rw [finiteEtaleMorphismFunctionFieldAlgEquiv_eq R g Y sigma] at h

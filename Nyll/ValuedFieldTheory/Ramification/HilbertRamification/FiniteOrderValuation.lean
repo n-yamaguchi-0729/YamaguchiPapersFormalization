@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.OrderOfElement
-import Mathlib.Order.Iterate
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+module
+
+public import Mathlib.GroupTheory.OrderOfElement
+public import Mathlib.Order.Iterate
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
 
 /-!
 # Finite-order decomposition and valuation values
@@ -14,6 +16,8 @@ import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
 A finite-order decomposition element fixes the original valuation's values.
 Consequently every finite inertia element lies in the value-trivial subgroup.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

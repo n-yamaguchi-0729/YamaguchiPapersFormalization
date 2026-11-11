@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NatCastValuation
-import Mathlib.Algebra.Order.GroupWithZero.Canonical
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NatCastValuation
+public import Mathlib.Algebra.Order.GroupWithZero.Canonical
 
 /-!
 # The value of the residue characteristic
@@ -14,6 +16,8 @@ For an integer-valued valuation in mixed characteristic, the positive exponent
 of the residue prime gives the denominator estimates for logarithm and
 exponential series. Neither completeness nor residue-field finiteness is needed.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

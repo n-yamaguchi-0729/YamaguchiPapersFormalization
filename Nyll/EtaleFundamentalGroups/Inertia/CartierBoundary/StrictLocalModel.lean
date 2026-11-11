@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
-import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
-import Mathlib.AlgebraicGeometry.ResidueField
+module
+
+public import Nyll.SchemeTheory.Divisors.CartierBoundaryComponents
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.CartierComponentStalkDVR
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.CartierGenericPoint
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkHenselian
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkResidue
+public import Mathlib.AlgebraicGeometry.ResidueField
 
 /-!
 # The canonical strict local model at a boundary component
@@ -21,14 +23,18 @@ All strict-local maps use the manuscript's original component point and
 its original residue-field algebraic closure.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open EtaleFundamentalGroups EtaleFundamentalGroups.StrictHenselian
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- The original component point has a domain stalk. -/
 theorem isDomain_stalk_componentPoint

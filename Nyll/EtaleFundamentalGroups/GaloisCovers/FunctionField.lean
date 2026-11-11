@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
 
 /-!
 # Function fields of finite-etale Galois covers
@@ -14,6 +17,8 @@ This file compares the generic geometric fiber of a connected finite-etale
 cover with embeddings of its function field.  It then transports categorical
 Galoisness to the resulting finite separable field extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -109,7 +114,8 @@ private theorem genericPointMorphism_eq_of_stalkMap_eq
   exact stalkMap_eq_of_congr_maps Z hq₁ hq₂
     (Scheme.stalkClosedPointTo q₁) (Scheme.stalkClosedPointTo q₂) hmaps
 
-private noncomputable def finiteEtaleGenericHom
+/-- The underlying scheme morphism of a point in a generic finite-etale fiber. -/
+noncomputable def finiteEtaleGenericHom
     {X : Scheme.{u}} [IsIntegral X]
     (Y : FiniteEtale X)
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
@@ -156,12 +162,11 @@ private theorem finiteEtale_genericPoint_of_over_genericExtension
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     finiteEtaleGenericHom Y g (IsLocalRing.closedPoint Ω) =
       genericPoint Y.left := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let f : Y.left ⟶ X := Y.hom
   let : IsFiniteEtale f := Y.2
   have hg :
@@ -197,13 +202,12 @@ noncomputable def finiteEtaleGenericHomFunctionFieldMap
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     Y.left.functionField →+* Ω := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedDefinitionOwner1
   exact ((Y.left.presheaf.stalkCongr (.of_eq
-      (finiteEtale_genericPoint_of_over_genericExtension Y g).symm)).hom ≫
+      (by exact (finiteEtale_genericPoint_of_over_genericExtension Y g).symm))).hom ≫
     Scheme.stalkClosedPointTo (finiteEtaleGenericHom Y g)).hom
 
 private theorem stalkClosedPointTo_genericExtensionMorphism
@@ -243,17 +247,14 @@ private theorem finiteEtaleGenericHomFunctionFieldMap_comp
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     (finiteEtaleGenericHomFunctionFieldMap Y g).comp
         (algebraMap X.functionField Y.left.functionField) =
       algebraMap X.functionField Ω := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let f : Y.left ⟶ X := Y.hom
   let q : Spec (CommRingCat.of Ω) ⟶ Y.left := finiteEtaleGenericHom Y g
   have hq : q (IsLocalRing.closedPoint Ω) = genericPoint Y.left :=
@@ -278,19 +279,17 @@ noncomputable def finiteEtaleGenericHomFunctionFieldAlgHom
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Y.left.functionField →ₐ[X.functionField] Ω := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  letI : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   exact
     { __ := finiteEtaleGenericHomFunctionFieldMap Y g
-      commutes' := fun z ↦ DFunLike.congr_fun
-        (finiteEtaleGenericHomFunctionFieldMap_comp Y g) z }
+      commutes' := by
+        intro z
+        exact DFunLike.congr_fun (finiteEtaleGenericHomFunctionFieldMap_comp Y g) z }
 
 private theorem finiteEtaleGenericHomFunctionFieldAlgHom_injective
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
@@ -412,7 +411,7 @@ private theorem finiteEtaleGenericHomFunctionFieldAlgHom_surjective
   have hqg : finiteEtaleGenericHom Y g = q := by
     change baseIso.inv ≫ (baseIso.hom ≫ q) = q
     exact baseIso.inv_hom_id_assoc q
-  apply AlgHom.coe_ringHom_injective
+  apply AlgHom.toRingHom_injective
   change finiteEtaleGenericHomFunctionFieldMap Y g = a.toRingHom
   change genericPointFunctionFieldMap Y.left
       (finiteEtaleGenericHom Y g)
@@ -426,20 +425,17 @@ noncomputable def finiteEtaleGenericHomEquivFunctionFieldAlgHom
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     (Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) ≃
       (Y.left.functionField →ₐ[X.functionField] Ω) := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  letI : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   exact Equiv.ofBijective
     (finiteEtaleGenericHomFunctionFieldAlgHom (Ω := Ω) Y)
-    ⟨finiteEtaleGenericHomFunctionFieldAlgHom_injective Y,
-      finiteEtaleGenericHomFunctionFieldAlgHom_surjective Y⟩
+    (by exact ⟨finiteEtaleGenericHomFunctionFieldAlgHom_injective Y,
+      finiteEtaleGenericHomFunctionFieldAlgHom_surjective Y⟩)
 
 /-- An automorphism of a connected finite-etale cover acts on its function
 field over the function field of the base. -/
@@ -447,22 +443,19 @@ noncomputable def finiteEtaleAutFunctionFieldAlgEquiv
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] (σ : Aut Y) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Y.left.functionField ≃ₐ[X.functionField] Y.left.functionField := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  letI : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedDefinitionOwner1 sharedDefinitionOwner2
   letI : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   let e := finiteEtaleGenericHomEquivFunctionFieldAlgHom
     (Ω := Y.left.functionField) Y
   let g₀ := e.symm (AlgHom.id X.functionField Y.left.functionField)
   exact (algEquivEquivAlgHom X.functionField Y.left.functionField).symm
-    (e (g₀ ≫ σ.hom.hom))
+    (e (g₀ ≫ σ.asIso.hom.hom))
 
 private theorem finiteEtaleGenericHomFunctionFieldMap_comp_coverAut
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
@@ -473,18 +466,18 @@ private theorem finiteEtaleGenericHomFunctionFieldMap_comp_coverAut
     (σ : Aut Y) :
     let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
     let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
-    finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.hom.hom) =
+    finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.asIso.hom.hom) =
       (finiteEtaleGenericHomFunctionFieldMap Y g).comp
-        (σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange) := by
+        (σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange) := by
   intro hIntegral hAlgebra
   let q : Spec (.of Ω) ⟶ Y.left := finiteEtaleGenericHom Y g
   have hq : q (IsLocalRing.closedPoint Ω) = genericPoint Y.left :=
     finiteEtale_genericPoint_of_over_genericExtension Y g
   have h := genericPointFunctionFieldMap_comp
-    σ.hom.left σ.hom.left.surjective.denseRange q hq
+    σ.asIso.hom.left σ.asIso.hom.left.surjective.denseRange q hq
   change (finiteEtaleGenericHomFunctionFieldMap Y g).comp
-      (σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange) =
-    finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.hom.hom) at h
+      (σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange) =
+    finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.asIso.hom.hom) at h
   exact h.symm
 
 /-- The function-field automorphism defined using generic fibers is the
@@ -496,7 +489,7 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap
     let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
     let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
     (finiteEtaleAutFunctionFieldAlgEquiv Y σ).toRingHom =
-      σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange := by
+      σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange := by
   intro hIntegral hAlgebra
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
@@ -505,7 +498,7 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap
   let g₀ := e.symm (AlgHom.id X.functionField Y.left.functionField)
   have heg₀ : e g₀ = AlgHom.id X.functionField Y.left.functionField := e.apply_symm_apply _
   have hdef : (finiteEtaleAutFunctionFieldAlgEquiv Y σ).toAlgHom =
-      e (g₀ ≫ σ.hom.hom) :=
+      e (g₀ ≫ σ.asIso.hom.hom) :=
     (algEquivEquivAlgHom X.functionField Y.left.functionField).apply_symm_apply _
   have heg₀_apply (w : Y.left.functionField) :
       finiteEtaleGenericHomFunctionFieldMap Y g₀ w = w :=
@@ -513,13 +506,13 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap
   apply RingHom.ext
   intro z
   calc
-    finiteEtaleAutFunctionFieldAlgEquiv Y σ z = e (g₀ ≫ σ.hom.hom) z :=
+    finiteEtaleAutFunctionFieldAlgEquiv Y σ z = e (g₀ ≫ σ.asIso.hom.hom) z :=
       DFunLike.congr_fun hdef z
-    _ = finiteEtaleGenericHomFunctionFieldMap Y (g₀ ≫ σ.hom.hom) z := rfl
+    _ = finiteEtaleGenericHomFunctionFieldMap Y (g₀ ≫ σ.asIso.hom.hom) z := rfl
     _ = ((finiteEtaleGenericHomFunctionFieldMap Y g₀).comp
-        (σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange)) z :=
+        (σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange)) z :=
       DFunLike.congr_fun (finiteEtaleGenericHomFunctionFieldMap_comp_coverAut Y g₀ σ) z
-    _ = σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange z := heg₀_apply _
+    _ = σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange z := heg₀_apply _
 
 /-- Pulling a generic point through an automorphism of a connected
 finite-etale cover composes its function-field embedding with the
@@ -531,23 +524,22 @@ theorem finiteEtaleGenericHomFunctionFieldAlgHom_comp_aut
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma)
     (σ : Aut Y) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
-    (finiteEtaleGenericHomFunctionFieldAlgHom Y (g ≫ σ.hom.hom)) =
+    (finiteEtaleGenericHomFunctionFieldAlgHom Y (g ≫ σ.asIso.hom.hom)) =
       (finiteEtaleGenericHomFunctionFieldAlgHom Y g).comp
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ).toAlgHom := by
-  let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   have hmap := finiteEtaleGenericHomFunctionFieldMap_comp_coverAut Y g σ
   have hσ := finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap Y σ
   apply AlgHom.ext
   intro z
-  change finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.hom.hom) z = _
+  change finiteEtaleGenericHomFunctionFieldMap Y (g ≫ σ.asIso.hom.hom) z = _
   rw [hmap]
   change (finiteEtaleGenericHomFunctionFieldMap Y g)
-      (σ.hom.left.functionFieldMap σ.hom.left.surjective.denseRange z) =
+      (σ.asIso.hom.left.functionFieldMap σ.asIso.hom.left.surjective.denseRange z) =
     (finiteEtaleGenericHomFunctionFieldAlgHom Y g) (finiteEtaleAutFunctionFieldAlgEquiv Y σ z)
   rw [← DFunLike.congr_fun hσ z]
   rfl
@@ -558,17 +550,14 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_mul_rev
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] (σ τ : Aut Y) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     finiteEtaleAutFunctionFieldAlgEquiv Y (σ * τ) =
       finiteEtaleAutFunctionFieldAlgEquiv Y τ *
         finiteEtaleAutFunctionFieldAlgEquiv Y σ := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   let e := finiteEtaleGenericHomEquivFunctionFieldAlgHom
@@ -576,7 +565,7 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_mul_rev
   let g₀ := e.symm (AlgHom.id X.functionField Y.left.functionField)
   have hdef (ρ : Aut Y) :
       (finiteEtaleAutFunctionFieldAlgEquiv Y ρ).toAlgHom =
-        e (g₀ ≫ ρ.hom.hom) := by
+        e (g₀ ≫ ρ.asIso.hom.hom) := by
     exact (algEquivEquivAlgHom
       X.functionField Y.left.functionField).apply_symm_apply _
   apply AlgEquiv.ext
@@ -584,12 +573,12 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_mul_rev
   have hdefz := congrArg
     (fun a : Y.left.functionField →ₐ[X.functionField]
       Y.left.functionField ↦ a z) (hdef (σ * τ))
-  have hmorph : g₀ ≫ (σ * τ).hom.hom =
-      (g₀ ≫ τ.hom.hom) ≫ σ.hom.hom := by
-    rw [CategoryTheory.Aut.Aut_mul_def]
+  have hmorph : g₀ ≫ (σ * τ).asIso.hom.hom =
+      (g₀ ≫ τ.asIso.hom.hom) ≫ σ.asIso.hom.hom := by
+    rw [Aut.mul_asIso]
     exact (Category.assoc _ _ _).symm
   have hnat := finiteEtaleGenericHomFunctionFieldAlgHom_comp_aut
-    Y (g₀ ≫ τ.hom.hom) σ
+    Y (g₀ ≫ τ.asIso.hom.hom) σ
   have hnatz := congrArg
     (fun a : Y.left.functionField →ₐ[X.functionField]
       Y.left.functionField ↦ a z) hnat
@@ -599,12 +588,12 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_mul_rev
         a (finiteEtaleAutFunctionFieldAlgEquiv Y σ z)) (hdef τ)
   calc
     finiteEtaleAutFunctionFieldAlgEquiv Y (σ * τ) z =
-        e (g₀ ≫ (σ * τ).hom.hom) z := hdefz
-    _ = e ((g₀ ≫ τ.hom.hom) ≫ σ.hom.hom) z := by rw [hmorph]
+        e (g₀ ≫ (σ * τ).asIso.hom.hom) z := hdefz
+    _ = e ((g₀ ≫ τ.asIso.hom.hom) ≫ σ.asIso.hom.hom) z := by rw [hmorph]
     _ = ((finiteEtaleGenericHomFunctionFieldAlgHom Y
-          (g₀ ≫ τ.hom.hom)).comp
+          (g₀ ≫ τ.asIso.hom.hom)).comp
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ).toAlgHom) z := hnatz
-    _ = finiteEtaleGenericHomFunctionFieldAlgHom Y (g₀ ≫ τ.hom.hom)
+    _ = finiteEtaleGenericHomFunctionFieldAlgHom Y (g₀ ≫ τ.asIso.hom.hom)
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ z) := rfl
     _ = finiteEtaleAutFunctionFieldAlgEquiv Y τ
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ z) := hdefτz.symm
@@ -626,15 +615,15 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_injective
     (Ω := Y.left.functionField) Y
   let g₀ := e.symm (AlgHom.id X.functionField Y.left.functionField)
   intro σ τ hστ
-  have ha : e (g₀ ≫ σ.hom.hom) = e (g₀ ≫ τ.hom.hom) := by
+  have ha : e (g₀ ≫ σ.asIso.hom.hom) = e (g₀ ≫ τ.asIso.hom.hom) := by
     change
       (algEquivEquivAlgHom X.functionField Y.left.functionField).symm
-          (e (g₀ ≫ σ.hom.hom)) =
+          (e (g₀ ≫ σ.asIso.hom.hom)) =
         (algEquivEquivAlgHom X.functionField Y.left.functionField).symm
-          (e (g₀ ≫ τ.hom.hom)) at hστ
+          (e (g₀ ≫ τ.asIso.hom.hom)) at hστ
     exact (algEquivEquivAlgHom
       X.functionField Y.left.functionField).symm.injective hστ
-  have hg : g₀ ≫ σ.hom.hom = g₀ ≫ τ.hom.hom := e.injective ha
+  have hg : g₀ ≫ σ.asIso.hom.hom = g₀ ≫ τ.asIso.hom.hom := e.injective ha
   let q₀ : Spec (.of Y.left.functionField) ⟶ Y.left :=
     finiteEtaleGenericHom Y g₀
   have hq₀ : q₀ (IsLocalRing.closedPoint Y.left.functionField) =
@@ -650,27 +639,28 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_injective
     apply closure_mono
     rintro _ rfl
     exact ⟨IsLocalRing.closedPoint Y.left.functionField, hq₀⟩
-  have hgleft : g₀.left ≫ σ.hom.left = g₀.left ≫ τ.hom.left := by
+  have hgleft : g₀.left ≫ σ.asIso.hom.left = g₀.left ≫ τ.asIso.hom.left := by
     exact congrArg (fun r ↦ r.left) hg
-  have hqauto : q₀ ≫ σ.hom.left = q₀ ≫ τ.hom.left := by
+  have hqauto : q₀ ≫ σ.asIso.hom.left = q₀ ≫ τ.asIso.hom.left := by
     change
       ((eqToIso (Over.mk_left
           (X.genericExtensionMorphism Y.left.functionField))).inv ≫ g₀.left) ≫
-          σ.hom.left =
+          σ.asIso.hom.left =
         ((eqToIso (Over.mk_left
           (X.genericExtensionMorphism Y.left.functionField))).inv ≫ g₀.left) ≫
-          τ.hom.left
+          τ.asIso.hom.left
     simpa only [Category.assoc] using
       congrArg (fun r ↦
         (eqToIso (Over.mk_left
           (X.genericExtensionMorphism Y.left.functionField))).inv ≫ r) hgleft
   let f : Y.left ⟶ X := Y.hom
   let : IsFiniteEtale f := Y.2
-  have hover : σ.hom.left ≫ f = τ.hom.left ≫ f := by
-    exact σ.hom.w.trans τ.hom.w.symm
-  have hs : σ.hom.left = τ.hom.left :=
+  have hover : σ.asIso.hom.left ≫ f = τ.asIso.hom.left ≫ f := by
+    exact σ.asIso.hom.w.trans τ.asIso.hom.w.symm
+  have hs : σ.asIso.hom.left = τ.asIso.hom.left :=
     ext_of_isDominant_of_isSeparated f hover q₀ hqauto
   apply Aut.ext
+  apply Iso.ext
   apply MorphismProperty.Over.Hom.ext
   exact hs
 
@@ -680,17 +670,13 @@ theorem isGalois_functionField_of_isGalois_finiteEtale
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) (hY : IsGalois Y) :
-    letI : IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : IsGalois Y := hY
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     IsGalois X.functionField Y.left.functionField := by
-  let : IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2 sharedOwner3
   let : FiniteDimensional X.functionField Y.left.functionField :=
     finiteDimensional_functionField_of_finiteEtale_isConnected Y
   let : Algebra.IsSeparable X.functionField Y.left.functionField :=
@@ -743,13 +729,12 @@ theorem finiteEtaleGenericHomFunctionFieldAlgHom_spec
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+    let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+    let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
     Spec.map (CommRingCat.ofHom (finiteEtaleGenericHomFunctionFieldAlgHom Y g).toRingHom) ≫
         Y.left.fromSpecStalk (genericPoint Y.left) =
       (eqToIso (Over.mk_left (X.genericExtensionMorphism Ω))).inv ≫ g.left := by
-  let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let j := finiteEtaleGenericHomFunctionFieldAlgHom Y g
   let : Algebra Y.left.functionField Ω := j.toRingHom.toAlgebra
   change Y.left.genericExtensionMorphism Ω = finiteEtaleGenericHom Y g
@@ -768,13 +753,12 @@ theorem finiteEtaleGenericHomFunctionFieldAlgHom_spec_comp
     (Y : FiniteEtale X) [IsConnected Y]
     {Ω : Type u} [Field Ω] [Algebra X.functionField Ω]
     (g : Over.mk (X.genericExtensionMorphism Ω) ⟶ Y.toComma) :
-    letI : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+    let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
+    let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
     (Spec.map (CommRingCat.ofHom (finiteEtaleGenericHomFunctionFieldAlgHom Y g).toRingHom) ≫
         Y.left.fromSpecStalk (genericPoint Y.left)) ≫ Y.hom =
       X.genericExtensionMorphism Ω := by
-  let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField := finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   exact (congrArg (fun q : Spec (.of Ω) ⟶ Y.left => q ≫ Y.hom)
     (finiteEtaleGenericHomFunctionFieldAlgHom_spec Y g)).trans
       (finiteEtaleGenericHom_comp Y g)

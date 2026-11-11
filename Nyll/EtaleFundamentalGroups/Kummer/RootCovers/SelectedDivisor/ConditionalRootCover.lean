@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Conditional
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.RootCover
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Conditional
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.SelectedDivisor.RootCover
 
 /-!
 # A selected divisor under a height-two conditional root cover
@@ -19,6 +21,8 @@ non-selected branch passes through the point, every stage has exponent one;
 the resulting tower is identified with the base before transporting the same
 geometry.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,7 @@ def iteratedRadicalTailOneAlgEquiv
       let aInit : Fin (r + 1) → R := Fin.init a
       let T : CommAlgCat R := iteratedRadical R (r + 1) nInit aInit
       have hlast : n (Fin.last (r + 1)) = 1 := by
-        simpa using htail (Fin.last r)
+        exact htail (Fin.last r)
       have htailInit : ∀ i : Fin r, nInit i.succ = 1 := by
         intro i
         change n i.succ.castSucc = 1
@@ -55,7 +59,9 @@ def iteratedRadicalTailOneAlgEquiv
         rfl
       let c : T := algebraMap R T (a (Fin.last (r + 1)))
       let f : T[X] := X ^ n (Fin.last (r + 1)) - C c
-      have hf : f = X ^ 1 - C c := by simp [f, hlast]
+      have hf : f = X ^ 1 - C c := by
+        change X ^ n (Fin.last (r + 1)) - C c = X ^ 1 - C c
+        rw [hlast]
       let eT : AdjoinRoot f ≃ₐ[T] T :=
         (AdjoinRoot.algEquivOfEq T f (X ^ 1 - C c) hf).trans
           (adjoinRootOneAlgEquiv c)
@@ -80,7 +86,8 @@ def iteratedRadicalAllOneAlgEquiv
         let c : R := algebraMap R R (a 0)
         let f : R[X] := X ^ n 0 - C c
         have hf : f = X ^ 1 - C (a 0) := by
-          simp [f, c, hall 0]
+          change X ^ n 0 - C (a 0) = X ^ 1 - C (a 0)
+          rw [hall 0]
         change AdjoinRoot f ≃ₐ[R] R
         exact (AdjoinRoot.algEquivOfEq R f (X ^ 1 - C (a 0)) hf).trans
           (adjoinRootOneAlgEquiv (a 0))
@@ -106,14 +113,18 @@ private theorem selectedDivisorGeometry_of_algEquiv
   let IC : Ideal C := Ideal.span ({algebraMap R C y} : Set C)
   let IB : Ideal B := Ideal.span ({algebraMap R B y} : Set B)
   have hIC : IC = IB.map (e : B →+* C) := by
-    simp [IC, IB, Ideal.map_span]
+    change Ideal.span ({algebraMap R C y} : Set C) =
+      (Ideal.span ({algebraMap R B y} : Set B)).map (e : B →+* C)
+    rw [Ideal.map_span, Set.image_singleton]
+    have he : (e : B →+* C) (algebraMap R B y) = algebraMap R C y := e.commutes y
+    exact congrArg (fun z : C => Ideal.span ({z} : Set C)) he.symm
   let eQ : (B ⧸ IB) ≃+* (C ⧸ IC) :=
     Ideal.quotientEquiv IB IC e.toRingEquiv hIC
   have hdomainCQ' : IsDomain (C ⧸ IC) := by
-    simpa [IC] using hdomainCQ
+    exact hdomainCQ
   let : IsDomain (C ⧸ IC) := hdomainCQ'
   have hregCQ' : IsRegularLocalRing (C ⧸ IC) := by
-    simpa [IC] using hregCQ
+    exact hregCQ
   let : IsRegularLocalRing (C ⧸ IC) := hregCQ'
   have hregB : IsRegularLocalRing B :=
     IsRegularLocalRing.of_ringEquiv e.symm.toRingEquiv
@@ -132,7 +143,7 @@ private theorem selectedDivisorGeometry_of_algEquiv
     exact hIBprime
   have hregBQ : IsRegularLocalRing (B ⧸ IB) :=
     IsRegularLocalRing.of_ringEquiv eQ.symm
-  simpa [IB] using
+  exact
     (show IsRegularLocalRing B ∧ IsDomain B ∧
         Prime (algebraMap R B y) ∧ IsDomain (B ⧸ IB) ∧
         IsRegularLocalRing (B ⧸ IB) from
@@ -165,7 +176,7 @@ theorem allOneRootCover_selectedDivisor_geometry
     prime_of_mem_regularSystem hreg hgen List.mem_cons_self
   have hyQuotient :=
     quotient_geometry_of_mem_regularSystem hreg hgen (p := y) List.mem_cons_self
-  simpa using
+  exact
     (show IsRegularLocalRing R ∧ IsDomain R ∧ Prime y ∧
         IsDomain (R ⧸ Ideal.span ({y} : Set R)) ∧
         IsRegularLocalRing (R ⧸ Ideal.span ({y} : Set R)) from

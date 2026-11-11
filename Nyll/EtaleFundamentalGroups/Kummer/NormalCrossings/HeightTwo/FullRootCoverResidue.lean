@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.PrimeOverRootCover
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.PrimeParameterLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.LocalGeometry.HeightOne.PrimeOverRootCover
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.PrimeParameterLocalization
 
 /-!
 # Residue characteristic on the height-two full root cover
@@ -21,6 +23,8 @@ The same quotient-injection mechanism transports characteristic zero further
 to the closed quotient of a full-cover prime and to the closed quotient of
 its height-one localization.  No residue comparison is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

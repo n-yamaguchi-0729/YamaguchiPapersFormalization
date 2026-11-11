@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableKummerH1
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.RootCharacters
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
 
 /-!
 # Constant-coefficient Kummer naturality in arbitrary characteristic
@@ -17,6 +20,8 @@ The chosen lift restricts to the separable closure and carries each radical
 root to a root of the transformed unit. If the base automorphism fixes the
 roots of unity, the actual absolute Kummer character has constant coefficients.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

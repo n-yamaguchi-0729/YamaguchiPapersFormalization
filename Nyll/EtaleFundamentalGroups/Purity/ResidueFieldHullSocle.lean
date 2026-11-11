@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Mathlib.Algebra.Group.Units.Defs
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.Range
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.Quotient.Basic
-import Mathlib.LinearAlgebra.Span.Basic
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Mathlib.Algebra.Group.Units.Defs
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.Range
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Quotient.Basic
+public import Mathlib.LinearAlgebra.Span.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-!
 # The socle of an essential extension of the residue field
@@ -28,6 +30,8 @@ field into its essential extension form a copy of the residue field.
 The arguments use the existing `R`-module structures throughout.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Purity
@@ -37,7 +41,8 @@ universe u v
 variable {R : Type u} [CommRing R]
 variable {E : Type v} [AddCommGroup E] [Module R E]
 
-private theorem quotient_linearMap_range_le_torsionBySet
+/-- A map out of a quotient module has image annihilated by the quotient ideal. -/
+theorem quotient_linearMap_range_le_torsionBySet
     (I : Ideal R) (f : (R ⧸ I) →ₗ[R] E) :
     LinearMap.range f ≤ Submodule.torsionBySet R E I := by
   intro z hz

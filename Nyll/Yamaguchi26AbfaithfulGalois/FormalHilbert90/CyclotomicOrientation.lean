@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
-import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicOpenCocycleLifting
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.FiniteH1Surjectivity
+public import Nyll.GaloisCohomology.Kummer.Concrete.CyclotomicOpenCocycleLifting
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Cyclotomic orientations satisfy formal Hilbert 90
@@ -14,6 +16,8 @@ import Mathlib.Topology.Instances.ZMod
 The orientation is the actual cyclotomic character on the field automorphisms.
 Hilbert 90 supplies the cohomology reduction on every open subgroup.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u v

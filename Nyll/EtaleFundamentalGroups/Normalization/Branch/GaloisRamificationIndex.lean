@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.RamificationInertia.Galois
-import Nyll.EtaleFundamentalGroups.Normalization.Branch.RamificationProduct
+module
+
+public import Mathlib.NumberTheory.RamificationInertia.Galois
+public import Nyll.EtaleFundamentalGroups.Normalization.Branch.RamificationProduct
 
 /-!
 # The common branch ramification index in a Galois normalization
@@ -15,6 +17,8 @@ height-one branch have the same ramification index.  This is the exponent
 needed by the root cover: unlike the product of all branch indices, it does
 not introduce a residual radical after selecting one actual branch factor.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -79,11 +83,11 @@ theorem localNormalizationPrime_ramificationIdx_eq_galoisBranchIndex
     [FiniteDimensional K L] [IsGalois K L]
     (p : Ideal A) [p.IsPrime] (hp : p.height = 1) :
     let V := Localization.AtPrime p
-    letI : Algebra V K :=
+    let : Algebra V K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) p
-    letI : Algebra V L :=
+    let : Algebra V L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
-    letI : IsScalarTower V K L :=
+    let : IsScalarTower V K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) p
     let S := integralClosure V L
@@ -91,15 +95,7 @@ theorem localNormalizationPrime_ramificationIdx_eq_galoisBranchIndex
       q.1.ramificationIdx V =
         normalizationGaloisBranchRamificationIndex
           (K := K) (L := L) p := by
-  dsimp only
-  let V := Localization.AtPrime p
-  let : Algebra V K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) p
-  let : Algebra V L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) p
-  let : IsScalarTower V K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) p
+  intro V sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4
   let : IsFractionRing V K :=
     localizationAtPrimeToFractionField_isFractionRing (K := K) p
   let : IsDiscreteValuationRing V :=

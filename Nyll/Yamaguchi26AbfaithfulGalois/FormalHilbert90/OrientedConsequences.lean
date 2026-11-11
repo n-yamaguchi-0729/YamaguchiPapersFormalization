@@ -4,9 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.PadicCharacters
+public import Mathlib.Algebra.Group.Commute.Hom
+public import Mathlib.Algebra.Group.Monoid
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-! # Torsion and fixed classes under relative formal Hilbert 90 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 
@@ -22,15 +29,14 @@ theorem primaryAbelianization_isMulTorsionFree
     (hLift : RelativeFormalHilbert90 D θ) :
     IsMulTorsionFree (PrimaryAbelianization ℓ D) := by
   constructor
-  intro n hn x y hxy
+  intro n hn x y hcomm hxy
   by_contra hne
   have hne' : x * y⁻¹ ≠ 1 := fun h => hne (mul_inv_eq_one.mp h)
   obtain ⟨U, hDU, c, hc⟩ := exists_padicCocycle_detecting_primary
     D hDclosed θ hDθ hLift (x * y⁻¹) hne'
   let f := c.primaryCharacter D hDclosed hDθ hDU
   have heq : f x = f y := by
-    apply IsMulTorsionFree.pow_left_injective hn
-    change (f x) ^ n = (f y) ^ n
+    apply eq_of_pow_eq_pow_of_commute hn (hcomm.map f)
     rw [← map_pow, ← map_pow]
     exact congrArg f hxy
   apply hc

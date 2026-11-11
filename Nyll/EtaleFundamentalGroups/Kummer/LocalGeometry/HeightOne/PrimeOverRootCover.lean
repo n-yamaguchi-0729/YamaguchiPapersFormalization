@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverHeightOne
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.FullRootCoverHeightOne
 
 /-!
 # Height-one primes over a one-root cover
@@ -19,6 +21,8 @@ The final theorem feeds the first sharpening into the height-two
 strict-normal-crossings full-cover endpoint: its selected-contraction branch
 is upgraded to an equality of primes on the full cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

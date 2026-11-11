@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
-import Nyll.SchemeTheory.Normalization.CompositumEmbedding
+module
+
+public import Nyll.EtaleFundamentalGroups.GenericTensor.FieldComponent.Tower
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.IntegralClosure.Product
+public import Nyll.SchemeTheory.Normalization.CompositumEmbedding
 
 /-!
 # The normalization map on an intermediate tensor component
@@ -15,6 +17,8 @@ A selected component of `F' \otimes[K] L` canonically contracts to a
 component of `F \otimes[K] L`.  This file constructs the induced field map
 over the smaller integral base and the resulting map between normalizations.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -44,28 +48,17 @@ noncomputable def
     (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
     let M := GenericTensorFieldComponent m
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-    letI : Algebra A M :=
+    let : Algebra A M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) m
     M₀ →ₐ[A] M := by
-  dsimp only
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let M := GenericTensorFieldComponent m
-  letI : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-  letI : Algebra A M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) m
+  intro n sharedOwner1 M₀ M sharedOwner2 sharedOwner3
   letI : Algebra F M :=
     genericTensorTowerFinalComponentAlgebra
       (K := K) (F := F) (F' := F') (L := L) m
@@ -94,22 +87,22 @@ noncomputable def
     (m : Ideal (F' ⊗[K] L)) [m.IsMaximal] :
     let n := genericTensorTowerIntermediateIdeal
       (K := K) (F := F) (F' := F') (L := L) m
-    letI : n.IsMaximal :=
+    let : n.IsMaximal :=
       genericTensorTowerIntermediateIdeal_isMaximal
         (K := K) (F := F) (F' := F') (L := L) m
     let M₀ := GenericTensorFieldComponent n
     let M := GenericTensorFieldComponent m
-    letI : Algebra A M₀ :=
+    let : Algebra A M₀ :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-    letI : Algebra A M :=
+    let : Algebra A M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-    letI : SMul A M :=
+    let : SMul A M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-    letI : Algebra B M :=
+    let : Algebra B M :=
       genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-    letI : SMul B M :=
+    let : SMul B M :=
       (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
-    letI : IsScalarTower A B M :=
+    let : IsScalarTower A B M :=
       IsScalarTower.of_algebraMap_eq fun x ↦ by
         change
           genericTensorFieldComponentLeft m (algebraMap A F' x) =
@@ -117,31 +110,8 @@ noncomputable def
               (algebraMap B F' (algebraMap A B x))
         rw [IsScalarTower.algebraMap_apply A B F']
     integralClosure A M₀ →ₐ[A] integralClosure B M := by
-  dsimp only
-  let n := genericTensorTowerIntermediateIdeal
-    (K := K) (F := F) (F' := F') (L := L) m
-  letI : n.IsMaximal :=
-    genericTensorTowerIntermediateIdeal_isMaximal
-      (K := K) (F := F) (F' := F') (L := L) m
-  let M₀ := GenericTensorFieldComponent n
-  let M := GenericTensorFieldComponent m
-  letI : Algebra A M₀ :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) n
-  letI : Algebra A M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := A) m
-  letI : SMul A M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := A) m).toSMul
-  letI : Algebra B M :=
-    genericTensorFieldComponentLeftScalarAlgebra (R := B) m
-  letI : SMul B M :=
-    (genericTensorFieldComponentLeftScalarAlgebra (R := B) m).toSMul
-  letI : IsScalarTower A B M :=
-    IsScalarTower.of_algebraMap_eq fun x ↦ by
-      change
-        genericTensorFieldComponentLeft m (algebraMap A F' x) =
-          genericTensorFieldComponentLeft m
-            (algebraMap B F' (algebraMap A B x))
-      rw [IsScalarTower.algebraMap_apply A B F']
+  intro n sharedOwner1 M₀ M sharedOwner2 sharedOwner3 sharedOwner4 sharedOwner5 sharedOwner6
+    sharedOwner7
   let f : M₀ →ₐ[A] M :=
     genericTensorTowerIntermediateComponentAlgHomRestrictBase
       (A := A) (K := K) (F := F) (F' := F') (L := L) m

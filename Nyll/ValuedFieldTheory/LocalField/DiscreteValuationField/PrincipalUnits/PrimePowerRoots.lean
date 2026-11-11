@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.Core
-import Nyll.ValuedFieldTheory.Valuation.PrincipalUnitRoots
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.Core
+public import Nyll.ValuedFieldTheory.Valuation.PrincipalUnitRoots
 
 /-!
 # Field roots of principal units remain in the principal-unit group
@@ -14,6 +16,8 @@ A field element whose `p`-power is a principal unit is represented by an
 actual element of the principal-unit subgroup, with the same power there.
 This is the root used when taking logarithms of a Kummer relation.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
 

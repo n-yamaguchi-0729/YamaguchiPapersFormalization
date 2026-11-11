@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
-import Mathlib.Algebra.CharP.Frobenius
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
+public import Mathlib.Algebra.CharP.Frobenius
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Artin–Schreier roots in a Henselian valuation ring
@@ -15,6 +17,8 @@ import Mathlib.Topology.Algebra.OpenSubgroup
 In characteristic p, the maximal ideal is contained in the image of
 x ↦ x^p - x. Consequently this additive image is open in the valued field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

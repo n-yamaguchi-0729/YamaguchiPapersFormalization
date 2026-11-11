@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactor
-import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactor
+public import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteQuotient
 
 /-!
 # Finite étale local algebras over complete local quotients
@@ -14,6 +16,8 @@ A finite étale local algebra over a quotient of a complete Noetherian local
 ring is the base change of a finite étale algebra over the original ring.
 The lift is the explicit monogenic lift of the residue-field extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

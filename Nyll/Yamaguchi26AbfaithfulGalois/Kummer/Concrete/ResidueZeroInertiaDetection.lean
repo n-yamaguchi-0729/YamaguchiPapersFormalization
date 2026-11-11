@@ -5,11 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairs
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaDetection
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.InertiaRootsOfUnity
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianPrimePowerRoots
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairs
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteInertiaDetection
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.InertiaRootsOfUnity
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianPrimePowerRoots
+public import Nyll.ProCGroups.ProP.ContinuousH1
 
 /-!
 # Kummer detection of inertia in residue characteristic zero
@@ -18,6 +21,8 @@ A nonidentity inertia element in a prime-degree Galois extension supplies a
 primitive root. Every primary root descends to the base, and finite residual
 primary roots make the existing roots-downstairs Kummer detection applicable.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

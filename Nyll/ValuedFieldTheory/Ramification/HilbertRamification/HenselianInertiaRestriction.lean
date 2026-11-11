@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueScalars
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
-import Nyll.ValuedFieldTheory.Valuation.UniqueRing
-import Mathlib.FieldTheory.Normal.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianDecomposition
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueScalars
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionReduction
+public import Nyll.ValuedFieldTheory.Valuation.UniqueRing
+public import Mathlib.FieldTheory.Normal.Basic
 
 /-!
 # Surjectivity of inertia restriction over a Henselian valuation ring
@@ -21,6 +23,8 @@ an automorphism over the base of the decomposition residue exact sequence.
 Lifting that residue action over the intermediate field supplies a correction
 which makes the original lift inertial without changing its restriction.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.Idempotents
+module
+
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.Idempotents
 
 /-!
 # Product decomposition from complete orthogonal idempotents
@@ -15,6 +17,8 @@ the product of the quotients `D / (1 - e i)`.  This file packages the bijectivit
 statement in `CompleteOrthogonalIdempotents.bijective_pi` as ring and algebra
 equivalences whose forward maps are definitionally the quotient maps.
 -/
+
+@[expose] public section
 
 namespace CompleteOrthogonalIdempotents
 

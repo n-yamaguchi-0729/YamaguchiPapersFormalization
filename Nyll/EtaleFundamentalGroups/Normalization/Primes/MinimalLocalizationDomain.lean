@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+module
+
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
 
 /-!
 # Killing a minimal prime in a domain localization
@@ -18,6 +20,8 @@ that localization has independently been shown to be a domain.
 The domain hypothesis is deliberately imposed only on the localization; it
 is not used to produce minimality of the original prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 

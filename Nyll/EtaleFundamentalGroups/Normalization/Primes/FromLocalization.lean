@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.Basic
 
 /-!
 # Recovering a normalization prime from its localization
@@ -18,6 +20,8 @@ This is the inverse direction to `localizedNormalizationPrime`, needed when
 all primes over the height-one DVR are first assembled locally and must then
 be tied back to the original normalization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -39,11 +43,11 @@ variable (P : Ideal A) [P.IsPrime]
 normalization after localizing `A` at `P`. -/
 noncomputable def normalizationPrimeFromLocalization
     :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     Ideal (integralClosure (Localization.AtPrime P) L) →
       Ideal (integralClosure A L) := by
-  letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedDefinitionOwner1
   letI : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   letI := integralClosureLocalizationAlgebra (L := L) P
@@ -53,11 +57,11 @@ omit [IsDomain A] in
 /-- Contraction of a localized normalization prime is prime. -/
 theorem normalizationPrimeFromLocalization_isPrime
     :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     ∀ q : Ideal (integralClosure (Localization.AtPrime P) L), q.IsPrime →
       (normalizationPrimeFromLocalization (K := K) (L := L) P q).IsPrime := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let := integralClosureLocalizationAlgebra (L := L) P
@@ -72,13 +76,13 @@ omit [IsDomain A] in
 contraction to the original normalization lies over `P`. -/
 theorem normalizationPrimeFromLocalization_liesOver
     :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     ∀ q : Ideal (integralClosure (Localization.AtPrime P) L),
       q.IsPrime →
       q.LiesOver (IsLocalRing.maximalIdeal (Localization.AtPrime P)) →
       (normalizationPrimeFromLocalization (K := K) (L := L) P q).LiesOver P := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let := integralClosureLocalizationAlgebra (L := L) P
@@ -111,12 +115,12 @@ omit [IsDomain A] in
 normalization prime. -/
 theorem localizedNormalizationPrime_normalizationPrimeFromLocalization
     :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     ∀ q : Ideal (integralClosure (Localization.AtPrime P) L), q.IsPrime →
       localizedNormalizationPrime (K := K) (L := L) P
           (normalizationPrimeFromLocalization (K := K) (L := L) P q) = q := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   let := integralClosureLocalizationAlgebra (L := L) P
@@ -139,14 +143,14 @@ omit [IsDomain A] in
 identifies its local ramification index with the global one. -/
 theorem normalizationPrimeFromLocalization_ramificationIdx
     :
-    letI := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+    let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
     letI := localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
     ∀ q : Ideal (integralClosure (Localization.AtPrime P) L),
       q.IsPrime →
       q.LiesOver (IsLocalRing.maximalIdeal (Localization.AtPrime P)) →
       q.ramificationIdx (Localization.AtPrime P) =
         (normalizationPrimeFromLocalization (K := K) (L := L) P q).ramificationIdx A := by
-  let := localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
+  intro sharedOwner1
   let : IsScalarTower A (Localization.AtPrime P) L :=
     localizationAtPrimeToExtension_isScalarTower (K := K) (L := L) P
   intro q hq hqOver

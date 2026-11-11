@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.NormalizationAffineBaseLocalization
-import Nyll.SchemeTheory.Affine.StalkLocalization
-import Mathlib.RingTheory.RingHom.Flat
-import Mathlib.RingTheory.Localization.Basic
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.NormalizationAffineBaseLocalization
+public import Nyll.SchemeTheory.Affine.StalkLocalization
+public import Mathlib.RingTheory.RingHom.Flat
+public import Mathlib.RingTheory.Localization.Basic
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-!
 # Relative normalization over localized stalks
@@ -18,6 +20,8 @@ Its section map is a localization, using the germ map and the standard
 localization-at-prime construction. The normalization comparison therefore is
 an isomorphism for any qcqs source, without assuming the source is affine.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Normalization
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Nyll.SchemeTheory.Normalization.Normal
+module
+
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Normalization
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Nyll.SchemeTheory.Normalization.Normal
 
 /-!
 # Finite normalizations in separable function-field extensions
@@ -19,6 +21,8 @@ over a locally Noetherian normal integral scheme, normalization in a finite
 separable extension of the function field is finite.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

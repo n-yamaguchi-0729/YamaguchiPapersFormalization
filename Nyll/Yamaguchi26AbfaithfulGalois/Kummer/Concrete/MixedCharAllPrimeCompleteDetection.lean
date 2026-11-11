@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCompleteDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCompleteDetection
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCompleteDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharPrimeToCompleteDetection
 
 /-!
 # Faithful p-power cohomology for every prime extension degree
@@ -14,6 +16,8 @@ The residue prime controls the coefficients. The Galois extension degree
 can be any prime: residue-prime degree uses wild detection, while a different
 prime degree is already detected at the first p-power level.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

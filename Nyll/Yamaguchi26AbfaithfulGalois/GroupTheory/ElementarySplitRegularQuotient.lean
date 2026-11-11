@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitCriterion
-import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Nyll.ProCGroups.GroupTheory.SemidirectSubgroups
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
-import Mathlib.Algebra.Group.Equiv.TypeTags
-import Nyll.ProCGroups.Abelian.AbelianModPower
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitCriterion
+public import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Nyll.ProCGroups.GroupTheory.SemidirectSubgroups
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Mathlib.Algebra.Group.Equiv.TypeTags
+public import Nyll.ProCGroups.Abelian.AbelianModPower
+public import Nyll.ProCGroups.WreathProducts
 
 /-!
 # Proposition 2.1: finite split embedding problems
@@ -30,6 +33,8 @@ The regular module `𝔽_q[H/N]` is represented as functions `H/N → ZMod q`.
 The source is the actual quotient `Nᵃᵇ/q`, and the equation below gives
 left translation on functions explicitly.
 -/
+
+@[expose] public section
 
 noncomputable section
 

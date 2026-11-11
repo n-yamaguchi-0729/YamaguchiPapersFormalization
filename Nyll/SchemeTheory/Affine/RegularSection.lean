@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.RingTheory.Localization.Defs
-import Mathlib.RingTheory.Regular.IsSMulRegular
-import Mathlib.Topology.Sheaves.CommRingCat
-import Mathlib.Topology.Sheaves.Stalks
+module
+
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+public import Mathlib.RingTheory.Localization.Defs
+public import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.Topology.Sheaves.CommRingCat
+public import Mathlib.Topology.Sheaves.Stalks
 
 /-!
 # Restricting a regular global section
@@ -19,6 +21,8 @@ sections of every open subset. This follows by testing at the actual
 localized stalks and is valid without reducedness or Noetherianity.
 -/
 
+
+@[expose] public section
 
 open CategoryTheory TopologicalSpace
 open scoped nonZeroDivisors

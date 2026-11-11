@@ -15,11 +15,13 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.QuotSMulTop
-import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularScalar
-import Mathlib.RingTheory.TensorProduct.Free
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.QuotSMulTop
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.FreeModuleRegularScalar
+public import Mathlib.RingTheory.TensorProduct.Free
 
 /-!
 # Weak regularity on a nontrivial free module
@@ -28,6 +30,8 @@ Weak regularity of a sequence on a nontrivial free module is equivalent to weak
 regularity on the ring. This auxiliary proof compares quotient modules and proceeds by
 induction on the sequence length.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 
@@ -42,7 +46,10 @@ theorem _root_.RingTheory.Sequence.isWeaklyRegular_of_free_aux.{u, v}
     RingTheory.Sequence.IsWeaklyRegular M s ↔ RingTheory.Sequence.IsWeaklyRegular R s := by
   generalize hn : s.length = n
   induction n generalizing R M with
-  | zero => simp_all
+  | zero =>
+      obtain rfl : s = [] := List.length_eq_zero_iff.mp hn
+      exact ⟨fun _ => _root_.RingTheory.Sequence.IsWeaklyRegular.nil R R,
+        fun _ => _root_.RingTheory.Sequence.IsWeaklyRegular.nil R M⟩
   | succ n IH =>
     cases s with
     | nil => exact (Nat.succ_ne_zero n hn.symm).elim

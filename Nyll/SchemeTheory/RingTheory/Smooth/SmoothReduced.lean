@@ -10,10 +10,12 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Unramified.LocalStructure
-import Mathlib.RingTheory.Unramified.Field
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.RingTheory.Flat.Basic
+module
+
+public import Mathlib.RingTheory.Unramified.LocalStructure
+public import Mathlib.RingTheory.Unramified.Field
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.RingTheory.Flat.Basic
 
 /-!
 # Reducedness of smooth algebras over fields
@@ -22,6 +24,8 @@ The etale generic-fiber argument and local standard-etale presentations prove
 reducedness directly. This is the reusable ring part of the pinned FLT proof
 previously maintained in AlgebraicCurves.
 -/
+
+@[expose] public section
 
 noncomputable section
 

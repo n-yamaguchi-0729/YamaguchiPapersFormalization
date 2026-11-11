@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Fibers.ResidueField
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
+module
+
+public import Nyll.SchemeTheory.Fibers.ResidueField
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.ComponentFunctionField
 
 /-!
 # Generic-fibre residue fields
@@ -15,6 +17,8 @@ point of the base, geometric integrality of the generic fibre makes the
 residue field at the source generic point geometrically integral over the
 base generic residue field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -31,12 +35,11 @@ theorem GeometricallyIntegral.specMap_transport_ringEquiv
     [Algebra k R] (e : R ≃+* T)
     (h : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k R)))) :
-    letI : Algebra k T :=
+    let : Algebra k T :=
       (e.toRingHom.comp (algebraMap k R)).toAlgebra
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k T))) := by
-  let : Algebra k T :=
-    (e.toRingHom.comp (algebraMap k R)).toAlgebra
+  intro sharedOwner1
   let j : Spec (CommRingCat.of T) ≅ Spec (CommRingCat.of R) :=
     Scheme.Spec.mapIso e.toCommRingCatIso.op
   let : MorphismProperty.RespectsIso
@@ -71,30 +74,19 @@ theorem geometricallyIntegral_spec_genericPointResidue_of_genericFiber
     let k := S.residueField (genericPoint S)
     let F := f.fiber (genericPoint S)
     let q := f.fiberToSpecResidueField (genericPoint S)
-    letI : GeometricallyIntegral q := hgeo
-    letI : IsIntegral F :=
+    let : GeometricallyIntegral q := hgeo
+    let : IsIntegral F :=
       GeometricallyIntegral.isIntegral_of_subsingleton q
-    letI : Algebra k F.functionField := q.functionFieldAlgebra
+    let : Algebra k F.functionField := q.functionFieldAlgebra
     let e : X.residueField (genericPoint X) ≃+* F.functionField :=
       (f.genericFiberResidueFieldRingEquiv hη).trans
         (Scheme.functionFieldResidueFieldRingEquiv F).symm
-    letI : Algebra k (X.residueField (genericPoint X)) :=
+    let : Algebra k (X.residueField (genericPoint X)) :=
       (e.symm.toRingHom.comp (algebraMap k F.functionField)).toAlgebra
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k (X.residueField (genericPoint X))))) := by
-  let k := S.residueField (genericPoint S)
-  let F := f.fiber (genericPoint S)
-  let q := f.fiberToSpecResidueField (genericPoint S)
-  let : GeometricallyIntegral q := hgeo
-  let : IsIntegral F :=
-    GeometricallyIntegral.isIntegral_of_subsingleton q
-  let : Algebra k F.functionField := q.functionFieldAlgebra
-  let e : X.residueField (genericPoint X) ≃+* F.functionField :=
-    (f.genericFiberResidueFieldRingEquiv hη).trans
-      (Scheme.functionFieldResidueFieldRingEquiv F).symm
-  let : Algebra k (X.residueField (genericPoint X)) :=
-    (e.symm.toRingHom.comp (algebraMap k F.functionField)).toAlgebra
+  intro k F q sharedOwner4 sharedOwner5 sharedOwner6 e sharedOwner8
   have hq : GeometricallyIntegral q := inferInstance
   have hff : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k F.functionField))) :=
@@ -113,36 +105,22 @@ theorem geometricallyIntegral_genericSourceResidue_of_genericFiber
     let k := S.residueField (genericPoint S)
     let F := f.fiber (genericPoint S)
     let q := f.fiberToSpecResidueField (genericPoint S)
-    letI : GeometricallyIntegral q := hgeo
-    letI : IsIntegral F :=
+    let : GeometricallyIntegral q := hgeo
+    let : IsIntegral F :=
       GeometricallyIntegral.isIntegral_of_subsingleton q
-    letI : Algebra k F.functionField := q.functionFieldAlgebra
+    let : Algebra k F.functionField := q.functionFieldAlgebra
     let eF : C.residueField (genericPoint C) ≃+* F.functionField :=
       (f.genericFiberResidueFieldRingEquiv hη).trans
         (Scheme.functionFieldResidueFieldRingEquiv F).symm
     let e : A.residueField (i (genericPoint C)) ≃+* F.functionField :=
       (i.residueFieldRingEquivOfIsClosedImmersion
         (genericPoint C)).trans eF
-    letI : Algebra k (A.residueField (i (genericPoint C))) :=
+    let : Algebra k (A.residueField (i (genericPoint C))) :=
       (e.symm.toRingHom.comp (algebraMap k F.functionField)).toAlgebra
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k (A.residueField (i (genericPoint C)))))) := by
-  let k := S.residueField (genericPoint S)
-  let F := f.fiber (genericPoint S)
-  let q := f.fiberToSpecResidueField (genericPoint S)
-  let : GeometricallyIntegral q := hgeo
-  let : IsIntegral F :=
-    GeometricallyIntegral.isIntegral_of_subsingleton q
-  let : Algebra k F.functionField := q.functionFieldAlgebra
-  let eF : C.residueField (genericPoint C) ≃+* F.functionField :=
-    (f.genericFiberResidueFieldRingEquiv hη).trans
-      (Scheme.functionFieldResidueFieldRingEquiv F).symm
-  let e : A.residueField (i (genericPoint C)) ≃+* F.functionField :=
-    (i.residueFieldRingEquivOfIsClosedImmersion
-      (genericPoint C)).trans eF
-  let : Algebra k (A.residueField (i (genericPoint C))) :=
-    (e.symm.toRingHom.comp (algebraMap k F.functionField)).toAlgebra
+  intro k F q sharedOwner4 sharedOwner5 sharedOwner6 eF e sharedOwner9
   have hq : GeometricallyIntegral q := inferInstance
   have hff : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k F.functionField))) :=
@@ -165,7 +143,7 @@ theorem exists_algebra_geometricallyIntegral_genericSourceResidue_of_genericFibe
       GeometricallyIntegral
         (Spec.map (CommRingCat.ofHom
           (algebraMap k (A.residueField (i (genericPoint C)))))) := by
-  let k := S.residueField (genericPoint S)
+  intro k
   let F := f.fiber (genericPoint S)
   let q := f.fiberToSpecResidueField (genericPoint S)
   let : GeometricallyIntegral q := hgeo

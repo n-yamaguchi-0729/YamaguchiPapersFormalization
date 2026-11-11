@@ -5,15 +5,18 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugationTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
 
 /-!
 # Absolute Galois abelianization using a separable closure
@@ -22,6 +25,8 @@ The comparison factors through the canonical separable closure and restriction
 from the algebraic closure. Independence of the chosen semilinear lift proves
 compatibility with the actual absolute action, including imperfect fields.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 open ProCGroups.Abelian

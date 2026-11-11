@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
-import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.FieldTheory.Separable
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutEquiv
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.FieldTheory.Separable
 
 /-!
 # Semilinear conjugation and restriction to the separable closure
@@ -17,6 +19,8 @@ import Mathlib.FieldTheory.Separable
 The chosen automorphism of the algebraic closure restricts to the separable
 closure. Both directions use that same automorphism and its actual inverse.
 -/
+
+@[expose] public section
 
 noncomputable section
 

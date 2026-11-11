@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStalkNormalizationEtale
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryExtension
-import Nyll.EtaleFundamentalGroups.Purity.CartierNormalizationSpreading
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationExtension
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.StalkNormalizationEtale
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Extension
+public import Nyll.EtaleFundamentalGroups.Purity.CartierNormalizationSpreading
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteNormalizationExtension
 
 /-!
 # Extending covers with trivial boundary stabilizers
@@ -18,7 +20,11 @@ restriction is the original cover, so the finite-cover kernel criterion
 supplies the remaining inclusion in the boundary quotient formula.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -26,7 +32,7 @@ open EtaleFundamentalGroups
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [IsLocallyNoetherian X]
 
 /-- A Galois cover whose normalization is etale at every component stalk extends across the
 regular Cartier boundary as the actual relative normalization. -/
@@ -63,7 +69,7 @@ theorem kernel_le_boundaryUnramifiedKernelIntersection
     [ConnectedSpace X]
     (D : X.EffectiveCartierDivisor) (hreg : D.IsAmbientRegularAlongSupport)
     [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     (fundamentalGroupHom D.1.supportComplement.ι point).toMonoidHom.ker ≤
       boundaryUnramifiedKernelIntersection D point := by

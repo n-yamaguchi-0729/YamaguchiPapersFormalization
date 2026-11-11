@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
-import Nyll.SchemeTheory.FunctionFields.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
 
 /-!
 # The actual geometric action underlying the Galois function-field action
@@ -16,6 +18,8 @@ In particular it intertwines the pullback on global sections with their
 inclusion in the function field. This identifies the actions used by affine
 normalization and by the canonical Galois-group comparison.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,10 +42,10 @@ theorem finiteEtaleAutFunctionFieldAlgEquiv_germToFunctionField
       ⟨⟨Classical.choice (inferInstance : Nonempty Y.left), trivial⟩⟩
     ∀ a : Γ(Y.left, ⊤),
       finiteEtaleAutFunctionFieldAlgEquiv Y sigma (Y.left.germToFunctionField ⊤ a) =
-        Y.left.germToFunctionField ⊤ (sigma.hom.left.appTop a) := by
+        Y.left.germToFunctionField ⊤ (sigma.asIso.hom.left.appTop a) := by
   intro hIntegral hAlgebra hTop a
-  have h := sigma.hom.left.functionFieldMap_comp_germToFunctionField_top
-    sigma.hom.left.surjective.denseRange
+  have h := sigma.asIso.hom.left.functionFieldMap_comp_germToFunctionField_top
+    sigma.asIso.hom.left.surjective.denseRange
   have ha := DFunLike.congr_fun h a
   have he := finiteEtaleAutFunctionFieldAlgEquiv_eq_functionFieldMap Y sigma
   exact (DFunLike.congr_fun he (Y.left.germToFunctionField ⊤ a)).trans ha

@@ -265,7 +265,7 @@ lemma fiberObjEquivHom_naturality {X Y : FiniteEtale S} (f : X ⟶ Y) (x) :
     (fiberObjEquivHom «ξ» X x) ≫ f.hom = fiberObjEquivHom «ξ» Y ((fiber «ξ»).map f x) :=
   by
     apply (fiberObjEquivHom «ξ» Y).symm.injective
-    simpa using
+    simpa only [Equiv.symm_apply_apply] using
       (fiberObjEquivHom_symm_naturality «ξ» f (fiberObjEquivHom «ξ» X x)).symm
 
 /-- The natural identification of the fiber functor with morphisms from the field point in the
@@ -458,16 +458,16 @@ instance isGalois_of_isGalois (X : FiniteEtale (Spec (.of k))) [IsGalois X] :
       { __ := f.left.appTop.hom,
         commutes' := fun z ↦ appTop_left_algebraMap k f z }
     let autToAlgEquiv : Aut X → (A ≃ₐ[k] A) := fun σ ↦
-      AlgEquiv.ofAlgHom (toAlgHom σ.hom) (toAlgHom σ.inv) (by
-        let e : X.left ≅ X.left := (forget _ ⋙ Over.forget _).mapIso σ
-        apply AlgHom.coe_ringHom_injective
+      AlgEquiv.ofAlgHom (toAlgHom σ.asIso.hom) (toAlgHom σ.asIso.inv) (by
+        let e : X.left ≅ X.left := (forget _ ⋙ Over.forget _).mapIso σ.asIso
+        apply AlgHom.toRingHom_injective
         change e.hom.appTop.hom.comp e.inv.appTop.hom =
           RingHom.id Γ(X.left, ⊤)
         rw [← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, e.hom_inv_id]
         rw [Scheme.Hom.id_appTop]
         rfl) (by
-        let e : X.left ≅ X.left := (forget _ ⋙ Over.forget _).mapIso σ
-        apply AlgHom.coe_ringHom_injective
+        let e : X.left ≅ X.left := (forget _ ⋙ Over.forget _).mapIso σ.asIso
+        apply AlgHom.toRingHom_injective
         change e.inv.appTop.hom.comp e.hom.appTop.hom =
           RingHom.id Γ(X.left, ⊤)
         rw [← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, e.inv_hom_id]
@@ -476,11 +476,11 @@ instance isGalois_of_isGalois (X : FiniteEtale (Spec (.of k))) [IsGalois X] :
     have haut_injective : Function.Injective autToAlgEquiv := by
       intro σ τ h
       apply Aut.ext
+      apply Iso.ext
       apply MorphismProperty.Over.Hom.ext
       apply Scheme.Hom.appTop_bijective_of_isAffine.injective
       ext z
-      simpa [autToAlgEquiv, toAlgHom] using
-        congrFun (congrArg (fun e : A ≃ₐ[k] A ↦ (e : A → A)) h) z
+      exact congrFun (congrArg (fun e : A ≃ₐ[k] A ↦ (e : A → A)) h) z
     have hle : Nat.card (A ≃ₐ[k] A) ≤ Module.finrank k A := calc
       Nat.card (A ≃ₐ[k] A) = Nat.card (A →ₐ[k] A) :=
         Nat.card_congr (algEquivEquivAlgHom k A)
@@ -502,11 +502,10 @@ instance [IsGalois k K] (X : FiniteEtale (Spec (.of k))) [IsGalois X] :
   rwa [homEquivAlgHom_smul]
 
 
-attribute [local instance] IsSepClosure.sep_closed
-
-variable [IsSepClosure k K]
-
-instance : IsFundamentalGroup (fib k K) (K ≃ₐ[k] K) where
+/- The natural field action uses only the geometric point. The stronger
+separable-closure hypothesis is needed for the fundamental-group comparison
+below, not for its original action on individual points. -/
+instance [IsSepClosed K] : IsNaturalSMul (fib k K) (K ≃ₐ[k] K) where
   naturality g X Y f x := by
     apply (fiberObjEquivHom (ξ k K) Y).injective
     rw [algEquiv_smul_fiber_def, algEquiv_smul_fiber_def]
@@ -515,38 +514,48 @@ instance : IsFundamentalGroup (fib k K) (K ≃ₐ[k] K) where
     ext1
     simp only [algEquiv_smul_hom]
     exact Category.assoc _ _ _
-  continuous_smul X := by
-    rw [continuousSMul_iff_stabilizer_isOpen]
-    intro x
-    let e := fiberObjEquivHom (ξ k K) X
-    let : DiscreteTopology (Over.mk (ξ k K) ⟶ X.toComma) :=
-      discreteTopology_bot _
-    have hopen := stabilizer_isOpen (K ≃ₐ[k] K) (e x)
-    convert hopen using 1
-    ext g
-    change (g • x = x) ↔ (g • e x = e x)
-    rw [algEquiv_smul_fiber_def]
-    constructor
-    · intro h
-      simpa only [e, Equiv.apply_symm_apply] using congrArg e h
-    · intro h
-      apply e.injective
-      simpa only [e, Equiv.apply_symm_apply] using h
-  transitive_of_isGalois X _ := by
-    constructor
-    intro x y
-    obtain ⟨g, hg⟩ := MulAction.exists_smul_eq (K ≃ₐ[k] K)
-      (fiberObjEquivHom _ _ x) (fiberObjEquivHom _ _ y)
-    use g
-    rw [algEquiv_smul_fiber_def]
-    apply (fiberObjEquivHom (ξ k K) X).injective
-    simp [hg]
-  non_trivial' g H := by
-    refine eq_one_of_smul_eq (k := k) (K := K) g ?_
-    intro X x
-    apply (fiberObjEquivHom (ξ k K) X).symm.injective
-    specialize H X ((fiberObjEquivHom (ξ k K) X).symm x)
-    rwa [algEquiv_smul_fiber_def, Equiv.apply_symm_apply] at H
+
+variable [IsSepClosure k K]
+
+instance :
+    let _ : IsSepClosed K := IsSepClosure.sep_closed k
+    IsFundamentalGroup (fib k K) (K ≃ₐ[k] K) := by
+  intro closureIsSepClosed
+  exact {
+    toIsNaturalSMul := inferInstance
+    continuous_smul X := by
+      rw [continuousSMul_iff_stabilizer_isOpen]
+      intro x
+      let e := fiberObjEquivHom (ξ k K) X
+      let : DiscreteTopology (Over.mk (ξ k K) ⟶ X.toComma) :=
+        discreteTopology_bot _
+      have hopen := stabilizer_isOpen (K ≃ₐ[k] K) (e x)
+      convert hopen using 1
+      ext g
+      change (g • x = x) ↔ (g • e x = e x)
+      rw [algEquiv_smul_fiber_def]
+      constructor
+      · intro h
+        simpa only [e, Equiv.apply_symm_apply] using congrArg e h
+      · intro h
+        apply e.injective
+        simpa only [e, Equiv.apply_symm_apply] using h
+    transitive_of_isGalois X _ := by
+      constructor
+      intro x y
+      obtain ⟨g, hg⟩ := MulAction.exists_smul_eq (K ≃ₐ[k] K)
+        (fiberObjEquivHom _ _ x) (fiberObjEquivHom _ _ y)
+      use g
+      rw [algEquiv_smul_fiber_def]
+      apply (fiberObjEquivHom (ξ k K) X).injective
+      simp only [hg, Equiv.apply_symm_apply]
+    non_trivial' g H := by
+      refine eq_one_of_smul_eq (k := k) (K := K) g ?_
+      intro X x
+      apply (fiberObjEquivHom (ξ k K) X).symm.injective
+      specialize H X ((fiberObjEquivHom (ξ k K) X).symm x)
+      rwa [algEquiv_smul_fiber_def, Equiv.apply_symm_apply] at H
+  }
 
 end FiniteEtale
 

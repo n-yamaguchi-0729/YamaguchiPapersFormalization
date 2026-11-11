@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Smooth.IntegralClosure
+module
+
+public import Mathlib.RingTheory.Smooth.IntegralClosure
 
 /-!
 # Integral elements in a smooth generic fibre
@@ -18,6 +20,8 @@ is useful for finite-etale generic fibres: primitive idempotents and elements
 supported on a selected field component are integral, hence descend to the
 original finite-etale algebra.
 -/
+
+@[expose] public section
 
 noncomputable section
 

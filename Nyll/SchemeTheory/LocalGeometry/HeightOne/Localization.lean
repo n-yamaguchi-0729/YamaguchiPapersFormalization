@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDimensionOne
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Height-one localizations of regular rings
@@ -19,6 +21,8 @@ The hypotheses describe geometric source data: a regular affine domain and a
 codimension-one prime.  No ramification, unramifiedness, or unit conclusion is
 assumed.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

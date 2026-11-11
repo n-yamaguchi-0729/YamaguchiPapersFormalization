@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Reductions for top local-cohomology vanishing
@@ -26,6 +28,8 @@ ideal is contained in a prime strictly below the maximal ideal.  The radical
 condition is essential: merely requiring the ideal itself to differ from the
 maximal ideal does not exclude ideals with maximal radical.
 -/
+
+@[expose] public section
 
 noncomputable section
 

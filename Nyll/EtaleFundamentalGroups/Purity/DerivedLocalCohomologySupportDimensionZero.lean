@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.RingTheory.Finiteness.Ideal
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.Noetherian.Basic
-import Mathlib.RingTheory.Spectrum.Prime.Basic
-import Mathlib.RingTheory.Support
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.RingTheory.Finiteness.Ideal
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.Noetherian.Basic
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
+public import Mathlib.RingTheory.Support
 
 /-!
 # Degree-zero nonvanishing for zero-dimensional coefficients
@@ -21,6 +23,8 @@ The support of a zero-dimensional finite module over a local ring is the
 closed point. A power of the maximal ideal therefore annihilates it, and
 degree-zero local cohomology evaluates isomorphically onto the module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

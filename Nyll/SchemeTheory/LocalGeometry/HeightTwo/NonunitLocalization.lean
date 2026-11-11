@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-import Mathlib.RingTheory.Localization.AtPrime.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-!
 # A height-two localization detected by a nonunit integer
@@ -18,6 +20,8 @@ This is the codimension-two reduction used in the local-purity part of the
 one-point inertia argument.  Its hypotheses are only the source-side divisor
 and residue-characteristic data; no height-two prime is supplied as input.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

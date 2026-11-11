@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.CompletePrimeOrderDetection
-import Nyll.GaloisCohomology.Kummer.Concrete.CompletionAbelianModPower
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeModPowerNaturality
-import Nyll.ValuedFieldTheory.Valuation.Completion.StableGalois
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.CompletePrimeOrderDetection
+public import Nyll.GaloisCohomology.Kummer.Concrete.CompletionAbelianModPower
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeModPowerNaturality
+public import Nyll.ValuedFieldTheory.Valuation.Completion.StableGalois
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
 
 /-!
 # Detecting prime-degree automorphisms through a stable completion
@@ -19,6 +21,8 @@ same Galois degree. The complete-field detection theorem detects an automorphism
 there, and the injective
 weak-approximation map transports the detection to the original field.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open KummerTheory ValuationTheory.DiscreteValuationField ProCGroups.Abelian

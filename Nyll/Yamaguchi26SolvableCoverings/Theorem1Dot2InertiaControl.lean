@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+module
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryBranchGeometricPoint
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictImage
-import Nyll.EtaleFundamentalGroups.Inertia.BoundaryNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Inertia.GaloisNormalizationPointLift
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationPoint
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
-import Mathlib.Algebra.Group.Subgroup.MulOpposite
-import Mathlib.GroupTheory.Index
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryBranchGeometricPoint
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryStrictImage
+public import Nyll.EtaleFundamentalGroups.Inertia.BoundaryNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Inertia.GaloisNormalizationPointLift
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationPoint
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverInertia
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.ResidueCharacteristic
+public import Mathlib.Algebra.Group.Subgroup.MulOpposite
+public import Mathlib.GroupTheory.Index
 /-!
 # 補題 1.2：正規交差点の剰余標数と惰性群の位数
 
@@ -54,7 +56,11 @@ Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Lem
 下の固定部分群についての定理と部分群の位数の整除性から、原稿の素数非整除が従う。
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -62,7 +68,7 @@ open EtaleFundamentalGroups EtaleFundamentalGroups.Inertia
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- 補題 1.2の固定部分群についての補助定理。
 水平境界の成分 `E` に剰余標数 `p` の正規交差点があれば、
@@ -151,9 +157,9 @@ theorem finite_inertia_control
   have hincl : (finiteCoverInertia D W E z).op ≤ J.map μ := by
     intro σ hσ
     have hσfixed : z ≫ normalizationEndomorphism (W.hom ≫ D.1.supportComplement.ι)
-        σ.unop.hom.left (by
+        σ.unop.asIso.hom.left (by
           rw [← Category.assoc]
-          exact congrArg (fun k => k ≫ D.1.supportComplement.ι) σ.unop.hom.w) = z := hσ
+          exact congrArg (fun k => k ≫ D.1.supportComplement.ι) σ.unop.asIso.hom.w) = z := hσ
     obtain ⟨τ, hτimage, hτfixed⟩ := hlift σ.unop ((hfixA σ.unop).mpr hσfixed)
     refine ⟨finiteEtaleAutFunctionFieldAlgEquiv Z τ, (hφfix τ).mpr hτfixed, ?_⟩
     change (FiniteEtale.galoisPullbackComponentQuotientMonoidHom
@@ -174,7 +180,7 @@ theorem inertia_control_1_2
     (hnc : ∃ x : D.1.subscheme, x ∈ E.val ∧
       ringChar (X.residueField (D.1.subschemeι x)) = p ∧
         D.IsNormalCrossingsAt (D.1.subschemeι x))
-    {Ξ : Type} [Field Ξ] [IsSepClosed Ξ]
+    {Ξ : Type u} [Field Ξ] [IsSepClosed Ξ]
     (xi : Spec (.of Ξ) ⟶ Spec (.of (boundaryStrictFractionField D E))) :
     let : ConnectedSpace D.1.supportComplement := boundaryComplement_connectedSpace D hreg
     ∀ (W : FiniteEtale D.1.supportComplement) (hW : IsGalois W)

@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+module
+
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-! # Finite extensions of finitely generated fields -/
+
+@[expose] public section
 
 namespace FieldTheory
 universe u v

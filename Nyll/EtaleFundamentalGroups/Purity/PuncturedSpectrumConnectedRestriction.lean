@@ -4,8 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.SchemeTheory.Normalization.FiniteNormalSource
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.SchemeTheory.Normalization.FiniteNormalSource
+public import Nyll.SchemeTheory.Normalization.SourceIso
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Restricting connected function-field normalizations
@@ -16,6 +21,8 @@ from the universal property of relative normalization and checked on affine
 charts by the uniqueness of integral closure inside the common function
 field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -28,16 +35,13 @@ universe u
 
 variable {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
 
-private local instance connectedLeftIntegral
+/-- A connected finite étale cover of an integral normal scheme is integral. -/
+local instance connectedLeftIntegral
     (W : FiniteEtale X) [IsConnected W] : IsIntegral W.left :=
   EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
 
-private local instance fieldSpecQuasiCompact
-    {K : Type u} [Field K] {S : Scheme.{u}} (f : Spec (.of K) ⟶ S) :
-    QuasiCompact f where
-  isCompact_preimage U _ _ := (Set.toFinite (f ⁻¹' U)).isCompact
-
-private local instance connectedLeftNormal
+/-- A connected finite étale cover retains normality of the integral base. -/
+local instance connectedLeftNormal
     (W : FiniteEtale X) [IsConnected W] : IsNormalIntegral W.left :=
   EtaleFundamentalGroups.isNormalIntegral_left_of_isConnected_finiteEtale W
 
@@ -62,7 +66,7 @@ noncomputable def connectedCoverGenericCompositeSectionsIso
     Γ(Spec (.of W.left.functionField),
         connectedCoverGenericComposite W ⁻¹ᵁ (⊤ : X.Opens)) ≅
       .of W.left.functionField := by
-  letI : Nonempty (⊤ : W.left.Opens) :=
+  let : Nonempty (⊤ : W.left.Opens) :=
     let y : W.left := Classical.choice (inferInstance : Nonempty W.left)
     ⟨⟨y, by trivial⟩⟩
   change Γ(Spec (.of W.left.functionField),
@@ -75,21 +79,19 @@ noncomputable def connectedCoverGenericCompositeSectionsIso
 global sections is the canonical map through the two function fields. -/
 theorem connectedCoverGenericCompositeSectionsIso_hom_appTop
     (W : FiniteEtale X) [IsConnected W] (r : Γ(X, ⊤)) :
-    letI : Nonempty (⊤ : X.Opens) :=
+    let : Nonempty (⊤ : X.Opens) :=
       ⟨⟨Classical.choice (inferInstance : Nonempty X), by trivial⟩⟩
-    letI : Algebra X.functionField W.left.functionField :=
+    let : Algebra X.functionField W.left.functionField :=
       EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
     (connectedCoverGenericCompositeSectionsIso W).hom
           ((connectedCoverGenericComposite W).appTop r) =
         algebraMap X.functionField W.left.functionField
           (X.germToFunctionField ⊤ r) := by
-  dsimp only
+  intro sharedOwner1 sharedOwner2
   let : Algebra X.functionField W.left.functionField :=
-    EtaleFundamentalGroups.finiteEtaleFunctionFieldAlgebra W
+    sharedOwner2
   let : IsIntegral W.left :=
     EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale W
-  let : Nonempty (⊤ : X.Opens) :=
-    ⟨⟨Classical.choice (inferInstance : Nonempty X), by trivial⟩⟩
   let : Nonempty (⊤ : W.left.Opens) :=
     let y : W.left := Classical.choice (inferInstance : Nonempty W.left)
     ⟨⟨y, by trivial⟩⟩
@@ -127,7 +129,8 @@ theorem connectedCoverGenericCompositeSectionsIso_hom_appTop
           (X.germToFunctionField ⊤ r)
   simpa only [hDense] using hMap.symm
 
-private noncomputable def connectedCoverGenericNormalizationDesc
+/-- The original finite cover receives the canonical map from its generic normalization. -/
+noncomputable def connectedCoverGenericNormalizationDesc
     (W : FiniteEtale X) [IsConnected W] :
     (connectedCoverGenericComposite W).normalization ⟶ W.left := by
   let hIntegral : IsIntegralHom W.hom :=
@@ -149,80 +152,22 @@ private lemma connectedCoverGenericNormalizationDesc_comp
     (connectedCoverGenericComposite W) inferInstance inferInstance _
     (connectedCoverGenericMorphism W) W.hom hIntegral rfl
 
-/-- Relative normalization is unchanged when the source of the morphism is
-replaced by an isomorphic scheme. -/
-private noncomputable def normalizationSourceIso
-    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z)
-    [QuasiCompact f] [QuasiSeparated f] :
-    (e.hom ≫ f).normalization ≅ f.normalization := by
-  let g : Y ⟶ Z := e.hom ≫ f
-  let a : g.normalization ⟶ f.normalization :=
-    g.normalizationDesc (e.hom ≫ f.toNormalization)
-      f.fromNormalization (by simp [g])
-  let b : f.normalization ⟶ g.normalization :=
-    f.normalizationDesc (e.inv ≫ g.toNormalization)
-      g.fromNormalization (by simp [g])
-  refine ⟨a, b, ?_, ?_⟩
-  · apply Scheme.Hom.normalization.hom_ext g
-      (a ≫ b) (𝟙 _) g.fromNormalization
-    · simp [a, b]
-    · simp [a, b]
-    · exact Category.id_comp _
-  · apply Scheme.Hom.normalization.hom_ext f
-      (b ≫ a) (𝟙 _) f.fromNormalization
-    · simp [a, b]
-    · simp [a, b]
-    · exact Category.id_comp _
-
-@[reassoc (attr := simp)]
-private lemma normalizationSourceIso_hom_fromNormalization
-    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z)
-    [QuasiCompact f] [QuasiSeparated f] :
-    (normalizationSourceIso e f).hom ≫ f.fromNormalization =
-      (e.hom ≫ f).fromNormalization := by
-  simp [normalizationSourceIso]
-
-private noncomputable def normalizationSourceIsoOfEq
-    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z) (g : Y ⟶ Z)
-    [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g]
-    [QuasiSeparated g] (h : e.hom ≫ f = g) :
-    g.normalization ≅ f.normalization := by
-  subst g
-  exact normalizationSourceIso e f
-
-@[reassoc (attr := simp)]
-private lemma normalizationSourceIsoOfEq_hom_fromNormalization
-    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z) (g : Y ⟶ Z)
-    [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g]
-    [QuasiSeparated g] (h : e.hom ≫ f = g) :
-    (normalizationSourceIsoOfEq e f g h).hom ≫ f.fromNormalization =
-      g.fromNormalization := by
-  subst g
-  exact normalizationSourceIso_hom_fromNormalization e f
-
-@[reassoc (attr := simp)]
-private lemma toNormalization_normalizationSourceIsoOfEq_hom
-    {Y Y' Z : Scheme.{u}} (e : Y ≅ Y') (f : Y' ⟶ Z) (g : Y ⟶ Z)
-    [QuasiCompact f] [QuasiSeparated f] [QuasiCompact g]
-    [QuasiSeparated g] (h : e.hom ≫ f = g) :
-    g.toNormalization ≫ (normalizationSourceIsoOfEq e f g h).hom =
-      e.hom ≫ f.toNormalization := by
-  subst g
-  simp [normalizationSourceIsoOfEq, normalizationSourceIso]
-
-private theorem monoFactorIsPullback {Y X S : Scheme.{u}}
+/-- Factoring through a monomorphism gives a pullback square with an identity side. -/
+theorem monoFactorIsPullback {Y X S : Scheme.{u}}
     (j : X ⟶ S) [Mono j] (f : Y ⟶ X) :
     IsPullback (𝟙 Y) f (f ≫ j) j :=
   @IsPullback.of_horiz_isIso_mono _ _ Y Y X S
     (𝟙 Y) f (f ≫ j) j inferInstance inferInstance ⟨rfl⟩
 
-private noncomputable def monoFactorPullbackIso {Y X S : Scheme.{u}}
+/-- The source of a map through a monomorphism is its pullback. -/
+noncomputable def monoFactorPullbackIso {Y X S : Scheme.{u}}
     (j : X ⟶ S) [Mono j] (f : Y ⟶ X) :
     Y ≅ Limits.pullback (f ≫ j) j :=
   (monoFactorIsPullback j f).isoPullback
 
+/-- The monomorphism pullback identification preserves the original map. -/
 @[reassoc (attr := simp)]
-private lemma monoFactorPullbackIso_hom_snd {Y X S : Scheme.{u}}
+lemma monoFactorPullbackIso_hom_snd {Y X S : Scheme.{u}}
     (j : X ⟶ S) [Mono j] (f : Y ⟶ X) :
     (monoFactorPullbackIso j f).hom ≫
       Limits.pullback.snd (f ≫ j) j = f :=
@@ -240,7 +185,8 @@ finite-etale cover is canonically the cover itself. -/
 noncomputable def connectedCoverGenericNormalizationIso
     (W : FiniteEtale X) [IsConnected W] :
     (connectedCoverGenericComposite W).normalization ≅ W.left :=
-  letI := connectedCoverGenericNormalizationDesc_isIso W
+  let : IsIso (connectedCoverGenericNormalizationDesc W) :=
+    connectedCoverGenericNormalizationDesc_isIso W
   asIso (connectedCoverGenericNormalizationDesc W)
 
 @[reassoc (attr := simp)]
@@ -272,7 +218,7 @@ noncomputable def connectedCoverGenericNormalizationPullbackIso
   let hSource : eSource.hom ≫ p = f := by
     exact monoFactorPullbackIso_hom_snd j f
   let eNormalization : f.normalization ≅ p.normalization :=
-    normalizationSourceIsoOfEq eSource p f hSource
+    Scheme.Hom.normalizationSourceIso f p eSource hSource
   exact (connectedCoverGenericNormalizationIso W).symm ≪≫
     eNormalization ≪≫ asIso (g.normalizationPullback j)
 
@@ -294,11 +240,11 @@ theorem connectedCoverGenericNormalizationPullbackIso_hom_snd
   let hSource : eSource.hom ≫ p = f := by
     exact monoFactorPullbackIso_hom_snd j f
   let eNormalization : f.normalization ≅ p.normalization :=
-    normalizationSourceIsoOfEq eSource p f hSource
+    Scheme.Hom.normalizationSourceIso f p eSource hSource
   have hNormalization : eNormalization.hom ≫ p.fromNormalization =
       f.fromNormalization := by
-    exact normalizationSourceIsoOfEq_hom_fromNormalization
-      eSource p f hSource
+    exact Scheme.Hom.normalizationSourceIso_hom_fromNormalization
+      f p eSource hSource
   change ((connectedCoverGenericNormalizationIso W).symm ≪≫
       eNormalization ≪≫
         asIso (g.normalizationPullback j)).hom ≫
@@ -329,7 +275,7 @@ theorem connectedCoverGenericMorphism_normalizationPullbackIso_fst
   let hSource : eSource.hom ≫ p = f :=
     monoFactorPullbackIso_hom_snd j f
   let eNormalization : f.normalization ≅ p.normalization :=
-    normalizationSourceIsoOfEq eSource p f hSource
+    Scheme.Hom.normalizationSourceIso f p eSource hSource
   have hW :
       connectedCoverGenericMorphism W ≫
           (connectedCoverGenericNormalizationIso W).inv =
@@ -354,7 +300,7 @@ theorem connectedCoverGenericMorphism_normalizationPullbackIso_fst
   simp only [Iso.trans_hom, Iso.symm_hom, asIso_hom, Category.assoc]
   rw [← Category.assoc (connectedCoverGenericMorphism W)
       (connectedCoverGenericNormalizationIso W).inv, hW]
-  rw [toNormalization_normalizationSourceIsoOfEq_hom_assoc eSource p f hSource]
+  rw [Scheme.Hom.toNormalization_normalizationSourceIso_hom_assoc f p eSource hSource]
   rw [Scheme.Hom.toNormalization_normalizationPullback_fst]
   rw [← Category.assoc, hfst, Category.id_comp]
 

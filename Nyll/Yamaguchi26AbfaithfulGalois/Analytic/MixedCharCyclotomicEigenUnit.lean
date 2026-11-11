@@ -4,12 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogMinimum
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapExtension
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitEigenLift
-import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerRestriction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogMinimum
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapExtension
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitEigenLift
+public import Nyll.ValuedFieldTheory.LocalField.Padic.CyclotomicTeichmullerRestriction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
+public import Mathlib.Algebra.CharP.Algebra
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
 
 /-!
 # A minimal cyclotomic logarithm with an eigenunit preimage
@@ -20,6 +25,8 @@ maps, and character averaging give an eigenunit in the upper field with
 this logarithm. The two cyclotomic characters and all valuation-preservation
 facts are supplied by the field extensions themselves.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

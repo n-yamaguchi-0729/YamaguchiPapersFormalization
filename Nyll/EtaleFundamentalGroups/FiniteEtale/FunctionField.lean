@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.SchemeTheory.FunctionFields.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
 
 /-!
 # Function fields of connected finite-etale covers
@@ -13,6 +15,8 @@ import Nyll.SchemeTheory.FunctionFields.Functoriality
 A connected finite-etale cover of a normal integral scheme
 has a canonical finite separable extension of function fields.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,11 +50,10 @@ finite-etale cover. -/
 @[reducible] noncomputable def finiteEtaleFunctionFieldAlgebra
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     Algebra X.functionField Y.left.functionField := by
-  letI : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedDefinitionOwner1
   exact ((show Y.left ⟶ X from Y.hom).functionFieldMap
     (finiteEtale_hom_denseRange_of_isConnected Y)).toAlgebra
 
@@ -59,12 +62,11 @@ essentially of finite type. -/
 theorem finiteEtale_functionFieldMap_essFiniteType
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     ((show Y.left ⟶ X from Y.hom).functionFieldMap
       (finiteEtale_hom_denseRange_of_isConnected Y)).EssFiniteType := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let : IsFiniteEtale (show Y.left ⟶ X from Y.hom) := Y.2
   unfold Scheme.Hom.functionFieldMap
   rw [CommRingCat.hom_comp,
@@ -77,12 +79,11 @@ formally unramified. -/
 theorem finiteEtale_functionFieldMap_formallyUnramified
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     ((show Y.left ⟶ X from Y.hom).functionFieldMap
       (finiteEtale_hom_denseRange_of_isConnected Y)).FormallyUnramified := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let : IsFiniteEtale (show Y.left ⟶ X from Y.hom) := Y.2
   unfold Scheme.Hom.functionFieldMap
   rw [CommRingCat.hom_comp,
@@ -95,15 +96,12 @@ function fields. -/
 theorem finiteDimensional_functionField_of_finiteEtale_isConnected
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     FiniteDimensional X.functionField Y.left.functionField := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let : Algebra.EssFiniteType X.functionField Y.left.functionField := by
     apply RingHom.essFiniteType_algebraMap.mp
     change ((show Y.left ⟶ X from Y.hom).functionFieldMap
@@ -122,15 +120,12 @@ fields. -/
 theorem isSeparable_functionField_of_finiteEtale_isConnected
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
-    letI : Algebra X.functionField Y.left.functionField :=
+    let : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
     Algebra.IsSeparable X.functionField Y.left.functionField := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
-  let : Algebra X.functionField Y.left.functionField :=
-    finiteEtaleFunctionFieldAlgebra Y
+  intro sharedOwner1 sharedOwner2
   let : Algebra.EssFiniteType X.functionField Y.left.functionField := by
     apply RingHom.essFiniteType_algebraMap.mp
     change ((show Y.left ⟶ X from Y.hom).functionFieldMap
@@ -143,5 +138,32 @@ theorem isSeparable_functionField_of_finiteEtale_isConnected
     exact finiteEtale_functionFieldMap_formallyUnramified Y
   exact Algebra.FormallyUnramified.isSeparable
     X.functionField Y.left.functionField
+
+/-- A connected finite étale cover of an integral normal base has integral source.
+Cover comparisons retain this proof for their chosen cover. -/
+theorem coverIntegral
+    {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
+    (Y : FiniteEtale X) [IsConnected Y] : IsIntegral Y.left :=
+  isIntegral_left_of_isConnected_finiteEtale Y
+
+/-- The canonical function-field algebra retained by cover comparisons. -/
+@[reducible] def coverFieldAlgebra
+    {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
+    (Y : FiniteEtale X) [IsConnected Y] :
+    let : IsIntegral Y.left := coverIntegral Y
+    Algebra X.functionField Y.left.functionField := by
+  intro integralCover
+  exact finiteEtaleFunctionFieldAlgebra Y
+
+/-- The canonical finite-dimensional function-field extension of a connected cover. -/
+theorem coverFieldFinite
+    {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
+    (Y : FiniteEtale X) [IsConnected Y] :
+    let : IsIntegral Y.left := coverIntegral Y
+    let : Algebra X.functionField Y.left.functionField :=
+      coverFieldAlgebra Y
+    FiniteDimensional X.functionField Y.left.functionField := by
+  intro integralCover coverAlgebra
+  exact finiteDimensional_functionField_of_finiteEtale_isConnected Y
 
 end EtaleFundamentalGroups

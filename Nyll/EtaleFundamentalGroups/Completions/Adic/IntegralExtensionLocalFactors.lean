@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
-import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalizationAtPrime
-import Nyll.EtaleFundamentalGroups.Completions.Adic.PowerCofinality
+module
+
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.CoprimeProduct
+public import Nyll.SchemeTheory.RingTheory.AdicCompletion.LocalizationAtPrime
+public import Nyll.EtaleFundamentalGroups.Completions.Adic.PowerCofinality
 
 /-!
 # Local factors of a completed integral extension
@@ -17,6 +19,8 @@ Power-adic cofinality removes the ramification exponent in each factor, and
 localization at that prime identifies the factor with the completion of the
 corresponding local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,7 +46,7 @@ noncomputable def adicCompletionPrimePowerLocalFactorAlgEquiv
       (Q.1.ramificationIdx_pos A)).trans
     (adicCompletionLocalizationAtPrimeAlgEquiv Q.1)
 
-omit [IsDomain A] [IsDedekindDomain B] [Module.IsTorsionFree A B] in
+omit [IsDomain A] [Module.IsTorsionFree A B] [Module.Finite A B] in
 @[simp]
 theorem adicCompletionPrimePowerLocalFactorAlgEquiv_of
     (p : Ideal A) [p.IsMaximal] (Q : p.primesOver B) (x : B) :

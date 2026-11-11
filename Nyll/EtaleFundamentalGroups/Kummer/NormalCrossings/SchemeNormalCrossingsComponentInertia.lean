@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
-import Mathlib.RingTheory.Spectrum.Prime.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticQuotientInertia
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeNormalCrossingsComplementCover
+public import Mathlib.RingTheory.Spectrum.Prime.Defs
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
 
 /-!
 # Divisorial inertia on normal-crossings chart components
@@ -16,6 +19,8 @@ connected component supplied by the pullback theorem is nevertheless Galois,
 and the split strict-normal-crossings inertia theorem applies directly to
 that component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -118,22 +123,22 @@ theorem
     (_phi :
       (Localization.AtPrime P.asIdeal ⧸ Ideal.span {t branch}) →+* k)
     (p : ℕ) [CharP k p] (_hp : p.Prime),
-    letI : IsDomain (Localization.AtPrime P.asIdeal) := hVdomain
-    letI : IsRegularRing (Localization.AtPrime P.asIdeal) := hVregular
-    letI : IsIntegrallyClosed (Localization.AtPrime P.asIdeal) := hVnormal
+    let _ : IsDomain (Localization.AtPrime P.asIdeal) := hVdomain
+    let _ : IsRegularRing (Localization.AtPrime P.asIdeal) := hVregular
+    let _ : IsIntegrallyClosed (Localization.AtPrime P.asIdeal) := hVnormal
     let hf :=
       Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
         hNC
-    letI : IsDomain (Localization.Away (boundaryProduct t r)) :=
+    let _ : IsDomain (Localization.Away (boundaryProduct t r)) :=
       IsLocalization.Away.isDomain
         (Localization.Away (boundaryProduct t r)) hf
     let j := localizationAwayToSupportComplement
       (I.comap f) u P.asIdeal (boundaryProduct t r) hboundary
     let g := comapSupportComplementTo I f
-    letI : Nonempty (I.comap f).supportComplement :=
+    let _ : Nonempty (I.comap f).supportComplement :=
       ⟨j (genericPoint
         (Spec (.of (Localization.Away (boundaryProduct t r)))))⟩
-    letI : Nonempty I.supportComplement :=
+    let _ : Nonempty I.supportComplement :=
       ⟨g (Classical.choice
         (inferInstance : Nonempty (I.comap f).supportComplement))⟩
     ∀ (W : FiniteEtale I.supportComplement), IsGalois W →
@@ -148,26 +153,7 @@ theorem
             hNC (Ideal.span {t branch}) Z p := by
   intro hPPrime r t hboundary hNC branch hbranch hCharZero
     hVdomain hVregular hVnormal k instCommRing instNontrivial phi p instCharP hp
-  dsimp only
-  let : IsDomain (Localization.AtPrime P.asIdeal) := hVdomain
-  let : IsRegularRing (Localization.AtPrime P.asIdeal) := hVregular
-  let : IsIntegrallyClosed (Localization.AtPrime P.asIdeal) := hVnormal
-  let hf :=
-    Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hNC
-  let : IsDomain (Localization.Away (boundaryProduct t r)) :=
-    IsLocalization.Away.isDomain
-      (Localization.Away (boundaryProduct t r)) hf
-  let j := localizationAwayToSupportComplement
-    (I.comap f) u P.asIdeal (boundaryProduct t r) hboundary
-  let g := comapSupportComplementTo I f
-  let : Nonempty (I.comap f).supportComplement :=
-    ⟨j (genericPoint
-      (Spec (.of (Localization.Away (boundaryProduct t r)))))⟩
-  let : Nonempty I.supportComplement :=
-    ⟨g (Classical.choice
-      (inferInstance : Nonempty (I.comap f).supportComplement))⟩
-  intro W hW
+    domainV regularV normalV hf domainAway j g nonemptyLocal nonemptyOriginal W hW
   obtain ⟨Z, component, hZ, hcomponent⟩ :=
     exists_galoisComponent_pullbackSupportComplementCoverToBoundaryAway
       I f u P t hboundary hNC hVdomain W hW
@@ -217,13 +203,13 @@ theorem IsNormalCrossingsAt.exists_etaleStrictChart_galoisComponent_quotientIdea
                 (_hlocalizedCharZero : ∀ j : Fin 2, j.1 < r →
                   CharZero (V ⧸ Ideal.span {t j}))
                 (_hpV : CharP (V ⧸ maximalIdeal V) p),
-                  letI : IsDomain V := hVdomain
-                  letI : IsRegularRing V := hVregular
-                  letI : IsIntegrallyClosed V := hVnormal
+                  let _ : IsDomain V := hVdomain
+                  let _ : IsRegularRing V := hVregular
+                  let _ : IsIntegrallyClosed V := hVnormal
                   let hf :=
                     Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
                       hNC
-                  letI : IsDomain
+                  let _ : IsDomain
                       (Localization.Away (boundaryProduct t r)) :=
                     IsLocalization.Away.isDomain
                       (Localization.Away (boundaryProduct t r)) hf
@@ -231,11 +217,11 @@ theorem IsNormalCrossingsAt.exists_etaleStrictChart_galoisComponent_quotientIdea
                     (I.comap f) u P.asIdeal
                       (boundaryProduct t r) hboundary
                   let g := comapSupportComplementTo I f
-                  letI : Nonempty (I.comap f).supportComplement :=
+                  let _ : Nonempty (I.comap f).supportComplement :=
                     ⟨j (genericPoint
                       (Spec (.of
                         (Localization.Away (boundaryProduct t r)))))⟩
-                  letI : Nonempty I.supportComplement :=
+                  let _ : Nonempty I.supportComplement :=
                     ⟨g (Classical.choice
                       (inferInstance :
                         Nonempty (I.comap f).supportComplement))⟩
@@ -264,26 +250,7 @@ theorem IsNormalCrossingsAt.exists_etaleStrictChart_galoisComponent_quotientIdea
   refine ⟨P, hqP, hPheight, r, t, branch, hVdomain, hVregular,
     hVnormal, hboundary, hNC, hbranch, hqV, hlocalizedCharZero,
     hpV, ?_⟩
-  dsimp only
-  let : IsDomain (Localization.AtPrime P.asIdeal) := hVdomain
-  let : IsRegularRing (Localization.AtPrime P.asIdeal) := hVregular
-  let : IsIntegrallyClosed (Localization.AtPrime P.asIdeal) := hVnormal
-  let hf :=
-    Kummer.splitStrictNormalCrossings_boundaryEquation_ne_zero
-      hNC
-  let : IsDomain (Localization.Away (boundaryProduct t r)) :=
-    IsLocalization.Away.isDomain
-      (Localization.Away (boundaryProduct t r)) hf
-  let j := localizationAwayToSupportComplement
-    (I.comap f) u P.asIdeal (boundaryProduct t r) hboundary
-  let g := comapSupportComplementTo I f
-  let : Nonempty (I.comap f).supportComplement :=
-    ⟨j (genericPoint
-      (Spec (.of (Localization.Away (boundaryProduct t r)))))⟩
-  let : Nonempty I.supportComplement :=
-    ⟨g (Classical.choice
-      (inferInstance : Nonempty (I.comap f).supportComplement))⟩
-  intro W hW
+  intro domainV regularV normalV hf domainAway j g nonemptyLocal nonemptyOriginal W hW
   obtain ⟨Z, component, hZ, hcomponent⟩ :=
     exists_galoisComponent_pullbackSupportComplementCoverToBoundaryAway
       I f u P t hboundary hNC hVdomain W hW

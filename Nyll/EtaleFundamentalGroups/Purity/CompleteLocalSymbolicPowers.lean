@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalChevalley
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Finiteness.Basic
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Ideal
-import Mathlib.RingTheory.Localization.Submodule
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalChevalley
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Finiteness.Basic
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Localization.Submodule
 
 /-!
 # Symbolic powers in the complete-local vanishing argument
@@ -22,6 +24,8 @@ at once: a single element outside the prime sends it into the ordinary
 power.  These two facts supply the separated filtration and the torsion
 error terms used in the complete-local vanishing argument.
 -/
+
+@[expose] public section
 
 noncomputable section
 

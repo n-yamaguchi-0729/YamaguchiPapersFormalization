@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
-import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.GenericTensorSplit
-import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
-import Mathlib.Algebra.Algebra.Defs
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
-import Mathlib.RingTheory.Localization.FractionRing
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalk
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFractionFieldMap
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkAffineGenericDescent
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.AffineNeighborhoodFaithfullyFlat
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.GenericTensorSplit
+public import Nyll.SchemeTheory.RingTheory.Etale.IntegralClosureEtaleOfSplit
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.AlgebraicGeometry.AffineScheme
+public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
+public import Mathlib.RingTheory.Localization.FractionRing
 
 
 /-!
@@ -26,6 +28,8 @@ The concrete tensor cancellation and commutation comparison then supplies the
 generic-fiber splitting used by normal-localization and integral-closure descent.
 No finite presentation of the original fraction field over its base is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -41,8 +41,8 @@ variable {G : Type v} [Monoid G] [TopologicalSpace G]
 omit [TopologicalSpace G] in
 private lemma hom_apply_rho {X Y : Action FintypeCat.{u} G}
     (f : X ⟶ Y) (g : G) (x : X.V) :
-    ConcreteCategory.hom f.hom (ConcreteCategory.hom (X.ρ g) x) =
-      ConcreteCategory.hom (Y.ρ g) (ConcreteCategory.hom f.hom x) := by
+    ConcreteCategory.hom f.hom (ConcreteCategory.hom (X.ρ g).asHom x) =
+      ConcreteCategory.hom (Y.ρ g).asHom (ConcreteCategory.hom f.hom x) := by
   simpa only [FintypeCat.comp_apply] using
     ConcreteCategory.congr_hom (f.comm g) x
 
@@ -52,14 +52,14 @@ private lemma isContinuous_of_finite_limit
     (hF : ∀ j, Action.IsContinuous (F.obj j)) :
     Action.IsContinuous c.pt := by
   rw [Action.isContinuous_def]
-  change Continuous (fun p : G × c.pt.V ↦ ConcreteCategory.hom (c.pt.ρ p.1) p.2)
+  change Continuous (fun p : G × c.pt.V ↦ ConcreteCategory.hom (c.pt.ρ p.1).asHom p.2)
   rw [continuous_prod_of_discrete_right]
   intro x
   rw [continuous_discrete_rng]
   intro y
   have hpreimage :
-      (fun g : G ↦ ConcreteCategory.hom (c.pt.ρ g) x) ⁻¹' ({y} : Set _) =
-        ⋂ j : J, (fun g : G ↦ ConcreteCategory.hom ((F.obj j).ρ g)
+      (fun g : G ↦ ConcreteCategory.hom (c.pt.ρ g).asHom x) ⁻¹' ({y} : Set _) =
+        ⋂ j : J, (fun g : G ↦ ConcreteCategory.hom ((F.obj j).ρ g).asHom
           (ConcreteCategory.hom (c.π.app j).hom x)) ⁻¹'
             ({ConcreteCategory.hom (c.π.app j).hom y} : Set _) := by
     ext g
@@ -74,7 +74,7 @@ private lemma isContinuous_of_finite_limit
         (isLimitOfPreserves (Action.forget FintypeCat G) hc)
       intro j
       change ConcreteCategory.hom (c.π.app j).hom
-          (ConcreteCategory.hom (c.pt.ρ g) x) =
+          (ConcreteCategory.hom (c.pt.ρ g).asHom x) =
         ConcreteCategory.hom (c.π.app j).hom y
       exact (hom_apply_rho (X := c.pt) (c.π.app j) g x).trans (h j)
   rw [hpreimage]
@@ -82,7 +82,7 @@ private lemma isContinuous_of_finite_limit
   intro j
   have hcontinuous :
       Continuous (fun p : G × (F.obj j).V ↦
-        ConcreteCategory.hom ((F.obj j).ρ p.1) p.2) :=
+        ConcreteCategory.hom ((F.obj j).ρ p.1).asHom p.2) :=
     (Action.isContinuous_def (F.obj j)).mp (hF j)
   exact (isOpen_discrete _).preimage
     (hcontinuous.comp (continuous_id.prodMk continuous_const))
@@ -93,7 +93,7 @@ private lemma isContinuous_of_finite_colimit
     (hF : ∀ j, Action.IsContinuous (F.obj j)) :
     Action.IsContinuous c.pt := by
   rw [Action.isContinuous_def]
-  change Continuous (fun p : G × c.pt.V ↦ ConcreteCategory.hom (c.pt.ρ p.1) p.2)
+  change Continuous (fun p : G × c.pt.V ↦ ConcreteCategory.hom (c.pt.ρ p.1).asHom p.2)
   rw [continuous_prod_of_discrete_right]
   intro x
   obtain ⟨j, y, hy⟩ := FintypeCat.jointly_surjective
@@ -102,10 +102,10 @@ private lemma isContinuous_of_finite_colimit
     (isColimitOfPreserves (Action.forget FintypeCat G) hc) x
   have hcontinuous :
       Continuous (fun p : G × (F.obj j).V ↦
-        ConcreteCategory.hom ((F.obj j).ρ p.1) p.2) :=
+        ConcreteCategory.hom ((F.obj j).ρ p.1).asHom p.2) :=
     (Action.isContinuous_def (F.obj j)).mp (hF j)
   have horbit :
-      Continuous (fun g : G ↦ ConcreteCategory.hom ((F.obj j).ρ g) y) :=
+      Continuous (fun g : G ↦ ConcreteCategory.hom ((F.obj j).ρ g).asHom y) :=
     hcontinuous.comp (continuous_id.prodMk continuous_const)
   have hleg :
       Continuous (fun z : (F.obj j).V ↦ ConcreteCategory.hom (c.ι.app j).hom z) :=

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
-import Mathlib.Algebra.Category.ModuleCat.Basic
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
+public import Mathlib.Algebra.Category.ModuleCat.Basic
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
 
 /-!
 # The module of derived local-cohomology classes
@@ -20,6 +22,8 @@ underlying additive-group colimit.
 The colimit maps out of the derived-Ext groups are linear.  Every class in
 the resulting module is annihilated by a power of the support ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -85,7 +89,7 @@ theorem derivedLocalCohomologyScalarMap_zero
 
 /-- The scalar endomorphisms furnish the module laws on the existing
 additive group.  This definition is deliberately not an instance. -/
-@[instance_reducible] private def derivedLocalCohomologyModuleStructure
+@[instance_reducible] def derivedLocalCohomologyModuleStructure
     (I : Ideal R) (M : ModuleCat.{u} R) (i : ℕ) :
     Module R (derivedLocalCohomology I M i) where
   smul a z := derivedLocalCohomologyScalarMap I M i a z

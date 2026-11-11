@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.NonunitLocalization
 
 /-!
 # Globalizing an integer unit from height-two localizations
@@ -14,6 +16,8 @@ be a unit on the divisor is detected at a height-two localization.  Thus a
 unit result at every such localization globalizes to the generic point of
 the divisor.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

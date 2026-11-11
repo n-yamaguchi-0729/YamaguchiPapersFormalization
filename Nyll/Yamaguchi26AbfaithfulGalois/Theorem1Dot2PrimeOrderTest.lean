@@ -4,11 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimePowerCharacterDetection
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaPrimeOrderTest
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.PrimePowerCharacterDetection
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualAbelianizationPrimePowers
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.TopologicallyCharacteristicSubgroups
 
 /-!
 # Lemma 1.2: the prime-order test
@@ -19,6 +23,8 @@ in the abelianization: two classes agree modulo `ℓ ^ s` precisely when
 they differ by an `ℓ ^ s`-th power. The prime order of `H/N` is not
 restricted to `Σ`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

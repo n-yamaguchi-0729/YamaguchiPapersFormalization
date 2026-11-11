@@ -3,15 +3,19 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedMixedCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitelyGeneratedMixedCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem3Dot6MixedCharacteristic
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaOrdinary
 
 /-!
 # The characteristic-zero case of the earlier finitely generated field example
 
 The mixed-characteristic valuation is constructed from finite generation.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

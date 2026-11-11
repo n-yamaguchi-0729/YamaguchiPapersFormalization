@@ -4,23 +4,25 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharAllPrimeCompleteDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
-import Nyll.GaloisCohomology.ProP.ResidualCharacterDetection
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Perfect
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharAllPrimeCompleteDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1Action
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupAbsoluteAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupTopology
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
+public import Nyll.GaloisCohomology.ProP.ResidualCharacterDetection
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ConjugationComparison
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Perfect
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Complete mixed-characteristic detection on actual fixing subgroups
@@ -29,6 +31,8 @@ Faithful H¹ supplies a changed finite p-power character. The actual closure
 comparison moves that character to the fixing subgroup, and its factorization
 through the pro-p residual quotient detects the same ambient conjugation.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.NumberField.Discriminant.Different
-import Mathlib.NumberTheory.NumberField.ExistsRamified
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.NumberTheory.NumberField.Discriminant.Basic
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.RingTheory.Unramified.Locus
-import Mathlib.Data.Int.Order.Units
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Connected
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
+module
+
+public import Mathlib.NumberTheory.NumberField.Discriminant.Different
+public import Mathlib.NumberTheory.NumberField.ExistsRamified
+public import Mathlib.RingTheory.Smooth.Flat
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.RingTheory.Unramified.Locus
+public import Mathlib.Data.Int.Order.Units
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Connected
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.Finite
+public import Mathlib.AlgebraicGeometry.Morphisms.Etale
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.Iso
 
 /-!
 # Finite étale algebras over the integers
@@ -30,6 +32,8 @@ number field of degree greater than one has absolute discriminant greater
 than two. Applying this to a component of the generic fibre shows that a
 connected finite étale `ℤ`-algebra is `ℤ` itself.
 -/
+
+@[expose] public section
 
 noncomputable section
 

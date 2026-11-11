@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Topology.Algebra.Ring.Basic
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisMap
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Topology.Algebra.Ring.Basic
 
 /-!
 # Averaging absolute Galois characters
@@ -18,6 +20,8 @@ Average cyclic absolute characters over a finite relative Galois group.
 The average is invariant under the relative action and preserves a common
 orbit value when the group order is coprime to the character modulus.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.Arithmetic
-import Mathlib.Algebra.Order.Archimedean.Defs
-import Mathlib.Data.Int.LeastGreatest
-import Mathlib.Order.Filter.IsBounded
-import Mathlib.Tactic.NormNum
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.Arithmetic
+public import Mathlib.Algebra.Order.Archimedean.Defs
+public import Mathlib.Order.Int.LeastGreatest
+public import Mathlib.Order.Filter.IsBounded
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Lower bounds and a minimum for logarithm denominators
@@ -17,6 +19,8 @@ Linear growth dominates the logarithmic denominator contribution, so a single
 integer lies strictly below every term of the resulting real sequence. The
 corresponding integer sequence using `padicValNat` therefore attains a minimum.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField
 

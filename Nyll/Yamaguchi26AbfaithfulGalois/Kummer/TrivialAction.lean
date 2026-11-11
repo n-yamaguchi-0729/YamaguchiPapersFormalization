@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
-import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Mathlib.Topology.Instances.ZMod
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummer
+public import Nyll.GaloisCohomology.Kummer.Concrete.SeparableAbsoluteKummerNaturality
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Mathlib.Topology.Instances.ZMod
 
 /-!
 # Kummer criterion for a trivial mod-n action
@@ -17,6 +19,8 @@ conjugation is trivial on `G_Kᵃᵇ/n`, using its exact character-dual
 description: every continuous `ZMod n`-valued character is fixed.
 The right side says `τ(x)/x^a` is an `n`-th power for every unit `x`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

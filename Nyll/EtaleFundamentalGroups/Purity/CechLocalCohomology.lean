@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CechInjectiveDegreeZero
-import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationDegreeZero
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDimensionShift
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
-import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
-import Mathlib.Algebra.Category.ModuleCat.Injective
-import Mathlib.Algebra.Homology.SingleHomology
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CechInjectiveDegreeZero
+public import Nyll.EtaleFundamentalGroups.Purity.CechLocalizationDegreeZero
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDimensionShift
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionInjectivePresentation
+public import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+public import Mathlib.Algebra.Category.ModuleCat.Injective
+public import Mathlib.Algebra.Homology.SingleHomology
 
 /-!
 # Čech cohomology and derived local cohomology
@@ -24,6 +26,8 @@ The coefficient long exact sequences give the comparison in positive
 degrees by dimension shifting.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open CategoryTheory Limits MonoidalCategory HomologicalComplex
@@ -34,7 +38,8 @@ universe u
 
 variable {R : Type u} [CommRing R] [IsNoetherianRing R]
 
-private abbrev cechCoefficients (xs : List R) (M : ModuleCat.{u} R) :=
+/-- The Čech localization complex with coefficients in the given module. -/
+abbrev cechCoefficients (xs : List R) (M : ModuleCat.{u} R) :=
   ((tensorLeft M).mapHomologicalComplex (ComplexShape.up ℕ)).obj
     (cechLocalizationComplex xs)
 
@@ -148,7 +153,8 @@ theorem cechHomologyZeroToModule_range (xs : List R) (M : ModuleCat.{u} R) :
       _ = (cechHomologyZeroToModule xs E) w := congrArg (cechHomologyZeroToModule xs E) hv
       _ = u z := hw
 
-private def cechHomologyZeroEquivPrimaryComponent (xs : List R) (M : ModuleCat.{u} R) :
+/-- Degree-zero Čech cohomology identifies with ideal-power torsion. -/
+def cechHomologyZeroEquivPrimaryComponent (xs : List R) (M : ModuleCat.{u} R) :
     (cechCoefficients xs M).homology 0 ≃ₗ[R]
       Ideal.primaryComponent M (Ideal.ofList xs) := by
   let f : (cechCoefficients xs M).homology 0 →ₗ[R]
@@ -167,7 +173,8 @@ private def cechHomologyZeroEquivPrimaryComponent (xs : List R) (M : ModuleCat.{
     obtain ⟨w, hw⟩ := hz
     exact ⟨w, Subtype.ext hw⟩
 
-private def cechLocalCohomologyZeroEquiv (xs : List R) (M : ModuleCat.{u} R) :
+/-- The degree-zero comparison between Čech and derived local cohomology. -/
+def cechLocalCohomologyZeroEquiv (xs : List R) (M : ModuleCat.{u} R) :
     (cechCoefficients xs M).homology 0 ≃ₗ[R]
       derivedLocalCohomologyModule (Ideal.ofList xs) M 0 :=
   (cechHomologyZeroEquivPrimaryComponent xs M).trans
@@ -189,7 +196,8 @@ private theorem cechLocalCohomologyZeroEquiv_eval (xs : List R) (M : ModuleCat.{
         (e.apply_symm_apply (cechHomologyZeroEquivPrimaryComponent xs M z))
     _ = (cechHomologyZeroToModule xs M) z := rfl
 
-private theorem cechLocalCohomologyZeroEquiv_secondMap
+/-- The degree-zero comparison commutes with the second coefficient map. -/
+theorem cechLocalCohomologyZeroEquiv_secondMap
     (xs : List R) {S : ShortComplex (ModuleCat.{u} R)} (hS : S.ShortExact) :
     (cechLocalCohomologyZeroEquiv xs S.X₃).toLinearMap.comp
       (homologyMap ((tensorComplexCoefficientFunctor (cechLocalizationComplex xs)).map S.g) 0).hom =
@@ -218,7 +226,8 @@ private theorem cechLocalCohomologyZeroEquiv_secondMap
       (DFunLike.congr_fun (derivedLocalCohomologyZeroToModule_comp_secondMap
         (Ideal.ofList xs) hS) (cechLocalCohomologyZeroEquiv xs S.X₂ z)).symm
 
-private theorem cechCoefficients_isZero_homology_succ
+/-- Positive Čech cohomology vanishes for injective coefficients. -/
+theorem cechCoefficients_isZero_homology_succ
     (xs : List R) (M : ModuleCat.{u} R) [Module.Injective R M] (n : ℕ) :
     IsZero ((cechCoefficients xs M).homology (n + 1)) :=
   IsZero.of_iso
@@ -226,7 +235,8 @@ private theorem cechCoefficients_isZero_homology_succ
       (ModuleCat.of R (Ideal.primaryComponent M (Ideal.ofList xs))) (n + 1) (by omega))
     ((cechInjectiveHomotopyEquiv xs M).toHomologyIso (n + 1))
 
-private def cechLocalCohomologyOneEquiv
+/-- The degree-one comparison obtained from an injective presentation. -/
+def cechLocalCohomologyOneEquiv
     (xs : List R) {S : ShortComplex (ModuleCat.{u} R)} (hS : S.ShortExact)
     [Module.Injective R S.X₂] :
     (cechCoefficients xs S.X₁).homology 1 ≃ₗ[R]

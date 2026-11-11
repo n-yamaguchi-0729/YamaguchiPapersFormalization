@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.AdicProdiscreteComparison
-import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.InverseEstimates
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnitPadicAction.AdicProdiscreteComparison
+public import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
+public import Nyll.ValuedFieldTheory.Valuation.AbsoluteValue.Theory.ExponentialValuations
 
 /-!
 # The valuation topology on principal units is the adic topology
@@ -14,6 +17,8 @@ import Nyll.ValuedFieldTheory.Valuation.ValuedAdicComplete
 The comparison uses the actual valuation topology and does not require a
 finite residue field. The valued-field structure is fixed once in the context.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

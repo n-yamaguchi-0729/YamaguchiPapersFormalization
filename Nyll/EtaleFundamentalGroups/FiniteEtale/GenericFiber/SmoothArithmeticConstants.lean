@@ -4,21 +4,23 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Smooth.SmoothReduced
-import Mathlib.Data.Int.Order.Units
-import Mathlib.LinearAlgebra.FiniteDimensional.Basic
-import Mathlib.NumberTheory.NumberField.Discriminant.Basic
-import Mathlib.NumberTheory.NumberField.Discriminant.Different
-import Mathlib.NumberTheory.NumberField.ExistsRamified
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Finiteness.Quotient
-import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
-import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients.Basic
-import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
-import Mathlib.RingTheory.LocalRing.ResidueField.Separable
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Nyll.SchemeTheory.RingTheory.Smooth.SmoothReduced
+public import Mathlib.Data.Int.Order.Units
+public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
+public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
+public import Mathlib.NumberTheory.NumberField.Discriminant.Different
+public import Mathlib.NumberTheory.NumberField.ExistsRamified
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Finiteness.Quotient
+public import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
+public import Mathlib.RingTheory.Ideal.Quotient.HasFiniteQuotients.Basic
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Localization
+public import Mathlib.RingTheory.LocalRing.ResidueField.Separable
+public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # Smooth arithmetic schemes and fields of constants
@@ -29,14 +31,18 @@ special fibers; faithful flatness descends this reducedness to the ring of
 integers. The local unramified criterion and Minkowski then force degree one.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe uR uS uK uA
 
 open scoped TensorProduct NumberField
 
 namespace EtaleFundamentalGroups
 
 private theorem unramifiedAt_of_radical_specialFiber
-    {R S : Type} [CommRing R] [CommRing S] [Algebra R S]
+    {R : Type uR} {S : Type uS} [CommRing R] [CommRing S] [Algebra R S]
     [Module.Finite R S] (p : Ideal R) [p.IsMaximal]
     [PerfectField p.ResidueField] (q : Ideal S) [q.IsPrime] [q.LiesOver p]
     (hred : (p.map (algebraMap R S)).IsRadical) :
@@ -77,7 +83,7 @@ private theorem unramifiedAt_of_radical_specialFiber
 /-- Smoothness over the integers and faithful flatness over the ring of
 integers force every finite prime of that ring of integers to be unramified. -/
 theorem ringOfIntegers_unramifiedAt_of_smooth_faithfullyFlat
-    (K A : Type) [Field K] [NumberField K] [CommRing A]
+    (K : Type uK) (A : Type uA) [Field K] [NumberField K] [CommRing A]
     [Algebra (𝓞 K) A] [Module.FaithfullyFlat (𝓞 K) A] [Algebra.Smooth ℤ A]
     (p : Ideal ℤ) [p.IsMaximal]
     (q : Ideal (𝓞 K)) [q.IsPrime] [q.LiesOver p] :
@@ -102,7 +108,7 @@ theorem ringOfIntegers_unramifiedAt_of_smooth_faithfullyFlat
 in degree. In the geometric application the algebra comes from a finite
 affine cover of the smooth arithmetic covering scheme. -/
 theorem numberField_finrank_eq_one_of_smooth_faithfullyFlat_ringOfIntegers
-    (K A : Type) [Field K] [NumberField K] [CommRing A]
+    (K : Type uK) (A : Type uA) [Field K] [NumberField K] [CommRing A]
     [Algebra (𝓞 K) A] [Module.FaithfullyFlat (𝓞 K) A] [Algebra.Smooth ℤ A] :
     Module.finrank ℚ K = 1 := by
   have hunit : IsUnit (NumberField.discr K) := by

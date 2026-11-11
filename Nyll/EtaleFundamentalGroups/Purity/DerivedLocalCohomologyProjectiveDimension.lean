@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
-import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyProjectiveDimension
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+public import Nyll.EtaleFundamentalGroups.Purity.LocalCohomologyProjectiveDimension
 
 /-!
 # Projective-dimension vanishing for derived local cohomology
@@ -14,6 +16,8 @@ Uniform projective-dimension bounds make every object of the derived Ext
 ideal-powers diagram trivial.  This gives the derived-colimit counterpart of
 the existing vanishing results for Mathlib's legacy local-cohomology object.
 -/
+
+@[expose] public section
 
 noncomputable section
 

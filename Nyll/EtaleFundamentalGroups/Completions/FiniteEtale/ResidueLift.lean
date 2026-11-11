@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Polynomial.Lifts
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.RingTheory.LocalRing.ResidueField.Instances
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ResidueClassification
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
+module
+
+public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.RingTheory.LocalRing.ResidueField.Instances
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ResidueClassification
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
 
 /-!
 # Lifting a finite separable residue extension
@@ -23,6 +25,8 @@ explicit special fibre: quotienting the adjoined-root algebra by the extended
 maximal ideal gives the adjoined root of the residue minimal polynomial, hence
 a field.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,7 +46,8 @@ noncomputable def finiteEtaleResidueLiftPowerBasis :
     PowerBasis (IsLocalRing.ResidueField R) l :=
   Field.powerBasisOfFiniteOfSeparable _ _
 
-private theorem exists_monic_residue_polynomial_lift :
+/-- A finite separable residue generator has a monic polynomial lift of the same degree. -/
+theorem exists_monic_residue_polynomial_lift :
     ∃ f : R[X],
       f.map (IsLocalRing.residue R) =
           minpoly (IsLocalRing.ResidueField R)

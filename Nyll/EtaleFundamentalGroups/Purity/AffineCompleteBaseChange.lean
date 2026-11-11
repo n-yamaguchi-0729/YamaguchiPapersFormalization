@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleCompleteBaseChange
-import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleCompleteBaseChange
+public import Nyll.SchemeTheory.FiniteEtale.AffineEquivalence
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite étale covers under complete affine base change
@@ -14,6 +17,8 @@ Quotient base change for finite étale algebras over a complete Noetherian local
 transported across the affine finite étale equivalence.  This gives the corresponding
 equivalence for finite étale covers of affine schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
-import Mathlib.AlgebraicGeometry.FunctionField
-import Mathlib.AlgebraicGeometry.Noetherian
+module
+
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.DominantPreimmersionPullback
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
+public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.Noetherian
 
 /-!
 # Finite-etale covers on local normal-crossings complements
@@ -18,6 +20,8 @@ principal local chart supplied by a normal-crossings boundary equation.  The
 resulting object has exactly the base scheme used by the local finite-quotient
 inertia statement.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -222,7 +226,8 @@ def pullbackSupportComplementCoverToBoundaryAway
     (localizationAwayToSupportComplement I x P.asIdeal
       (boundaryProduct t r) hboundary)).obj W
 
-private theorem boundaryProduct_ne_zero_of_splitStrictNormalCrossings
+/-- A split strict normal-crossings boundary product is nonzero. -/
+theorem boundaryProduct_ne_zero_of_splitStrictNormalCrossings
     {V : Type u} [CommRing V] [IsDomain V] [IsLocalRing V]
     {r : ℕ} {t : Fin 2 → V}
     (hNC : IsSplitStrictNormalCrossingsAt
@@ -279,20 +284,15 @@ theorem localizationAwayToSupportComplement_pullback_isGalois_of_ne_zero
       (I.stalkIdeal x).map
           (algebraMap (X.presheaf.stalk x) (Localization.AtPrime P)) =
         Ideal.span {f}) :
-    letI : IsDomain (Localization.Away f) :=
+    let : IsDomain (Localization.Away f) :=
       IsLocalization.Away.isDomain (Localization.Away f) hf
-    letI : Nonempty I.supportComplement :=
+    let : Nonempty I.supportComplement :=
       supportComplement_nonempty_of_localizationAway
         I x P f hf hboundary
     ∀ (W : FiniteEtale I.supportComplement), IsGalois W →
       IsGalois ((FiniteEtale.pullback
         (localizationAwayToSupportComplement I x P f hboundary)).obj W) := by
-  let : IsDomain (Localization.Away f) :=
-    IsLocalization.Away.isDomain (Localization.Away f) hf
-  let : Nonempty I.supportComplement :=
-    supportComplement_nonempty_of_localizationAway
-      I x P f hf hboundary
-  intro W hW
+  intro sharedOwner1 sharedOwner2 W hW
   exact localizationAwayToSupportComplement_pullback_isGalois
     I x P f hf hboundary W hW
 

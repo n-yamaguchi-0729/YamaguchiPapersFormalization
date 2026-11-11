@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPrimeKernel
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.Topology.Algebra.Ring.Basic
-import Mathlib.Topology.LocallyConstant.Basic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.Ring
+module
+
+public import Nyll.GaloisCohomology.ProfiniteIntegers.ZModPrimeKernel
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.Topology.Algebra.Ring.Basic
+public import Mathlib.Topology.LocallyConstant.Basic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.Ring
 
 /-!
 # Successive lifting of finite crossed cocycles
@@ -19,6 +21,8 @@ An arbitrary finite-valued lift has a defect in the prime-order kernel.
 Trivial action on that kernel makes the defect an ordinary two-cocycle;
 a primitive supplied by H² vanishing corrects the lift.
 -/
+
+@[expose] public section
 
 namespace GaloisCohomology
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.RepresentationCharacterTwist
-import Mathlib.RepresentationTheory.Invariants
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.RepresentationCharacterTwist
+public import Mathlib.RepresentationTheory.Invariants
 
 /-!
 # Lifting character eigenvectors by averaging
@@ -14,6 +16,8 @@ The inverse character twist turns character eigenvectors into invariants.
 The standard averaging projection commutes with an actual intertwining map,
 so every eigenvector in its image has an eigenvector preimage.
 -/
+
+@[expose] public section
 
 noncomputable section
 

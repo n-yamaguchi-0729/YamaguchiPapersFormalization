@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
-import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Localization.Ideal
+module
+
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkFlat
+public import Nyll.EtaleFundamentalGroups.StrictHenselian.GeometricStalkLocalizedGerm
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Localization.Ideal
 
 /-!
 # The ordinary local ring mapping to the actual geometric stalk
@@ -17,6 +19,8 @@ through the localization at its actual kernel prime. This factorization
 is local, and for a domain base it is injective. No comparison with a
 separately postulated strict henselization is used.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,7 +36,8 @@ variable {R Ω : Type u} [CommRing R] [Field Ω] (φ : R →+* Ω)
 def geometricBasePrime : PrimeSpectrum R :=
   ⟨RingHom.ker φ, RingHom.ker_isPrime φ⟩
 
-private theorem geometricBaseDenominatorUnit
+/-- Elements outside the geometric base prime become units in the geometric stalk. -/
+theorem geometricBaseDenominatorUnit
     (r : (geometricBasePrime φ).asIdeal.primeCompl) :
     IsUnit (geometricStalkStructureMap φ r) := by
   apply geometricStalk_isUnit_of_evaluation_ne_zero

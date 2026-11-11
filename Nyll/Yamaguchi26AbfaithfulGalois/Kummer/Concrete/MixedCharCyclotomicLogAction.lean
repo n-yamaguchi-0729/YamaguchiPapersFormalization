@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogDifference
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRepresentation
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitEigenLift
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogDifference
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRepresentation
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitEigenLift
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.CyclotomicGaloisCard
 
 /-!
 # Trivial lower cohomology gives the actual character-log action modulo p
@@ -17,6 +20,8 @@ Its vectors lift to cyclotomic eigenunits. Kummer descent gives a logarithm
 for each character difference; multiplying by the inverse character and
 using saturation returns the witness to the same character space.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

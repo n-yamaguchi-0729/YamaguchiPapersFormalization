@@ -10,20 +10,22 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.RingTheory.Algebraic.Basic
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.HopkinsLevitzki
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Ideal.Quotient.Noetherian
-import Mathlib.RingTheory.KrullDimension.Basic
-import Mathlib.RingTheory.Length
-import Mathlib.RingTheory.Localization.FractionRing
-import Mathlib.Tactic.Choose
-import Mathlib.Tactic.Lift
-import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
+module
+
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.RingTheory.Algebraic.Basic
+public import Mathlib.RingTheory.DedekindDomain.Basic
+public import Mathlib.RingTheory.HopkinsLevitzki
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Mathlib.RingTheory.Length
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Tactic.Choose
+public import Mathlib.Tactic.Lift
+public import Mathlib.Tactic.Linarith
+public import Mathlib.Tactic.NormNum
 
 /-!
 # Finite intermediate algebras in a fraction field
@@ -32,6 +34,8 @@ An intermediate algebra that is finite in the fraction field satisfies the
 Krull–Akizuki finiteness and dimension bounds. Length estimates for scalar-multiple
 quotients and finite lattices provide the supporting module arguments.
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomology
 
 /-!
 # Radical invariance of derived local cohomology
@@ -14,6 +16,8 @@ whose radical contains it.  Applying the same cofinality argument as for
 Mathlib's legacy local cohomology shows that the derived-Ext colimit depends
 only on the radical of its support ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.HigherRadical.ActualCompositum.TensorComponent
 
 /-!
 # Canonical complete-DVF higher-radical tensor components
@@ -15,6 +17,8 @@ structure.  The construction is the localization lift of the inclusion of
 the valuation ring.  It therefore supplies, rather than assumes, the scalar
 tower needed by the fixed generic tensor component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -157,18 +161,18 @@ theorem
     (hvarpi : base.valuation.IsUniformizer (varpi : K))
     (D : ℕ) (hdegree : Module.finrank K L ≤ D) :
     let V := base.valuationSubring
-    letI : IsFractionRing V K :=
+    let : IsFractionRing V K :=
       base.toDVF.valuationSubring_isFractionRing
-    letI : IsIntegrallyClosed V :=
+    let : IsIntegrallyClosed V :=
       base.toDVF.valuationSubring_isIntegrallyClosed
     let N := D.factorial
     let Rn := AdjoinRoot (X ^ N - C varpi)
-    letI : IsDomain Rn :=
+    let : IsDomain Rn :=
       completeDVFFactorialRootRing_isDomain base varpi hvarpi D
     let F := FractionRing Rn
-    letI : Algebra K F :=
+    let : Algebra K F :=
       completeDVFFactorialRootFractionFieldAlgebra base varpi hvarpi D
-    letI : IsScalarTower V K F :=
+    let : IsScalarTower V K F :=
       completeDVFFactorialRootFractionField_isScalarTower
         base varpi hvarpi D
     ∀ (m : Ideal (F ⊗[K] L)) (hm : m.IsMaximal),
@@ -178,23 +182,7 @@ theorem
         pureRadicalFractionFieldGenericTensorComponentRootAlgebra
           (K := K) varpi m
       Algebra.Etale Rn (integralClosure Rn P) := by
-  dsimp only
-  let V := base.valuationSubring
-  let N := D.factorial
-  let Rn := AdjoinRoot (X ^ N - C varpi)
-  let : IsFractionRing V K :=
-    base.toDVF.valuationSubring_isFractionRing
-  let : IsIntegrallyClosed V :=
-    base.toDVF.valuationSubring_isIntegrallyClosed
-  let : IsDomain Rn :=
-    completeDVFFactorialRootRing_isDomain base varpi hvarpi D
-  let F := FractionRing Rn
-  let : Algebra K F :=
-    completeDVFFactorialRootFractionFieldAlgebra base varpi hvarpi D
-  let : IsScalarTower V K F :=
-    completeDVFFactorialRootFractionField_isScalarTower
-      base varpi hvarpi D
-  intro m hm
+  intro V sharedOwner1 sharedOwner2 N Rn sharedOwner5 F sharedOwner6 sharedOwner7 m hm
   let : m.IsMaximal := hm
   exact
     integralClosure_pureRadicalFractionFieldGenericTensorComponent_etale_of_completeBase

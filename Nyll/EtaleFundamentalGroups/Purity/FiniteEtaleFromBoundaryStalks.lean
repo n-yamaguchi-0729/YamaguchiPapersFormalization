@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FiniteEtale.Local.OfTargetLocalizations
-import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
-import Mathlib.AlgebraicGeometry.Noetherian
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+module
+
+public import Nyll.SchemeTheory.FiniteEtale.Local.OfTargetLocalizations
+public import Nyll.SchemeTheory.LocalGeometry.EtaleStalkPrimeLocalization
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Finite etaleness from the punctured locus and boundary stalks
@@ -22,6 +24,8 @@ The local input is deliberately only formal etaleness.  In applications to a
 normalization, this is the part supplied by punctured purity after identifying
 the localized normalization with the canonical local extension.
 -/
+
+@[expose] public section
 
 noncomputable section
 

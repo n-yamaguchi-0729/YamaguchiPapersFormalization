@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingSolutions
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingQuotient
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
-import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.Topologies.QuotientMaps
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingSolutions
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ResidualSelfCentralizingQuotient
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+public import Nyll.ProCGroups.FreeProC.Characterization.EmbeddingProblems
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # The finite embedding formulation of Sigma-abelianization-faithfulness
@@ -22,6 +24,8 @@ abelian quotient supplies the extension and its proper solution. Its kernel
 is exactly the image of the original normal subgroup, so it is a Sigma group.
 No Sigma restriction is placed on the original finite quotient.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

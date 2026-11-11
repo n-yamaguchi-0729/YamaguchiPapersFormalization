@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaps
-import Mathlib.Order.Zorn
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleMaps
+public import Mathlib.Order.Zorn
 
 /-!
 # Maximal essential extensions inside a fixed module
@@ -16,6 +18,8 @@ of the supremum is checked elementwise: an element of a disjoint submodule
 already belongs to one member of the chain and hence must vanish there.
 This keeps the construction in the original universe.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

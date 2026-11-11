@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
-import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.InertiaCharacterConjugation
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.RootsOfUnity
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ValuationSubring
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.CharacterMap
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.FiniteOrderValuation
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.InertiaCharacterConjugation
 
 /-!
 # Finite inertia and roots of unity
@@ -19,6 +21,8 @@ Roots of unity in the base force trivial residue action on those roots.
 For a finite extension with Henselian valuation ring and residue characteristic
 zero, the corresponding finite-order inertia elements commute with decomposition.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

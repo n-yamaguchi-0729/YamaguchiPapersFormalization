@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
-import Mathlib.Algebra.Category.ModuleCat.EpiMono
-import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Module.Submodule.Equiv
-import Mathlib.Algebra.Module.Submodule.LinearMap
-import Mathlib.Algebra.Module.Torsion.Basic
-import Mathlib.CategoryTheory.Abelian.Injective.Resolution
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.IdealPowerTorsionFunctor
+public import Mathlib.Algebra.Category.ModuleCat.EpiMono
+public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Module.Submodule.Equiv
+public import Mathlib.Algebra.Module.Submodule.LinearMap
+public import Mathlib.Algebra.Module.Torsion.Basic
+public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 
 /-!
 # Degree zero of the torsion complex of an injective resolution
@@ -24,6 +26,8 @@ its annihilating power back to the original module. This identifies
 degree-zero homology with the existing local-cohomology colimit.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 namespace EtaleFundamentalGroups.Purity
@@ -34,7 +38,8 @@ open CategoryTheory Limits
 
 variable {R : Type u} [CommRing R]
 
-private def idealPowerTorsionResolutionCyclesZeroEquiv
+/-- The primary component identifies with degree-zero torsion cycles in an injective resolution. -/
+def idealPowerTorsionResolutionCyclesZeroEquiv
     (I : Ideal R) {M : ModuleCat.{u} R} (J : InjectiveResolution M) :
     Ideal.primaryComponent M I ≃ₗ[R]
       LinearMap.ker ((derivedLocalCohomologyInjectiveComplex I J).d 0 1).hom := by

@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirstFinite
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirstTower
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.ConditionalLocalizationEtale
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirstFinite
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCoverActualRoot
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirstTower
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.ActiveRoot.ConditionalLocalizationEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.SelectedBranchEtale
 
 /-!
 # Actual-root-first fixed-component localization
@@ -18,6 +20,8 @@ component is introduced.  This is the order used by the active-root source
 theorem, and keeps the actual-root-first coordinate calculation independent
 of the large component-localization telescope.
 -/
+
+@[expose] public section
 
 noncomputable section
 

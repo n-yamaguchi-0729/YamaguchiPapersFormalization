@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedCharZero
-import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedPositiveChar
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedCharZero
+public import Nyll.Yamaguchi26AbfaithfulGalois.FieldExamples.FinitelyGeneratedPositiveChar
+public import Mathlib.Algebra.CharP.Basic
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-! # Ab-faithfulness of infinite finitely generated fields -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ProCGroups.FiniteStepSolvableQuotients

@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection
-import Nyll.GaloisCohomology.Kummer.Concrete.MixedCharacteristicCharacters
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.ValuationCharacterDetection
+public import Nyll.GaloisCohomology.Kummer.Concrete.MixedCharacteristicCharacters
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
 
 /-!
 # Detecting an automorphism which moves a discrete valuation
@@ -17,6 +19,8 @@ of its inequivalent conjugate extend simultaneously by weak approximation.
 Their different values detect the relative action on abelianization modulo
 the residue prime.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open KummerTheory ValuationTheory.DiscreteValuationField ProCGroups.Abelian

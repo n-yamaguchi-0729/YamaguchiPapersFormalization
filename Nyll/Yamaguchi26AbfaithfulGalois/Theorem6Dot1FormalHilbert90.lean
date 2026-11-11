@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
-import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
-import Nyll.ProCGroups.Topologies.QuotientMaps
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
-import Mathlib.NumberTheory.Padics.RingHoms
-import Mathlib.Topology.Instances.ZMod
-import Mathlib.GroupTheory.Torsion
-import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualCore
+public import Nyll.ProCGroups.ProC.MaximalQuotients.UniversalProperty
+public import Nyll.ProCGroups.Topologies.QuotientMaps
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Mathlib.NumberTheory.Padics.RingHoms
+public import Mathlib.Topology.Instances.ZMod
+public import Mathlib.GroupTheory.Torsion
+public import Mathlib.RepresentationTheory.Homological.ContCohomology.Functoriality
 
 /-!
 # Definition 6.1: orientations and formal Hilbert 90
@@ -26,6 +28,8 @@ continuous first cohomology and its functorial reduction map. Explicit
 continuous cocycles are retained only for the lifting statements; mathlib's
 continuous low-degree API does not yet expose them as functions.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,7 @@ abbrev Orientation (ℓ : ℕ) [Fact ℓ.Prime]
 /-- The orientation restricted to a subgroup and reduced modulo `ℓ ^ n`.
 This is a homomorphism into units, so it gives the prescribed coefficient
 action without a separately postulated action. -/
-private def finiteOrientationUnits {ℓ : ℕ} [Fact ℓ.Prime]
+def finiteOrientationUnits {ℓ : ℕ} [Fact ℓ.Prime]
     {G : Type u} [Group G] [TopologicalSpace G]
     (θ : Orientation ℓ G) (H : Subgroup G) (n : ℕ) :
     H →* (ZMod (ℓ ^ n))ˣ :=

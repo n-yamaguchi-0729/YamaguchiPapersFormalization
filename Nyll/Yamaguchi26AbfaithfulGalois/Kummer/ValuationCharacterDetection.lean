@@ -5,10 +5,12 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.WeakApproximationForCharacters
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.WeakApproximationForCharacters
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteRingEquiv
 
 /-!
 # Characters detecting an automorphism that moves a valuation
@@ -17,6 +19,8 @@ Weak approximation prescribes a nonzero character on one completion and the
 zero character on its inequivalent conjugate. These characters detect the
 relative Galois action on abelianization modulo a prime.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open KummerTheory ValuationTheory.DiscreteValuationField ProCGroups.Abelian

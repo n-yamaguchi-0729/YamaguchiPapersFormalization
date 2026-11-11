@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
-import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
-import Mathlib.Topology.Algebra.Valued.NormedValued
-import Mathlib.Analysis.Normed.Module.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.UniqueExtensionPrimitive
+public import Mathlib.Topology.Algebra.Valued.NormedValued
+public import Mathlib.Analysis.Normed.Module.Basic
 
 /-!
 # Galois isometries over a Henselian normed field
@@ -16,6 +18,8 @@ The norm of a finite extension is preserved by every base-field automorphism
 when the nonarchimedean base valuation ring is Henselian. Completeness of the
 base field is not required.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

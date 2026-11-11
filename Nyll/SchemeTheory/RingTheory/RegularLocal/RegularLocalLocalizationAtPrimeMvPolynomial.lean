@@ -10,11 +10,15 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.RingTheory.RegularLocalRing.Polynomial
+module
+
+public import Mathlib.RingTheory.RegularLocalRing.Polynomial
 
 /-!
 # is Regular Local Ring localization at Prime mv Polynomial
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.NumberTheory.Padics.PadicVal.Basic
-import Mathlib.Data.Int.Basic
-import Mathlib.Algebra.Order.GroupWithZero.Basic
+module
+
+public import Mathlib.NumberTheory.Padics.PadicVal.Basic
+public import Mathlib.Data.Int.Basic
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
 
 /-!
 # The p-adic order of a bounded cyclotomic exponent
@@ -16,6 +18,8 @@ one is nonzero and has p-adic order below `s+1`. The absolute value of that
 integer is strictly below the modulus, so divisibility by the modulus is
 impossible. The exponent zero and the prime two are included.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

@@ -4,10 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.LinearAlgebra.Dimension.RankNullity
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.Regular.RegularSequence
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Mathlib.LinearAlgebra.Dimension.RankNullity
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Localization.AtPrime.Basic
+public import Mathlib.RingTheory.Regular.RegularSequence
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # A prescribed first parameter in dimension two
@@ -22,6 +26,8 @@ from regularity and the height of the source prime.  The only extra datum it
 needs is the geometric transversality statement that the prescribed local
 equation does not lie in the square of the localized maximal ideal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -59,7 +65,7 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two
   have hv : LinearIndependent (ResidueField R) v := by
     simpa only [v, Matrix.cons_val_zero, Matrix.cons_val_one, hyCot] using hxyCot
   have hvSpan : Submodule.span (ResidueField R) (Set.range v) = ⊤ :=
-    hv.span_eq_top_of_card_eq_finrank' (by simp [hfin])
+    hv.span_eq_top_of_card_eq_finrank' (by rw [Fintype.card_fin, hfin])
   have himage :
       m.toCotangent '' ({x', y'} : Set m) = Set.range v := by
     ext z
@@ -84,8 +90,7 @@ theorem exists_regular_pair_of_finrank_cotangentSpace_eq_two
     change Ideal.span ({x, y} : Set R) = m
     rw [← hmapSpan, Submodule.map_span]
     congr 1
-    ext z
-    simp [x', y, eq_comm]
+    exact (Set.image_pair m.subtype x' y').symm
   have hspan : Ideal.ofList [x, y] = maximalIdeal R := by
     change Ideal.span {r | r ∈ [x, y]} = maximalIdeal R
     rw [show {r | r ∈ [x, y]} = ({x, y} : Set R) by ext r; exact List.mem_pair]

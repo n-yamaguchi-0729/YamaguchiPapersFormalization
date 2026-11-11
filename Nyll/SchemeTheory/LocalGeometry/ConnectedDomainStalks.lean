@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponents
-import Mathlib.Topology.Connected.Clopen
+module
+
+public import Nyll.SchemeTheory.Divisors.EtaleIrreducibleComponents
+public import Mathlib.Topology.Connected.Clopen
 
 /-!
 # Connected schemes with domain stalks
@@ -14,6 +16,8 @@ On a locally Noetherian scheme with domain stalks, irreducible components are
 open and closed. Connectedness therefore forces one component to be the whole
 scheme, and reducedness follows directly from the stalks.
 -/
+
+@[expose] public section
 
 noncomputable section
 

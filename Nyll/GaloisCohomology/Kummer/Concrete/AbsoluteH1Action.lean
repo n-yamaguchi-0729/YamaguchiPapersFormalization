@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
-import Nyll.ProCGroups.ProP.ContinuousH1
-import Mathlib.Algebra.Ring.Aut
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
+public import Nyll.ProCGroups.ProP.ContinuousH1
+public import Mathlib.Algebra.Ring.Aut
 
 /-!
 # The canonical action on continuous degree-one classes
@@ -14,6 +16,8 @@ import Mathlib.Algebra.Ring.Aut
 The character action with trivial coefficients gives the additive action on H¹.
 Restriction along relative Galois automorphisms gives the action for an extension.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

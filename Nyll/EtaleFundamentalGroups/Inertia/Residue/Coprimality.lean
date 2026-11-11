@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.Data.Nat.Prime.Defs
+module
+
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Data.Nat.Prime.Defs
 
 /-!
 # Coprimality detected in a residue ring
@@ -15,6 +17,8 @@ residue ring of characteristic `p`.  If that image is a unit, the index is
 prime to `p`.  This file records that arithmetic endpoint without mentioning
 ramification or inertia.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

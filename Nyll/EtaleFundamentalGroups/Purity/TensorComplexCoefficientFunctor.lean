@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Homology.Additive
-import Mathlib.Algebra.Homology.HomologicalComplexAbelian
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.RingTheory.Flat.CategoryTheory
+module
+
+public import Mathlib.Algebra.Homology.Additive
+public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
+public import Mathlib.Algebra.Homology.HomologySequence
+public import Mathlib.RingTheory.Flat.CategoryTheory
 
 /-!
 # Exactness in the coefficients of a flat tensor complex
@@ -17,6 +19,8 @@ coefficient module. When all its terms are flat, coefficient short exact
 sequences remain short exact sequences of complexes. Consequently an
 injective acyclicity result gives the usual cohomology dimension shift.
 -/
+
+@[expose] public section
 
 noncomputable section
 

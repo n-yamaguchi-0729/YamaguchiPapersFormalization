@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
-import Mathlib.RingTheory.TensorProduct.Finite
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Compositum
+public import Mathlib.RingTheory.TensorProduct.Finite
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Component
 
 /-!
 # Selected generic components after finite-etale base change
@@ -20,6 +22,8 @@ selected field is finite etale over `B`.
 The final theorem specializes the target field to an actual compositum in a
 fixed ambient field, using the product-map API from ClassFieldTheory.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -38,11 +42,10 @@ def baseChangeGenericFiberEquiv
     [CommRing A] [CommRing B] [CommRing T] [CommRing K]
     [Algebra A B] [Algebra A T] [Algebra B K]
     [Algebra A K] [IsScalarTower A B K] :
-    letI : Algebra K ((B ⊗[A] T) ⊗[B] K) :=
+    let : Algebra K ((B ⊗[A] T) ⊗[B] K) :=
       Algebra.TensorProduct.rightAlgebra
     ((B ⊗[A] T) ⊗[B] K) ≃ₐ[K] (K ⊗[A] T) := by
-  letI : Algebra K ((B ⊗[A] T) ⊗[B] K) :=
-    Algebra.TensorProduct.rightAlgebra
+  intro sharedDefinitionOwner1
   exact
     (Algebra.TensorProduct.commRight B K (B ⊗[A] T)).symm.trans
       (Algebra.TensorProduct.cancelBaseChange A B K K T)
@@ -165,12 +168,10 @@ theorem integralClosure_compositum_etale_of_finiteEtale_baseChange
     [FiniteDimensional F E]
     (eGeneric : (F ⊗[A] T) ≃ₐ[F] E) :
     let M := E ⊔ K'
-    letI : Algebra B M :=
+    let : Algebra B M :=
       ((algebraMap K' M).comp (algebraMap B K')).toAlgebra
     Algebra.Etale B (integralClosure B M) := by
-  let M := E ⊔ K'
-  let : Algebra B M :=
-    ((algebraMap K' M).comp (algebraMap B K')).toAlgebra
+  intro M sharedOwner2
   let : IsScalarTower B K' M := IsScalarTower.of_algebraMap_eq' rfl
   let eFactor : (K' ⊗[A] T) ≃ₐ[K'] (K' ⊗[F] E) :=
     iteratedGenericFiberEquiv A F K' T E eGeneric

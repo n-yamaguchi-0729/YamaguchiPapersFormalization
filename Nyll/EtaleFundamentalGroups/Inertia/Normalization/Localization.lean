@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.Localized.Basic
 
 /-!
 # Normalization inertia and localization
@@ -18,6 +20,8 @@ Only the canonical generic action on integral closures is used.  In
 particular, this file introduces no global action, algebra, or scalar-tower
 instances and needs no finiteness, Galois, regularity, or height hypotheses.
 -/
+
+@[expose] public section
 
 noncomputable section
 

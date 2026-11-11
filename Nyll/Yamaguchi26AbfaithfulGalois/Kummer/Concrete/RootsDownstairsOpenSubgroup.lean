@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsFixedSubgroup
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.Topology.Algebra.OpenSubgroup
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.RootsDownstairsFixedSubgroup
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationFunctoriality
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.Topology.Algebra.OpenSubgroup
 
 /-!
 # Roots downstairs for arbitrary open normal subgroups
@@ -16,6 +18,8 @@ Infinite Galois correspondence supplies the finite Galois fixed field of an
 open normal subgroup. Prime quotient order supplies its prime field degree,
 so roots-downstairs detection applies to the original quotient action.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOver
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackFiberPoint
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.PointedOver
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackFiberPoint
 
 /-!
 # Geometric fibers over a pointed finite étale cover
@@ -16,6 +18,8 @@ this equivalence, the geometric fiber at a lifted point is the corresponding
 fiber-over-a-point functor.  Consequently, its automorphism group is the
 stabilizer of the lifted point in the automorphism group over the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -29,19 +33,23 @@ namespace AlgebraicGeometry.FiniteEtale
 
 variable {S : Scheme.{u}}
 
-private abbrev overBaseObj (A : FiniteEtale S) (B : FiniteEtale A.left) :
+/-- Compose a finite étale cover of the source with the original cover. -/
+abbrev overBaseObj (A : FiniteEtale S) (B : FiniteEtale A.left) :
     FiniteEtale S :=
   MorphismProperty.Over.mk ⊤ (B.hom ≫ A.hom) (by
     exact @IsFiniteEtale.instCompScheme B.left A.left S B.hom A.hom B.2 A.2)
 
-private abbrev overBaseHom (A : FiniteEtale S) (B : FiniteEtale A.left) :
+/-- The source cover has its structural map to the original finite étale cover. -/
+abbrev overBaseHom (A : FiniteEtale S) (B : FiniteEtale A.left) :
     overBaseObj A B ⟶ A :=
   MorphismProperty.Over.homMk B.hom
 
-private abbrev toOverObj (A : FiniteEtale S) (B : FiniteEtale A.left) : Over A :=
+/-- View a finite étale cover of the source as an object over the original cover. -/
+abbrev toOverObj (A : FiniteEtale S) (B : FiniteEtale A.left) : Over A :=
   Over.mk (overBaseHom A B)
 
-private abbrev toOverMap (A : FiniteEtale S) {B C : FiniteEtale A.left}
+/-- View a morphism over the source as a morphism in the over-category. -/
+abbrev toOverMap (A : FiniteEtale S) {B C : FiniteEtale A.left}
     (f : B ⟶ C) : toOverObj A B ⟶ toOverObj A C :=
   Over.homMk
     (MorphismProperty.Over.homMk f.left (by
@@ -51,7 +59,8 @@ private abbrev toOverMap (A : FiniteEtale S) {B C : FiniteEtale A.left}
       apply MorphismProperty.Over.Hom.ext
       exact MorphismProperty.Over.w f)
 
-private def toOver (A : FiniteEtale S) : FiniteEtale A.left ⥤ Over A where
+/-- The functor from finite étale covers of the source to the over-category. -/
+def toOver (A : FiniteEtale S) : FiniteEtale A.left ⥤ Over A where
   obj B := toOverObj A B
   map f := toOverMap A f
   map_id B := by
@@ -63,13 +72,15 @@ private def toOver (A : FiniteEtale S) : FiniteEtale A.left ⥤ Over A where
     apply MorphismProperty.Over.Hom.ext
     rfl
 
-private abbrev toOverFaithful (A : FiniteEtale S) : (toOver A).Faithful where
+/-- The functor to the over-category is faithful. -/
+abbrev toOverFaithful (A : FiniteEtale S) : (toOver A).Faithful where
   map_injective {B C} f g h := by
     change toOverMap A f = toOverMap A g at h
     apply MorphismProperty.Over.Hom.ext
     exact congrArg (fun q ↦ q.left.left) h
 
-private abbrev toOverFull (A : FiniteEtale S) : (toOver A).Full where
+/-- The functor to the over-category is full. -/
+abbrev toOverFull (A : FiniteEtale S) : (toOver A).Full where
   map_surjective {B C} f := by
     let g : B ⟶ C := MorphismProperty.Over.homMk f.left.left (by
       exact congrArg (fun q ↦ q.left) (Over.w f))
@@ -79,7 +90,8 @@ private abbrev toOverFull (A : FiniteEtale S) : (toOver A).Full where
     apply MorphismProperty.Over.Hom.ext
     rfl
 
-private abbrev toOverEssSurj (A : FiniteEtale S) : (toOver A).EssSurj where
+/-- Every object over the original cover comes from a finite étale cover of its source. -/
+abbrev toOverEssSurj (A : FiniteEtale S) : (toOver A).EssSurj where
   mem_essImage U := by
     let B : FiniteEtale A.left := FiniteEtale.mk U.hom.left
     let eBase : overBaseObj A B ≅ U.left :=
@@ -105,11 +117,13 @@ noncomputable def overEquiv (A : FiniteEtale S) :
 
 variable {Omega : Type u} [Field Omega] [IsSepClosed Omega]
 
-private abbrev basePoint (A : FiniteEtale S)
+/-- The base geometric point obtained by composing a lifted point with the cover. -/
+abbrev basePoint (A : FiniteEtale S)
     (xi' : Spec (.of Omega) ⟶ A.left) : Spec (.of Omega) ⟶ S :=
   xi' ≫ A.hom
 
-private abbrev liftedPointHom (A : FiniteEtale S)
+/-- The lifted geometric point as a morphism over the base. -/
+abbrev liftedPointHom (A : FiniteEtale S)
     (xi' : Spec (.of Omega) ⟶ A.left) :
     Over.mk (basePoint A xi') ⟶ A.toComma :=
   Over.homMk xi'
@@ -128,7 +142,8 @@ noncomputable def liftedFiberPointOverComposite (A : FiniteEtale S)
     (fiber (xi' ≫ A.hom)).obj A :=
   liftedFiberPoint A xi'
 
-private noncomputable def sourcePointOfFiberOver
+/-- Recover a geometric point of the source cover from its fiber over the lifted point. -/
+noncomputable def sourcePointOfFiberOver
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     (B : FiniteEtale A.left)
     (y : (fiberOver (fiber (basePoint A xi')) (liftedFiberPoint A xi')).obj
@@ -148,7 +163,8 @@ private noncomputable def sourcePointOfFiberOver
   refine Over.homMk q.left ?_
   exact congrArg (fun f ↦ f.left) hq
 
-private noncomputable def fiberOverOfSourcePoint
+/-- A geometric point of the source cover gives a point in the fiber over the lifted point. -/
+noncomputable def fiberOverOfSourcePoint
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     (B : FiniteEtale A.left) (z : Over.mk xi' ⟶ B.toComma) :
     (fiberOver (fiber (basePoint A xi')) (liftedFiberPoint A xi')).obj
@@ -177,15 +193,15 @@ private noncomputable def fiberOverOfSourcePoint
     _ = fiberObjEquivHom (basePoint A xi') A (liftedFiberPoint A xi') :=
       (Equiv.apply_symm_apply _ _).symm
 
-private theorem sourcePointOfFiberOver_fiberOverOfSourcePoint
+theorem sourcePointOfFiberOver_fiberOverOfSourcePoint
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     (B : FiniteEtale A.left) (z : Over.mk xi' ⟶ B.toComma) :
     sourcePointOfFiberOver A xi' B (fiberOverOfSourcePoint A xi' B z) = z := by
   apply Over.OverMorphism.ext
-  simp [sourcePointOfFiberOver, fiberOverOfSourcePoint]
+  simp only [sourcePointOfFiberOver, fiberOverOfSourcePoint, Equiv.apply_symm_apply]
   rfl
 
-private theorem fiberOverOfSourcePoint_sourcePointOfFiberOver
+theorem fiberOverOfSourcePoint_sourcePointOfFiberOver
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     (B : FiniteEtale A.left)
     (y : (fiberOver (fiber (basePoint A xi')) (liftedFiberPoint A xi')).obj
@@ -196,7 +212,8 @@ private theorem fiberOverOfSourcePoint_sourcePointOfFiberOver
     (fiberObjEquivHom (basePoint A xi') (overBaseObj A B) y.1) = y.1
   exact Equiv.symm_apply_apply (fiberObjEquivHom (basePoint A xi') (overBaseObj A B)) y.1
 
-private noncomputable def fiberOverEquiv
+/-- Identify the fiber over the lifted point with the geometric fiber on the source. -/
+noncomputable def fiberOverEquiv
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     (B : FiniteEtale A.left) :
     (fiberOver (fiber (basePoint A xi')) (liftedFiberPoint A xi')).obj
@@ -269,7 +286,7 @@ private theorem fiberOverFormula_naturality
   exact (sourcePointOfFiberOver_naturality A xi' f y).trans
     (fiberObjEquivHom_map_symm xi' f (sourcePointOfFiberOver A xi' B y))
 
-private theorem fiberOverEquiv_naturality
+theorem fiberOverEquiv_naturality
     (A : FiniteEtale S) (xi' : Spec (.of Omega) ⟶ A.left)
     {B C : FiniteEtale A.left} (f : B ⟶ C)
     (y : (fiberOver (fiber (basePoint A xi')) (liftedFiberPoint A xi')).obj
@@ -465,6 +482,7 @@ theorem fundamentalGroupEquivStabilizerOfLift_coe
       ((autFiberOverEquivFiber A xi').symm a) =
     fundamentalGroupHom A.hom xi' a
   apply Aut.ext
+  apply Iso.ext
   ext B b
   rw [extendFiberOverAut_hom_app_apply_eq]
   apply (productFiberEquivComparison
@@ -478,19 +496,19 @@ theorem fundamentalGroupEquivStabilizerOfLift_coe
   let p : (fiber xi').obj PB := transportedPointOfCompIso
     (pullback A.hom) tPull B b
   let y := (overEquivFiberIso A xi').inv.app PB p
-  let b' : F.obj B := (fundamentalGroupHom A.hom xi' a).hom.app B b
+  let b' : F.obj B := (fundamentalGroupHom A.hom xi' a).asIso.hom.app B b
   let p' : (fiber xi').obj PB := transportedPointOfCompIso
     (pullback A.hom) tPull B b'
   let y' := (overEquivFiberIso A xi').inv.app PB p'
-  have hdp : d.hom.app (toOverObj A ((pullback A.hom).obj B)) y = y' := by
-    change d.hom.app ((overEquiv A).functor.obj PB) y = y'
+  have hdp : d.asIso.hom.app (toOverObj A ((pullback A.hom).obj B)) y = y' := by
+    change d.asIso.hom.app ((overEquiv A).functor.obj PB) y = y'
     have hd : autFiberOverEquivFiber A xi' d = a := by
       exact (autFiberOverEquivFiber A xi').apply_symm_apply a
-    have heq : (overEquivFiberIso A xi').hom.app PB (d.hom.app _ y) =
+    have heq : (overEquivFiberIso A xi').hom.app PB (d.asIso.hom.app _ y) =
         (autHomOfCompIso (overEquiv A).functor
-          (overEquivFiberIso A xi') d).hom.app PB
+          (overEquivFiberIso A xi') d).asIso.hom.app PB
             ((overEquivFiberIso A xi').hom.app PB y) := by
-      simp only [autHomOfCompIso_apply, Iso.conjAut_hom, Iso.conj_apply,
+      simp only [autHomOfCompIso_apply, Iso.conjAut_hom, Iso.conj_apply_asHom,
         NatTrans.comp_app, FintypeCat.comp_apply]
       congr 2
       exact (FintypeCat.hom_inv_id_apply ((overEquivFiberIso A xi').app PB) y).symm
@@ -506,40 +524,40 @@ theorem fundamentalGroupEquivStabilizerOfLift_coe
     apply (ConcreteCategory.bijective_of_isIso
       ((overEquivFiberIso A xi').hom.app PB)).injective
     rw [hy', heq]
-    have hpull : tPull.hom.app B (a.hom.app PB p) =
-        (fundamentalGroupHom A.hom xi' a).hom.app B (tPull.hom.app B p) := by
+    have hpull : tPull.hom.app B (a.asIso.hom.app PB p) =
+        (fundamentalGroupHom A.hom xi' a).asIso.hom.app B (tPull.hom.app B p) := by
       exact pullbackFiberIso_hom_fundamentalGroupHom_apply A.hom xi' a B p
     have hp : tPull.hom.app B p = b := by
       exact FintypeCat.inv_hom_id_apply (tPull.app B) b
     have hp' : tPull.hom.app B (tPull.inv.app B b') = b' := by
       exact FintypeCat.inv_hom_id_apply (tPull.app B) b'
-    have hb' : (fundamentalGroupHom A.hom xi' a).hom.app B b = b' := by
+    have hb' : (fundamentalGroupHom A.hom xi' a).asIso.hom.app B b = b' := by
       rfl
-    change a.hom.app PB p = tPull.inv.app B b'
+    change a.asIso.hom.app PB p = tPull.inv.app B b'
     apply (ConcreteCategory.bijective_of_isIso (tPull.hom.app B)).injective
     exact hpull.trans ((congrArg
-      ((fundamentalGroupHom A.hom xi' a).hom.app B) hp).trans
+      ((fundamentalGroupHom A.hom xi' a).asIso.hom.app B) hp).trans
         (hb'.trans hp'.symm))
   have hy := fiberOver_map_pullbackToProductOver A xi' B b
   have hy' := fiberOver_map_pullbackToProductOver A xi' B b'
-  change d.hom.app ((productOver (X := A)).obj B)
+  change d.asIso.hom.app ((productOver (X := A)).obj B)
       (productFiberEquivComparison F x B b) =
     productFiberEquivComparison F x B b'
   calc
-    d.hom.app ((productOver (X := A)).obj B)
+    d.asIso.hom.app ((productOver (X := A)).obj B)
         (productFiberEquivComparison F x B b) =
-      d.hom.app ((productOver (X := A)).obj B)
+      d.asIso.hom.app ((productOver (X := A)).obj B)
         ((fiberOver F x).map (pullbackToProductOver A B) y) :=
-      congrArg (d.hom.app ((productOver (X := A)).obj B)) hy.symm
+      congrArg (d.asIso.hom.app ((productOver (X := A)).obj B)) hy.symm
     _ = (fiberOver F x).map (pullbackToProductOver A B)
-        (d.hom.app (toOverObj A ((pullback A.hom).obj B)) y) := by
+        (d.asIso.hom.app (toOverObj A ((pullback A.hom).obj B)) y) := by
       change
         ((fiberOver F x).map (pullbackToProductOver A B) ≫
-          d.hom.app ((productOver (X := A)).obj B)) y =
-        (d.hom.app (toOverObj A ((pullback A.hom).obj B)) ≫
+          d.asIso.hom.app ((productOver (X := A)).obj B)) y =
+        (d.asIso.hom.app (toOverObj A ((pullback A.hom).obj B)) ≫
           (fiberOver F x).map (pullbackToProductOver A B)) y
       exact ConcreteCategory.congr_hom
-        (d.hom.naturality (pullbackToProductOver A B)) y
+        (d.asIso.hom.naturality (pullbackToProductOver A B)) y
     _ = (fiberOver F x).map (pullbackToProductOver A B) y' :=
       congrArg ((fiberOver F x).map (pullbackToProductOver A B)) hdp
     _ = productFiberEquivComparison F x B b' := hy'

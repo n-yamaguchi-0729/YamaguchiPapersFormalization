@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentBranchResidue
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentBranchResidue
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticChart
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Characteristic zero along every arithmetic boundary branch
@@ -15,6 +18,8 @@ boundary is the generic point of an irreducible boundary component.  The
 arithmetic geometric-integrality condition therefore forces characteristic
 zero along every such branch, not only along a preselected component.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -73,19 +78,14 @@ theorem galoisPullback_hasCharacteristicZeroBranchesAt_of_ratEquiv
     (ek : S.residueField (genericPoint S) ≃+* ℚ)
     (Y : FiniteEtale X) (hY : CategoryTheory.PreGaloisCategory.IsGalois Y)
     (x : Y.left) :
-    letI : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-    letI : IsIntegral Y.left :=
+    let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
+    let : IsIntegral Y.left :=
       EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-    letI : IsLocallyNoetherian Y.left :=
+    let : IsLocallyNoetherian Y.left :=
       EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
     let I : Y.left.IdealSheafData := D.1.comap Y.hom
     I.HasCharacteristicZeroBranchesAt x := by
-  let : CategoryTheory.PreGaloisCategory.IsGalois Y := hY
-  let : IsIntegral Y.left :=
-    EtaleFundamentalGroups.isIntegral_left_of_isConnected_finiteEtale Y
-  let : IsLocallyNoetherian Y.left :=
-    EtaleFundamentalGroups.isLocallyNoetherian_left_finiteEtale Y
-  let I : Y.left.IdealSheafData := D.1.comap Y.hom
+  intro sharedOwner1 sharedOwner2 sharedOwner3 I
   let D' : EffectiveCartierDivisor Y.left := D.comapFiniteEtale Y
   dsimp only [Scheme.IdealSheafData.HasCharacteristicZeroBranchesAt]
   intro q hqPrime hqHeight hIq

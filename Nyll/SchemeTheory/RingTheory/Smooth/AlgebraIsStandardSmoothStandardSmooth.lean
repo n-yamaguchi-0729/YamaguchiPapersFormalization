@@ -11,11 +11,15 @@ Local adaptation and maintenance: Naganori Yamaguchi (https://github.com/n-yamag
 AI assistance in local adaptation and maintenance: OpenAI Codex.
 -/
 
-import Mathlib.RingTheory.Smooth.StandardSmooth
+module
+
+public import Mathlib.RingTheory.Smooth.StandardSmooth
 
 /-!
 # Algebra Is Standard Smooth exists is Standard Smooth Of Relative Dimension of field
 -/
+
+@[expose] public section
 
 section ProofImplementation
 

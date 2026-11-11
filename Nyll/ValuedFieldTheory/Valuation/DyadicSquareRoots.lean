@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Henselian
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Algebra.Polynomial.Monic
-import Mathlib.Tactic.LinearCombination
-import Mathlib.Tactic.FieldSimp
-import Mathlib.Data.Int.WithZero
-import Mathlib.Data.Int.LeastGreatest
+module
+
+public import Mathlib.RingTheory.Henselian
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Algebra.Polynomial.Monic
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.FieldSimp
+public import Mathlib.Data.Int.WithZero
+public import Mathlib.Order.Int.LeastGreatest
 
 /-!
 # Square roots and first-order principal units in dyadic valued fields
@@ -19,6 +21,8 @@ Hensel's simple-root theorem bounds the precision of a nonsquare near one.
 For integer-valued valuations, a principal unit of valuation-one difference
 from one cannot be a square when the value of two is less than one.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrimePuncturedPurity
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.GenericPoint
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.Algebra.Module.FinitePresentation
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalCompletionDescent
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrimePuncturedPurity
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrime
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.GenericPoint
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.Algebra.Module.FinitePresentation
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
 
 /-!
 # Purity along a regular boundary
@@ -22,6 +24,8 @@ because the algebra is étale off that boundary. Generic and height-one
 has punctured purity, contradicting the minimal non-étale point criterion.
 Regularity is required only on the boundary, not on the whole base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

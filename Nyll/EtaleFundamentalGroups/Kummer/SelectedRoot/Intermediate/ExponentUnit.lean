@@ -4,21 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Module
-import Mathlib.RingTheory.RingHom.Etale
-import Nyll.EtaleFundamentalGroups.Kummer.Boundary.IteratedRadical
-import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.HeightOneRootsOfUnity
-import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntegralClosure
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
-import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Algebra.Polynomial.Eval.Coeff
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.RingTheory.TensorProduct.Maps
-import Mathlib.Algebra.Algebra.Defs
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Module
+public import Mathlib.RingTheory.RingHom.Etale
+public import Nyll.EtaleFundamentalGroups.Kummer.Boundary.IteratedRadical
+public import Nyll.EtaleFundamentalGroups.Kummer.Descent.FormallyUnramifiedDescent
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Regularity
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.HeightOneRootsOfUnity
+public import Nyll.EtaleFundamentalGroups.Kummer.PureRadical.IntegralClosure
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.HeightTwo
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Algebra.Polynomial.Eval.Coeff
+public import Mathlib.RingTheory.TensorProduct.Basic
+public import Mathlib.RingTheory.TensorProduct.Maps
+public import Mathlib.Algebra.Algebra.Defs
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoIntegralClosure
 
 /-!
 # The selected intermediate-root exponent is a boundary unit
@@ -32,6 +35,8 @@ extension `L / K`, every intermediate field `F` has a concrete generator
 The proof constructs the root algebra from `β`; neither its identification
 with the normalization nor the desired unit assertion is assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

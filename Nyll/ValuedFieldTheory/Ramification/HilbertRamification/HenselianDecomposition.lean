@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueExactSequence
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionUniqueness
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 
 /-!
 # Decomposition over a Henselian valuation ring
@@ -18,6 +20,8 @@ integral closure, so every base-field automorphism preserves it. Consequently
 the fixed integers in the residue exact sequence over an intermediate field
 come from that intermediate field's actual pulled-back valuation ring.
 -/
+
+@[expose] public section
 
 namespace RamificationTheory.HilbertRamification.ValuationSubring
 

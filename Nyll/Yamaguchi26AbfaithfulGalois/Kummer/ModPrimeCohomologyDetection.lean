@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.ProCGroups.Abelian.PrimeExponentCharacters
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Detecting cohomology actions from moved mod-prime classes
@@ -14,6 +16,8 @@ import Mathlib.FieldTheory.Galois.Profinite
 A moved mod-prime abelianization class yields a nontrivial relative Galois
 cohomology action. The inverse automorphism reflects contravariant pullback.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

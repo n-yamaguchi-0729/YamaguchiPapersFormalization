@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Quotient.Basic
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
-import Mathlib.RingTheory.Regular.IsSMulRegular
-import Mathlib.RingTheory.Spectrum.Prime.Basic
+module
+
+public import Mathlib.RingTheory.Ideal.Quotient.Basic
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+public import Mathlib.RingTheory.Regular.IsSMulRegular
+public import Mathlib.RingTheory.Spectrum.Prime.Basic
 
 /-!
 # Scalars on modules isomorphic to prime quotients
@@ -17,6 +19,8 @@ prime quotient of a local ring, an element of the maximal ideal outside
 the prime acts regularly.  These properties transfer along a coefficient
 linear equivalence without constructing a map on local cohomology.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimePowerRootObstruction
-import Mathlib.Data.Nat.Basic
-import Mathlib.Data.Set.Finite.Lemmas
-import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimePowerRootObstruction
+public import Mathlib.Data.Nat.Basic
+public import Mathlib.Data.Set.Finite.Lemmas
+public import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 
 /-!
 # The last prime-power root level
@@ -15,6 +17,8 @@ import Mathlib.RingTheory.RootsOfUnity.PrimitiveRoots
 Finiteness of the prime-power roots gives a maximal primitive-root exponent.
 At this exponent a primitive root of prime order has nonidentity power class.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

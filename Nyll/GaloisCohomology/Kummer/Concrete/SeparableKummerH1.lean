@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteCharacterEquiv
-import Mathlib.FieldTheory.IsSepClosed
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.InfiniteCharacterEquiv
+public import Mathlib.FieldTheory.IsSepClosed
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Kummer characters over the separable closure
@@ -15,6 +17,8 @@ For an exponent nonzero in the base field, every unit has a root in the
 separable closure. The existing Galois Kummer equivalence therefore applies
 without a perfectness or characteristic-zero hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -45,7 +49,8 @@ theorem finiteKummerRadicalSubgroup_separableClosure_eq_top
   refine ⟨Units.mk0 β hβ_ne, ?_⟩
   exact Units.ext hβ
 
-private def unitsEquivSeparableRadicalCarrier
+/-- Base-field units identify with the radical carrier in the separable closure. -/
+def unitsEquivSeparableRadicalCarrier
     (n : ℕ+) [NeZero ((n : ℕ) : K)] :
     Kˣ ≃* (chosenFiniteKummerRadicalDatum
       (K := K) (L := SeparableClosure K) n).carrier :=
@@ -53,7 +58,8 @@ private def unitsEquivSeparableRadicalCarrier
     (MulEquiv.subgroupCongr
       (finiteKummerRadicalSubgroup_separableClosure_eq_top K n).symm)
 
-private theorem map_powerRange_unitsEquivSeparableRadicalCarrier
+/-- The power subgroup transports to the ambient powers of the separable radical datum. -/
+theorem map_powerRange_unitsEquivSeparableRadicalCarrier
     (n : ℕ+) [NeZero ((n : ℕ) : K)] :
     (powMonoidHom (n : ℕ) : Kˣ →* Kˣ).range.map
         (unitsEquivSeparableRadicalCarrier K n).toMonoidHom =
@@ -72,7 +78,8 @@ private theorem map_powerRange_unitsEquivSeparableRadicalCarrier
     apply Subtype.ext
     rfl
 
-private def separablePowerClassEquivRadicalQuotient
+/-- Power classes identify with the radical quotient in the separable closure. -/
+def separablePowerClassEquivRadicalQuotient
     (n : ℕ+) [NeZero ((n : ℕ) : K)] :
     Kˣ ⧸ (powMonoidHom (n : ℕ) : Kˣ →* Kˣ).range ≃*
       (chosenFiniteKummerRadicalDatum

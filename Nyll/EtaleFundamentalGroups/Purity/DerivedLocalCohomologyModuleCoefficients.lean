@@ -4,15 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
-import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
-import Mathlib.Algebra.Homology.ShortComplex.Ab
-import Mathlib.RingTheory.Regular.Category
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyCoefficientsExact
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyScalar
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTopMultiplication
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Mathlib.Algebra.Homology.DerivedCategory.Ext.Linear
+public import Mathlib.Algebra.Homology.ShortComplex.Ab
+public import Mathlib.RingTheory.Regular.Category
 
 /-!
 # Linear coefficient maps on derived local cohomology
@@ -23,6 +25,8 @@ these maps linear for the module structure already constructed on the
 local-cohomology colimit.  Their underlying functions retain the existing
 coefficient exactness, and regular multiplication is scalar multiplication.
 -/
+
+@[expose] public section
 
 noncomputable section
 

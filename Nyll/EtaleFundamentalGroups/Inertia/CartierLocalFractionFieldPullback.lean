@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
-import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
-import Nyll.SchemeTheory.Divisors.RegularCartier
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierLocalFractionField
+public import Nyll.SchemeTheory.RingTheory.FieldExtensions.DVRFractionFieldAway
+public import Nyll.SchemeTheory.Divisors.RegularCartier
+public import Nyll.SchemeTheory.Divisors.LocalComplement
 
 /-!
 # The actual fraction-stalk pullback of a Cartier complement
@@ -15,6 +18,8 @@ At a divisor point with discrete valuation stalk, the inverse image of the
 complement is the spectrum of the actual fraction field. The horizontal map
 is the previously constructed canonical factorization through the complement.
 -/
+
+@[expose] public section
 
 noncomputable section
 

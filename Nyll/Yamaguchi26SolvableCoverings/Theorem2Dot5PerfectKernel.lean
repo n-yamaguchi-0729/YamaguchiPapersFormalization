@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
-import Nyll.Yamaguchi26SolvableCoverings.GroupTheory.PerfectKernel
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryAbelianizationPullback
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
-import Mathlib.GroupTheory.Commutator.Basic
-import Mathlib.Topology.Algebra.Group.Subgroup
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Quotient
+public import Nyll.Yamaguchi26SolvableCoverings.GroupTheory.PerfectKernel
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryAbelianizationPullback
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot2BoundaryCondition
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.ProsolvableCriterion
+public import Mathlib.GroupTheory.Commutator.Basic
+public import Mathlib.Topology.Algebra.Group.Subgroup
 
 /-!
 # Theorem 2.5: the boundary kernel is topologically perfect
@@ -28,7 +30,11 @@ to open normal subgroups, then checks perfectness in finite quotients.
 Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Theorem 2.5.
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale
@@ -36,7 +42,7 @@ open ProCGroups.FiniteStepSolvableQuotients
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- 定理 2.5：条件 `(†)` の下で、補集合は連結、包含が誘導する
 基本群の準同型の核は位相的完全であり、その最大 prosolvable 商への誘導写像は同型である。 -/
@@ -44,7 +50,7 @@ theorem perfect_kernel_2_5
     (D : X.EffectiveCartierDivisor) (hhor : IsHorizontal D)
     (hD : BoundaryCondition D) :
     ConnectedSpace D.1.supportComplement ∧
-      ∀ (Ω : Type) [Field Ω] [IsSepClosed Ω]
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
         (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement),
         let f : π₁ᵉᵗ(point) →ₜ* π₁ᵉᵗ(point ≫ D.1.supportComplement.ι) :=
           fundamentalGroupHom D.1.supportComplement.ι point

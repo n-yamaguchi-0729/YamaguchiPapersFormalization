@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.SchemeTheory.Normalization.Localization.IntegralClosureAwayEquiv
 
 /-!
 # A finite-etale function-field normalization on an away open
@@ -16,6 +18,8 @@ structure supplied by the cover with the canonical localization algebra and
 returns finite etaleness for the literal away map of the normalization over
 `A`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

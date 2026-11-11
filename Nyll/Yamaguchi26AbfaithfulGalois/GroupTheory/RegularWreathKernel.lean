@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.WreathProducts
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Mathlib.GroupTheory.SemidirectProduct
-import Mathlib.GroupTheory.PGroup
-import Mathlib.Algebra.Group.ULift
-import Mathlib.Algebra.Group.TypeTags.Basic
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Data.Fintype.Pi
-import Mathlib.Basic.Nontrivial.Defs
+module
+
+public import Nyll.ProCGroups.WreathProducts
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.FaithfulKernel
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Mathlib.GroupTheory.SemidirectProduct
+public import Mathlib.GroupTheory.PGroup
+public import Mathlib.Algebra.Group.ULift
+public import Mathlib.Algebra.Group.TypeTags.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Data.Fintype.Pi
+public import Mathlib.Basic.Nontrivial.Defs
 
 /-!
 # Faithful elementary abelian kernels from regular wreath products
@@ -25,6 +27,8 @@ supported at the identity. Finite coefficients killed by `q` give an actual
 elementary abelian kernel. No restriction is placed on the finite quotient
 group's order.
 -/
+
+@[expose] public section
 
 namespace ProCGroups
 

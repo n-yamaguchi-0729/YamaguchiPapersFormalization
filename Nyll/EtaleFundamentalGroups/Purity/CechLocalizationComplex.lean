@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
-import Mathlib.Algebra.Category.ModuleCat.Biproducts
-import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
-import Mathlib.Algebra.Homology.Monoidal
-import Mathlib.LinearAlgebra.DFinsupp
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PrincipalLocalizationComplex
+public import Mathlib.Algebra.Category.ModuleCat.Biproducts
+public import Mathlib.Algebra.Category.ModuleCat.Monoidal.Basic
+public import Mathlib.Algebra.Homology.Monoidal
+public import Mathlib.LinearAlgebra.DFinsupp
 
 /-!
 # The bounded flat Čech complex of a finite list
@@ -18,6 +20,8 @@ whose terms are flat and which ends in the degree given by the length of
 the list. All signs, summands, and differentials are supplied by the
 standard tensor product of homological complexes.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,7 +34,8 @@ universe u
 
 variable {R : Type u} [CommRing R]
 
-private instance cochainNatTensorSigns : (ComplexShape.up ℕ).TensorSigns where
+/-- Koszul signs for tensor products of nonnegative cochain complexes. -/
+instance cochainNatTensorSigns : (ComplexShape.up ℕ).TensorSigns where
   ε' := MonoidHom.mk' (fun n : ℕ => (-1 : ℤˣ) ^ n) (pow_add (-1 : ℤˣ))
   rel_add p q r hpq := by
     change p + 1 = q at hpq

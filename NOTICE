@@ -203,6 +203,7 @@ Nyll/SchemeTheory/RingTheory/RegularLocal/FreeModuleRegularScalar.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/FreeModuleRegularSequenceAux.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/ModuleDepthBound.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/ModuleDepthRegularQuotient.lean
+Nyll/SchemeTheory/RingTheory/RegularLocal/QuotientRegular.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDepth.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDepthFreeness.lean
 Nyll/SchemeTheory/RingTheory/RegularLocal/RegularLocalDomain.lean

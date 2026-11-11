@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Local.OverDiscreteValuationRing
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Exact.DegreeSandwich
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Intermediate.ExponentUnit
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactorCoordinates
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Local.OverDiscreteValuationRing
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Exact.DegreeSandwich
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Intermediate.ExponentUnit
 
 /-!
 # Exact fraction degree of a complete chosen one-root factor
@@ -28,6 +30,8 @@ right-map bijectivity statement.  In particular, it is suitable for the
 exact-degree half of the selected-root sandwich after the finite-etale
 residue diagonal.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -241,9 +245,9 @@ noncomputable def oneRootChosenFactorAlgEquiv
       (iteratedRadical A 1 (fun _ : Fin 1 ↦ N) (fun _ : Fin 1 ↦ varpi)
         ⊗[A] C) ≃ₐ[
           iteratedRadical A 1 (fun _ : Fin 1 ↦ N) (fun _ : Fin 1 ↦ varpi)] D) :
-    letI : Algebra C D := tensorChosenFactorRightAlgebra eTensor
+    let : Algebra C D := tensorChosenFactorRightAlgebra eTensor
     AdjoinRoot (X ^ N - Polynomial.C (algebraMap A C varpi)) ≃ₐ[C] D := by
-  letI : Algebra C D := tensorChosenFactorRightAlgebra eTensor
+  intro sharedDefinitionOwner1
   exact
     (oneIteratedRadicalAlgEquiv C N (algebraMap A C varpi)).symm.trans
       (iteratedRadicalChosenFactorAlgEquiv

@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicPowerWitness
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCyclotomicEigenUnit
-import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessDecrease
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
-import Mathlib.Algebra.CharP.IntermediateField
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicPowerWitness
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCyclotomicEigenUnit
+public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharPrincipalUnitPowerWitnessDecrease
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianAutomorphismValuation
+public import Mathlib.Algebra.CharP.IntermediateField
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Basic
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 
 /-!
 # Trivial cohomological action fixes prime-power roots
@@ -19,6 +23,8 @@ the two cyclotomic extensions. A trivial lower H¹ action produces an actual
 power witness. If its bounded exponent differs from one, its logarithm is
 another eigenvector of strictly smaller valuation, contradicting that minimum.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

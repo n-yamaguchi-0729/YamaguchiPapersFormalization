@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.LocalRing.Quotient
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
+module
+
+public import Mathlib.RingTheory.LocalRing.Quotient
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianFinite
 
 /-!
 # Quotients of complete local rings
@@ -15,6 +17,8 @@ maximal ideal is again complete local, hence Henselian.  Completeness is first
 proved for the extended maximal ideal; surjectivity of the quotient map then
 identifies this ideal with the maximal ideal of the quotient.
 -/
+
+@[expose] public section
 
 noncomputable section
 

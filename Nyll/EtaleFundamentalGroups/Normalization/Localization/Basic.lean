@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Localization.Finiteness
+module
+
+public import Nyll.SchemeTheory.RingTheory.Localization.Fraction.FieldLocalization
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Localization.Finiteness
 
 /-!
 # Normalization after localization at a prime
@@ -17,6 +19,8 @@ normalization in a field extension.  The normalization inclusion is obtained
 by base-changing integrality, after which we specialize mathlib's theorem that
 integral closure commutes with localization.
 -/
+
+@[expose] public section
 
 noncomputable section
 

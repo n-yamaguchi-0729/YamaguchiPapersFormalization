@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierNonSurjective
-import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
-import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
+module
+
+public import Nyll.GaloisCohomology.ArtinSchreier.NontrivialCharacter
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierNonSurjective
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DiscreteValuedCompletion
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-! # Nontrivial prime cyclic characters from discrete valuations -/
+
+@[expose] public section
 
 namespace ArtinSchreierTheory
 universe u v

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.DVFSeparableClosedGeneration
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.DVFSeparableClosedGeneration
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # The tensor map from an embedded separably closed field
@@ -14,6 +16,8 @@ Multiplication of the two given embeddings is surjective because the
 embedded separably closed field generates the separable extension of the
 valuation completion. No Henselian hypothesis is used for surjectivity.
 -/
+
+@[expose] public section
 
 noncomputable section
 

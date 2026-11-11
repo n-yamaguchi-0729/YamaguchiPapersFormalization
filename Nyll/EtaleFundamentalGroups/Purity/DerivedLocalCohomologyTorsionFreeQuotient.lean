@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
-import Mathlib.Algebra.Category.Grp.Zero
-import Mathlib.Algebra.Exact.Basic
-import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
+public import Mathlib.Algebra.Category.Grp.Zero
+public import Mathlib.Algebra.Exact.Basic
+public import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
 
 /-!
 # Local cohomology after removing the primary component
@@ -21,6 +23,8 @@ vector in a quotient containing no such nonzero vector.  In positive degrees
 the inclusion of the primary component and its quotient give a concrete
 linear equivalence through the coefficient long exact sequence.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

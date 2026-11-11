@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.QuasiFinite
-import Mathlib.RingTheory.Ideal.GoingDown
-import Nyll.SchemeTheory.RingTheory.Ramification.Etale.BaseChange
+module
+
+public import Mathlib.RingTheory.Etale.QuasiFinite
+public import Mathlib.RingTheory.Ideal.GoingDown
+public import Nyll.SchemeTheory.RingTheory.Ramification.Etale.BaseChange
 
 /-!
 # A chosen prime below the étale factor of Tag 00UJ
@@ -19,6 +21,8 @@ ramification-index comparison identifies its ramification index with that of `r`
 The right tensor-factor algebra and its flatness are proof-local.  In particular this module does
 not register a second global algebra structure on a tensor product.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.CoprimeFactorLifting
-import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.CoprimeFactorLifting
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.ValuationExtensionCriterion
 
 /-!
 # From simple-root Hensel lifting to valuation factorization
@@ -14,6 +16,8 @@ The Henselian ring assumption now supplies the actual coprime factors.
 The valuation factorization criterion then extends the monic result to
 all primitive polynomials, with the prescribed reductions and degree bounds.
 -/
+
+@[expose] public section
 
 namespace DiscreteValuationField
 

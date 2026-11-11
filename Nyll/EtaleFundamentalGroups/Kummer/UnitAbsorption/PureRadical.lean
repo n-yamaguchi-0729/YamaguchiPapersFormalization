@@ -4,17 +4,21 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Compositum
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
-import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
-import Mathlib.RingTheory.RamificationInertia.Ramification
-import Mathlib.RingTheory.Smooth.Flat
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.UnitAbsorption.Compositum
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Residue
+public import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+public import Mathlib.RingTheory.Smooth.Flat
 
 /-!
 # Finite-etale unit absorption over the pure uniformizer radical
 
 This file is intentionally developed after the actual-compositum witness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

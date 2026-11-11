@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
-import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.GenericFiberResidue
+module
+
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+public import Nyll.SchemeTheory.Divisors.ComponentStalkBranch
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.GenericFiberResidue
 
 /-!
 # Geometrically integral residue fields of horizontal components
@@ -21,6 +23,8 @@ These are the residue-field inputs to the cyclotomic argument in Lemma 2.1 of
 Yamaguchi's solvable-coverings paper.  No condition on finite covers, inertia,
 or an abelian quotient is assumed here.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactor
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.FiniteEtale.ChosenFactor
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
 
 /-!
 # Coordinates on a complete-local chosen factor
@@ -21,6 +23,8 @@ The induced algebra structure is a named definition, not a global instance.
 Consumers install it locally once, avoiding duplicate tensor-product tower
 searches.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -46,9 +50,9 @@ noncomputable def tensorChosenFactorCommAlgEquiv
     {A B C D : Type u} [CommRing A] [CommRing B] [CommRing C] [CommRing D]
     [Algebra A B] [Algebra A C] [Algebra B D]
     (e : (B ⊗[A] C) ≃ₐ[B] D) :
-    letI : Algebra C D := tensorChosenFactorRightAlgebra e
+    let : Algebra C D := tensorChosenFactorRightAlgebra e
     (C ⊗[A] B) ≃ₐ[C] D := by
-  letI : Algebra C D := tensorChosenFactorRightAlgebra e
+  intro sharedDefinitionOwner1
   refine
     { toRingEquiv :=
         (Algebra.TensorProduct.comm A C B).toRingEquiv.trans e.toRingEquiv
@@ -66,9 +70,9 @@ noncomputable def iteratedRadicalChosenFactorAlgEquiv
     {r : ℕ} (n : Fin r → ℕ) (a : Fin r → A)
     [Algebra (iteratedRadical A r n a) D]
     (e : (iteratedRadical A r n a ⊗[A] C) ≃ₐ[iteratedRadical A r n a] D) :
-    letI : Algebra C D := tensorChosenFactorRightAlgebra e
+    let : Algebra C D := tensorChosenFactorRightAlgebra e
     iteratedRadical C r n (fun i ↦ algebraMap A C (a i)) ≃ₐ[C] D := by
-  letI : Algebra C D := tensorChosenFactorRightAlgebra e
+  intro sharedDefinitionOwner1
   exact
     (iteratedRadicalBaseChangeAlgEquiv n a).symm.trans
       (tensorChosenFactorCommAlgEquiv e)

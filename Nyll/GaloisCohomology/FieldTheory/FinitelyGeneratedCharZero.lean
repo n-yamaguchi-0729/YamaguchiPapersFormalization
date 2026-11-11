@@ -3,14 +3,18 @@ Copyright (c) 2026 Naganori Yamaguchi (https://github.com/n-yamaguchi-0729). All
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
-import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
-import Nyll.GaloisCohomology.FieldTheory.IntegralClosureTorsion
-import Mathlib.NumberTheory.NumberField.Units.Basic
-import Mathlib.FieldTheory.PrimeField
+module
+
+public import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
+public import Nyll.GaloisCohomology.FieldTheory.IntegralClosureTorsion
+public import Mathlib.NumberTheory.NumberField.Units.Basic
+public import Mathlib.FieldTheory.PrimeField
 
 /-!
 # Roots of unity in finitely generated fields of characteristic zero
 -/
+
+@[expose] public section
 
 namespace FieldTheory
 

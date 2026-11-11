@@ -4,14 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot1AbelianInvariance
-import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot4FiniteEtaleStability
-import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
-import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
-import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
-import Nyll.ProCGroups.Abelian.TopologicalAbelianization
-import Mathlib.CategoryTheory.Adjunction.Unique
-import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot1AbelianInvariance
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem2Dot4FiniteEtaleStability
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenImmersionPullbackModel
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroupComposition
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.PullbackEquivalence
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianization
+public import Mathlib.CategoryTheory.Adjunction.Unique
+public import Mathlib.CategoryTheory.MorphismProperty.OverAdjunction
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.OpenNormalExtendedQuotientKernel
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.ClosedCommutator
+public import Nyll.ProCGroups.Topologies.QuotientMaps
 
 /-!
 # 開正規部分群の上での境界アーベル化比較
@@ -26,7 +31,11 @@ EFG の `OpenNormalPullbackModel` から実際に構成する。補題 2.1 と 2
 限り、このファイルだけによって幾何学的な議論全体が完成したことにはならない。
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
@@ -35,13 +44,13 @@ open ProCGroups.FiniteStepSolvableQuotients
 namespace Yamaguchi26SolvableCoverings
 
 private theorem finiteEtale_pullback_isEquivalence_of_isIso
-    {X Y : Scheme.{0}} (f : X ⟶ Y) [IsIso f] :
+    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsIso f] :
     (pullback f).IsEquivalence := by
-  let P : MorphismProperty Scheme.{0} := @IsFiniteEtale
+  let P : MorphismProperty Scheme.{u} := @IsFiniteEtale
   let e : Functor.fromPUnit X ≅ Functor.fromPUnit Y :=
     Discrete.natIso fun _ => asIso f
   let E : P.Over ⊤ X ≌ P.Over ⊤ Y :=
-    MorphismProperty.Comma.mapRightIso (P := P) (Q := ⊤) (W := ⊤) (𝟭 Scheme) e
+    MorphismProperty.Comma.mapRightIso (P := P) (Q := ⊤) (W := ⊤) (𝟭 Scheme.{u}) e
   have adj : E.functor ⊣ MorphismProperty.Over.pullback P ⊤ f :=
     MorphismProperty.Over.mapPullbackAdj P ⊤ f (P.of_isIso f) trivial
   exact (Functor.isEquivalence_iff_of_iso
@@ -49,7 +58,7 @@ private theorem finiteEtale_pullback_isEquivalence_of_isIso
       (Equivalence.isEquivalence_inverse E)
 
 private theorem fundamentalGroupHom_composite_eq_one
-    {X Y Z : Scheme.{0}} {Ω : Type} [Field Ω]
+    {X Y Z : Scheme.{u}} {Ω : Type u} [Field Ω]
     (f : X ⟶ Y) (g : Y ⟶ Z) (point : Spec (.of Ω) ⟶ X)
     (a : π₁ᵉᵗ(point)) (ha : fundamentalGroupHom (f ≫ g) point a = 1) :
     fundamentalGroupHom g (point ≫ f) (fundamentalGroupHom f point a) = 1 := by
@@ -72,10 +81,10 @@ private theorem fundamentalGroupHom_composite_eq_one
 
 /-- 条件 `(†)` の下で、開正規部分群の逆像から有限離散可換群への写像は境界核を消す。 -/
 theorem boundary_openNormalFiniteDiscreteAbelianMapsKillKernel
-    {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+    {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
     (D : X.EffectiveCartierDivisor) (hhor : IsHorizontal D)
     (hD : BoundaryCondition D) [ConnectedSpace D.1.supportComplement]
-    {Ω : Type} [Field Ω] [IsSepClosed Ω]
+    {Ω : Type u} [Field Ω] [IsSepClosed Ω]
     (point : Spec (.of Ω) ⟶ D.1.supportComplement) :
     OpenNormalFiniteDiscreteAbelianMapsKillKernel
       (fundamentalGroupHom D.1.supportComplement.ι point) := by

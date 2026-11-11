@@ -4,8 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.AffineCompleteBaseChange
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.AffineCompleteBaseChange
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumQuotient
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.OpenImmersionSurjective
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The categorical hypersurface step for punctured local purity
@@ -16,6 +22,8 @@ puncture to the quotient puncture is fully faithful, purity for the quotient
 therefore implies purity for the ambient ring.  This isolates the genuine
 local Lefschetz input from the already formalized complete-quotient lifting.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,10 +45,10 @@ theorem hasPuncturedPurity_of_complete_quotient_of_fullyFaithful
     {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     [IsAdicComplete (maximalIdeal R) R]
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr
         (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     AlgebraicGeometry.FiniteEtale.HasPuncturedPurity (R ⧸ I) →
@@ -48,13 +56,7 @@ theorem hasPuncturedPurity_of_complete_quotient_of_fullyFaithful
         (AlgebraicGeometry.Scheme.puncturedSpectrumQuotientMorphism
           R I hI)).FullyFaithful →
       AlgebraicGeometry.FiniteEtale.HasPuncturedPurity R := by
-  let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr
-      (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
-  intro hquotient hlefschetz
+  intro sharedOwner1 sharedOwner2 hquotient hlefschetz
   rw [AlgebraicGeometry.FiniteEtale.hasPuncturedPurity_iff] at hquotient ⊢
   intro W
   let j := AlgebraicGeometry.Scheme.puncturedSpectrumInclusion R
@@ -94,10 +96,10 @@ theorem hasPuncturedPurity_of_complete_quotient_of_preserves_connected
     {R : Type u} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
     [IsAdicComplete (maximalIdeal R) R]
     (I : Ideal R) (hI : I ≤ maximalIdeal R) :
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr
         (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     ConnectedSpace (AlgebraicGeometry.Scheme.puncturedSpectrum R) →
@@ -112,13 +114,7 @@ theorem hasPuncturedPurity_of_complete_quotient_of_preserves_connected
               (AlgebraicGeometry.Scheme.puncturedSpectrumQuotientMorphism
                 R I hI)).obj W)) →
       AlgebraicGeometry.FiniteEtale.HasPuncturedPurity R := by
-  let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr
-      (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI)
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
-  intro hconnectedR hconnectedQuotient hpurity hpreserves
+  intro sharedOwner1 sharedOwner2 hconnectedR hconnectedQuotient hpurity hpreserves
   let : ConnectedSpace
       (AlgebraicGeometry.Scheme.puncturedSpectrum R) := hconnectedR
   let : ConnectedSpace

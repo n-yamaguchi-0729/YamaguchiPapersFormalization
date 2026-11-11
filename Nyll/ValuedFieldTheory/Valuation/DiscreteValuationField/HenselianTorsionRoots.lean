@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianRootsOfUnity
-import Mathlib.GroupTheory.Torsion
-import Mathlib.RingTheory.Valuation.ValuationSubring
-import Mathlib.Algebra.Group.Subgroup.Ker
-import Mathlib.Algebra.Order.GroupWithZero.Basic
-import Mathlib.Data.Fintype.EquivFin
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianRootsOfUnity
+public import Mathlib.GroupTheory.Torsion
+public import Mathlib.RingTheory.Valuation.ValuationSubring
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.Algebra.Order.GroupWithZero.Basic
+public import Mathlib.Data.Fintype.EquivFin
 
 /-!
 # Reduction of all torsion roots in residue characteristic zero
@@ -19,6 +21,8 @@ on valuation-ring units. It is independent of any chosen exponent. Hensel
 uniqueness makes this map injective when the residue field has characteristic
 zero, so finiteness of residue-field torsion implies finiteness of field torsion.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -30,7 +34,8 @@ variable {K : Type u} [Field K]
 
 namespace DVF
 
-private theorem torsion_le_unitGroup (D : DVF.{u, v} K) :
+/-- Every finite-order unit has valuation one. -/
+theorem torsion_le_unitGroup (D : DVF.{u, v} K) :
     CommGroup.torsion Kˣ ≤ D.valuation.valuationSubring.unitGroup := by
   intro z hz
   obtain ⟨n, hn, hzn⟩ := hz.exists_pow_eq_one

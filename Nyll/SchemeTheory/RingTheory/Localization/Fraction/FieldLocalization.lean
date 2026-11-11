@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.Localization.LocalizationLocalization
+module
+
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 
 /-!
@@ -17,6 +19,8 @@ map is defined by composition through the fraction field, so the two scalar
 towers are definitionally compatible and the localization lift is constructed
 only once.
 -/
+
+@[expose] public section
 
 noncomputable section
 

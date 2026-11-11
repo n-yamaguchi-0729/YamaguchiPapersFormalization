@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Ideal.Maximal
+module
+
+public import Nyll.SchemeTheory.RingTheory.GenericFiber.FractionRing
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Ideal.Maximal
 
 /-!
 # A chosen generic-fibre component as a fraction field
@@ -21,6 +23,8 @@ the bridge needed to compare a chosen generic component with a concrete
 domain factor of `U` once that contraction is identified with the kernel of
 the corresponding factor map.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -77,12 +81,11 @@ theorem genericFiberComponentQuotient_isFractionRing
     (m : Ideal (K ⊗[R] U)) [m.IsMaximal] :
     let N := genericFiberComponentBaseIdeal m
     let Ω := ((K ⊗[R] U) ⧸ m)
-    letI : Algebra (U ⧸ N) Ω :=
+    let : Algebra (U ⧸ N) Ω :=
       (genericFiberComponentQuotientRingHom m).toAlgebra
     IsFractionRing (U ⧸ N) Ω := by
   let G := K ⊗[R] U
-  let N := genericFiberComponentBaseIdeal m
-  let Ω := G ⧸ m
+  intro N Ω quotientAlgebra
   let M : Submonoid U :=
     Algebra.algebraMapSubmonoid U (nonZeroDivisors R)
   let : Algebra U G := Algebra.TensorProduct.rightAlgebra
@@ -94,8 +97,6 @@ theorem genericFiberComponentQuotient_isFractionRing
   let : N.IsPrime := (inferInstance : m.IsPrime).comap
     (Algebra.TensorProduct.includeRight : U →ₐ[R] G).toRingHom
   let : Field Ω := Ideal.Quotient.field m
-  let : Algebra (U ⧸ N) Ω :=
-    (genericFiberComponentQuotientRingHom m).toAlgebra
   let : FaithfulSMul (U ⧸ N) Ω :=
     (faithfulSMul_iff_algebraMap_injective (U ⧸ N) Ω).mpr
       (genericFiberComponentQuotientRingHom_injective m)

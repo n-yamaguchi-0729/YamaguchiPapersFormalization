@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
-import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimaryRootsFiniteness
+public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-!
 # Root finiteness in subfields
@@ -15,6 +17,8 @@ A finite separable extension of a subfield embeds in a finite extension
 of the ambient field. In characteristic zero this descends finiteness of
 primary roots of unity to finite extensions of the subfield.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 universe u v w

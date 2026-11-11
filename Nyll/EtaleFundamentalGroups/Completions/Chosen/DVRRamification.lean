@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
-import Nyll.EtaleFundamentalGroups.Ramification.Product.Coordinate
+module
+
+public import Nyll.EtaleFundamentalGroups.Completions.Chosen.DVRProductCoordinate
+public import Nyll.EtaleFundamentalGroups.Ramification.Product.Coordinate
 
 /-!
 # Ramification in the chosen completed DVR factor
@@ -16,6 +18,8 @@ file combines that identification with flat base-change invariance of
 ramification to compare the completed local DVR directly with the original
 normalization prime.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -40,7 +44,7 @@ theorem completedPrimeValuationSubring_ramificationIdx_eq
     let H := standardDVFCompletionCompleteDVF V K
     let Vhat := H.valuationSubring
     let A := completedPrimeValuationSubring (L := L) Q
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
     letI : Algebra Vhat A :=
       completedPrimeValuationSubringCompletionAlgebra
@@ -48,13 +52,10 @@ theorem completedPrimeValuationSubring_ramificationIdx_eq
     (IsLocalRing.maximalIdeal A).ramificationIdx Vhat =
       Q.1.ramificationIdx V := by
   classical
+  intro H Vhat selectedA algebraVVhat
   let p := IsLocalRing.maximalIdeal V
-  let H := standardDVFCompletionCompleteDVF V K
-  let Vhat := H.valuationSubring
   let A := fun Q' : p.primesOver C =>
     completedPrimeValuationSubring (L := L) Q'
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
   let : IsLocalHom (algebraMap V Vhat) :=
     standardDVRToCompletion_isLocalHom V K
   let : Module.FaithfullyFlat V Vhat :=
@@ -134,26 +135,26 @@ theorem completedGenericTensorChosenIntegralClosureAlgEquiv_map_maximalIdeal
     let Khat := standardDVFCompletionField V K
     let A := fun Q' : (IsLocalRing.maximalIdeal V).primesOver C =>
       completedPrimeValuationSubring (L := L) Q'
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : IsLocalHom (algebraMap V Vhat) :=
+    let : IsLocalHom (algebraMap V Vhat) :=
       standardDVRToCompletion_isLocalHom V K
-    letI : Module.FaithfullyFlat V Vhat :=
+    let : Module.FaithfullyFlat V Vhat :=
       standardDVRCompletionValuationSubring_faithfullyFlat
         (V := V) (K := K)
-    letI : Algebra K Khat := standardDVFCompletionAlgebra V K
-    letI : Algebra V Khat :=
+    let : Algebra K Khat := standardDVFCompletionAlgebra V K
+    let : Algebra V Khat :=
       standardDVFCompletionBaseAlgebra (V := V) (K := K)
-    letI : SMul K Khat :=
+    let : SMul K Khat :=
       (standardDVFCompletionAlgebra V K).toSMul
-    letI : SMul V Khat :=
+    let : SMul V Khat :=
       (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-    letI : IsScalarTower V K Khat :=
+    let : IsScalarTower V K Khat :=
       standardDVFCompletion_isScalarTower (V := V) (K := K)
-    letI : IsScalarTower V Vhat Khat :=
+    let : IsScalarTower V Vhat Khat :=
       standardDVRCompletionValuationSubring_isScalarTower
         (V := V) (K := K)
-    letI : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
+    let : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
       completedPrimeValuationSubringCompletionAlgebra
         (V := V) (C := C) (K := K) (L := L) Q'
     let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
@@ -164,47 +165,12 @@ theorem completedGenericTensorChosenIntegralClosureAlgEquiv_map_maximalIdeal
     let B := integralClosure Vhat (GenericTensorFieldComponent m)
     let e := completedGenericTensorChosenIntegralClosureAlgEquiv
       (V := V) (C := C) (K := K) (L := L) Q
-    letI : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
+    let : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
     (IsLocalRing.maximalIdeal B).map e.toRingEquiv.toRingHom =
       IsLocalRing.maximalIdeal (A Q) := by
   classical
-  let p := IsLocalRing.maximalIdeal V
-  let H := standardDVFCompletionCompleteDVF V K
-  let Vhat := H.valuationSubring
-  let Khat := standardDVFCompletionField V K
-  let A := fun Q' : p.primesOver C =>
-    completedPrimeValuationSubring (L := L) Q'
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  let : IsLocalHom (algebraMap V Vhat) :=
-    standardDVRToCompletion_isLocalHom V K
-  let : Module.FaithfullyFlat V Vhat :=
-    standardDVRCompletionValuationSubring_faithfullyFlat
-      (V := V) (K := K)
-  let : Algebra K Khat := standardDVFCompletionAlgebra V K
-  let : Algebra V Khat :=
-    standardDVFCompletionBaseAlgebra (V := V) (K := K)
-  let : SMul K Khat :=
-    (standardDVFCompletionAlgebra V K).toSMul
-  let : SMul V Khat :=
-    (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-  let : IsScalarTower V K Khat :=
-    standardDVFCompletion_isScalarTower (V := V) (K := K)
-  let : IsScalarTower V Vhat Khat :=
-    standardDVRCompletionValuationSubring_isScalarTower
-      (V := V) (K := K)
-  let : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
-    completedPrimeValuationSubringCompletionAlgebra
-      (V := V) (C := C) (K := K) (L := L) Q'
-  let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
-  let hres := standardDVRToCompletion_residueFieldMap_bijective V K
-  let m := completedGenericTensorChosenIdeal
-    (R := V) (R' := Vhat) (C := C) (K := K) (L := L) (K' := Khat)
-    hmax hres Q.1
-  let B := integralClosure Vhat (GenericTensorFieldComponent m)
-  let e := completedGenericTensorChosenIntegralClosureAlgEquiv
-    (V := V) (C := C) (K := K) (L := L) Q
-  let : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
+  intro H Vhat Khat A algebraVVhat localHomVVhat faithfullyFlatVVhat algebraKKhat
+    algebraVKhat smulKKhat smulVKhat towerVKKhat towerVVhatKhat algebraVhatA hmax hres m B e localB
   exact IsLocalRing.map_ringEquiv_maximalIdeal e.toRingEquiv
 
 /-- The maximal ideal in the normalization of the chosen completed generic
@@ -216,26 +182,26 @@ theorem completedGenericTensorChosenIntegralClosure_ramificationIdx_eq
     let Khat := standardDVFCompletionField V K
     let A := fun Q' : (IsLocalRing.maximalIdeal V).primesOver C =>
       completedPrimeValuationSubring (L := L) Q'
-    letI : Algebra V Vhat :=
+    let : Algebra V Vhat :=
       standardDVFCompletionValuationSubringAlgebra V K
-    letI : IsLocalHom (algebraMap V Vhat) :=
+    let : IsLocalHom (algebraMap V Vhat) :=
       standardDVRToCompletion_isLocalHom V K
-    letI : Module.FaithfullyFlat V Vhat :=
+    let : Module.FaithfullyFlat V Vhat :=
       standardDVRCompletionValuationSubring_faithfullyFlat
         (V := V) (K := K)
-    letI : Algebra K Khat := standardDVFCompletionAlgebra V K
-    letI : Algebra V Khat :=
+    let : Algebra K Khat := standardDVFCompletionAlgebra V K
+    let : Algebra V Khat :=
       standardDVFCompletionBaseAlgebra (V := V) (K := K)
-    letI : SMul K Khat :=
+    let : SMul K Khat :=
       (standardDVFCompletionAlgebra V K).toSMul
-    letI : SMul V Khat :=
+    let : SMul V Khat :=
       (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-    letI : IsScalarTower V K Khat :=
+    let : IsScalarTower V K Khat :=
       standardDVFCompletion_isScalarTower (V := V) (K := K)
-    letI : IsScalarTower V Vhat Khat :=
+    let : IsScalarTower V Vhat Khat :=
       standardDVRCompletionValuationSubring_isScalarTower
         (V := V) (K := K)
-    letI : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
+    let : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
       completedPrimeValuationSubringCompletionAlgebra
         (V := V) (C := C) (K := K) (L := L) Q'
     let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
@@ -246,47 +212,12 @@ theorem completedGenericTensorChosenIntegralClosure_ramificationIdx_eq
     let B := integralClosure Vhat (GenericTensorFieldComponent m)
     let e := completedGenericTensorChosenIntegralClosureAlgEquiv
       (V := V) (C := C) (K := K) (L := L) Q
-    letI : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
+    let : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
     (IsLocalRing.maximalIdeal B).ramificationIdx Vhat =
       Q.1.ramificationIdx V := by
   classical
-  let p := IsLocalRing.maximalIdeal V
-  let H := standardDVFCompletionCompleteDVF V K
-  let Vhat := H.valuationSubring
-  let Khat := standardDVFCompletionField V K
-  let A := fun Q' : p.primesOver C =>
-    completedPrimeValuationSubring (L := L) Q'
-  let : Algebra V Vhat :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  let : IsLocalHom (algebraMap V Vhat) :=
-    standardDVRToCompletion_isLocalHom V K
-  let : Module.FaithfullyFlat V Vhat :=
-    standardDVRCompletionValuationSubring_faithfullyFlat
-      (V := V) (K := K)
-  let : Algebra K Khat := standardDVFCompletionAlgebra V K
-  let : Algebra V Khat :=
-    standardDVFCompletionBaseAlgebra (V := V) (K := K)
-  let : SMul K Khat :=
-    (standardDVFCompletionAlgebra V K).toSMul
-  let : SMul V Khat :=
-    (standardDVFCompletionBaseAlgebra (V := V) (K := K)).toSMul
-  let : IsScalarTower V K Khat :=
-    standardDVFCompletion_isScalarTower (V := V) (K := K)
-  let : IsScalarTower V Vhat Khat :=
-    standardDVRCompletionValuationSubring_isScalarTower
-      (V := V) (K := K)
-  let : ∀ Q', Algebra Vhat (A Q') := fun Q' =>
-    completedPrimeValuationSubringCompletionAlgebra
-      (V := V) (C := C) (K := K) (L := L) Q'
-  let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
-  let hres := standardDVRToCompletion_residueFieldMap_bijective V K
-  let m := completedGenericTensorChosenIdeal
-    (R := V) (R' := Vhat) (C := C) (K := K) (L := L) (K' := Khat)
-    hmax hres Q.1
-  let B := integralClosure Vhat (GenericTensorFieldComponent m)
-  let e := completedGenericTensorChosenIntegralClosureAlgEquiv
-    (V := V) (C := C) (K := K) (L := L) Q
-  let : IsLocalRing B := e.symm.toRingEquiv.isLocalRing
+  intro H Vhat Khat A algebraVVhat localHomVVhat faithfullyFlatVVhat algebraKKhat
+    algebraVKhat smulKKhat smulVKhat towerVKKhat towerVVhatKhat algebraVhatA hmax hres m B e localB
   calc
     (IsLocalRing.maximalIdeal B).ramificationIdx Vhat =
         (IsLocalRing.maximalIdeal (A Q)).ramificationIdx Vhat :=

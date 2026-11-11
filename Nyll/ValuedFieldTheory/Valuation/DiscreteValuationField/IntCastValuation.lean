@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NatCastValuation
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.NatCastValuation
 
 /-!
 # Values of integers in a valued field
@@ -13,6 +15,8 @@ The value of a nonzero integer is determined by its p-adic order at the
 residue characteristic. Taking its natural absolute value reduces the formula
 to the natural-number case, without a characteristic-zero hypothesis.
 -/
+
+@[expose] public section
 
 namespace Valuation
 

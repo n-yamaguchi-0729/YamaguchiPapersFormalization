@@ -8,6 +8,7 @@ module
 
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.FundamentalGroup
 public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.Functoriality
 
 /-!
 # Functoriality over a tower of fields

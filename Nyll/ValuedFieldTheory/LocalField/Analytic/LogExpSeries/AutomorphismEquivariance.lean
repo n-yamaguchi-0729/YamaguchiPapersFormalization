@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
-import Mathlib.Topology.Algebra.InfiniteSum.Basic
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.LogExpSeries.SeriesTerms
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
+public import Mathlib.Topology.Algebra.InfiniteSum.Basic
 
 /-!
 # The logarithm series commutes with valuation-preserving automorphisms
@@ -15,6 +17,8 @@ The actual valuation topology makes the field automorphism and its inverse
 continuous. Consequently they commute with the total infinite sum defining
 the logarithm; no supplied convergence or comparison theorem is needed.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

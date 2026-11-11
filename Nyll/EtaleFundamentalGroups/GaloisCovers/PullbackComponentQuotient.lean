@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
-import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
-import Mathlib.Algebra.Group.Subgroup.Finite
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
+public import Nyll.EtaleFundamentalGroups.Inertia.DivisorialStrictHenselian
+public import Mathlib.Algebra.Group.Subgroup.Finite
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
 
 /-!
 # Quotients attached to pointed pullback components
@@ -18,6 +21,8 @@ component deck group to the original deck group.  In particular, mapping a
 subgroup along this homomorphism preserves its cardinality and all numerical
 coprimality statements.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,12 +47,12 @@ theorem galoisPullbackComponent_quotient_ker_eq
     (hiz : (fiber xi).map i z =
       transportedPointOfCompIso (pullback f) (pullbackFiberIso f xi) A x)
     (hZ : IsGalois Z) (hi : Mono i) :
-    letI : IsGalois Z := hZ
+    let : IsGalois Z := hZ
     (EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
       xi Z hZ z).ker =
       (EtaleFundamentalGroups.Inertia.finiteEtaleGaloisCoverQuotientOfMorphism
         f xi A hA x).ker := by
-  let : IsGalois Z := hZ
+  intro sharedOwner1
   let : Mono i := hi
   rw [EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom_ker,
     EtaleFundamentalGroups.Inertia.finiteEtaleGaloisCoverQuotientOfMorphism_ker]
@@ -115,14 +120,14 @@ theorem galoisPullbackComponentQuotientMonoidHom_comp
     (hiz : (fiber xi).map i z =
       transportedPointOfCompIso (pullback f) (pullbackFiberIso f xi) A x)
     (hZ : IsGalois Z) (hi : Mono i) :
-    letI : IsGalois Z := hZ
+    let : IsGalois Z := hZ
     (galoisPullbackComponentQuotientMonoidHom
       f xi A hA x Z i z hiz hZ hi).comp
         (EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
           xi Z hZ z) =
       EtaleFundamentalGroups.Inertia.finiteEtaleGaloisCoverQuotientOfMorphism
         f xi A hA x := by
-  let : IsGalois Z := hZ
+  intro sharedOwner1
   let qZ := EtaleFundamentalGroups.finiteEtaleGaloisCoverQuotientMonoidHom
     xi Z hZ z
   let qA :=

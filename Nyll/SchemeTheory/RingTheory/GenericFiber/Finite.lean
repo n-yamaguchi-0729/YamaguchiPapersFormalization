@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.BaseChange
-import Mathlib.RingTheory.Localization.Integral
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Mathlib.RingTheory.Localization.BaseChange
+public import Mathlib.RingTheory.Localization.Integral
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Generic fibre of a finite domain extension
@@ -19,6 +21,8 @@ The proof regards both sides as localizations of `C` at the image of the
 non-zero elements of `R`.  Finiteness makes `C / R` algebraic, so every
 non-zero denominator from `C` can be cleared by a non-zero element of `R`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -107,7 +111,8 @@ def finiteGenericFiberAlgEquiv
       algebraMap C E := by
     ext c
     change f (1 ⊗ₜ[R] c) = algebraMap C E c
-    simp [f]
+    change (1 : K) • algebraMap C E c = algebraMap C E c
+    exact one_smul K (algebraMap C E c)
   exact AlgEquiv.ofBijective f
     (IsLocalization.bijective (M := M) f.toRingHom hfC)
 
@@ -128,7 +133,8 @@ theorem finiteGenericFiberAlgEquiv_tmul
     finiteGenericFiberAlgEquiv
         (R := R) (C := C) (K := K) (E := E) (x ⊗ₜ[R] c) =
       algebraMap K E x * algebraMap C E c := by
-  simp [finiteGenericFiberAlgEquiv, Algebra.smul_def]
+  change x • algebraMap C E c = algebraMap K E x * algebraMap C E c
+  exact Algebra.smul_def x (algebraMap C E c)
 
 end EtaleFundamentalGroups
 

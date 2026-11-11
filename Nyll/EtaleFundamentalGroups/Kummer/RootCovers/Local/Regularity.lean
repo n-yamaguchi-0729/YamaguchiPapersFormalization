@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.RegularLocalRing.Defs
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.Basic
+public import Mathlib.RingTheory.KrullDimension.Field
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Regularity of a local Kummer root cover
@@ -21,6 +24,8 @@ adjoined root followed by the images of `rs`.  This generating family has the
 same length as the dimension of `R`; going-up supplies the required lower
 bound on the dimension of `B`, so `B` is regular local.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Kummer
 

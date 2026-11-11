@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
-import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.AlgebraicExtensionHenselian
 
 /-!
 # Actual Henselian discrete valuation extensions
@@ -15,6 +17,8 @@ The localized integral closure constructs a discrete extension valuation.
 Henselianity follows from the simple-root condition on the base valuation
 ring and uniqueness along algebraic field towers.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

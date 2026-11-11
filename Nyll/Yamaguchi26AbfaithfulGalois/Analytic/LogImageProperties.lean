@@ -4,14 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogImage
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogReduced
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMap
-import Mathlib.NumberTheory.Padics.PadicIntegers
-import Mathlib.Topology.Algebra.GroupWithZero
-import Mathlib.Topology.Algebra.OpenSubgroup
-import Mathlib.Topology.Algebra.Valued.ValuationTopology
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLog
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogImage
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogReduced
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMap
+public import Mathlib.NumberTheory.Padics.PadicIntegers
+public import Mathlib.Topology.Algebra.GroupWithZero
+public import Mathlib.Topology.Algebra.OpenSubgroup
+public import Mathlib.Topology.Algebra.Valued.ValuationTopology
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.Filtration
 
 /-!
 # The image of the principal-unit logarithm
@@ -19,6 +22,8 @@ import Mathlib.Topology.Algebra.Valued.ValuationTopology
 Openness, closedness, torsion-freeness, and separation of the actual
 logarithm image in Section 3 of [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -36,13 +41,13 @@ theorem principal_unit_log_image_open_closed
     [ValuationTheory.DiscreteValuationField.Valuation.IsCompleteDiscrete v]
     (p : ℕ) [Fact p.Prime]
     [CharP (IsLocalRing.ResidueField v.valuationSubring) p] :
-    letI : Valued K (WithZero (Multiplicative ℤ)) := Valued.mk' v
+    let : Valued K (WithZero (Multiplicative ℤ)) := Valued.mk' v
     let Λ : Set K := Set.range
       (fun u : LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
           (completeDVFOfWithZeroValuation v) 1 =>
         (principalUnitLogOfMixedChar v p u).toAdd)
     IsOpen Λ ∧ IsClosed Λ := by
-  let : Valued K (WithZero (Multiplicative ℤ)) := Valued.mk' v
+  intro sharedOwner1 sharedOwner2
   let f : Additive
       (LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
         (completeDVFOfWithZeroValuation v) 1) →+ K :=

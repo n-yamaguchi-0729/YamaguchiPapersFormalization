@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Divisors.LocalComplement
-import Mathlib.AlgebraicGeometry.OpenImmersion
+module
+
+public import Nyll.SchemeTheory.Divisors.LocalComplement
+public import Mathlib.AlgebraicGeometry.OpenImmersion
 
 /-!
 # The principal complement of a stalk ideal
@@ -14,6 +16,8 @@ This is the one-localization counterpart of `LocalComplement`: the actual
 spectrum of the stalk localized away from a generator maps to the global
 support complement, and the canonical maps form a pullback square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

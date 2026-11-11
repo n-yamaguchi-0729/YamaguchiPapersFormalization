@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.SeparableClosure.GeometricallyIntegralRestriction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueLift
-import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Conjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.Cyclotomic.RationalCyclotomicCharacterEquiv
-import Nyll.SchemeTheory.FunctionFields.IntegerBase
+module
+
+public import Nyll.SchemeTheory.FunctionFields.SeparableClosure.GeometricallyIntegralRestriction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.ResidueLift
+public import Nyll.SchemeTheory.AbhyankarLemma.Geometry.CyclicInertia.Conjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.Cyclotomic.RationalCyclotomicCharacterEquiv
+public import Nyll.SchemeTheory.FunctionFields.IntegerBase
 
 /-!
 # Cyclotomic inversion and tame inertia
@@ -17,6 +19,8 @@ This file constructs the rational cyclotomic automorphism with character
 `-1`, transports it to a separable closure of a regular characteristic-zero
 field, and connects its residue lift to conjugation on finite tame inertia.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -229,12 +233,11 @@ which inverts every finite-order element.  This formulation includes
 universe lifts of `ℚ`. -/
 theorem exists_separableClosureAutomorphism_inverting_torsion_of_ratEquiv
     (k : Type u) [Field k] [PerfectField k] (e : k ≃+* ℚ) :
-    letI : Algebra k (SeparableClosure ℚ) :=
+    let : Algebra k (SeparableClosure ℚ) :=
       ((algebraMap ℚ (SeparableClosure ℚ)).comp e.toRingHom).toAlgebra
     ∃ sigma : SeparableClosure ℚ ≃ₐ[k] SeparableClosure ℚ,
       ∀ z : SeparableClosure ℚ, IsOfFinOrder z → sigma z = z⁻¹ := by
-  let : Algebra k (SeparableClosure ℚ) :=
-    ((algebraMap ℚ (SeparableClosure ℚ)).comp e.toRingHom).toAlgebra
+  intro closureAlgebra
   obtain ⟨sigmaQ, hsigmaQ⟩ :=
     exists_separableClosureRatAutomorphism_inverting_torsion
   refine ⟨AlgEquiv.ofRingEquiv (f := sigmaQ.toRingEquiv) ?_, hsigmaQ⟩
@@ -597,7 +600,8 @@ section IntegerBase
 local instance : IsDomain (ULift.{v} ℤ) :=
   (ULift.ringEquiv : ULift.{v} ℤ ≃+* ℤ).toMulEquiv.isDomain ℤ
 
-private abbrev integerGenericResidueField : Type v :=
+/-- The residue field at the generic point of the lifted integer scheme. -/
+abbrev integerGenericResidueField : Type v :=
   AlgebraicGeometry.Scheme.residueField
     (AlgebraicGeometry.Spec (CommRingCat.of (ULift.{v} ℤ)))
     (_root_.genericPoint

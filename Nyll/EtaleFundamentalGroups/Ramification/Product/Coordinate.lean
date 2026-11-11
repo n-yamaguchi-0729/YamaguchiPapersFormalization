@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
-import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
+module
+
+public import Nyll.EtaleFundamentalGroups.Normalization.Primes.AtLargerPrime
+public import Nyll.SchemeTheory.Normalization.Products.LocalRingFactor
 
 /-!
 # Ramification in a selected product coordinate
@@ -15,6 +17,8 @@ ramification index as the maximal ideal in that coordinate.  This is the
 ideal-theoretic transport needed after a completed finite algebra has been
 decomposed into its local factors.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -66,15 +70,13 @@ variable [∀ j, CommRing (B j)] [∀ j, IsLocalRing (B j)]
 pulled back along a ring equivalence. -/
 theorem ringEquivProductCoordinatePrime_ramificationIdx_eq
     (e : U ≃+* (∀ j, B j)) (i : ι) :
-    letI : Algebra U (B i) := ringEquivProductCoordinateAlgebra B i e
-    letI : Algebra R (B i) :=
+    let : Algebra U (B i) := ringEquivProductCoordinateAlgebra B i e
+    let : Algebra R (B i) :=
       ringEquivProductCoordinateBaseAlgebra (R := R) B i e
     (ringEquivProductCoordinatePrime B i e).ramificationIdx R =
       (IsLocalRing.maximalIdeal (B i)).ramificationIdx R := by
+  intro sharedOwner1 sharedOwner2
   let q := ringEquivProductCoordinatePrime B i e
-  let : Algebra U (B i) := ringEquivProductCoordinateAlgebra B i e
-  let : Algebra R (B i) :=
-    ringEquivProductCoordinateBaseAlgebra (R := R) B i e
   let : IsScalarTower R U (B i) :=
     ringEquivProductCoordinate_isScalarTower (R := R) B i e
   let : IsLocalization q.primeCompl (B i) :=

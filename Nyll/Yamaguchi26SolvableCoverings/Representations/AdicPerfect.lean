@@ -4,18 +4,20 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Ring.Commute
-import Mathlib.GroupTheory.Commutator.Basic
-import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Ideal.Quotient.Defs
-import Mathlib.Topology.Algebra.ContinuousMonoidHom
-import Mathlib.Topology.Algebra.Group.Subgroup
-import Mathlib.Topology.Algebra.Group.Matrix
-import Mathlib.Topology.Algebra.Group.Units
-import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
-import Mathlib.Topology.Instances.Matrix
+module
+
+public import Mathlib.Algebra.Ring.Commute
+public import Mathlib.GroupTheory.Commutator.Basic
+public import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Defs
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.Topology.Algebra.ContinuousMonoidHom
+public import Mathlib.Topology.Algebra.Group.Subgroup
+public import Mathlib.Topology.Algebra.Group.Matrix
+public import Mathlib.Topology.Algebra.Group.Units
+public import Mathlib.Topology.Algebra.Nonarchimedean.AdicTopology
+public import Mathlib.Topology.Instances.Matrix
 
 /-!
 # 完全な位相群の合同表現は自明
@@ -33,6 +35,8 @@ import Mathlib.Topology.Instances.Matrix
 系2.6では `I` は極大イデアルであり、完備性からこの分離性が得られる。
 この補助定理自体には剰余体の有限性・Noether 性・`G` のコンパクト性は不要である。
 -/
+
+@[expose] public section
 
 noncomputable section
 

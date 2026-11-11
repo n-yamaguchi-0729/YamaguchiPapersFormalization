@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.RegularBoundaryPurity
-import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
-import Nyll.SchemeTheory.Etale.AffineBaseChangeProperties
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.RegularBoundaryPurity
+public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
+public import Nyll.SchemeTheory.Etale.AffineBaseChangeProperties
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Purity for the actual normalization of a cover of a principal open
@@ -18,6 +20,8 @@ actual scheme base change. The canonical function-field comparison turns
 these into the local hypotheses of purity, with regularity required only
 along the boundary.
 -/
+
+@[expose] public section
 
 noncomputable section
 

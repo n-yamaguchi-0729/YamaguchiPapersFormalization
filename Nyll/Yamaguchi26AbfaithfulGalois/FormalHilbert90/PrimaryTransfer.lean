@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
-import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrimaryQuotient
-import Nyll.ProCGroups.Abelian.Transfer
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Theorem6Dot1FormalHilbert90
+public import Nyll.GaloisCohomology.ProfiniteIntegers.PadicPrimaryQuotient
+public import Nyll.ProCGroups.Abelian.Transfer
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
 
 /-!
 # Transfer on fixed primary classes
@@ -14,6 +17,8 @@ import Nyll.ProCGroups.Abelian.Transfer
 Transfer of a p-adic character evaluates on a globally fixed primary
 class as multiplication by the index of the open normal subgroup.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ProCGroups.Abelian ProCGroups.ProC ProCGroups.FiniteStepSolvableQuotients

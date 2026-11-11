@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionReductionPrimary
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
-import Mathlib.GroupTheory.Index
-import Mathlib.Algebra.CharP.Reduced
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionReductionPrimary
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
+public import Mathlib.GroupTheory.Index
+public import Mathlib.Algebra.CharP.Reduced
 
 /-!
 # Finiteness of all roots of unity in mixed characteristic
@@ -17,6 +19,8 @@ the finite set of p-power roots of the original field. Finiteness of the
 residue-field torsion then gives finiteness of all field torsion, without
 assuming the valuation is Henselian or complete.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

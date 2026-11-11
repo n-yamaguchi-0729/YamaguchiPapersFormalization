@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
-import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
-import Nyll.SchemeTheory.FunctionFields.StalkFunctoriality
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionFieldNormalization
+public import Nyll.EtaleFundamentalGroups.Normalization.Localization.IntegralClosureAtPrimeEquiv
+public import Nyll.SchemeTheory.FunctionFields.StalkFunctoriality
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
 
 /-!
 # Function-field normalizations over local rings
@@ -17,6 +19,8 @@ scheme normalizes every local ring to an etale algebra.  The proof first
 works on an affine neighbourhood and then localizes its normalization at the
 prime represented by the chosen point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -70,7 +74,7 @@ theorem
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y]
     (U : X.Opens) (hU : IsAffineOpen U) [Nonempty U] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     letI : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
@@ -78,8 +82,7 @@ theorem
       X.affineExtensionAlgebra U Y.left.functionField
     Algebra.Etale Γ(X, U)
       (integralClosure Γ(X, U) Y.left.functionField) := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let f : Y.left ⟶ X := Y.hom
   let : IsFiniteEtale f := Y.prop
   let V : Y.left.Opens := f ⁻¹ᵁ U
@@ -130,7 +133,7 @@ theorem
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     [IsLocallyNoetherian X]
     (Y : FiniteEtale X) [IsConnected Y] (x : X) :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     letI : Algebra X.functionField Y.left.functionField :=
       finiteEtaleFunctionFieldAlgebra Y
@@ -139,8 +142,7 @@ theorem
     Algebra.Etale (X.presheaf.stalk x)
       (integralClosure (X.presheaf.stalk x)
         Y.left.functionField) := by
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
+  intro sharedOwner1
   let K := X.functionField
   let L := Y.left.functionField
   let A := X.presheaf.stalk x

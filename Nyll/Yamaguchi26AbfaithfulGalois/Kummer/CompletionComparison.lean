@@ -4,12 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianAbsoluteGalois
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Mathlib.FieldTheory.Galois.Profinite
-import Mathlib.Topology.Homeomorph.Lemmas
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianAbsoluteGalois
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualEquivalence
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Mathlib.FieldTheory.Galois.Profinite
+public import Mathlib.Topology.Homeomorph.Lemmas
+public import Nyll.ValuedFieldTheory.Valuation.Completion.SeparableClosureAutTopology
 
 /-!
 # Absolute Galois groups and their pro-p quotients across completion
@@ -19,6 +22,8 @@ core. The absolute Galois comparison carries this core onto the corresponding
 core of the completion, giving a continuous group isomorphism and preserving
 ab-faithfulness in every characteristic.
 -/
+
+@[expose] public section
 
 noncomputable section
 

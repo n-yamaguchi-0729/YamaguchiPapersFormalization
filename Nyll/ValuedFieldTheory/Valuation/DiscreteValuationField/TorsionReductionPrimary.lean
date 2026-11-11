@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.PrincipalUnitTorsion
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
-import Mathlib.Data.Nat.Factorization.Basic
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.GroupTheory.PGroup
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.PrincipalUnitTorsion
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.HenselianTorsionRoots
+public import Mathlib.Data.Nat.Factorization.Basic
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.GroupTheory.PGroup
 
 /-!
 # The actual torsion-reduction kernel is primary for the residue prime
@@ -18,6 +20,8 @@ A kernel element is an actual principal unit. Its p^a-th power is killed
 by the prime-to-p factor, hence is one by the geometric-sum argument.
 This needs neither Henselianity nor characteristic zero of the field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.DVF
 

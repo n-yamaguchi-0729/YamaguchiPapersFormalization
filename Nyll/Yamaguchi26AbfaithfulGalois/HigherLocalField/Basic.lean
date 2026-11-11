@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
-import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionFiniteness
-import Mathlib.Algebra.CharP.Defs
-import Mathlib.FieldTheory.Finite.Basic
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
+public import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionFiniteness
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.FieldTheory.Finite.Basic
 
 /-!
 # Higher local fields and finiteness of roots of unity
@@ -22,6 +24,8 @@ property is included in the definition.
 Finiteness of all roots of unity is proved by induction on this actual
 residue tower, using the reduction map in each of the characteristic cases.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory
 

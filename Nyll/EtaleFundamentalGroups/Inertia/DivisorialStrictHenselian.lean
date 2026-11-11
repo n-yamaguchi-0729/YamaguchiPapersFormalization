@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
-import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FiberQuotient
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.Functoriality
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # Fundamental-group images from geometric local models
@@ -20,6 +23,8 @@ strictly Henselian discrete valuation ring.  The definitions below do not
 postulate a strict henselization or an inertia comparison: they apply to the
 actual local model once it has been constructed.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -48,9 +53,9 @@ noncomputable def finiteEtaleGaloisCoverQuotientOfMorphism
     (j : T ⟶ U) (xi : Spec (.of Omega) ⟶ T)
     (Y : AlgebraicGeometry.FiniteEtale U) (hY : IsGalois Y)
     (y : (AlgebraicGeometry.FiniteEtale.fiber (xi ≫ j)).obj Y) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     π₁ᵉᵗ(xi) →* (Aut Y)ᵐᵒᵖ := by
-  letI : IsGalois Y := hY
+  intro sharedDefinitionOwner1
   exact
     (finiteEtaleGaloisCoverQuotientMonoidHom (xi ≫ j) Y hY y).comp
       (AlgebraicGeometry.FiniteEtale.fundamentalGroupHom j xi).toMonoidHom
@@ -63,12 +68,12 @@ theorem finiteEtaleGaloisCoverQuotient_map_fundamentalGroupImage
     (j : T ⟶ U) (xi : Spec (.of Omega) ⟶ T)
     (Y : AlgebraicGeometry.FiniteEtale U) (hY : IsGalois Y)
     (y : (AlgebraicGeometry.FiniteEtale.fiber (xi ≫ j)).obj Y) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     Subgroup.map
         (finiteEtaleGaloisCoverQuotientMonoidHom (xi ≫ j) Y hY y)
         (fundamentalGroupImageOfMorphism j xi) =
       (finiteEtaleGaloisCoverQuotientOfMorphism j xi Y hY y).range := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   exact MonoidHom.map_range
     (finiteEtaleGaloisCoverQuotientMonoidHom (xi ≫ j) Y hY y)
     (AlgebraicGeometry.FiniteEtale.fundamentalGroupHom j xi).toMonoidHom
@@ -81,13 +86,13 @@ theorem finiteEtaleGaloisCoverQuotientOfMorphism_ker
     (j : T ⟶ U) (xi : Spec (.of Omega) ⟶ T)
     (Y : AlgebraicGeometry.FiniteEtale U) (hY : IsGalois Y)
     (y : (AlgebraicGeometry.FiniteEtale.fiber (xi ≫ j)).obj Y) :
-    letI : IsGalois Y := hY
+    let : IsGalois Y := hY
     (finiteEtaleGaloisCoverQuotientOfMorphism j xi Y hY y).ker =
       MulAction.stabilizer π₁ᵉᵗ(xi)
         (transportedPointOfCompIso
           (AlgebraicGeometry.FiniteEtale.pullback j)
           (AlgebraicGeometry.FiniteEtale.pullbackFiberIso j xi) Y y) := by
-  let : IsGalois Y := hY
+  intro sharedOwner1
   let h :=
     (AlgebraicGeometry.FiniteEtale.fundamentalGroupHom j xi).toMonoidHom
   let q := finiteEtaleGaloisCoverQuotientMonoidHom (xi ≫ j) Y hY y

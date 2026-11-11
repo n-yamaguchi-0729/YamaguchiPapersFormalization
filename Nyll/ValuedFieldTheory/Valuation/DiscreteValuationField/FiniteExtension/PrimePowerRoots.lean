@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
-import Mathlib.Algebra.CharP.Algebra
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.Localization
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FinitePrimePowerRoots
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Extensions
+public import Mathlib.Algebra.CharP.Algebra
 
 /-!
 # Finiteness of prime-power roots after finite extension
@@ -17,6 +19,8 @@ Its residue characteristic is the base residue characteristic, so the
 prime-power root bound applies to every finite extension of a mixed
 characteristic discretely valued field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

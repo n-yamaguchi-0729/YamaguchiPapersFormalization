@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
-import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
-import Mathlib.AlgebraicGeometry.Geometrically.Connected
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Morphisms.Smooth
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.ConnectedDomainStalks
+public import Nyll.SchemeTheory.LocalGeometry.SmoothStalks
+public import Mathlib.AlgebraicGeometry.Geometrically.Connected
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Smooth geometrically connected morphisms are geometrically integral
@@ -17,6 +19,8 @@ After an arbitrary field-valued base change, smoothness supplies domain
 stalks and local Noetherianity. Geometric connectedness supplies connectedness,
 so the resulting scheme is integral.
 -/
+
+@[expose] public section
 
 noncomputable section
 

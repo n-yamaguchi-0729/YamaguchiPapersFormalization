@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
-import Nyll.GaloisCohomology.FieldTheory.IntegralClosureTorsion
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicField
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionFiniteness
-import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
+module
+
+public import Nyll.GaloisCohomology.FieldTheory.FiniteAlgebraicConstants
+public import Nyll.GaloisCohomology.FieldTheory.IntegralClosureTorsion
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicField
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteNormCompleteExtension
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.TorsionFiniteness
+public import Nyll.ValuedFieldTheory.Valuation.FiniteResidueExtension
 
 /-!
 # Roots of unity in finitely generated p-adic extensions
@@ -18,6 +20,8 @@ Finite extensions of the p-adic field have finite torsion unit groups.
 The same finiteness holds in essentially finite-type extensions by
 passing to their finite extension of algebraic constants.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open LocalFieldTheory.DiscreteValuationField.Examples.Qp

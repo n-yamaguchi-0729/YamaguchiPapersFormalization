@@ -4,9 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
+module
+
+public import Nyll.GaloisCohomology.FieldTheory.ContinuousAdditiveHilbert90
 
 /-! # Explicit vanishing of additive H² on a finite Galois extension -/
+
+@[expose] public section
 
 namespace GaloisCohomology
 universe u v

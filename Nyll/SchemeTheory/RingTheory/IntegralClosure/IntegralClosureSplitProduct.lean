@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.Algebra.Algebra.Pi
-import Mathlib.RingTheory.Finiteness.Prod
-import Mathlib.RingTheory.Etale.Pi
+module
+
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.Finiteness.Prod
+public import Mathlib.RingTheory.Etale.Pi
 
 /-!
 # Normalization of a split finite generic algebra
@@ -20,6 +22,8 @@ coordinate; conversely a finite product of copies of the base is finite,
 so all of its elements are integral. This also proves that this actual
 integral closure is étale over the base.
 -/
+
+@[expose] public section
 
 noncomputable section
 

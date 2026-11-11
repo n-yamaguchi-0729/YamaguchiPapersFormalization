@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
-import Nyll.Yamaguchi26SolvableCoverings.Geometry.BoundaryInertia
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot1BoundaryQuotient
-import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
-import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
-import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
-import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
-import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
-import Mathlib.Data.Nat.Prime.Basic
-import Mathlib.GroupTheory.Coset.Card
-import Mathlib.SetTheory.Cardinal.Finite
+module
+
+public import Nyll.Yamaguchi26SolvableCoverings.Geometry.Boundary
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Inertia
+public import Nyll.EtaleFundamentalGroups.Inertia.CartierBoundary.Quotient
+public import Nyll.Yamaguchi26SolvableCoverings.Theorem1Dot2InertiaControl
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.GaloisObjectQuotient
+public import Nyll.EtaleFundamentalGroups.GeometricFiber.RegularBoundarySurjective
+public import Nyll.ProCGroups.Topologies.ContinuousMulEquiv
+public import Nyll.SchemeTheory.Divisors.ArithmeticBoundary
+public import Mathlib.Data.Nat.Prime.Basic
+public import Mathlib.GroupTheory.Coset.Card
+public import Mathlib.SetTheory.Cardinal.Finite
 
 /-!
 # Proposition 1.3: boundary invariance
@@ -36,14 +38,18 @@ of Shimizu and Yamaguchi, On branched coverings of the projective line over the 
 [arXiv:2608.15057v1](https://arxiv.org/abs/2608.15057v1).
 -/
 
+@[expose] public section
+
 noncomputable section
+
+universe u
 
 open AlgebraicGeometry CategoryTheory
 open AlgebraicGeometry.FiniteEtale CategoryTheory.PreGaloisCategory
 
 namespace Yamaguchi26SolvableCoverings
 
-variable {X : Scheme.{0}} [ConnectedSpace X] [IsLocallyNoetherian X]
+variable {X : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X]
 
 /-- A finite Galois cover has trivial boundary stabilizers if each boundary
 component has a normal-crossings point in every prime residue characteristic
@@ -81,7 +87,7 @@ theorem boundary_invariance_1_3
     (hnc : ∀ p : ℕ, p.Prime →
       D.HasNormalCrossingPointOfResidueCharacteristicOnEachComponent p) :
     ConnectedSpace D.1.supportComplement ∧
-      ∀ (Ω : Type) [Field Ω] [IsSepClosed Ω]
+      ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]
         (point : Spec (CommRingCat.of Ω) ⟶ D.1.supportComplement),
         ∃ e : π₁ᵉᵗ(point) ≃ₜ* π₁ᵉᵗ(point ≫ D.1.supportComplement.ι),
           ∀ g : π₁ᵉᵗ(point), e g = fundamentalGroupHom D.1.supportComplement.ι point g := by

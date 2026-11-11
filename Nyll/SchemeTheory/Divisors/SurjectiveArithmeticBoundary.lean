@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Ideal.Int
-import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
+module
+
+public import Mathlib.RingTheory.Ideal.Int
+public import Nyll.SchemeTheory.Divisors.ReducedIrreducibleComponentGeometry
 
 /-!
 # Boundary components surjective over an arithmetic base
@@ -16,6 +18,8 @@ integer base, componentwise surjectivity supplies a point of every prime
 residue characteristic on every component.  The structure morphism to
 `Spec ℤ` is the canonical map to the terminal scheme.
 -/
+
+@[expose] public section
 
 noncomputable section
 

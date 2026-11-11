@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
-import Mathlib.FieldTheory.Relrank
-import Mathlib.FieldTheory.LinearDisjoint
-import Mathlib.FieldTheory.SeparableClosure
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Mathlib.RingTheory.Unramified.Field
-import Mathlib.RingTheory.TensorProduct.Finite
+module
+
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.FieldTheory.Relrank
+public import Mathlib.FieldTheory.LinearDisjoint
+public import Mathlib.FieldTheory.SeparableClosure
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Unramified.Field
+public import Mathlib.RingTheory.TensorProduct.Finite
 
 /-!
 # Field-theoretic composita for finite valued extensions
@@ -23,9 +25,11 @@ finite-dimensionality over either branch, degree bounds and equalities, the
 intersection degree square, and separability of the common top.
 -/
 
+@[expose] public section
+
 noncomputable section
 
-universe u v
+universe u v w
 
 namespace DiscreteValuationField
 namespace FieldCompositum
@@ -133,7 +137,7 @@ instance supLeftIsScalarTower (L K' : IntermediateField K Ω) :
 used to move from abstract field-level tensor representatives to denominator
 clearing data in the compositum arguments. -/
 theorem tensorProduct_exists_list_sum_tmul
-    {R : Type u} {A B : Type v} [CommSemiring R]
+    {R : Type u} {A : Type v} {B : Type w} [CommSemiring R]
     [AddCommMonoid A] [Module R A] [AddCommMonoid B] [Module R B]
     (z : A ⊗[R] B) :
     ∃ l : List (A × B), z = (l.map (fun p => p.1 ⊗ₜ[R] p.2)).sum := by
@@ -382,7 +386,8 @@ local instance tensorProductIdealHasQuotient
   @Ideal.instHasQuotient (K' ⊗[K] L)
     (inferInstance : CommRing (K' ⊗[K] L)).toRing
 
-private noncomputable def quotientKerAlgEquivOfSurjectiveCommRing
+/-- A surjective algebra homomorphism identifies its kernel quotient with its target. -/
+noncomputable def quotientKerAlgEquivOfSurjectiveCommRing
     {R A B : Type*}
     [ringR : CommSemiring R] [ringA : CommRing A]
     [algebraRA : Algebra R A]
@@ -495,7 +500,8 @@ theorem sup_right_adjoin_left_singleton_eq_top_of_adjoin_eq_top
     intro y hy
     rcases hy with ⟨z, rfl⟩
     have hz : z ∈ Algebra.adjoin K ({x} : Set L) := by
-      simp [hx]
+      rw [hx]
+      exact Set.mem_univ z
     change iL z ∈ S
     refine
       Algebra.adjoin_induction

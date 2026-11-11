@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.FunctionFields.Functoriality
-import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
+module
+
+public import Nyll.SchemeTheory.FunctionFields.Functoriality
+public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 
 /-!
 # Function-field maps and local rings
@@ -15,6 +17,8 @@ only with global sections. For an open immersion it therefore identifies
 the actual local-ring subrings. This supplies the local equations needed
 when restricting a Kummer construction to an open curve.
 -/
+
+@[expose] public section
 
 noncomputable section
 

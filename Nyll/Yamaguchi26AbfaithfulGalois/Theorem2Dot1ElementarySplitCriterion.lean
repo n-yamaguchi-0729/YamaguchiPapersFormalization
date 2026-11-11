@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitCriterion
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementarySplitCriterion
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
 
 /-!
 # Proposition 2.1: finite split embedding problems
@@ -14,6 +16,8 @@ Source: [Yamaguchi, arXiv:2610.05634v1](https://arxiv.org/abs/2610.05634v1), Pro
 The stronger regular-module quotient construction is retained in
 `GroupTheory/ElementarySplitRegularQuotient.lean`.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyDegreeZeroModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Finite length in degree zero
@@ -18,6 +20,8 @@ Degree-zero local cohomology embeds in its finite coefficient module.
 Noetherianity makes it finite, and its maximal-ideal-power torsion then
 gives finite length.  This is the base of the Artinianness induction.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups
 

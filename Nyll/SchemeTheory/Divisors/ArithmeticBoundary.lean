@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Geometrically.Integral
-import Mathlib.AlgebraicGeometry.Limits
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Nyll.SchemeTheory.Divisors.Basic
-import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
-import Nyll.SchemeTheory.Normalization.Normal
+module
+
+public import Mathlib.AlgebraicGeometry.Geometrically.Integral
+public import Mathlib.AlgebraicGeometry.Limits
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Nyll.SchemeTheory.Divisors.Basic
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
+public import Nyll.SchemeTheory.Normalization.Normal
 
 /-!
 # Arithmetic boundary conditions
@@ -22,6 +24,8 @@ The condition uses local Noetherianity rather than a finite-type or Nagata
 hypothesis.  The base is an arbitrary integral scheme; its generic point
 specifies the generic fibres occurring below.
 -/
+
+@[expose] public section
 
 noncomputable section
 

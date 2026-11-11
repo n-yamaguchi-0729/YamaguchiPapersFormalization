@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.Finiteness.ModuleFinitePresentation
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Recovering global etaleness from target localizations
@@ -21,6 +23,8 @@ The latter formulation is useful when the map under consideration is a
 literal `Localization.awayMap`: no replacement of that map by an isomorphic
 algebra is needed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -40,7 +40,9 @@ private def tensorProductCounitOfSection (g : S →ₐ[R] R) :
 private theorem tensorProductCounitOfSection_tmul
     (g : S →ₐ[R] R) (s : S) (m : M) :
     tensorProductCounitOfSection g (s ⊗ₜ[R] m) = g s • m := by
-  simp [tensorProductCounitOfSection]
+  simp only [tensorProductCounitOfSection, LinearMap.coe_comp, LinearEquiv.coe_coe,
+    Function.comp_apply, TensorProduct.map_tmul, AlgHom.toLinearMap_apply, LinearMap.id_coe, id_eq,
+    TensorProduct.lid_tmul]
 
 /-- Apply an algebra section to the first algebra factor of
 `(S ⊗[R] S) ⊗[R] M`. -/
@@ -54,7 +56,9 @@ private theorem tensorProductFirstCounitOfSection_tmul
     (g : S →ₐ[R] R) (s t : S) (m : M) :
     tensorProductFirstCounitOfSection g ((s ⊗ₜ[R] t) ⊗ₜ[R] m) =
       (g s • t) ⊗ₜ[R] m := by
-  simp [tensorProductFirstCounitOfSection]
+  simp only [tensorProductFirstCounitOfSection, LinearMap.rTensor_tmul, LinearMap.coe_comp,
+    LinearEquiv.coe_coe, Function.comp_apply, TensorProduct.map_tmul, AlgHom.toLinearMap_apply,
+    LinearMap.id_coe, id_eq, TensorProduct.lid_tmul]
 
 /-- If `S` admits an `R`-algebra section, then the module-valued Amitsur
 pair is exact for every `R`-module `M`.
@@ -77,7 +81,7 @@ theorem tensorProduct_exact_of_section (g : S →ₐ[R] R) :
           1 ⊗ₜ[R] tensorProductCounitOfSection g y - y := by
       intro y
       induction y using TensorProduct.inductionOn with
-      | add x y hx hy => simp [hx, hy, TensorProduct.tmul_add, sub_add_sub_comm]
+      | add x y hx hy => simp only [map_add, hx, hy, sub_add_sub_comm, TensorProduct.tmul_add]
       | tmul s m =>
           simp only [LinearMap.rTensor_tmul,
             Algebra.TensorProduct.includeLeftSubRight_apply,
@@ -90,7 +94,8 @@ theorem tensorProduct_exact_of_section (g : S →ₐ[R] R) :
     rw [hidentity x] at hcontract
     exact sub_eq_zero.mp hcontract
   · rintro ⟨m, rfl⟩
-    simp [Algebra.TensorProduct.includeLeftSubRight_apply]
+    simp only [TensorProduct.mk_apply, LinearMap.rTensor_tmul,
+      Algebra.TensorProduct.includeLeftSubRight_apply, sub_self, TensorProduct.zero_tmul]
 
 /-- Multiplication of the two algebra factors after base change. -/
 private def tensorProductBaseChangeCounit :
@@ -103,7 +108,9 @@ private theorem tensorProductBaseChangeCounit_tmul
     (a s : S) (m : M) :
     tensorProductBaseChangeCounit (a ⊗ₜ[R] (s ⊗ₜ[R] m)) =
       (a * s) ⊗ₜ[R] m := by
-  simp [tensorProductBaseChangeCounit]
+  simp only [tensorProductBaseChangeCounit, LinearMap.coe_comp, LinearEquiv.coe_coe,
+    Function.comp_apply, TensorProduct.assoc_symm_tmul, LinearMap.rTensor_tmul,
+    AlgHom.toLinearMap_apply, Algebra.TensorProduct.lmul'_apply_tmul]
 
 /-- Multiply the first two algebra factors in
 `S ⊗ ((S ⊗ S) ⊗ M)`, leaving the third algebra factor untouched. -/
@@ -120,7 +127,9 @@ private theorem tensorProductBaseChangeFirstMultiplication_tmul
     tensorProductBaseChangeFirstMultiplication
         (a ⊗ₜ[R] ((s ⊗ₜ[R] t) ⊗ₜ[R] m)) =
       (a * s) ⊗ₜ[R] (t ⊗ₜ[R] m) := by
-  simp [tensorProductBaseChangeFirstMultiplication]
+  simp only [tensorProductBaseChangeFirstMultiplication, LinearMap.coe_comp, LinearEquiv.coe_coe,
+    Function.comp_apply, TensorProduct.assoc_symm_tmul, LinearMap.rTensor_tmul,
+    AlgHom.toLinearMap_apply, Algebra.TensorProduct.lmul'_apply_tmul, TensorProduct.assoc_tmul]
 
 /-- Faithfully flat module descent in degree zero: for any faithfully flat
 `R`-algebra `S` and any `R`-module `M`, the canonical Amitsur pair
@@ -148,7 +157,7 @@ theorem tensorProduct_exact_of_faithfullyFlat
               (tensorProductBaseChangeCounit y) - y := by
       intro y
       induction y using TensorProduct.inductionOn with
-      | add x y hx hy => simp [hx, hy, sub_add_sub_comm]
+      | add x y hx hy => simp only [map_add, hx, hy, sub_add_sub_comm]
       | tmul a y =>
           induction y using TensorProduct.inductionOn with
           | add x y hx hy =>
@@ -166,9 +175,11 @@ theorem tensorProduct_exact_of_faithfullyFlat
     exact sub_eq_zero.mp hcontract
   · rintro ⟨y, rfl⟩
     induction y using TensorProduct.inductionOn with
-    | add x y hx hy => simp [hx, hy]
+    | add x y hx hy => simp only [map_add, hx, hy, add_zero]
     | tmul s m =>
-        simp [Algebra.TensorProduct.includeLeftSubRight_apply]
+        simp only [LinearMap.lTensor_tmul, TensorProduct.mk_apply, LinearMap.rTensor_tmul,
+          Algebra.TensorProduct.includeLeftSubRight_apply, sub_self, TensorProduct.zero_tmul,
+          TensorProduct.tmul_zero]
 
 /-- Pull an extended module back along the left projection
 `S ⇉ S ⊗[R] S`. -/
@@ -202,7 +213,10 @@ def tensorProductEqualizerMap :
       (tensorProductDescentRight (R := R) (S := S) (M := M)) :=
   LinearMap.codRestrict _ (TensorProduct.mk R S M 1) (by
     intro m
-    simp [tensorProductDescentLeft, tensorProductDescentRight])
+    simp only [tensorProductDescentLeft, Algebra.TensorProduct.toLinearMap_includeLeft,
+      tensorProductDescentRight, Algebra.TensorProduct.toLinearMap_includeRight,
+      TensorProduct.AlgebraTensorModule.mk_apply, TensorProduct.mk_apply, LinearMap.mem_eqLocus,
+      LinearMap.rTensor_tmul, LinearMap.flip_apply, LinearMap.coe_mk, AddHom.coe_mk])
 
 @[simp]
 theorem tensorProductEqualizerMap_coe (m : M) :

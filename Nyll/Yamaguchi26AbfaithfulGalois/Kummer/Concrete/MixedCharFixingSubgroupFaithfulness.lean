@@ -4,12 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupDetection
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
-import Nyll.ProCGroups.FiniteGroups.PGroupFormation
-import Mathlib.FieldTheory.Galois.Infinite
-import Mathlib.FieldTheory.Perfect
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharFixingSubgroupDetection
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupConjugation
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientAction
+public import Nyll.ProCGroups.FiniteGroups.PGroupFormation
+public import Mathlib.FieldTheory.Galois.Infinite
+public import Mathlib.FieldTheory.Perfect
 
 /-!
 # Faithful quotient action on the actual pro-p abelianization
@@ -18,6 +20,8 @@ Over a complete mixed-characteristic discretely valued base, the quotient
 by a prime-degree fixing subgroup acts faithfully on the topological
 abelianization of that subgroup's intrinsic pro-p residual quotient.
 -/
+
+@[expose] public section
 
 namespace ClassFieldTower.Martinet.Shafarevich
 

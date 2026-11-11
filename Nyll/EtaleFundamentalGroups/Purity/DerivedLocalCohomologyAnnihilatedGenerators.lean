@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyMayerVietoris
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
-import Mathlib.RingTheory.Regular.RegularSequence
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyGeneratorCountDomain
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyMayerVietoris
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyPrincipalAnnihilated
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyRadical
+public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!
 # Generator-count vanishing with an annihilated coefficient module
@@ -21,6 +23,8 @@ product ideal, which again has an annihilating generator and fewer remaining
 generators.  The induction starts with principal-support degree-one
 vanishing for an annihilated module.
 -/
+
+@[expose] public section
 
 noncomputable section
 

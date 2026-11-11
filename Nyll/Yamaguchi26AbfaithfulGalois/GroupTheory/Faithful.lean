@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.FiniteStepSolvableQuotients.Faithful
+module
+
+public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Faithful
 
 /-!
 # Compatibility import for the shared ProCGroups results
@@ -13,3 +15,4 @@ The general group-theoretic definitions and proofs are maintained in
 `ProCGroups.FiniteStepSolvableQuotients.Faithful`.
 This module preserves existing downstream imports without duplicate declarations.
 -/
+@[expose] public section

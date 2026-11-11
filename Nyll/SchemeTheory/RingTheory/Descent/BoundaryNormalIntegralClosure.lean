@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
-import Mathlib.Algebra.Group.Submonoid.Membership
-import Mathlib.RingTheory.Ideal.Prime
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
-import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-import Mathlib.RingTheory.LocalProperties.Basic
-import Mathlib.RingTheory.Localization.Away.Basic
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.LocalizationNormalIntegralClosure
+public import Mathlib.Algebra.Group.Submonoid.Membership
+public import Mathlib.RingTheory.Ideal.Prime
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.RingTheory.LocalProperties.Basic
+public import Mathlib.RingTheory.Localization.Away.Basic
 
 
 /-!
@@ -22,6 +24,8 @@ local divisibility of its numerator, and divisibility descends from the
 localizations at maximal ideals. No normality away from the boundary is
 assumed.
 -/
+
+@[expose] public section
 
 noncomputable section
 

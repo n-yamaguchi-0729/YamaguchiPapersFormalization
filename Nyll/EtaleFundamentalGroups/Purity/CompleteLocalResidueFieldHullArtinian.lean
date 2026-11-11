@@ -4,17 +4,19 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveScalarEndomorphismArtinian
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealPowerQuotientLength
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullFiniteTruncation
-import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullPowerTorsion
-import Mathlib.Algebra.Module.Injective
-import Mathlib.RingTheory.AdicCompletion.Basic
-import Mathlib.RingTheory.Artinian.Module
-import Mathlib.RingTheory.FiniteLength
-import Mathlib.RingTheory.Ideal.Operations
-import Mathlib.RingTheory.Noetherian.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveScalarEndomorphismArtinian
+public import Nyll.SchemeTheory.RingTheory.LocalRing.MaximalIdealPowerQuotientLength
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullFiniteTruncation
+public import Nyll.EtaleFundamentalGroups.Purity.ResidueFieldHullPowerTorsion
+public import Mathlib.Algebra.Module.Injective
+public import Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.RingTheory.Artinian.Module
+public import Mathlib.RingTheory.FiniteLength
+public import Mathlib.RingTheory.Ideal.Operations
+public import Mathlib.RingTheory.Noetherian.Basic
 
 /-!
 # Artinianness of a residue-field hull over a complete local ring
@@ -29,6 +31,8 @@ The scalar endomorphism theorem identifies submodules with their double
 annihilators.  Noetherianity of the ring then gives the descending chain
 condition on submodules of the hull.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

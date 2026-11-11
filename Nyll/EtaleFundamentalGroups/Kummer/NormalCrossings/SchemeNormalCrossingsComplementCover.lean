@@ -4,12 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponent
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.SchemeArithmeticComplementCover
 
 /-!
 # Covers on normal-crossings chart complements
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,17 +47,6 @@ instance (I : X.IdealSheafData) (f : Y ⟶ X) [Etale f] :
     Etale (comapSupportComplementTo I f) := by
   dsimp only [comapSupportComplementTo]
   infer_instance
-
-private theorem boundaryProduct_ne_zero_of_splitStrictNormalCrossings
-    {V : Type u} [CommRing V] [IsDomain V] [IsLocalRing V]
-    {r : ℕ} {t : Fin 2 → V}
-    (hNC : IsSplitStrictNormalCrossingsAt
-      (boundaryProduct t r) t r) :
-    boundaryProduct t r ≠ 0 := by
-  apply (hNC.2.2.2.2.1.ne_zero_iff).mpr
-  rw [boundaryProduct]
-  exact Finset.prod_ne_zero_iff.mpr fun j hj ↦
-    (hNC.2.2.2.1 j (Finset.mem_filter.mp hj).2).ne_zero
 
 /-- Restrict a finite-etale cover to the support complement in a chart. -/
 def pullbackSupportComplementCoverToChart

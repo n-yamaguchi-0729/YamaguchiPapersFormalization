@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
-import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPointLift
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.FractionFieldSpecNormalization
+public import Nyll.SchemeTheory.RingTheory.Henselian.StrictHenselianFiniteDomainPointLift
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+public import Mathlib.CategoryTheory.Endomorphism
 
 /-!
 # A fixed geometric point on a strict-Henselian fraction-cover normalization
@@ -18,6 +21,8 @@ geometric point is constructed in the same algebraically closed field, then
 transported through the actual function-field normalization isomorphism.
 Every deck transformation fixes this point.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -43,11 +48,12 @@ theorem exists_fractionCover_normalizationPoint_fixed_of_strictHenselian
           Spec.map (CommRingCat.ofHom ψ) ∧
       ∀ σ : Aut Y, z ≫ normalizationEndomorphism
         ((show Y.left ⟶ Spec (.of K) from Y.hom) ≫
-          Spec.map (CommRingCat.ofHom (algebraMap R K))) σ.hom.left
+          Spec.map (CommRingCat.ofHom (algebraMap R K))) σ.asIso.hom.left
         (by
           rw [← Category.assoc]
           exact congrArg
-            (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R K))) σ.hom.w) = z := by
+            (fun k => k ≫ Spec.map (CommRingCat.ofHom (algebraMap R K)))
+            σ.asIso.hom.w) = z := by
   let : IsIntegral Y.left := isIntegral_left_of_isConnected_finiteEtale Y
   let : IsNormalIntegral Y.left := isNormalIntegral_left_of_isConnected_finiteEtale Y
   let : IsAffine Y.left := isAffine_of_isAffineHom (show Y.left ⟶ Spec (.of K) from Y.hom)
@@ -77,10 +83,10 @@ theorem exists_fractionCover_normalizationPoint_fixed_of_strictHenselian
     exact congrArg (fun k => Spec.map (CommRingCat.ofHom k)) hφbase
   · intro σ
     let s : Y.left ≅ Y.left :=
-      (FiniteEtale.forget (Spec (.of K)) ⋙ Over.forget (Spec (.of K))).mapIso σ
+      (FiniteEtale.forget (Spec (.of K)) ⋙ Over.forget (Spec (.of K))).mapIso σ.asIso
     have hs : s.hom ≫ f = f := by
-      have hw : σ.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
-          (show Y.left ⟶ Spec (.of K) from Y.hom) := σ.hom.w
+      have hw : σ.asIso.hom.left ≫ (show Y.left ⟶ Spec (.of K) from Y.hom) =
+          (show Y.left ⟶ Spec (.of K) from Y.hom) := σ.asIso.hom.w
       exact (Category.assoc _ _ _).symm.trans (congrArg (fun k => k ≫ g) hw)
     apply (affineMorphismFunctionFieldNormalizationIso_fixes_iff R f s hs z).mp
     have hfixed := hφfixed (affineMorphismFunctionFieldAlgEquiv R f s hs).mapIntegralClosure

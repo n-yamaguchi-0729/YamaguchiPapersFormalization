@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1TrivialCharacter
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
-import Mathlib.Algebra.Algebra.Tower
+module
+
+public import Nyll.GaloisCohomology.Kummer.Concrete.FixedSubgroupCharacterDescent
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteH1TrivialCharacter
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearRestriction
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureCharacterConjugation
+public import Mathlib.Algebra.Algebra.Tower
 
 /-!
 # The action on a descended character
@@ -18,6 +20,8 @@ a coprime degree. If the lower automorphism acts trivially on H¹, every lift
 to that intermediate field fixes this character. The proof constructs one
 ambient lift and uses its actual compatibility with both fields.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

@@ -4,11 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFiberComparison
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumDimensionTwoPurity
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumParameterInduction
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.RegularLocalGeneral
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationFiberComparison
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumDimensionTwoPurity
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumParameterInduction
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalConnectedness
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzSource
+public import Nyll.SchemeTheory.LocalGeometry.PuncturedSpectrum
 
 /-!
 # The complete regular-local hypersurface purity step
@@ -17,6 +23,8 @@ Grothendieck connectedness for the literal normalization fibre supplies the
 connected-cover input in the categorical hypersurface induction theorem.
 This file packages that passage as a reusable one-step purity theorem.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -41,26 +49,20 @@ theorem hasPuncturedPurity_of_complete_regularLocal_quotient_span_singleton
     (hdim : ((3 : ℕ∞) : WithBot ℕ∞) ≤ ringKrullDim R)
     (x : R) (hx : x ∈ maximalIdeal R) (hx0 : x ≠ 0) :
     let I : Ideal R := Ideal.span {x}
-    letI : Nontrivial (R ⧸ I) :=
+    let : Nontrivial (R ⧸ I) :=
       Ideal.Quotient.nontrivial_iff.mpr
         (ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top
           ((maximalIdeal R).span_singleton_le_iff_mem.mpr hx))
-    letI : IsLocalRing (R ⧸ I) :=
+    let : IsLocalRing (R ⧸ I) :=
       IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
         Ideal.Quotient.mk_surjective
     AlgebraicGeometry.FiniteEtale.HasPuncturedPurity (R ⧸ I) →
       AlgebraicGeometry.FiniteEtale.HasPuncturedPurity R := by
-  dsimp only
-  let I : Ideal R := Ideal.span {x}
+  intro I sharedOwner1 sharedOwner2
   have hI : I ≤ maximalIdeal R :=
     (maximalIdeal R).span_singleton_le_iff_mem.mpr hx
-  have hIne : I ≠ ⊤ :=
-    ne_top_of_le_ne_top (maximalIdeal.isMaximal R).ne_top hI
   let : Nontrivial (R ⧸ I) :=
-    Ideal.Quotient.nontrivial_iff.mpr hIne
-  let : IsLocalRing (R ⧸ I) :=
-    IsLocalRing.of_surjective' (Ideal.Quotient.mk I)
-      Ideal.Quotient.mk_surjective
+    sharedOwner1
   intro hquotient
   have hpos : (1 : WithBot ℕ∞) ≤ ringKrullDim R :=
     (by norm_num : (1 : WithBot ℕ∞) ≤ (3 : ℕ∞)).trans hdim

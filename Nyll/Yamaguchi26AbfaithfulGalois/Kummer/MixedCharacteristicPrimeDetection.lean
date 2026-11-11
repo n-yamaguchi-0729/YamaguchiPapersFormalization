@@ -5,9 +5,11 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicCompletionDetection
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicMovedValuation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicCompletionDetection
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.MixedCharacteristicMovedValuation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
 
 /-!
 # Prime-degree detection for arbitrary mixed-characteristic discrete valuations
@@ -16,6 +18,8 @@ A prolongation is either invariant under every automorphism or is moved by
 one. Completion detects the first case, and simultaneous character approximation
 detects the second case. No completeness or Henselian hypothesis is required.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 open ValuationTheory.DiscreteValuationField ProCGroups.Abelian

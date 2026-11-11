@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ProCGroups.Abelian.PrimePowerCharacters
-import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
-import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
+module
+
+public import Nyll.ProCGroups.Abelian.PrimePowerCharacters
+public import Nyll.ProCGroups.ProC.Quotients.ClosedNormal
+public import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
 
 /-!
 # Detecting prime-power divisibility by continuous characters
@@ -14,6 +16,8 @@ import Nyll.ProCGroups.Topologies.ContinuousMonoidHom
 For a compact totally disconnected abelian group, failure to be a prime-power
 power is detected by a continuous character of prime-power order.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,8 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentChart
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.GenericFiberResidue
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Boundary.ArithmeticComponentChart
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.GenericFiberResidue
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
 
 /-!
 # Residue fields of arithmetic boundary components
@@ -14,6 +17,8 @@ The geometrically integral generic fibre supplied by the arithmetic boundary
 condition determines a geometrically integral residue field at the canonical
 generic point of every pulled-back boundary component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

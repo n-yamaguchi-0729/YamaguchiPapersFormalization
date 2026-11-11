@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.GroupWithZero.Regular
-import Mathlib.Algebra.Ring.Basic
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Mathlib.RingTheory.Filtration
-import Mathlib.RingTheory.Flat.TorsionFree
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Unramified.LocalRing
+module
+
+public import Mathlib.Algebra.GroupWithZero.Regular
+public import Mathlib.Algebra.Ring.Basic
+public import Mathlib.RingTheory.DiscreteValuationRing.Basic
+public import Mathlib.RingTheory.Filtration
+public import Mathlib.RingTheory.Flat.TorsionFree
+public import Mathlib.RingTheory.Localization.Submodule
+public import Mathlib.RingTheory.Unramified.LocalRing
 
 /-!
 # The local rings of étale neighborhoods of a DVR
@@ -26,6 +28,8 @@ flatness makes that image a non-zero-divisor. This proves the DVR assertion for
 the local rings of pointed affine étale neighborhoods. Passing these
 factorizations through their localized germ maps is a separate step.
 -/
+
+@[expose] public section
 
 noncomputable section
 

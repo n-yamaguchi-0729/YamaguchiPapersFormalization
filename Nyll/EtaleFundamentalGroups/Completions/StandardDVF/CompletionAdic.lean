@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.AdicCompletion.RingHom
-import Mathlib.RingTheory.Ideal.Quotient.Operations
-import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
+module
+
+public import Mathlib.RingTheory.AdicCompletion.RingHom
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Nyll.EtaleFundamentalGroups.Completions.StandardDVF.Completion
 
 /-!
 # The standard valued completion realizes the adic completion of a DVR
@@ -15,6 +17,8 @@ Starting from a DVR `V` and a chosen fraction field `K`, this file compares
 the `maximalIdeal V`-adic completion of `V` with the valuation subring in the
 actual valued-field completion of the standard valuation on `K`.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -103,20 +107,17 @@ theorem standardDVRToCompletion_maximalIdeal_map_eq
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     Ideal.map (algebraMap V target.valuationSubring)
         (IsLocalRing.maximalIdeal V) =
       target.maximalIdeal := by
-  dsimp only
+  intro target sharedOwner2
   let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
   let : Algebra K (standardDVFCompletionField V K) :=
     standardDVFCompletionAlgebra V K
   let : base.valuation.HasExtension target.valuation :=
     standardDVFCompletion_hasExtension V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
   let e : V ≃+* base.valuationSubring :=
     IsDiscreteValuationRing.equivValuationSubring (A := V) (K := K)
   let g : base.valuationSubring →+* target.valuationSubring :=
@@ -142,13 +143,10 @@ theorem standardDVRToCompletion_isLocalHom
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     IsLocalHom (algebraMap V target.valuationSubring) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner1
   have hmax : Ideal.map (algebraMap V target.valuationSubring)
       (IsLocalRing.maximalIdeal V) = target.maximalIdeal :=
     standardDVRToCompletion_maximalIdeal_map_eq V K
@@ -162,20 +160,17 @@ theorem standardDVRToCompletion_maximalIdeal_pow_comap
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] (n : ℕ) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     (target.maximalIdeal ^ n).comap
         (algebraMap V target.valuationSubring) =
       IsLocalRing.maximalIdeal V ^ n := by
-  dsimp only
+  intro target sharedOwner2
   let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
   let : Algebra K (standardDVFCompletionField V K) :=
     standardDVFCompletionAlgebra V K
   let : base.valuation.HasExtension target.valuation :=
     standardDVFCompletion_hasExtension V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
   let : Module.FaithfullyFlat
       base.valuationSubring target.valuationSubring :=
     standardDVFCompletion_faithfullyFlat V K
@@ -215,21 +210,18 @@ theorem standardDVRToCompletion_exists_approx_mod_maximalIdeal_pow
     (n : ℕ)
     (y : (standardDVFCompletionCompleteDVF V K).valuationSubring) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     ∃ x : V,
       algebraMap V target.valuationSubring x - y ∈
         target.maximalIdeal ^ n := by
-  dsimp only
+  intro target sharedOwner2
   let v := (IsDiscreteValuationRing.maximalIdeal V).valuation K
   let base := standardDVFOfDVR V K
-  let target := standardDVFCompletionCompleteDVF V K
   let : Algebra K (standardDVFCompletionField V K) :=
     standardDVFCompletionAlgebra V K
   let : base.valuation.HasExtension target.valuation :=
     standardDVFCompletion_hasExtension V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
   let e : V ≃+* base.valuationSubring :=
     IsDiscreteValuationRing.equivValuationSubring (A := V) (K := K)
   rcases base.exists_uniformizer with ⟨pi, hpi⟩
@@ -390,14 +382,11 @@ noncomputable def standardDVRCompletionPowQuotientAlgHom
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] (n : ℕ) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     (V ⧸ (IsLocalRing.maximalIdeal V ^ n)) →ₐ[V]
       (target.valuationSubring ⧸ (target.maximalIdeal ^ n)) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  letI : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner3
   exact Ideal.quotientMapₐ (target.maximalIdeal ^ n)
     (Algebra.ofId V target.valuationSubring) (by
       change IsLocalRing.maximalIdeal V ^ n ≤
@@ -412,16 +401,13 @@ theorem standardDVRCompletionPowQuotientAlgHom_apply_mk
     [Field K] [Algebra V K] [IsFractionRing V K]
     (n : ℕ) (x : V) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     standardDVRCompletionPowQuotientAlgHom V K n
         (Ideal.Quotient.mk (IsLocalRing.maximalIdeal V ^ n) x) =
       Ideal.Quotient.mk (target.maximalIdeal ^ n)
         (algebraMap V target.valuationSubring x) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner1
   change (Ideal.quotientMapₐ (target.maximalIdeal ^ n)
       (Algebra.ofId V target.valuationSubring) _)
         (Ideal.Quotient.mk (IsLocalRing.maximalIdeal V ^ n) x) =
@@ -437,14 +423,10 @@ theorem standardDVRCompletionPowQuotientAlgHom_injective
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] (n : ℕ) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     Function.Injective (standardDVRCompletionPowQuotientAlgHom V K n) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  intro a b hab
+  intro target sharedOwner1 a b hab
   obtain ⟨x, rfl⟩ := Ideal.Quotient.mk_surjective a
   obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective b
   rw [standardDVRCompletionPowQuotientAlgHom_apply_mk,
@@ -465,14 +447,10 @@ theorem standardDVRCompletionPowQuotientAlgHom_surjective
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] (n : ℕ) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     Function.Surjective (standardDVRCompletionPowQuotientAlgHom V K n) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  intro q
+  intro target sharedOwner1 q
   induction q using Quotient.inductionOn' with
   | _ y =>
       rcases standardDVRToCompletion_exists_approx_mod_maximalIdeal_pow
@@ -493,14 +471,11 @@ noncomputable def standardDVRCompletionPowQuotientAlgEquiv
     [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
     [Field K] [Algebra V K] [IsFractionRing V K] (n : ℕ) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     (V ⧸ (IsLocalRing.maximalIdeal V ^ n)) ≃ₐ[V]
       (target.valuationSubring ⧸ (target.maximalIdeal ^ n)) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  letI : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner3
   exact AlgEquiv.ofBijective
     (standardDVRCompletionPowQuotientAlgHom V K n)
     ⟨standardDVRCompletionPowQuotientAlgHom_injective V K n,
@@ -513,16 +488,13 @@ theorem standardDVRCompletionPowQuotientAlgEquiv_apply_mk
     [Field K] [Algebra V K] [IsFractionRing V K]
     (n : ℕ) (x : V) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     standardDVRCompletionPowQuotientAlgEquiv V K n
         (Ideal.Quotient.mk (IsLocalRing.maximalIdeal V ^ n) x) =
       Ideal.Quotient.mk (target.maximalIdeal ^ n)
         (algebraMap V target.valuationSubring x) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner1
   change standardDVRCompletionPowQuotientAlgHom V K n
       (Ideal.Quotient.mk (IsLocalRing.maximalIdeal V ^ n) x) =
     Ideal.Quotient.mk (target.maximalIdeal ^ n)
@@ -538,16 +510,13 @@ theorem standardDVRCompletionPowQuotientAlgEquiv_factorPow
     {m n : ℕ} (hmn : m ≤ n)
     (x : V ⧸ (IsLocalRing.maximalIdeal V ^ n)) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     Ideal.Quotient.factorPow target.maximalIdeal hmn
         (standardDVRCompletionPowQuotientAlgEquiv V K n x) =
       standardDVRCompletionPowQuotientAlgEquiv V K m
         (Ideal.Quotient.factorPow (IsLocalRing.maximalIdeal V) hmn x) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
+  intro target sharedOwner1
   induction x using Quotient.inductionOn' with
   | _ x =>
       change Ideal.Quotient.factorPow target.maximalIdeal hmn
@@ -567,18 +536,14 @@ theorem standardDVRCompletionPowQuotientAlgEquiv_symm_factorPow
     [Field K] [Algebra V K] [IsFractionRing V K]
     {m n : ℕ} (hmn : m ≤ n) :
     let target := standardDVFCompletionCompleteDVF V K
-    letI : Algebra V target.valuationSubring :=
+    let : Algebra V target.valuationSubring :=
       standardDVFCompletionValuationSubringAlgebra V K
     ∀ x : target.valuationSubring ⧸ (target.maximalIdeal ^ n),
       Ideal.Quotient.factorPow (IsLocalRing.maximalIdeal V) hmn
           ((standardDVRCompletionPowQuotientAlgEquiv V K n).symm x) =
         (standardDVRCompletionPowQuotientAlgEquiv V K m).symm
           (Ideal.Quotient.factorPow target.maximalIdeal hmn x) := by
-  dsimp only
-  let target := standardDVFCompletionCompleteDVF V K
-  let : Algebra V target.valuationSubring :=
-    standardDVFCompletionValuationSubringAlgebra V K
-  intro x
+  intro target sharedOwner1 x
   apply (standardDVRCompletionPowQuotientAlgEquiv V K m).injective
   rw [AlgEquiv.apply_symm_apply,
     ← standardDVRCompletionPowQuotientAlgEquiv_factorPow V K hmn
@@ -630,13 +595,15 @@ private theorem factorPow_evalₐ
         (by rw [Ideal.smul_eq_mul, Ideal.mul_top]), hm]
       rfl
 
-private noncomputable def completionToValuationSubringQuotientRingHom
+/-- Reduction from the DVR completion to a quotient of the completed valuation ring. -/
+noncomputable def completionToValuationSubringQuotientRingHom
     (n : ℕ) :
     AdicCompletion I_V V →+* V_hat ⧸ (I_hat ^ n) :=
   (standardDVRCompletionPowQuotientAlgEquiv V K n).toRingEquiv.toRingHom.comp
     (AdicCompletion.evalₐ I_V n).toRingHom
 
-private theorem completionToValuationSubringQuotientRingHom_compatible :
+/-- The quotient comparison maps commute with reduction between powers. -/
+theorem completionToValuationSubringQuotientRingHom_compatible :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow I_hat hmn).comp
           (completionToValuationSubringQuotientRingHom V K n) =
@@ -651,7 +618,8 @@ private theorem completionToValuationSubringQuotientRingHom_compatible :
   rw [standardDVRCompletionPowQuotientAlgEquiv_factorPow V K hmn,
     factorPow_evalₐ I_V hmn]
 
-private noncomputable def completionToValuationSubringCompletionRingHom :
+/-- The comparison map from the DVR completion to the valuation-ring completion. -/
+noncomputable def completionToValuationSubringCompletionRingHom :
     AdicCompletion I_V V →+* AdicCompletion I_hat V_hat :=
   AdicCompletion.liftRingHom I_hat
     (completionToValuationSubringQuotientRingHom V K)
@@ -668,13 +636,15 @@ private theorem evalₐ_completionToValuationSubringCompletionRingHom
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private noncomputable def valuationSubringCompletionToQuotientRingHom
+/-- Reduction from the valuation-ring completion to a quotient of the original DVR. -/
+noncomputable def valuationSubringCompletionToQuotientRingHom
     (n : ℕ) :
     AdicCompletion I_hat V_hat →+* V ⧸ (I_V ^ n) :=
   (standardDVRCompletionPowQuotientAlgEquiv V K n).symm.toRingEquiv.toRingHom.comp
     (AdicCompletion.evalₐ I_hat n).toRingHom
 
-private theorem valuationSubringCompletionToQuotientRingHom_compatible :
+/-- The inverse quotient comparison maps commute with reduction between powers. -/
+theorem valuationSubringCompletionToQuotientRingHom_compatible :
     ∀ {m n : ℕ} (hmn : m ≤ n),
       (Ideal.Quotient.factorPow I_V hmn).comp
           (valuationSubringCompletionToQuotientRingHom V K n) =
@@ -689,7 +659,8 @@ private theorem valuationSubringCompletionToQuotientRingHom_compatible :
   rw [standardDVRCompletionPowQuotientAlgEquiv_symm_factorPow V K hmn,
     factorPow_evalₐ I_hat hmn]
 
-private noncomputable def valuationSubringCompletionToCompletionRingHom :
+/-- The inverse comparison map from the valuation-ring completion to the DVR completion. -/
+noncomputable def valuationSubringCompletionToCompletionRingHom :
     AdicCompletion I_hat V_hat →+* AdicCompletion I_V V :=
   AdicCompletion.liftRingHom I_V
     (valuationSubringCompletionToQuotientRingHom V K)
@@ -706,7 +677,8 @@ private theorem evalₐ_valuationSubringCompletionToCompletionRingHom
   rw [AdicCompletion.evalₐ_liftRingHom]
   rfl
 
-private theorem completionToValuationSubring_comp_fromValuationSubring :
+/-- The completion comparison maps compose to the identity on the valuation-ring completion. -/
+theorem completionToValuationSubring_comp_fromValuationSubring :
     (completionToValuationSubringCompletionRingHom V K).comp
         (valuationSubringCompletionToCompletionRingHom V K) =
       RingHom.id (AdicCompletion I_hat V_hat) := by
@@ -721,7 +693,8 @@ private theorem completionToValuationSubring_comp_fromValuationSubring :
   rw [evalₐ_completionToValuationSubringCompletionRingHom,
     evalₐ_valuationSubringCompletionToCompletionRingHom, AlgEquiv.apply_symm_apply]
 
-private theorem valuationSubringToCompletion_comp_fromCompletion :
+/-- The completion comparison maps compose to the identity on the original DVR completion. -/
+theorem valuationSubringToCompletion_comp_fromCompletion :
     (valuationSubringCompletionToCompletionRingHom V K).comp
         (completionToValuationSubringCompletionRingHom V K) =
       RingHom.id (AdicCompletion I_V V) := by
@@ -763,7 +736,8 @@ local instance completionValuationSubringIsAdicComplete :
     IsAdicComplete I_hat V_hat :=
   (standardDVFCompletionCompleteDVF V K).isAdicComplete
 
-private noncomputable def valuationSubringCompletionEquivSelf :
+/-- Adic completeness identifies the completed valuation ring with its adic completion. -/
+noncomputable def valuationSubringCompletionEquivSelf :
     AdicCompletion I_hat V_hat ≃ₐ[V] V_hat :=
   AlgEquiv.ofRingEquiv
     (f := (AdicCompletion.ofAlgEquiv I_hat).symm.toRingEquiv) (fun x => by

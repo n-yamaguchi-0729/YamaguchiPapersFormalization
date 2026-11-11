@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosedTensor
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.Algebra.Algebra.Subalgebra.Lattice
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianSeparableClosedTensor
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Extending automorphisms through the separable tensor comparison
@@ -16,6 +18,8 @@ The automorphism is transported from `id ⊗ σ` through the actual tensor
 comparison. Its values on the chosen separable closure determine it, so
 the resulting extension preserves composition.
 -/
+
+@[expose] public section
 
 noncomputable section
 

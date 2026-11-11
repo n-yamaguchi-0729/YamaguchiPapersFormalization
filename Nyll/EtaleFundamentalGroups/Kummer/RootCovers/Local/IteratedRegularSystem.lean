@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularity
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.RegularSystem
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedRegularity
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Local.IteratedHeightOne
 
 /-!
 # Regular systems on full iterated local root covers
@@ -19,6 +21,8 @@ the quotient by any such divisor is a regular local domain.
 
 All recursive typeclass structures remain local to proofs.
 -/
+
+@[expose] public section
 
 noncomputable section
 

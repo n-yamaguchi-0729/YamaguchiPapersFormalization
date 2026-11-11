@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldResidueNaturality
 
 /-!
 # Function fields at the image of a source generic point
@@ -14,6 +16,8 @@ is canonically the residue field at the image of the source generic point.
 The resulting equivalence is compatible with the residue-field map to the
 source generic point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

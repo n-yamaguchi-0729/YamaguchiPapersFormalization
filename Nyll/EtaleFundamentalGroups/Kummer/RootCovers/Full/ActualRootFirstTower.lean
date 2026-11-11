@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirst
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.RootCovers.Full.ActualRootFirst
 
 /-!
 # The base tower of the actual-root-first full cover
@@ -14,6 +16,8 @@ through an `R`-algebra equivalence.  This leaf records the resulting scalar
 tower once, so downstream branch theorems do not repeatedly elaborate that
 coordinate calculation inside a large dependent telescope.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -35,19 +39,12 @@ theorem fullRootCoverActualRootFirst_isScalarTower
     let D := AdjoinRoot F
     let gx : R[X] := X ^ n k - C (a k)
     let Xroot := AdjoinRoot gx
-    letI : Algebra Xroot D :=
+    let : Algebra Xroot D :=
       fullRootCoverActualRootFirstAlgebra n a k hother N y
     IsScalarTower R Xroot D := by
-  dsimp only
-  let B := iteratedRadical R (s + 1) n a
-  let F : B[X] := X ^ N - C (algebraMap R B y)
-  let D := AdjoinRoot F
-  let gx : R[X] := X ^ n k - C (a k)
-  let Xroot := AdjoinRoot gx
+  intro B F D gx Xroot sharedOwner1
   let fy : Xroot[X] := X ^ N - C (algebraMap R Xroot y)
   let Dxy := AdjoinRoot fy
-  let : Algebra Xroot D :=
-    fullRootCoverActualRootFirstAlgebra n a k hother N y
   let eD : D ≃ₐ[R] Dxy :=
     fullRootCoverActualRootFirstAlgEquiv n a k hother N y
   apply IsScalarTower.of_algebraMap_eq

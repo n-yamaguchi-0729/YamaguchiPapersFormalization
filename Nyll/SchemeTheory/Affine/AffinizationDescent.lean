@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
-import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
+module
+
+public import Nyll.SchemeTheory.Affine.FlatBaseChangeAffinization
+public import Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
 # Descent of an open affinization
@@ -14,6 +16,8 @@ The actual affinization square commutes with flat affine base change.
 An open immersion after an affine fpqc base change therefore descends.
 -/
 
+
+@[expose] public section
 
 noncomputable section
 

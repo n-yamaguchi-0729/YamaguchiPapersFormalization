@@ -5,11 +5,13 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerResidue
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
-import Mathlib.FieldTheory.Galois.GaloisClosure
-import Mathlib.GroupTheory.PGroup
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.KummerResidue
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.BaseChange
+public import Mathlib.FieldTheory.Galois.GaloisClosure
+public import Mathlib.GroupTheory.PGroup
 
 /-!
 # Nontrivial inertia from prime-degree residue-trivial extensions
@@ -17,6 +19,8 @@ import Mathlib.GroupTheory.PGroup
 A selected valuation above a prime-degree Galois extension with unchanged
 residue field yields a nontrivial finite inertia p-group.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField
 

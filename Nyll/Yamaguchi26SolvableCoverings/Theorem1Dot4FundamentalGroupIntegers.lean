@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integers
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
-import Mathlib.CategoryTheory.Galois.Decomposition
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integers
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.EtaleFundamentalGroups.Pi1.FiniteEtale.GaloisCategory
+public import Mathlib.CategoryTheory.Galois.Decomposition
 
 /-!
 # Example 1.4 (1): the fundamental group of the integers
@@ -21,6 +23,8 @@ assertions in the same item, items (2) and (3), and Corollary 2.7 are not formal
 
 Source: [Yamaguchi, arXiv:2610.02948v1](https://arxiv.org/abs/2610.02948v1), Example 1.4(1).
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -37,6 +41,7 @@ theorem fundamental_group_integers_1_4
     Subsingleton π₁ᵉᵗ(ξ) := by
   constructor
   intro a b
+  apply Aut.ext
   apply Iso.ext
   apply PreGaloisCategory.natTrans_ext_of_isGalois (fiber ξ)
   intro Y _

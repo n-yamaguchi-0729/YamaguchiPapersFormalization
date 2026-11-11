@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Category.Ring.Under.Basic
-import Mathlib.CategoryTheory.Limits.Cones
-import Mathlib.RingTheory.TensorProduct.Maps
+module
+
+public import Mathlib.Algebra.Category.Ring.Under.Basic
+public import Mathlib.CategoryTheory.Limits.Cones
+public import Mathlib.RingTheory.TensorProduct.Maps
 
 /-!
 # Literal tensor-product legs of algebra cocones
@@ -18,6 +20,8 @@ single boundary between those two presentations: it exposes literal canonical
 algebra homomorphisms, proves that their `Under` morphisms are the mapped
 cocone legs, and records naturality and the tensor-symmetry square.
 -/
+
+@[expose] public section
 
 noncomputable section
 

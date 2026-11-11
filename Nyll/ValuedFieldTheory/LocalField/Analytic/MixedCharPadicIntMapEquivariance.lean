@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
-import Mathlib.Topology.DenseEmbedding
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPadicIntMapContinuous
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ValuationPreservingContinuous
+public import Mathlib.Topology.DenseEmbedding
 
 /-!
 # Automorphism invariance of the p-adic integer map
@@ -14,6 +16,8 @@ import Mathlib.Topology.DenseEmbedding
 A valuation-preserving field automorphism fixes the constructed image of
 the p-adic integers, by continuity and density of the natural numbers.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.MultiplicativeIntegerValuation
 

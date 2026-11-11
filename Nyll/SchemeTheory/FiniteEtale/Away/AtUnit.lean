@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Etale.Locus
-import Mathlib.RingTheory.RingHom.Etale
+module
+
+public import Mathlib.RingTheory.Etale.Locus
+public import Mathlib.RingTheory.RingHom.Etale
 
 /-!
 # Removing an Away localization at a unit
@@ -14,6 +16,8 @@ If the distinguished element is already a unit in the target, the target
 Away localization is isomorphic to the original target.  This file records
 the corresponding descent of etaleness and its target-local application.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -42,7 +46,7 @@ theorem etale_of_localization_awayMap_of_isUnit_image
     intro a
     change algebraMap A T a = mapST (algebraMap A S a)
     rw [IsScalarTower.algebraMap_apply A B T]
-    simp [mapST, S, T, fB, IsLocalization.Away.map]
+    exact (IsLocalization.map_eq _ a).symm
   let : Algebra.Etale S T := hAway.toAlgebra
   let : Algebra.Etale A S := Algebra.Etale.of_isLocalizationAway f
   let : Algebra.Etale A T := Algebra.Etale.comp A S T
@@ -91,7 +95,7 @@ theorem localization_awayMap_etale_of_etale_localizationsAtPrime
     intro a
     change algebraMap A T a = mapST (algebraMap A S a)
     rw [IsScalarTower.algebraMap_apply A B T]
-    simp [mapST, S, T, fB, IsLocalization.Away.map]
+    exact (IsLocalization.map_eq _ a).symm
   let : Algebra.Etale A S := Algebra.Etale.of_isLocalizationAway f
   let : Algebra.Etale A T := hAT
   exact Algebra.Etale.of_restrictScalars A S T

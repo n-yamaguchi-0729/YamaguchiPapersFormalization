@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.Algebra.Algebra.Equiv
-import Mathlib.FieldTheory.Galois.Notation
-import Mathlib.RingTheory.SimpleRing.Basic
+module
+
+public import Mathlib.Algebra.Algebra.Equiv
+public import Mathlib.FieldTheory.Galois.Notation
+public import Mathlib.RingTheory.SimpleRing.Basic
 
 /-!
 # Semilinear conjugation and independence of the extension
@@ -16,6 +18,8 @@ the relative Galois group. Two lifts of the same base automorphism differ by an
 actual relative Galois automorphism, so their conjugations agree after mapping to
 any commutative group.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

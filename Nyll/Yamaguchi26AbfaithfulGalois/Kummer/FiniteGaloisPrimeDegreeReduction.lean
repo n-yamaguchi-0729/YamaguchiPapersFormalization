@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
-import Nyll.ProCGroups.Abelian.PowerQuotientAction
-import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
-import Mathlib.FieldTheory.Galois.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteAbelianizationAction
+public import Nyll.ProCGroups.Abelian.PowerQuotientAction
+public import Nyll.ProCGroups.FiniteGroups.PrimeOrderHom
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.FiniteExtension.ProlongationDiscrete
+public import Mathlib.FieldTheory.Galois.Basic
 
 /-!
 # Reducing finite Galois faithfulness to prime degree
@@ -19,6 +21,8 @@ Prime-degree detection yields faithful mod-prime abelianization actions
 for finite Galois extensions by passing to fixed fields of prime-order
 subgroups in a hypothetical kernel.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -5,12 +5,14 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
-import Nyll.ProCGroups.Abelian.TopologicalAbelianizationQuotientFaithfulness
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.Faithful
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureConjugation
+public import Nyll.ProCGroups.Abelian.TopologicalAbelianizationQuotientFaithfulness
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Nyll.ValuedFieldTheory.Ramification.HilbertRamification.HenselianResidueAction
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
 
 /-!
 # Detection through the actual residue Galois quotient
@@ -18,6 +20,8 @@ import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Henselian
 Residue ab-faithfulness detects quotient conjugation on every open normal
 subgroup that contains the actual inertia kernel.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Nyll.SchemeTheory.Affine.StalkLocalization
-import Nyll.SchemeTheory.FunctionFields.GeometricIntegrality
+module
+
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+public import Nyll.SchemeTheory.Affine.StalkLocalization
+public import Nyll.SchemeTheory.FunctionFields.GeometricIntegrality
 
 /-!
 # Function fields of closed integral components
@@ -15,6 +17,8 @@ At the generic point of an integral closed subscheme, the ambient residue
 field is the function field of the subscheme.  The comparison below also
 transports geometric integrality across this canonical field equivalence.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -95,12 +99,11 @@ private theorem geometricallyIntegral_specMap_transport_ringEquiv
     [Algebra k R] (e : R ≃+* S)
     (h : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k R)))) :
-    letI : Algebra k S :=
+    let : Algebra k S :=
       (e.toRingHom.comp (algebraMap k R)).toAlgebra
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom (algebraMap k S))) := by
-  let : Algebra k S :=
-    (e.toRingHom.comp (algebraMap k R)).toAlgebra
+  intro sharedOwner1
   let j : Spec (CommRingCat.of S) ≅ Spec (CommRingCat.of R) :=
     Scheme.Spec.mapIso e.toCommRingCatIso.op
   let : MorphismProperty.RespectsIso
@@ -143,7 +146,7 @@ theorem Scheme.geometricallyIntegral_residueFieldFromSpecStalk
     (h : GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k (X.residueField (X.fromSpecStalk x p)))))) :
-    letI : p.asIdeal.IsPrime := p.isPrime
+    let : p.asIdeal.IsPrime := p.isPrime
     let e := X.residueFieldFromSpecStalkEquiv x p
     letI : Algebra k p.asIdeal.ResidueField :=
       (e.toRingHom.comp
@@ -151,7 +154,7 @@ theorem Scheme.geometricallyIntegral_residueFieldFromSpecStalk
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k p.asIdeal.ResidueField))) := by
-  let : p.asIdeal.IsPrime := p.isPrime
+  intro sharedOwner1
   exact geometricallyIntegral_specMap_transport_ringEquiv'
     (X.residueFieldFromSpecStalkEquiv x p) h
 
@@ -173,9 +176,7 @@ theorem geometricallyIntegral_primeResidueField_of_specQuotient
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k P.ResidueField))) := by
-  let Z := Spec (CommRingCat.of (A ⧸ P))
-  let f : Z ⟶ Spec (CommRingCat.of k) :=
-    Spec.map (CommRingCat.ofHom (algebraMap k (A ⧸ P)))
+  intro Z f
   let : GeometricallyIntegral f := hgeo
   let : Algebra k Z.functionField := f.functionFieldAlgebra
   let e := Scheme.primeResidueFieldEquivQuotientFunctionField P
@@ -192,18 +193,15 @@ theorem Scheme.Hom.geometricallyIntegral_genericSourceResidue
     {k : Type u} [Field k] {Z X : Scheme.{u}} [IsIntegral Z]
     (i : Z ⟶ X) [IsClosedImmersion i]
     (f : Z ⟶ Spec (.of k)) (hgeo : GeometricallyIntegral f) :
-    letI : Algebra k Z.functionField := f.functionFieldAlgebra
+    let : Algebra k Z.functionField := f.functionFieldAlgebra
     let e := i.genericSourceResidueEquivFunctionField
-    letI : Algebra k (X.residueField (i (genericPoint Z))) :=
+    let : Algebra k (X.residueField (i (genericPoint Z))) :=
       (e.symm.toRingHom.comp (algebraMap k Z.functionField)).toAlgebra
     GeometricallyIntegral
       (Spec.map (CommRingCat.ofHom
         (algebraMap k (X.residueField (i (genericPoint Z)))))) := by
+  intro sharedOwner2 e sharedOwner3
   let : GeometricallyIntegral f := hgeo
-  let : Algebra k Z.functionField := f.functionFieldAlgebra
-  let e := i.genericSourceResidueEquivFunctionField
-  let : Algebra k (X.residueField (i (genericPoint Z))) :=
-    (e.symm.toRingHom.comp (algebraMap k Z.functionField)).toAlgebra
   exact geometricallyIntegral_specMap_transport_ringEquiv e.symm
     (GeometricallyIntegral.spec_functionField f)
 

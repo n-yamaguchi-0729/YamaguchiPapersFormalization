@@ -4,13 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
-import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityIntegralClosure
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrimeLocalization
-import Nyll.SchemeTheory.FunctionFields.OpenImmersion
-import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentFunctionField
+module
+
+public import Nyll.SchemeTheory.RingTheory.Descent.EtalePrimeLocalization
+public import Nyll.EtaleFundamentalGroups.Purity.FiniteEtaleFromBoundaryStalks
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrum
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumPurityIntegralClosure
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.BaseMinimalPrimeLocalization
+public import Nyll.SchemeTheory.FunctionFields.OpenImmersion
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.PullbackComponentFunctionField
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumFunctionField
+public import Nyll.SchemeTheory.Pi1.FiniteEtale.Basic
 
 /-!
 # The punctured cover at a minimal non-etale base point
@@ -21,6 +26,8 @@ spectrum.  Applying this to the localization at a minimal base cotangent-
 support point packages the prime-local result of
 `BaseMinimalPrimeLocalization` as the cover needed by punctured purity.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -80,9 +87,7 @@ theorem puncturedRestriction_nonempty_of_injective
     let f : Spec (.of B) ⟶ Spec (.of A) :=
       Spec.map (CommRingCat.ofHom (algebraMap A B))
     Nonempty (f ⁻¹ᵁ Scheme.puncturedSpectrumOpen A) := by
-  dsimp only
-  let f : Spec (.of B) ⟶ Spec (.of A) :=
-    Spec.map (CommRingCat.ofHom (algebraMap A B))
+  intro f
   let etaA : PrimeSpectrum A := ⟨⊥, inferInstance⟩
   let etaB : PrimeSpectrum B := ⟨⊥, inferInstance⟩
   have hmap : f etaB = etaA := by
@@ -118,9 +123,7 @@ theorem puncturedRestriction_connectedSpace_of_injective
     let f : Spec (.of B) ⟶ Spec (.of A) :=
       Spec.map (CommRingCat.ofHom (algebraMap A B))
     ConnectedSpace (f ⁻¹ᵁ Scheme.puncturedSpectrumOpen A) := by
-  dsimp only
-  let f : Spec (.of B) ⟶ Spec (.of A) :=
-    Spec.map (CommRingCat.ofHom (algebraMap A B))
+  intro f
   let V : (Spec (.of B)).Opens :=
     f ⁻¹ᵁ Scheme.puncturedSpectrumOpen A
   let : Nonempty V :=
@@ -142,9 +145,7 @@ theorem puncturedRestriction_isFiniteEtale_of_isEtaleAt_away_from_closedPoint
     let f : Spec (.of B) ⟶ Spec (.of A) :=
       Spec.map (CommRingCat.ofHom (algebraMap A B))
     IsFiniteEtale (f ∣_ Scheme.puncturedSpectrumOpen A) := by
-  dsimp only
-  let f : Spec (.of B) ⟶ Spec (.of A) :=
-    Spec.map (CommRingCat.ofHom (algebraMap A B))
+  intro f
   let U : (Spec (.of A)).Opens := Scheme.puncturedSpectrumOpen A
   have hf : IsFinite f := by
     rw [IsFinite.SpecMap_iff]

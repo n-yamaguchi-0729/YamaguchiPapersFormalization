@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Henselian.NormedGaloisIsometry
-import Mathlib.Analysis.Normed.Algebra.Ultra
-import Mathlib.Analysis.Normed.Field.Instances
-import Mathlib.Analysis.Normed.Module.Completion
-import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
-import Mathlib.FieldTheory.Minpoly.IsConjRoot
-import Mathlib.FieldTheory.SplittingField.IsSplittingField
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Henselian.NormedGaloisIsometry
+public import Mathlib.Analysis.Normed.Algebra.Ultra
+public import Mathlib.Analysis.Normed.Field.Instances
+public import Mathlib.Analysis.Normed.Module.Completion
+public import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+public import Mathlib.FieldTheory.Minpoly.IsConjRoot
+public import Mathlib.FieldTheory.SplittingField.IsSplittingField
 
 /-!
 # Separable algebraic closure of a Henselian field in its completion
@@ -21,6 +23,8 @@ must therefore be fixed by every automorphism. Applying this to the splitting
 field of a separable element in an algebraic closure of the completion shows
 that the element already belongs to the original field.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.Henselian
 

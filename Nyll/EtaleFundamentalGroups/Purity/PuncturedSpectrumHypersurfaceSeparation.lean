@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceIntersectionReduction
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumHypersurfaceIntersectionReduction
 
 /-!
 # Separations of a punctured hypersurface
@@ -14,6 +16,8 @@ irreducible component to exactly one side.  The resulting two finite,
 nonempty families of minimal primes have all cross-component intersections
 supported at the closed point.
 -/
+
+@[expose] public section
 
 noncomputable section
 

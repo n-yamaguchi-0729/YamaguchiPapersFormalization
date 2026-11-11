@@ -5,13 +5,15 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
 
-import Nyll.GaloisCohomology.Topology.AbsoluteGaloisLiftComparison
-import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
-import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
-import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
-import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
-import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
+module
+
+public import Nyll.GaloisCohomology.Topology.AbsoluteGaloisLiftComparison
+public import Nyll.GaloisCohomology.Topology.FiniteExtensionGalois
+public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
+public import Nyll.GaloisCohomology.Kummer.Concrete.GaloisClosureTransport
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteConjugation
+public import Nyll.GaloisCohomology.Kummer.Concrete.SemilinearConjugation
+public import Nyll.GaloisCohomology.ProP.PrimeToIndexCharacterExtension
 
 /-!
 # Restriction and extension of absolute Galois characters
@@ -20,6 +22,8 @@ Compute character restriction through compatible algebraic closures.
 For a finite Galois extension, characters of modulus coprime to the degree
 are detected by restriction, and invariant characters admit extensions.
 -/
+
+@[expose] public section
 
 namespace KummerTheory
 

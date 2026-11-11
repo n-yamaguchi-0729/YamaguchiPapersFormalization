@@ -4,10 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Mathlib.RingTheory.Ideal.GoingUp
-import Mathlib.RingTheory.Localization.Ideal
-import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Mathlib.RingTheory.Ideal.GoingUp
+public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.RingTheory.Smooth.Flat
+public import Nyll.SchemeTheory.FiniteEtale.Henselian.Strict
 
 /-!
 # A uniquely chosen finite étale factor over a strictly Henselian local ring
@@ -18,6 +21,8 @@ uniqueness makes the factor local.  Faithful flatness is then produced from
 flatness and the local algebra map, so the connected strict-Henselian
 splitting theorem applies without a separate faithfulness hypothesis.
 -/
+
+@[expose] public section
 
 noncomputable section
 

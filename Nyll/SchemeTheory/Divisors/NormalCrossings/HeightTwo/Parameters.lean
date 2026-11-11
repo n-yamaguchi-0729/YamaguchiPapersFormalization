@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.LocalRing.RingHom.Basic
-import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
-import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
-import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
+module
+
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.LocalRing.RingHom.Basic
+public import Nyll.SchemeTheory.LocalGeometry.HeightTwo.RegularParameters
+public import Nyll.SchemeTheory.LocalGeometry.RegularLocal.SystemDomain
+public import Nyll.SchemeTheory.Divisors.NormalCrossings.Basic
 
 /-!
 # Strict-normal-crossings parameters at height two
@@ -21,6 +23,8 @@ one-dimensional regular local ring.  If the branch equation lay in the square
 of the localized maximal ideal, Nakayama would make that maximal ideal
 principal, contradicting its two-dimensional cotangent space.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -65,7 +69,7 @@ private noncomputable def quotientLocalizationEquiv
     let Q := quotientPrimeOfLe hIP
     let Rₚ := Localization.AtPrime P
     let J := I.map (algebraMap R Rₚ)
-    letI : Algebra (R ⧸ I) (Rₚ ⧸ J) :=
+    let : Algebra (R ⧸ I) (Rₚ ⧸ J) :=
       Ideal.Quotient.algebraQuotientOfLEComap (R := R) (A := Rₚ)
         (p := I) (P := J)
         (by
@@ -73,17 +77,7 @@ private noncomputable def quotientLocalizationEquiv
           exact Ideal.mem_comap.mpr
             (Ideal.mem_map_of_mem (algebraMap R Rₚ) hx))
     Localization.AtPrime Q.asIdeal ≃ₐ[R ⧸ I] (Rₚ ⧸ J) := by
-  dsimp only
-  let Q := quotientPrimeOfLe hIP
-  let Rₚ := Localization.AtPrime P
-  let J := I.map (algebraMap R Rₚ)
-  letI : Algebra (R ⧸ I) (Rₚ ⧸ J) :=
-    Ideal.Quotient.algebraQuotientOfLEComap (R := R) (A := Rₚ)
-      (p := I) (P := J)
-      (by
-        intro x hx
-        exact Ideal.mem_comap.mpr
-          (Ideal.mem_map_of_mem (algebraMap R Rₚ) hx))
+  intro Q Rₚ J quotientAlgebra
   have hloc :
       IsLocalization (P.primeCompl.map (Ideal.Quotient.mk I)) (Rₚ ⧸ J) := by
     refine IsLocalization.of_surjective

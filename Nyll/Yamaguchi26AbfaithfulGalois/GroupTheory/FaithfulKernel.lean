@@ -4,7 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.GroupTheory.QuotientGroup.Basic
+module
+
+public import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!
 # Faithful conjugation on an abelian kernel
@@ -12,6 +14,8 @@ import Mathlib.GroupTheory.QuotientGroup.Basic
 Conjugation descends along an epimorphism with abelian kernel. Its faithfulness
 is characterized by the kernel being its own centralizer.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 

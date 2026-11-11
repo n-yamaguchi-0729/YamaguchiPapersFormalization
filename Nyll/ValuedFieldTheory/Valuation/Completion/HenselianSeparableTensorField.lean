@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSubfieldTensor
-import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianTensorField
-import Mathlib.FieldTheory.Separable
-import Mathlib.RingTheory.TensorProduct.Nontrivial
+module
+
+public import Nyll.ValuedFieldTheory.Valuation.Completion.FiniteSubfieldTensor
+public import Nyll.ValuedFieldTheory.Valuation.Completion.HenselianTensorField
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.TensorProduct.Nontrivial
 
 /-!
 # Separable algebraic extensions after Henselian completion
@@ -16,6 +18,8 @@ Each tensor element comes from a finite subextension. Inverting a nonzero
 lift there and mapping the inverse back proves the field property without
 assuming a comparison map is injective.
 -/
+
+@[expose] public section
 
 namespace ValuationTheory.DiscreteValuationField.HenselianDVF
 

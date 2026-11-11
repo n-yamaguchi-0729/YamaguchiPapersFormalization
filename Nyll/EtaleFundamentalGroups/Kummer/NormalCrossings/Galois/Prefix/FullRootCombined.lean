@@ -4,11 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.SchemeTheory.LocalGeometry.HeightOne.BoundaryPrimeDichotomy
-import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.FinalNormalizationLocal
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.Prefix.ConditionalBoundaryAway
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
+module
+
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.BoundaryPrimeDichotomy
+public import Nyll.EtaleFundamentalGroups.Kummer.GenericTensor.Tower.FinalNormalizationLocal
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.Prefix.ConditionalBoundaryAway
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.FullRootCover.FixedComponentEtale
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwo.IntegralClosure.Local
 
 /-!
 # One permutation for the conditional and selected-root covers
@@ -26,6 +28,8 @@ final cover.  At the new root, the selected-branch theorem applies.  Purity
 then returns etaleness of the normalization in the original literal final
 component.
 -/
+
+@[expose] public section
 
 noncomputable section
 

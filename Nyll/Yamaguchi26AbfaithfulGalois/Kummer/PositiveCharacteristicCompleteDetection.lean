@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
-import Nyll.GaloisCohomology.ArtinSchreier.AutomorphismDetection
-import Nyll.GaloisCohomology.ArtinSchreier.PrimeDegreeAction
-import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierPrimeToDegree
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PolynomialImageInfinite
-import Mathlib.FieldTheory.Galois.Profinite
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.RelativeAbelianModPowerAction
+public import Nyll.GaloisCohomology.ArtinSchreier.AutomorphismDetection
+public import Nyll.GaloisCohomology.ArtinSchreier.PrimeDegreeAction
+public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteRestrictionConjugation
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.ArtinSchreierPrimeToDegree
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.PolynomialImageInfinite
+public import Mathlib.FieldTheory.Galois.Profinite
 
 /-!
 # Prime-degree detection over complete discretely valued fields of characteristic p
@@ -19,6 +21,8 @@ Artin--Schreier classes are infinite over a discretely valued field. In degree p
 finite restriction kernels and additive Hilbert 90 detect the action. In every
 other prime degree, a norm valuation and a base-field multiple detect it directly.
 -/
+
+@[expose] public section
 
 namespace Yamaguchi26AbfaithfulGalois
 

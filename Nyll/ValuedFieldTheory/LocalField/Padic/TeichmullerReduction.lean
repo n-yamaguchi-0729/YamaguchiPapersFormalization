@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
-import Nyll.ValuedFieldTheory.LocalField.Padic.ReductionCompatibility
-import Nyll.ValuedFieldTheory.LocalField.Padic.PrimePowerTorsionReduction
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.Padic.Teichmuller
+public import Nyll.ValuedFieldTheory.LocalField.Padic.ReductionCompatibility
+public import Nyll.ValuedFieldTheory.LocalField.Padic.PrimePowerTorsionReduction
 
 /-!
 # Teichmüller representatives at finite prime-power levels
@@ -14,6 +16,8 @@ import Nyll.ValuedFieldTheory.LocalField.Padic.PrimePowerTorsionReduction
 A unit modulo a positive power of `p` whose `(p - 1)`-st power is one
 is the reduction of the Teichmüller representative of its residue.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.Examples.Qp
 

@@ -4,22 +4,24 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementaryFaithfulEmbeddingSolution
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.RegularWreathKernel
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingSolutions
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
-import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelOpenSubgroup
-import Nyll.ProCGroups.FiniteGroups.StandardClasses
-import Nyll.ProCGroups.WreathProducts
-import Nyll.ProCGroups.GroupTheory.RegularWreathQuotient
-import Nyll.ProCGroups.GroupTheory.SemidirectSubgroups
-import Nyll.ProCGroups.FreeProC.Characterization.OpenSubgroupFiniteQuotient
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
-import Mathlib.Data.ZMod.Basic
-import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
-import Mathlib.Data.Set.Insert
-import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.ElementaryFaithfulEmbeddingSolution
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.RegularWreathKernel
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaEmbeddingSolutions
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelEmbeddingProblems
+public import Nyll.ProCGroups.FreeProC.Characterization.AbelianKernelOpenSubgroup
+public import Nyll.ProCGroups.FiniteGroups.StandardClasses
+public import Nyll.ProCGroups.WreathProducts
+public import Nyll.ProCGroups.GroupTheory.RegularWreathQuotient
+public import Nyll.ProCGroups.GroupTheory.SemidirectSubgroups
+public import Nyll.ProCGroups.FreeProC.Characterization.OpenSubgroupFiniteQuotient
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Basic
+public import Mathlib.Data.Set.Insert
+public import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 
 /-!
 # Split abelian-kernel criteria for Sigma-abelianization-faithfulness
@@ -29,6 +31,8 @@ construction. Applied to the actual regular wreath product, it produces
 a proper solution with faithful kernel action for each finite quotient.
 No restriction is imposed on either whole endpoint of an embedding problem.
 -/
+
+@[expose] public section
 
 namespace ProCGroups.FiniteStepSolvableQuotients
 
@@ -56,31 +60,6 @@ private noncomputable def regularFiberNorm
     by_cases hj : ρ j = b
     · simp only [ite_eq_left hj]
     · simp only [ite_eq_right hj, one_mul]
-
-private theorem regularFiberNorm_equivariant
-    {A Q B : Type u} [CommGroup A] [Group Q] [Finite Q] [Group B]
-    (J : Subgroup Q) (ρ : J →* B) (j : J) (f : Q → A) :
-    regularFiberNorm J ρ
-      ((mulAutArrow (G := Q) (A := Q) (M := A)) (j : Q) f) =
-      (mulAutArrow (G := B) (A := B) (M := A)) (ρ j) (regularFiberNorm J ρ f) := by
-  classical
-  let : Fintype J := Fintype.ofFinite J
-  funext b
-  change (∏ k : J, if ρ k = b then f ((j : Q)⁻¹ * k) else 1) =
-    ∏ k : J, if ρ k = (ρ j)⁻¹ * b then f (k : Q) else 1
-  let e : J ≃ J := Equiv.mulLeft j⁻¹
-  apply Fintype.prod_equiv e
-  intro k
-  change (if ρ k = b then f ((j : Q)⁻¹ * k) else 1) =
-    if ρ (j⁻¹ * k) = (ρ j)⁻¹ * b then f ((j⁻¹ * k : J) : Q) else 1
-  have h : ρ k = b ↔ ρ (j⁻¹ * k) = (ρ j)⁻¹ * b := by
-    simp only [map_mul, map_inv]
-    constructor <;> intro hk
-    · rw [hk]
-    · apply (mul_left_cancel (a := (ρ j)⁻¹))
-      exact hk
-  simp only [h]
-  rfl
 
 variable {G : Type u} [Group G] [TopologicalSpace G] [IsTopologicalGroup G]
   [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G]

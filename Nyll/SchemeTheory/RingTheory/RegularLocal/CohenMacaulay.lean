@@ -10,8 +10,10 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.RingTheory.KrullDimension.Basic
-import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
+module
+
+public import Mathlib.RingTheory.KrullDimension.Basic
+public import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 
 /-!
 # Cohen–Macaulay local rings of a fixed dimension
@@ -19,6 +21,8 @@ import Nyll.SchemeTheory.RingTheory.Localization.LocalAlgebra
 The predicate records equality of the Krull dimension and the depth of the ring with a
 specified natural number. Its two projections recover the dimension and depth equalities.
 -/
+
+@[expose] public section
 
 namespace IsLocalRing
 

@@ -4,8 +4,10 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismTransport
-import Mathlib.Algebra.Group.Subgroup.Map
+module
+
+public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PrincipalUnits.AutomorphismTransport
+public import Mathlib.Algebra.Group.Subgroup.Map
 
 /-!
 # Automorphisms of the concrete principal-unit groups
@@ -13,6 +15,8 @@ import Mathlib.Algebra.Group.Subgroup.Map
 A field automorphism preserving the valuation ring restricts to every level
 of the principal-unit filtration, with its original action on field elements.
 -/
+
+@[expose] public section
 
 namespace LocalFieldTheory.DiscreteValuationField.CompleteDVF.higherPrincipalUnitGroup
 

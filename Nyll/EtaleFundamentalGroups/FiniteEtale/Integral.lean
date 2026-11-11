@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Connected
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
-import Nyll.SchemeTheory.Normalization.FiniteSeparable
+module
+
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.GenericFiber.Connected
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Connected
+public import Nyll.SchemeTheory.Normalization.FiniteSeparable
 
 /-!
 # Integral connected finite-etale covers
@@ -14,6 +16,8 @@ import Nyll.SchemeTheory.Normalization.FiniteSeparable
 This file passes from the generic-component calculation for finite-etale
 algebras to connected finite-etale covers of normal integral schemes.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -322,12 +326,11 @@ scheme has normal integral source. -/
 theorem isNormalIntegral_left_of_isConnected_finiteEtale
     {X : Scheme.{u}} [IsIntegral X] [IsNormalIntegral X]
     (Y : FiniteEtale X) [IsConnected Y] :
-    letI : IsIntegral Y.left :=
+    let : IsIntegral Y.left :=
       isIntegral_left_of_isConnected_finiteEtale Y
     IsNormalIntegral Y.left := by
+  intro sharedOwner1
   classical
-  let : IsIntegral Y.left :=
-    isIntegral_left_of_isConnected_finiteEtale Y
   apply IsNormalIntegral.of_stalks Y.left
   intro y
   have hAffine :

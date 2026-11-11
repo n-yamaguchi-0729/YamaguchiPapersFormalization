@@ -4,14 +4,16 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
-import Mathlib.RingTheory.Ideal.Pointwise
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
-import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
-import Mathlib.RingTheory.Invariant.Galois
-import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
-import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
-import Mathlib.RingTheory.Ideal.Over
+module
+
+public import Nyll.EtaleFundamentalGroups.Kummer.Normalization.FiniteEtaleGaloisCoverNormalizationAction
+public import Mathlib.RingTheory.Ideal.Pointwise
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionField
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.FunctionFieldAutomorphisms
+public import Mathlib.RingTheory.Invariant.Galois
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.Integral
+public import Nyll.EtaleFundamentalGroups.FiniteEtale.FunctionField
+public import Mathlib.RingTheory.Ideal.Over
 
 /-!
 # Normalization-prime subgroups in finite-etale Galois-cover quotients
@@ -20,6 +22,8 @@ Decomposition and ideal inertia groups for a normalization prime are
 transported from the function-field Galois group to the categorical finite
 quotient represented by the cover.
 -/
+
+@[expose] public section
 
 noncomputable section
 

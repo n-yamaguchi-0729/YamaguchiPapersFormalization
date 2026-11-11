@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Localization.FractionRing
-import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
-import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+module
+
+public import Mathlib.RingTheory.Localization.FractionRing
+public import Nyll.EtaleFundamentalGroups.Kummer.Completions.HigherRadical.ActualTensor.ComponentPrescribedExponent
+public import Nyll.EtaleFundamentalGroups.Kummer.SelectedRoot.Prime.StandardCompletion
+public import Nyll.SchemeTheory.LocalGeometry.HeightOne.Localization
 
 /-!
 # The fraction field of the selected-root standard completion
@@ -16,6 +19,8 @@ fraction field of the completed pure-root ring are canonically equivalent.
 This is the fraction-field lift of the valuation-subring equivalence already
 constructed in `SelectedRootPrimeStandardCompletion`.
 -/
+
+@[expose] public section
 
 noncomputable section
 

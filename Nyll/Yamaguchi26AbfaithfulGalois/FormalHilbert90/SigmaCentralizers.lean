@@ -4,11 +4,14 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.SigmaKernel
-import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
-import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
-import Mathlib.GroupTheory.Subgroup.Centralizer
+module
+
+public import Nyll.Yamaguchi26AbfaithfulGalois.FormalHilbert90.SigmaKernel
+public import Nyll.Yamaguchi26AbfaithfulGalois.GroupTheory.SigmaFaithful
+public import Nyll.ProCGroups.ProC.MaximalQuotients.ResidualQuotientTransport
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Separation
+public import Mathlib.GroupTheory.Subgroup.Centralizer
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Centralizers in sigma-residual quotients
@@ -17,6 +20,8 @@ Sigma-abelian faithfulness makes the action on an open normal subgroup
 injective. An element centralizing that subgroup in a sigma-residual
 quotient consequently belongs to the subgroup.
 -/
+
+@[expose] public section
 
 open scoped commutatorElement
 

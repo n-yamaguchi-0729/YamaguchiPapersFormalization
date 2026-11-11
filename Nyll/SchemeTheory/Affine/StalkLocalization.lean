@@ -16,12 +16,14 @@ Upstream per-file ATTRIBUTION: https://github.com/anthropics/fermats-last-theore
 Repository maintainer: Naganori Yamaguchi (https://github.com/n-yamaguchi-0729).
 -/
 
-import Mathlib.AlgebraicGeometry.Stalk
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.ResidueField
-import Mathlib.RingTheory.Ideal.Height
-import Mathlib.RingTheory.Localization.LocalizationLocalization
-import Mathlib.RingTheory.KrullDimension.Basic
+module
+
+public import Mathlib.AlgebraicGeometry.Stalk
+public import Mathlib.AlgebraicGeometry.OpenImmersion
+public import Mathlib.AlgebraicGeometry.ResidueField
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.Localization.LocalizationLocalization
+public import Mathlib.RingTheory.KrullDimension.Basic
 
 /-!
 # Stalks of localization morphisms
@@ -30,6 +32,8 @@ The canonical map from the spectrum of an arbitrary model of a localization
 has isomorphic stalk maps.  Mathlib contains this for the quotient-type
 `Localization M`; the statement below removes that representation choice.
 -/
+
+@[expose] public section
 
 section StalkLocalization
 

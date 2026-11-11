@@ -4,9 +4,11 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.AlgebraicGeometry.Noetherian
-import Nyll.SchemeTheory.Divisors.Reduced
-import Nyll.SchemeTheory.Morphisms.EtaleReduced
+module
+
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Nyll.SchemeTheory.Divisors.Reduced
+public import Nyll.SchemeTheory.Morphisms.EtaleReduced
 
 /-!
 # Reduced boundaries after etale pullback
@@ -15,6 +17,8 @@ The closed subscheme of a pulled-back ideal sheaf is the corresponding
 scheme-theoretic fibre product.  An etale morphism over a locally Noetherian
 reduced base has reduced source, so radical boundary ideals remain radical.
 -/
+
+@[expose] public section
 
 noncomputable section
 

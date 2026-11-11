@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Inertia.TrivialInertiaUnramified
-import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
-import Mathlib.RingTheory.Invariant.Galois
-import Mathlib.RingTheory.DedekindDomain.IntegralClosure
+module
+
+public import Nyll.EtaleFundamentalGroups.Inertia.TrivialInertiaUnramified
+public import Nyll.EtaleFundamentalGroups.Purity.Local.DimensionOne
+public import Mathlib.RingTheory.Invariant.Galois
+public import Mathlib.RingTheory.DedekindDomain.IntegralClosure
 
 /-!
 # A DVR normalization with trivial inertia is finite étale
@@ -16,6 +18,8 @@ The integral closure in a finite Galois extension is finite and torsion-free.
 Trivial inertia supplies unramifiedness even for imperfect residue fields,
 and flatness over the DVR supplies étaleness.
 -/
+
+@[expose] public section
 
 noncomputable section
 

@@ -4,9 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
-import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
-import Nyll.ValuedFieldTheory.Valuation.LocalRingEquiv
+module
+
+public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
+public import Nyll.ValuedFieldTheory.Valuation.LocalRingEquiv
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.AdicPower
 
 /-!
 # The standard complete discrete valuation field attached to a complete DVR
@@ -16,6 +19,8 @@ when the DVR is complete for its maximal-ideal-adic topology.  This is the
 base object needed to apply the finite-integral-closure construction after
 completing a height-one local ring.
 -/
+
+@[expose] public section
 
 noncomputable section
 

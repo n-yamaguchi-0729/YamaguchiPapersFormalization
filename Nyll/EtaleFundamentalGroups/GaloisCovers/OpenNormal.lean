@@ -4,10 +4,12 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
-import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
-import Mathlib.CategoryTheory.Galois.Equivalence
-import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
+module
+
+public import Nyll.EtaleFundamentalGroups.GaloisCovers.Basic
+public import Nyll.EtaleFundamentalGroups.GaloisCategories.ConnectedActions
+public import Mathlib.CategoryTheory.Galois.Equivalence
+public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 
 /-!
 # Galois objects attached to open normal subgroups
@@ -16,6 +18,8 @@ This file packages the normal-subgroup part of the fundamental equivalence
 between a Galois category and finite continuous actions of its fundamental
 group.
 -/
+
+@[expose] public section
 
 noncomputable section
 
@@ -32,8 +36,8 @@ private def quotientRightIso
     (N : Subgroup (Aut F)) [N.Normal]
     [Fintype (Aut F ⧸ N)] (g : Aut F) :
     (Aut F ⧸ₐ N) ≅ (Aut F ⧸ₐ N) where
-  hom := Action.FintypeCat.toEndHom N g
-  inv := Action.FintypeCat.toEndHom N g⁻¹
+  hom := (Action.FintypeCat.toEndHom N g).asHom
+  inv := (Action.FintypeCat.toEndHom N g⁻¹).asHom
   hom_inv_id := by
     apply Action.hom_ext
     ext q
@@ -94,7 +98,7 @@ theorem isGalois_of_fiber_iso_quotient_openNormal
   let s : (functorToAction F).obj X ≅ (functorToAction F).obj X :=
     e ≪≫ r ≪≫ e.symm
   let φ : X ≅ X := (functorToAction F).preimageIso s
-  refine ⟨φ, ?_⟩
+  refine ⟨Aut.of φ, ?_⟩
   apply (ConcreteCategory.bijective_of_isIso ef.hom).injective
   change ef.hom (F.map φ.hom x) = ef.hom y
   have hmap : (functorToAction F).map φ.hom = s.hom := by

@@ -4,13 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
-import Nyll.SchemeTheory.RingTheory.Ramification.Etale.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
-import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
-import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
-import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoIntegralClosure
+module
+
+public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import Nyll.SchemeTheory.RingTheory.Ramification.Etale.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.AdjoinRoot.FormallyEtale
+public import Nyll.EtaleFundamentalGroups.Kummer.IteratedRadical.BaseChange
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.Galois.BranchAtLargerPrime
+public import Nyll.EtaleFundamentalGroups.Kummer.NormalCrossings.HeightTwo.GaloisFullRootCover
+public import Nyll.EtaleFundamentalGroups.Purity.SpecialLocal.DimensionTwoIntegralClosure
 
 /-!
 # The other-root prefix at a selected Galois branch
@@ -26,6 +28,8 @@ the right tensor factor is precisely the input to the ramification-index
 comparison theorem.
 -/
 
+@[expose] public section
+
 noncomputable section
 
 open scoped TensorProduct
@@ -36,18 +40,6 @@ open Polynomial
 open RingTheory.Sequence
 
 universe u uA uK uL
-
-private theorem prime_algebraMap_localizationAtPrime_of_mem
-    {A : Type u} [CommRing A] [IsDomain A]
-    (P : Ideal A) [P.IsPrime] {t : A} (ht : Prime t) (htP : t ∈ P) :
-    Prime (algebraMap A (Localization.AtPrime P) t) := by
-  rcases prime_or_isUnit_algebraMap_localizationAtPrime P ht with
-    hprime | hunit
-  · exact hprime
-  · have htCompl : t ∈ P.primeCompl :=
-      (IsLocalization.AtPrime.isUnit_to_map_iff
-        (Localization.AtPrime P) P t).mp hunit
-    exact (htCompl htP).elim
 
 /-- Iterated Kummer radicals with positive unit exponents and unit
 radicands are etale over their base. -/
@@ -228,14 +220,14 @@ theorem heightTwoGaloisOtherRootPrefix_finiteEtale_at_selectedBranch
       (K := K) (L := L) t hNC i
     let n := heightTwoConditionalOtherExponent t i r P e sigma
     let R := Localization.AtPrime P
-    letI : Algebra R K :=
+    let : Algebra R K :=
       localizationAtPrimeToFractionFieldAlgebra (K := K) P
-    letI : Algebra R L :=
+    let : Algebra R L :=
       localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-    letI : IsScalarTower R K L :=
+    let : IsScalarTower R K L :=
       localizationAtPrimeToFractionFieldToExtension_isScalarTower
         (K := K) (L := L) P
-    letI : IsFractionRing R K :=
+    let : IsFractionRing R K :=
       localizationAtPrimeToFractionField_isFractionRing (K := K) P
     let aR : Fin d → R :=
       heightTwoConditionalOtherRadicand t i P sigma
@@ -244,37 +236,13 @@ theorem heightTwoGaloisOtherRootPrefix_finiteEtale_at_selectedBranch
       prime_algebraMap_localizationAtPrime_of_mem P
         (hNC.2.2.2.1 i hi) htiP
     let pR := Ideal.span ({y} : Set R)
-    letI : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hy
+    let : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hy
     let V := Localization.AtPrime pR
     let aV : Fin d → V := fun k ↦ algebraMap R V (aR k)
     let E := iteratedRadical V d n aV
     Module.Finite V E ∧
       Module.FaithfullyFlat V E ∧ Algebra.Etale V E := by
-  dsimp only
-  let e := heightTwoOtherBranchGaloisRamificationIndex
-    (K := K) (L := L) t hNC i
-  let n := heightTwoConditionalOtherExponent t i r P e sigma
-  let R := Localization.AtPrime P
-  let : Algebra R K :=
-    localizationAtPrimeToFractionFieldAlgebra (K := K) P
-  let : Algebra R L :=
-    localizationAtPrimeToExtensionAlgebra (K := K) (L := L) P
-  let : IsScalarTower R K L :=
-    localizationAtPrimeToFractionFieldToExtension_isScalarTower
-      (K := K) (L := L) P
-  let : IsFractionRing R K :=
-    localizationAtPrimeToFractionField_isFractionRing (K := K) P
-  let aR : Fin d → R :=
-    heightTwoConditionalOtherRadicand t i P sigma
-  let y : R := algebraMap A R (t i)
-  have hy : Prime y :=
-    prime_algebraMap_localizationAtPrime_of_mem P
-      (hNC.2.2.2.1 i hi) htiP
-  let pR := Ideal.span ({y} : Set R)
-  let : pR.IsPrime := Ideal.isPrime_span_singleton_of_prime hy
-  let V := Localization.AtPrime pR
-  let aV : Fin d → V := fun k ↦ algebraMap R V (aR k)
-  let E := iteratedRadical V d n aV
+  intro e n R sharedOwner1 sharedOwner2 sharedOwner3 sharedOwner4 aR y hy pR sharedOwner5 V aV E
   have hn : ∀ k, 0 < n k := by
     intro k
     by_cases hk : (i.succAbove (sigma k)).1 < r ∧

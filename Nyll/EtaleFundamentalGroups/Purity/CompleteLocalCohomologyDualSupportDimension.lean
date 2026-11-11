@@ -4,24 +4,26 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalTopCohomologyDual
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinianZero
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
-import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeQuotient
-import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
-import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
-import Nyll.EtaleFundamentalGroups.Purity.InjectiveDualScalarQuotient
-import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
-import Nyll.EtaleFundamentalGroups.Purity.RegularArtinianParameterChoice
-import Mathlib.Algebra.Module.Submodule.Lattice
-import Mathlib.Algebra.Module.Submodule.Pointwise
-import Mathlib.Algebra.Module.Torsion.PrimaryComponent
-import Mathlib.Order.KrullDimension
-import Mathlib.RingTheory.KrullDimension.Module
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Spectrum.Prime.Module
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.CompleteLocalTopCohomologyDual
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinian
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyArtinianZero
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModule
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyModuleCoefficients
+public import Nyll.EtaleFundamentalGroups.Purity.DerivedLocalCohomologyTorsionFreeQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.EssentialModuleExtension
+public import Nyll.EtaleFundamentalGroups.Purity.FinitePowerTorsionLength
+public import Nyll.EtaleFundamentalGroups.Purity.InjectiveDualScalarQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.MaximalIdealTorsionQuotient
+public import Nyll.EtaleFundamentalGroups.Purity.RegularArtinianParameterChoice
+public import Mathlib.Algebra.Module.Submodule.Lattice
+public import Mathlib.Algebra.Module.Submodule.Pointwise
+public import Mathlib.Algebra.Module.Torsion.PrimaryComponent
+public import Mathlib.Order.KrullDimension
+public import Mathlib.RingTheory.KrullDimension.Module
+public import Mathlib.RingTheory.KrullDimension.Regular
+public import Mathlib.RingTheory.Spectrum.Prime.Module
 
 /-!
 # Support dimension of dual local cohomology
@@ -33,6 +35,8 @@ scalar quotient. In degree zero a uniform maximal-ideal power kills the
 cohomology and its dual. In positive degree the primary component is
 removed before choosing a regular scalar.
 -/
+
+@[expose] public section
 
 namespace EtaleFundamentalGroups.Purity
 

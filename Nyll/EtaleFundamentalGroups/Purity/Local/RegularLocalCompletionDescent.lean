@@ -4,16 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 -/
 
-import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteRegularLocalPurity
-import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
-import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
-import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompletionDescentFrontier
-import Nyll.SchemeTheory.FiniteEtale.AffinizationExtension
-import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.RingTheory.RingHom.FaithfullyFlat
+module
+
+public import Nyll.EtaleFundamentalGroups.Purity.Local.CompleteRegularLocalPurity
+public import Nyll.EtaleFundamentalGroups.Purity.Local.MaximalAdicCompletion
+public import Nyll.EtaleFundamentalGroups.Purity.Local.PuncturedFiniteEtaleSections
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompletionDescentFrontier
+public import Nyll.SchemeTheory.FiniteEtale.AffinizationExtension
+public import Nyll.SchemeTheory.RingTheory.RegularLocal.RegularLocalDomain
+public import Mathlib.AlgebraicGeometry.Morphisms.Flat
+public import Mathlib.AlgebraicGeometry.Noetherian
+public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
+public import Mathlib.RingTheory.RingHom.FaithfullyFlat
 
 /-!
 # Punctured purity descends from the maximal-adic completion
@@ -23,6 +25,8 @@ theorem. Flat base change then descends its finite étale section algebra and
 the open immersion into its affinization. The original cover is recovered
 as the restriction of this finite étale affinization.
 -/
+
+@[expose] public section
 
 noncomputable section
 
