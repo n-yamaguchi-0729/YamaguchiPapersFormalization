@@ -43,11 +43,14 @@ open Polynomial
 
 universe uR uC uL uB uF
 
-local instance spanSingletonIsPrime
+/-- A prime element defines the prime ideal used at a selected root. -/
+theorem spanSingletonIsPrime
     {R : Type uR} [CommRing R] [IsDomain R]
     {p : R} [hp : Fact (Prime p)] :
     (Ideal.span ({p} : Set R)).IsPrime :=
   Ideal.isPrime_span_singleton_of_prime hp.out
+
+attribute [local instance] spanSingletonIsPrime
 
 /-- The selected-root completion algebra uses the literal right tensor inclusion.
 This computation is checked before entering the larger descent proof. -/

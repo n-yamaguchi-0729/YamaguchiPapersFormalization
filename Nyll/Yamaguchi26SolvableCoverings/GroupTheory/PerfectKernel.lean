@@ -112,8 +112,8 @@ theorem isPerfect_kernel_image_of_openNormalAbelianizationInjective
     have hqPx_eq : qP x = n := Subtype.ext hkq
     exact hqPx_eq ▸ hqPx
   apply Group.isPerfect_def.mpr
-  rw [topDerivedTop_one_eq_topologicalCommutator,
-    topologicalCommutator_eq_commutator_of_isClosed N (isClosed_discrete _)] at hNderived
+  rw [topDerivedTop_one_eq_closedCommutator,
+    closedCommutator_eq_commutator_of_isClosed N (isClosed_discrete _)] at hNderived
   exact hNderived
 
 /-- 局所アーベル化の単射性から、核自身の位相についての完全性を導く。 -/

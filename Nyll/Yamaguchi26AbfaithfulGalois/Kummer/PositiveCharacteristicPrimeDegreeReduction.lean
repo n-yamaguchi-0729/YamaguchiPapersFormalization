@@ -184,6 +184,10 @@ theorem isSigmaAbFaithful_of_primeDegree_detection_fg_charP
             relativeGaloisAbelianModPowerTransform F E p τ z ≠ z)
     {K : Type u} [Field K] [CharP K p] [Infinite K] (hfg : Field.FG K) :
     IsSigmaAbFaithful {p} Gal(AlgebraicClosure K/K) := by
+  let : T2Space Gal(SeparableClosure K/K) :=
+    krullTopology_t2 (K := K) (L := SeparableClosure K)
+  let : T2Space Gal(AlgebraicClosure K/K) :=
+    krullTopology_t2 (K := K) (L := AlgebraicClosure K)
   have hSep : IsSigmaAbFaithful {p} Gal(SeparableClosure K/K) := by
     apply isSigmaAbFaithful_iff_prime_order_test.mpr
     intro H

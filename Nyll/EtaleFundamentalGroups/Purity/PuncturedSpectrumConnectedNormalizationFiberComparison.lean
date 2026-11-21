@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzAlgebra
+public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedLefschetzSource
 public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumConnectedNormalizationLocal
 public import Nyll.EtaleFundamentalGroups.Purity.PuncturedSpectrumCompleteLocalConnectedness
 public import Mathlib.RingTheory.Ideal.GoingUp
@@ -47,7 +48,7 @@ theorem isLocalHom_of_isIntegral_between_localRings
       (maximalIdeal B)
   have heq : (maximalIdeal B).comap f = maximalIdeal A :=
     (maximal_ideal_unique A).unique hcomap (maximalIdeal.isMaximal A)
-  exact ((local_hom_TFAE f).out 5 1).mp heq
+  exact ((local_hom_tfae f).out 5 1).mp heq
 
 /-- For an integral map of local rings, the inverse image of the punctured
 spectrum is the punctured spectrum. -/
@@ -540,17 +541,6 @@ theorem connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosure_hom_fr
   (connectedPuncturedCoverGenericNormalizationIsoSpecIntegralClosureData
     R hpos W).2
 
-/-- Pulling back two isomorphic schemes over a fixed base preserves the
-pullback.  This local copy is used to keep the comparison data explicit. -/
-noncomputable def pullbackIsoOfIsoOverForNormalizationFiber
-    {A B X Y : Scheme.{u}} (e : A ≅ B)
-    (f : A ⟶ X) (h : B ⟶ X) (g : Y ⟶ X)
-    (w : e.hom ≫ h = f) :
-    Limits.pullback f g ≅ Limits.pullback h g :=
-  asIso <| Limits.pullback.map f g h g e.hom (𝟙 _) (𝟙 _)
-    (by simpa only [Category.comp_id] using w.symm)
-    (by rw [Category.comp_id, Category.id_comp])
-
 /-- An affine base change by a quotient, with its structural-map equation. -/
 noncomputable def affineQuotientPullbackIsoData
     (A B : Type u) [CommRing A] [CommRing B] [Algebra A B]
@@ -566,11 +556,11 @@ noncomputable def affineQuotientPullbackIsoData
   let T := A ⧸ I
   let c := Spec.map (CommRingCat.ofHom (algebraMap A B))
   let eFiber : Limits.pullback z q ≅ Limits.pullback c q :=
-    pullbackIsoOfIsoOverForNormalizationFiber eZ z c q heZ
+    AlgebraicGeometry.FiniteEtale.pullbackIsoOfIsoOver eZ z c q heZ
   have heFiber :
       eFiber.hom ≫ Limits.pullback.snd c q =
         Limits.pullback.snd z q := by
-    dsimp only [eFiber, pullbackIsoOfIsoOverForNormalizationFiber]
+    dsimp only [eFiber, AlgebraicGeometry.FiniteEtale.pullbackIsoOfIsoOver]
     simp only [asIso_hom, pullback.map, pullback.lift_snd,
       Category.comp_id]
   let eRing : Q ≃ₐ[T] T ⊗[A] B :=
@@ -810,7 +800,7 @@ noncomputable def
       R hpos W I
   change Limits.pullback F.hom p ≅ Scheme.puncturedSpectrum Q
   exact
-    pullbackIsoOfIsoOverForNormalizationFiber
+    AlgebraicGeometry.FiniteEtale.pullbackIsoOfIsoOver
         eClosed F.hom f p heClosed ≪≫
       Scheme.pullbackPuncturedSpectrumIsoOfIntegral (algebraMap T Q) hf
 

@@ -48,10 +48,10 @@ theorem exists_completeOrthogonalIdempotents_lift_of_surjective_henselianRing_ke
     have hij_ker : e' i * e' j ∈ RingHom.ker f := by
       rw [RingHom.mem_ker, map_mul, he'_map i, he'_map j]
       exact he.ortho hij
-    have hij_jac : e' i * e' j ∈ Ideal.jacobson (⊥ : Ideal R) :=
+    have hij_jac : e' i * e' j ∈ Ring.jacobson R :=
       HenselianRing.jac hij_ker
     have hunit : IsUnit (1 - e' i * e' j) := by
-      apply Ideal.isUnit_of_sub_one_mem_jacobson_bot
+      apply Ideal.isUnit_of_sub_one_mem_jacobson
       simpa only [sub_sub_cancel_left] using neg_mem hij_jac
     have hone : 1 - e' i * e' j = 1 :=
       (IsIdempotentElem.iff_eq_one_of_isUnit hunit).mp hij_idem.one_sub
@@ -62,10 +62,10 @@ theorem exists_completeOrthogonalIdempotents_lift_of_surjective_henselianRing_ke
   have hsum_ker : (∑ i, e' i) - 1 ∈ RingHom.ker f := by
     rw [RingHom.mem_ker, map_sub, map_sum, map_one]
     simp only [he'_map, he.complete, sub_self]
-  have hsum_jac : (∑ i, e' i) - 1 ∈ Ideal.jacobson (⊥ : Ideal R) :=
+  have hsum_jac : (∑ i, e' i) - 1 ∈ Ring.jacobson R :=
     HenselianRing.jac hsum_ker
   have hsum_unit : IsUnit (∑ i, e' i) :=
-    Ideal.isUnit_of_sub_one_mem_jacobson_bot _ hsum_jac
+    Ideal.isUnit_of_sub_one_mem_jacobson _ hsum_jac
   have hsum : ∑ i, e' i = 1 :=
     (IsIdempotentElem.iff_eq_one_of_isUnit hsum_unit).mp hsum_idem
   refine ⟨e', ⟨⟨he'_idem, he'_ortho⟩, hsum⟩, ?_⟩

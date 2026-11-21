@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.ContinuousFieldUnitLog
 public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.RamificationIndex
 public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.WithZeroCompleteSpace

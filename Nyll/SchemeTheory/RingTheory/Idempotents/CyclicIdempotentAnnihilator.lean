@@ -69,7 +69,8 @@ theorem exists_monic_annihilator_of_cyclic_quotient_idempotent
   let N : Submodule R B := Submodule.span R (Set.range v)
   have hv : N = ⊤ := by
     apply top_unique
-    apply Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top hI
+    have hI' : I ≤ Ring.jacobson R := by simpa only [Ideal.jacobson_bot] using hI
+    apply Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top hI'
     refine hs.ge.trans (Submodule.span_le.mpr ?_)
     intro x hx
     obtain ⟨r, hr⟩ := hcycdef x

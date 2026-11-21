@@ -35,18 +35,8 @@ namespace AlgebraicGeometry.Scheme
 
 universe u
 
-local instance finiteEtaleHasPullbacksAlongPuncturedSpectrumCompletionDescentFrontier
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongPuncturedSpectrumCompletionDescentFrontier
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- A local ring map which maps the maximal ideal onto the maximal ideal
 pulls the punctured open back to the punctured open. -/

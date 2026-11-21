@@ -34,9 +34,11 @@ universe u
 
 /-- The algebra structure carried by an object under `CommRingCat.of R`,
 spelled with the underlying type `R`. -/
-local instance underCommRingCatAlgebra
+abbrev underCommRingCatAlgebra
     {R : Type u} [CommRing R] (A : Under (CommRingCat.of R)) : Algebra R A :=
   RingHom.toAlgebra A.hom.hom
+
+attribute [local instance] underCommRingCatAlgebra
 
 /-- The literal tensor-product map induced by a leg of a cocone of
 `R`-algebras, with the stage algebra in the left tensor coordinate. -/

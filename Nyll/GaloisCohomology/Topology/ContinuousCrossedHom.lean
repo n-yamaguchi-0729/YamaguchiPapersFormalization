@@ -88,7 +88,8 @@ def scalarLine {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
           map_smul' := fun a b => mul_smul a b.down x }
       cont := continuous_of_discreteTopology }
 
-private theorem scalarLine_one {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
+/-- The original vector is the value of its scalar line at one. -/
+theorem scalarLine_one {R : Type} [Ring R] [TopologicalSpace R] [DiscreteTopology R]
     {M : TopModuleCat.{u} R} (x : M) : scalarLine x (ULift.up 1) = x :=
   one_smul R x
 

@@ -59,8 +59,8 @@ theorem comp_injective_of_le_jacobson [FormallyUnramified R A] [EssFiniteType R 
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     change q (φ t - 1) = 0
     rw [map_sub, hqt, map_one, sub_self]
-  have hunit : IsUnit (φ t) :=
-    Ideal.isUnit_of_sub_one_mem_jacobson_bot (φ t) (hJ hmem)
+  have hunit : IsUnit (φ t) := Ideal.isUnit_of_sub_one_mem_jacobson (φ t) (by
+    simpa only [Ideal.jacobson_bot] using hJ hmem)
   apply AlgHom.ext
   intro a
   have hmul : (g a - f a) * φ t = 0 := by

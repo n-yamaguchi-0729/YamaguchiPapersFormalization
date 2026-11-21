@@ -30,18 +30,10 @@ open AlgebraicGeometry.FiniteEtale EtaleFundamentalGroups.Inertia
 
 namespace EtaleFundamentalGroups.StrictHenselian
 
-local instance (X : Scheme.{u}) :
-    Category (MorphismProperty.Over (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) :=
-  AlgebraicGeometry.FiniteEtale.instCategory X
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback (P := @IsFiniteEtale) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- Triviality of the actual strict generic action at a boundary DVR makes
 the base change of the original cover's normalization etale at that stalk. -/

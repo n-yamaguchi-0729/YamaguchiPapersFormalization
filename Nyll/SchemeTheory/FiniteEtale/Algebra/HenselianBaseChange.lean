@@ -35,7 +35,9 @@ theorem baseChange_isEquivalence_of_henselian
     {R : Type u} [CommRing R] (I : Ideal R) [HenselianRing R I] :
     (baseChange R (R ⧸ I) : CommAlgCat.FiniteEtale.{u} R ⥤
       CommAlgCat.FiniteEtale.{u} (R ⧸ I)).IsEquivalence where
-  faithful := baseChange_faithful_of_le_jacobson I (HenselianRing.jac (R := R) (I := I))
+  faithful := baseChange_faithful_of_le_jacobson I (by
+    simpa only [Ideal.jacobson_bot] using
+      (HenselianRing.jac (R := R) (I := I)))
   full := baseChange_full_of_henselian I
   essSurj := {
     mem_essImage A := by

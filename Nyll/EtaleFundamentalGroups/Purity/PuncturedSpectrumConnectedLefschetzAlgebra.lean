@@ -235,7 +235,7 @@ theorem connectedPuncturedCover_integralClosure_three_le_prime_height
   let C := integralClosure R L
   let : FaithfulSMul R C :=
     integralClosure_faithfulSMul_of_fractionField (R := R) (K := K) (L := L)
-  let : Algebra.IsIntegral R C := integralClosure.AlgebraIsIntegral
+  let : Algebra.IsIntegral R C := integralClosure.algebraIsIntegral
   intro P _ hP
   exact three_le_prime_height_of_map_maximalIdeal_le hdim P hP
 

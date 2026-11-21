@@ -60,7 +60,7 @@ private lemma depth_le_krullDim_support' [Nontrivial M] [Module.Finite R M] :
   clear this
   simp only [WithBot.coe_le_coe, ge_iff_le]
   induction n using Nat.strong_induction_on generalizing M with
-  | h n IH =>
+  | ind n IH =>
     rw [depth, sSup_le_iff]
     rintro _ ⟨l, hl, hl', rfl⟩
     apply WithTop.coe_le_coe.mpr ?_

@@ -1174,8 +1174,8 @@ theorem span_eq_top_of_span_quotientMk_eq_top [Module.Finite R M]
     rw [Submodule.map_span, ← Set.range_comp]
     exact h1
   rw [Submodule.map_mkQ_eq_top] at h2
-  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-    (span_le_jacobson_bot x hx) ?_)
+  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top
+    (by simpa only [Ideal.jacobson_bot] using span_le_jacobson_bot x hx) ?_)
   rw [Submodule.ideal_span_singleton_smul, sup_comm, h2]
 
 theorem linearIndependent_of_quotientMk_linearIndependent [IsNoetherianRing R]

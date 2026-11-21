@@ -168,7 +168,7 @@ theorem
     change q.under R = IsLocalRing.maximalIdeal R
     exact (q.over_def (IsLocalRing.maximalIdeal R)).symm
   let : IsLocalHom (algebraMap R S) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R S)).out 5 1).mp hcomap
+    ((IsLocalRing.local_hom_tfae (algebraMap R S)).out 5 1).mp hcomap
   let : Module.FaithfullyFlat R S :=
     Module.FaithfullyFlat.of_flat_of_isLocalHom
   exact

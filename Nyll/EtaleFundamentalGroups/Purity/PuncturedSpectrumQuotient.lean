@@ -31,18 +31,8 @@ namespace AlgebraicGeometry.Scheme
 
 universe u
 
-local instance finiteEtaleHasPullbacksAlongPuncturedSpectrumQuotient
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongPuncturedSpectrumQuotient
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable (R : Type u) [CommRing R] [IsLocalRing R]
 

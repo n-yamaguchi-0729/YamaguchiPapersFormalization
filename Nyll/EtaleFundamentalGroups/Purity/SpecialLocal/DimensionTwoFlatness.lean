@@ -42,7 +42,8 @@ private theorem free_of_free_quotSMulTop
     (hx : x ∈ (⊥ : Ideal R).jacobson) (hregular : IsSMulRegular M x)
     (hfree : Module.Free (R ⧸ Ideal.span {x}) (QuotSMulTop x M)) :
     Module.Free R M :=
-  (Module.free_quotSMulTop_iff_free R M hx hregular).mp hfree
+  (Module.free_quotSMulTop_iff_free R M
+    (by simpa only [Ideal.jacobson_bot] using hx) hregular).mp hfree
 
 /-- A finite module is free if an element generating the maximal ideal acts
 regularly.  This is the one-step lifting used for the second parameter below. -/

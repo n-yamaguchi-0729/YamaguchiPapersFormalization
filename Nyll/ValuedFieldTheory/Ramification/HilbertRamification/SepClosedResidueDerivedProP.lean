@@ -74,8 +74,8 @@ theorem HenselianDVF.topDerived_hasOpenNormalBasisInClass_of_separablyClosedResi
       have hτ := (topDerivedTop_le_comap (f := res) 1)
         (topDerivedTop_antitone hm τ.property)
       change res (τ : Gal(Ω/K)) ∈ topDerivedTop Gal(E/K) 1 at hτ
-      rw [topDerivedTop_one_eq_topologicalCommutator,
-        topologicalCommutator_eq_commutator_of_isClosed _ (isClosed_discrete _)] at hτ
+      rw [topDerivedTop_one_eq_closedCommutator,
+        closedCommutator_eq_commutator_of_isClosed _ (isClosed_discrete _)] at hτ
       exact hτ
     change ProCGroups.FiniteGroupClass.pGroup p (D ⧸ f.toMonoidHom.ker)
     exact (ProCGroups.FiniteGroupClass.pGroup p).mem_of_mulEquiv

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Mathlib.Topology.Instances.ZMod
 public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
 public import Nyll.ProCGroups.ProP.ContinuousH1
 public import Mathlib.Algebra.Ring.Aut
@@ -24,9 +25,6 @@ namespace KummerTheory
 open ClassFieldTower.ProP
 
 variable {K : Type*} [Field K] (n : ℕ)
-
-local instance discreteZModTopology : TopologicalSpace (ZMod n) := ⊥
-local instance discreteZMod : DiscreteTopology (ZMod n) := discreteTopology_bot _
 
 /-- Pullback of continuous degree-one classes by inverse Galois conjugation. -/
 noncomputable def absoluteH1Transform (τ : RingAut K)

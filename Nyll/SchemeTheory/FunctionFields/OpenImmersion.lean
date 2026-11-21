@@ -36,6 +36,12 @@ theorem denseRange_of_isOpenImmersion
     DenseRange j :=
   j.isOpenEmbedding.isOpenMap.denseRange_of_isPreirreducibleSpace j
 
+/-- Open immersions between integral schemes are dominant. -/
+theorem isDominant_of_isOpenImmersion
+    [IsIntegral X] [IsIntegral U]
+    (j : U ⟶ X) [IsOpenImmersion j] : IsDominant j :=
+  ⟨j.denseRange_of_isOpenImmersion⟩
+
 /-- The canonical function-field map of an open immersion of integral
 schemes is bijective. -/
 theorem functionFieldMap_bijective_of_isOpenImmersion

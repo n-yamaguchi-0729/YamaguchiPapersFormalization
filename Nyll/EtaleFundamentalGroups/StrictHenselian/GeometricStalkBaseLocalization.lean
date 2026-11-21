@@ -70,7 +70,7 @@ theorem geometricStalkBaseLocalizationMap_apply (r : R) :
 This follows from the localization correspondence on ideals. -/
 instance geometricStalkBaseLocalizationMap_isLocalHom :
     IsLocalHom (geometricStalkBaseLocalizationMap φ) := by
-  apply ((IsLocalRing.local_hom_TFAE (geometricStalkBaseLocalizationMap φ)).out 5 1).mp
+  apply ((IsLocalRing.local_hom_tfae (geometricStalkBaseLocalizationMap φ)).out 5 1).mp
   apply (IsLocalization.orderEmbedding (geometricBasePrime φ).asIdeal.primeCompl
     (Localization.AtPrime (geometricBasePrime φ).asIdeal)).injective
   change ((maximalIdeal (geometricStalk (Spec.map (CommRingCat.ofHom φ)))).comap

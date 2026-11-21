@@ -109,10 +109,7 @@ end CommAlgCat.FiniteEtale
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryAffine (X : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) :=
-  FiniteEtale.instCategory X
+attribute [local instance] finiteEtaleOverCategory
 
 /-- Finite étale covers of `Spec R`, with arrows reversed, are equivalent to finite étale
 `R`-algebras. -/

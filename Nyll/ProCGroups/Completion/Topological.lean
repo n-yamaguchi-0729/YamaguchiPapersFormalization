@@ -6,7 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
-public import Nyll.ClassFieldTheory.Definitions.LocalClassFieldTheory.TopologicalProfiniteCompletion
+public import Nyll.ProCGroups.Completion.TopologicalBasic
 public import Mathlib.Topology.Algebra.Category.ProfiniteGrp.Limits
 
 /-!

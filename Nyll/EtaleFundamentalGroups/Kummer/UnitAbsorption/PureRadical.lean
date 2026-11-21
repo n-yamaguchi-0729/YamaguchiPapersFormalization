@@ -296,7 +296,7 @@ theorem unitFactor_etale_over_uniformizerRadical
     charZero_of_injective_ringHom hresidueMap.1
   let : IsLocalHom
       (algebraMap R (Localization.AtPrime (P.under R))) :=
-    ((IsLocalRing.local_hom_TFAE
+    ((IsLocalRing.local_hom_tfae
       (algebraMap R (Localization.AtPrime (P.under R)))).out 5 1).mp (by
         change (IsLocalRing.maximalIdeal
           (Localization.AtPrime (P.under R))).under R =

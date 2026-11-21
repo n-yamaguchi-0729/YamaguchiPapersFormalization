@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.GaloisCohomology.Kummer.Concrete.DescendedCharacterAction
 public import Nyll.GaloisCohomology.Kummer.Concrete.AbsoluteContinuousCharacterAction
 public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharInvariantKummerTrace

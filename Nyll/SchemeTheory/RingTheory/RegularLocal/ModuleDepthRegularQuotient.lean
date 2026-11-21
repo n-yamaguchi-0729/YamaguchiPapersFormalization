@@ -110,7 +110,7 @@ lemma Module.depth_le_krullDim_support [Nontrivial M] [Module.Finite R M] :
   clear this
   simp only [WithBot.coe_le_coe, ge_iff_le]
   induction n using Nat.strong_induction_on generalizing M with
-  | h n IH =>
+  | ind n IH =>
     rw [depth, sSup_le_iff]
     rintro _ ⟨l, hl, hl', rfl⟩
     apply WithTop.coe_le_coe.mpr ?_
@@ -620,9 +620,9 @@ theorem IsLocalRing.exists_isSMulRegular_and_isSMulRegular_of_notMem_associatedP
     rintro ⟨I, hIs, hle⟩
     rw [Set.Finite.mem_toFinset, Set.mem_insert_iff, Set.mem_union] at hIs
     rcases hIs with rfl | hI | hI
-    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R)
+    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson (maximalIdeal R)
         (maximalIdeal R) (IsNoetherian.noetherian _) ?_
-        (IsLocalRing.maximalIdeal_le_jacobson _))
+        (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge)
       rwa [Ideal.smul_eq_mul, ← pow_two]
     · have heq : I = maximalIdeal R :=
         (IsLocalRing.le_maximalIdeal (AssociatedPrimes.mem_iff.mp hI).isPrime.ne_top).antisymm
@@ -1438,9 +1438,9 @@ lemma IsAssociatedPrime.exists_forall_smul_eq_zero_notMem_smul_top
     have hmK' : m ∈ pTorsion p M := hmK
     exact (Submodule.mem_smul_pointwise_iff_exists k x (pTorsion p M)).mpr ⟨m, hmK', hm⟩
   have hKbot : pTorsion p M = ⊥ := by
-    refine Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (Ideal.span {x}) (pTorsion p M)
+    refine Submodule.eq_bot_of_le_smul_of_le_jacobson (Ideal.span {x}) (pTorsion p M)
       (IsNoetherian.noetherian (pTorsion p M)) hKxK ?_
-    refine le_trans ?_ (IsLocalRing.maximalIdeal_le_jacobson ⊥)
+    rw [IsLocalRing.ringJacobson_eq_maximalIdeal R]
     rw [Ideal.span_le, Set.singleton_subset_iff]
     exact hx
   have hzK : z ∈ pTorsion p M := hzann

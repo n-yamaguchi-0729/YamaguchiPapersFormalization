@@ -397,8 +397,7 @@ lemma isField_of_isConnected (X : FiniteEtale (Spec (.of k))) [IsConnected X] :
     rw [← PrimeSpectrum.subsingleton_iff_isField_of_isReduced]
     constructor
     intro p q
-    exact PreconnectedSpace.constant (f := id)
-      (inferInstance : PreconnectedSpace (PrimeSpectrum Γ(X.left, ⊤))) continuous_id
+    exact Continuous.isConst_of_preconnectedSpace (f := id) continuous_id p q
 
 noncomputable instance (X : FiniteEtale (Spec (.of k))) [IsConnected X] : Field Γ(X.left, ⊤) :=
   (isField_of_isConnected _ X).toField

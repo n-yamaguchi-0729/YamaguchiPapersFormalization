@@ -12,9 +12,6 @@
     "SchemeTheory": [
       "Nyll.SchemeTheory"
     ],
-    "ClassFieldTheory": [
-      "Nyll.ClassFieldTheory"
-    ],
     "EtaleFundamentalGroups": [
       "Nyll.EtaleFundamentalGroups"
     ],
@@ -31,9 +28,9 @@
   "roots": [
     "Nyll"
   ],
-  "leanToolchain": "leanprover/lean4:v4.35.0",
-  "mathlibRevision": "56a005855ea17e0b0958f73ec801ae140b0a1679",
-  "mathlibRepository": "https://github.com/leanprover-community/mathlib4",
+  "leanToolchain": "leanprover/lean4:v4.36.0",
+  "mathlibRevision": "fc4f59e577feb1a4956671bc04ac18aaaf8cd842",
+  "mathlibRepository": "https://github.com/leanprover-community/mathlib4.git",
   "externalModuleRoots": [
     "Mathlib",
     "Lean",
@@ -60,7 +57,6 @@
     "ValuedFieldTheory": 1,
     "GaloisCohomology": 1,
     "SchemeTheory": 1,
-    "ClassFieldTheory": 2,
     "EtaleFundamentalGroups": 2,
     "Yamaguchi26AbfaithfulGalois": 3,
     "Yamaguchi26SolvableCoverings": 3
@@ -70,7 +66,6 @@
     "ValuedFieldTheory",
     "GaloisCohomology",
     "SchemeTheory",
-    "ClassFieldTheory",
     "EtaleFundamentalGroups",
     "Yamaguchi26AbfaithfulGalois",
     "Yamaguchi26SolvableCoverings"

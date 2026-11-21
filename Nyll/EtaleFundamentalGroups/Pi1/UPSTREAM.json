@@ -65,8 +65,8 @@
           ]
         },
         "local_change_description": "Nyll completions of upstream Point.lean placeholders and dependent fiber-action/fundamental-group repairs; existing IsSepClosed and IsSepClosure assumptions preserved.",
-        "sha256": "8226efdce8406d6e56bbecfcf50aec3fb9e5801b8b4b880f39653c9af044ccf9",
-        "byte_count": 24942,
+        "sha256": "66bb6709052696ef0ff988c0c93ecee3977969d9ff89a0a38e45da5db28e1ce3",
+        "byte_count": 24885,
         "canonical_record_sha256": "8226efdce8406d6e56bbecfcf50aec3fb9e5801b8b4b880f39653c9af044ccf9",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []
@@ -566,8 +566,8 @@
           ]
         },
         "local_change_description": "Maintained adaptation: namespace/declaration ownership retained, paths/imports and Lean/mathlib APIs updated.",
-        "sha256": "f075a49bcfdc78a02d47ce049b68bdac83faf87bef97b0e3200faf11c514a909",
-        "byte_count": 16063,
+        "sha256": "f60d2e3561125e43097f3162822e3dd198335c56eac2524b144cb712bf983939",
+        "byte_count": 16439,
         "canonical_record_sha256": "f075a49bcfdc78a02d47ce049b68bdac83faf87bef97b0e3200faf11c514a909",
         "header": "Copyright (c) 2025 Christian Merten. All rights reserved.\nReleased under Apache 2.0 license as described in the file LICENSE.\nAuthors: Christian Merten",
         "source_urls": []

@@ -39,7 +39,9 @@ theorem bijective_comp_quotient_of_henselian
     Function.Bijective
       ((Ideal.Quotient.mkₐ R I).comp : (B →ₐ[R] R) → B →ₐ[R] R ⧸ I) := by
   refine ⟨Algebra.FormallyUnramified.comp_injective_of_le_jacobson I
-    (HenselianRing.jac (R := R) (I := I)), ?_⟩
+    (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := I))), ?_⟩
   intro σ
   obtain ⟨e, he, hσe, hintegral, hscalar⟩ :=
     Algebra.exists_integral_idempotent_factor_of_etale_quotientSection I σ
@@ -58,7 +60,9 @@ theorem bijective_comp_quotient_of_henselian
   let σF : F →ₐ[R] R ⧸ I := Ideal.Quotient.liftₐ K σ (fun b hb ↦ hker hb)
   have hbij : Function.Bijective (algebraMap R F) :=
     Algebra.FiniteEtale.bijective_algebraMap_of_quotientSection I
-      (HenselianRing.jac (R := R) (I := I)) σF hscalar
+      (by
+        simpa only [Ideal.jacobson_bot] using
+          (HenselianRing.jac (R := R) (I := I))) σF hscalar
   let E : R ≃ₐ[R] F := AlgEquiv.ofBijective (Algebra.ofId R F) hbij
   refine ⟨E.symm.toAlgHom.comp q, ?_⟩
   apply AlgHom.ext

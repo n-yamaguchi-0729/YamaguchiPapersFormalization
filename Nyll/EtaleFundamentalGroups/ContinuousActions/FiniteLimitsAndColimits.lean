@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Mathlib.CategoryTheory.Action.Concrete
 public import Mathlib.CategoryTheory.Action.Continuous
 public import Mathlib.CategoryTheory.Action.Limits
 public import Mathlib.CategoryTheory.Limits.FintypeCat
@@ -37,6 +38,19 @@ open scoped FintypeCatDiscrete
 namespace CategoryTheory.ContAction
 
 variable {G : Type v} [Monoid G] [TopologicalSpace G]
+
+/-- The finite-action carrier carries the action of the original object. -/
+abbrev finiteCarrierMulAction (X : ContAction FintypeCat.{u} G) :
+    MulAction G ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) :=
+  inferInstanceAs <| MulAction G X.obj.V
+
+attribute [local instance] finiteCarrierMulAction in
+/-- Continuity on the finite carrier is the continuity of the original action. -/
+theorem finiteCarrierContinuousSMul (X : ContAction FintypeCat.{u} G) :
+    ContinuousSMul G ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) := by
+  change ContinuousSMul G
+    ((forget₂ (Action FintypeCat.{u} G) TopCat).obj X.obj)
+  exact X.property
 
 omit [TopologicalSpace G] in
 private lemma hom_apply_rho {X Y : Action FintypeCat.{u} G}

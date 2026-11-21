@@ -85,7 +85,7 @@ theorem pureRadicalFractionField_finrank_eq_exponent
         (AdjoinRoot.powerBasis'
           (monic_X_pow_sub_C varpi hN.ne')).finrank
     _ = (X ^ N - C varpi).natDegree := rfl
-    _ = N := Polynomial.natDegree_X_pow_sub_C
+    _ = N := Polynomial.natDegree_X_pow_sub_C _
 
 /-- Finiteness of the valuation-subring extension supplies finiteness of its
 canonical generic fibre. -/

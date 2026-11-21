@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Nyll.EtaleFundamentalGroups.Inertia.AffineNormalizationGeometricPoint
 public import Mathlib.RingTheory.Invariant.Galois
 
@@ -34,7 +35,7 @@ variable (R K L : Type u) [CommRing R] [Field K] [Field L]
 homomorphism into the automorphisms of the integral closure. -/
 theorem galRestrict_integralClosure_eq :
     (galRestrict R K L (integralClosure R L)).toMonoidHom =
-      (integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R) := by
+      (SchemeTheory.integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R) := by
   apply MonoidHom.ext
   intro σ
   apply AlgEquiv.ext
@@ -47,7 +48,7 @@ restriction action on the same integral closure, with no choice of comparison. -
 theorem integralClosureGaloisAction_eq :
     IsIntegralClosure.MulSemiringAction R K L (integralClosure R L) =
       MulSemiringAction.compHom (integralClosure R L)
-        ((integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R)) := by
+        ((SchemeTheory.integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R)) := by
   change MulSemiringAction.compHom (integralClosure R L)
     (galRestrict R K L (integralClosure R L)).toMonoidHom = _
   rw [galRestrict_integralClosure_eq R K L]

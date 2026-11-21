@@ -46,7 +46,8 @@ theorem isUnit_quotient_one_sub_of_eq_mod_extendedIdeal
   have hmap : q (b - e) ∈ I.map (algebraMap R (C ⧸ K)) := by
     rw [← q.map_extendedIdeal I]
     exact Ideal.mem_map_of_mem q.toRingHom hmem
-  apply Ideal.isUnit_of_sub_one_mem_jacobson_bot
+  apply Ideal.isUnit_of_sub_one_mem_jacobson
+  rw [← Ideal.jacobson_bot]
   apply Ideal.map_le_jacobson_bot_of_isIntegral hI
   change q b - 1 ∈ I.map (algebraMap R (C ⧸ K))
   simpa only [map_sub, he] using hmap

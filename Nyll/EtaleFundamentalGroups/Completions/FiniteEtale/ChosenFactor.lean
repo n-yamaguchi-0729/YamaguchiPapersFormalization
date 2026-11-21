@@ -85,7 +85,7 @@ theorem isLocalHom_of_unique_prime_over_maximal
         IsLocalRing.maximalIdeal R := by
     rw [← hq_eq]
     exact (q.over_def (IsLocalRing.maximalIdeal R)).symm
-  exact ((IsLocalRing.local_hom_TFAE (algebraMap R S)).out 5 1).mp hcomap
+  exact ((IsLocalRing.local_hom_tfae (algebraMap R S)).out 5 1).mp hcomap
 
 /-- A finite étale unique chosen factor is faithfully flat over the local
 base. -/

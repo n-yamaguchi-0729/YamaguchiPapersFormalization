@@ -251,7 +251,6 @@ theorem derivedLocalCohomologyModuleCoefficientsFirstMap_smulShortComplex
   change derivedLocalCohomologyCoefficientsFirstMap I hx.smulShortComplex_shortExact i z =
     derivedLocalCohomologyScalarMap I M i x z
   rw [derivedLocalCohomologyCoefficientsFirstMap_smulShortComplex I M i x hx]
-  rfl
 
 end EtaleFundamentalGroups
 

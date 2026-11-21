@@ -69,7 +69,9 @@ theorem exists_lift_of_quotient_of_henselian
   obtain ⟨e, he, heq⟩ := Algebra.exists_idempotent_lift_of_isIntegral I g hgidem
   have hunit : IsUnit (Ideal.Quotient.mk (Ideal.span {1 - e}) g) :=
     Algebra.isUnit_quotient_one_sub_of_eq_mod_extendedIdeal I
-      (HenselianRing.jac (R := R) (I := I)) g e heq.symm
+      (by
+        simpa only [Ideal.jacobson_bot] using
+          (HenselianRing.jac (R := R) (I := I))) g e heq.symm
   have hpg : p (qD (f g)) = 1 := by
     have h := congrArg Prod.fst hEg
     rw [hE₁] at h

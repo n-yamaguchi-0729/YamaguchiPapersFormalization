@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleAwayNormalizationAction
 public import Mathlib.RingTheory.Ideal.Defs
 public import Mathlib.RingTheory.Ideal.Over
@@ -112,7 +113,7 @@ private theorem exists_awayPoint_of_algebraEq
   · intro σ
     have hsmul (b : integralClosure R Y.left.functionField) :
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ) • b =
-        ((integralClosureAutHom R Y.left.functionField).comp
+        ((SchemeTheory.integralClosureAutHom R Y.left.functionField).comp
           (AlgEquiv.restrictScalarsHom R)) (finiteEtaleAutFunctionFieldAlgEquiv Y σ) b := by
       apply Subtype.ext
       exact integralClosure.coe_smul _ _
@@ -122,7 +123,8 @@ private theorem exists_awayPoint_of_algebraEq
         (let : MulSemiringAction Gal(Y.left.functionField/(Spec (.of S)).functionField)
             (integralClosure R Y.left.functionField) :=
           MulSemiringAction.compHom (integralClosure R Y.left.functionField)
-            ((integralClosureAutHom R Y.left.functionField).comp (AlgEquiv.restrictScalarsHom R))
+            ((SchemeTheory.integralClosureAutHom R Y.left.functionField).comp
+              (AlgEquiv.restrictScalarsHom R))
          finiteEtaleAutFunctionFieldAlgEquiv Y σ ∈
           (RingHom.ker φ).inertia Gal(Y.left.functionField/(Spec (.of S)).functionField)) := by
       constructor

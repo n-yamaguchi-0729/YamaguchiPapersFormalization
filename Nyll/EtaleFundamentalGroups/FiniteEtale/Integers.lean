@@ -73,7 +73,7 @@ theorem integerAlgebraMap_ringOfIntegers_bijective
   refine ⟨FaithfulSMul.algebraMap_injective ℤ (𝓞 K), ?_⟩
   intro x
   obtain ⟨q, hq⟩ :=
-    (finrank_eq_one_iff_of_nonzero' (1 : K) one_ne_zero).mp
+    (finrank_eq_one_iff_of_ne_zero' (1 : K) one_ne_zero).mp
       (numberField_finrank_eq_one_of_formallyUnramified K) (x : K)
   have hqmap : algebraMap ℚ K q = (x : K) := by
     simpa only [Algebra.smul_def, mul_one] using hq

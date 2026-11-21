@@ -203,7 +203,7 @@ theorem oneRoot_fractionRing_finrank_eq_exponent_of_prime
         (AdjoinRoot.powerBasis'
           (monic_X_pow_sub_C y hN.ne')).finrank
     _ = (X ^ N - Polynomial.C y).natDegree := rfl
-    _ = N := Polynomial.natDegree_X_pow_sub_C
+    _ = N := Polynomial.natDegree_X_pow_sub_C _
 
 /-- Domain-level finite-dimensionality companion to
 `oneRoot_fractionRing_finrank_eq_exponent_of_prime`. -/
@@ -312,7 +312,7 @@ private theorem rootCoordinate_fractionRing_finiteDimensional_finrank
     _ = (AdjoinRoot.powerBasis' (monic_X_pow_sub_C yC hN.ne')).dim := by
       exact (AdjoinRoot.powerBasis' (monic_X_pow_sub_C yC hN.ne')).finrank
     _ = (X ^ N - Polynomial.C yC).natDegree := rfl
-    _ = N := Polynomial.natDegree_X_pow_sub_C
+    _ = N := Polynomial.natDegree_X_pow_sub_C _
 
 /-- A chosen finite-etale local factor of a one-root cover over a complete
 regular local ring has exact fraction degree after the explicit finite

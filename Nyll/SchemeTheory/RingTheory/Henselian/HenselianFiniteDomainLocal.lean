@@ -36,7 +36,9 @@ theorem isLocalRing_of_finite_domain_henselian
   let k := R ⧸ m
   let Q := B ⧸ J
   have hJ : J ≤ Ideal.jacobson ⊥ :=
-    Ideal.map_le_jacobson_bot_of_isIntegral (HenselianRing.jac (R := R) (I := m))
+    Ideal.map_le_jacobson_bot_of_isIntegral (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := m)))
   obtain ⟨M, hM⟩ := Ideal.exists_maximal B
   have hJM : J ≤ M := hJ.trans (sInf_le ⟨bot_le, hM⟩)
   have hproper : J ≠ ⊤ := ne_top_of_le_ne_top hM.ne_top hJM
@@ -69,7 +71,8 @@ theorem isLocalRing_of_finite_domain_henselian
     · exact hN.ne_top (N.eq_top_of_isUnit_mem (haN N hN.isPrime hne)
         (hone ▸ isUnit_one))
   let : IsLocalRing Q := hlocal
-  let : IsLocalHom (Ideal.Quotient.mk J) := isLocalHom_of_le_jacobson_bot J hJ
+  let : IsLocalHom (Ideal.Quotient.mk J) := isLocalHom_of_le_jacobson (by
+    simpa only [Ideal.jacobson_bot] using hJ)
   exact (Ideal.Quotient.mk J).domain_isLocalRing
 
 end SchemeTheory

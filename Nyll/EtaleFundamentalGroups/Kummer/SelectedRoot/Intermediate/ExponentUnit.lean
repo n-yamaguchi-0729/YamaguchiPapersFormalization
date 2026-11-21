@@ -237,6 +237,7 @@ private theorem awayMap_formallyUnramified_of_normalization_etale
     basisD.localizationLocalization Bs (Submonoid.powers b) Ds
   let : Module.Free Bs Ds := Module.Free.of_basis basisDs
   let : Module.Finite Bs Ds := Module.Finite.of_basis basisDs
+  let : Module.Flat Bs Ds := Module.Flat.of_free
   let : Algebra.FormallyUnramified Bs Ds :=
     Algebra.FormallyUnramified.of_restrictScalars S Bs Ds
   let : Module.FinitePresentation Bs Ds :=
@@ -412,6 +413,7 @@ private theorem awayMap_formallyUnramified_of_embedded_normalization_etale
     basisD.localizationLocalization Bs (Submonoid.powers b) Ds
   let : Module.Free Bs Ds := Module.Free.of_basis basisDs
   let : Module.Finite Bs Ds := Module.Finite.of_basis basisDs
+  let : Module.Flat Bs Ds := Module.Flat.of_free
   let : Algebra.FormallyUnramified Bs Ds :=
     Algebra.FormallyUnramified.of_restrictScalars S Bs Ds
   let : Module.FinitePresentation Bs Ds :=

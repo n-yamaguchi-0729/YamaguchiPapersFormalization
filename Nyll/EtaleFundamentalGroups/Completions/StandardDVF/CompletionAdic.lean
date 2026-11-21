@@ -150,7 +150,7 @@ theorem standardDVRToCompletion_isLocalHom
   have hmax : Ideal.map (algebraMap V target.valuationSubring)
       (IsLocalRing.maximalIdeal V) = target.maximalIdeal :=
     standardDVRToCompletion_maximalIdeal_map_eq V K
-  exact ((IsLocalRing.local_hom_TFAE
+  exact ((IsLocalRing.local_hom_tfae
     (algebraMap V target.valuationSubring)).out 3 1).mp hmax.le
 
 /-- Contraction of every power of the completed maximal ideal is the

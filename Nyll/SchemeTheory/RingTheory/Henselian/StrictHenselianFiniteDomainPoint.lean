@@ -41,7 +41,7 @@ theorem strictHenselian_finiteDomain_aut_fixes_closedPoint
       (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R)
         (IsLocalRing.maximalIdeal B))
   let : IsLocalHom (algebraMap R B) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R B)).out 1 5).mpr hcontract
+    ((IsLocalRing.local_hom_tfae (algebraMap R B)).out 1 5).mpr hcontract
   let k := IsLocalRing.ResidueField R
   let l := IsLocalRing.ResidueField B
   have hσ : (IsLocalRing.ResidueField.mapAlgEquiv' σ).toAlgHom = AlgHom.id k l :=

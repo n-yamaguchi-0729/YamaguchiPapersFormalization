@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitPadicPow
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.PrincipalUnitPadicContinuity
 public import Nyll.ValuedFieldTheory.LocalField.DiscreteValuationField.PadicLinearOfContinuous

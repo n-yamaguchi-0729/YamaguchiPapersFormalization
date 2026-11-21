@@ -38,7 +38,7 @@ private theorem exists_binomial_quadratic_remainder
     have hcases : k = 0 ∨ k = 1 := by omega
     rcases hcases with rfl | rfl
     · simp only [coeff_sub, coeff_one_add_X_pow, Nat.choose_zero_right, Nat.cast_one,
-        coeff_one_zero, coeff_C_mul, coeff_X_zero, mul_zero, sub_self]
+        AddMonoidAlgebra.coeff_one_zero, coeff_C_mul, coeff_X_zero, mul_zero, sub_self]
     · simp only [coeff_sub, coeff_one_add_X_pow, Nat.choose_one_right, coeff_one,
         ite_eq_right (by decide : ¬ (1 : ℕ) = 0),
         coeff_C_mul, coeff_X_one, mul_one, sub_zero, sub_self]

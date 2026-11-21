@@ -208,9 +208,8 @@ theorem genericTensorFieldComponent_fieldRange_sup_eq_top
     convert
       ((genericTensorFieldComponentLeft m).fieldRange ⊔
         (genericTensorFieldComponentRight m).fieldRange).mul_mem ha hb using 1
-    all_goals
-      simp [genericTensorFieldComponentLeft,
-        genericTensorFieldComponentRight, ← map_mul]
+    simp [genericTensorFieldComponentLeft,
+      genericTensorFieldComponentRight, ← map_mul]
   · intro x y hx hy
     simpa using
       ((genericTensorFieldComponentLeft m).fieldRange ⊔

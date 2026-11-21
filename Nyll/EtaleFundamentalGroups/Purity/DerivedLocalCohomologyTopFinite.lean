@@ -85,9 +85,9 @@ theorem derivedLocalCohomology_maximalIdeal_isZero_succ_of_finite_of_regular
     rw [← hw]
     exact Submodule.smul_mem_smul hx Submodule.mem_top
   have htop : (⊤ : Submodule R H) = ⊥ :=
-    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot
+    Submodule.eq_bot_of_le_smul_of_le_jacobson
       (maximalIdeal R) (⊤ : Submodule R H) Module.Finite.fg_top hsmul
-      (jacobson_eq_maximalIdeal (⊥ : Ideal R) bot_ne_top).symm.le
+      (ringJacobson_eq_maximalIdeal R).symm.le
   have hz : ∀ z : H, z = 0 := by
     intro z
     have hmem : z ∈ (⊤ : Submodule R H) := Submodule.mem_top

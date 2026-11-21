@@ -83,8 +83,9 @@ theorem connectedSpace_spec_quotient_map_of_finiteDomain_of_maximalAdicComplete
   have hJne : J ≠ ⊤ := by
     obtain ⟨M, hM⟩ := Ideal.exists_maximal C
     apply ne_top_of_le_ne_top hM.ne_top
-    exact (HenselianRing.jac (R := C) (I := J)).trans
-      (sInf_le ⟨bot_le, hM⟩)
+    apply (HenselianRing.jac (R := C) (I := J)).trans
+    rw [Ring.jacobson_eq_sInf_isMaximal]
+    exact sInf_le hM
   let : Nontrivial Q := Ideal.Quotient.nontrivial_iff.mpr hJne
   have hker : RingHom.ker q = J := Ideal.mk_ker
   let : HenselianRing C (RingHom.ker q) := by

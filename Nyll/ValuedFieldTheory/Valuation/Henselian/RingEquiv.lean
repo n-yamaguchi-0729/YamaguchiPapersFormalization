@@ -29,10 +29,12 @@ theorem henselianRing_map_of_ringEquiv
     (e : R ≃+* S) (I : Ideal R) [HenselianRing R I] :
     HenselianRing S (I.map (e : R →+* S)) where
   jac := by
-    have hmap := Ideal.map_mono (f := (e : R →+* S))
-      (show I ≤ Ideal.jacobson (⊥ : Ideal R) from HenselianRing.jac)
-    rw [Ideal.map_jacobson_of_bijective e.bijective, Ideal.map_bot] at hmap
-    exact hmap
+    have hR : I ≤ (⊥ : Ideal R).jacobson := by
+      rw [Ideal.jacobson_bot]
+      exact HenselianRing.jac
+    have hmap := Ideal.map_mono (f := (e : R →+* S)) hR
+    rwa [Ideal.map_jacobson_of_bijective e.bijective, Ideal.map_bot,
+      Ideal.jacobson_bot] at hmap
   is_henselian := by
     intro f hf a₀ hroot hsimple
     have heval (p : Polynomial S) (x : S) :

@@ -112,9 +112,9 @@ theorem exists_parameter_notMem_minimalPrimes
     rintro ⟨I, hIs, hle⟩
     rw [Set.Finite.mem_toFinset, Set.mem_insert_iff] at hIs
     rcases hIs with rfl | hI
-    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R)
+    · refine hbot (Submodule.eq_bot_of_le_smul_of_le_jacobson (maximalIdeal R)
         (maximalIdeal R) (IsNoetherian.noetherian _) ?_
-        (IsLocalRing.maximalIdeal_le_jacobson _))
+        (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge)
       rwa [Ideal.smul_eq_mul, ← pow_two]
     · have hp_prime : I.IsPrime := Ideal.IsMinimalPrime.isPrime hI
       have heq : I = maximalIdeal R :=
@@ -293,8 +293,8 @@ theorem isDomain_of_isRegularLocalRing_aux :
       rw [Ideal.smul_eq_mul, ← hrx, mul_comm r x]
       exact Ideal.mul_mem_mul hx_mem hrp
     have hp_bot : p = ⊥ :=
-      Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (maximalIdeal R) p
-        (IsNoetherian.noetherian p) hple (IsLocalRing.maximalIdeal_le_jacobson _)
+      Submodule.eq_bot_of_le_smul_of_le_jacobson (maximalIdeal R) p
+        (IsNoetherian.noetherian p) hple (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge
     have : (⊥ : Ideal R).IsPrime := hp_bot ▸ hp_prime
     exact IsDomain.of_bot_isPrime R
 

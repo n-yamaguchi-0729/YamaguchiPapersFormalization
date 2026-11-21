@@ -68,8 +68,11 @@ theorem exists_integral_idempotent_factor_of_etale_quotientSection
     intro x
     obtain ⟨r, hr⟩ := Ideal.Quotient.mk_surjective (E x).1
     refine ⟨r, E.injective ?_⟩
-    rw [← IsScalarTower.algebraMap_smul (R ⧸ I) r (qC g),
-      map_smul, map_mul, hEg]
+    have hsmul (t : R ⧸ I) : E (t • qC g) = t • E (qC g) :=
+      E.toLinearEquiv.map_smul t (qC g)
+    have hmul : E (qC g * x) = E (qC g) * E x := E.map_mul (qC g) x
+    have hg' : E (qC g) = (1, 0) := hEg
+    rw [← IsScalarTower.algebraMap_smul (R ⧸ I) r (qC g), hsmul, hmul, hg']
     apply Prod.ext
     · change 1 * (E x).1 = Ideal.Quotient.mk I r * 1
       rw [one_mul, mul_one, hr]
@@ -81,8 +84,9 @@ theorem exists_integral_idempotent_factor_of_etale_quotientSection
     rw [heq]
     exact hcyc
   have hunit : IsUnit (Ideal.Quotient.mk (Ideal.span {1 - e}) g) :=
-    isUnit_quotient_one_sub_of_eq_mod_extendedIdeal I
-      (HenselianRing.jac (R := R) (I := I)) g e heq.symm
+    isUnit_quotient_one_sub_of_eq_mod_extendedIdeal I (by
+      rw [Ideal.jacobson_bot]
+      exact HenselianRing.jac) g e heq.symm
   have hfactor := f.bijective_idempotentFactorMap_of_awayMap_bijective e he g hunit hlocal
   have hintegral : Algebra.IsIntegral R (B ⧸ Ideal.span {1 - f e}) :=
     f.isIntegral_idempotentFactor_of_awayMap_bijective e he g hunit hlocal

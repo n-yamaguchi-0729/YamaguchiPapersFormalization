@@ -125,7 +125,7 @@ lemma Module.depth_le_krullDim_support [Nontrivial M] [Module.Finite R M] :
   clear this
   simp only [WithBot.coe_le_coe, ge_iff_le]
   induction n using Nat.strong_induction_on generalizing M with
-  | h n IH =>
+  | ind n IH =>
     rw [depth, sSup_le_iff]
     rintro _ ⟨l, hl, hl', rfl⟩
     apply WithTop.coe_le_coe.mpr ?_
@@ -1303,8 +1303,10 @@ theorem span_eq_top_of_span_quotientMk_eq_top [Module.Finite R M]
     rw [Submodule.map_span, ← Set.range_comp]
     exact h1
   rw [Submodule.map_mkQ_eq_top] at h2
-  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top
-    (span_le_jacobson_bot x hx) ?_)
+  have hxJac : Ideal.span {x} ≤ Ring.jacobson R := by
+    rw [← Ideal.jacobson_bot]
+    exact span_le_jacobson_bot x hx
+  refine top_le_iff.mp (Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top hxJac ?_)
   rw [Submodule.ideal_span_singleton_smul, sup_comm, h2]
 
 theorem linearIndependent_of_quotientMk_linearIndependent [IsNoetherianRing R]
@@ -1340,8 +1342,10 @@ theorem linearIndependent_of_quotientMk_linearIndependent [IsNoetherianRing R]
     rw [ha_eq]
     exact Submodule.smul_mem_smul (Ideal.mem_span_singleton_self x) hc_ker
   have hker : LinearMap.ker (Fintype.linearCombination R m) = ⊥ :=
-    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot (Ideal.span {x}) _
-      (IsNoetherian.noetherian _) hker_le (span_le_jacobson_bot x hx)
+    Submodule.eq_bot_of_le_smul_of_le_jacobson (Ideal.span {x}) _
+      (IsNoetherian.noetherian _) hker_le (by
+        rw [← Ideal.jacobson_bot]
+        exact span_le_jacobson_bot x hx)
   rw [Fintype.linearIndependent_iff]
   intro g hg i
   have hg_ker : g ∈ LinearMap.ker (Fintype.linearCombination R m) := by

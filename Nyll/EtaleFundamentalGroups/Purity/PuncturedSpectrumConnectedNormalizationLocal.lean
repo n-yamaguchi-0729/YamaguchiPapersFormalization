@@ -277,7 +277,7 @@ theorem connectedPuncturedCover_integralClosure_ringKrullDim_eq
   let : Module.Finite R C :=
     connectedPuncturedCover_integralClosure_finite_of_positiveDimension
       R hpos W
-  let : Algebra.IsIntegral R C := integralClosure.AlgebraIsIntegral
+  let : Algebra.IsIntegral R C := integralClosure.algebraIsIntegral
   let : FaithfulSMul R C :=
     integralClosure_faithfulSMul_of_fractionField
       (R := R) (K := K) (L := L)

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Nyll.EtaleFundamentalGroups.Inertia.IntegralClosureGaloisAction
 public import Nyll.EtaleFundamentalGroups.Inertia.TrivialNormalizationInertiaEtale
 public import Nyll.SchemeTheory.RingTheory.FieldExtensions.FiniteResidueGeometricPoint
@@ -85,7 +86,7 @@ theorem integralClosure_etale_of_dvr_of_geometricInertia_trivial
   intro b
   have hsmul : σ • b = (σ.restrictScalars R) • b := by
     change (galRestrict R K L S σ) b =
-      (((integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R)) σ) b
+      (((SchemeTheory.integralClosureAutHom R L).comp (AlgEquiv.restrictScalarsHom R)) σ) b
     exact congrArg (fun f : Gal(L/K) →* (S ≃ₐ[R] S) => f σ b)
       (galRestrict_integralClosure_eq R K L)
   rw [← hsmul, hker]

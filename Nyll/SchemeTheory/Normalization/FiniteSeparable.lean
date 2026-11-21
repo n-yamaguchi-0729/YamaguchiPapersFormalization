@@ -111,6 +111,15 @@ def genericExtensionMorphism (L : Type u) [CommRing L] [Algebra X.functionField 
   Spec.map (CommRingCat.ofHom (algebraMap X.functionField L)) ≫
     X.fromSpecStalk (genericPoint X)
 
+/-- The generic extension morphism factors through the generic point over the function field. -/
+theorem genericExtension_point_comp (L : Type u) [CommRing L] [Algebra X.functionField L] :
+    Spec.map (CommRingCat.ofHom (algebraMap X.functionField L)) ≫
+        X.genericExtensionMorphism X.functionField =
+      X.genericExtensionMorphism L := by
+  simp only [genericExtensionMorphism]
+  rw [← Spec.map_comp_assoc]
+  congr 1
+
 @[simp]
 lemma genericExtensionMorphism_apply_closedPoint (L : Type u) [Field L]
     [Algebra X.functionField L] :
@@ -169,7 +178,7 @@ lemma genericExtensionSectionsIso_hom_app (L : Type u) [Field L]
       _ = _ := by
         unfold genericExtensionMorphism
         convert h₂ using 1
-        all_goals rfl
+        rfl
   exact congrArg (fun q : Γ(X, U) ⟶ CommRingCat.of L ↦ q.hom r) H
 
 section ExtensionSections

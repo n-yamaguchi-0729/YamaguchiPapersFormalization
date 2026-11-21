@@ -64,7 +64,7 @@ theorem derivedLocalCohomology_isZero_of_supportDim_lt
     | zero =>
         intro N _ _ _ hdimN
         have hbot : Module.supportDim R N = ⊥ :=
-          (WithBot.lt_zero_iff_eq_bot _).mp hdimN
+          WithBot.lt_zero_iff_eq_bot.mp hdimN
         let : Subsingleton N :=
           (Module.supportDim_eq_bot_iff_subsingleton R N).mp hbot
         apply AddCommGrpCat.isZero_iff_subsingleton.mpr

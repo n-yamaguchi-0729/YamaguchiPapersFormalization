@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Mathlib.RingTheory.Valuation.Extension
+public import Mathlib.Topology.Algebra.Valued.WithVal
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 public import Mathlib.RingTheory.Flat.TorsionFree
 public import Nyll.EtaleFundamentalGroups.LocalGeometry.HeightOne.StandardDVF

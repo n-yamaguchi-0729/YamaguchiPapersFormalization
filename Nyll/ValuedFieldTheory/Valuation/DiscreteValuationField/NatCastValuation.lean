@@ -38,10 +38,14 @@ theorem natCast_eq_pow_padicValNat (v : Valuation K Γ₀)
     v (n : K) = v (p : K) ^ padicValNat p n := by
   let k : ℕ := padicValNat p n
   let a : ℕ := n / p ^ k
-  have hfactor : p ^ k * a = n := Nat.mul_div_cancel' pow_padicValNat_dvd
+  have hpow : p ^ k ∣ n := by
+    simpa only [k, Nat.padicValNat_def] using pow_multiplicity_dvd p n
+  have hfactor : p ^ k * a = n := Nat.mul_div_cancel' hpow
   have ha : ¬ p ∣ a := by
     intro hpa
-    apply pow_succ_padicValNat_not_dvd (p := p) hn
+    have hnot : ¬ p ^ (k + 1) ∣ n := by
+      simpa only [k, Nat.padicValNat_def] using pow_succ_multiplicity_not_dvd (p := p) hn
+    apply hnot
     obtain ⟨b, hb⟩ := hpa
     refine ⟨b, ?_⟩
     calc

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.Yamaguchi26AbfaithfulGalois.Kummer.Concrete.MixedCharCyclotomicLogDifference
 public import Nyll.GaloisCohomology.Kummer.Concrete.PrimeToCyclotomicTower
 public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogRepresentation

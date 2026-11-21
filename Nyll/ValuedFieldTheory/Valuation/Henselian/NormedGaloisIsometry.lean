@@ -37,7 +37,7 @@ private theorem normed_valuationSubring_hasExtension :
         (algebraMap K L x) ≤ 1
     rw [ValuationSubring.valuation_le_one_iff, ValuationSubring.valuation_le_one_iff]
     change ‖x‖₊ ≤ 1 ↔ ‖algebraMap K L x‖₊ ≤ 1
-    rw [nnnorm_algebraMap']
+    rw [nnNorm_algebraMap']
 
 /-- Every automorphism of a finite normed extension of a Henselian
 nonarchimedean field preserves the norm. -/

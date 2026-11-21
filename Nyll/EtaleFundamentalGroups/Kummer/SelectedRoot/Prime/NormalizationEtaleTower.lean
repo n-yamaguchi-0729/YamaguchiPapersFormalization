@@ -35,11 +35,7 @@ open Polynomial
 
 universe uR uC uL uB uK₁ uK'
 
-local instance spanSingletonIsPrimeTower
-    {R : Type uR} [CommRing R] [IsDomain R]
-    {p : R} [hp : Fact (Prime p)] :
-    (Ideal.span ({p} : Set R)).IsPrime :=
-  Ideal.isPrime_span_singleton_of_prime hp.out
+attribute [local instance] spanSingletonIsPrime
 
 /-- Etaleness at a selected root prime is preserved after passing to a
 specified generic tensor component over any further normal base.

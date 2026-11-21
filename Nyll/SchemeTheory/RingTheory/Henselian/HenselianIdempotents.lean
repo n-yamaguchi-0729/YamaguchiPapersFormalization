@@ -56,7 +56,9 @@ theorem bijective_idempotents_quotient_of_henselian
           {e : B ⧸ I.map (algebraMap R B) // IsIdempotentElem e})) := by
   let J : Ideal B := I.map (algebraMap R B)
   have hJ : J ≤ Ideal.jacobson ⊥ :=
-    Ideal.map_le_jacobson_bot_of_isIntegral (HenselianRing.jac (R := R) (I := I))
+    Ideal.map_le_jacobson_bot_of_isIntegral (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := I)))
   constructor
   · intro e f h
     apply Subtype.ext

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Nyll.EtaleFundamentalGroups.Inertia.SchemeNormalizationFunctionField
 public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleFunctionFieldAction
 public import Mathlib.Algebra.Algebra.Tower
@@ -118,7 +119,8 @@ theorem exists_finiteEtaleMorphism_point_inertia_iff
     let : MulSemiringAction Gal(Y.left.functionField/X.functionField)
         (integralClosure R Y.left.functionField) :=
       MulSemiringAction.compHom (integralClosure R Y.left.functionField)
-        ((integralClosureAutHom R Y.left.functionField).comp (AlgEquiv.restrictScalarsHom R))
+        ((SchemeTheory.integralClosureAutHom R Y.left.functionField).comp
+          (AlgEquiv.restrictScalarsHom R))
     ∃ φ : integralClosure R Y.left.functionField →+* Ω,
       Spec.map (CommRingCat.ofHom φ) =
           z ≫ (affineMorphismFunctionFieldNormalizationIso R

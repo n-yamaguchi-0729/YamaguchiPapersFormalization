@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.Yamaguchi26AbfaithfulGalois.Analytic.MixedCharCharacterLogImage
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogBound
 public import Mathlib.Order.Int.LeastGreatest

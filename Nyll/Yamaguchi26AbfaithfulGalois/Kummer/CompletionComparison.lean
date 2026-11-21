@@ -52,6 +52,8 @@ def completionMaximalProPGaloisEquiv
   have : IsGalois K (SeparableClosure K) :=
     IsSepClosure.isGalois (k := K) (K := SeparableClosure K)
   have : CompactSpace (Field.absoluteGaloisGroup K) := r.symm.toHomeomorph.compactSpace
+  have : T2Space Gal(SeparableClosure K/K) :=
+    krullTopology_t2 (K := K) (L := SeparableClosure K)
   have : T2Space (Field.absoluteGaloisGroup K) := r.toHomeomorph.isEmbedding.t2Space
   have : CompactSpace (Field.absoluteGaloisGroup base.valuation.Completion) :=
     e.toHomeomorph.compactSpace

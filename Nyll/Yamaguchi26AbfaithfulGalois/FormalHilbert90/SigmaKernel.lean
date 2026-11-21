@@ -98,9 +98,9 @@ theorem sigmaResidualKernel_mono {G : Type u}
   have : CompactSpace (D : Subgroup G) := D.isClosed'.isClosedEmbedding_subtypeVal.compactSpace
   let i : (D : Subgroup G) →ₜ* (E : Subgroup G) :=
     ⟨Subgroup.inclusion hDE, continuous_subtype_val.subtype_mk _⟩
-  let f := ProCGroups.QuotientGroup.mapₜ
-    (proCResidualCore (FiniteGroupClass.sigmaGroup sigma) (D : Subgroup G))
-    (proCResidualCore (FiniteGroupClass.sigmaGroup sigma) (E : Subgroup G)) i
+  let f := ProCGroups.QuotientGroup.mapContinuousMonoidHom
+    (N := proCResidualCore (FiniteGroupClass.sigmaGroup sigma) (D : Subgroup G))
+    (M := proCResidualCore (FiniteGroupClass.sigmaGroup sigma) (E : Subgroup G)) i
     (Subgroup.map_le_iff_le_comap.mp (map_proCResidualCore_le_of_continuousMonoidHom
       (FiniteGroupClass.sigmaGroup_fullFormation sigma).hereditary i))
   rintro _ ⟨d, hd, rfl⟩

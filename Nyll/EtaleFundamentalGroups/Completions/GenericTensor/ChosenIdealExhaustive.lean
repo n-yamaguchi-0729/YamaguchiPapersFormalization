@@ -89,6 +89,44 @@ private theorem coordinate_prime_eq_of_maximal_comap
   exact hq.symm.trans
     (congrArg (fun I : Ideal (A i) => I.comap (Pi.evalRingHom A i)) hqeq)
 
+private theorem exists_map_eq_ker_coordinateEval
+    {S : Type*} {ι : Type*} [CommRing S] [Finite ι]
+    (A : ι → Type*) [∀ i, CommRing (A i)] [∀ i, IsDomain (A i)]
+    [∀ i, IsDiscreteValuationRing (A i)]
+    (E : S ≃+* ∀ i, A i) (N P : Ideal S) (hN : N.IsPrime) (hP : P.IsMaximal)
+    (hNP : N ≤ P) (hNneP : N ≠ P) :
+    ∃ Q, N.map E.toRingHom = RingHom.ker (Pi.evalRingHom A Q) := by
+  let : N.IsPrime := hN
+  let : P.IsMaximal := hP
+  let Pprod := P.map E.toRingHom
+  let : Pprod.IsMaximal :=
+    (inferInstance : P.IsMaximal).map_bijective
+      E.toRingHom E.bijective
+  let pSpec : PrimeSpectrum (∀ Q : ι, A Q) :=
+    ⟨Pprod, (inferInstance : Pprod.IsMaximal).isPrime⟩
+  obtain ⟨Q, q, hq⟩ := PrimeSpectrum.exists_comap_evalRingHom_eq pSpec
+  have hqcomap : q.asIdeal.comap (Pi.evalRingHom A Q) = Pprod :=
+    congrArg PrimeSpectrum.asIdeal hq
+  have hPprod : Pprod = productCoordinatePrime A Q :=
+    coordinate_prime_eq_of_maximal_comap A Pprod
+      (inferInstance : Pprod.IsMaximal) Q q hqcomap
+  let Nprod := N.map E.toRingHom
+  let : Nprod.IsPrime := by
+    apply Ideal.map_isPrime_of_surjective E.surjective
+    intro x hx
+    have hx0 : x = 0 := E.injective (hx.trans E.map_zero.symm)
+    simp only [hx0, Ideal.zero_mem]
+  have hNprodP : Nprod ≤ productCoordinatePrime A Q := by
+    rw [← hPprod]
+    exact Ideal.map_mono hNP
+  have hNprodNe : Nprod ≠ productCoordinatePrime A Q := by
+    intro hEq
+    exact hNneP (E.idealComapOrderIso.symm.injective
+      (hEq.trans hPprod.symm))
+  have hNprod : Nprod = RingHom.ker (Pi.evalRingHom A Q) :=
+    prime_eq_ker_coordinateEval_of_le_of_ne A Q Nprod hNprodP hNprodNe
+  exact ⟨Q, hNprod⟩
+
 variable {V : Type uV} {C : Type uC}
 variable [CommRing V] [IsDomain V] [IsDiscreteValuationRing V]
 variable [CommRing C] [IsDedekindDomain C]
@@ -138,8 +176,7 @@ theorem exists_completedGenericTensorChosenIdeal_eq
         (R := V) (R' := Vhat) (C := C) (K := K) (L := L) (K' := Khat)
         hmax hres Q.1 = m := by
   classical
-  intro H Vhat Khat
-  let p := IsLocalRing.maximalIdeal V
+  intro H Vhat Khat G m hm
   let : Algebra V Vhat :=
     standardDVFCompletionValuationSubringAlgebra V K
   let : IsLocalHom (algebraMap V Vhat) :=
@@ -162,7 +199,7 @@ theorem exists_completedGenericTensorChosenIdeal_eq
   let : IsScalarTower V Vhat Khat :=
     standardDVRCompletionValuationSubring_isScalarTower
       (V := V) (K := K)
-  intro G m hm
+  let p := IsLocalRing.maximalIdeal V
   let : m.IsMaximal := hm
   let U := Vhat ⊗[V] C
   let G₀ := Khat ⊗[Vhat] U
@@ -215,27 +252,6 @@ theorem exists_completedGenericTensorChosenIdeal_eq
       (V := V) (C := C) (K := K) (L := L) Q
   let E := completedDVRIntegralExtensionLocalFactorsCompletionAlgEquiv
     (V := V) (C := C) (K := K) (L := L)
-  let Pprod := P.map E.toRingEquiv.toRingHom
-  let : Pprod.IsMaximal :=
-    (inferInstance : P.IsMaximal).map_bijective
-      E.toRingEquiv.toRingHom E.bijective
-  let pSpec : PrimeSpectrum (∀ Q : p.primesOver C, A Q) :=
-    ⟨Pprod, (inferInstance : Pprod.IsMaximal).isPrime⟩
-  obtain ⟨Q, q, hq⟩ := PrimeSpectrum.exists_comap_evalRingHom_eq pSpec
-  have hqcomap : q.asIdeal.comap (Pi.evalRingHom A Q) = Pprod :=
-    congrArg PrimeSpectrum.asIdeal hq
-  have hPprod : Pprod = productCoordinatePrime A Q :=
-    coordinate_prime_eq_of_maximal_comap A Pprod
-      (inferInstance : Pprod.IsMaximal) Q q hqcomap
-  let Nprod := N.map E.toRingEquiv.toRingHom
-  let : Nprod.IsPrime := by
-    apply Ideal.map_isPrime_of_surjective E.surjective
-    intro x hx
-    have hx0 : x = 0 := E.injective (hx.trans E.map_zero.symm)
-    simp only [hx0, Ideal.zero_mem]
-  have hNprodP : Nprod ≤ productCoordinatePrime A Q := by
-    rw [← hPprod]
-    exact Ideal.map_mono hNP
   have hNneP : N ≠ P := by
     intro hEq
     have : (⊥ : Ideal Vhat) = IsLocalRing.maximalIdeal Vhat := by
@@ -245,12 +261,8 @@ theorem exists_completedGenericTensorChosenIdeal_eq
         _ = IsLocalRing.maximalIdeal Vhat :=
           (P.over_def (IsLocalRing.maximalIdeal Vhat)).symm
     exact IsDiscreteValuationRing.not_a_field Vhat this.symm
-  have hNprodNe : Nprod ≠ productCoordinatePrime A Q := by
-    intro hEq
-    exact hNneP (E.toRingEquiv.idealComapOrderIso.symm.injective
-      (hEq.trans hPprod.symm))
-  have hNprod : Nprod = RingHom.ker (Pi.evalRingHom A Q) :=
-    prime_eq_ker_coordinateEval_of_le_of_ne A Q Nprod hNprodP hNprodNe
+  obtain ⟨Q, hNprod⟩ := exists_map_eq_ker_coordinateEval A E.toRingEquiv N P
+    (inferInstance : N.IsPrime) (inferInstance : P.IsMaximal) hNP hNneP
   let hmax := standardDVRToCompletion_maximalIdeal_map_eq V K
   let hres := standardDVRToCompletion_residueFieldMap_bijective V K
   let NQ := completedBaseChangeChosenGenericPrime

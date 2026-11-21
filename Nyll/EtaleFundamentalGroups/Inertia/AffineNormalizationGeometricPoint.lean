@@ -8,6 +8,7 @@ module
 
 public import Nyll.EtaleFundamentalGroups.Inertia.AffineGeometricPoint
 public import Nyll.SchemeTheory.Normalization.Affine
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Mathlib.Algebra.Algebra.Equiv
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
@@ -39,26 +40,11 @@ universe u
 
 variable (R B : Type u) [CommRing R] [CommRing B] [Algebra R B]
 
-/-- Restrict algebra automorphisms to the actual integral closure. -/
-def integralClosureAutHom :
-    (B ≃ₐ[R] B) →* (integralClosure R B ≃ₐ[R] integralClosure R B) where
-  toFun σ := σ.mapIntegralClosure
-  map_one' := by
-    apply AlgEquiv.ext
-    intro b
-    apply Subtype.ext
-    rfl
-  map_mul' σ τ := by
-    apply AlgEquiv.ext
-    intro b
-    apply Subtype.ext
-    rfl
-
 /-- The restriction action of `Aut_R(B)` on the integral closure of `R` in `B`.
 It is kept explicit, so it does not introduce a competing global instance. -/
 abbrev integralClosureAutAction :
     MulSemiringAction (B ≃ₐ[R] B) (integralClosure R B) :=
-  MulSemiringAction.compHom (integralClosure R B) (integralClosureAutHom R B)
+  MulSemiringAction.compHom (integralClosure R B) (SchemeTheory.integralClosureAutHom R B)
 
 /-- Extend an actual algebra automorphism by the universal property of relative
 normalization, using the same `normalizationDesc` construction as for deck maps. -/

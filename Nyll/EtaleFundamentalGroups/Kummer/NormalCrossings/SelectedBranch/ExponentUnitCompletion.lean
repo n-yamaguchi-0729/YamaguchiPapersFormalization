@@ -704,7 +704,7 @@ private theorem selectedExponent_prefix_normalization_source
     IsScalarTower.of_algebraMap_eq fun x ↦ (jPrefix.commutes x).symm
   let : Algebra.IsIntegral Bhat ICprefix := by
     change Algebra.IsIntegral Bhat (integralClosure Bhat OmegaPrefix)
-    exact integralClosure.AlgebraIsIntegral
+    exact integralClosure.algebraIsIntegral
   let : Algebra.IsIntegral Tprefix ICprefix :=
     Algebra.IsIntegral.tower_top (S := Tprefix) (T := ICprefix) Bhat
   have hkerPrefix : RingHom.ker (algebraMap Tprefix ICprefix) ≤ Qprefix := by

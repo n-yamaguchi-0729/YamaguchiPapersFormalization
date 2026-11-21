@@ -32,7 +32,7 @@ def inverseCharacterTwist (χ : Δ →* Rˣ) (ρ : Representation R Δ A) :
   map_mul' g h := by
     ext a
     simp only [map_mul, mul_inv_rev, Units.val_mul, LinearMap.smul_apply,
-      Module.End.mul_apply, map_smul, smul_smul]
+      mul_apply_eq_comp, map_smul, smul_smul]
 
 /-- The actual fixed vectors of the twist are the original character eigenvectors. -/
 theorem inverseCharacterTwist_mem_invariants_iff

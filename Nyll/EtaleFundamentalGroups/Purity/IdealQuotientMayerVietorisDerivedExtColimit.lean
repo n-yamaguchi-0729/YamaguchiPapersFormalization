@@ -8,6 +8,7 @@ module
 
 public import Nyll.EtaleFundamentalGroups.Purity.IdealQuotientMayerVietorisDerivedExtPowers
 public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 public import Mathlib.CategoryTheory.Functor.ReflectsIso.Exact
 

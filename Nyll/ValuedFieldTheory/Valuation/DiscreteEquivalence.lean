@@ -25,9 +25,7 @@ theorem IsEquiv.isRankOneDiscrete
     [LinearOrderedCommGroupWithZero Γ] [LinearOrderedCommGroupWithZero Δ]
     {v : Valuation K Γ} {w : Valuation K Δ} (h : v.IsEquiv w)
     [v.IsRankOneDiscrete] : w.IsRankOneDiscrete := by
-  let e : v.valueGroup ≃* w.valueGroup :=
-    WithZero.unitsWithZeroEquiv.symm.trans
-      ((Units.mapEquiv h.orderMonoidIso.toMulEquiv).trans WithZero.unitsWithZeroEquiv)
+  let e : v.valueGroup ≃* w.valueGroup := h.orderMonoidIso.toMulEquiv
   have : w.IsNontrivial := h.isNontrivial_iff.mp inferInstance
   have : IsCyclic w.valueGroup := isCyclic_of_surjective e.toMonoidHom e.surjective
   exact IsRankOneDiscrete.mk' w

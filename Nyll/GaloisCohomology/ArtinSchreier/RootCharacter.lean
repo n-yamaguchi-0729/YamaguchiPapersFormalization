@@ -29,15 +29,9 @@ variable (p : ℕ) [Fact p.Prime] (Ω : Type*) [Field Ω] [CharP Ω p]
 theorem exists_zmod_of_pow_eq {x : Ω} (hx : x ^ p = x) :
     ∃ z : ZMod p, (ZMod.castHom (dvd_refl p) Ω) z = x := by
   let f : (ZMod p)[X] := X ^ p - X
-  have hr : f.roots = Finset.univ.val := by
-    simpa only [ZMod.card] using FiniteField.roots_X_pow_card_sub_X (K := ZMod p)
-  have hsplit : f.Splits := Polynomial.splits_iff_card_roots.mpr (by
-    rw [hr]
-    change Fintype.card (ZMod p) = f.natDegree
-    rw [ZMod.card]
-    exact (FiniteField.X_pow_card_sub_X_natDegree_eq (ZMod p) (Fact.out : p.Prime).one_lt).symm)
+  have hsplit : f.Splits := Polynomial.splits_X_pow_char_sub_X (ZMod p) p
   apply hsplit.mem_range_of_isRoot
-    (FiniteField.X_pow_card_sub_X_ne_zero (ZMod p) (Fact.out : p.Prime).one_lt)
+    (Polynomial.X_pow_sub_X_ne_zero (Fact.out : p.Prime).one_lt)
   simp only [f, Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X,
     Polynomial.IsRoot.def, Polynomial.eval_sub, Polynomial.eval_pow, Polynomial.eval_X,
     hx, sub_self]

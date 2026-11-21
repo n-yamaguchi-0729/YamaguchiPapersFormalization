@@ -53,7 +53,7 @@ theorem isLocalHom_algebraMap_of_moduleFinite_of_isLocalRing
   have hcomap :
       (maximalIdeal S).comap (algebraMap R S) = maximalIdeal R :=
     IsLocalRing.eq_maximalIdeal hcomapMaximal
-  exact ((IsLocalRing.local_hom_TFAE (algebraMap R S)).out 5 1).mp hcomap
+  exact ((IsLocalRing.local_hom_tfae (algebraMap R S)).out 5 1).mp hcomap
 
 /-- Every finite étale local algebra over a proper quotient of a complete
 Noetherian local ring is obtained by base change from an explicit finite

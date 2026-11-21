@@ -54,7 +54,8 @@ theorem bijective_of_baseChange_quotient
     change Function.Surjective f.toLinearMap
     apply LinearMap.range_eq_top.mp
     apply top_unique
-    apply Submodule.le_of_le_smul_of_le_jacobson_bot Module.Finite.fg_top hI
+    have hI' : I ≤ Ring.jacobson R := by simpa only [Ideal.jacobson_bot] using hI
+    apply Submodule.le_of_le_smul_of_le_jacobson Module.Finite.fg_top hI'
     intro b _
     obtain ⟨a, ha⟩ := hquot b
     have hdiff : b - f a ∈ I • (⊤ : Submodule R B) := by
@@ -74,8 +75,9 @@ theorem bijective_of_baseChange_quotient
     change (1 : R ⧸ I) ⊗ₜ[R] f a =
       Algebra.TensorProduct.map (.id (R ⧸ I) (R ⧸ I)) f 0
     rw [show f a = 0 from ha, TensorProduct.tmul_zero, map_zero]
-  have hkerjac : RingHom.ker f.toRingHom ≤ Ideal.jacobson ⊥ :=
-    hkerle.trans (Ideal.map_le_jacobson_bot_of_isIntegral hI)
+  have hkerjac : RingHom.ker f.toRingHom ≤ Ring.jacobson A := by
+    rw [← Ideal.jacobson_bot]
+    exact hkerle.trans (Ideal.map_le_jacobson_bot_of_isIntegral hI)
   let : Algebra A B := f.toAlgebra
   let : IsScalarTower R A B := .of_algebraMap_eq' f.comp_algebraMap.symm
   have hfe : Algebra.FormallyEtale A B :=
@@ -84,7 +86,7 @@ theorem bijective_of_baseChange_quotient
     (Algebra.FormallyEtale.iff_of_surjective (R := A) (S := B)
       (show Function.Surjective (algebraMap A B) from hsurj)).mp hfe
   have hkerbot : RingHom.ker f.toRingHom = ⊥ :=
-    Submodule.eq_bot_of_le_smul_of_le_jacobson_bot
+    Submodule.eq_bot_of_le_smul_of_le_jacobson
       (RingHom.ker f.toRingHom) (RingHom.ker f.toRingHom)
       (Algebra.FinitePresentation.ker_fG_of_surjective f hsurj)
       (by rw [Ideal.smul_eq_mul]; exact hkeridem.ge) hkerjac

@@ -43,9 +43,7 @@ namespace EtaleFundamentalGroups
 
 universe u
 
-local instance underCommRingCatAlgebraDescent
-    {R : Type u} [CommRing R] (A : Under (CommRingCat.of R)) : Algebra R A :=
-  RingHom.toAlgebra A.hom.hom
+attribute [local instance] underCommRingCatAlgebra
 
 /-- Descend one tensor-product morphism to a finite stage of the coefficient
 colimit. Only the source algebra needs a finite presentation. The descended

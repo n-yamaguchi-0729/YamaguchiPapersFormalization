@@ -37,17 +37,18 @@ universe u
 
 private theorem discrete_topDerivedTop_eq_derivedSeries
     (A : Type u) [Group A] [TopologicalSpace A] [DiscreteTopology A] (n : ℕ) :
-    topDerivedTop A n = derivedSeries A n := by
+    topDerivedTop A n = Subgroup.derivedSeries A n := by
   induction n with
   | zero => rfl
   | succ n ih =>
     change (⁅topDerivedTop A n, topDerivedTop A n⁆).topologicalClosure =
-      ⁅derivedSeries A n, derivedSeries A n⁆
+      ⁅Subgroup.derivedSeries A n, Subgroup.derivedSeries A n⁆
     rw [ih]
     exact le_antisymm
       (Subgroup.topologicalClosure_minimal
-        (s := ⁅derivedSeries A n, derivedSeries A n⁆)
-        (t := ⁅derivedSeries A n, derivedSeries A n⁆) le_rfl (isClosed_discrete _))
+        (s := ⁅Subgroup.derivedSeries A n, Subgroup.derivedSeries A n⁆)
+        (t := ⁅Subgroup.derivedSeries A n, Subgroup.derivedSeries A n⁆)
+        le_rfl (isClosed_discrete _))
       (Subgroup.le_topologicalClosure _)
 
 /-- Proposition 5.2: proper solvability of every finite split embedding problem
@@ -77,7 +78,7 @@ theorem abelian_split_solvable_slim
   let π : G →ₜ* A := πN.comp q
   have hπ : Function.Surjective π :=
     (ProC.OpenNormalSubgroup.quotientProj_surjective N).comp hq
-  have hA : derivedSeries A m = ⊥ := by
+  have hA : Subgroup.derivedSeries A m = ⊥ := by
     rw [← discrete_topDerivedTop_eq_derivedSeries A m,
       ← topDerived_map_eq_of_surj π hπ (fun n => isClosed_discrete _) m]
     apply (Subgroup.map_eq_bot_iff (f := π.toMonoidHom)

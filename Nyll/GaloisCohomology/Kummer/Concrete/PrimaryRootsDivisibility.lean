@@ -96,7 +96,7 @@ theorem primaryComponent_pow_surjective_of_infinite
     (n : ℕ) (hn : 0 < n) :
     Function.Surjective (fun z : CommGroup.primaryComponent Kˣ p => z ^ n) := by
   induction n using Nat.strong_induction_on with
-  | h n ih =>
+  | ind n ih =>
     by_cases hn1 : n = 1
     · subst n
       intro z

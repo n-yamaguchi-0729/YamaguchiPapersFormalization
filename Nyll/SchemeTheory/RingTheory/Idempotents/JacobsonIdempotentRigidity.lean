@@ -29,9 +29,10 @@ private lemma eq_zero_of_mem_jacobson
     {R : Type u} [CommRing R] {e : R} (he : IsIdempotentElem e)
     (hmem : e ∈ Ideal.jacobson (⊥ : Ideal R)) : e = 0 := by
   have hunit : IsUnit (1 - e) := by
-    apply Ideal.isUnit_of_sub_one_mem_jacobson_bot
+    apply Ideal.isUnit_of_sub_one_mem_jacobson
     have heq : (1 - e) - 1 = -e := by ring
     rw [heq]
+    rw [← Ideal.jacobson_bot]
     exact (Ideal.jacobson (⊥ : Ideal R)).neg_mem hmem
   apply hunit.mul_left_cancel
   rw [he.one_sub_mul_self, mul_zero]

@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.RepresentationCharacterTwist
 public import Mathlib.RepresentationTheory.Intertwining

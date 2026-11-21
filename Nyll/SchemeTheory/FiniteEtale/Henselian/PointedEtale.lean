@@ -39,7 +39,7 @@ theorem isLocalHom_algebraMap_localizationAtPrime_of_liesOver_maximalIdeal
     [IsLocalRing R] (P : Ideal S) [P.IsPrime]
     [P.LiesOver (IsLocalRing.maximalIdeal R)] :
     IsLocalHom (algebraMap R (Localization.AtPrime P)) := by
-  apply ((IsLocalRing.local_hom_TFAE
+  apply ((IsLocalRing.local_hom_tfae
     (algebraMap R (Localization.AtPrime P))).out 1 5 rfl rfl).mpr
   change (IsLocalRing.maximalIdeal (Localization.AtPrime P)).under R =
     IsLocalRing.maximalIdeal R

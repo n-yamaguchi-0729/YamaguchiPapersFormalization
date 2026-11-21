@@ -55,7 +55,7 @@ theorem relative_centerfree_and_slim_criterion
     intro d hd
     change θ d = 1
     have hdcomm : d ∈ Subgroup.closedCommutator G := by
-      simpa only [topDerivedTop, closedDerivedSeries_top_one_eq_closedCommutator] using
+      simpa only [topDerivedTop_one_eq_closedCommutator] using
         hDderived hd
     rw [← TopologicalAbelianization.lift_apply_mk θ d,
       TopologicalAbelianization.mk_eq_one_iff.mpr hdcomm, map_one]

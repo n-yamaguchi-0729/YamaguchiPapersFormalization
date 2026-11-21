@@ -48,9 +48,12 @@ theorem exists_idempotent_lift_of_cyclic_quotient
   let J : Ideal B := I.map (algebraMap R B)
   let qR : R →+* R ⧸ I := Ideal.Quotient.mk I
   let qB : B →+* B ⧸ J := Ideal.Quotient.mk J
+  have hI : I ≤ (⊥ : Ideal R).jacobson := by
+    rw [Ideal.jacobson_bot]
+    exact HenselianRing.jac
   obtain ⟨d, hd, p, hpmonic, hproot, hpmap⟩ :=
     exists_monic_annihilator_of_cyclic_quotient_idempotent
-      I (HenselianRing.jac (R := R) (I := I)) b hb hcyc
+      I hI b hb hcyc
   have hpone : p.eval 1 ∈ I := by
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     rw [← eval_one_map, hpmap, eval_mul, eval_sub, eval_X, eval_one,
@@ -77,7 +80,7 @@ theorem exists_idempotent_lift_of_cyclic_quotient
   have hcmap : qR (q.eval a) = 1 := by
     rw [← eval_map_apply, haq, hqmap, eval_pow, eval_X, one_pow]
   have hc : IsUnit (q.eval a) := by
-    apply Ideal.isUnit_of_sub_one_mem_jacobson_bot
+    apply Ideal.isUnit_of_sub_one_mem_jacobson
     apply HenselianRing.jac (R := R) (I := I)
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     change qR (q.eval a - 1) = 0

@@ -323,7 +323,7 @@ theorem globalIdealInertiaToDecomposition_mem_localIdealInertia :
       (P.mul_mem_right s hdeltaA)
       (P.mul_mem_left a hdeltaS)
     convert h using 1
-    all_goals ring
+    ring
   let den : P.primeCompl :=
     ⟨((sigma : Gal(L/K)) • s) * s,
       P.primeCompl.mul_mem hsigma hs⟩

@@ -36,6 +36,7 @@ theorem intCast_eq_pow_padicValInt (v : Valuation K Γ₀)
     · simpa only [Int.cast_natCast] using congrArg (fun t : ℤ => v (t : K)) h
     · simpa only [Int.cast_neg, Int.cast_natCast, v.map_neg] using
         congrArg (fun t : ℤ => v (t : K)) h
+  rw [padicValInt, ← Nat.padicValNat_def]
   exact hsign.trans (v.natCast_eq_pow_padicValNat p z.natAbs
     (Int.natAbs_ne_zero.mpr hz))
 

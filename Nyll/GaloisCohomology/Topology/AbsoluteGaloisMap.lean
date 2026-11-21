@@ -7,6 +7,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 module
 
 public import Mathlib.FieldTheory.AbsoluteGaloisGroup
+public import Mathlib.FieldTheory.Galois.Profinite
 public import Mathlib.FieldTheory.Normal.Basic
 
 /-!
@@ -22,6 +23,11 @@ of a continuous homomorphism with commutative target does compose exactly.
 namespace Field.absoluteGaloisGroup
 
 variable {K L M : Type*} [Field K] [Field L] [Field M]
+
+/-- Compactness of the Krull topology when the algebraic closure is Galois. -/
+theorem compactSpace (K : Type*) [Field K] [IsGalois K (AlgebraicClosure K)] :
+    CompactSpace (Field.absoluteGaloisGroup K) :=
+  inferInstanceAs (CompactSpace (AlgebraicClosure K ≃ₐ[K] AlgebraicClosure K))
 
 /-- The algebraic-closure embedding used to define the absolute Galois restriction. -/
 noncomputable def closureLift (f : K →+* L) :
@@ -96,3 +102,14 @@ theorem character_map_comp
   exact mul_right_cancel hχ
 
 end Field.absoluteGaloisGroup
+
+namespace ClassFieldTower.Martinet.Shafarevich
+
+/-- Unfold the public absolute-Galois-group wrapper to the Galois group on which the canonical
+field action is defined. -/
+noncomputable def absoluteGaloisGroupContinuousMulEquiv (K : Type*) [Field K] :
+    Field.absoluteGaloisGroup K ≃ₜ* Gal(AlgebraicClosure K/K) := by
+  change Gal(AlgebraicClosure K/K) ≃ₜ* Gal(AlgebraicClosure K/K)
+  exact ContinuousMulEquiv.refl _
+
+end ClassFieldTower.Martinet.Shafarevich

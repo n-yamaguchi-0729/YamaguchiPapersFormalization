@@ -27,23 +27,10 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.FiniteEtale
 
-local instance finiteEtaleOverCategoryPullbackFiberPoint (S : Scheme.{u}) :
-    Category (MorphismProperty.Over
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ S) :=
-  instCategory S
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
-local instance finiteEtaleHasPullbacksAlongPullbackFiberPoint
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.HasPullbacksAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance finiteEtaleStableUnderBaseChangeAlongPullbackFiberPoint
-    {S T : Scheme.{u}} (f : S ⟶ T) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback
-    (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 variable {X Y : Scheme.{u}} {Omega : Type u} [Field Omega]
 

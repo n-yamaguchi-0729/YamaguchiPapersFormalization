@@ -19,7 +19,8 @@ public import Mathlib.Data.Finset.Max
 public import Mathlib.Algebra.Algebra.Subalgebra.Lattice
 public import Mathlib.RingTheory.Adjoin.FG
 public import Mathlib.RingTheory.DedekindDomain.Basic
-public import Mathlib.RingTheory.DedekindDomain.AdicValuation
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Completion
+public import Mathlib.RingTheory.DedekindDomain.AdicValuation.Valuation
 public import Mathlib.RingTheory.DedekindDomain.Dvr
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Ideal.GoingUp

@@ -212,9 +212,9 @@ def extensionDifference : (functions D M) ⋊[action D M] A →* (D → M) where
 /-- The first derived subgroup has trivial differences. -/
 theorem difference_eq_one_of_mem_derived
     {b : (functions D M) ⋊[action D M] A}
-    (hb : b ∈ derivedSeries ((functions D M) ⋊[action D M] A) 1) :
+    (hb : b ∈ Subgroup.derivedSeries ((functions D M) ⋊[action D M] A) 1) :
     difference D M b.left = 1 :=
-  Abelianization.commutator_subset_ker (extensionDifference D M) hb
+  Group.Abelianization.commutator_le_ker (extensionDifference D M) hb
 
 end FaithfulAbelianExtension
 
@@ -224,13 +224,14 @@ universe u
 faithful action on a finite abelian group whose semidirect product has the same bound. -/
 theorem faithful_abelian_extension_solvable_length
     (A : Type u) [Group A] [Finite A] (m : ℕ) (hm : 2 ≤ m)
-    (hA : derivedSeries A m = ⊥) :
+    (hA : Subgroup.derivedSeries A m = ⊥) :
     ∃ (C : Type u) (_ : CommGroup C) (_ : Finite C) (φ : A →* MulAut C),
-      Function.Injective φ ∧ derivedSeries (C ⋊[φ] A) m = ⊥ := by
+      Function.Injective φ ∧ Subgroup.derivedSeries (C ⋊[φ] A) m = ⊥ := by
   classical
-  let D := derivedSeries A (m - 1)
+  let D := Subgroup.derivedSeries A (m - 1)
+  let : D.Normal := Subgroup.derivedSeries_normal A (m - 1)
   have hD : ⁅D, D⁆ = ⊥ := by
-    change derivedSeries A ((m - 1) + 1) = ⊥
+    change Subgroup.derivedSeries A ((m - 1) + 1) = ⊥
     rw [Nat.sub_add_cancel (by omega)]
     exact hA
   let : CommGroup D :=
@@ -251,16 +252,16 @@ theorem faithful_abelian_extension_solvable_length
     exact congrArg Prod.fst h
   refine ⟨C, inferInstance, inferInstance,
     φ, FaithfulAbelianExtension.action_injective D M ι hι, ?_⟩
-  have hright {b : C ⋊[φ] A} (hb : b ∈ derivedSeries (C ⋊[φ] A) (m - 1)) :
+  have hright {b : C ⋊[φ] A} (hb : b ∈ Subgroup.derivedSeries (C ⋊[φ] A) (m - 1)) :
       b.right ∈ D :=
-    map_derivedSeries_le_derivedSeries (SemidirectProduct.rightHom : C ⋊[φ] A →* A)
+    Subgroup.map_derivedSeries_le_derivedSeries (SemidirectProduct.rightHom : C ⋊[φ] A →* A)
       (m - 1) ⟨b, hb, rfl⟩
-  have hdiff {b : C ⋊[φ] A} (hb : b ∈ derivedSeries (C ⋊[φ] A) (m - 1)) :
+  have hdiff {b : C ⋊[φ] A} (hb : b ∈ Subgroup.derivedSeries (C ⋊[φ] A) (m - 1)) :
       FaithfulAbelianExtension.difference D M b.left = 1 :=
     FaithfulAbelianExtension.difference_eq_one_of_mem_derived D M
-      (derivedSeries_antitone (C ⋊[φ] A) (by omega : 1 ≤ m - 1) hb)
+      (Subgroup.derivedSeries_antitone (C ⋊[φ] A) (by omega : 1 ≤ m - 1) hb)
   rw [show m = (m - 1) + 1 from (Nat.sub_add_cancel (by omega)).symm,
-    derivedSeries_succ]
+    Subgroup.derivedSeries_succ]
   apply le_antisymm _ bot_le
   apply Subgroup.commutator_le.mpr
   intro x hx y hy

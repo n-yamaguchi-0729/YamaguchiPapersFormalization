@@ -192,7 +192,7 @@ theorem boundaryStrictInertiaClosure_eq_of_paths
         (fundamentalGroupHom (boundaryStrictGenericMorphism D hreg E)
           (boundaryStrictGenericPoint D hreg E) a) ∈ Subgroup.normalClosure s :=
       Subgroup.subset_normalClosure ⟨E, a, rfl⟩
-    exact Subgroup.Normal.conj_mem inferInstance _ ha _
+    exact Subgroup.normalClosure_normal.conj_mem _ ha _
   · apply Subgroup.normalClosure_mono
     rintro g ⟨E, a, rfl⟩
     exact ⟨E, paths E, a, rfl⟩

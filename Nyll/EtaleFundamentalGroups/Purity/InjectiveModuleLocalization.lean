@@ -48,9 +48,9 @@ theorem localizedModule_mkLinearMap_surjective_of_injective
   let e : Module.End R R := LinearMap.lsmul R R (s : R)
   have he (n : ℕ) (a : R) : (e ^ n) a = (s : R) ^ n * a := by
     induction n generalizing a with
-    | zero => simp only [pow_zero, Module.End.one_apply, one_mul]
+    | zero => simp only [pow_zero, one_apply_eq_self, one_mul]
     | succ n hn =>
-      rw [pow_succ, Module.End.mul_apply, hn, pow_succ]
+      rw [pow_succ, mul_apply_eq_comp, hn, pow_succ]
       change (s : R) ^ n * ((s : R) * a) = _
       exact (mul_assoc _ _ _).symm
   obtain ⟨n, hn : ∀ m, n ≤ m →

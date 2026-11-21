@@ -926,20 +926,12 @@ private theorem
   refine ⟨_hFinCombined, ?_⟩
   intro finiteKBKD m hm n₀ hn₀ M₀ algBM₀ smulBM₀ towerBKBM₀
     M algDM smulDM towerDKDM
-  have hcomponent :
-      (Localization.awayMap
-          (algebraMap B (integralClosure B M₀)) yB).Etale ∧
-        Module.Finite D (integralClosure D M) ∧
-          Algebra.Etale D (integralClosure D M) :=
-    hcomponentForAll m inferInstance
+  have hcomponent := hcomponentForAll m hm
   intro pR qB qD hpR hqB hqD hqBpR hqDqB hqDpR V W
     algVW localVW algVK algVL algWKD algWM algLM algVM
-  have hPrefixRamification :
-      ∀ qPrefix : Ideal (integralClosure B M₀), qPrefix.IsPrime →
-        qPrefix.LiesOver qB → qPrefix.ramificationIdx B = N :=
+  have hPrefixRamification :=
     prefixNormalizationRamification_exactPrimeSource
-      (K := K) (L := L) hNC i hi P hP htiP (hCharZero i hi) σ hgeometryB
-      n₀ inferInstance
+      (K := K) (L := L) hNC i hi P hP htiP (hCharZero i hi) σ hgeometryB n₀ hn₀
   intro Csel Cpost Cglobal algBCglobal algVCpost
   let : IsScalarTower B D Cglobal := IsScalarTower.of_algebraMap_eq' rfl
   let : Module.Finite D Cglobal := hcomponent.2.1

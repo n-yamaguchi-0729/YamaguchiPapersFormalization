@@ -14,8 +14,8 @@ public import Mathlib.CategoryTheory.Limits.Shapes.ConcreteCategory
 public import Mathlib.CategoryTheory.Limits.Shapes.SingleObj
 public import Mathlib.CategoryTheory.Limits.Types.Equalizers
 public import Mathlib.CategoryTheory.Limits.Types.Pullbacks
-public import Nyll.ClassFieldTheory.LocalClassFieldTheory.Infinite.ProfiniteCompletion
-public import Nyll.ClassFieldTheory.Definitions.LocalClassFieldTheory.TopologicalProfiniteCompletion
+public import Nyll.ProCGroups.Completion.Topological
+public import Nyll.ProCGroups.Completion.TopologicalBasic
 
 /-!
 # Uniqueness of the fiber functor on finite continuous actions
@@ -211,19 +211,7 @@ private noncomputable def coherentPoint
     nonempty_sections_of_finite_cofiltered_system (quotientFibers G F)
   exact ⟨Classical.choose h, Classical.choose_spec h⟩
 
-private instance carrierMulAction
-    (X : ContAction FintypeCat.{u} G) :
-    MulAction G
-      ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) :=
-  inferInstanceAs <| MulAction G X.obj.V
-
-private instance carrierContinuousSMul
-    (X : ContAction FintypeCat.{u} G) :
-    ContinuousSMul G
-      ((forget₂ (ContAction FintypeCat.{u} G) FintypeCat).obj X) := by
-  change ContinuousSMul G
-    ((forget₂ (Action FintypeCat.{u} G) TopCat).obj X.obj)
-  exact X.property
+attribute [local instance] ContAction.finiteCarrierMulAction ContAction.finiteCarrierContinuousSMul
 
 omit [IsTopologicalGroup G] in
 private theorem actionKernel_isOpen

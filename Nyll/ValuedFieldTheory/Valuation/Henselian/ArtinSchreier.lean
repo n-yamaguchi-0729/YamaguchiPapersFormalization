@@ -8,6 +8,7 @@ module
 
 public import Nyll.ValuedFieldTheory.Valuation.Henselian.NonmonicSimpleRoot
 public import Mathlib.Algebra.CharP.Frobenius
+public import Mathlib.Algebra.CharP.Subring
 public import Mathlib.Topology.Algebra.Valued.ValuationTopology
 public import Mathlib.Topology.Algebra.OpenSubgroup
 
@@ -33,7 +34,7 @@ theorem exists_pow_sub_eq_of_valuation_lt_one
     (p : ℕ) [Fact p.Prime] [CharP K p] (a : K) (ha : v a < 1) :
     ∃ b : K, b ^ p - b = a := by
   let R := v.valuationSubring
-  have : CharP R p := CharP.subring K p v.valuationSubring.toSubring
+  have : CharP R p := SubsemiringClass.charP_iff.2 ‹CharP K p›
   let a₀ : R := ⟨a, ha.le⟩
   let f : R[X] := X ^ p - X - C a₀
   have hp0 : p ≠ 0 := (Fact.out : p.Prime).ne_zero

@@ -117,7 +117,7 @@ theorem intermediateField_eq_adjoin_pow_finrank_of_pureRadical
   have hdvd : minpoly M α ∣ X ^ d - C β := minpoly.dvd M α hroot
   have hdpos : 0 < d := Module.finrank_pos
   have hdegree : (minpoly M α).natDegree ≤ d := by
-    rw [← Polynomial.natDegree_X_pow_sub_C (r := β) (n := d)]
+    rw [← Polynomial.natDegree_X_pow_sub_C (n := d) β]
     exact Polynomial.natDegree_le_of_dvd hdvd
       (Polynomial.X_pow_sub_C_ne_zero hdpos β)
   have hML : Module.finrank M L ≤ d := by

@@ -69,7 +69,7 @@ theorem exists_ker_pow_lt_top_range_pow_lt_top
     intro y
     obtain ⟨x, hx⟩ := hpow y
     refine ⟨(f ^ n) x, ?_⟩
-    simpa only [pow_succ', Module.End.mul_apply] using hx
+    simpa only [pow_succ', mul_apply_eq_comp] using hx
 
 /-- Every Artinian module is the sum of finitely many nonzero secondary
 submodules; the zero module has the empty decomposition. -/
@@ -107,12 +107,12 @@ theorem exists_finset_secondarySubmodules_sup_eq_top [IsArtinian R M] :
     induction n with
     | zero =>
         intro x
-        simp only [pow_zero, Module.End.one_apply, one_smul]
+        simp only [pow_zero, one_apply_eq_self, one_smul]
     | succ n ihpow =>
         intro x
         calc
           (f ^ (n + 1)) x = f ((f ^ n) x) := by
-            rw [pow_succ', Module.End.mul_apply]
+            rw [pow_succ', mul_apply_eq_comp]
           _ = r • (r ^ n • x) := by
             change r • ((f ^ n) x) = r • (r ^ n • x)
             exact congrArg (fun z : N ↦ r • z) (ihpow x)

@@ -61,7 +61,7 @@ theorem oriented_invariants
   refine ⟨hTF, hInj, ?_, hInfinite⟩
   intro hDerived
   have hDcomm : D ≤ Subgroup.closedCommutator G := by
-    simpa only [topDerivedTop, closedDerivedSeries_top_one_eq_closedCommutator] using hDerived
+    simpa only [topDerivedTop_one_eq_closedCommutator] using hDerived
   have hAbZero (a : TopologicalAbelianization D) :
       abelianizationInclusion D a = 1 := by
     obtain ⟨d, rfl⟩ := TopologicalAbelianization.surjective_mk D a

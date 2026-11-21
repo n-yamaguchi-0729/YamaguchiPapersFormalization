@@ -283,24 +283,31 @@ instance : Category (FiniteEtale X) := by
     (Functor.id Scheme) (Functor.fromPUnit X)
     (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ ⊤
 
-local instance finiteEtaleOverCategory (X : Scheme.{u}) :
+/-- The finite étale category dictionary on its `MorphismProperty.Over` presentation. -/
+abbrev finiteEtaleOverCategory (X : Scheme.{u}) :
     Category (MorphismProperty.Over
       (@IsFiniteEtale : MorphismProperty Scheme.{u})
       (⊤ : MorphismProperty Scheme.{u}) X) :=
   instCategory X
 
-local instance finiteEtaleHasPullbacksAlong
+attribute [local instance] finiteEtaleOverCategory
+
+/-- Finite étale covers have pullbacks along every scheme morphism. -/
+theorem finiteEtaleHasPullbacksAlong
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     MorphismProperty.HasPullbacksAlong
       (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
   ⟨fun _ _ ↦ inferInstance⟩
 
-local instance finiteEtaleIsStableUnderBaseChangeAlong
+/-- A pullback of a finite étale cover along any scheme morphism is finite étale. -/
+theorem finiteEtaleIsStableUnderBaseChangeAlong
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     MorphismProperty.IsStableUnderBaseChangeAlong
       (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
   ⟨fun h hf ↦ MorphismProperty.of_isPullback
     (P := (@IsFiniteEtale : MorphismProperty Scheme.{u})) h hf⟩
+
+attribute [local instance] finiteEtaleHasPullbacksAlong finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The forgetful functor from schemes finite étale over `X` to schemes over `X`. -/
 def forget : FiniteEtale X ⥤ Over X :=

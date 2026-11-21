@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.SchemeTheory.Normalization.IntegralClosureAutomorphismRestriction
 public import Nyll.EtaleFundamentalGroups.Inertia.FiniteEtaleNormalizationAction
 public import Mathlib.CategoryTheory.Endomorphism
 
@@ -69,7 +70,7 @@ theorem exists_finiteEtaleMorphism_normalizationPoint_inertia_iff
   · intro σ
     have hsmul (b : integralClosure R Y.left.functionField) :
         (finiteEtaleAutFunctionFieldAlgEquiv Y σ) • b =
-        ((integralClosureAutHom R Y.left.functionField).comp
+        ((SchemeTheory.integralClosureAutHom R Y.left.functionField).comp
           (AlgEquiv.restrictScalarsHom R)) (finiteEtaleAutFunctionFieldAlgEquiv Y σ) b := by
       apply Subtype.ext
       exact integralClosure.coe_smul _ _
@@ -79,7 +80,8 @@ theorem exists_finiteEtaleMorphism_normalizationPoint_inertia_iff
         (let : MulSemiringAction Gal(Y.left.functionField/X.functionField)
             (integralClosure R Y.left.functionField) :=
           MulSemiringAction.compHom (integralClosure R Y.left.functionField)
-            ((integralClosureAutHom R Y.left.functionField).comp (AlgEquiv.restrictScalarsHom R))
+            ((SchemeTheory.integralClosureAutHom R Y.left.functionField).comp
+              (AlgEquiv.restrictScalarsHom R))
          finiteEtaleAutFunctionFieldAlgEquiv Y σ ∈
           (RingHom.ker φ).inertia Gal(Y.left.functionField/X.functionField)) := by
       constructor

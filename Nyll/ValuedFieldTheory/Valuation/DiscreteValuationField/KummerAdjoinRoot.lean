@@ -64,7 +64,7 @@ theorem exists_cyclic_kummer_extension_of_prime_parameter
     calc
       Module.finrank K L = B.dim := B.finrank
       _ = f.natDegree := by rfl
-      _ = r := natDegree_X_pow_sub_C
+      _ = r := natDegree_X_pow_sub_C (algebraMap R K π)
   have hprimitive : (primitiveRoots r K).Nonempty :=
     ⟨ζ, (mem_primitiveRoots hr).mpr hζ⟩
   let : f.IsSplittingField K L :=

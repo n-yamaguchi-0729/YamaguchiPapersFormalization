@@ -39,7 +39,7 @@ theorem isAdicComplete_of_le_maximalIdeal
   refine
     { toIsHausdorff :=
         IsHausdorff.of_le_jacobson I M
-          (hI.trans (maximalIdeal_le_jacobson (⊥ : Ideal R)))
+          (hI.trans (IsLocalRing.ringJacobson_eq_maximalIdeal R).ge)
       toIsPrecomplete := ?_ }
   refine ⟨fun f hf ↦ ?_⟩
   have hfMaximal :

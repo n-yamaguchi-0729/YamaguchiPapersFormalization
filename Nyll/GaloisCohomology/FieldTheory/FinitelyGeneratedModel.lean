@@ -49,7 +49,8 @@ theorem int_isJacobsonRing : IsJacobsonRing ℤ := by
   · subst P
     apply le_antisymm ?_ Ideal.le_jacobson
     intro x hx
-    have hu : IsUnit (x * 3 + 1) := (Ideal.mem_jacobson_bot.mp hx) 3
+    rw [Ideal.jacobson_bot] at hx
+    have hu : IsUnit (x * 3 + 1) := (Ring.mem_jacobson_iff.mp hx) 3
     rcases Int.isUnit_eq_one_or hu with h | h <;>
       simp only [Ideal.mem_bot] <;> omega
   · have : P.IsMaximal := hP.isMaximal hzero

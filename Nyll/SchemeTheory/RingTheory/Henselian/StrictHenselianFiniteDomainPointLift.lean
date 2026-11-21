@@ -44,7 +44,7 @@ theorem exists_local_hom_finiteDomain_fixed_of_strictHenselian
       (Ideal.isMaximal_under_of_isIntegral_of_isMaximal (R := R)
         (IsLocalRing.maximalIdeal B))
   let : IsLocalHom (algebraMap R B) :=
-    ((IsLocalRing.local_hom_TFAE (algebraMap R B)).out 1 5).mpr hcontract
+    ((IsLocalRing.local_hom_tfae (algebraMap R B)).out 1 5).mpr hcontract
   let k := IsLocalRing.ResidueField R
   let l := IsLocalRing.ResidueField B
   let : Algebra k Ω := (IsLocalRing.ResidueField.lift ψ).toAlgebra

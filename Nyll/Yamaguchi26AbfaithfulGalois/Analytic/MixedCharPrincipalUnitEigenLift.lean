@@ -6,6 +6,7 @@ Authors: Naganori Yamaguchi (assisted by OpenAI Codex)
 
 module
 
+public import Nyll.ValuedFieldTheory.Valuation.DiscreteValuationField.Complete
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.CharacterAveraging
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharAutomorphismRepresentations
 public import Nyll.ValuedFieldTheory.LocalField.Analytic.MixedCharPrincipalUnitLogRepresentation

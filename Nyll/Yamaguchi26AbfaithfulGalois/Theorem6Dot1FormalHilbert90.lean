@@ -14,6 +14,7 @@ public import Nyll.ProCGroups.Topologies.QuotientMaps
 public import Nyll.ProCGroups.ProC.OpenNormalSubgroups.Basic
 public import Nyll.ProCGroups.FiniteGroups.StandardClasses
 public import Nyll.ProCGroups.FiniteStepSolvableQuotients.Commutators.DerivedSeriesAndQuotients
+public import Nyll.GaloisCohomology.Topology.ContinuousRepresentationUniverseLift
 public import Mathlib.NumberTheory.Padics.RingHoms
 public import Mathlib.Topology.Instances.ZMod
 public import Mathlib.GroupTheory.Torsion
@@ -61,8 +62,7 @@ orientation, viewed as an integer module so reduction has a common base ring. -/
 noncomputable def finiteOrientationTopRep {ℓ : ℕ} [Fact ℓ.Prime]
     {G : Type u} [Group G] [TopologicalSpace G]
     (θ : Orientation ℓ G) (H : Subgroup G) (n : ℕ) : TopRep.{u} ℤ H := by
-  letI : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ n))) :=
-    ContinuousSMul.induced ULift.moduleEquiv.toLinearMap
+  let : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ n))) := ULift.continuousSMul
   letI : ContinuousConstSMul (ZMod (ℓ ^ n))ˣ (ULift.{u} (ZMod (ℓ ^ n))) :=
     ⟨fun _ => continuous_of_discreteTopology⟩
   let action : (ZMod (ℓ ^ n))ˣ →*
@@ -91,10 +91,8 @@ noncomputable def finiteOrientationReduction {ℓ : ℕ} [Fact ℓ.Prime]
     (θ : Orientation ℓ G) (H : Subgroup G) (n : ℕ) (hn : 1 ≤ n) :
     TopRep.res (ContinuousMonoidHom.id H) (finiteOrientationTopRep θ H n) ⟶
       finiteOrientationTopRep θ H 1 := by
-  letI : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ n))) :=
-    ContinuousSMul.induced ULift.moduleEquiv.toLinearMap
-  letI : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ 1))) :=
-    ContinuousSMul.induced ULift.moduleEquiv.toLinearMap
+  let : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ n))) := ULift.continuousSMul
+  let : ContinuousSMul ℤ (ULift.{u} (ZMod (ℓ ^ 1))) := ULift.continuousSMul
   let f : ZMod (ℓ ^ n) →L[ℤ] ZMod (ℓ ^ 1) :=
     { toLinearMap :=
         (ZMod.castHom (pow_dvd_pow ℓ hn) (ZMod (ℓ ^ 1))).toAddMonoidHom.toIntLinearMap
@@ -206,7 +204,7 @@ noncomputable def primaryInclusionMap (ℓ : ℕ) [Fact ℓ.Prime]
   have hmap := map_proCResidualCore_le_of_continuousMonoidHom
     (C := ProCGroups.FiniteGroupClass.pGroup ℓ)
     (ProCGroups.FiniteGroupClass.pGroup_hereditary ℓ) f
-  exact ProCGroups.QuotientGroup.mapₜ _ _ f (Subgroup.map_le_iff_le_comap.mp hmap)
+  exact ProCGroups.QuotientGroup.mapContinuousMonoidHom f (Subgroup.map_le_iff_le_comap.mp hmap)
 
 /-- Conjugation by `g` induces the canonical map on the ℓ-primary factor. -/
 noncomputable def primaryConjugationMap (ℓ : ℕ) [Fact ℓ.Prime]
@@ -222,7 +220,7 @@ noncomputable def primaryConjugationMap (ℓ : ℕ) [Fact ℓ.Prime]
   have hmap := map_proCResidualCore_le_of_continuousMonoidHom
     (C := ProCGroups.FiniteGroupClass.pGroup ℓ)
     (ProCGroups.FiniteGroupClass.pGroup_hereditary ℓ) f
-  exact ProCGroups.QuotientGroup.mapₜ _ _ f (Subgroup.map_le_iff_le_comap.mp hmap)
+  exact ProCGroups.QuotientGroup.mapContinuousMonoidHom f (Subgroup.map_le_iff_le_comap.mp hmap)
 
 /-- Elements of the ℓ-primary abelianization fixed by a subgroup. -/
 def primaryFixedSubgroup (ℓ : ℕ) [Fact ℓ.Prime]

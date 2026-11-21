@@ -135,7 +135,9 @@ theorem exists_lift_section_of_finite_henselian_base
     rw [map_sub, τ.commutes, sub_eq_zero] at h
     exact h.symm
   have hJ : J ≤ Ideal.jacobson ⊥ :=
-    Ideal.map_le_jacobson_bot_of_isIntegral (HenselianRing.jac (R := R) (I := I))
+    Ideal.map_le_jacobson_bot_of_isIntegral (by
+      simpa only [Ideal.jacobson_bot] using
+        (HenselianRing.jac (R := R) (I := I)))
   have hbij : Function.Bijective (algebraMap B D) :=
     bijective_algebraMap_of_quotientSection J hJ σD hscalar
   let E : B ≃ₐ[B] D := AlgEquiv.ofBijective (Algebra.ofId B D) hbij

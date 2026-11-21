@@ -41,7 +41,7 @@ theorem tensorProduct_lift_surjective_of_denseRange
     Algebra.TensorProduct.lift (Algebra.ofId A B) g
       (fun (a : A) (l : L) => Commute.all (algebraMap A B a) (g l))
   have hclosed : IsClosed (f.toLinearMap.range : Set B) :=
-    Submodule.closed_of_finiteDimensional (𝕜 := A) f.toLinearMap.range
+    Submodule.isClosed_of_finiteDimensional (𝕜 := A) f.toLinearMap.range
   have hrange : Set.range g ⊆ (f.toLinearMap.range : Set B) := by
     rintro _ ⟨l, rfl⟩
     refine ⟨1 ⊗ₜ[K] l, ?_⟩

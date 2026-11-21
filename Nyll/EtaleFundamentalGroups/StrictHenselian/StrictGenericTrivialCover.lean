@@ -41,18 +41,10 @@ theorem finiteEtale_spec_of_finite_etale_algebra
   apply IsFiniteEtale.SpecMap_iff.mpr
   exact RingHom.finiteEtale_algebraMap_iff.mpr ⟨⟩
 
-local instance (X : Scheme.{u}) :
-    Category (MorphismProperty.Over (@IsFiniteEtale : MorphismProperty Scheme.{u}) ⊤ X) :=
-  AlgebraicGeometry.FiniteEtale.instCategory X
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleOverCategory
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleHasPullbacksAlong
 
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.HasPullbacksAlong (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun _ _ ↦ inferInstance⟩
-
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    MorphismProperty.IsStableUnderBaseChangeAlong
-      (@IsFiniteEtale : MorphismProperty Scheme.{u}) f :=
-  ⟨fun h hf ↦ MorphismProperty.of_isPullback (P := @IsFiniteEtale) h hf⟩
+attribute [local instance] AlgebraicGeometry.FiniteEtale.finiteEtaleIsStableUnderBaseChangeAlong
 
 /-- The actual strict generic image fixing a finite etale algebra's fiber
 implies that its normalization over the original normal local domain is etale. -/

@@ -66,6 +66,17 @@ theorem _root_.AlgebraicGeometry.Smooth.isDomain_and_isIntegrallyClosed_stalk
     isDomain_and_isIntegrallyClosed_of_isIntegrallyClosed_of_isLocalization_atPrime
       Γ(S, ⊤) Γ(U, W)
       (hW.primeIdealOf ⟨y, hyW⟩).asIdeal (U.presheaf.stalk y))
+
+/-- A smooth scheme over a field has integrally closed domain stalks. -/
+theorem _root_.AlgebraicGeometry.Smooth.isDomain_and_isIntegrallyClosed_stalk_of_field
+    {k : Type u} [Field k] {X : Scheme.{u}}
+    (f : X ⟶ Spec (CommRingCat.of k)) [Smooth f] (x : X) :
+    IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x) := by
+  let e := (Scheme.ΓSpecIso (CommRingCat.of k)).commRingCatIsoToRingEquiv
+  let : IsDomain Γ(Spec (CommRingCat.of k), ⊤) := MulEquiv.isDomain k e.toMulEquiv
+  let : IsIntegrallyClosed Γ(Spec (CommRingCat.of k), ⊤) := IsIntegrallyClosed.of_equiv e.symm
+  exact Smooth.isDomain_and_isIntegrallyClosed_stalk f x
+
 end AlgebraicCurves.Geometry.Schemes.Proofs.Smooth_isDomain_and_isIntegrallyClosed_stalk
 end ProofImplementation
 
